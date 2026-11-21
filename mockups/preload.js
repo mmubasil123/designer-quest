@@ -98,7 +98,7 @@ async function run(j, id, imageOpt) {
     manifest ??= await (await fetch(new URL("pieces.json", HERE))).json();
     const p = manifest.pieces.find(x => x.id === id);
     const splat = p?.assets.splat?.path, glb = p?.assets.glb?.path;
-    const path = splat ?? glb;
+    const path = splat && p.assets.clo ? p.assets.clo.path : splat ?? glb;   // Up close shows MoMu's CLO model where a study piece has one
     if (!path) return set(j, { state: "skipped" }), false;   // unknown card, or a piece with no 3D file
     const url = new URL(path, HERE).href;
     Object.assign(j.s, { kind: splat ? "splat" : "glb", url });

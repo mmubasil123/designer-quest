@@ -255,6 +255,13 @@
                 "minItems": 3,
                 "maxItems": 3
               },
+              "atClo": {
+                "description": "Where the detail sits on the CLO model (assets.clo) as a fraction of the garment's box; Up close uses it instead of `at` when it shows that model",
+                "type": "array",
+                "items": { "type": "number", "minimum": 0, "maximum": 1 },
+                "minItems": 3,
+                "maxItems": 3
+              },
               "quote": {
                 "type": "string",
                 "minLength": 1

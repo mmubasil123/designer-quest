@@ -1018,7 +1018,7 @@ function preloadStudy(id) {
   // so the popup and the page stay smooth; Not now, Escape or a backdrop tap clears the timer and aborts it
   const wait = new Promise(r => { study.timer = setTimeout(r, 2000); });
   wait.then(() => { if (!ctl.signal.aborted) nfcStatus.textContent = "Getting the scan ready…"; });
-  wait.then(() => fetch(PIECES[id].splat, { signal: ctl.signal, priority: "low" })).then(async r => {
+  wait.then(() => fetch(PIECES[id].clo ?? PIECES[id].splat, { signal: ctl.signal, priority: "low" })).then(async r => {
     if (!r.ok) throw new Error(r.status);
     const total = +r.headers.get("content-length") || 0, reader = r.body.getReader();
     let got = 0;

@@ -161,7 +161,8 @@ li.found .fact { grid-template-rows: 1fr; }
 <script type="module">
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { SparkRenderer, SplatMesh } from "@sparkjsdev/spark";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { backTo } from "./nav.js";
 import { mountScene } from "./scenes.js";   // H6: back gesture closes layers; ← steps back to the Stage instead of stacking a new page
 
@@ -236,7 +237,6 @@ renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
 view.prepend(renderer.domElement);
 const scene = new THREE.Scene();
 mountScene(view).set(piece.year);   // H7: a period room instead of the grey wall
-scene.add(new SparkRenderer({ renderer }));
 const camera = new THREE.PerspectiveCamera(40, 1, 0.01, 100);
 const controls = new OrbitControls(camera, renderer.domElement);
 Object.assign(controls, { enableDamping: true, enablePan: false, minPolarAngle: Math.PI * 0.3, maxPolarAngle: Math.PI * 0.62 });
@@ -246,23 +246,47 @@ function resize() {
 }
 new ResizeObserver(resize).observe(view);
 
-// .sog is what deploys; a local .ply of the same name is the fallback while only the raw capture exists
-let url = piece.assets.splat.path, mesh;
+// A piece with MoMu's own CLO model shows that model on MoMu's mannequin; every other study piece shows its splat scan.
+// Both are turned into one frame (front towards -z, y up), so the box, camera and details work the same on either.
+const clo = piece.assets.clo;
+let mesh, box;
 try {
-  // the HEAD round trip only matters on a dev machine that has the raw .ply but not the .sog; the deployed site always has the .sog
-  if (/^(localhost|127\.0\.0\.1|.*\.local)$/.test(location.hostname) && !(await fetch(url, { method: "HEAD" })).ok) url = url.replace(/\.sog$/, ".ply");
-  mesh = new SplatMesh({ url });
-  mesh.quaternion.set(1, 0, 0, 0);   // the captures are y-down
-  scene.add(mesh);
-  await Promise.race([mesh.initialized, new Promise((_, no) => setTimeout(() => no(new Error("timeout")), 45000))]);
+  const timeout = new Promise((_, no) => setTimeout(() => no(new Error("timeout")), 45000));
+  if (clo) {
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture; scene.environmentIntensity = 0.55;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 0.8;   // as outfit.html: white cloth keeps its folds
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8680, 0.15));
+    const key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(-1.2, 2.2, -2); scene.add(key);
+    const rim = new THREE.DirectionalLight(0xffffff, 1.2); rim.position.set(1.5, 1.5, 2); scene.add(rim);
+    const loader = new GLTFLoader();
+    const [garment, body] = await Promise.race([Promise.all([clo.path, clo.avatar].map(u => loader.loadAsync(u))), timeout]);
+    body.scene.traverse(o => { if (o.isMesh) o.material = new THREE.MeshStandardMaterial({ color: 0xe4ddd2, roughness: 0.85 }); });
+    mesh = new THREE.Group(); mesh.add(garment.scene, body.scene);
+    mesh.rotation.y = Math.PI;   // CLO garments face +z
+    scene.add(mesh); mesh.updateMatrixWorld(true);
+    box = new THREE.Box3().setFromObject(garment.scene);   // the garment's box, not the mannequin's: details sit on the cloth
+  } else {
+    const { SparkRenderer, SplatMesh } = await import("@sparkjsdev/spark");
+    scene.add(new SparkRenderer({ renderer }));
+    // .sog is what deploys; a local .ply of the same name is the fallback while only the raw capture exists
+    let url = piece.assets.splat.path;
+    // the HEAD round trip only matters on a dev machine that has the raw .ply but not the .sog; the deployed site always has the .sog
+    if (/^(localhost|127\.0\.0\.1|.*\.local)$/.test(location.hostname) && !(await fetch(url, { method: "HEAD" })).ok) url = url.replace(/\.sog$/, ".ply");
+    mesh = new SplatMesh({ url });
+    mesh.quaternion.set(1, 0, 0, 0);   // the captures are y-down
+    scene.add(mesh);
+    await Promise.race([mesh.initialized, timeout]);
+    box = new THREE.Box3().setFromPoints(corners(mesh.getBoundingBox()).map(p => p.applyQuaternion(mesh.quaternion)));
+  }
 } catch {   // a 15 MB scan on venue wifi can fail: say so instead of loading forever
-  $("#loading").innerHTML = `<div>The scan didn't load<br><br><a href="" style="text-decoration:underline">Try again</a></div>`;
+  $("#loading").innerHTML = `<div>The ${clo ? "model" : "scan"} didn't load<br><br><a href="" style="text-decoration:underline">Try again</a></div>`;
   await new Promise(() => {});
 }
 
-const box = new THREE.Box3().setFromPoints(corners(mesh.getBoundingBox()).map(p => p.applyQuaternion(mesh.quaternion)));
 const centre = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3());
-const points = piece.details.map(d => new THREE.Vector3(...d.at.map((f, k) => box.min.getComponent(k) + f * size.getComponent(k))));
+// details[].at is placed on the splat; atClo on the CLO model, whose box and drape differ
+const points = piece.details.map(d => new THREE.Vector3(...((clo && d.atClo) || d.at).map((f, k) => box.min.getComponent(k) + f * size.getComponent(k))));
 const dist = size.y * 1.55;
 controls.target.copy(centre);
 controls.minDistance = size.y * 0.55; controls.maxDistance = size.y * 2.6;
@@ -407,13 +431,13 @@ function fracAt(sx, sy, fz) {
   const p = camera.position.clone().addScaledVector(dir, (box.min.z + fz * size.z - camera.position.z) / dir.z);
   return [(p.x - box.min.x) / size.x, (p.y - box.min.y) / size.y, fz].map(v => +v.toFixed(3));
 }
-window.upClose = { piece, points, camera, controls, found, box, fracAt };
+window.upClose = { piece, points, camera, controls, found, box, mesh, fracAt };
 renderer.setAnimationLoop(now => { stepTurn(now); controls.update(); placePins(); renderer.render(scene, camera); });
 // Leaving for the Stage: release the scan and the GPU now instead of keeping 15 MB of splats alive in the back-forward
 // cache; if the browser shows this page again from that cache, it starts over (the scan comes from the HTTP cache)
 addEventListener("pagehide", () => {
   renderer.setAnimationLoop(null);
-  scene.remove(mesh); mesh.dispose?.(); controls.dispose();
+  scene.remove(mesh); mesh.dispose?.(); mesh.traverse?.(o => { o.geometry?.dispose(); [].concat(o.material ?? []).forEach(m => m.dispose()); }); controls.dispose();
   renderer.dispose(); renderer.forceContextLoss();
   delete window.upClose;
 });
