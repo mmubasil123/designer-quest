@@ -37,7 +37,7 @@ export function fieldAnswer(rec, key) {
     extent: `The record measures it as ${list(v)}.`,
     title: `The record gives its title as ${list(v)}.`,
   }[key] ?? list(v);
-  return { answerable: true, answer: text, fields: [key], quote: f.values[0] };
+  return { answerable: true, answer: text, fields: [key], quote: f.values.join("; ") };   // the record's own words, Dutch where it is Dutch
 }
 
 /* The record as the model reads it: every filled field, verbatim, with our English marked as ours. */

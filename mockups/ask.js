@@ -61,7 +61,7 @@ export function createAsk({ endpoint = "api/ask" } = {}) {
 
   function answerHtml(rec, a, { ai }) {
     const from = a.fields.length ? `<p class="ask-from">From the MoMu record: ${a.fields.map(k => esc(fieldLabel(rec, k))).join(", ")}</p>` : "";
-    const dutch = a.quote && rec?.fields.some(f => f.values.some(v => v.replace(/\s+/g, " ").includes(a.quote)));   // values are MoMu's Dutch; en is ours
+    const dutch = a.quote && rec?.fields.some(f => f.values.join("; ").replace(/\s+/g, " ").includes(a.quote));   // values are MoMu's Dutch; en is ours
     const quote = a.quote ? `<q class="ask-quote"${dutch ? ' lang="nl"' : ""}>${esc(a.quote)}</q>` : "";
     const badge = ai ? `<span class="ask-badge">${esc(LABEL)}</span>` : `<span class="ask-badge plain">Straight from the record, no AI</span>`;
     return `<p>${esc(a.answer)}</p>${from}${quote}${badge}`;
