@@ -35,6 +35,17 @@ Raised by Basil after a phone test: 3D scans take about 10 s, and the main avata
 - Why: the Ideation page lists "first-time help pop-up with a skip button" and a help button as UX must-haves. The copy only describes what the app does today and makes no claim about MoMu facts (D3).
 - Checked in headless Chromium at 390 px: opens on first visit, steps through, closes on Start, stays closed on reload, "?" reopens at step 1, Skip closes, no popup on a `?card=ST503` arrival, no horizontal overflow, console clean. Not checked on a real phone or with a screen reader.
 
+### Team notes and storyline (branch hassan/docs-storyline)
+- New `docs/PROJECT_NOTES.md`: problem statement, Lotus Blossom outcomes, the visitor flow with what is built,
+  team decisions, roles for all four of us, open questions.
+- New `presentation/STORYLINE.md`: one-line pitch, persona, 7-beat story arc, demo script mapped to what works
+  today, demo pieces from `pieces.json`, jury questions.
+- README layout table and the Delivery line in `AGENTS.md` now point to both.
+- Why: the idea and the pitch lived only on paper and in Notion; everyone (and every agent) needs one place to
+  refer back to. Decision: facts on stage stay placeholders (`[fact: ...]`) until filled from the record (D3).
+  The ideation's optional selfie and sign-up conflict with D1 and D2; recorded as an open team decision, not
+  changed in the ledger.
+
 ### A6: phone memory (branch basil/A6)
 - GLB cache is now an LRU of 8 parsed scans: the oldest one not on the form is disposed (geometry, textures, material) after each load. Before, every piece ever worn stayed in GPU memory for the session.
 - The idle spin stops when the tab is hidden or the Stage is off screen (Piece screen), and restarts on return; before it kept running a loop that rendered nothing. Reduced motion still never spins.
