@@ -44,6 +44,28 @@ The 8 pieces are MoMu's own "All Hackathon Assets" garments (item set 413025). T
 images and 87 garments linked to pattern records, enough for a 20-piece season "Fibres and Hands, 1750 to 2009"
 (shortlist in `LEDGER.md`, verify each photo and fact before use).
 
+## 3D Gaussian Splats (MoMu, 2026-11-19)
+From the hackathon page's Splatting_FOLDER (Google Drive). `splats/` is git-ignored: each file is about 220 MB,
+so share it outside git. Standard .ply only so far: about 0.9 M splats each, SH degree 3 (45 `f_rest`).
+MOMU-5 is missing (Drive may have split the download into a second zip). The `.sog` and compressed `.ply`
+folders hold the same pieces, smaller.
+
+| File | Record | Type (dcterms:subject) | Date (dcterms:date) |
+|---|---|---|---|
+| MOMU-1_st673 | ST673/1-2 | combinaison | 1880-1900 |
+| MOMU-2_st81190 | ST81190 | jas (coat) | herfst-winter 1998-1999 |
+| MOMU-3_st2435 | ST2435 | jurk (dress) | 1920-1925 |
+| MOMU-4_st80998 | ST80998 | japon (bridal kaftan) | 1900-1925 |
+| MOMU-6_st2431 | ST2431/1-4 | uniform | 1870-1900 |
+| MOMU-7_st2432 | ST2432/1-2 | uniform | 1800-1940 |
+| MOMU-8_st671 | ST671 | japon | 1900-1915 |
+| MOMU-9_st2203 | ST2203 | jurk | 1937-1948 |
+| MOMU-10_st652 | ST652/1 (+ /2 slip) | jurk | 1940-1945 |
+
+None of the 8 demo pieces has a splat; ST2435 is on the season shortlist. Splats are not meshes: no remix shader,
+and they need a splat renderer (e.g. Spark for three.js, unverified) beside the dress form. 220 MB is too big
+for a phone page: test the `.sog` or compressed `.ply` size before any engine work.
+
 ## CLO path
 CLO on a personal machine (WeTransfer is blocked here), pattern files from MoMu, `Lilbonner/clo3d-mcp` (read its
 listener first). In `pieces.json` a CLO garment is `assets.glb.kind: "clo"`, `origin: "avatar"`, `units: "m"`;
