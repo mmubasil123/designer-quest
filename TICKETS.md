@@ -1,4 +1,4 @@
-# Second Skin: dress-form 3D engine
+# MoMu app: dress-form 3D engine
 
 Goal: clothes on the avatar look smooth and consistent at every angle. One three.js scene, a dress-form avatar
 (the form every MoMu photo is shot on), garment-only scans, automatic fit by slot.

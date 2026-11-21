@@ -4,11 +4,30 @@ Read this, then `LEDGER.md` (tickets, decisions D1 to D8, product-owner cut and 
 change with its reason. Agent rule (both people): work autonomously within your claimed ticket, inspect screenshots critically
 before calling anything done. Never deploy, push to `main` or publish without your person's explicit go.
 
-## MoMu branding (H10, PR #44 open, not merged, 2026-11-21)
-"MoMu / Second Skin" lockup in the Stage bar and the Up close header, the "MoMu" wordmark on the share card, and
-"at MoMu" instead of "in the museum" in the copy. Typographic only: no official MoMu logo file is in the repo or the
-template. Checked in Chrome at 390 px, not on a phone. Small overlaps with H11/H12/H13 in `quiz.js`, `share.js`,
-`story.js` (one to three lines each). Next: Hassan reviews and merges; then mark H10 done in LEDGER and Notion.
+## Find-it game H11 (hassan, PR #48 merged 2026-11-21; takes in Basil's J5)
+Up close is found on the piece now: tap the detail on the scan; the list is clues without numbers; "Hint" shows after a
+first miss or 20 s and rings the area (a tap in the ring counts); wrong taps get a ripple and a helping line; each find
+shows the record's Dutch words large, then "Now find it on the real piece in front of you." Only `up-close.html`.
+Checked in Chrome at 390 px on ST2435 and ST81190, front and back, console clean; not on a phone. Done in LEDGER and Notion. Left out: J5's
+"next piece to win" on the Won card (`second-skin.html`).
+
+## H13 Poetic narration (hassan, PR #46 open, not merged, 2026-11-21)
+- The 16 record-built stories are short poems in `mockups/narration-poems.json` (facts only from each record, each
+  traced to the record's Dutch words; check: `python3 -I mockups/tools/narration_facts.py <path to cache/>`). the curator's 3
+  stories unchanged. Story sheet leads with play and a few lines; full transcript under "Read the story".
+  Old drafts beside new poems: `docs/H13-NARRATION-REVIEW.md` (for the curator to read).
+- **Half done: audio.** The 16 poems are not voiced yet; they play in the phone's voice. No Gemini key in `.env`, and the
+  house voice is Picsart Adeline (manual export). Scripts: `narration.py --scripts DIR` (a copy of the 16 is in the side
+  sessions' notes folder `h13-voice-scripts/`). Voice in Picsart (AI Audio Generator, Adeline, one line per script,
+  export MP4), then `narration.py --import DIR --voice "picsart:Adeline"`, `--check`, transcribe each file back, commit
+  to `hassan/H13-narration`. Then merge on Hassan's word, mark H13 done in LEDGER and Notion.
+
+## MoMu branding (H10, PR #44 and PR #47 merged, 2026-11-21)
+MoMu's official two-M logo (`mockups/assets/brand/momu-logo.svg`, copied from momu.be) in the Stage bar, the Up close
+header, the share card, the tab icon and the Up close loading screen; "at MoMu" in the copy; the name "Second Skin" is
+gone from everything a visitor sees (the team is renaming the app; until then it says MoMu). Kept: `second-skin.html`,
+the Vercel project, sticker URLs, `secondSkin.*` keys, `second_skin` DB schema. Checked in Chrome at 390 px, not on a
+phone. Next: once the new name is picked, decide whether to rename those identifiers (sticker URLs, Mubasil deploys).
 
 ## Personal share card (H12, PR #45, merged 2026-11-21)
 Share sheet takes an optional name (device only) and draws a personal 1080x1920 card: name title, period room, pieces
@@ -37,7 +56,7 @@ scan pieces and 3 photo-only pieces are next. Checked headless at 390 px; not on
 - Serve: `cd mockups && python3 -m http.server 8765 --bind 127.0.0.1`; console handle `window.secondSkin`.
 
 ## A7 Archive vs Reconstruction: cut (2026-11-21)
-- MoMu's own CLO models (branch `hassan/momu-clo-pieces`): ST80881, ST503, ST2062, ST81190, ST80998 on MoMu's mannequins at `outfit.html?card=<id>`. To add one: open its `.zprj` in CLO, File > Export > OBJ with patterns, avatars and trims selected, Multiple Objects, Thin, mm; `clo/obj2glb.mjs <scene.obj> <outDir> <id>`; `clo/optimise_glb.mjs` on both files (garment ratio 0.5, body 0.4); add `assets.clo` with `avatar` = its `_body.glb`. Open: no entry from the wardrobe or card scans; 11 pieces have no CLO project; cavalry ST2431 project is part 1 of 4 and undraped.
+- MoMu's own CLO models (branch `hassan/momu-clo-pieces`): ST80881, ST503, ST2062, ST81190, ST80998 on MoMu's mannequins at `outfit.html?card=<id>`. To add one: open its `.zprj` in CLO, File > Export > OBJ with patterns, avatars and trims selected, Multiple Objects, Thin, mm; `clo/obj2glb.mjs <scene.obj> <outDir> <id>`; `clo/optimise_glb.mjs` on both files (garment ratio 0.5, body 0.4); add `assets.clo` with `avatar` = its `_body.glb`. Linked from the fact card and Up close (H14, "See it on a mannequin"). Open: 11 pieces have no CLO project; cavalry ST2431 project is part 1 of 4 and undraped.
 - the team's cycling outfit (branch `hassan/team-models`): blouse ST81114AB and trousers ST81116 on the team avatar at `outfit.html`, reached from their card scans (story, then "See it on the avatar"). To add another of the team's pieces: run `clo/optimise_glb.mjs` on his GLB, put it in `assets/clo/`, add `assets.clo` to its `pieces.json` entry (same `avatar`); if it overlaps a piece already there, make a cut variant with `clo/tuck_glb.mjs` and list it under `variants`. Open: the outfit page is not in the wardrobe, only behind the two cards; the trousers' denim texture is plain black (sheen stands in).
 - Removed: Up close shows only the splat again for ST81190 and every study piece (our CLO coat changed the fabric, so it misrepresented the piece). `reconstruction.js` and `assets/clo/ST81190.glb` are in `_to_delete/`. Kept for the team's models (`hassan/team-models`): `clo/outfit.js`, `assets/clo/avatar_web.glb`. The team no longer makes its own CLO garments.
 

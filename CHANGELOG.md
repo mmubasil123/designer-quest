@@ -2,6 +2,63 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## MoMu's official logo in the app (2026-11-21, branch hassan/H10-rename)
+- What: MoMu's two-M logo replaces the typed "MoMu": `assets/brand/momu-logo.svg` (the small 202x42 proportion, copied
+  unchanged from the inline SVG on momu.be), inlined in the Stage bar and Up close header (87x18 px, down to 62 px wide in
+  the 340 px pitch frame so it never touches the pills), drawn as polygons on the share card (40 px tall, right end of the
+  date row), as the browser-tab icon (`assets/brand/favicon.svg`) on the Stage, Up close and outfit pages, and breathing
+  above "Loading MoMu's 3D scan" on Up close (still under reduced motion).
+- Why: Hassan, 2026-11-21: take the branding from momu.be and the hackathon presentation template, and use the logo.
+- Decision: black on white only, as on momu.be and the template's content slides; never redrawn, stretched or recoloured.
+  The template's red, red capital titles and plain grotesque were already the H4 theme, so no token changed. The
+  template's partner mark (MASJIEN) is not used.
+
+## The app drops the name "Second Skin" (2026-11-21, branch hassan/H10-rename)
+- What: every place a visitor sees the name now says MoMu instead: the Stage bar and Up close header show the "MoMu" mark
+  alone (22 px, 44 px row), page titles are "MoMu", "Up close · MoMu", "<piece> · MoMu", "Cycling outfit · MoMu"; the
+  share card's top row is the date with MoMu on the right, its footer is the link alone, the shared file is
+  `momu-look.png` titled "My MoMu look"; help button label "How it works". README, AGENTS, ARCHITECTURE, TICKETS and the
+  pieces schema title call it the MoMu app.
+- Why: Hassan, 2026-11-21: the team is changing the name, so "Second Skin" goes from everywhere.
+- Decision: until a new name is picked the app carries MoMu's name only. Identifiers stay: `second-skin.html`, the Vercel
+  project `second-skin`, the sticker URLs, the `secondSkin.*` saved keys, `window.secondSkin` and the `second_skin` DB
+  schema (renaming them would break printed stickers and saved looks, and needs Mubasil for the deploy). History
+  (this changelog, past ledger rows, plans) is left as written. Checked in Chrome at 390 px, console clean.
+## Find-it game: tap the details on the piece (2026-11-21, branch hassan/H11-find-it, H11 with J5)
+- What: in Up close the visitor finds each recorded detail by tapping it on the 3D scan. The list shows the clues
+  without numbers, and a line under the count says how to play. "Show me" is now "Hint". It appears only after a first
+  wrong tap or 20 s without a find. A hint turns the piece and rings the area around the detail, off-centre, and a tap
+  anywhere in the ring counts. A wrong tap gets a ripple and a helpful line ("Close. Look a little nearer.",
+  "Nothing left to find on this side. Turn the piece."). A find opens a card on the scan with the record's Dutch words
+  large, the English below and "Now find it on the real piece in front of you." The last find's card has "Win its
+  fabric". Found marks on the piece are plain dots. Before all are found, the bottom button never shows the answer.
+- Why: feedback 2026-11-21. Visitors tapped "Show me" in the list and only then saw the detail on the piece, so the
+  list was the way in, not the scan. J5 (no order numbers, the record's words large, then the real piece) is the same
+  flow, so Hassan took it over from Basil and it lands here.
+- Decision: the scan comes first and the text is a hint. Hints stay so nobody gets stuck (D2). The ring shows an area,
+  never the spot. Quotes are the record's own (`details[].quote`, unchanged). Not done: J5's "then the next piece to
+  win" belongs on the Won card in `second-skin.html`, outside this ticket, so it is left for a follow-up. Checked in Chrome at
+  390 px on ST2435 and ST81190, front and back; not on a phone.
+
+## Way in to the CLO models (2026-11-21, H14, branch hassan/H14-clo-links)
+- What: a piece with a MoMu CLO model (`assets.clo`) links to its page. Fact card: a "See it on a mannequin" button
+  under "See it in 3D", for won pieces (furisode, jak, knee breeches, coat, kaftan). Up close: the same link under
+  the fabric button for the two study pieces (coat, kaftan). `outfit.html`: "My look" steps back to the Stage
+  (`backTo`) instead of stacking a new one.
+- Why: the five pages opened by address only.
+- Decision: reuse the fact card's ghost button and Up close's underlined link; no new styles beyond one `.more` rule.
+  A locked piece shows no link (it is won first). The card-scan flow is unchanged: a scan leads to the Won tab or Up
+  close, and the link is one tap from there.
+## MoMu branding on every main screen (2026-11-21, branch hassan/H10-branding)
+- What: a stacked "MoMu / Second Skin" lockup replaces the plain "Second Skin" in the Stage bar and the Up close header
+  (`.momu` and `.brand.lockup` in `theme.css`); the share card PNG carries the same "MoMu" wordmark at the right end of its "Second Skin · date" row (H12);
+  copy names MoMu where it said "the museum" (Found at MoMu on the story and quiz sheets, Find it at MoMu, Win it at
+  MoMu, At MoMu, Win pieces at MoMu); page titles end in "· MoMu"; Up close loads "MoMu's 3D scan".
+- Why: feedback round 2026-11-21, "Add more MoMu branding". The app read as Second Skin with MoMu only in small credits.
+- Decision: a typographic wordmark ("MoMu" in its own mixed case, Hanken Grotesk 600, black as on momu.be), not a
+  logo: neither the repo nor MoMu's hackathon presentation template holds an official logo file, and we do not draw
+  one. Red stays for titles only. Fact card left as it is: it already says MoMu study collection, MoMu says, MoMu record.
+  Checked in Chrome at 390 px (Stage, story, fact card, share card, Up close), console clean; not on a phone.
 ## Personal share card (2026-11-21, branch hassan/H12-share)
 - What: the share sheet has an optional name field. The card now reads "<Name>'s look across N years" (without a name:
   "A look across N years"), stands the form in the period room of the look's middle year (`scenes.js`), shows the date,

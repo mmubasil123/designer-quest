@@ -1,10 +1,10 @@
-# MoMu collection DB and Second Skin
+# MoMu collection DB and the MoMu app
 
 Two things live here, for the MoMu Hackathon 2026 (MoMu is the Antwerp fashion museum):
 
 1. **The collection database.** MoMu's public collection data, harvested from the Omeka S APIs behind
    studycenter.momu.be and heron.libis.be/momu into a normalised Postgres schema.
-2. **Second Skin**, a web mockup where visitors unlock real collection pieces and dress a 3D museum dress form in
+2. **The MoMu app** (new name not decided yet), a web mockup where visitors unlock real collection pieces and dress a 3D museum dress form in
    them, remix fabrics across pieces and centuries, and learn the history as they go.
 
 ## Layout

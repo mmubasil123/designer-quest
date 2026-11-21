@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Cycling outfit · Second Skin</title>
+<title>Cycling outfit · MoMu</title>
+<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="theme.css">
 <style>
 * { box-sizing: border-box; margin: 0; }
@@ -28,7 +29,7 @@ footer { padding: 12px 16px max(16px, env(safe-area-inset-bottom)); display: gri
 } }</script>
 </head>
 <body>
-<header><h1 id="title">Cycling outfit</h1><a class="mono" href="second-skin.html">My look</a></header>
+<header><h1 id="title">Cycling outfit</h1><a class="mono" id="back" href="second-skin.html">My look</a></header>
 <div id="view"><div id="status" role="status">Loading</div></div>
 <footer>
   <div class="row" id="pieces" aria-label="Wear"></div>
@@ -45,6 +46,7 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { OutfitRig } from "./clo/outfit.js";
+import { backTo } from "./nav.js";   // H6: step back to the Stage instead of stacking a new one
 
 const $ = s => document.querySelector(s), view = $("#view"), status = $("#status");
 const manifest = await (await fetch("pieces.json")).json();
@@ -55,7 +57,7 @@ const clo = all.filter(p => p.assets.clo.avatar === avatarUrl);   // the pieces 
 const team = /avatar_web\.glb$/.test(avatarUrl);
 const word = clo[0].name.split(" ")[0];
 $("#title").textContent = clo.length > 1 && clo.every(p => p.name.startsWith(word)) ? `${word} outfit` : clo[0].name;
-document.title = `${$("#title").textContent} · Second Skin`;
+document.title = `${$("#title").textContent} · MoMu`;
 $("#credit").textContent = team ? "Models by the team, sewn in CLO 3D and draped on the team avatar. Worn as exported: nothing is fitted."
   : "MoMu's own CLO 3D model, on MoMu's mannequin in the pose it was draped in. Worn as exported: nothing is fitted.";
 
@@ -121,6 +123,7 @@ btns.addEventListener("click", async e => {
 rig.addEventListener("change", e => {
   for (const b of btns.children) b.setAttribute("aria-pressed", String(e.detail.worn.includes(b.dataset.id)));
 });
+$("#back").addEventListener("click", e => { e.preventDefault(); backTo("second-skin.html"); });
 $("#views").addEventListener("click", e => { const v = e.target.closest("button")?.dataset.v; if (v) setView(v); });
 status.textContent = "";
 if (card && rig.items.has(card)) await rig.wear(card);

@@ -106,7 +106,7 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
     const hasMore = rest.length > 0 || lead !== full;
     el.innerHTML = `<div tabindex="-1" autofocus>
       ${img ? `<img class="pic" src="${img(id)}" alt="">` : ""}
-      <div class="mono">${found ? "Found in the museum" : "Story"} · ${esc(id)}</div>
+      <div class="mono">${found ? "Found at MoMu" : "Story"} · ${esc(id)}</div>
       <h2 id="storyName">${esc(name?.(id) ?? p.title)}</h2>
       ${years && p.years ? `<p class="years">${esc(p.years)}</p>` : ""}
       ${p.draft ? `<p class="draft">From the MoMu record</p>` : ""}

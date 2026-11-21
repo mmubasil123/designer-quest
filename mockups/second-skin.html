@@ -7,7 +7,8 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<title>Second Skin mockups</title>
+<title>MoMu</title>
+<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/" } }</script>
@@ -193,7 +194,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .museum { width: min(420px, calc(100% - 32px)); text-align: left; }
 .museum .grid { max-height: min(60vh, 520px); overflow-y: auto; margin-bottom: 8px; }
 .tile.study:not(.seen) img { filter: grayscale(1) contrast(.2) brightness(1.4); }
-.tile.locked::after { pointer-events: none; content: "Win it in the museum"; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 10px; font: italic 13px/1.2 var(--serif); color: var(--muted); }
+.tile.locked::after { pointer-events: none; content: "Win it at MoMu"; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 10px; font: italic 13px/1.2 var(--serif); color: var(--muted); }
 
 dl { display: grid; grid-template-columns: 84px 1fr; gap: 4px 10px; margin: 12px 0; font-size: 13px; }
 dt { color: var(--muted); }
@@ -268,7 +269,7 @@ dt { color: var(--muted); }
   <feColorMatrix type="saturate" values="0"/>
   <feComponentTransfer><feFuncR type="gamma" exponent="10"/><feFuncG type="gamma" exponent="10"/><feFuncB type="gamma" exponent="10"/></feComponentTransfer>
 </filter></svg>
-<h1 class="sheet">Second Skin</h1>
+<h1 class="sheet">MoMu</h1>
 <p class="sheet">Drag the avatar to turn it. The avatar is a 3D dress form wearing models made from the museum photos, sized and placed by slot so any top, bottom and shoes fit at every angle. CLO drapes replace the models later.</p>
 
 <div class="screens">
@@ -277,7 +278,7 @@ dt { color: var(--muted); }
   <section data-screen="stage">
     <div class="label">1 · Stage</div>
     <div class="phone">
-      <div class="bar"><span class="brand">Second Skin</span><span class="bar-actions"><button class="pill ghost press" id="museumBtn">Museum</button><button class="pill press" id="shareBtn">Share look</button><button class="pill ghost press helpbtn" id="helpBtn" aria-label="How Second Skin works">?</button></span></div>
+      <div class="bar"><span class="brand lockup"><!-- H10: MoMu's official logo, as assets/brand/momu-logo.svg (inline so it takes currentColor) --><svg class="momu-logo" viewBox="0 0 202 42" role="img" aria-label="MoMu"><title>MoMu</title><g fill="currentColor" fill-rule="evenodd"><polygon points="93.7308089 0 50.1255238 40.3757678 4.82491673 0 0 0 0 42 25.9339274 42 25.9339274 19.7578271 50.6796291 42 74.57917 42 98.8387794 19.7578271 98.8387794 42 100 42 100 0"/><polygon points="195.731684 0 152.123526 40.3757678 106.825013 0 102 0 102 42 127.933446 42 127.933446 19.7578271 152.679643 42 176.579662 42 200.840757 19.7578271 200.840757 42 202 42 202 0"/></g></svg></span><span class="bar-actions"><button class="pill ghost press" id="museumBtn">Museum</button><button class="pill press" id="shareBtn">Share look</button><button class="pill ghost press helpbtn" id="helpBtn" aria-label="How it works">?</button></span></div>
       <div class="stage" id="stage" data-snap="peek">
         <div class="credit">
           <div>
@@ -1137,12 +1138,13 @@ async function openFact(id) {
   const link = document.getElementById("factLink");
   link.hidden = !r.uri; if (r.uri) link.href = r.uri;
   const actBtn = document.getElementById("factAct");
-  const label = ctx === "study" ? (p.seen ? "Study it up close" : "Find it in the museum")
-    : p.locked ? "Find it in the museum" : ctx === "remix" ? (isWorn(id, ctx) ? `Take it off the ${activeZone}` : `Use on the ${activeZone}`)
+  const label = ctx === "study" ? (p.seen ? "Study it up close" : "Find it at MoMu")
+    : p.locked ? "Find it at MoMu" : ctx === "remix" ? (isWorn(id, ctx) ? `Take it off the ${activeZone}` : `Use on the ${activeZone}`)
     : isWorn(id, ctx) ? "Take it off" : "Wear it";
   actBtn.hidden = !label; actBtn.textContent = label ?? "";
   const unwon = p.room && p.locked && !p.splat;   // its date is the answer to Guess the year, so nothing may reveal it yet
   document.getElementById("factAsk").hidden = unwon;
+  document.getElementById("factClo").hidden = !p.clo || p.locked;   // H14: MoMu's draped CLO model, on its own page (outfit.html); a won piece only
   view3dBtn.hidden = !(p.glb && !unwon) && !(p.splat && p.seen);   // a study piece's 3D is its Up close scan, open once its sticker was tapped
   if (!factEl.open) factEl.showModal();
   if (p.splat && p.seen) preloadStudy(id);   // "See it in 3D" opens its Up close scan: start it quietly after 2 s; closing the card aborts it
@@ -1152,6 +1154,7 @@ async function openFact(id) {
 const viewEl = document.getElementById("view3d"), viewMV = document.getElementById("viewMV"), view3dBtn = document.getElementById("fact3d");
 const viewScene = mountScene(viewEl.firstElementChild);
 let mvReady = null;
+document.getElementById("factClo").addEventListener("click", () => { const id = factId; factEl.close(); go(`outfit.html?card=${encodeURIComponent(id)}`); });
 view3dBtn.addEventListener("click", async () => {
   const id = factId;
   if (!PIECES[id].glb) { location.href = `up-close.html?id=${encodeURIComponent(id)}`; return; }
@@ -1235,7 +1238,7 @@ document.getElementById("cats").addEventListener("click", e => { if (e.target.cl
 /* ---------- Help: three steps, shown once on a first visit, always reopenable with the ? button ---------- */
 const HELP = [
   { t: "Dress the form", d: "Pull up the wardrobe from the bottom. Tap a piece to wear it, tap it again to take it off. Drag the form to turn it." },
-  { t: "Win pieces in the museum", d: "Tap the sticker beside a piece. Guess its year, or find its details up close, and it joins your wardrobe. Museum shows what is left to find." },
+  { t: "Win pieces at MoMu", d: "Tap the sticker beside a piece. Guess its year, or find its details up close, and it joins your wardrobe. Museum shows what is left to find." },
   { t: "Remix a fabric", d: "In the Fabrics tab, put one piece's cloth on another piece's cut. The i on any piece shows what MoMu recorded about it." },
 ];
 const HELP_KEY = "secondSkin.help.v1", helpEl = document.getElementById("help");
@@ -1304,14 +1307,14 @@ try { if (!scanned && !claimed && !localStorage.getItem(HELP_KEY)) openHelp(); }
 </script>
 <dialog class="nfc" id="nfc" aria-labelledby="nfcTitle"><div tabindex="-1" autofocus>
   <div class="ring" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 8.5a5 5 0 0 1 0 7M9.5 6a8.5 8.5 0 0 1 0 12M13 3.5a12 12 0 0 1 0 17"/></svg></div>
-  <h2 id="nfcTitle">Find it in the museum</h2>
+  <h2 id="nfcTitle">Find it at MoMu</h2>
   <p id="nfcText"></p>
   <p class="mono status" id="nfcStatus" role="status"></p>
   <a class="btn press" id="nfcGo">Demo: tap the sticker</a>
   <form method="dialog"><button class="btn ghost press">Not now</button></form>
 </div></dialog>
 <dialog class="nfc museum" id="museum" aria-labelledby="museumTitle"><div tabindex="-1" autofocus>
-  <h2 id="museumTitle">In the museum</h2>
+  <h2 id="museumTitle">At MoMu</h2>
   <p class="mono status" id="museumCount"></p>
   <p>Tap a piece's sticker in the room to win it.</p>
   <div class="grid" id="museumGrid"></div>
@@ -1340,6 +1343,7 @@ try { if (!scanned && !claimed && !localStorage.getItem(HELP_KEY)) openHelp(); }
   <blockquote id="factQuote"></blockquote>
   <div class="shares" id="factShares"></div>
   <button class="btn ghost press ar" id="fact3d" hidden>See it in 3D</button>
+  <button class="btn ghost press ar" id="factClo" hidden>See it on a mannequin</button>
   <div class="row"><button class="btn press" id="factAct"></button><button class="ask-open press" id="factAsk">Ask</button><a id="factLink" target="_blank" rel="noopener">MoMu record ↗</a></div>
 </div></dialog>
 </body>
