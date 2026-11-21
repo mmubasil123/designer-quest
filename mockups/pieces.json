@@ -159,7 +159,12 @@
           "units": "m",
           "origin": "avatar",
           "variants": [
-            { "over": ["ST81116"], "path": "assets/clo/ST81114AB_in_ST81116.glb" }
+            {
+              "over": [
+                "ST81116"
+              ],
+              "path": "assets/clo/ST81114AB_in_ST81116.glb"
+            }
           ]
         }
       },
@@ -633,6 +638,11 @@
             0.765,
             0.3
           ],
+          "atClo": [
+            0.676,
+            0.58,
+            0.199
+          ],
           "quote": "aan elkaar vastgehecht met messingkleurige rivetten",
           "en": "Joined together with brass-coloured rivets."
         },
@@ -643,6 +653,11 @@
             0.65,
             0.2
           ],
+          "atClo": [
+            0.513,
+            0.491,
+            0.132
+          ],
           "quote": "De jas sluit middenvoor met negen messingkleurige drukknopen.",
           "en": "The coat closes at the centre front with nine brass-coloured press studs."
         },
@@ -652,6 +667,11 @@
             0.446,
             0.912,
             0.8
+          ],
+          "atClo": [
+            0.494,
+            0.89,
+            0.837
           ],
           "quote": "Op de achterzijde ter hoogte van de hals is een rood kruis gestikt.",
           "en": "A red cross is stitched on the back at neck height."
@@ -727,6 +747,11 @@
             0.866,
             0.25
           ],
+          "atClo": [
+            0.501,
+            0.907,
+            0.379
+          ],
           "quote": "ronde halsuitsnijding, uitlopend in een punt",
           "en": "A round neckline that runs out into a point."
         },
@@ -737,6 +762,11 @@
             0.775,
             0.2
           ],
+          "atClo": [
+            0.561,
+            0.841,
+            0.285
+          ],
           "quote": "het borstvlak van de kaftan zijn versierd met veelkleurig borduurwerk van opgenaaide koorden en metaaldraad",
           "en": "The chest of the kaftan is decorated with many-coloured embroidery of couched cords and metal thread."
         },
@@ -746,6 +776,11 @@
             0.954,
             0.52,
             0.45
+          ],
+          "atClo": [
+            0.063,
+            0.568,
+            0.441
           ],
           "quote": "met lange puntmouwen",
           "en": "With long pointed sleeves."
