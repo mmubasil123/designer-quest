@@ -26,7 +26,8 @@ before calling anything done. Never deploy, push to `main` or publish without yo
 - Text and audio list: `mockups/narration.json`, built by `python3 -I mockups/tools/narration.py` from `questions.json`
   (the curator) and `records.json` (drafts for pieces she hasn't written yet, marked on screen). Never hand-edit it.
 - Audio: `assets/audio/<id>.en.m4a`, all 19 done, English only. Only the story text goes to the voice (no style line:
-  models read it out). Each piece's `voice` says who made it: 3 Gemini (Sulafat), 16 Picsart (Adeline).
+  models read it out). One voice throughout: Picsart Adeline (each piece's `voice` records it). Keep new audio in
+  Adeline: Gemini's voice would break that, so use the Picsart route below.
 - After the curator edits her page: re-sync `questions.json`, then `narration.py --audio` (Gemini, key `GEMINI_API_KEY` in
   `.env`; stops cleanly when the free daily quota is spent). For what's left: `--scripts DIR`, voice those texts in
   Picsart (AI Audio Generator, Adeline, one line per script, export MP4), then `--import DIR --voice "picsart:Adeline"`.

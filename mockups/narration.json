@@ -17,9 +17,9 @@
       "hash": "ac91b9f0f010d5ce",
       "audio": "assets/audio/ST503.en.m4a",
       "audioHash": "ac91b9f0f010d5ce",
-      "seconds": 21.5,
-      "bytes": 138494,
-      "voice": "gemini:gemini-3.8-flash-tts:Sulafat"
+      "seconds": 22.9,
+      "bytes": 143243,
+      "voice": "picsart:Adeline"
     },
     "ST80930": {
       "title": "Ikat vest",
@@ -35,9 +35,9 @@
       "hash": "95d3631bf34edb26",
       "audio": "assets/audio/ST80930.en.m4a",
       "audioHash": "95d3631bf34edb26",
-      "seconds": 18.4,
-      "bytes": 117808,
-      "voice": "gemini:gemini-3.8-flash-tts:Sulafat"
+      "seconds": 19.2,
+      "bytes": 120684,
+      "voice": "picsart:Adeline"
     },
     "ST2434": {
       "title": "Green wool coat",
@@ -251,9 +251,9 @@
       "hash": "79b791e9fe668c5b",
       "audio": "assets/audio/ST81190.en.m4a",
       "audioHash": "79b791e9fe668c5b",
-      "seconds": 64.1,
-      "bytes": 400783,
-      "voice": "gemini:gemini-3.8-flash-tts:Sulafat"
+      "seconds": 71.3,
+      "bytes": 447025,
+      "voice": "picsart:Adeline"
     },
     "ST80998": {
       "title": "Striped velvet bridal kaftan",

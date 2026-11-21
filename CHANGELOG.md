@@ -4,6 +4,11 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### One narration voice throughout (branch hassan/H3-one-voice)
+- **What:** the 3 stories still in Gemini's voice (ST81190, ST503, ST80930) are re-made in Picsart's Adeline, so all 19 now share one voice. Made from the story text alone, like the rest.
+- **Checked:** every file transcribed back: none contains the old style line ("Read this aloud in a calm, warm voice..."), and the words match the story (83 to 97%; the gaps are numbers like "9th" heard as "ninth").
+- **Script:** `narration.py --force` with `--only` treats chosen pieces as missing, so `--scripts` and `--import` can redo them (for example to change voice).
+
 ### Narration from the story text alone (branch hassan/H3-narration-text)
 - **What:** `tools/narration.py` now sends the TTS only the story text. The old prompt put a style line before it ("Read this aloud in a calm, warm voice..."), and the model read that out. Every story is re-voiced; durations are shorter because the "unhurried" pace hint is gone.
 - **Hash:** the audio hash is now the text alone, so a file is remade only when its story changes, whatever voice made it. Each piece records its `voice` (`gemini:<model>:<voice>` or `picsart:<voice>`).
