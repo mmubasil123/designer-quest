@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 202 42" role="img" aria-label="MoMu"><title>MoMu</title>
+<!-- MoMu's official logo, small proportion, copied unchanged from the inline SVG on https://www.momu.be/en/ (2026-11-21).
+     Two M shapes; fill is currentColor so it takes the text colour where it is inlined. Do not redraw or recolour beyond black/white. -->
+<g fill="currentColor" fill-rule="evenodd">
+<polygon points="93.7308089 0 50.1255238 40.3757678 4.82491673 0 0 0 0 42 25.9339274 42 25.9339274 19.7578271 50.6796291 42 74.57917 42 98.8387794 19.7578271 98.8387794 42 100 42 100 0"/>
+<polygon points="195.731684 0 152.123526 40.3757678 106.825013 0 102 0 102 42 127.933446 42 127.933446 19.7578271 152.679643 42 176.579662 42 200.840757 19.7578271 200.840757 42 202 42 202 0"/>
+</g></svg>

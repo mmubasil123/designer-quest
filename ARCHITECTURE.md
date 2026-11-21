@@ -31,7 +31,7 @@ mockups/pieces.json  (single source of truth for pieces) ───────�
 - `make_swatches.py`: tileable 512 px fabric crops for Remix.
 - Output is committed: GLBs are expensive to make (scarce free GPU), cheap to store.
 
-## 3. Second Skin mockup (`mockups/`)
+## 3. MoMu app mockup (`mockups/`)
 - `second-skin.html`: one file, one `<script type="module">`. three.js 0.169.0 from jsDelivr via import map;
   model-viewer only on the Piece page (to be replaced, A4).
 - Boot: `fetch("pieces.json")`, restore save from `localStorage` key `secondSkin.save.v1` (ids validated).

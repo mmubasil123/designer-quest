@@ -36,6 +36,11 @@ export function pickQuote(facts, stories) {
 
 export const CARD_W = 1080, CARD_H = 1920;
 const CREDIT = "Collection: MoMu Fashion Museum Antwerp";
+// MoMu's official logo, the two polygons of assets/brand/momu-logo.svg (viewBox 0 0 202 42), for drawing on the canvas
+const MOMU_LOGO = [
+  [93.7308089, 0, 50.1255238, 40.3757678, 4.82491673, 0, 0, 0, 0, 42, 25.9339274, 42, 25.9339274, 19.7578271, 50.6796291, 42, 74.57917, 42, 98.8387794, 19.7578271, 98.8387794, 42, 100, 42, 100, 0],
+  [195.731684, 0, 152.123526, 40.3757678, 106.825013, 0, 102, 0, 102, 42, 127.933446, 42, 127.933446, 19.7578271, 152.679643, 42, 176.579662, 42, 200.840757, 19.7578271, 200.840757, 42, 202, 42, 202, 0],
+];
 // the canvas cannot read CSS variables per draw call cheaply, so these mirror theme.css (fonts and colour tokens): change both together
 const SERIF = '"Source Serif 4", Georgia, serif', MONO = '"Hanken Grotesk", "Helvetica Neue", Arial, sans-serif';   // MONO: the small label face (was a mono)
 const INK = "#000", MUTED = "#595959", LINE = "#cbcbcb", PAPER = "#fff", WALL = "#ededed", RED = "#d72f25";
@@ -89,10 +94,11 @@ export function drawCard({ grab, name, facts, url, scene, quote, won, kicker }) 
   ctx.textBaseline = "alphabetic"; ctx.fillStyle = MUTED; ctx.font = `500 24px ${MONO}`;
   ctx.fillText(kicker.toUpperCase(), pad, 124);
 
-  // H10: MoMu's name as the same typographic wordmark as the app's top bar (no official logo file exists to draw),
-  // at the right end of the kicker's row so the two read as one header line
-  ctx.fillStyle = INK; ctx.font = `600 46px ${MONO}`; ctx.letterSpacing = "-1px"; ctx.textAlign = "right";
-  ctx.fillText("MoMu", CARD_W - pad, 124); ctx.letterSpacing = "0px"; ctx.textAlign = "left";
+  // H10: MoMu's official logo (assets/brand/momu-logo.svg) at the right end of the date row, its foot on the row's baseline
+  const logoH = 40, logoW = logoH * 202 / 42;
+  ctx.save(); ctx.translate(CARD_W - pad - logoW, 124 - logoH); ctx.scale(logoH / 42, logoH / 42); ctx.fillStyle = INK;
+  for (const pts of MOMU_LOGO) { ctx.beginPath(); for (let i = 0; i < pts.length; i += 2) ctx[i ? "lineTo" : "moveTo"](pts[i], pts[i + 1]); ctx.closePath(); ctx.fill(); }
+  ctx.restore();
   ctx.fillStyle = RED; ctx.font = `400 84px ${MONO}`;   // titles are red capitals, as in MoMu's template
   const lines = wrap(ctx, name.toUpperCase(), CARD_W - 2 * pad, 3);
   let y = 214;
@@ -141,7 +147,7 @@ export function drawCard({ grab, name, facts, url, scene, quote, won, kicker }) 
   ctx.textAlign = "left"; ctx.fillStyle = INK; ctx.font = `400 38px ${SERIF}`;
   ctx.fillText(CREDIT, pad, FOOT_Y + 90);
   ctx.font = `400 26px ${MONO}`; ctx.fillStyle = MUTED;
-  ctx.fillText("Made in Second Skin · " + fit(ctx, url, CARD_W - 2 * pad - 330), pad, FOOT_Y + 142);
+  ctx.fillText(fit(ctx, url, CARD_W - 2 * pad), pad, FOOT_Y + 142);
   return cv;
 }
 
@@ -170,7 +176,7 @@ export function createShare({ tt, look, PIECES, getName, toast }) {
     <label class="share-name"><span>Your name <i>(optional)</i></span><input id="shareName" type="text" maxlength="20" autocomplete="off" autocapitalize="words" spellcheck="false" enterkeyhint="done" placeholder="Put your name on it"></label>
     <img class="share-img" id="shareImg" alt="" width="270" height="480">
     <p class="share-note" id="shareNote"></p>
-    <div class="row"><button class="btn press" id="shareGo" hidden>Share</button><a class="btn ghost press" id="shareSave" download="second-skin-look.png">Download image</a></div>
+    <div class="row"><button class="btn press" id="shareGo" hidden>Share</button><a class="btn ghost press" id="shareSave" download="momu-look.png">Download image</a></div>
     <button class="share-x press" data-close aria-label="Close" autofocus>×</button>
   </div>`;
   document.body.append(el);
@@ -180,7 +186,7 @@ export function createShare({ tt, look, PIECES, getName, toast }) {
   el.addEventListener("close", () => { clearTimeout(timer); run++; URL.revokeObjectURL(img.src); img.removeAttribute("src"); save.removeAttribute("href"); file = null; });
   go.addEventListener("click", async () => {
     if (!file) return;
-    try { await navigator.share({ files: [file], title: "Second Skin" }); }
+    try { await navigator.share({ files: [file], title: "My MoMu look" }); }
     catch (err) { if (err.name !== "AbortError") toast("Couldn't share from this browser, use Download"); }
   });
   save.addEventListener("click", () => toast("Saved to your downloads"));   // the link itself downloads the blob
@@ -200,14 +206,14 @@ export function createShare({ tt, look, PIECES, getName, toast }) {
     const won = readWon().filter(id => PIECES[id] && !wornIds.has(id)).map(id => PIECES[id].name);
     const shown = won.length > 2 ? [...won.slice(0, 2), `+${won.length - 2} more`] : won;
     const title = cardTitle(name, facts, getName());
-    const kicker = "Second Skin · " + new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+    const kicker = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
     const url = location.host + location.pathname.replace(/\/(index|second-skin)\.html$/, "/");
     const canvas = drawCard({ grab: h => grabStill(tt, h), name: title, facts, url, scene, quote: pickQuote(facts, stories), won: shown, kicker });
     const blob = await new Promise(res => canvas.toBlob(res, "image/png"));
     if (mine !== run) return;
     if (!blob) { toast("Couldn't make the card in this browser"); return; }
     URL.revokeObjectURL(img.src);
-    file = new File([blob], "second-skin-look.png", { type: "image/png" });
+    file = new File([blob], "momu-look.png", { type: "image/png" });
     img.src = URL.createObjectURL(file);
     img.alt = `Share card: ${title}, ${facts.span ? `from ${facts.oldest} to ${facts.newest}` : "years as recorded"}, ${CREDIT}`;
     const canShare = !!navigator.canShare?.({ files: [file] });

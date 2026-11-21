@@ -7,7 +7,8 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<title>Second Skin · MoMu</title>
+<title>MoMu</title>
+<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/" } }</script>
@@ -268,7 +269,7 @@ dt { color: var(--muted); }
   <feColorMatrix type="saturate" values="0"/>
   <feComponentTransfer><feFuncR type="gamma" exponent="10"/><feFuncG type="gamma" exponent="10"/><feFuncB type="gamma" exponent="10"/></feComponentTransfer>
 </filter></svg>
-<h1 class="sheet">Second Skin</h1>
+<h1 class="sheet">MoMu</h1>
 <p class="sheet">Drag the avatar to turn it. The avatar is a 3D dress form wearing models made from the museum photos, sized and placed by slot so any top, bottom and shoes fit at every angle. CLO drapes replace the models later.</p>
 
 <div class="screens">
@@ -277,7 +278,7 @@ dt { color: var(--muted); }
   <section data-screen="stage">
     <div class="label">1 · Stage</div>
     <div class="phone">
-      <div class="bar"><span class="brand lockup"><b class="momu">MoMu</b><span>Second Skin</span></span><span class="bar-actions"><button class="pill ghost press" id="museumBtn">Museum</button><button class="pill press" id="shareBtn">Share look</button><button class="pill ghost press helpbtn" id="helpBtn" aria-label="How MoMu Second Skin works">?</button></span></div>
+      <div class="bar"><span class="brand lockup"><!-- H10: MoMu's official logo, as assets/brand/momu-logo.svg (inline so it takes currentColor) --><svg class="momu-logo" viewBox="0 0 202 42" role="img" aria-label="MoMu"><title>MoMu</title><g fill="currentColor" fill-rule="evenodd"><polygon points="93.7308089 0 50.1255238 40.3757678 4.82491673 0 0 0 0 42 25.9339274 42 25.9339274 19.7578271 50.6796291 42 74.57917 42 98.8387794 19.7578271 98.8387794 42 100 42 100 0"/><polygon points="195.731684 0 152.123526 40.3757678 106.825013 0 102 0 102 42 127.933446 42 127.933446 19.7578271 152.679643 42 176.579662 42 200.840757 19.7578271 200.840757 42 202 42 202 0"/></g></svg></span><span class="bar-actions"><button class="pill ghost press" id="museumBtn">Museum</button><button class="pill press" id="shareBtn">Share look</button><button class="pill ghost press helpbtn" id="helpBtn" aria-label="How it works">?</button></span></div>
       <div class="stage" id="stage" data-snap="peek">
         <div class="credit">
           <div>

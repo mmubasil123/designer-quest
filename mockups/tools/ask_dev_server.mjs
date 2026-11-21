@@ -33,6 +33,6 @@ createServer(async (req, res) => {
     const data = await readFile(path);
     res.writeHead(200, { "Content-Type": TYPES[extname(path)] || "application/octet-stream" }).end(data);
   } catch { res.writeHead(404).end(); }
-}).listen(PORT, "127.0.0.1", () => console.log(`Second Skin + /api/ask on http://127.0.0.1:${PORT}/ (${PROVIDER ? `${PROVIDER} ${MODEL}` : "no key: fallback mode"})`));
+}).listen(PORT, "127.0.0.1", () => console.log(`MoMu app + /api/ask on http://127.0.0.1:${PORT}/ (${PROVIDER ? `${PROVIDER} ${MODEL}` : "no key: fallback mode"})`));
 
 function safeJson(s) { try { return JSON.parse(s); } catch { return null; } }

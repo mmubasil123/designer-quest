@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Cycling outfit · Second Skin · MoMu</title>
+<title>Cycling outfit · MoMu</title>
+<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="theme.css">
 <style>
 * { box-sizing: border-box; margin: 0; }
@@ -56,7 +57,7 @@ const clo = all.filter(p => p.assets.clo.avatar === avatarUrl);   // the pieces 
 const team = /avatar_web\.glb$/.test(avatarUrl);
 const word = clo[0].name.split(" ")[0];
 $("#title").textContent = clo.length > 1 && clo.every(p => p.name.startsWith(word)) ? `${word} outfit` : clo[0].name;
-document.title = `${$("#title").textContent} · Second Skin · MoMu`;
+document.title = `${$("#title").textContent} · MoMu`;
 $("#credit").textContent = team ? "Models by the team, sewn in CLO 3D and draped on the team avatar. Worn as exported: nothing is fitted."
   : "MoMu's own CLO 3D model, on MoMu's mannequin in the pose it was draped in. Worn as exported: nothing is fitted.";
 
