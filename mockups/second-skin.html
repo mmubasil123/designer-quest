@@ -13,6 +13,7 @@
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/" } }</script>
 <script type="module" src="preload.js"></script><!-- H5: a ?card= scan starts fetching its 3D file at once; API in preload.js -->
 <link rel="preconnect" href="https://heron.libis.be" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="ask.css">
 <link rel="stylesheet" href="share.css">
 <link rel="stylesheet" href="story.css">
@@ -162,12 +163,16 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .fact .shares button { text-decoration: underline; text-underline-offset: 2px; min-height: 32px; }
 .fact .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .fact .ar { width: 100%; margin-bottom: 8px; }
+.fact > div { position: relative; }
+.fact #factName { padding-right: 40px; }
+.fact-x { position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; border-radius: 50%; font: 300 24px/1 var(--sans); color: var(--ink); }
 .view3d { width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; border: 0; padding: 0; background: var(--wall); }
 .view3d > div { position: relative; width: 100%; height: 100%; }
 .view3d model-viewer { width: 100%; height: 100%; --poster-color: transparent; }
 .view3d h2 { position: absolute; left: 20px; top: calc(20px + env(safe-area-inset-top)); right: 76px; font: var(--t-title); text-transform: uppercase; color: var(--title-ink); }
 .view3d .view-x { position: absolute; right: 16px; top: calc(14px + env(safe-area-inset-top)); width: 44px; height: 44px; border-radius: 50%; background: var(--paper); font: 300 24px/1 var(--sans); box-shadow: var(--shadow-pill); }
-.view3d .view-ar { position: absolute; left: 20px; right: 20px; bottom: calc(24px + env(safe-area-inset-bottom)); min-height: 48px; }
+.view3d .view-ar { position: absolute; left: 0; right: 0; margin: 0 auto; bottom: calc(24px + env(safe-area-inset-bottom)); width: min(340px, calc(100% - 40px)); min-height: 48px; display: flex; align-items: center; justify-content: center; }
+.view3d .view-ar[hidden] { display: none; }
 .fact .row .btn { flex: 1; }
 .fact .row a { flex: none; min-height: 44px; display: flex; align-items: center; padding: 0 14px; font-size: 13px; color: var(--ink); }
 .tile.on { outline: 2px solid var(--ink); outline-offset: 2px; }
@@ -313,7 +318,8 @@ const FINISH_NAMES = ["Linen", "Calico", "Black jersey", "Oak"];
 const manifest = await (await fetch("pieces.json")).json();
 const PIECES = Object.fromEntries(manifest.pieces.map(p => [p.id, {
   ...p.fit, slot: p.slot, name: p.name, year: p.year, locked: p.locked, room: p.locked,   // room: has a sticker in the museum, won there
-  img: IMG(p.source.imgSha), glb: p.assets.glb?.path ?? null, kind: p.assets.glb?.kind ?? null,
+  // a piece without a photo must not take the app down
+  img: p.source?.imgSha ? IMG(p.source.imgSha) : `assets/swatch/${p.id.replace("/", "_")}.jpg`, glb: p.assets.glb?.path ?? null, kind: p.assets.glb?.kind ?? null,
   splat: p.assets.splat?.path ?? null, details: p.details?.length ?? 0,
 }]));
 // Splat pieces (study slot) are studied on up-close.html, not worn: finding every detail there unlocks their fabric
@@ -333,7 +339,7 @@ const scanned = params.get("card");
 // C2: the curator's story and questions (questions.json) show after a card scan; optional, nothing is locked behind them
 const quiz = null;   // shortcut: the curator's questions (C2) are left out of the tap flow to keep it to story then challenge; bring them back on the Won card if wanted
 const story = scanned ? await createStory({ img: id => PIECES[id].img, name: id => PIECES[id].name }) : null;   // H3: story with narration before the questions (story.js)
-if (PIECES[scanned]?.splat) {   // before the Stage boots, so a study card never downloads the wearable GLBs; Up close is its challenge
+if (PIECES[scanned]?.splat && PIECES[scanned].locked) {   // before the Stage boots, so a study card never downloads the wearable GLBs; Up close is its challenge
   await showScan({ story, quiz, id: scanned, next: "Study it up close" });
   await window.momuPreload?.handoff(scanned);   // H5: a download still running would be cancelled by the jump, so wait for it (preload.js)
   await settled();   // H6: the story's history step must be gone before this entry is rewritten
@@ -346,7 +352,7 @@ const look = { top: "ST2434", bottom: "ST80931", feet: "ST2407/1-2", full: null,
 const SAVE_KEY = "secondSkin.save.v1";
 try {   // restore the visitor's look; ids are checked against the manifest, since storage is user-controlled
   const saved = JSON.parse(localStorage.getItem(SAVE_KEY) || "null");
-  const ok = (id, slots) => id === null || (PIECES[id] && !PIECES[id].locked && slots.includes(PIECES[id].slot));
+  const ok = (id, slots) => id === null || (PIECES[id] && !PIECES[id].locked && (PIECES[id].glb || PIECES[id].splat) && slots.includes(PIECES[id].slot));
   const l = saved?.v === 1 && saved.look;
   if (l && ok(l.top, ["top"]) && ok(l.bottom, ["bottom"]) && ok(l.feet, ["feet"]) && ok(l.full, ["full"])
       && ok(l.fabric?.body ?? null, ["top", "bottom", "feet", "full", "study"]) && ok(l.fabric?.sleeves ?? null, ["top", "bottom", "feet", "full", "study"])
@@ -860,11 +866,11 @@ function isWorn(id, ctx) {
   return (ctx === "feet" || !look.full) && look[ctx] === id;
 }
 const tile = (id, cls, img, label, aria) => `<div class="tile ${cls}" data-id="${id}">
-  <button class="pick press" aria-label="${esc(aria)}" aria-pressed="${cls.includes("on")}"><img src="${img}" alt="" decoding="async"${img.startsWith("assets/swatch") ? ' style="mix-blend-mode:normal"' : ""}></button>${label}
+  <button class="pick press" aria-label="${esc(aria)}" aria-pressed="${cls.includes("on")}"><img src="${img}" alt="" loading="lazy" decoding="async"${img.startsWith("assets/swatch") ? ' style="mix-blend-mode:normal"' : ""}></button>${label}
   <button class="info" data-info="${id}" aria-label="About ${esc(PIECES[id].name)}"><span aria-hidden="true">i</span></button></div>`;
 const newFirst = ([a], [b]) => fresh.has(b) - fresh.has(a);   // a piece just won leads its tab
 function renderLocker() {
-  document.getElementById("foundCount").textContent = `${Object.values(PIECES).filter(p => !p.locked).length} in your wardrobe`;
+  document.getElementById("foundCount").textContent = `${Object.values(PIECES).filter(p => !p.locked && p.glb).length} in your wardrobe`;
   document.getElementById("slotTitle").textContent = LABEL[activeSlot];
   document.getElementById("cats").innerHTML = [...SLOTS, "remix"].map(s =>
     `<button class="cat press" aria-pressed="${s === activeSlot}" data-slot="${s}">${LABEL[s]}</button>`).join("");
@@ -909,7 +915,9 @@ museumEl.addEventListener("click", e => {
   if (PIECES[id].splat || PIECES[id].locked) tapCard(id);
   else { activeSlot = PIECES[id].slot; renderLocker(); setSnap("half"); }
 });
-const fresh = new Set();   // pieces and fabrics won this visit, marked New until worn
+const FRESH_KEY = "secondSkin.new.v1";   // pieces and fabrics won but not yet worn, marked New
+const fresh = new Set((() => { try { return JSON.parse(localStorage.getItem(FRESH_KEY) || "[]"); } catch { return []; } })().filter(id => PIECES[id]));
+const keepFresh = () => { try { localStorage.setItem(FRESH_KEY, JSON.stringify([...fresh])); } catch { /* blocked: New lasts this visit */ } };
 /* What the form wears, always in the sheet's peek: tap a chip to change that part, × to take it off */
 function renderWearing() {
   const parts = (look.full ? [["full", look.full], ["feet", look.feet]] : [["top", look.top], ["bottom", look.bottom], ["feet", look.feet]])
@@ -920,16 +928,16 @@ function renderWearing() {
   }
   document.getElementById("wearing").innerHTML = parts.length ? parts.map(w => `<span class="wear">
     <button class="open press" data-open="${w.slot}" data-zone="${w.zone}" aria-label="Change the ${w.kind.toLowerCase()}: ${esc(PIECES[w.id].name)}">
-      <img src="${w.img}" alt=""><span><em>${w.kind}</em> ${esc(shortName(w.id))}</span></button>
+      <img src="${w.img}" alt="" loading="lazy" decoding="async"><span><em>${w.kind}</em> ${esc(shortName(w.id))}</span></button>
     <button class="off press" data-off="${w.slot}" data-zone="${w.zone}" aria-label="Take off ${esc(PIECES[w.id].name)}">×</button></span>`).join("")
     : `<span class="none">Nothing on yet. Pick a piece below.</span>`;
 }
 function dress() {
   if (!look.full && !look.top && (look.fabric.body || look.fabric.sleeves)) {   // fabric sits on a top: without one it would come back unseen on the next
     look.fabric = { body: null, sleeves: null };
-    toast("Its fabric went back to your wardrobe");
+    toast("Its fabric went back to your Fabrics");
   }
-  [look.top, look.bottom, look.feet, look.full, look.fabric.body, look.fabric.sleeves].forEach(id => fresh.delete(id));
+  [look.top, look.bottom, look.feet, look.full, look.fabric.body, look.fabric.sleeves].forEach(id => fresh.delete(id)); keepFresh();
   turntables.forEach(t => t.draw()); renderLocker(); renderCredit();
 }
 /* Study preload: tapping a study tile that still needs its card starts fetching that scan (about 17 MB) and the Up close page's
@@ -971,11 +979,17 @@ function tapCard(id) {   // shortcut: stands in for walking to the sticker; a re
   document.getElementById("nfc").showModal();
   if (p.splat) preloadStudy(id);
 }
+/* Fabric is drawn on a top's or full look's cut, so a bare form first gets one: a full-length dress shows a whole piece's cloth best */
+function wearFabric(id) {
+  const owned = slot => Object.keys(PIECES).find(k => PIECES[k].slot === slot && PIECES[k].glb && !PIECES[k].locked && k !== id);
+  let cut = look.full || look.top;
+  if (!cut) { cut = owned("full") ?? owned("top"); if (!cut) return; look[PIECES[cut].slot] = cut; toast(`Shown on the ${shortName(cut).toLowerCase()} cut`); }
+  look.fabric.body = id; activeSlot = "remix"; activeZone = "body";
+  dress();
+}
 function act(id, ctx) {   // the one action a tile, or its fact card, performs
   if (ctx === "study") { tapCard(id); return; }
-  if (ctx === "remix" && !look.full && !look.top) {   // cloth goes on a top's body or sleeves: without one it would vanish
-    activeSlot = "top"; renderLocker(); toast("Put on a top first, then its fabric"); return;
-  }
+  if (ctx === "remix" && !look.full && !look.top) { wearFabric(id); return; }
   const off = isWorn(id, ctx);
   if (ctx === "remix") look.fabric[activeZone] = off ? null : id;
   else if (ctx === "full") look.full = off ? null : id;
@@ -1002,7 +1016,7 @@ document.getElementById("grid").addEventListener("click", e => {
   const info = e.target.closest("[data-info]");
   if (info) { openFact(info.dataset.info); return; }
   const t = e.target.closest(".pick") && e.target.closest("[data-id]");
-  if (t && !t.classList.contains("locked")) act(t.dataset.id, ctxOf(t.dataset.id));
+  if (t) t.classList.contains("locked") ? tapCard(t.dataset.id) : act(t.dataset.id, ctxOf(t.dataset.id));
 });
 
 /* ---------- Fact card (C1): every field is copied from the MoMu record by tools/records.py; gaps say so (D3) ---------- */
@@ -1038,7 +1052,7 @@ async function openFact(id) {
   actBtn.hidden = !label; actBtn.textContent = label ?? "";
   const unwon = p.room && p.locked && !p.splat;   // its date is the answer to Guess the year, so nothing may reveal it yet
   document.getElementById("factAsk").hidden = unwon;
-  view3dBtn.hidden = !p.glb;
+  view3dBtn.hidden = !(p.glb && !unwon) && !(p.splat && p.seen);   // a study piece's 3D is its Up close scan, open once its sticker was tapped
   if (!factEl.open) factEl.showModal();
 }
 /* 3D view: any piece with a 3D file opens full screen, turnable and zoomable. Inside it model-viewer offers "See it in your
@@ -1047,13 +1061,17 @@ const viewEl = document.getElementById("view3d"), viewMV = document.getElementBy
 let mvReady = null;
 view3dBtn.addEventListener("click", async () => {
   const id = factId;
+  if (!PIECES[id].glb) { location.href = `up-close.html?id=${encodeURIComponent(id)}`; return; }
   mvReady ??= import("https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js").catch(() => null);
   document.getElementById("viewName").textContent = PIECES[id].name;
   viewMV.removeAttribute("src");
   factEl.close(); viewEl.showModal();
   if (await mvReady) viewMV.src = PIECES[id].glb;
 });
-viewEl.addEventListener("close", () => viewMV.removeAttribute("src"));   // frees the model and its GPU memory
+const viewAR = document.getElementById("viewAR");   // our own button: model-viewer's ar-button slot positions itself, off centre
+viewMV.addEventListener("load", () => { viewAR.hidden = !viewMV.canActivateAR; });
+viewAR.addEventListener("click", () => viewMV.activateAR());
+viewEl.addEventListener("close", () => { viewMV.removeAttribute("src"); viewAR.hidden = true; });   // frees the model and its GPU memory
 document.getElementById("factShares").addEventListener("click", e => { const b = e.target.closest("[data-fact]"); if (b) openFact(b.dataset.fact); });
 document.getElementById("factAct").addEventListener("click", () => { factEl.close(); PIECES[factId].locked && !PIECES[factId].splat ? tapCard(factId) : act(factId, ctxOf(factId)); });
 factEl.addEventListener("click", e => { if (e.target === factEl) factEl.close(); });   // backdrop tap closes
@@ -1158,22 +1176,25 @@ const win = createWin({ PIECES, record: id => RECORDS[id], img: id => PIECES[id]
 const welcome = (id, text) => { activeSlot = PIECES[id].splat ? "remix" : PIECES[id].slot; activeZone = "body"; renderLocker(); document.getElementById("grid").scrollTop = 0; setSnap("half"); toast(text); };
 async function scan(id) {
   const p = PIECES[id];
-  if (!p.locked) { welcome(id, `Already in your wardrobe: ${p.name}`); return; }
+  if (!p.locked) { welcome(id, p.splat ? `Its fabric is already in your Fabrics: ${shortName(id).toLowerCase()}` : `Already in your wardrobe: ${p.name}`); return; }
   await showScan({ story, quiz, id, next: "Win it", years: false });
   const off = await win.guess(id);
-  await recordsReady; await win.won(id, { off });
-  p.locked = false; fresh.add(id);
+  await recordsReady; const pick = await win.won(id, { off });
+  p.locked = false;
   try { localStorage.setItem(WON_KEY, JSON.stringify([...new Set([...readWon(), id])])); } catch { /* blocked: the win lasts this visit */ }
+  if (pick === "wear") { activeSlot = p.slot; act(id, p.slot); setSnap("half"); toast(`Wearing the ${shortName(id).toLowerCase()}`); return; }
+  fresh.add(id); keepFresh();
   welcome(id, `${p.name.split(",")[0]} is in your wardrobe. Tap it to wear it.`);
 }
-if (scanned && !PIECES[scanned]?.glb) toast("This sticker isn't in the app yet");
+if (scanned && !PIECES[scanned]?.glb && !PIECES[scanned]?.splat) toast("This sticker isn't in the app yet");
 else if (scanned) scan(scanned);
 // up-close.html sends ?fabric=<id> once every detail is found: the same Won card, then the fabric waits in the Remix tab
 const CLAIM_KEY = "secondSkin.claim";   // H6: Up close steps back to this page and leaves the won fabric here, instead of ?fabric= on a new entry
 const takeClaim = () => { try { const c = sessionStorage.getItem(CLAIM_KEY); sessionStorage.removeItem(CLAIM_KEY); return c; } catch { return null; } };
 const claimed = takeClaim() ?? params.get("fabric");   // read the claim either way, so it is used once
-if (claimed && PIECES[claimed]?.splat && !PIECES[claimed].locked) recordsReady.then(() => win.won(claimed, { what: "fabric" })).then(() => {
-  fresh.add(claimed);
+if (claimed && PIECES[claimed]?.splat && !PIECES[claimed].locked) recordsReady.then(() => win.won(claimed, { what: "fabric" })).then(pick => {
+  if (pick === "wear") { wearFabric(claimed); setSnap("half"); return; }
+  fresh.add(claimed); keepFresh();
   welcome(claimed, `New in Fabrics: ${PIECES[claimed].name.split(",")[0].toLowerCase()}. Tap it to wear it.`);
 });
 if (scanned || claimed) history.replaceState(null, "", location.pathname);   // a reload must not replay the card
@@ -1192,7 +1213,7 @@ try { if (!scanned && !claimed && !localStorage.getItem(HELP_KEY)) openHelp(); }
   <h2 id="nfcTitle">Find it in the museum</h2>
   <p id="nfcText"></p>
   <p class="mono status" id="nfcStatus" role="status"></p>
-  <a class="btn press" id="nfcGo">Simulate NFC tap</a>
+  <a class="btn press" id="nfcGo">Demo: tap the sticker</a>
   <form method="dialog"><button class="btn ghost press">Not now</button></form>
 </div></dialog>
 <dialog class="nfc museum" id="museum" aria-labelledby="museumTitle"><div tabindex="-1" autofocus>
@@ -1205,8 +1226,9 @@ try { if (!scanned && !claimed && !localStorage.getItem(HELP_KEY)) openHelp(); }
 <dialog class="view3d" id="view3d" aria-labelledby="viewName"><div>
   <model-viewer id="viewMV" camera-controls touch-action="pan-y" auto-rotate ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto"
     shadow-intensity="0.8" exposure="1.05" interaction-prompt="none" alt="3D model of the piece">
-    <button slot="ar-button" class="btn press view-ar">See it in your room</button>
+    <span slot="ar-button" hidden></span>
   </model-viewer>
+  <button class="btn press view-ar" id="viewAR" hidden>See it in your room</button>
   <h2 id="viewName"></h2>
   <form method="dialog"><button class="view-x press" aria-label="Close the 3D view">×</button></form>
 </div></dialog>
@@ -1217,6 +1239,7 @@ try { if (!scanned && !claimed && !localStorage.getItem(HELP_KEY)) openHelp(); }
   <button class="btn ghost press skip" id="helpSkip">Skip</button>
 </div></dialog>
 <dialog class="fact" id="fact" aria-labelledby="factName"><div tabindex="-1" autofocus>
+  <form method="dialog"><button class="fact-x press" aria-label="Close">×</button></form>
   <div class="mono" id="factId"></div>
   <h2 id="factName"></h2>
   <dl id="factFields"></dl>
