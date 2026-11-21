@@ -2,6 +2,17 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## MoMu's official logo in the app (2026-11-21, branch hassan/H10-rename)
+- What: MoMu's two-M logo replaces the typed "MoMu": `assets/brand/momu-logo.svg` (the small 202x42 proportion, copied
+  unchanged from the inline SVG on momu.be), inlined in the Stage bar and Up close header (87x18 px, down to 62 px wide in
+  the 340 px pitch frame so it never touches the pills), drawn as polygons on the share card (40 px tall, right end of the
+  date row), as the browser-tab icon (`assets/brand/favicon.svg`) on the Stage, Up close and outfit pages, and breathing
+  above "Loading MoMu's 3D scan" on Up close (still under reduced motion).
+- Why: Hassan, 2026-11-21: take the branding from momu.be and the hackathon presentation template, and use the logo.
+- Decision: black on white only, as on momu.be and the template's content slides; never redrawn, stretched or recoloured.
+  The template's red, red capital titles and plain grotesque were already the H4 theme, so no token changed. The
+  template's partner mark (MASJIEN) is not used.
+
 ## The app drops the name "Second Skin" (2026-11-21, branch hassan/H10-rename)
 - What: every place a visitor sees the name now says MoMu instead: the Stage bar and Up close header show the "MoMu" mark
   alone (22 px, 44 px row), page titles are "MoMu", "Up close · MoMu", "<piece> · MoMu", "Cycling outfit · MoMu"; the

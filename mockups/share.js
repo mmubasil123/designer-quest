@@ -36,6 +36,11 @@ export function pickQuote(facts, stories) {
 
 export const CARD_W = 1080, CARD_H = 1920;
 const CREDIT = "Collection: MoMu Fashion Museum Antwerp";
+// MoMu's official logo, the two polygons of assets/brand/momu-logo.svg (viewBox 0 0 202 42), for drawing on the canvas
+const MOMU_LOGO = [
+  [93.7308089, 0, 50.1255238, 40.3757678, 4.82491673, 0, 0, 0, 0, 42, 25.9339274, 42, 25.9339274, 19.7578271, 50.6796291, 42, 74.57917, 42, 98.8387794, 19.7578271, 98.8387794, 42, 100, 42, 100, 0],
+  [195.731684, 0, 152.123526, 40.3757678, 106.825013, 0, 102, 0, 102, 42, 127.933446, 42, 127.933446, 19.7578271, 152.679643, 42, 176.579662, 42, 200.840757, 19.7578271, 200.840757, 42, 202, 42, 202, 0],
+];
 // the canvas cannot read CSS variables per draw call cheaply, so these mirror theme.css (fonts and colour tokens): change both together
 const SERIF = '"Source Serif 4", Georgia, serif', MONO = '"Hanken Grotesk", "Helvetica Neue", Arial, sans-serif';   // MONO: the small label face (was a mono)
 const INK = "#000", MUTED = "#595959", LINE = "#cbcbcb", PAPER = "#fff", WALL = "#ededed", RED = "#d72f25";
@@ -89,10 +94,11 @@ export function drawCard({ grab, name, facts, url, scene, quote, won, kicker }) 
   ctx.textBaseline = "alphabetic"; ctx.fillStyle = MUTED; ctx.font = `500 24px ${MONO}`;
   ctx.fillText(kicker.toUpperCase(), pad, 124);
 
-  // H10: MoMu's name as the same typographic wordmark as the app's top bar (no official logo file exists to draw),
-  // at the right end of the date row so the two read as one header line
-  ctx.fillStyle = INK; ctx.font = `600 46px ${MONO}`; ctx.letterSpacing = "-1px"; ctx.textAlign = "right";
-  ctx.fillText("MoMu", CARD_W - pad, 124); ctx.letterSpacing = "0px"; ctx.textAlign = "left";
+  // H10: MoMu's official logo (assets/brand/momu-logo.svg) at the right end of the date row, its foot on the row's baseline
+  const logoH = 40, logoW = logoH * 202 / 42;
+  ctx.save(); ctx.translate(CARD_W - pad - logoW, 124 - logoH); ctx.scale(logoH / 42, logoH / 42); ctx.fillStyle = INK;
+  for (const pts of MOMU_LOGO) { ctx.beginPath(); for (let i = 0; i < pts.length; i += 2) ctx[i ? "lineTo" : "moveTo"](pts[i], pts[i + 1]); ctx.closePath(); ctx.fill(); }
+  ctx.restore();
   ctx.fillStyle = RED; ctx.font = `400 84px ${MONO}`;   // titles are red capitals, as in MoMu's template
   const lines = wrap(ctx, name.toUpperCase(), CARD_W - 2 * pad, 3);
   let y = 214;

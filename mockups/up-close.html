@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Up close · MoMu</title>
+<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="theme.css">
@@ -29,6 +30,10 @@ header .mono { margin-left: auto; }
 #view.ready canvas { opacity: 1; }
 #loading { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; }
 #view.ready #loading { display: none; }
+/* H10: the MoMu logo breathes while the scan loads (the only sign of progress); still under reduced motion */
+#loading .load-logo { width: 116px; height: 24px; margin: 0 auto 6px; animation: breathe 1.4s ease-in-out infinite alternate; }
+@keyframes breathe { from { opacity: 1; } to { opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { #loading .load-logo { animation: none; } }
 .pin { position: absolute; left: 0; top: 0; width: 28px; height: 28px; margin: -14px 0 0 -14px; border-radius: 50%;
   border: 2px solid var(--paper); background: var(--found); color: var(--paper); display: grid; place-items: center;
   font: 600 12px/1 var(--sans); pointer-events: none; transition: opacity 200ms var(--ease-out);
@@ -96,12 +101,12 @@ li.found .fact { grid-template-rows: 1fr; }
 <body>
 <header>
   <a class="back press" href="second-skin.html" aria-label="Back to your look">←</a>
-  <span class="brand lockup"><b class="momu">MoMu</b></span>
+  <span class="brand lockup"><!-- H10: MoMu's official logo, as assets/brand/momu-logo.svg (inline so it takes currentColor) --><svg class="momu-logo" viewBox="0 0 202 42" role="img" aria-label="MoMu"><title>MoMu</title><g fill="currentColor" fill-rule="evenodd"><polygon points="93.7308089 0 50.1255238 40.3757678 4.82491673 0 0 0 0 42 25.9339274 42 25.9339274 19.7578271 50.6796291 42 74.57917 42 98.8387794 19.7578271 98.8387794 42 100 42 100 0"/><polygon points="195.731684 0 152.123526 40.3757678 106.825013 0 102 0 102 42 127.933446 42 127.933446 19.7578271 152.679643 42 176.579662 42 200.840757 19.7578271 200.840757 42 202 42 202 0"/></g></svg></span>
   <span class="mono" id="pid"></span>
 </header>
 
 <main id="view" aria-label="3D scan of the piece. Drag to turn, pinch to zoom, tap a detail to find it.">
-  <div id="loading" class="mono">Loading MoMu’s 3D scan</div>
+  <div id="loading" class="mono"><div><svg class="momu-logo load-logo" viewBox="0 0 202 42" aria-hidden="true"><g fill="currentColor" fill-rule="evenodd"><polygon points="93.7308089 0 50.1255238 40.3757678 4.82491673 0 0 0 0 42 25.9339274 42 25.9339274 19.7578271 50.6796291 42 74.57917 42 98.8387794 19.7578271 98.8387794 42 100 42 100 0"/><polygon points="195.731684 0 152.123526 40.3757678 106.825013 0 102 0 102 42 127.933446 42 127.933446 19.7578271 152.679643 42 176.579662 42 200.840757 19.7578271 200.840757 42 202 42 202 0"/></g></svg><br>Loading MoMu’s 3D scan</div></div>
   <div id="toast" role="status"></div>
 </main>
 
