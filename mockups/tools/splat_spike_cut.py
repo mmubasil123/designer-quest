@@ -1,4 +1,4 @@
-"""Spike: cut MoMu splat captures into wearable parts (avatar, tops, bottoms) by height, depth and colour.
+"""Spike: cut MoMu splat captures into wearable parts (avatar, tops, hands, bottoms) by height, depth and colour.
 
 Throwaway rules for ST2431/1-4 and ST2432/1-2 only; writes raw .ply parts that splat-transform turns into .sog.
 Run: .venv/bin/python -I mockups/tools/splat_spike_cut.py <out_dir>
@@ -54,8 +54,7 @@ def cut(out):
     out.mkdir(parents=True, exist_ok=True)
     parts = {}
 
-    # The form's arms were posed differently for each capture (ST2431 hands sit about 5 cm wider), so hands travel
-    # with their own top in a separate undyed part; the shared avatar is only the head, neck and feet.
+    # arms were posed per capture (ST2431 hands 5 cm wider): hands ship with their top, the avatar is head and feet
     h, p, r = load(ROOT / "splats/MOMU-6_st2431.ply")
     x, y, z, rgb, lum, sat, reach = fields(p, r)
     cream = (lum > 0.48) & (sat < 0.25)                               # the mannequin; every garment is darker

@@ -63,7 +63,7 @@ new ResizeObserver(() => {
   camera.aspect = view.clientWidth / view.clientHeight; camera.updateProjectionMatrix();
 }).observe(view);
 
-// fabric remix on splats: keep each splat's luminance (folds, braid shadow), replace its hue with the fabric colour
+// keep each splat's luminance (folds, braid), take the fabric's hue; 0.16 is about the mean garment luminance
 const tint = dynoVec3(new THREE.Vector3(1, 1, 1)), amount = dynoFloat(0);
 const remix = dynoBlock({ gsplat: Gsplat }, { gsplat: Gsplat }, ({ gsplat }) => {
   const { rgb } = splitGsplat(gsplat).outputs;
