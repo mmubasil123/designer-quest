@@ -301,6 +301,7 @@ import { createShare } from "./share.js";
 import { AVATAR_URL, AVATAR_FIT, FORM_CUT, prepAvatar, placeFeet, fitWorn, restoreShape } from "./avatar-body.js";
 import { createStory, showScan } from "./story.js";
 import { createWin } from "./win.js";
+import { go, settled } from "./nav.js";   // H6: the back gesture closes the top layer; page changes wait for it (nav.js)
 
 const IMG = id => `https://heron.libis.be/momu/files/large/${id}.jpg`;
 const ZOOM_MAX = 3;
@@ -335,7 +336,9 @@ const story = scanned ? await createStory({ img: id => PIECES[id].img, name: id 
 if (PIECES[scanned]?.splat) {   // before the Stage boots, so a study card never downloads the wearable GLBs; Up close is its challenge
   await showScan({ story, quiz, id: scanned, next: "Study it up close" });
   await window.momuPreload?.handoff(scanned);   // H5: a download still running would be cancelled by the jump, so wait for it (preload.js)
-  location.replace(`up-close.html?id=${encodeURIComponent(scanned)}`);
+  await settled();   // H6: the story's history step must be gone before this entry is rewritten
+  history.replaceState(null, "", location.pathname);   // H6: the Stage stays under Up close, so back lands on it, not outside the app
+  await go(`up-close.html?id=${encodeURIComponent(scanned)}`);
   await new Promise(() => {});
 }
 const SLOTS = ["top", "bottom", "feet", "full"];
@@ -960,7 +963,7 @@ function cancelStudy() {
 }
 function tapCard(id) {   // shortcut: stands in for walking to the sticker; a real tap opens the same ?card=<id>
   const p = PIECES[id];
-  if (p.splat && p.seen) { location.href = `up-close.html?id=${encodeURIComponent(id)}`; return; }
+  if (p.splat && p.seen) { go(`up-close.html?id=${encodeURIComponent(id)}`); return; }
   document.getElementById("nfcText").textContent = `Hold your phone to the sticker beside the ${p.name.split(",")[0].toLowerCase()} to ${p.splat ? "study it up close" : "win it"}.`;
   document.getElementById("nfcGo").href = `?card=${encodeURIComponent(id)}`;
   document.getElementById("nfc").showModal();
@@ -1164,12 +1167,21 @@ async function scan(id) {
 if (scanned && !PIECES[scanned]?.glb) toast("This sticker isn't in the app yet");
 else if (scanned) scan(scanned);
 // up-close.html sends ?fabric=<id> once every detail is found: the same Won card, then the fabric waits in the Remix tab
-const claimed = params.get("fabric");
+const CLAIM_KEY = "secondSkin.claim";   // H6: Up close steps back to this page and leaves the won fabric here, instead of ?fabric= on a new entry
+const takeClaim = () => { try { const c = sessionStorage.getItem(CLAIM_KEY); sessionStorage.removeItem(CLAIM_KEY); return c; } catch { return null; } };
+const claimed = takeClaim() ?? params.get("fabric");   // read the claim either way, so it is used once
 if (claimed && PIECES[claimed]?.splat && !PIECES[claimed].locked) recordsReady.then(() => win.won(claimed, { what: "fabric" })).then(() => {
   fresh.add(claimed);
   welcome(claimed, `New in Fabrics: ${PIECES[claimed].name.split(",")[0].toLowerCase()}. Tap it to wear it.`);
 });
 if (scanned || claimed) history.replaceState(null, "", location.pathname);   // a reload must not replay the card
+// H6: back from Up close may show this page from the back-forward cache, frozen as it was; details found or a fabric won
+// there since then are only read at boot, so start again (the look is saved)
+const foundAtBoot = (() => { try { return localStorage.getItem("secondSkin.found.v1"); } catch { return null; } })();
+addEventListener("pageshow", e => {
+  if (!e.persisted) return;
+  try { if (sessionStorage.getItem(CLAIM_KEY) || localStorage.getItem("secondSkin.found.v1") !== foundAtBoot) location.reload(); } catch { /* storage blocked: nothing new to show */ }
+});
 // first visit only, and not for a visitor who arrived by a sticker or from Up close: they already know what they want
 try { if (!scanned && !claimed && !localStorage.getItem(HELP_KEY)) openHelp(); } catch { openHelp(); }
 </script>

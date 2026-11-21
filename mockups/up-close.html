@@ -119,7 +119,8 @@ li.found .fact { grid-template-rows: 1fr; }
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { SparkRenderer, SplatMesh } from "@sparkjsdev/spark";
-import { createReconstruction } from "./reconstruction.js";   // A7: Archive vs Reconstruction, only for pieces with assets.clo
+import { createReconstruction } from "./reconstruction.js";
+import { backTo } from "./nav.js";   // H6: back gesture closes layers; ← steps back to the Stage instead of stacking a new page   // A7: Archive vs Reconstruction, only for pieces with assets.clo
 
 const FOUND_KEY = "secondSkin.found.v1";   // { [pieceId]: [detail index, ...] }; second-skin.html reads it
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -159,9 +160,13 @@ function renderPanel() {
   $("#wear").textContent = n === total ? "Win its fabric" : `Find ${total - n} more to win its fabric`;
 }
 renderPanel();
+$("header .back").addEventListener("click", e => { e.preventDefault(); backTo("second-skin.html"); });   // H6: a link would stack a new Stage
 $("#wear").addEventListener("click", () => {   // never a dead button: until all are found it points at the next one
   const next = piece.details.findIndex((_, i) => !found.has(i));
-  if (next < 0) location.href = `second-skin.html?fabric=${encodeURIComponent(id)}`;
+  if (next < 0) {   // H6: back to the Stage underneath (it shows the Won card), never a new entry that back would return through
+    try { sessionStorage.setItem("secondSkin.claim", id); } catch { /* blocked: ?fabric= below still carries it */ }
+    backTo(`second-skin.html?fabric=${encodeURIComponent(id)}`);
+  }
   else if (view.classList.contains("ready")) showMe(next);
 });
 
