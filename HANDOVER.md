@@ -50,5 +50,5 @@ listener first). In `pieces.json` a CLO garment is `assets.glb.kind: "clo"`, `or
 ticket A7 adds the engine branch (no rescale, remix by named panel material).
 
 ## Housekeeping
-Loose large files in the project root: `artcraft-launcher-0.19.2-macos-universal.dmg`, `1764243536153.gif`. Not a
-git repo; if one is created, ignore `.env`, `.venv/`, `cache/`, `_to_delete/`, `*.dmg`.
+Loose large files in the project root: `artcraft-launcher-0.19.2-macos-universal.dmg` (git-ignored),
+`1764243536153.gif`. Repo: github.com/mmubasil123/momu-collection-db; collaboration rules are in `AGENTS.md`.
