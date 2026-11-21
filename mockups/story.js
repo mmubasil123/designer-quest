@@ -11,7 +11,7 @@ const ICON = {
   pause: `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>`,
 };
 
-export async function createStory({ img } = {}) {   // img(id): the piece's photo, which leads the sheet
+export async function createStory({ img, name } = {}) {   // img(id): the piece's photo, which leads the sheet; name(id): its name everywhere else in the app
   let doc = { pieces: {} };
   try { doc = await (await fetch("narration.json")).json(); } catch { /* no stories: card scans work as before */ }
   const speech = "speechSynthesis" in window ? window.speechSynthesis : null;
@@ -87,7 +87,7 @@ export async function createStory({ img } = {}) {   // img(id): the piece's phot
     el.innerHTML = `<div tabindex="-1" autofocus>
       ${img ? `<img class="pic" src="${img(id)}" alt="">` : ""}
       <div class="mono">${found ? "Found in the museum" : "Story"} · ${esc(id)}</div>
-      <h2 id="storyName">${esc(p.title)}</h2>
+      <h2 id="storyName">${esc(name?.(id) ?? p.title)}</h2>
       ${years && p.years ? `<p class="years">${esc(p.years)}</p>` : ""}
       ${p.draft ? `<p class="draft">From the MoMu record</p>` : ""}
       <div class="player">
@@ -102,6 +102,7 @@ export async function createStory({ img } = {}) {   // img(id): the piece's phot
       <div class="row"><button class="btn press" data-close type="button">${esc(next)}</button></div>
     </div>`;
     player(p);
+    if (!years) el.querySelector(".player").hidden = true;   // the narration opens with the years
     if (!el.open) el.showModal();
     return new Promise(resolve => el.addEventListener("close", resolve, { once: true }));
   }

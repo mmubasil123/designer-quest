@@ -16,7 +16,7 @@ Museum button: every room piece, won or still to find
 ```
 
 ## Decisions
-- Room pieces are the ones with `locked: true` in `pieces.json`: the jak ST503 and the knee breeches ST2062 (wearables)
+- Room pieces are the ones with `locked: true` in `pieces.json`: the jak ST503 (wearable; the knee breeches ST2062 stay hidden until they have a GLB)
   plus the 9 study pieces. The starter look moves from the jak to the green wool coat ST2434.
 - Guess the year: one slider. A guess within 25 years of the record's range wins. Otherwise "Earlier" or "Later" and
   try again; the third miss wins anyway. You always win; the game is the guess, not a gate you can fail.
