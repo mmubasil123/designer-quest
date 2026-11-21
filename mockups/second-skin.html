@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<title>Second Skin mockups</title>
+<title>Second Skin · MoMu</title>
 <link rel="preload" href="assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/" } }</script>
@@ -193,7 +193,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .museum { width: min(420px, calc(100% - 32px)); text-align: left; }
 .museum .grid { max-height: min(60vh, 520px); overflow-y: auto; margin-bottom: 8px; }
 .tile.study:not(.seen) img { filter: grayscale(1) contrast(.2) brightness(1.4); }
-.tile.locked::after { pointer-events: none; content: "Win it in the museum"; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 10px; font: italic 13px/1.2 var(--serif); color: var(--muted); }
+.tile.locked::after { pointer-events: none; content: "Win it at MoMu"; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 10px; font: italic 13px/1.2 var(--serif); color: var(--muted); }
 
 dl { display: grid; grid-template-columns: 84px 1fr; gap: 4px 10px; margin: 12px 0; font-size: 13px; }
 dt { color: var(--muted); }
@@ -277,7 +277,7 @@ dt { color: var(--muted); }
   <section data-screen="stage">
     <div class="label">1 · Stage</div>
     <div class="phone">
-      <div class="bar"><span class="brand">Second Skin</span><span class="bar-actions"><button class="pill ghost press" id="museumBtn">Museum</button><button class="pill press" id="shareBtn">Share look</button><button class="pill ghost press helpbtn" id="helpBtn" aria-label="How Second Skin works">?</button></span></div>
+      <div class="bar"><span class="brand lockup"><b class="momu">MoMu</b><span>Second Skin</span></span><span class="bar-actions"><button class="pill ghost press" id="museumBtn">Museum</button><button class="pill press" id="shareBtn">Share look</button><button class="pill ghost press helpbtn" id="helpBtn" aria-label="How MoMu Second Skin works">?</button></span></div>
       <div class="stage" id="stage" data-snap="peek">
         <div class="credit">
           <div>
@@ -1137,8 +1137,8 @@ async function openFact(id) {
   const link = document.getElementById("factLink");
   link.hidden = !r.uri; if (r.uri) link.href = r.uri;
   const actBtn = document.getElementById("factAct");
-  const label = ctx === "study" ? (p.seen ? "Study it up close" : "Find it in the museum")
-    : p.locked ? "Find it in the museum" : ctx === "remix" ? (isWorn(id, ctx) ? `Take it off the ${activeZone}` : `Use on the ${activeZone}`)
+  const label = ctx === "study" ? (p.seen ? "Study it up close" : "Find it at MoMu")
+    : p.locked ? "Find it at MoMu" : ctx === "remix" ? (isWorn(id, ctx) ? `Take it off the ${activeZone}` : `Use on the ${activeZone}`)
     : isWorn(id, ctx) ? "Take it off" : "Wear it";
   actBtn.hidden = !label; actBtn.textContent = label ?? "";
   const unwon = p.room && p.locked && !p.splat;   // its date is the answer to Guess the year, so nothing may reveal it yet
@@ -1235,7 +1235,7 @@ document.getElementById("cats").addEventListener("click", e => { if (e.target.cl
 /* ---------- Help: three steps, shown once on a first visit, always reopenable with the ? button ---------- */
 const HELP = [
   { t: "Dress the form", d: "Pull up the wardrobe from the bottom. Tap a piece to wear it, tap it again to take it off. Drag the form to turn it." },
-  { t: "Win pieces in the museum", d: "Tap the sticker beside a piece. Guess its year, or find its details up close, and it joins your wardrobe. Museum shows what is left to find." },
+  { t: "Win pieces at MoMu", d: "Tap the sticker beside a piece. Guess its year, or find its details up close, and it joins your wardrobe. Museum shows what is left to find." },
   { t: "Remix a fabric", d: "In the Fabrics tab, put one piece's cloth on another piece's cut. The i on any piece shows what MoMu recorded about it." },
 ];
 const HELP_KEY = "secondSkin.help.v1", helpEl = document.getElementById("help");
@@ -1304,14 +1304,14 @@ try { if (!scanned && !claimed && !localStorage.getItem(HELP_KEY)) openHelp(); }
 </script>
 <dialog class="nfc" id="nfc" aria-labelledby="nfcTitle"><div tabindex="-1" autofocus>
   <div class="ring" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 8.5a5 5 0 0 1 0 7M9.5 6a8.5 8.5 0 0 1 0 12M13 3.5a12 12 0 0 1 0 17"/></svg></div>
-  <h2 id="nfcTitle">Find it in the museum</h2>
+  <h2 id="nfcTitle">Find it at MoMu</h2>
   <p id="nfcText"></p>
   <p class="mono status" id="nfcStatus" role="status"></p>
   <a class="btn press" id="nfcGo">Demo: tap the sticker</a>
   <form method="dialog"><button class="btn ghost press">Not now</button></form>
 </div></dialog>
 <dialog class="nfc museum" id="museum" aria-labelledby="museumTitle"><div tabindex="-1" autofocus>
-  <h2 id="museumTitle">In the museum</h2>
+  <h2 id="museumTitle">At MoMu</h2>
   <p class="mono status" id="museumCount"></p>
   <p>Tap a piece's sticker in the room to win it.</p>
   <div class="grid" id="museumGrid"></div>

@@ -29,7 +29,7 @@ export async function createQuiz({ pieces }) {
     if (!p) return Promise.resolve();
     const qs = p.questions;   // every question on her page, in her order
     el.innerHTML = `<div tabindex="-1" autofocus>
-      <div class="mono">${found ? "Found in the museum" : story ? "Story" : "Questions"} · ${esc(id)}</div>
+      <div class="mono">${found ? "Found at MoMu" : story ? "Story" : "Questions"} · ${esc(id)}</div>
       <h2 id="quizName">${esc(p.title)}</h2>
       ${p.facts.length ? `<dl>${p.facts.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>` : ""}
       ${(story ? p.story : []).map(t => `<p class="story">${esc(t)}</p>`).join("")}

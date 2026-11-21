@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Up close · Second Skin</title>
+<title>Up close · Second Skin · MoMu</title>
 <link rel="preload" href="assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="theme.css">
@@ -96,12 +96,12 @@ li.found .fact { grid-template-rows: 1fr; }
 <body>
 <header>
   <a class="back press" href="second-skin.html" aria-label="Back to your look">←</a>
-  <span class="brand">Second Skin</span>
+  <span class="brand lockup"><b class="momu">MoMu</b><span>Second Skin</span></span>
   <span class="mono" id="pid"></span>
 </header>
 
 <main id="view" aria-label="3D scan of the piece. Drag to turn, pinch to zoom, tap a detail to find it.">
-  <div id="loading" class="mono">Loading the 3D scan</div>
+  <div id="loading" class="mono">Loading MoMu’s 3D scan</div>
   <div id="toast" role="status"></div>
 </main>
 
@@ -140,7 +140,7 @@ saveFound();
 
 /* ---------- Panel ---------- */
 const $ = s => document.querySelector(s);
-document.title = `${piece.name} · Second Skin`;
+document.title = `${piece.name} · Second Skin · MoMu`;
 $("#pid").textContent = id;
 $("#name").textContent = piece.name;
 $("#date").textContent = piece.year.from === piece.year.to ? piece.year.from : `${piece.year.from}–${piece.year.to}`;
