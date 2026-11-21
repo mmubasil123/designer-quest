@@ -2,9 +2,11 @@
    study pieces by finding their details on up-close.html, then both end on the same Won card. Every fact shown comes
    from pieces.json or records.json (D3). Nobody can lose: hints after a miss, and the third miss wins anyway. */
 import { stepsHtml, stepIn } from "./steps.js";   // H6: same step line as the story; content swaps in place
-const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+import { t, tc, labelHtml } from "./i18n.js";   // D-3
+
+const esc = x => String(x).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const NEAR = 25;   // years: close enough to win
-const span = y => y.from === y.to ? `${y.from}` : `${y.from} to ${y.to}`;
+const span = y => y.from === y.to ? `${y.from}` : t("{a} to {b}", { a: y.from, b: y.to });
 
 export function judge(guess, year) {
   const off = guess < year.from ? year.from - guess : guess > year.to ? guess - year.to : 0;
@@ -28,15 +30,15 @@ export function createWin({ PIECES, record, img }) {
 
   function guess(id) {
     const p = PIECES[id];
-    open(`${stepsHtml(1)}<div class="mono">Win it · ${esc(id)}</div>
-      <h2 id="winTitle">When was it made?</h2>
+    open(`${stepsHtml(1)}<div class="mono">${t("Win it")} · ${esc(id)}</div>
+      <h2 id="winTitle">${t("When was it made?")}</h2>
       <img class="pic" src="${img(id)}" alt="">
       <output class="year" id="winYear" aria-live="polite">1900</output>
-      <input type="range" id="winSlider" min="1700" max="2025" step="5" value="1900" aria-label="Your guess, year">
+      <input type="range" id="winSlider" min="1700" max="2025" step="5" value="1900" aria-label="${t("Your guess, year")}">
       <div class="ends mono"><span>1700</span><span>2025</span></div>
-      <p class="hint" id="winHint" role="status">Get within ${NEAR} years to win the ${esc(p.name.split(",")[0].toLowerCase())}.</p>
-      <button class="btn press" id="winGo">Guess</button>
-      <button class="btn ghost press" id="winLater" type="button">Not now</button>`);
+      <p class="hint" id="winHint" role="status">${t("Get within {n} years to win the {name}.", { n: NEAR, name: esc(p.name.split(",")[0].toLowerCase()) })}</p>
+      <button class="btn press" id="winGo">${t("Guess")}</button>
+      <button class="btn ghost press" id="winLater" type="button">${t("Not now")}</button>`);
     const slider = el.querySelector("#winSlider"), out = el.querySelector("#winYear"), hint = el.querySelector("#winHint");
     slider.addEventListener("input", () => { out.textContent = slider.value; });
     let tries = 0;
@@ -47,7 +49,7 @@ export function createWin({ PIECES, record, img }) {
         const r = judge(+slider.value, p.year);
         tries++;
         if (r.won || tries >= 3) { this.removeEventListener("click", go); onCancel = null; resolve(r.off); return; }
-        hint.textContent = `${r.hint === "later" ? "Later" : "Earlier"} than ${slider.value}. ${tries === 1 ? "Try again." : "One more try."}`;
+        hint.textContent = `${t(r.hint === "later" ? "Later than {year}." : "Earlier than {year}.", { year: slider.value })} ${tries === 1 ? t("Try again.") : t("One more try.")}`;
         hint.classList.remove("nudge"); void hint.offsetWidth; hint.classList.add("nudge");
       });
     });
@@ -55,14 +57,15 @@ export function createWin({ PIECES, record, img }) {
 
   function won(id, { off = null, what = "piece", study = false } = {}) {   // study: the challenge was Up close (step line)
     const p = PIECES[id], r = record(id) || {};
-    const quote = r.quoteEn || r.quote;
-    open(`${stepsHtml(2, { study })}<p class="cheer">You won ${what === "fabric" ? "its fabric" : "it"}!</p>
+    // the first sentence of MoMu's description (Dutch) in this language; the team's own English where there is one
+    const q = r.quote ? tc(`rec:${id}:quote`, r.quote, "nl") : null;
+    open(`${stepsHtml(2, { study })}<p class="cheer">${what === "fabric" ? t("You won its fabric!") : t("You won it!")}</p>
       <h2 id="winTitle" class="name">${esc(p.name)}</h2>
       <img class="pic won" src="${img(id)}" alt="">
-      <p class="date">Made ${esc(span(p.year))}${off === null ? "" : off === 0 ? " · spot on" : ` · you were ${off} years off`}</p>
-      ${quote ? `<blockquote>${esc(quote)}<span class="mono">MoMu says${r.quoteEn ? ", our translation" : ""}</span></blockquote>` : ""}
-      <button class="btn press" id="winAdd" data-pick="wear">Wear it now</button>
-      <button class="btn ghost press" data-pick="keep">Keep it in my ${what === "fabric" ? "fabrics" : "wardrobe"}</button>
+      <p class="date">${t("Made {span}", { span: esc(span(p.year)) })}${off === null ? "" : off === 0 ? ` · ${t("spot on")}` : ` · ${t("you were {n} years off", { n: off })}`}</p>
+      ${q ? `<blockquote>${esc(q.text)}<span class="mono">${t("MoMu says")}</span>${q.tr ? labelHtml(q.by) : ""}${q.tr ? `<q class="orig" lang="nl">${esc(r.quote)}</q>` : ""}</blockquote>` : ""}
+      <button class="btn press" id="winAdd" data-pick="wear">${t("Wear it now")}</button>
+      <button class="btn ghost press" data-pick="keep">${what === "fabric" ? t("Keep it in my fabrics") : t("Keep it in my wardrobe")}</button>
       ${nextRow(id)}`);
     // resolves "wear", "keep" or "next" (H17: keep it, then open win.next); either way the prize is already the visitor's
     return new Promise(resolve => {   // H6: Escape or back keeps it, like the quiet button
@@ -83,13 +86,13 @@ export function createWin({ PIECES, record, img }) {
   function nextRow(wonId) {
     const found = nextPiece(wonId); next = found?.[0] ?? null; if (!found) return "";
     const [id, q] = found, n = q.details || 3;
-    const how = q.splat && q.seen ? (q.found > 0 ? `You found ${q.found} of ${n} details. Tap to finish up close.`
-        : `Tap to find its ${n} details up close.`)
-      : q.splat ?`Find its sticker at MoMu, then find its ${n} details up close.`
-      : "Find its sticker at MoMu and guess when it was made.";
+    const how = q.splat && q.seen ? (q.found > 0 ? t("You found {found} of {n} details. Tap to finish up close.", { found: q.found, n })
+        : t("Tap to find its {n} details up close.", { n }))
+      : q.splat ?t("Find its sticker at MoMu, then find its {n} details up close.", { n })
+      : t("Find its sticker at MoMu and guess when it was made.");
     // H17: a button, so one win leads straight to the next; the Stage opens it after keeping this prize
     return `<button class="next press" data-pick="next"><img src="${img(id)}" alt="">
-      <span class="txt"><span class="mono">Next to win</span><b>${esc(q.name)}</b><span class="how">${esc(how)}</span></span>
+      <span class="txt"><span class="mono">${t("Next to win")}</span><b>${esc(q.name)}</b><span class="how">${esc(how)}</span></span>
       <svg class="go" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
   }
 

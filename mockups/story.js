@@ -7,7 +7,9 @@
    browser's own voice reads the same captions (its word boundaries drive the highlight). */
 
 import { stepsHtml, handover } from "./steps.js";   // H6: one flow across story and challenge
-const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+import { lang, t, tc, labelHtml, years as yearsText } from "./i18n.js";   // D-3: language layer
+
+const esc = x => String(x).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const clock = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
 const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const ICON = {
@@ -30,6 +32,13 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
   el.addEventListener("click", e => {
     const more = e.target.closest("[data-more]");
     if (more) { toggle(more); return; }
+    const o = e.target.closest("[data-orig]");
+    if (o) {   // the original (the curator's English) in place of the translation
+      const on = o.getAttribute("aria-pressed") !== "true", loc = el._loc;
+      el.querySelector(".rest > div > .paras").innerHTML = (on ? loc.orig : loc.paras).map(x => `<p${on ? ` lang="en"` : ""}>${esc(x)}</p>`).join("");
+      o.setAttribute("aria-pressed", on); o.textContent = on ? t("Show the translation") : t("Show the original");
+      return;
+    }
     // H6: only the main button goes on. Not now, Escape and back stop here; a backdrop tap does nothing, so a stray
     // tap never starts the challenge
     if (e.target.closest("[data-close]")) { if (el.dataset.step) handover(); el.close("next"); }
@@ -39,7 +48,7 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
   function toggle(btn) {   // "Read the story": the whole caption text, and the curator's own story for her pieces
     const open = btn.getAttribute("aria-expanded") !== "true";
     btn.setAttribute("aria-expanded", String(open));
-    btn.textContent = open ? "Show less" : "Read the story";
+    btn.textContent = open ? t("Show less") : t("Read the story");
     el.querySelector(".captions").classList.toggle("clamp", !open);
     const rest = el.querySelector(".rest");
     if (rest) { rest.classList.toggle("open", open); rest.inert = !open; }
@@ -48,8 +57,9 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
 
   /* Captions: every word is a span with its place in the spoken text (for the browser voice's boundary events) and
      its start time as a share of the whole narration (for an audio file, which has no word timings). */
-  function captions(p, guess) {
-    const beats = p.form === "script" ? p.beats : p.paragraphs.map(t => ({ t }));
+  function captions(id, p, guess) {
+    let tr = false;
+    const beats = p.form === "script" ? p.beats.map((b, n) => { const g = tc(`narr:${id}:${n}`, b.t, "en"); if (g.tr) tr = true; return { ...b, t: g.text }; }) : p.paragraphs.map(x => ({ t: x }));
     const words = []; let total = 0, at = 0, cut = null;
     const beatStarts = [];
     const html = beats.map(b => {
@@ -64,7 +74,7 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
       return `<span class="beat">${spans.join(" ")}</span>`;
     }).join(" ");
     const spoken = beats.filter(b => !(guess && b.reveal)).map(b => b.t).join(" ");
-    return { html, words, total, cut, spoken, beatStarts };
+    return { html, words, total, cut, spoken, beatStarts, tr };
   }
 
   function player(p, cap, guess) {
@@ -74,7 +84,7 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
     let lit = -1;
     const set = playing => {
       btn.innerHTML = playing ? ICON.pause : ICON.play;
-      btn.setAttribute("aria-label", playing ? "Pause narration" : "Play narration");
+      btn.setAttribute("aria-label", playing ? t("Pause narration") : t("Play narration"));
       btn.setAttribute("aria-pressed", String(playing));
       el.classList.toggle("playing", playing);
       if (playing) box.classList.add("live");
@@ -113,13 +123,13 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
     // Fallback: the phone's own voice reads the captions; its word boundaries drive the highlight (estimated if it sends none)
     const browserVoice = () => {
       if (!speech) return hide();
-      label.textContent = "Read by your phone's built-in voice";
+      label.textContent = t("Read by your phone's built-in voice");
       bar.hidden = true; time.hidden = true;
       let speaking = false, raf = 0;
       btn.onclick = () => {
         if (speaking) { speech.cancel(); return; }
         const u = new SpeechSynthesisUtterance(cap.spoken);
-        u.lang = p.lang || "en"; u.rate = 0.95;
+        u.lang = lang !== "en" ? lang : p.lang || "en"; u.rate = 0.95;
         let bounded = false; const t0 = performance.now(), cps = 13.5 * u.rate;   // about 13.5 characters a second at rate 1
         u.onboundary = e => { if (e.name !== "word") return; bounded = true; let i = -1; while (i + 1 < cap.words.length && cap.words[i + 1].at <= e.charIndex) i++; light(i); };
         const tick = () => { if (!bounded) { const c = (performance.now() - t0) / 1000 * cps; let i = -1; while (i + 1 < cap.words.length && cap.words[i + 1].at <= c) i++; light(i); } raf = requestAnimationFrame(tick); };
@@ -134,6 +144,7 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
     const audio = new Audio();
     audio.preload = "none";   // nothing downloads until the visitor asks for it
     audio.src = p.audio;
+    if (lang !== "en") label.textContent = t("Narration in English");   // the recordings are English only; the captions are in the chosen language
     const length = () => audio.duration || p.seconds || 0;
     // before a guess the file plays only up to the first beat that names the date (cue from the import, else estimated)
     const stopAt = () => guess && cap.cut !== null ? (p.revealAt ?? cap.cut / cap.total * length() - 0.3) : Infinity;
@@ -168,30 +179,37 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
     const p = doc.pieces[id];
     if (!p) return Promise.resolve(true);
     const guess = !years;
-    const cap = captions(p, guess);
-    const curator = p.source === "curator" && p.form === "script" ? p.paragraphs : null;   // her own words, never changed
+    const cap = captions(id, p, guess);
+    const curator = p.source === "curator" && p.form === "script" ? p.paragraphs : null;   // her own words, never changed in English
+    // D-3: in NL/FR her paragraphs are our machine translation, labelled, with her English one tap away
+    const got = curator?.map((x, k) => tc(`q:${id}:story:${k}`, x, "en"));
+    const loc = curator ? { paras: got.map(g => g.text), orig: curator, tr: got.some(g => g.tr) } : { tr: false };
+    const tease = guess && p.tease ? tc(`narr:${id}:tease`, p.tease, "en") : null;
+    const capTr = cap.tr || !!tease?.tr;
     const seconds = p.seconds || Math.max(25, cap.total / 14);   // the photo drifts for about as long as the story lasts
     let i = 0; const n = () => `style="--i:${i++}"`;   // stagger order for the opening
     el.innerHTML = `<div tabindex="-1" autofocus>
       ${img ? `<figure class="pic"><img src="${img(id)}" alt="" style="--drift:${seconds}s"></figure>` : ""}
       ${step ? stepsHtml(0, step) : ""}
-      <div class="mono rise" ${n()}>${found ? "Found in the museum" : "Story"} · ${esc(id)}</div>
-      <h2 id="storyName" class="rise" ${n()}>${esc(name?.(id) ?? p.title)}</h2>
-      ${years && p.years ? `<p class="years rise" ${n()}>${esc(p.years)}</p>` : ""}
-      ${p.draft ? `<p class="draft rise" ${n()}>Told from the MoMu record</p>` : ""}
+      <div class="mono rise" ${n()}>${found ? t("Found in the museum") : t("Story")} · ${esc(id)}</div>
+      <h2 id="storyName" class="rise" ${n()}>${esc(name?.(id) ?? tc(`q:${id}:title`, p.title, "en").text)}</h2>
+      ${years && p.years ? `<p class="years rise" ${n()}>${esc(yearsText(p.years))}</p>` : ""}
+      ${p.draft ? `<p class="draft rise" ${n()}>${t("Told from the MoMu record")}</p>` : ""}
       <div class="player rise" ${n()}>
         <button class="play press" data-play type="button"></button>
         <div class="meta">
-          <progress value="0" max="1" aria-label="Narration progress"></progress>
+          <progress value="0" max="1" aria-label="${t("Narration progress")}"></progress>
           <div class="mono"><span data-voice></span> <span data-time></span></div>
         </div>
       </div>
-      <div class="captions clamp rise" ${n()} aria-label="Narration text">${cap.html}</div>
-      ${guess && p.tease ? `<p class="tease rise" ${n()}>${esc(p.tease)}</p>` : ""}
-      ${curator ? `<div class="rest" id="storyRest" inert><div><h3 class="more-title">More about this piece</h3>${curator.map(t => `<p>${esc(t)}</p>`).join("")}</div></div>` : ""}
-      <button class="more press rise" ${n()} data-more type="button" aria-expanded="false" ${curator ? `aria-controls="storyRest"` : ""}>Read the story</button>
-      <div class="row rise" ${n()}><button class="btn press" data-close type="button">${esc(next)}</button>${dismiss ? `<button class="btn ghost press" data-dismiss type="button">${esc(dismiss)}</button>` : ""}</div>
+      <div class="captions clamp rise" ${n()} aria-label="${t("Narration text")}">${cap.html}</div>
+      ${tease ? `<p class="tease rise" ${n()}>${esc(tease.text)}</p>` : ""}
+      ${curator ? `<div class="rest" id="storyRest" inert><div><h3 class="more-title">${t("More about this piece")}</h3><div class="paras">${loc.paras.map(x => `<p>${esc(x)}</p>`).join("")}</div>${loc.tr ? `<div class="tr-row">${labelHtml()}<button class="tr-orig press" data-orig type="button" aria-pressed="false">${t("Show the original")}</button></div>` : ""}</div></div>` : ""}
+      <button class="more press rise" ${n()} data-more type="button" aria-expanded="false" ${curator ? `aria-controls="storyRest"` : ""}>${t("Read the story")}</button>
+      ${capTr ? `<p class="tr-row rise" ${n()}>${labelHtml()}</p>` : ""}
+      <div class="row rise" ${n()}><button class="btn press" data-close type="button">${esc(t(next))}</button>${dismiss ? `<button class="btn ghost press" data-dismiss type="button">${esc(t(dismiss))}</button>` : ""}</div>
     </div>`;
+    el._loc = loc;
     player(p, cap, guess);
     el.returnValue = "";
     if (step) el.dataset.step = "1"; else delete el.dataset.step;

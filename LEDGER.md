@@ -59,7 +59,7 @@ write your name in it. Size: S (under 2 h), M (half a day), L (a day or more).
 |---|---|---|---|---|
 | D-1 | Export the 20-piece season from the DB into `pieces.json` rows (ids in the narrative report below), quoting `dcterms:medium` and dates | M | 20 rows validate; every fact quotes a field | open |
 | D-2 | Eyeball full-garment photo quality for the 20; swap any without a clean shot | S | 20 usable photos | open |
-| D-3 | English text for Dutch-only descriptions, marked as translation | S | No untranslated fact on screen | hassan, in progress (branch `hassan/D-3-i18n`); also adds the NL / EN / FR language toggle |
+| D-3 | English text for Dutch-only descriptions, marked as translation | S | No untranslated fact on screen | built on `hassan/D-3-i18n` (hassan), PR pending; also adds the NL / EN / FR language toggle. the curator to review `mockups/i18n/glossary.json` and the machine text |
 | D-4 | Generate GLBs for the 12 new pieces (about 2 to 3 per GPU refill per account) | L | 20 GLBs, garment-only cutouts | open |
 
 Season shortlist (from the narrative agent; verify each before use): tops ST503, ST2218, ST80930, ST81114AB,

@@ -1,0 +1,585 @@
+{
+ "_about": "D-3: nl text for facts and stories, built by mockups/tools/i18n_build.py. Do not hand-edit; change the glossary or the source and rerun. h = hash of the source text; by = team or machine.",
+ "det:ST2203:0:find": {
+  "h": "a986ff64",
+  "t": "Grote schoudervullingen",
+  "by": "machine",
+  "s": "Big padded shoulders"
+ },
+ "det:ST2203:1:find": {
+  "h": "216c2862",
+  "t": "Een rits van de V tot de taille",
+  "by": "machine",
+  "s": "A zip from the V to the waist"
+ },
+ "det:ST2203:2:find": {
+  "h": "d3ff98c0",
+  "t": "Gedrapeerde zakken op de heupen",
+  "by": "machine",
+  "s": "Draped pockets at the hips"
+ },
+ "det:ST2431/1-4:0:find": {
+  "h": "3dd9bcea",
+  "t": "Chinese knopen die ook de sluiting zijn",
+  "by": "machine",
+  "s": "Frogging that is also the fastening"
+ },
+ "det:ST2431/1-4:1:find": {
+  "h": "7e161cf2",
+  "t": "De rode opstaande kraag",
+  "by": "machine",
+  "s": "The red standing collar"
+ },
+ "det:ST2431/1-4:2:find": {
+  "h": "0302fc21",
+  "t": "Metalen galon op de boorden",
+  "by": "machine",
+  "s": "Metal braid on the cuffs"
+ },
+ "det:ST2432/1-2:0:find": {
+  "h": "a6ec4de8",
+  "t": "De hoge rode kraag",
+  "by": "machine",
+  "s": "The high red collar"
+ },
+ "det:ST2432/1-2:1:find": {
+  "h": "8bf227d0",
+  "t": "Epauletten van gouddraad",
+  "by": "machine",
+  "s": "Epaulettes of gold thread"
+ },
+ "det:ST2432/1-2:2:find": {
+  "h": "40c05fb8",
+  "t": "Rode flitsen aan de uiteinden van de slippen",
+  "by": "machine",
+  "s": "Red flashes at the tail tips"
+ },
+ "det:ST2435:0:find": {
+  "h": "58e11ae2",
+  "t": "De brede bootnek",
+  "by": "machine",
+  "s": "The wide boat neck"
+ },
+ "det:ST2435:1:find": {
+  "h": "61a70f85",
+  "t": "De band die de heupen vorm geeft",
+  "by": "machine",
+  "s": "The band that shapes the hips"
+ },
+ "det:ST2435:2:find": {
+  "h": "54c59ae4",
+  "t": "Krullen en ogen in het stiksel",
+  "by": "machine",
+  "s": "Curls and eyes in the stitching"
+ },
+ "det:ST652/1:0:find": {
+  "h": "9ae410ed",
+  "t": "De geruite verstelling",
+  "by": "machine",
+  "s": "The checked mending"
+ },
+ "det:ST652/1:1:find": {
+  "h": "940e0237",
+  "t": "Een rode zakdoek die er niet is",
+  "by": "machine",
+  "s": "A red handkerchief that isn't there"
+ },
+ "det:ST652/1:2:find": {
+  "h": "7b04c754",
+  "t": "Het riempje op de rug",
+  "by": "machine",
+  "s": "The little belt at the back"
+ },
+ "det:ST671:0:find": {
+  "h": "b7f49b0f",
+  "t": "Een kantkraag die doorgaat voor Lille-kant",
+  "by": "machine",
+  "s": "A lace collar pretending to be Lille lace"
+ },
+ "det:ST671:1:find": {
+  "h": "201e8575",
+  "t": "Een kantband langs de linkervoorkant",
+  "by": "machine",
+  "s": "A lace band down the left front"
+ },
+ "det:ST671:2:find": {
+  "h": "117311b1",
+  "t": "Haken op de rug",
+  "by": "machine",
+  "s": "Hooks down the back"
+ },
+ "det:ST673/1-2:0:find": {
+  "h": "6ccc81f4",
+  "t": "Parelmoeren knopen",
+  "by": "machine",
+  "s": "Mother-of-pearl buttons"
+ },
+ "det:ST673/1-2:1:find": {
+  "h": "1a510de5",
+  "t": "Een U-vormige pas van broderie anglaise",
+  "by": "machine",
+  "s": "A U-shaped yoke of eyelet lace"
+ },
+ "det:ST673/1-2:2:find": {
+  "h": "ba8b07b5",
+  "t": "Bewegingsruimte op de rug",
+  "by": "machine",
+  "s": "Room to move at the back"
+ },
+ "det:ST80998:0:find": {
+  "h": "c9217a36",
+  "t": "Een halslijn die in een punt eindigt",
+  "by": "machine",
+  "s": "A neckline that ends in a point"
+ },
+ "det:ST80998:1:find": {
+  "h": "ea3392ff",
+  "t": "Lijnborduursel op de borst",
+  "by": "machine",
+  "s": "Couched cord embroidery on the chest"
+ },
+ "det:ST80998:2:find": {
+  "h": "13dda94d",
+  "t": "Lange puntmouwen",
+  "by": "machine",
+  "s": "Long pointed sleeves"
+ },
+ "det:ST81190:0:find": {
+  "h": "eadf650c",
+  "t": "Klinknagels in plaats van naden",
+  "by": "machine",
+  "s": "Rivets instead of seams"
+ },
+ "det:ST81190:1:find": {
+  "h": "49b2e8bd",
+  "t": "Negen drukknopen",
+  "by": "machine",
+  "s": "Nine press studs"
+ },
+ "det:ST81190:2:find": {
+  "h": "6a746423",
+  "t": "Een rood kruis in de nek",
+  "by": "machine",
+  "s": "A red cross at the back of the neck"
+ },
+ "name:ST2062": {
+  "h": "42dd19a3",
+  "t": "Kniebroek",
+  "by": "machine",
+  "s": "Knee breeches"
+ },
+ "name:ST2203": {
+  "h": "baaeedb8",
+  "t": "Zwarte satijnen japon",
+  "by": "machine",
+  "s": "Black satin dress"
+ },
+ "name:ST2407/1-2": {
+  "h": "9b625a7d",
+  "t": "Voetbalschoenen, Dirk Bikkembergs",
+  "by": "machine",
+  "s": "Football boots, Dirk Bikkembergs"
+ },
+ "name:ST2431/1-4": {
+  "h": "53dddec4",
+  "t": "Lichtblauw cavalerie-uniform",
+  "by": "machine",
+  "s": "Light-blue cavalry uniform"
+ },
+ "name:ST2432/1-2": {
+  "h": "1d21ef41",
+  "t": "Donkerblauw uniform met slipjas",
+  "by": "machine",
+  "s": "Dark-blue tailcoat uniform"
+ },
+ "name:ST2434": {
+  "h": "c3ec4690",
+  "t": "Groene wollen jas",
+  "by": "machine",
+  "s": "Green wool coat"
+ },
+ "name:ST2435": {
+  "h": "3dfd2a82",
+  "t": "Zijden jurk met pailletten",
+  "by": "machine",
+  "s": "Sequin silk dress"
+ },
+ "name:ST503": {
+  "h": "4bf2d68d",
+  "t": "Jak",
+  "by": "machine",
+  "s": "Jak"
+ },
+ "name:ST652/1": {
+  "h": "61932e7c",
+  "t": "Herstelde jurk met polkadots",
+  "by": "machine",
+  "s": "Polka-dot mended dress"
+ },
+ "name:ST655/1": {
+  "h": "640f054c",
+  "t": "Cocktailjurk",
+  "by": "machine",
+  "s": "Cocktail dress"
+ },
+ "name:ST671": {
+  "h": "a4a9d40c",
+  "t": "Zijden wandeljapon",
+  "by": "machine",
+  "s": "Silk walking dress"
+ },
+ "name:ST673/1-2": {
+  "h": "1446b91e",
+  "t": "Katoenen combinaison",
+  "by": "machine",
+  "s": "Cotton combinaison"
+ },
+ "name:ST80881": {
+  "h": "94268b67",
+  "t": "Furisode kimono",
+  "by": "machine",
+  "s": "Furisode kimono"
+ },
+ "name:ST80930": {
+  "h": "bb679682",
+  "t": "Ikat vest",
+  "by": "machine",
+  "s": "Ikat vest"
+ },
+ "name:ST80931": {
+  "h": "0a1c6c5f",
+  "t": "Monpe broek",
+  "by": "machine",
+  "s": "Monpe trousers"
+ },
+ "name:ST80998": {
+  "h": "d1a8aadb",
+  "t": "Bruidskaftan in gestreept fluweel",
+  "by": "machine",
+  "s": "Striped velvet bridal kaftan"
+ },
+ "name:ST81190": {
+  "h": "7ed60806",
+  "t": "Wollen jas met klinknagels",
+  "by": "machine",
+  "s": "Riveted wool coat"
+ },
+ "q:ST81190:a:0": {
+  "h": "95dde6f9",
+  "t": "het kruis in de nek",
+  "by": "machine",
+  "s": "the cross at the nape of the neck"
+ },
+ "q:ST81190:a:1": {
+  "h": "3477990c",
+  "t": "klinknagels",
+  "by": "machine",
+  "s": "rivets"
+ },
+ "q:ST81190:a:2": {
+  "h": "3c0cb3b4",
+  "t": "9",
+  "by": "machine",
+  "s": "9"
+ },
+ "q:ST81190:a:3": {
+  "h": "e3010dcb",
+  "t": "Herfst en winter",
+  "by": "machine",
+  "s": "Autumn and winter"
+ },
+ "q:ST81190:fact:0": {
+  "h": "fd6ae67b",
+  "t": "Jak",
+  "by": "machine",
+  "s": "Jacket"
+ },
+ "q:ST81190:fact:1": {
+  "h": "bf217580",
+  "t": "Wol, synthetische vezel, katoen, metaal, vilt",
+  "by": "machine",
+  "s": "Wool, synthetic fiber, cotton, metal, felt"
+ },
+ "q:ST81190:fact:2": {
+  "h": "9dd2f044",
+  "t": "vilten",
+  "by": "machine",
+  "s": "Felting"
+ },
+ "q:ST81190:fact:3": {
+  "h": "8e0fdb35",
+  "t": "1998-1999",
+  "by": "machine",
+  "s": "1998-1999"
+ },
+ "q:ST81190:fact:4": {
+  "h": "cabe18f6",
+  "t": "België",
+  "by": "machine",
+  "s": "Belgium"
+ },
+ "q:ST81190:q:0": {
+  "h": "d1d9933e",
+  "t": "Welk deel van het jak is gestikt met rode draad?",
+  "by": "machine",
+  "s": "What part of the jacket is stitched with red thread?"
+ },
+ "q:ST81190:q:1": {
+  "h": "78134353",
+  "t": "Welk element van het jak laat de vormentaal van de ontwerper duidelijk zien?",
+  "by": "machine",
+  "s": "Which element of the jacket clearly shows the designer’s visual language?"
+ },
+ "q:ST81190:q:2": {
+  "h": "e90cba1a",
+  "t": "Hoeveel drukknopen heeft het jak?",
+  "by": "machine",
+  "s": "How many snap buttons does the jacket have?"
+ },
+ "q:ST81190:q:3": {
+  "h": "9fe5070a",
+  "t": "Voor welke seizoenen is dit jak gemaakt, als je kijkt naar het materiaal en de stijl?",
+  "by": "machine",
+  "s": "Considering the material and style, what seasons was this jacket made for?"
+ },
+ "q:ST81190:story:0": {
+  "h": "f9a7ef51",
+  "t": "Dit grijze wollen jak uit 1998-1999 van het Belgische modehuis A.F. Vandevorst heeft een paar opvallende details. Het is opgebouwd uit losse delen; de mouw-, voor-, schouder- en borststukken zijn niet aan elkaar genaaid. Als je goed kijkt, hoe zitten ze dan vast? De panden, net als de coupenaden en zijnaden, zijn vastgemaakt met metalen klinknagels, boutachtige bevestigingen die twee stoffen aan elkaar zetten. Het jak sluit middenvoor met een rij drukknopen, een type knop dat je makkelijk dichtmaakt door de twee uiteinden op elkaar te drukken.",
+  "by": "machine",
+  "s": "This grey woolen jacket from 1998-1999 by Belgian fashion house A.F. Vandevorst has some remarkable details. It is made up of separate parts; the sleeve, front, shoulder, and breast pieces are not sewn together. If you look closely, how are they held together? The pieces, as well as the darts and side seams are fastened with metal rivets, bolt-like fasteners that attach two fabrics. The jacket is closed in the centre front by a column of snap buttons, a type of button you can easily close by pressing the two ends together."
+ },
+ "q:ST81190:story:1": {
+  "h": "bafaf3c9",
+  "t": "Kijk nu naar de achterkant van het stuk. Wat valt er op? Het rode kruis dat in de nek is geborduurd, is het iconische logo van A.F. Vandevorst. Al vanaf hun vroege collecties halen ze inspiratie uit het werk van de Duitse kunstenaar Joseph Beuys, religie, paarden en hun tuig, uniformen, klinknagels, lingerie en fetisj schoenen. Dit jak maakt deel uit van hun eerste collectie.",
+  "by": "machine",
+  "s": "Now look at the back of the piece. What stands out? The red cross stitched at the nape of the neck is the iconic logo of A.F. Vandevorst. Since their early collections, their designs have been inspired by German artist Joseph Beuys, religion, horses and their tack, uniforms, rivets, lingerie, and fetish shoes. This jacket is part of their first collection."
+ },
+ "q:ST81190:title": {
+  "h": "304fa7d6",
+  "t": "A.F. Vandevorst jak",
+  "by": "machine",
+  "s": "A.F. Vandevorst Jacket"
+ },
+ "term:Belgium": {
+  "h": "cabe18f6",
+  "t": "België",
+  "by": "machine",
+  "s": "Belgium"
+ },
+ "term:Japan": {
+  "h": "a28f44fb",
+  "t": "Japan",
+  "by": "machine",
+  "s": "Japan"
+ },
+ "term:Netherlands": {
+  "h": "64b61f6b",
+  "t": "Nederland",
+  "by": "machine",
+  "s": "Netherlands"
+ },
+ "term:Palestine": {
+  "h": "fe9dc088",
+  "t": "Palestina",
+  "by": "machine",
+  "s": "Palestine"
+ },
+ "term:appliqué (technique)": {
+  "h": "3dd306f8",
+  "t": "applicatie (techniek)",
+  "by": "machine",
+  "s": "appliqué (technique)"
+ },
+ "term:artificial silk": {
+  "h": "4559f69a",
+  "t": "kunstzijde",
+  "by": "machine",
+  "s": "artificial silk"
+ },
+ "term:bone (material)": {
+  "h": "6132932d",
+  "t": "been (materiaal)",
+  "by": "machine",
+  "s": "bone (material)"
+ },
+ "term:brass": {
+  "h": "9e19b1ea",
+  "t": "messing",
+  "by": "machine",
+  "s": "brass"
+ },
+ "term:broadcloth (woollen fabric)": {
+  "h": "c4505507",
+  "t": "laken",
+  "by": "machine",
+  "s": "broadcloth (woollen fabric)"
+ },
+ "term:cotton (fiber)": {
+  "h": "d98486b7",
+  "t": "katoen",
+  "by": "machine",
+  "s": "cotton (fiber)"
+ },
+ "term:double ikat": {
+  "h": "6c4aa87d",
+  "t": "double ikat",
+  "by": "machine",
+  "s": "double ikat"
+ },
+ "term:embroidering": {
+  "h": "923a1cda",
+  "t": "borduren",
+  "by": "machine",
+  "s": "embroidering"
+ },
+ "term:felt": {
+  "h": "c546d834",
+  "t": "vilt",
+  "by": "machine",
+  "s": "felt"
+ },
+ "term:flax": {
+  "h": "c2eab0b6",
+  "t": "vlas",
+  "by": "machine",
+  "s": "flax"
+ },
+ "term:hand-painted": {
+  "h": "d5925f3c",
+  "t": "handgeschilderd",
+  "by": "machine",
+  "s": "hand-painted"
+ },
+ "term:handmade": {
+  "h": "ad484035",
+  "t": "handgemaakt",
+  "by": "machine",
+  "s": "handmade"
+ },
+ "term:knitting": {
+  "h": "1a2add79",
+  "t": "breien",
+  "by": "machine",
+  "s": "knitting"
+ },
+ "term:leather": {
+  "h": "92b18d26",
+  "t": "leder",
+  "by": "machine",
+  "s": "leather"
+ },
+ "term:machine lace": {
+  "h": "d1e78aa1",
+  "t": "machinale kant",
+  "by": "machine",
+  "s": "machine lace"
+ },
+ "term:machine-made": {
+  "h": "bc5fb094",
+  "t": "machinaal gemaakt",
+  "by": "machine",
+  "s": "machine-made"
+ },
+ "term:manmade material": {
+  "h": "19c44adb",
+  "t": "door mensen gemaakten materie",
+  "by": "machine",
+  "s": "manmade material"
+ },
+ "term:metal": {
+  "h": "d756aedc",
+  "t": "metaal",
+  "by": "machine",
+  "s": "metal"
+ },
+ "term:mother of pearl": {
+  "h": "06815f6b",
+  "t": "moederkoorn",
+  "by": "machine",
+  "s": "mother of pearl"
+ },
+ "term:passementerie (material)": {
+  "h": "863db8f2",
+  "t": "passementerie (materiaal)",
+  "by": "machine",
+  "s": "passementerie (material)"
+ },
+ "term:printing (process)": {
+  "h": "4273d534",
+  "t": "drukken (proces)",
+  "by": "machine",
+  "s": "printing (process)"
+ },
+ "term:satin": {
+  "h": "2323499c",
+  "t": "satijn",
+  "by": "machine",
+  "s": "satin"
+ },
+ "term:satin weave": {
+  "h": "0b540b1a",
+  "t": "satijnbinding",
+  "by": "machine",
+  "s": "satin weave"
+ },
+ "term:sequin": {
+  "h": "0b3fff58",
+  "t": "paillet",
+  "by": "machine",
+  "s": "sequin"
+ },
+ "term:sewing (needleworking technique)": {
+  "h": "2646b6bd",
+  "t": "naaien",
+  "by": "machine",
+  "s": "sewing (needleworking technique)"
+ },
+ "term:silk (silkworm material)": {
+  "h": "5f8b2d2a",
+  "t": "zijde",
+  "by": "machine",
+  "s": "silk (silkworm material)"
+ },
+ "term:silk taffeta": {
+  "h": "f82f17c9",
+  "t": "tafzijde",
+  "by": "machine",
+  "s": "silk taffeta"
+ },
+ "term:synthetic fiber": {
+  "h": "c00b96ba",
+  "t": "synthetische vezel",
+  "by": "machine",
+  "s": "synthetic fiber"
+ },
+ "term:textile printing": {
+  "h": "d5e57c07",
+  "t": "textieldruk",
+  "by": "machine",
+  "s": "textile printing"
+ },
+ "term:twilled weave": {
+  "h": "ef1ac664",
+  "t": "keperbinding",
+  "by": "machine",
+  "s": "twilled weave"
+ },
+ "term:velvet": {
+  "h": "fb16326b",
+  "t": "fluweel",
+  "by": "machine",
+  "s": "velvet"
+ },
+ "term:weaving": {
+  "h": "23089dd6",
+  "t": "weven",
+  "by": "machine",
+  "s": "weaving"
+ },
+ "term:wool (hair material)": {
+  "h": "76d000d4",
+  "t": "wol",
+  "by": "machine",
+  "s": "wool (hair material)"
+ }
+}

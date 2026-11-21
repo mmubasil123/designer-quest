@@ -18,25 +18,26 @@ const SUGGEST = [
   ["extent", "How big is it?"],
   ["title", "Does it have a name?"],
 ];
-export function suggestions(rec, n = 3) {
-  return SUGGEST.filter(([k]) => byKey(rec, k)).slice(0, n).map(([key, q]) => ({ key, q }));
+export function suggestions(rec, n = 3, tr = x => x) {   // tr: the screen's translator (i18n.js t); the server and eval keep English
+  return SUGGEST.filter(([k]) => byKey(rec, k)).slice(0, n).map(([key, q]) => ({ key, q: tr(q) }));
 }
 
 const plain = t => t.replace(/ \([^)]*\)$/, "");   // "cotton (fiber)" -> "cotton", as on the fact card
-const list = a => a.length < 2 ? a.join("") : `${a.slice(0, -1).join(", ")} and ${a.at(-1)}`;
+const list = (a, and = "and") => a.length < 2 ? a.join("") : `${a.slice(0, -1).join(", ")} ${and} ${a.at(-1)}`;
 /* The no-model answer to a suggested question: the field itself, English where records.json has our translation. */
-export function fieldAnswer(rec, key) {
+export function fieldAnswer(rec, key, tr = x => x) {
   const f = byKey(rec, key);
-  if (!f) return { answerable: false, answer: NOT_RECORDED, fields: [], quote: "" };
+  if (!f) return { answerable: false, answer: NOT_RECORDED, fields: [], quote: "" };   // the sheet shows it through t()
   const v = f.en ?? f.values;
+  const L = a => list(a, tr("and"));
   const text = {
-    creator: `The record names the maker: ${list(v)}.`,
-    date: `The record dates it ${list(v)}.`,
-    medium: `The record lists ${list(v.map(plain))}.`,
-    place: `The record gives the place as ${list(v)}.`,
-    extent: `The record measures it as ${list(v)}.`,
-    title: `The record gives its title as ${list(v)}.`,
-  }[key] ?? list(v);
+    creator: `${tr("The record names the maker:")} ${L(v)}.`,
+    date: `${tr("The record dates it")} ${L(v)}.`,
+    medium: `${tr("The record lists")} ${L(v.map(plain))}.`,
+    place: `${tr("The record gives the place as")} ${L(v)}.`,
+    extent: `${tr("The record measures it as")} ${L(v)}.`,
+    title: `${tr("The record gives its title as")} ${L(v)}.`,
+  }[key] ?? L(v);
   return { answerable: true, answer: text, fields: [key], quote: f.values.join("; ") };   // the record's own words, Dutch where it is Dutch
 }
 

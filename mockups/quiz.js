@@ -2,7 +2,9 @@
    tools/questions_sync.py). Optional and on top: the piece is collected by the scan itself, nothing is locked behind a
    question, and there is no score, timer or streak (D2). Each question shows its answer on a tap. */
 
-const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+import { t, tc, labelHtml } from "./i18n.js";   // D-3
+
+const esc = x => String(x).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
 export async function createQuiz({ pieces }) {
   let byId = {};
@@ -28,16 +30,19 @@ export async function createQuiz({ pieces }) {
     const p = byId[id];
     if (!p) return Promise.resolve();
     const qs = p.questions;   // every question on her page, in her order
+    const T = (k, x) => tc(`q:${id}:${k}`, x, "en");   // her English text in the chosen language (build-time translation)
+    const anyTr = [...p.story.map((x, n) => T(`story:${n}`, x)), ...qs.flatMap((q, n) => [T(`q:${n}`, q.q), T(`a:${n}`, q.a)])].some(g => g.tr);
     el.innerHTML = `<div tabindex="-1" autofocus>
-      <div class="mono">${found ? "Found at MoMu" : story ? "Story" : "Questions"} · ${esc(id)}</div>
-      <h2 id="quizName">${esc(p.title)}</h2>
-      ${p.facts.length ? `<dl>${p.facts.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>` : ""}
-      ${(story ? p.story : []).map(t => `<p class="story">${esc(t)}</p>`).join("")}
-      ${p.link ? `<p class="cite"><a href="${esc(p.link)}" target="_blank" rel="noopener">Source: MoMu Study Collection ↗</a></p>` : ""}
-      ${qs.length ? `<h3>Look closer</h3><ol class="qs">${qs.map((q, i) => `<li><p>${esc(q.q)}</p>
-        <button class="reveal press" data-reveal aria-controls="quizA${i}">Show answer</button>
-        <p class="ans" id="quizA${i}" tabindex="-1" hidden>${esc(q.a[0].toUpperCase() + q.a.slice(1))}</p></li>`).join("")}</ol>` : ""}
-      <div class="row"><button class="btn press" data-close>${esc(next)}</button></div>
+      <div class="mono">${found ? t("Found at MoMu") : story ? t("Story") : t("Questions")} · ${esc(id)}</div>
+      <h2 id="quizName">${esc(T("title", p.title).text)}</h2>
+      ${p.facts.length ? `<dl>${p.facts.map(([k, v], n) => `<dt>${esc(t(k))}</dt><dd>${esc(T(`fact:${n}`, v).text)}</dd>`).join("")}</dl>` : ""}
+      ${(story ? p.story : []).map((x, n) => `<p class="story">${esc(T(`story:${n}`, x).text)}</p>`).join("")}
+      ${p.link ? `<p class="cite"><a href="${esc(p.link)}" target="_blank" rel="noopener">${t("Source: MoMu Study Collection")} ↗</a></p>` : ""}
+      ${qs.length ? `<h3>${t("Look closer")}</h3><ol class="qs">${qs.map((q, i) => `<li><p>${esc(T(`q:${i}`, q.q).text)}</p>
+        <button class="reveal press" data-reveal aria-controls="quizA${i}">${t("Show answer")}</button>
+        <p class="ans" id="quizA${i}" tabindex="-1" hidden>${esc((a => a[0].toUpperCase() + a.slice(1))(T(`a:${i}`, q.a).text))}</p></li>`).join("")}</ol>` : ""}
+      ${anyTr ? `<p class="tr-row">${labelHtml("machine")}</p>` : ""}
+      <div class="row"><button class="btn press" data-close>${esc(t(next))}</button></div>
     </div>`;
     if (!el.open) el.showModal();
     return new Promise(resolve => el.addEventListener("close", resolve, { once: true }));

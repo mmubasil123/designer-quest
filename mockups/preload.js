@@ -124,7 +124,9 @@ function handoff(id, maxMs = 30000) {
   el.setAttribute("role", "status");
   el.style.cssText = "position:fixed;inset:0;z-index:99999;display:grid;place-items:center;background:var(--paper,#fff);color:var(--ink,#000);font:var(--t-label,500 11px/1.3 sans-serif);letter-spacing:.08em;text-transform:uppercase";
   document.body.append(el);
-  const draw = s => { el.textContent = s.fraction ? `Getting the scan ready ${Math.floor(s.fraction * 100)}%` : "Getting the scan ready"; };
+  // D-3: the page imports i18n.js anyway; loading it here without waiting keeps the preload itself fast (English until it arrives)
+  let tr = x => x; import("./i18n.js").then(m => { tr = m.t; }).catch(() => {});
+  const draw = s => { el.textContent = s.fraction ? `${tr("Getting the scan ready")} ${Math.floor(s.fraction * 100)}%` : tr("Getting the scan ready"); };
   draw(snapshot(j));
   const off = preload.on(s => { if (s.id === id) draw(s); });
   return Promise.race([j.done, new Promise(r => setTimeout(r, maxMs))]).then(() => { off(); el.remove(); });
