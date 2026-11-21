@@ -27,6 +27,8 @@ Newest first. Each entry: what changed, why, and the decision behind it.
   poems side by side for review in `docs/H13-NARRATION-REVIEW.md`. Audio: the 16 changed stories need re-voicing in
   the same voice (Picsart Adeline, manual export); until then they play in the phone's own voice (the old files read
   the old text, so `narration.py` no longer points at them). the curator's 3 keep their Adeline audio.
+- Also: H12's share card quotes a story's first line; for a poem it now joins the verse lines and credits the piece
+  ("Jak, 1750–1780") instead of "MoMu's record of the jak", since the poem's words are ours, not the record's.
 
 ## MoMu's own CLO models on the outfit page (2026-11-21, branch hassan/momu-clo-pieces)
 - What: five pieces that have a MoMu CLO project are shown on `outfit.html` on MoMu's mannequin: furisode ST80881,
