@@ -44,20 +44,18 @@ study pieces and the "find the 3 recorded details" challenge.
 Every beat uses something that already works unless marked **(to build)**. Presenter's phone on a hotspot;
 the backup video (E2) follows the same order.
 
-1. **Tap.** Noor taps the card next to the jak, ST503 (`?card=ST503`). The jak lands on the dress form.
-   Say: "No app store, no account. The card opens the piece."
-2. **Story.** Open the jak's fact card (ⓘ): materials, date, place, the record's description with its
-   translation. Say `[fact: ST503, from dcterms:description]`. Narration plays **(to build)**.
-3. **Question.** One question about the jak; the right answer wins its fabric **(to build, C2)**.
-4. **Mix centuries.** From the wardrobe sheet: monpe trousers (ST80931, 1965) and the Dirk Bikkembergs football
-   boots (ST2407/1-2, 2005 to 2009). The span counter shows the look covers about 250 years.
-5. **Remix.** Put the ikat vest's fabric (ST80930, 1950s) on the jak's sleeves. Say: "One piece's fabric on
-   another, centuries apart."
-6. **Look closer.** Open a study piece, e.g. the 1920s sequin silk dress (ST2435), as a 3D splat. Find the 3
-   recorded details; each quotes the record. The fabric unlocks.
-7. **Share.** Export the 9:16 share card: look name, span in years, MoMu credit **(to build, B7)**.
-   Say: "This is what goes on her story, and every share credits MoMu."
-8. **Come back.** Show a locked piece: "Find card in room N" **(B6, optional)**.
+1. **Play.** Noor opens the app: a dress form and a starter wardrobe. Two taps make a look (green wool coat,
+   monpe trousers, football boots). Say: "No app store, no account."
+2. **Tap.** She taps the sticker beside the jak, ST503 (`?card=ST503`). Its photo and story open; narration plays.
+3. **Win it.** "When was it made?" She drags the slider, gets "Earlier!", tries again: "You won it! 1750 to 1780",
+   with the record's own description. Add it to my wardrobe.
+4. **Wear it.** The wardrobe opens on the jak, marked New. She puts it on with the football boots: the look spans
+   about 250 years. Say: "She won it by guessing, and now she remembers the date."
+5. **Look closer.** She taps the sticker on the Vandevorst coat, ST81190: story, then Up close, a 3D scan. She
+   finds its 3 recorded details; each quotes the record. You won its fabric.
+6. **Remix.** She puts that fabric on the jak's sleeves. Say: "One piece's fabric on another, centuries apart."
+7. **Share.** The 9:16 share card: look name, span in years, MoMu credit. Say: "Every share credits MoMu."
+8. **Come back.** The Museum button: "2 of 11 won". The rest are waiting in the room.
 
 Fallbacks: if a GLB is slow, skip to the next beat; if the venue wifi drops, play the backup video from the
 same step.

@@ -11,7 +11,7 @@ const ICON = {
   pause: `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>`,
 };
 
-export async function createStory() {
+export async function createStory({ img } = {}) {   // img(id): the piece's photo, which leads the sheet
   let doc = { pieces: {} };
   try { doc = await (await fetch("narration.json")).json(); } catch { /* no stories: card scans work as before */ }
   const speech = "speechSynthesis" in window ? window.speechSynthesis : null;
@@ -22,6 +22,7 @@ export async function createStory() {
   let stop = () => {};
   el.addEventListener("close", () => stop());
   el.addEventListener("click", e => {
+    if (e.target.closest("[data-more]")) { el.querySelector(".transcript").classList.remove("clamp"); e.target.closest("[data-more]").remove(); return; }
     if (e.target === el || e.target.closest("[data-close]")) el.close();
   });
 
@@ -77,14 +78,18 @@ export async function createStory() {
     stop = () => audio.pause();
   }
 
-  function show(id, { found = false, next = "Continue" } = {}) {
+  function show(id, { found = false, next = "Continue", years = true } = {}) {   // years: false before Guess the year, so the story does not give it away
     const p = doc.pieces[id];
     if (!p) return Promise.resolve();
+    // shortcut: drops the drafts' lead-in on screen only (the audio still says it); move it into tools/narration.py at the next audio run
+    const paras = p.paragraphs.map(t => t.replace(/^The museum's record describes it like this: /, ""));
+    const long = paras.join(" ").length > 140;   // past about 3 lines the sheet shows a teaser; the audio carries the rest
     el.innerHTML = `<div tabindex="-1" autofocus>
+      ${img ? `<img class="pic" src="${img(id)}" alt="">` : ""}
       <div class="mono">${found ? "Found in the museum" : "Story"} · ${esc(id)}</div>
       <h2 id="storyName">${esc(p.title)}</h2>
-      ${p.years ? `<p class="years">${esc(p.years)}</p>` : ""}
-      ${p.draft ? `<p class="draft">Draft built only from the MoMu record; the curator's story is still to come.</p>` : ""}
+      ${years && p.years ? `<p class="years">${esc(p.years)}</p>` : ""}
+      ${p.draft ? `<p class="draft">From the MoMu record</p>` : ""}
       <div class="player">
         <button class="play press" data-play type="button"></button>
         <div class="meta">
@@ -92,7 +97,8 @@ export async function createStory() {
           <div class="mono"><span data-voice></span> <span data-time></span></div>
         </div>
       </div>
-      <div class="transcript" aria-label="Transcript">${p.paragraphs.map(t => `<p>${esc(t)}</p>`).join("")}</div>
+      <div class="transcript${long ? " clamp" : ""}" aria-label="Transcript">${paras.map(t => `<p>${esc(t)}</p>`).join("")}</div>
+      ${long ? `<button class="more press" data-more type="button">Read the whole story</button>` : ""}
       <div class="row"><button class="btn press" data-close type="button">${esc(next)}</button></div>
     </div>`;
     player(p);
@@ -104,8 +110,8 @@ export async function createStory() {
 }
 
 /* After a card scan: story first, then the curator's questions (without repeating the story), then `next`. */
-export async function showScan({ story, quiz, id, next }) {
+export async function showScan({ story, quiz, id, next, years }) {
   const hasQuiz = !!quiz?.has(id), hasStory = !!story?.has(id);
-  if (hasStory) await story.show(id, { found: true, next: hasQuiz ? "Continue to the questions" : next });
+  if (hasStory) await story.show(id, { found: true, next: hasQuiz ? "Continue to the questions" : next, years });
   if (hasQuiz) await quiz.show(id, { found: !hasStory, next, story: !hasStory });
 }

@@ -13,7 +13,7 @@
       "source": {
         "imgSha": "d854d7decbce09ccfb198297818c8dac50d8c2b9"
       },
-      "locked": false,
+      "locked": true,
       "assets": {
         "glb": {
           "path": "assets/ST503.glb",
