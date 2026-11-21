@@ -4,6 +4,12 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### First look: the furisode kimono (branch basil/first-look)
+- **Problem (Basil's phone):** the default first look, green wool coat, Monpe trousers and boots, showed scan debris to every new visitor: a torn-looking collar and lapel, stray green fragments at the hem, boots half buried in the trouser hem.
+- **What I tried:** the coat's texture shows no cleanable bleed left (a grey-patch rule refilled 1.5% of texels and changed nothing visible), so the torn collar is mesh geometry, which only a regenerated scan fixes (GPU quota, ask first). The red band at the waist is the coat's real red piping in the MoMu photo, so it stays.
+- **Decision:** the first look is now the furisode kimono (`full: ST80881`). Checked front, side and back at 390 px: no clipping, no stray fragments, console clean. The wardrobe opens on the Full tab to match, a saved look still wins on later visits, and wearing a top still clears the kimono. Before and after: `docs/first-look/before-after.jpg`.
+- **Not changed:** the coat, trousers and boots are still in the wardrobe; their scans are unchanged. The kimono's hem ends above the boots, so no feet are worn by default.
+
 ### A7 reconstruction removed: Up close is splat-only again (branch hassan/A7-remove-reconstruction)
 - **What:** the Archive / Compare / Wear it control from PR #26 is gone from `up-close.html`; the coat ST81190, like every study piece, shows only MoMu's Gaussian splat with its detail hunt. `pieces.json` drops ST81190's `assets.clo` and `pieces.schema.json` the `clo` field; `preload.js` no longer warms the CLO coat and avatar after the splat. `mockups/reconstruction.js` and `assets/clo/ST81190.glb` moved to `_to_delete/`. Also restores the H6 comment on `up-close.html`'s `nav.js` import, which had absorbed the old A7 comment in a merge.
 - **Kept:** `clo/outfit.js` and `assets/clo/avatar_web.glb`, for the team's avatar, blouse and trousers (`hassan/team-models`).

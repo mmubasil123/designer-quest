@@ -348,7 +348,7 @@ if (PIECES[scanned]?.splat && PIECES[scanned].locked) {   // before the Stage bo
   await new Promise(() => {});
 }
 const SLOTS = ["top", "bottom", "feet", "full"];
-const look = { top: "ST2434", bottom: "ST80931", feet: "ST2407/1-2", full: null, fabric: { body: null, sleeves: null }, skin: 1 };
+const look = { top: null, bottom: null, feet: null, full: "ST80881", fabric: { body: null, sleeves: null }, skin: 1 };   // first look: the furisode, the cleanest scan and the most recognisable piece
 const SAVE_KEY = "secondSkin.save.v1";
 try {   // restore the visitor's look; ids are checked against the manifest, since storage is user-controlled
   const saved = JSON.parse(localStorage.getItem(SAVE_KEY) || "null");
@@ -853,7 +853,7 @@ skinsEl.addEventListener("click", e => {
   turntables.forEach(t => t.draw());
 });
 
-let activeSlot = "top", activeZone = "body";
+let activeSlot = look.full ? "full" : "top", activeZone = "body";
 const LABEL = { top: "Top", bottom: "Bottom", feet: "Feet", full: "Full", study: "Study", remix: "Fabrics" };
 const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const shortName = id => PIECES[id].name.split(",")[0];
