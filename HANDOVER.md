@@ -27,7 +27,8 @@ trousers, plinth removed, dressing-order render.
    then deploy `mockups/` as a static site and exclude nothing else.
 3. **A6 LRU + render on demand**, **A5 GLB optimisation** (meshopt + webp, keep `gltf-transform` inside the project).
 4. **C2** in review on `hassan/C2` (questions for ST503, ST80931, ST2407/1-2; the curator to rewrite and approve the draft
-   text in `mockups/questions.json`, then set `draft: false` and rerun `tools/questions_check.py`). C1 done.
+   text in the Notion table "Quiz questions" (hub > "Quiz questions: review (the curator)"); then export the rows to JSON with
+   the Notion connector and run `python3 -I mockups/tools/questions_apply.py rows.json --cache ../cache`). C1 done.
    Console: `secondSkinQuiz.reset()` clears answers for a demo rerun.
 5. **B7** share card, **E2** screen recording, **E1** slides in `presentation/`.
 

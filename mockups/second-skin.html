@@ -99,7 +99,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .handle::before { content: ""; position: absolute; left: 50%; top: 9px; width: 40px; height: 4px; margin-left: -20px; border-radius: 2px; background: var(--line); }
 .wardrobe-head { display: flex; align-items: baseline; justify-content: space-between; }
 .wardrobe h2 { font: 400 22px/1 Newsreader, serif; margin: 0; }
-.wardrobe .grid { padding: 4px 18px 24px; overflow-y: auto; overscroll-behavior: contain; grid-template-columns: repeat(3, 1fr); }
+/* max-content rows: the grid is a shrinking flex item and tiles clip (min-height 0), so auto rows were squeezed below the tiles' 3:4 height */
+.wardrobe .grid { padding: 4px 18px 24px; overflow-y: auto; overscroll-behavior: contain; grid-template-columns: repeat(3, 1fr); grid-auto-rows: max-content; }
 /* the form steps up and back so it stays visible above an open wardrobe */
 .stage .turntable { transform-origin: 50% 0; transition: transform 420ms var(--ease-sheet); }
 .stage[data-snap="half"] .turntable, .stage[data-snap="full"] .turntable { transform: translateY(-2%) scale(.6); }

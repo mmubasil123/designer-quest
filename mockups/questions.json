@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "about": "C2: one question per piece. `answer` and every option are verbatim values of `field` in MoMu record `record` (mockups/records.json, built from cache/ by tools/records.py). Distractors are real values of the same field from other records. `prompt` and `label` text are drafts until `draft` is false (the curator approves). Check: python3 -I mockups/tools/questions_check.py",
+  "about": "C2: one question per piece. `answer` and every option are verbatim values of `field` in MoMu record `record` (mockups/records.json, built from cache/ by tools/records.py). Distractors are real values of the same field from other records. `prompt` text is a draft until `draft` is false: the curator reviews it in the team Notion table \"Quiz questions\", and tools/questions_apply.py brings her edits back here. Check: python3 -I mockups/tools/questions_check.py",
   "questions": [
     {
       "id": "ST503",
@@ -9,7 +9,12 @@
       "draft": true,
       "prompt": "This jak was worn around 1750 to 1780. Where was it made?",
       "answer": "Netherlands",
-      "options": ["Belgium", "Netherlands", "Japan", "Palestine"]
+      "options": [
+        "Belgium",
+        "Japan",
+        "Palestine",
+        "Netherlands"
+      ]
     },
     {
       "id": "ST80931",
@@ -18,7 +23,12 @@
       "draft": true,
       "prompt": "These monpe, dark blue puffed trousers in ikat, come from Japan. When were they made?",
       "answer": "1965",
-      "options": ["1850-1870", "1750-1780", "1965", "2005-2009"]
+      "options": [
+        "1965",
+        "1850-1870",
+        "1750-1780",
+        "2005-2009"
+      ]
     },
     {
       "id": "ST2407/1-2",
@@ -27,7 +37,12 @@
       "draft": true,
       "prompt": "Dirk Bikkembergs made these football boots partly from man-made material. What else are they made of?",
       "answer": "leather",
-      "options": ["silk taffeta", "broadcloth (woollen fabric)", "leather", "cotton (fiber)"]
+      "options": [
+        "silk taffeta",
+        "broadcloth (woollen fabric)",
+        "cotton (fiber)",
+        "leather"
+      ]
     }
   ]
 }
