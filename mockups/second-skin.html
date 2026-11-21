@@ -397,7 +397,7 @@ const GARMENT_VERT = ["#include <common>\nattribute vec3 aObj;\nvarying vec3 vOb
 const GARMENT_DECL = `varying vec3 vObjPos;
 varying vec3 vObjN;
 uniform sampler2D uFabricA, uFabricB;
-uniform float uRemixA, uRemixB, uMean, uDrop, uCx, uSplit, uSleeveY, uOn, uCut, uCutHalf;
+uniform float uRemixA, uRemixB, uMean, uDrop, uCx, uSplit, uSleeveY, uOn, uCut, uCutHalf, uCutTol, uCutPale;
 uniform vec3 uForm;
 vec3 triplanar(sampler2D t) {
   vec3 w = pow(abs(normalize(vObjN)), vec3(4.0)); w /= w.x + w.y + w.z;
@@ -408,7 +408,9 @@ const GARMENT_FRAG = `#include <map_fragment>
   float lum = dot(diffuseColor.rgb, vec3(0.299, 0.587, 0.114));
   if (lum < uDrop) discard;
   // on the demo avatar: drop the dress form TRELLIS baked into the neck (texels of the form's colour near the centre line)
-  if (uOn > 0.5 && uCut > 0.5 && abs(vObjPos.x - uCx) < uCutHalf && distance(diffuseColor.rgb, uForm) < 0.09) discard;
+  float hi = max(diffuseColor.r, max(diffuseColor.g, diffuseColor.b)), lo = min(diffuseColor.r, min(diffuseColor.g, diffuseColor.b));
+  if (uOn > 0.5 && uCut > 0.5 && abs(vObjPos.x - uCx) < uCutHalf
+      && (distance(diffuseColor.rgb, uForm) < uCutTol || (uCutPale > 0.5 && hi > 0.3 && hi - lo < 0.06 * hi + 0.02))) discard;
   float shade = clamp(lum / uMean, 0.35, 1.5);
   vec3 bodyCol = uRemixA > 0.5 ? triplanar(uFabricA) * shade : diffuseColor.rgb;
   vec3 sleeveCol = uRemixB > 0.5 ? triplanar(uFabricB) * shade : diffuseColor.rgb;
@@ -444,8 +446,8 @@ function prepGarment(scene, piece, id) {
       uSplit: { value: half * 0.5 },   // scans hang sleeves outside about half the full width
       uSleeveY: { value: g.boundingBox.min.y + (piece.sleeveTo ?? 0.4) * (g.boundingBox.max.y - g.boundingBox.min.y) },
       uDrop: { value: piece.hideStand ? 0.03 : -1 },   // 0.03 is linear: the stand's near-black, under any fabric's darkest dye
-      uOn: { value: 0 }, uCut: { value: FORM_CUT[id] ? 1 : 0 }, uCutHalf: { value: half * 0.4 },
-      uForm: { value: new THREE.Color().setRGB(...(FORM_CUT[id] || [0, 0, 0]).map(v => v / 255), THREE.SRGBColorSpace) } };
+      uOn: { value: 0 }, uCut: { value: FORM_CUT[id] ? 1 : 0 }, uCutHalf: { value: half * 0.4 }, uCutTol: { value: FORM_CUT[id]?.[3] ?? 0.09 }, uCutPale: { value: FORM_CUT[id]?.[4] ?? 0 },
+      uForm: { value: new THREE.Color().setRGB(...(FORM_CUT[id] || [0, 0, 0]).slice(0, 3).map(v => v / 255), THREE.SRGBColorSpace) } };
     m.onBeforeCompile = sh => {
       Object.assign(sh.uniforms, u);
       sh.vertexShader = sh.vertexShader.replace("#include <common>", GARMENT_VERT[0]).replace("#include <begin_vertex>", GARMENT_VERT[1]);
