@@ -2,6 +2,16 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## MoMu teaser video, made in code (2026-11-22, E2, branch hassan/E2-demo-video)
+- What: `presentation/reel/`, a Remotion project that renders a 44 s, 1920 x 1080 teaser from the app's real screens
+  (captured at 390 px with Playwright, `scripts/capture.mjs`) and MoMu's photos: nine scenes, one per caption, with
+  small sound effects made in code. `style.md` holds the look (MoMu tokens from `theme.css`, no voice); a `/reel` skill
+  (`.claude/skills/reel/`) makes the next one; `scripts/check.py` measures dead spots and busy moments.
+  `presentation/DEMO_VIDEO.md` has the script, sources of every fact, the checks and what to re-record.
+- Why: feedback 2026-11-21, make a great demo video rather than perfect the meshes.
+- Decision: Hassan picked a standalone teaser (16:9 for the projector, no voice, about 45 s, result first) and
+  dropped Picsart AI clips; facts only from the collection data (D3), so scene 6 says "the fabric of" the Vandevorst
+  coat, a study piece. Videos, captures and copied assets stay git-ignored. Not shown on the venue projector yet.
 ## MoMu logo at momu.be's own shape (2026-11-21, branch hassan/H10-logo-ratio)
 - What: every MoMu logo now has the 1.786:1 shape momu.be shows in its header (measured 718 x 402 px): the large logo's
   polygons, unchanged, stretched vertically by 299/120. `assets/brand/momu-logo.svg` (viewBox 0 0 534 299), the favicon,
