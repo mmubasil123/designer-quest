@@ -967,11 +967,17 @@ function tapCard(id) {   // shortcut: stands in for walking to the sticker; a re
   document.getElementById("nfc").showModal();
   if (p.splat) preloadStudy(id);
 }
+/* Fabric is drawn on a top's or full look's cut, so a bare form first gets one: a full-length dress shows a whole piece's cloth best */
+function wearFabric(id) {
+  const owned = slot => Object.keys(PIECES).find(k => PIECES[k].slot === slot && PIECES[k].glb && !PIECES[k].locked && k !== id);
+  let cut = look.full || look.top;
+  if (!cut) { cut = owned("full") ?? owned("top"); if (!cut) return; look[PIECES[cut].slot] = cut; toast(`Shown on the ${shortName(cut).toLowerCase()} cut`); }
+  look.fabric.body = id; activeSlot = "remix"; activeZone = "body";
+  dress();
+}
 function act(id, ctx) {   // the one action a tile, or its fact card, performs
   if (ctx === "study") { tapCard(id); return; }
-  if (ctx === "remix" && !look.full && !look.top) {   // cloth goes on a top's body or sleeves: without one it would vanish
-    activeSlot = "top"; renderLocker(); toast("Put on a top first, then its fabric"); return;
-  }
+  if (ctx === "remix" && !look.full && !look.top) { wearFabric(id); return; }
   const off = isWorn(id, ctx);
   if (ctx === "remix") look.fabric[activeZone] = off ? null : id;
   else if (ctx === "full") look.full = off ? null : id;
@@ -1034,7 +1040,7 @@ async function openFact(id) {
   actBtn.hidden = !label; actBtn.textContent = label ?? "";
   const unwon = p.room && p.locked && !p.splat;   // its date is the answer to Guess the year, so nothing may reveal it yet
   document.getElementById("factAsk").hidden = unwon;
-  view3dBtn.hidden = !p.glb;
+  view3dBtn.hidden = !(p.glb && !unwon) && !(p.splat && p.seen);   // a study piece's 3D is its Up close scan, open once its sticker was tapped
   if (!factEl.open) factEl.showModal();
 }
 /* 3D view: any piece with a 3D file opens full screen, turnable and zoomable. Inside it model-viewer offers "See it in your
@@ -1043,6 +1049,7 @@ const viewEl = document.getElementById("view3d"), viewMV = document.getElementBy
 let mvReady = null;
 view3dBtn.addEventListener("click", async () => {
   const id = factId;
+  if (!PIECES[id].glb) { location.href = `up-close.html?id=${encodeURIComponent(id)}`; return; }
   mvReady ??= import("https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js").catch(() => null);
   document.getElementById("viewName").textContent = PIECES[id].name;
   viewMV.removeAttribute("src");
@@ -1160,16 +1167,19 @@ async function scan(id) {
   if (!p.locked) { welcome(id, `Already in your wardrobe: ${p.name}`); return; }
   await showScan({ story, quiz, id, next: "Win it", years: false });
   const off = await win.guess(id);
-  await recordsReady; await win.won(id, { off });
-  p.locked = false; fresh.add(id);
+  await recordsReady; const pick = await win.won(id, { off });
+  p.locked = false;
   try { localStorage.setItem(WON_KEY, JSON.stringify([...new Set([...readWon(), id])])); } catch { /* blocked: the win lasts this visit */ }
+  if (pick === "wear") { activeSlot = p.slot; act(id, p.slot); setSnap("half"); toast(`Wearing the ${shortName(id).toLowerCase()}`); return; }
+  fresh.add(id);
   welcome(id, `${p.name.split(",")[0]} is in your wardrobe. Tap it to wear it.`);
 }
 if (scanned && !PIECES[scanned]?.glb) toast("This sticker isn't in the app yet");
 else if (scanned) scan(scanned);
 // up-close.html sends ?fabric=<id> once every detail is found: the same Won card, then the fabric waits in the Remix tab
 const claimed = params.get("fabric");
-if (claimed && PIECES[claimed]?.splat && !PIECES[claimed].locked) recordsReady.then(() => win.won(claimed, { what: "fabric" })).then(() => {
+if (claimed && PIECES[claimed]?.splat && !PIECES[claimed].locked) recordsReady.then(() => win.won(claimed, { what: "fabric" })).then(pick => {
+  if (pick === "wear") { wearFabric(claimed); setSnap("half"); return; }
   fresh.add(claimed);
   welcome(claimed, `New in Fabrics: ${PIECES[claimed].name.split(",")[0].toLowerCase()}. Tap it to wear it.`);
 });

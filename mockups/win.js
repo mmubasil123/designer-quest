@@ -49,8 +49,10 @@ export function createWin({ PIECES, record, img }) {
       <img class="pic won" src="${img(id)}" alt="">
       <p class="date">Made ${esc(span(p.year))}${off === null ? "" : off === 0 ? " · spot on" : ` · you were ${off} years off`}</p>
       ${quote ? `<blockquote>${esc(quote)}<span class="mono">MoMu says${r.quoteEn ? ", our translation" : ""}</span></blockquote>` : ""}
-      <button class="btn press" id="winAdd">${what === "fabric" ? "Add to my fabrics" : "Add to my wardrobe"}</button>`);
-    return new Promise(resolve => el.querySelector("#winAdd").addEventListener("click", () => { el.close(); resolve(true); }, { once: true }));
+      <button class="btn press" id="winAdd" data-pick="wear">Wear it now</button>
+      <button class="btn ghost press" data-pick="keep">Keep it in my ${what === "fabric" ? "fabrics" : "wardrobe"}</button>`);
+    // resolves "wear" or "keep"; either way the prize is already the visitor's
+    return new Promise(resolve => el.querySelectorAll("[data-pick]").forEach(b => b.addEventListener("click", () => { el.close(); resolve(b.dataset.pick); }, { once: true })));
   }
 
   return { guess, won };
