@@ -46,7 +46,7 @@ write your name in it. Size: S (under 2 h), M (half a day), L (a day or more).
 | # | Ticket | Size | Acceptance | Status |
 |---|---|---|---|---|
 | C1 | Fabric cards (Locker tab): title built from fields, "MoMu says" quotes, "not recorded" gaps, "Seen on" list | S | Every card field traces to a record id | done 2026-11-21 (basil): ⓘ on every wardrobe tile; `records.json` from `tools/records.py`; "also in" links stand in for "Seen on" |
-| C2 | One question per piece (answer is a metadata field); right answer reveals the fact and unlocks the fabric; wrong answer still unlocks the piece | M | Answering one demo piece right shows its fact and unlocks its fabric; answering wrong still unlocks the piece, not the fabric | open |
+| C2 | One question per piece (answer is a metadata field); right answer reveals the fact and unlocks the fabric; wrong answer still unlocks the piece | M | Answering one demo piece right shows its fact and unlocks its fabric; answering wrong still unlocks the piece, not the fabric | hassan, in progress on `hassan/C2` |
 | C3 | Card scan via URL `?card=ST503` (and a "tap to scan" demo button; QR later) | S | Opening `/?card=ST503` on a phone over 4G puts that piece on the form within 10 s; an unknown id shows "card not found" and leaves the form unchanged | done 2026-11-21: `?card=<id>` unlocks and wears the piece with a toast; unknown ids ignored |
 | C4 | Remix connection reveal only when two records share a field (technique, country, decade) | M | No fact shown for pairs with nothing in common | open |
 | C5 | Guess-the-decade slider before the reveal; shows your gap in years, no score | S | Works on the 8 demo pieces | open |
