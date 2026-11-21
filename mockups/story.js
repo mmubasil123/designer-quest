@@ -81,12 +81,15 @@ export async function createStory({ img } = {}) {   // img(id): the piece's phot
   function show(id, { found = false, next = "Continue", years = true } = {}) {   // years: false before Guess the year, so the story does not give it away
     const p = doc.pieces[id];
     if (!p) return Promise.resolve();
+    // shortcut: drops the drafts' lead-in on screen only (the audio still says it); move it into tools/narration.py at the next audio run
+    const paras = p.paragraphs.map(t => t.replace(/^The museum's record describes it like this: /, ""));
+    const long = paras.join(" ").length > 140;   // past about 3 lines the sheet shows a teaser; the audio carries the rest
     el.innerHTML = `<div tabindex="-1" autofocus>
       ${img ? `<img class="pic" src="${img(id)}" alt="">` : ""}
       <div class="mono">${found ? "Found in the museum" : "Story"} · ${esc(id)}</div>
       <h2 id="storyName">${esc(p.title)}</h2>
       ${years && p.years ? `<p class="years">${esc(p.years)}</p>` : ""}
-      ${p.draft ? `<p class="draft">Draft built only from the MoMu record; the curator's story is still to come.</p>` : ""}
+      ${p.draft ? `<p class="draft">From the MoMu record</p>` : ""}
       <div class="player">
         <button class="play press" data-play type="button"></button>
         <div class="meta">
@@ -94,8 +97,8 @@ export async function createStory({ img } = {}) {   // img(id): the piece's phot
           <div class="mono"><span data-voice></span> <span data-time></span></div>
         </div>
       </div>
-      <div class="transcript${p.paragraphs.join(" ").length > 260 ? " clamp" : ""}" aria-label="Transcript">${p.paragraphs.map(t => `<p>${esc(t)}</p>`).join("")}</div>
-      ${p.paragraphs.join(" ").length > 260 ? `<button class="more press" data-more type="button">Read the whole story</button>` : ""}
+      <div class="transcript${long ? " clamp" : ""}" aria-label="Transcript">${paras.map(t => `<p>${esc(t)}</p>`).join("")}</div>
+      ${long ? `<button class="more press" data-more type="button">Read the whole story</button>` : ""}
       <div class="row"><button class="btn press" data-close type="button">${esc(next)}</button></div>
     </div>`;
     player(p);
