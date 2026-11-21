@@ -2,6 +2,10 @@
 
 The story text is not written here; this script only collects it:
   - the curator's story from questions.json (synced from her Notion page by questions_sync.py) wins whenever she wrote one;
+  - the spoken story (H13) is a short audio-guide scene from narration-scripts.json, for the curator's pieces too: facts only
+    from the record or the curator's story, each traced and checked by narration_facts.py (D3). the curator's own text stays word
+    for word in `paragraphs` and shows in full under the narration. `beats` are the caption lines; `reveal` beats
+    carry the date, left out before a Guess the year, where `tease` (shown, not spoken) ends instead;
   - otherwise a draft built only from the piece's MoMu record (records.json, D3): date, place, the record's own
     description (English translation of the Dutch record) and its materials and techniques. Marked draft: true for her.
 
@@ -70,26 +74,34 @@ def build(lang="en"):
     pieces = json.loads((MOCKUPS / "pieces.json").read_text())["pieces"]
     records = json.loads((MOCKUPS / "records.json").read_text())
     curator = {p["id"]: p for p in json.loads((MOCKUPS / "questions.json").read_text())["pieces"] if p.get("story")}
+    scripts = json.loads((MOCKUPS / "narration-scripts.json").read_text())["pieces"]
     out = {}
     for piece in pieces:
         pid, rec = piece["id"], records.get(piece["id"]) or {}
         y = piece.get("year") or {}
         span = (f"{y['from']}" if y.get("from") == y.get("to") else f"{y.get('from')} to {y.get('to')}") if y else None
-        if pid in curator:
-            m = curator[pid]
+        m = curator.get(pid)
+        if m:
             date = dict(m.get("facts") or []).get("Date")
-            title, when, paras, source = m["title"], years(date) if date else span, m["story"], "curator"
-            spoken = [f"{title}, {when}." if when else f"{title}."] + paras
+            title, when, source = m["title"], years(date) if date else span, "curator"
         elif rec:
             title, when, source = piece["name"], span, "record"
-            paras = draft_from_record(piece, rec)
-            spoken = paras
         else:
             continue   # no story and no record: no story screen, nothing invented
+        if pid in scripts:   # H13: the spoken story, an audio-guide scene from the record (and the curator's facts)
+            beats = [{"t": b["t"], **({"reveal": True} if b.get("reveal") else {})} for b in scripts[pid]["beats"]]
+            spoken = [b["t"] for b in beats]
+            paras = m["story"] if m else spoken
+            extra = {"form": "script", "beats": beats, "tease": scripts[pid].get("tease")}
+        else:
+            paras = m["story"] if m else draft_from_record(piece, rec)[1:]
+            spoken = ([f"{title}, {when}." if when else f"{title}."] + paras) if m else draft_from_record(piece, rec)
+            extra = {"form": "prose"}
         text = "\n\n".join(spoken)
         out[pid] = {
             "title": title, "years": when, "source": source, "draft": source != "curator",
-            "paragraphs": paras if source == "curator" else paras[1:],   # the draft's first line is the heading itself
+            **extra,
+            "paragraphs": paras,   # the curator's own text, word for word, for her pieces; else what is spoken
             "lang": lang, "text": text,
             "hash": hashlib.sha256(text.encode()).hexdigest()[:16],
             "audio": None,

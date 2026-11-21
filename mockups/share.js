@@ -19,17 +19,18 @@ export function cardTitle(name, facts, fallback) {
   return facts.span ? `A look across ${facts.span} years` : fallback;
 }
 
-/* One line from the story of a worn piece. Prefer the curator's own text; a record draft gives its first sentence of the record. */
+/* One line from the story of a worn piece. Prefer the curator's own text; a record draft gives its first sentence of the record;
+   an H13 narration script (form "script", facts from the record but our words) is credited to the piece, not to the record. */
 export function pickQuote(facts, stories) {
   const worn = facts.rows.filter(r => stories?.[r.id]);
   worn.sort((a, b) => (stories[a.id].source === "curator" ? 0 : 1) - (stories[b.id].source === "curator" ? 0 : 1) || (a.year ?? 9999) - (b.year ?? 9999));
   for (const r of worn) {
-    let t = (stories[r.id].paragraphs?.[0] || "").replace(/^The museum's record describes it like this:\s*/, "").trim();
+    let t = (stories[r.id].paragraphs?.[0] || "").replace(/^The museum's record describes it like this:\s*/, "").replace(/\s*\n\s*/g, " ").trim();   // line breaks joined
     const m = t.match(/^(.{40,170}?[.!?])(\s|$)/);
     t = m ? m[1] : t.length > 170 ? t.slice(0, 170).replace(/\s*\S*$/, "") + "…" : t;
     if (t.length < 20) continue;
     const yrs = r.year ? (r.to && r.to !== r.year ? `${r.year}–${r.to}` : `${r.year}`) : "";
-    return { text: t, by: stories[r.id].source === "curator" ? `${r.name}${yrs ? ", " + yrs : ""}` : `MoMu's record of the ${r.name.toLowerCase()}` };
+    return { text: t, by: stories[r.id].source === "curator" || stories[r.id].form === "script" ? `${r.name}${yrs ? ", " + yrs : ""}` : `MoMu's record of the ${r.name.toLowerCase()}` };
   }
   return null;
 }

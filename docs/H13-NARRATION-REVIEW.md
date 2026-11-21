@@ -1,0 +1,539 @@
+# H13 narration: what was there, and the new spoken stories, for review
+
+Feedback 2026-11-21: tell each piece's story through narration, not a lot of on-screen text; make it poetic, immersive
+and exciting, not the app's text read out. Each piece now has a short spoken scene (about 30 to 40 seconds) in
+`mockups/narration-scripts.json`, shown as captions that light up as the voice reads them.
+
+- **Facts:** only from the piece's MoMu record or from the curator's own story (D3). Each fact is listed below beside the
+  source's own words; `python3 -I mockups/tools/narration_facts.py <cache>` checks that those words really are in
+  the source and that every number in the script is too. Framing ("Picture a woman setting off on a bicycle",
+  "scattered like confetti") is ours; facts are not.
+- **the curator's text is unchanged**, word for word: it shows in full under "Read the story" on her three pieces, and her
+  questions follow as before. The narration for her pieces is built from her story's facts.
+- **Wearables** are won by guessing their year, so their date sits in the last beat (marked *reveal*), which is
+  left out before the guess; the narration then ends on the *tease* line instead.
+- **The grey coat ST81190:** the record and the curator say it is part of A.F. Vandevorst's first collection; neither
+  says "first fashion show", so the script says "first collection".
+
+For the curator: please read these. If a line should go, or a fact reads wrong, edit `narration-scripts.json` (or tell
+Hassan), then rerun `narration.py` and `narration_facts.py`.
+
+## ST81190 A.F. Vandevorst Jacket (1998 to 1999)
+
+**Before (on screen):** the curator's story (still shown in full, unchanged)
+
+> This grey woolen jacket from 1998-1999 by Belgian fashion house A.F. Vandevorst has some remarkable details. It is made up of separate parts; the sleeve, front, shoulder, and breast pieces are not sewn together. If you look closely, how are they held together? The pieces, as well as the darts and side seams are fastened with metal rivets, bolt-like fasteners that attach two fabrics. The jacket is closed in the centre front by a column of snap buttons, a type of button you can easily close by pressing the two ends together.
+> Now look at the back of the piece. What stands out? The red cross stitched at the nape of the neck is the iconic logo of A.F. Vandevorst. Since their early collections, their designs have been inspired by German artist Joseph Beuys, religion, horses and their tack, uniforms, rivets, lingerie, and fetish shoes. This jacket is part of their first collection.
+
+**Now (spoken, and shown as captions):**
+
+> Autumn-winter, 1998. A Belgian fashion house, A.F. Vandevorst, presents its very first collection.  
+> This grey wool coat is part of it. The museum's record gives it a single word: Blessed.  
+> Now look closer. The sleeves, the front, the shoulders: none of them are sewn together.  
+> Brass-coloured rivets hold every piece in place, even the darts and the side seams.  
+> Horses and their tack, uniforms, rivets: they inspired the house from the start, and you can see it here.  
+> Nine snap buttons close the front.  
+> And at the back of the neck, stitched in red, a cross: the mark of A.F. Vandevorst.  
+
+**Facts and where they come from:**
+
+- autumn-winter 1998: *date: herfst-winter 1998-1999*
+- a Belgian fashion house, A.F. Vandevorst: *curator: Belgian fashion house A.F. Vandevorst*
+- its very first collection: *curator: This jacket is part of their first collection*
+- grey wool coat: *Getailleerde jas in grijs wolweefsel*
+- the record's single word: Blessed: *title: BLESSED*
+- sleeves, front and shoulders not sewn together: *curator: the sleeve, front, shoulder, and breast pieces are not sewn together*
+- brass-coloured rivets, even the darts and side seams: *Ook de nepen en zijnaden zijn niet gestikt, maar met rivetten vastgemaakt*
+- brass-coloured rivets: *aan elkaar vastgehecht met messingkleurige rivetten*
+- inspired by horses and their tack, uniforms, rivets, from the early collections: *curator: Since their early collections, their designs have been inspired by German artist Joseph Beuys, religion, horses and their tack, uniforms, rivets*
+- nine snap buttons: *De jas sluit middenvoor met negen messingkleurige drukknopen*
+- a red cross at the back of the neck: *Op de achterzijde ter hoogte van de hals is een rood kruis gestikt*
+- the mark of A.F. Vandevorst: *curator: The red cross stitched at the nape of the neck is the iconic logo of A.F. Vandevorst*
+
+## ST81114AB Blouse (1890 to 1920)
+
+**Before (on screen):** the curator's story (still shown in full, unchanged)
+
+> This white cotton blouse has machine-made lace on the front, the collar, and the ends of the sleeves (named the cuffs). Take a look at the centre front of the blouse, the lace pieces frame a panel of pleats (the columns of fabric folded double and sewed). If you look closely you can see this pleated panel is attached to the rest of the blouse with buttons. These shiny white buttons are made of mother of pearl, the strong and smooth inner layer of certain sea shells, such as oysters. The buttonholes are hand sewn
+> The blouse is part of an outfit that would have been worn by women for cycling around 1900. The type of fabric used for the blouse, called ‘cotton batiste’ is very light and breathable, making it a good fit for cycling and exercising.
+
+**Now (spoken, and shown as captions):**
+
+> Picture a woman setting off on a bicycle.  
+> This is what she wore on top: a white blouse of cotton batiste, light and breathable, made for the ride.  
+> Machine-made lace runs along the collar, the cuffs, and down the front.  
+> Look at the centre. A panel of fine pleats is buttoned on, with buttons of mother of pearl, the smooth inner layer of a sea shell.  
+> And every buttonhole? Sewn by hand.  
+> Outfits like this one were worn by women for cycling, around 1900.  *(reveal: after the guess)*  
+> *Before the guess it ends on:* So when did she ride? Make your guess.
+
+**Facts and where they come from:**
+
+- a woman setting off on a bicycle: *curator: part of an outfit that would have been worn by women for cycling*
+- white blouse of cotton batiste: *Witte blouse gedragen als fietskleding, gemaakt van katoenbatist*
+- light and breathable, made for the ride: *curator: very light and breathable, making it a good fit for cycling*
+- lace on the collar, cuffs and front: *curator: machine-made lace on the front, the collar, and the ends of the sleeves*
+- a pleated panel buttoned on: *curator: this pleated panel is attached to the rest of the blouse with buttons*
+- mother of pearl, the inner layer of a sea shell: *curator: made of mother of pearl, the strong and smooth inner layer of certain sea shells*
+- buttonholes sewn by hand: *curator: The buttonholes are hand sewn*
+- worn by women for cycling around 1900: *curator: worn by women for cycling around 1900*
+
+## ST81116 Trousers (1890 to 1920)
+
+**Before (on screen):** the curator's story (still shown in full, unchanged)
+
+> Take a look at these black woollen trousers. They are wide and gather at the knees with an elastic, forming a kind of balloon shape. Both in the front and the back are six deep pleats or folds which hide the part where the left and right pant legs are attached.
+> If you take a few steps back, you may find it is hard to see whether these are trousers or a skirt. The voluminous trousers are part of an outfit worn by women around 1900 for cycling. Around this time, many women started wearing trousers to cycle as long skirts could get caught in the wheels. In contrast to their daily clothing, newly designed sports clothes gave women more comfort and room to move when exercising.
+
+**Now (spoken, and shown as captions):**
+
+> Take a few steps back. Trousers, or a skirt? It is hard to tell.  
+> Black wool, wide, gathered at the knee with elastic into a kind of balloon.  
+> Six deep pleats, at the front and at the back, hide where the legs meet.  
+> Why so much fabric? Because a long skirt could get caught in the wheels of a bicycle.  
+> These gave women room to move.  
+> Around 1900, many women started wearing trousers like these to cycle.  *(reveal: after the guess)*  
+> *Before the guess it ends on:* When did women first ride in these? Make your guess.
+
+**Facts and where they come from:**
+
+- trousers or a skirt, hard to tell: *curator: it is hard to see whether these are trousers or a skirt*
+- black wool, gathered at the knee with elastic, a balloon: *curator: They are wide and gather at the knees with an elastic, forming a kind of balloon shape*
+- black wool: *Zwarte wollen knielange broek gebruikt om te fietsen*
+- six deep pleats front and back hide where the legs meet: *curator: Both in the front and the back are six deep pleats or folds which hide the part where the left and right pant legs are attached*
+- long skirts could catch in the wheels: *curator: long skirts could get caught in the wheels*
+- room to move: *curator: more comfort and room to move*
+- around 1900 women started wearing trousers to cycle: *curator: Around this time, many women started wearing trousers to cycle*
+
+## ST503 Jak (1750 to 1780)
+
+**Before (on screen):** record draft
+
+> The museum's record describes it like this: The jacket reaches to the waist and has long skirts, a square neckline and close-fitting sleeves to the elbow.
+> Materials and techniques in the record: silk, silk taffeta, flax, metal, sewing, handmade.
+
+**Now (spoken, and shown as captions):**
+
+> In the Netherlands, someone made this jacket from blue silk taffeta: fine, smooth, with a soft shine.  
+> Follow the threads. White and yellow floats run with the warp, and a zigzag breaks into flowers.  
+> It stops at the waist, then falls into long skirts. The neckline is square. The sleeves hug the arm and end at the elbow.  
+> The front stays open, held by small metal hooks and eyes.  
+> Even the lining is dressed up: blue linen, striped white and yellow.  
+> It was made between 1750 and 1780.  *(reveal: after the guess)*  
+> *Before the guess it ends on:* How old do you think it is? Make your guess.
+
+**Facts and where they come from:**
+
+- the Netherlands: *place: Netherlands*
+- blue silk taffeta, fine, smooth, soft shine: *De buitenstof is gemaakt van blauwe tafzijde*
+- fine, smooth, soft shine: *Tafzijde is een fijne, gladde en licht glanzende zijden stof*
+- white and yellow floats along the warp: *witgele versiering van plaatselijke vlottermotieven in de richting van de kettingdraden*
+- a zigzag and flowers: *abstract zigzagpatroon met een bloemmotief*
+- to the waist, long skirts, square neck, close sleeves to the elbow: *reikt tot aan de taille en heeft lange schootpanden, een vierkante halslijn en nauw aansluitende mouwen tot aan de elleboog*
+- open front, metal hooks and eyes: *Aan de voorkant is het open en het wordt in het midden gesloten met metalen haken en ogen*
+- blue linen lining striped white and yellow: *De voering bestaat uit een blauwe linnen stof die eveneens versierd is met witte en gele strepen*
+- 1750 to 1780: *date: 1750-1780*
+
+## ST80930 Ikat vest (1950 to 1960)
+
+**Before (on screen):** record draft
+
+> The museum's record describes it like this: Dark blue waistcoat or jacket in ikat with light blue spots and red squares.
+> Materials and techniques in the record: double ikat, cotton.
+
+**Now (spoken, and shown as captions):**
+
+> From Japan comes this little jacket in dark blue cotton.  
+> Its pattern is double ikat: light blue spots, and small red squares, scattered like confetti.  
+> The sleeves are long and puffed. The front panels cross over each other, and close at the waist with ribbons.  
+> Waistcoat, or jacket? Even the museum's record cannot decide: it says one or the other.  
+> It dates from the 1950s.  *(reveal: after the guess)*  
+> *Before the guess it ends on:* When was it made? Make your guess.
+
+**Facts and where they come from:**
+
+- Japan: *place: Japan*
+- dark blue, ikat, light blue spots, red squares: *Donkerblauwe vest of jasje in ikat met lichtblauwe vlekken en rode vierkanten*
+- cotton, double ikat: *medium: double ikat, cotton (fiber)*
+- long puffed sleeves, overlapping fronts, ribbons at the waist: *lange pofmouwen, overlappende voorpanden en sluit in de taille met linten*
+- waistcoat or jacket: *vest of jasje*
+- the 1950s: *date: 1950-1960*
+
+## ST80931 Monpe trousers (1965)
+
+**Before (on screen):** record draft
+
+> The museum's record describes it like this: Dark blue puffed trousers, or "monpe", in ikat with light blue spots and red squares.
+> Materials and techniques in the record: cotton.
+
+**Now (spoken, and shown as captions):**
+
+> These are monpe: puffed trousers from Japan.  
+> Dark blue cotton in ikat, with light blue spots and small red squares.  
+> A broad waistband closes with long ribbons. And at the ankles? More ribbons, so you can tie the legs in close.  
+> They were made in 1965.  *(reveal: after the guess)*  
+> *Before the guess it ends on:* When were they made? Make your guess.
+
+**Facts and where they come from:**
+
+- monpe, puffed trousers: *Donkerblauwe pofbroek, ofwel "monpe"*
+- Japan: *place: Japan*
+- dark blue ikat, light blue spots, red squares: *in ikat met lichtblauwe vlekken en rode vierkanten*
+- cotton: *medium: cotton (fiber)*
+- broad waistband with long ribbons: *Brede tailleband met lange linten als sluiting*
+- ribbons at the ankles: *kan ook onderaan rond de enkels gebonden worden met linten*
+- 1965: *date: 1965*
+
+## ST2434 Green wool coat (1795 to 1840)
+
+**Before (on screen):** record draft
+
+> The museum's record describes it like this: Coat in green broadcloth, with tails.
+> Materials and techniques in the record: cotton, twilled weave, broadcloth, brass, weaving, wool.
+
+**Now (spoken, and shown as captions):**
+
+> This green broadcloth coat, with its long tails, has a puzzle for you.  
+> Count the buttonholes on the front: two rows of four. Now count the buttons. None.  
+> Eight round brass buttons were kept loose. Most likely, they once sat on the back.  
+> Two large flat brass buttons are still there, low on the tails, signed: M and Cie, Paris.  
+> Later, someone added a broad red band to the front. And inside, there is a lining of glossy purple.  
+> It was made somewhere between 1795 and 1840.  *(reveal: after the guess)*  
+> *Before the guess it ends on:* How old is this coat? Make your guess.
+
+**Facts and where they come from:**
+
+- green broadcloth coat with tails: *Jas in groen laken, met slippen*
+- two rows of four buttonholes, no buttons: *Knoopsluiting met twee keer vier knoopsgaten, double breasted, zonder knopen*
+- eight loose round brass buttons, most likely once on the back: *Acht bolle, los aanwezige knopen in messing waren oorspronkelijk waarschijnlijk bevestigd op de achterzijde*
+- two large flat brass buttons low on the tails, signed M & Cie Paris: *Op de achterzijde bevinden zich onderaan de slippen twee grote, platte messing knopen, gesigneerd M & Cie PARIS*
+- a broad red band added later: *werd later aan weerszijden een horizontale brede bies toegevoegd in rood laken*
+- glossy purple lining: *Gevoerd in paars geglansd keperkatoen*
+- 1795 to 1840: *date: 1795-1840*
+
+## ST2062 Knee breeches (1850 to 1870)
+
+**Before (on screen):** record draft
+
+> The museum's record describes it like this: Trousers: men's knee breeches in cream woollen broadcloth.
+> Materials and techniques in the record: handmade, broadcloth, brass, wool, silk.
+
+**Now (spoken, and shown as captions):**
+
+> Every stitch in these breeches was sewn by hand.  
+> Cream woollen broadcloth, made for a man, and once part of a Russian military costume.  
+> Six buttons close the long fly. A small pocket hides in the waistband at the right hip. At the back, a brass buckle pulls them tight.  
+> Down at each knee: a slit and three buttons. And inside, a glimpse of glossy cream twill, probably silk.  
+> They date from between 1850 and 1870.  *(reveal: after the guess)*  
+> *Before the guess it ends on:* When were they sewn? Make your guess.
+
+**Facts and where they come from:**
+
+- sewn entirely by hand: *Volledig met de hand genaaid*
+- cream woollen broadcloth, for a man: *Broek, kniebroek voor een man, in crèmekleurig wollen laken*
+- part of a Russian military costume: *Deel van een Russisch militair kostuum*
+- six buttons on the long fly: *Lange gulp middenvoor, gesloten met zes knopen*
+- small pocket in the waistband at the right hip: *Zakje rechts op de heup: steekzak in de tailleband*
+- brass buckle at the back: *Middenachter een riempje met een messing gesp*
+- slit and three buttons at the knee: *onderaan de pijpen afgewerkt met een split en drie knopen*
+- glossy cream twill, probably silk: *gevoerd met glanzend crèmewit keperweefsel in waarschijnlijk zijde*
+- 1850 to 1870: *date: 1850-1870*
+
+## ST2407/1-2 Football boots, Dirk Bikkembergs (2005 to 2009)
+
+**Before (on screen):** record draft
+
+> The museum's record describes it like this: Pair of football boots in white, with leather in blue circular stripes.
+> Materials and techniques in the record: manmade material, leather.
+
+**Now (spoken, and shown as captions):**
+
+> Dirk Bikkembergs made these football boots for a real club: FC Bikkembergs Fossombrone, in the Marche, in Italy.  
+> White leather, wound with blue circles.  
+> Turn them over. Through the clear, studded sole, you can see a drawing in red and blue.  
+> A leather circle covers the laces, held on with elastic, and carries the logo of Bikkembergs Sport.  
+> One heel is blue, the other red. The club's badge on the left, the label's on the right.  
+> They were made between 2005 and 2009.  *(reveal: after the guess)*  
+> *Before the guess it ends on:* How new are they? Make your guess.
+
+**Facts and where they come from:**
+
+- Dirk Bikkembergs: *creator: Dirk Bikkembergs*
+- made for FC Bikkembergs Fossombrone in the Marche, Italy: *Gemaakt voor de club FC Bikkembergs Fossombrone in De Marken, Italië*
+- white leather with blue circles: *Paar voetbalschoenen in wit met circulair blauw gestreept leder*
+- clear studded sole showing a red and blue design: *Zool met noppen in transparante kunststof, waardoorheen een grafisch ontwerp in rood en blauw zichtbaar is*
+- leather circle over the laces with the Bikkembergs Sport logo: *bovenop een vetersluiting bevindt zich een cirkel in leder die het logo van het label Bikkembergs Sport bevat*
+- held on with elastic: *Deze flap zit met elastiek bevestigd rondom de schoen*
+- left heel blue, right heel red: *De hiel links is in blauw leder uitgevoerd; de hiel rechts in rood*
+- club badge left, label right: *Links op de hiel is het logo van de voetbalploeg FC Fossombrone opgestikte; rechts het logo van het label Bikkembergs Sport*
+- 2005 to 2009: *date: 2005-2009*
+
+## ST80881 Furisode kimono (1979)
+
+**Before (on screen):** record draft
+
+> The museum's record describes it like this: Ecru furisode kimono, painted and with a gold print.
+> Materials and techniques in the record: silk, textile printing, hand-painted, embroidering, weaving, sewing.
+
+**Now (spoken, and shown as captions):**
+
+> Open this furisode kimono from Japan, and a whole landscape unfolds.  
+> Ecru silk, painted, and printed with gold.  
+> Broad ribbons billow across it in many colours. Behind them: houses, clouds, peonies, chrysanthemums, plum blossom, Japanese maple, and bamboo.  
+> Come closer to the flowers. Their details are embroidered in silk and metal thread.  
+> Inside, the lining changes halfway: white at the top, printed below.  
+> It dates from 1979.  *(reveal: after the guess)*  
+> *Before the guess it ends on:* When was it made? Make your guess.
+
+**Facts and where they come from:**
+
+- furisode kimono, ecru, painted, gold print: *Ecru furisode kimono, beschilderd en met gouden opdruk*
+- Japan: *place: Japan*
+- silk: *medium: silk (silkworm material)*
+- broad billowing ribbons in many colours: *Veelkleurig motief van brede opwaaiende linten*
+- houses, clouds and the flowers: *abstract landschap met huizen, wolken en flora, waaronder pioenen, chrysanten, ume pruimenbloesem, Japanse esdoorn en bamboe*
+- flower details embroidered in silk and metal thread: *Details op bloemen zijn geborduurd met zijde en metaaldraad*
+- two-part lining, white above, printed below: *Tweedelige voering, bovenaan wit, onderaan bedrukte stof*
+- 1979: *date: 1979*
+
+## ST655/1 Cocktail dress (1947 to 1950)
+
+**Before (on screen):** record draft
+
+> The museum's record describes it like this: Calf- to ankle-length button-through gown, a cocktail dress, in green and black horizontally striped synthetic material.
+> Materials and techniques in the record: synthetic fiber, velvet, metal.
+
+**Now (spoken, and shown as captions):**
+
+> From Belgium, a cocktail dress in green and black stripes, with a secret in its cut.  
+> Eleven covered buttons run down the front. The shawl collar is black velvet, and so are the bands on the short sleeves.  
+> Now, the secret. The skirt is made of half circles, with no side seams. So the stripes run across at the front, and turn upright at the back.  
+> No pockets. No lining. Just a black ribbon inside the hem, fixed by hand with fine stitches.  
+> It was made between 1947 and 1950.  *(reveal: after the guess)*  
+> *Before the guess it ends on:* When was it made? Make your guess.
+
+**Facts and where they come from:**
+
+- Belgium: *place: Belgium*
+- a cocktail dress in green and black stripes: *type cocktailjurk, van groen-zwart horizontaal gestreept synthetisch materiaal*
+- eleven covered buttons down the front: *Sluiting vooraan met 11 knopen, met dezelfde strepenstof en fluweel bekleed*
+- black velvet shawl collar: *Sjaalkraag met revers van zwart fluweel*
+- velvet bands on the short sleeves: *Aangezette korte mouwen met aangezette boord van zwart fluweel*
+- half circles, no side seams: *de onderste panden van de rok hebben geen zijnaden, omdat het halve cirkels zijn*
+- stripes across at the front, upright at the back: *Daardoor zijn de strepen vooraan horizontaal, maar lopen ze aan de achterzijde verticaal*
+- no pockets, no lining: *Er zijn geen zakken en er is geen voering*
+- black ribbon in the hem, fine hand stitches: *De zoom is aan de binnenzijde verstevigd met een zwart lint en is met fijne steekjes met de hand vastgezet*
+- 1947 to 1950: *date: 1947-1950*
+
+## ST2435 Sequin silk dress (1920 to 1925)
+
+**Before (on screen):** record draft
+
+> The museum's record describes it like this: Calf-length dress in ecru woven silk, covered all over in sequin embroidery with the iridescent effect of pearls.
+> Materials and techniques in the record: embroidering, metal, sequin, weaving, silk.
+
+**Now (spoken, and shown as captions):**
+
+> Somewhere between 1920 and 1925, this dress was made to shimmer.  
+> Ecru silk, calf-length, and covered all over in sequins that glow like pearls.  
+> It falls almost straight, from a wide boat neck.  
+> The sides are left open. Only three hooks and eyes on the left, and short strips at the hips, draw it in.  
+> Look closely at the surface: machine stitching in metal thread draws curls, and eyes.  
+
+**Facts and where they come from:**
+
+- 1920 to 1925: *date: 1920-1925*
+- ecru silk, calf-length, sequins all over with a pearl effect: *Jurk in ecru zijdeweefsel, kuitlang, volledig voorzien van paillettenborduurwerk met het iridiserende effect van parels*
+- falls almost straight: *De grotendeels rechtvallende panden*
+- wide boat neck: *Brede boothals*
+- sides open but for three hooks and eyes on the left: *niet gesloten langs de zijnaden, behalve door links drie haken en ogen*
+- short strips at the hips that shape it: *korte opgezette stroken van dezelfde geborduurde stof op de heupen aan voor en achterzijde, die het rechte model tailleren*
+- machine stitching, metal thread: *volledig bedekt met machinale stiksels (binnenzijde: metaaldraad)*
+- curls and eyes: *motief van krullen en ogen*
+
+## ST652/1 Polka-dot mended dress (1940 to 1945)
+
+**Before (on screen):** record draft
+
+> The museum's record describes it like this: Button-through dress of printed cotton, blue with small white and red dots.
+> Materials and techniques in the record: printing, cotton, manmade material, artificial silk.
+
+**Now (spoken, and shown as captions):**
+
+> Between 1940 and 1945, this dress was mended, and mended again.  
+> Blue cotton, with small white and red dots, buttoned all the way down.  
+> Look for the patches: checked cloth, set in time after time.  
+> Red edges the pockets and the sleeves. Three red lines trim the right lapel.  
+> And that red handkerchief in the chest pocket? Look again. It only seems to be there.  
+> A cloth belt ties at the front, to mark the waist.  
+
+**Facts and where they come from:**
+
+- 1940 to 1945: *date: 1940-1945*
+- mended again and again with checked cloth: *Stelselmatig gerepareerd met geruite stof*
+- button-through, printed cotton, blue with small white and red dots: *Doorknoopjurk van bedrukte katoen, blauw met witte en rode stipjes*
+- red edging on pockets and sleeves: *zijn afgebiesd met een rood weefsel, net als de mouwen*
+- three red lines on the right lapel: *Rechter revers langs de rand gedecoreerd met drie rode biezen*
+- a red handkerchief that only seems to be there: *In een zak op borsthoogte steekt optisch een rood pochet*
+- cloth belt tied at the front to mark the waist: *ceintuurtje van stof bevestigd, die aan de voorkant vastgestrikt kan worden voor de markering van de taille*
+
+## ST673/1-2 Cotton combinaison (1880 to 1900)
+
+**Before (on screen):** record draft
+
+> The museum's record describes it like this: Combination in white cotton: a bodice without boning, with long open drawers buttoned to it.
+> Materials and techniques in the record: bone, embroidering, knitting, cotton, mother of pearl.
+
+**Now (spoken, and shown as captions):**
+
+> Tennis. Croquet. Badminton. Archery. Between 1880 and 1900, this was made for sport.  
+> White cotton: a bodice and long drawers, buttoned into one, with no boning at all.  
+> Broderie anglaise frames the V of the neck, and ruffles circle the arms.  
+> Mother-of-pearl buttons close the front. Bone buttons ring the waist, to hold whatever was worn on top.  
+> And the drawers? Open at the front, open at the back, and closed over a single button.  
+
+**Facts and where they come from:**
+
+- for sport: tennis, croquet, badminton, archery: *Te gebruiken tijdens het sporten (bv. tennis, croquet, badminton of boogschieten)*
+- 1880 to 1900: *date: 1880-1900*
+- white cotton bodice without boning, long drawers buttoned to it: *Combinaison in wit katoen, bestaande uit een baleinloos onderlijf waaraan met knopen bevestigd een lange open onderbroek*
+- broderie anglaise at the V neck: *halslijn in V-vorm voorzien van stroken broderie anglaise*
+- ruffles round the armholes: *Deze rand is ook gemonteerd rondom het armsgat*
+- mother-of-pearl buttons at the front: *Sluit middenvoor met parelmoeren knopen*
+- bone buttons at the waist for clothes worn over it: *Rondom de taille ecrukleurige benen knopen voor de bevestiging van de hierover gedragen kleding*
+- drawers open front and back, closed over one button: *De onderbroek is aan de voorzijde open vanaf de taille, en aan de achterkant geheel open; de twee zijden worden gesloten overheen dezelfde knoop*
+
+## ST80998 Striped velvet bridal kaftan (1900 to 1925)
+
+**Before (on screen):** record draft
+
+> The museum's record describes it like this: Bridal kaftan in burgundy, red, green and black striped velvet, with a round neckline ending in a point and long pointed sleeves.
+> Materials and techniques in the record: appliqué, embroidering, printing, velvet, cotton, machine-made, silk.
+
+**Now (spoken, and shown as captions):**
+
+> This kaftan was made for a bride in Palestine, between 1900 and 1925.  
+> Velvet, in stripes of burgundy, red, green and black.  
+> The neckline is round, then drops to a point. The long sleeves end in points too.  
+> Now follow the embroidery: across the chest, along the sides, over the sleeves. Cords and metal thread, sewn on in many colours, on grounds of orange, light brown and green.  
+> And under the embroidered sleeves, a hidden lining of pink cotton.  
+
+**Facts and where they come from:**
+
+- a bridal kaftan, striped velvet in burgundy, red, green and black: *Bruidskaftan in bordeaux, rood, groen en zwart gestreepte fluweel*
+- Palestine: *place: Palestine*
+- 1900 to 1925: *date: 1900-1925*
+- round neckline ending in a point, long pointed sleeves: *met ronde halsuitsnijding, uitlopend in een punt en met lange puntmouwen*
+- embroidery of cords and metal thread on chest, sides and sleeves: *De zijkanten, bovenkanten van de mouwen en het borstvlak van de kaftan zijn versierd met veelkleurig borduurwerk van opgenaaide koorden en metaaldraad*
+- grounds of orange, light brown and green: *op oranje, lichtbruine en groene ondergronden*
+- pink cotton lining under the sleeve embroidery: *De geborduurde zones op de mouwen zijn gevoerd met een roze katoen*
+
+## ST2431/1-4 Light-blue cavalry uniform (1870 to 1900)
+
+**Before (on screen):** record draft
+
+> The museum's record describes it like this: Military uniform for a man, in light blue and red wool, of a lieutenant of the National Guard, in the 9th or 18th regiment of mounted chasseurs (Chasseurs à cheval, France).
+> Materials and techniques in the record: cotton, leather, metal, satin, weaving, wool.
+
+**Now (spoken, and shown as captions):**
+
+> Imagine him on horseback: a lieutenant of the National Guard, with the mounted chasseurs of France, the ninth regiment, or the eighteenth.  
+> His uniform is light blue and red wool, made between 1870 and 1900.  
+> Black braid crosses his chest, and it is the fastening too. His red collar stands up, worked with coiled metal thread.  
+> Red trousers with a blue stripe. Gold buttons on the waistband read: eighteenth chasseurs.  
+> On his head, a kepi, fifteen centimetres tall, with a black leather peak.  
+> One last detail: small slits in the side seams, just big enough for a small hand.  
+
+**Facts and where they come from:**
+
+- a lieutenant of the National Guard, 9th or 18th mounted chasseurs, France, light blue and red wool: *Militair uniform voor een man, in lichtblauwe en rode wol, van een luitenant van de Nationale Garde, lid van het 9e of 18e regiment van de jagers te paard (Chasseurs à cheval, Frankrijk)*
+- 1870 to 1900: *date: 1870-1900*
+- black braid on the chest that forms the fastening: *groot motief in zwarte passementerie op beide kanten van het voorpand (brandebourgs, die ook de sluiting vormen)*
+- red standing collar with coiled metal thread: *Opstaande kraag in rood laken voorzien van decoratie in cannetille*
+- red trousers with a blue stripe: *Broek in rode wol, met lange rechte pijpen, afgewerkt met een streep in blauwe wol*
+- gold waistband buttons reading 18e chasseurs: *Gouden knopen op de tailleband waarin de tekst 18e CHASSEURS TOUJAS*
+- kepi, 15 cm tall, black leather peak: *met een hoogte van 15 centimeter, gedecoreerd met metalen passement en cannetille en voorzien van een zwarte klep in leder*
+- slits in the side seams for a small hand: *Kleine splitten in de zijnaden waardoorheen een kleine hand zou passen*
+
+## ST2432/1-2 Dark-blue tailcoat uniform (1800 to 1940)
+
+**Before (on screen):** record draft
+
+> The museum's record describes it like this: Costume in the form of a military uniform for a man, a member of the National Guard: an original coat and trousers made later, both altered.
+> Materials and techniques in the record: cotton, leather, metal, passementerie, weaving, wool.
+
+**Now (spoken, and shown as captions):**
+
+> This uniform has lived more than one life.  
+> The coat is the original, made for a member of the National Guard: dark blue broadcloth, a high red collar, red cuffs, and tails lined in red.  
+> Look at the tails. Their points are turned out, so a flash of red shows below the blue.  
+> Three white-metal buttons still say: Garde Nationale.  
+> The trousers came later, from between 1910 and 1940. Later still, a red lace was set into their back.  
+> Even the gold buttons on the front are newer, possibly from 1980 to 2000. Coat and trousers: both altered over the years.  
+
+**Facts and where they come from:**
+
+- an original coat, trousers made later, both altered: *bestaande uit een originele jas en een broek die later werd gemaakt; beide werden aangepast*
+- for a member of the National Guard: *militair uniform voor een man, lid van de Nationale Garde*
+- dark blue broadcloth, high red collar: *Jas met slippen in donkerblauw laken (wol), hoge opstaande kraag in rood laken*
+- red cuffs, tails lined red: *aangestikte manchetten in rood laken en slippen gevoerd in rood laken*
+- tail points turned out, red showing below the blue: *De punten van elk van de slippen werden van binnen naar buiten gekeerd en aan elkaar verbonden, waardoor er een rood detail zichtbaar is onderaan de blauwe slippen*
+- three white-metal buttons reading Garde Nationale: *drie witmetalen knopen bevinden, voorzien van de tekst 'Garde Nationale'*
+- trousers from 1910 to 1940: *Bandplooibroek uit de jaren 1910-1940 in donkerblauw laken*
+- a red lace set into the back: *Hier werd een rijgsluiting ingezet met een rode veter uit de jaren 1970-1990*
+- newer gold buttons, possibly 1980 to 2000: *vervangen door goudkleurige, nieuwe knopen in dezelfde stijl (knopen met embleem van de Keizerlijke Garde, datering mogelijk 1980-2000)*
+
+## ST671 Silk walking dress (1900 to 1915)
+
+**Before (on screen):** record draft
+
+> The museum's record describes it like this: Long gown, a walking gown, in beige silk rep.
+> Materials and techniques in the record: embroidering, cotton, machine lace, metal, weaving, silk.
+
+**Now (spoken, and shown as captions):**
+
+> Paris, 83 Boulevard Magenta. That address is printed on this dress's waistband, with the name Madame Guédon Deschamps.  
+> It is a walking gown: long, in beige silk rep, made between 1900 and 1915.  
+> At the throat, machine lace made to imitate Lille bobbin lace, and a standing collar held up by bones.  
+> Underneath is a second dress, of silk. Its pleats peek out below the hem.  
+> Look at that hem: at both sides, it hangs a little lower than at the front and back.  
+> And both dresses close at the back, with one long row of hooks and buttons.  
+
+**Facts and where they come from:**
+
+- the printed waistband: Paris, 83 Boulevard Magenta, Madame Guédon Deschamps: *Het lijfje heeft een tailleband met daarop de bedrukking 'Mme Guédon Descham(?) 83, Boulevard Magenta, Paris'*
+- the maker's name in full: *creator: Mme Guédon Deschamps*
+- a long walking gown in beige silk rep: *Lange japon, wandeljapon, in beige zijderips*
+- 1900 to 1915: *date: 1900-1915*
+- machine lace imitating Lille bobbin lace: *In de halsuitsnijding is een kraag gezet in beige machinale kant, een imitatie van Rijselse kloskant*
+- standing collar with bones: *Het opstaande deel van de kraag heeft baleinen*
+- a silk underdress: *De japon heeft een beige zijden onderjurk*
+- pleats showing under the gown: *is in plooien aan de onderjurk gezet en komt onder de japon uit*
+- hem lower at the sides: *Aan beide zijkanten hangt de rokzoom lager dan middenvoor en middenachter*
+- both close at the back with hooks and buttons: *De japon en de onderjurk sluiten beide middenachter met een rij haken en knopen*
+
+## ST2203 Black satin dress (1937 to 1948)
+
+**Before (on screen):** record draft
+
+> The museum's record describes it like this: Dress of black silk satin.
+> Materials and techniques in the record: velvet, metal, satin weave, silk.
+
+**Now (spoken, and shown as captions):**
+
+> Black silk satin, cut close to the body, somewhere between 1937 and 1948.  
+> A deep V, edged in black velvet. Big shoulders, padded with white cotton.  
+> The satin gathers and drapes, down the front and down the back.  
+> Two draped pockets sit at the hips. Five fabric buttons close each cuff.  
+> And from the point of the V, a black metal zip runs twenty centimetres down, to the waist.  
+
+**Facts and where they come from:**
+
+- black silk satin, close-fitting: *Jurk van zwart zijden satijn. Nauwsluitend model*
+- 1937 to 1948: *date: 1937-1948*
+- deep V edged in black velvet: *diepe V-hals die afgezet is met een band van zwart zijden fluweel*
+- big shoulder pads of white padded cotton: *Grote schoudervullingen van witte, opgevulde katoen*
+- gathered and draped front and back: *De jurk is langs middenvoor- en middenachterlijn sterk ingerimpeld en gedrapeerd*
+- two draped pockets at the hips: *Twee gedrapeerde zakken op heuphoogte*
+- five fabric buttons at each cuff: *een manchet sluitend met vijf stofknopen en lusjes*
+- 20 cm black metal zip from the V to the waist: *zwarte metalen rits (20cm) vanaf punt V-hals tot op taillehoogte*
