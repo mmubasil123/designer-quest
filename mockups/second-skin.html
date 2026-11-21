@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://heron.libis.be" crossorigin>
 <link rel="stylesheet" href="quiz.css">
 <link rel="stylesheet" href="ask.css">
+<link rel="stylesheet" href="share.css">
 <style>
 :root {
   --paper: #f3efe7;
@@ -342,6 +343,7 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { createQuiz } from "./quiz.js";
 import { createAsk } from "./ask.js";
+import { createShare } from "./share.js";
 
 const IMG = id => `https://heron.libis.be/momu/files/large/${id}.jpg`;
 const ZOOM_MAX = 3;
@@ -1069,16 +1071,8 @@ function go(screen) {
 document.addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (b) go(b.dataset.go); });
 document.getElementById("nfc").addEventListener("click", e => { if (e.target.id === "nfc") e.target.close(); });   // backdrop tap closes
 document.getElementById("nfc").addEventListener("close", cancelStudy);   // Not now, Escape or the backdrop: stop downloading
-document.getElementById("shareBtn").addEventListener("click", async () => {   // shortcut: shares text and link, B7 adds the 9:16 image
-  const span = document.getElementById("lookSpan").textContent.split(" · ")[0];
-  const name = look.fabric.body || look.fabric.sleeves ? lookName() : "My look";   // unremixed looks have no name
-  const text = `${name}${span ? `, ${span.toLowerCase()}` : ""}. Made from the MoMu collection in Second Skin.`;
-  const url = location.origin + location.pathname;
-  try {
-    if (navigator.share) await navigator.share({ title: "Second Skin", text, url });
-    else { await navigator.clipboard.writeText(`${text} ${url}`); toast("Look copied, paste it anywhere"); }
-  } catch (err) { if (err.name !== "AbortError") toast("Couldn't share from this browser"); }
-});
+const share = createShare({ tt: stageTT, look, PIECES, toast, getName: () => look.fabric.body || look.fabric.sleeves ? lookName() : "My look" });   // B7: 9:16 card (share.js)
+document.getElementById("shareBtn").addEventListener("click", () => share.open());
 document.getElementById("wearBtn").addEventListener("click", () => {   // the Piece page's kimono goes onto the form
   look.full = "ST80881";
   turntables.forEach(t => t.draw()); renderLocker(); renderCredit();
