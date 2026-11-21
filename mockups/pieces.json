@@ -244,6 +244,7 @@
     {
       "id": "ST2435",
       "slot": "study",
+      "wear": "full",
       "name": "Sequin silk dress",
       "year": {
         "from": 1920,
@@ -254,14 +255,47 @@
       },
       "locked": true,
       "assets": {
-        "glb": null,
+        "glb": {
+          "path": "assets/ST2435.glb",
+          "kind": "scan",
+          "units": "norm",
+          "origin": "bbox"
+        },
         "splat": {
           "path": "assets/splat/ST2435.sog"
         }
       },
       "fit": {},
       "pipeline": {
-        "cutout": "none"
+        "cutout": "none",
+        "mesh": {
+          "wear": "full",
+          "drop": [
+            {
+              "H": [
+                0,
+                0.015
+              ]
+            },
+            {
+              "H": [
+                0.84,
+                1
+              ]
+            },
+            {
+              "sat": [
+                0,
+                0.14
+              ],
+              "H": [
+                0.3,
+                0.85
+              ]
+            }
+          ],
+          "matchk": 0.8
+        }
       },
       "details": [
         {
@@ -299,6 +333,7 @@
     {
       "id": "ST652/1",
       "slot": "study",
+      "wear": "full",
       "name": "Polka-dot mended dress",
       "year": {
         "from": 1940,
@@ -309,14 +344,59 @@
       },
       "locked": true,
       "assets": {
-        "glb": null,
+        "glb": {
+          "path": "assets/ST652_1.glb",
+          "kind": "scan",
+          "units": "norm",
+          "origin": "bbox"
+        },
         "splat": {
           "path": "assets/splat/ST652_1.sog"
         }
       },
       "fit": {},
       "pipeline": {
-        "cutout": "none"
+        "cutout": "none",
+        "mesh": {
+          "wear": "full",
+          "satk": 1.2,
+          "drop": [
+            {
+              "H": [
+                0,
+                0.015
+              ]
+            },
+            {
+              "lum": [
+                0.42,
+                1
+              ],
+              "sat": [
+                0,
+                0.22
+              ],
+              "H": [
+                0.86,
+                1
+              ]
+            },
+            {
+              "lum": [
+                0.45,
+                1
+              ],
+              "sat": [
+                0,
+                0.22
+              ],
+              "ax": [
+                0.13,
+                1
+              ]
+            }
+          ]
+        }
       },
       "details": [
         {
@@ -354,6 +434,7 @@
     {
       "id": "ST673/1-2",
       "slot": "study",
+      "wear": "full",
       "name": "Cotton combinaison",
       "year": {
         "from": 1880,
@@ -364,14 +445,45 @@
       },
       "locked": true,
       "assets": {
-        "glb": null,
+        "glb": {
+          "path": "assets/ST673_1-2.glb",
+          "kind": "scan",
+          "units": "norm",
+          "origin": "bbox"
+        },
         "splat": {
           "path": "assets/splat/ST673_1-2.sog"
         }
       },
       "fit": {},
       "pipeline": {
-        "cutout": "none"
+        "cutout": "none",
+        "mesh": {
+          "wear": "full",
+          "drop": [
+            {
+              "H": [
+                0,
+                0.015
+              ]
+            },
+            {
+              "lum": [
+                0.42,
+                1
+              ],
+              "sat": [
+                0,
+                0.22
+              ],
+              "H": [
+                0.93,
+                1
+              ]
+            }
+          ],
+          "matchk": 0.8
+        }
       },
       "details": [
         {
@@ -409,6 +521,7 @@
     {
       "id": "ST81190",
       "slot": "study",
+      "wear": "top",
       "name": "Riveted wool coat",
       "year": {
         "from": 1998,
@@ -419,14 +532,53 @@
       },
       "locked": true,
       "assets": {
-        "glb": null,
+        "glb": {
+          "path": "assets/ST81190.glb",
+          "kind": "scan",
+          "units": "norm",
+          "origin": "bbox"
+        },
         "splat": {
           "path": "assets/splat/ST81190.sog"
         }
       },
-      "fit": {},
+      "fit": {
+        "sleeveTo": 0.08,
+        "split": 0.64
+      },
       "pipeline": {
-        "cutout": "none"
+        "cutout": "none",
+        "mesh": {
+          "wear": "top",
+          "drop": [
+            {
+              "sat": [
+                0.28,
+                1
+              ],
+              "H": [
+                0,
+                0.22
+              ]
+            },
+            {
+              "lum": [
+                0.42,
+                1
+              ],
+              "sat": [
+                0,
+                0.3
+              ]
+            },
+            {
+              "H": [
+                0,
+                0.12
+              ]
+            }
+          ]
+        }
       },
       "details": [
         {
@@ -464,6 +616,7 @@
     {
       "id": "ST80998",
       "slot": "study",
+      "wear": "full",
       "name": "Striped velvet bridal kaftan",
       "year": {
         "from": 1900,
@@ -474,14 +627,45 @@
       },
       "locked": true,
       "assets": {
-        "glb": null,
+        "glb": {
+          "path": "assets/ST80998.glb",
+          "kind": "scan",
+          "units": "norm",
+          "origin": "bbox"
+        },
         "splat": {
           "path": "assets/splat/ST80998.sog"
         }
       },
       "fit": {},
       "pipeline": {
-        "cutout": "none"
+        "cutout": "none",
+        "mesh": {
+          "wear": "full",
+          "satk": 1.2,
+          "drop": [
+            {
+              "H": [
+                0,
+                0.015
+              ]
+            },
+            {
+              "lum": [
+                0.42,
+                1
+              ],
+              "sat": [
+                0,
+                0.22
+              ],
+              "H": [
+                0.86,
+                1
+              ]
+            }
+          ]
+        }
       },
       "details": [
         {
@@ -519,6 +703,7 @@
     {
       "id": "ST2431/1-4",
       "slot": "study",
+      "wear": "full",
       "name": "Light-blue cavalry uniform",
       "year": {
         "from": 1870,
@@ -529,14 +714,63 @@
       },
       "locked": true,
       "assets": {
-        "glb": null,
+        "glb": {
+          "path": "assets/ST2431_1-4.glb",
+          "kind": "scan",
+          "units": "norm",
+          "origin": "bbox"
+        },
         "splat": {
           "path": "assets/splat/ST2431_1-4.sog"
         }
       },
       "fit": {},
       "pipeline": {
-        "cutout": "none"
+        "cutout": "none",
+        "mesh": {
+          "wear": "full",
+          "pct": 45,
+          "drop": [
+            {
+              "H": [
+                0.855,
+                1
+              ]
+            },
+            {
+              "H": [
+                0,
+                0.02
+              ]
+            },
+            {
+              "ax": [
+                0.11,
+                1
+              ],
+              "H": [
+                0,
+                0.475
+              ]
+            },
+            {
+              "lum": [
+                0.45,
+                1
+              ],
+              "sat": [
+                0,
+                0.25
+              ],
+              "H": [
+                0.78,
+                1
+              ]
+            }
+          ],
+          "matchk": 0.85,
+          "satk": 2.0
+        }
       },
       "details": [
         {
@@ -574,6 +808,7 @@
     {
       "id": "ST2432/1-2",
       "slot": "study",
+      "wear": "full",
       "name": "Dark-blue tailcoat uniform",
       "year": {
         "from": 1800,
@@ -584,14 +819,79 @@
       },
       "locked": true,
       "assets": {
-        "glb": null,
+        "glb": {
+          "path": "assets/ST2432_1-2.glb",
+          "kind": "scan",
+          "units": "norm",
+          "origin": "bbox"
+        },
         "splat": {
           "path": "assets/splat/ST2432_1-2.sog"
         }
       },
       "fit": {},
       "pipeline": {
-        "cutout": "none"
+        "cutout": "none",
+        "mesh": {
+          "wear": "full",
+          "pct": 45,
+          "satk": 1.3,
+          "matchk": 0.6,
+          "drop": [
+            {
+              "H": [
+                0.94,
+                1
+              ],
+              "ax": [
+                0,
+                0.07
+              ]
+            },
+            {
+              "H": [
+                0,
+                0.015
+              ]
+            },
+            {
+              "hue": [
+                15,
+                60
+              ],
+              "lum": [
+                0.3,
+                1
+              ],
+              "H": [
+                0.42,
+                0.56
+              ],
+              "ax": [
+                0.09,
+                1
+              ]
+            },
+            {
+              "lum": [
+                0.42,
+                1
+              ],
+              "sat": [
+                0,
+                0.22
+              ],
+              "H": [
+                0.85,
+                1
+              ],
+              "ax": [
+                0,
+                0.07
+              ]
+            }
+          ]
+        }
       },
       "details": [
         {
@@ -629,6 +929,7 @@
     {
       "id": "ST671",
       "slot": "study",
+      "wear": "full",
       "name": "Silk walking dress",
       "year": {
         "from": 1900,
@@ -639,14 +940,45 @@
       },
       "locked": true,
       "assets": {
-        "glb": null,
+        "glb": {
+          "path": "assets/ST671.glb",
+          "kind": "scan",
+          "units": "norm",
+          "origin": "bbox"
+        },
         "splat": {
           "path": "assets/splat/ST671.sog"
         }
       },
       "fit": {},
       "pipeline": {
-        "cutout": "none"
+        "cutout": "none",
+        "mesh": {
+          "wear": "full",
+          "drop": [
+            {
+              "H": [
+                0,
+                0.015
+              ]
+            },
+            {
+              "lum": [
+                0.42,
+                1
+              ],
+              "sat": [
+                0,
+                0.22
+              ],
+              "H": [
+                0.93,
+                1
+              ]
+            }
+          ],
+          "matchk": 0.8
+        }
       },
       "details": [
         {
@@ -684,6 +1016,7 @@
     {
       "id": "ST2203",
       "slot": "study",
+      "wear": "full",
       "name": "Black satin dress",
       "year": {
         "from": 1937,
@@ -694,14 +1027,61 @@
       },
       "locked": true,
       "assets": {
-        "glb": null,
+        "glb": {
+          "path": "assets/ST2203.glb",
+          "kind": "scan",
+          "units": "norm",
+          "origin": "bbox"
+        },
         "splat": {
           "path": "assets/splat/ST2203.sog"
         }
       },
       "fit": {},
       "pipeline": {
-        "cutout": "none"
+        "cutout": "none",
+        "mesh": {
+          "wear": "full",
+          "drop": [
+            {
+              "H": [
+                0,
+                0.015
+              ]
+            },
+            {
+              "H": [
+                0.8,
+                1
+              ],
+              "lum": [
+                0.3,
+                1
+              ]
+            },
+            {
+              "H": [
+                0.84,
+                1
+              ]
+            },
+            {
+              "lum": [
+                0.3,
+                1
+              ],
+              "sat": [
+                0,
+                0.25
+              ],
+              "H": [
+                0.2,
+                0.4
+              ]
+            }
+          ],
+          "pct": 45
+        }
       },
       "details": [
         {

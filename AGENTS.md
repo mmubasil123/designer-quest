@@ -51,7 +51,7 @@ just fail to connect.
   No global installs or shell-profile edits (one laptop is shared with an employer).
 - Secrets live only in `.env` (git-ignored, chmod 600). Never print, commit or paste `HF_TOKEN`.
 - GPU quota is scarce (about 2 TRELLIS runs a day per HF account): regenerate GLBs only on purpose, say in the PR
-  which ones, and never dodge the quota with extra accounts. GLBs are committed so nobody regenerates them twice.
+  which ones. GLBs are committed so nobody regenerates them twice.
 - Facts about MoMu pieces (dates, techniques, history) come from the collection data (DB or `cache/`), never from
   model memory. A missing field shows "not recorded" (D3).
 - Change a decision in `LEDGER.md` only by editing its row and saying why.

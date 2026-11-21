@@ -4,6 +4,11 @@ Read this, then `LEDGER.md` (tickets, decisions D1 to D8, product-owner cut and 
 change with its reason. Agent rule (both people): work autonomously within your claimed ticket, inspect screenshots critically
 before calling anything done. Never deploy, push to `main` or publish without your person's explicit go.
 
+## Wearable scans (branch basil/wear-scans, 2026-11-21, not merged)
+Read `docs/WEARABLE-PIPELINE.md`. Coat ST81190 and cavalry uniform ST2431/1-4 are meshed and registered; the other 7
+scan pieces and 3 photo-only pieces are next. Checked headless at 390 px; not on a phone. Uniform colours still dull
+(raise `matchk`/`satk`), uniform hands may leave stubs at the cuffs.
+
 ## State
 - **Win it flow (branch basil/study-wardrobe, 2026-11-21):** sticker -> story -> one challenge (Guess the year, or Up close for study pieces) -> You won it -> wardrobe (New). Jak ST503 is the wearable room piece (knee breeches ST2062 has no GLB yet, so it is hidden); stickers point at `https://second-skin-ten.vercel.app/second-skin.html?card=<id>`. Piece screen removed. Details in CHANGELOG.
 - `mockups/second-skin.html` + `mockups/pieces.json` (schema `pieces.schema.json`): one three.js scene per

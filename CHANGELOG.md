@@ -2,7 +2,21 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## Wearable scans (2026-11-21, branch basil/wear-scans)
+- What: `mockups/tools/garment.py` turns a piece's splat scan into a wearable GLB (or runs the TRELLIS photo route) and
+  registers it. All 9 scan pieces (coat ST81190 as a top, the other 8 as full looks) now wear as themselves once won,
+  and appear in their slot's tab. New `wear` field and `fit.split`, `pipeline.mesh` in the schema.
+- Why: Basil: a won coat shown on another coat's cut "looks nothing like" the real piece; Higgsfield images for every
+  combination would cost about 40x the credit cap.
+- Decision: real cut from MoMu's own scans; fabrics stay textures on the mesh. CUT_OF stays as the fallback for
+  pieces not run yet. Doc: `docs/WEARABLE-PIPELINE.md`.
+
 ## 2026-11-21
+
+### Brighter cavalry uniform; unreached texels no longer bake black (branch basil/wear-scans)
+- **What:** ST2431/1-4 rebuilt with `satk` 2.0 and `matchk` 0.85, so its blue is close to the photo. `garment.py` now leaves texels no splat reaches (composite weight under 0.05) to the gutter fill instead of baking them black; the other GLBs are unchanged until rebuilt. `requirements.txt` pins the pipeline's packages.
+- **Also:** `AGENTS.md` drops the rule against using a second HF account for TRELLIS quota (Basil, 2026-11-21).
+- **Checked:** uniform worn on the Stage in desktop Chrome, front and side; console clean.
 
 ### Won fabrics go on the nearest cut; the fact card warms the scan (branch basil/won-cut)
 - **Problem (Basil's phone):** the won riveted wool coat showed as a dress, because every won study fabric went on the cocktail dress cut. He also asked whether the piece card loads the 3D scan and whether closing it cleans up.
