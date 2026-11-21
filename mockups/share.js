@@ -54,7 +54,12 @@ const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;",
 /* What the card says about the look: the same pieces and years the Stage's "Spans N years" line counts. */
 export function lookFacts(look, PIECES) {
   const main = look.full ? [["Dress", look.full]] : [["Top", look.top], ["Bottom", look.bottom]];
-  const rows = [...main, ["Shoes", look.feet], ["Cloth", look.fabric.body], ["Sleeves", look.fabric.sleeves]]
+  // as on the Stage: a piece's own fabric on its own cut is the original, not a remix, and one fabric on body and
+  // sleeves is one row (a won study piece worn alone used to fill Dress, Cloth and Sleeves with the same name)
+  const cut = look.full || look.top, { body, sleeves } = look.fabric;
+  const own = f => f && f !== cut ? f : null;
+  const cloth = own(body) && own(body) === own(sleeves) ? [["Cloth", own(body)]] : [["Cloth", own(body)], ["Sleeves", own(sleeves)]];
+  const rows = [...main, ["Shoes", look.feet], ...cloth]
     .filter(([, id]) => id && PIECES[id])
     .map(([role, id]) => ({ role, id, name: PIECES[id].name, year: PIECES[id].year?.from ?? null, to: PIECES[id].year?.to ?? null }));
   const years = rows.map(r => r.year).filter(Boolean);
@@ -210,7 +215,8 @@ export function createShare({ tt, look, PIECES, getName, toast }) {
     const scene = await loadImg(`assets/scenes/${era}.svg`);
     if (mine !== run) return;   // a newer keystroke or a close took over
     const wornIds = new Set(facts.rows.map(r => r.id));
-    const won = readWon().filter(id => PIECES[id] && !wornIds.has(id)).map(id => PIECES[id].name);
+    // every museum win: wearables (Win it) and study fabrics (Up close); PIECES already holds both as unlocked room pieces
+    const won = [...new Set([...readWon(), ...Object.keys(PIECES)])].filter(id => PIECES[id]?.room && !PIECES[id].locked && !wornIds.has(id)).map(id => PIECES[id].name);
     const shown = won.length > 2 ? [...won.slice(0, 2), `+${won.length - 2} more`] : won;
     const title = cardTitle(name, facts, getName());
     const kicker = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });

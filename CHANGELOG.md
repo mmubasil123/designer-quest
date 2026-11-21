@@ -12,6 +12,24 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 - Decision: Hassan picked a standalone teaser (16:9 for the projector, no voice, about 45 s, result first) and
   dropped Picsart AI clips; facts only from the collection data (D3), so scene 6 says "the fabric of" the Vandevorst
   coat, a study piece, and scene 7 says "on MoMu's 3D model" (Up close shows the CLO model since H18). Videos, captures and copied assets stay git-ignored. Not shown on the venue projector yet.
+
+## QA bug bash: 8 fixes (2026-11-22, branch hassan/H19-qa-bugbash, H19)
+- What: test cases in `docs/QA-TEST-CASES.md` (about 50 scenarios, run headless at 390 and 320 px). Fixed:
+  B1 the form finish was not saved (only a look change saved it), so a reload reset it. B2 "your widest" was saved but
+  never read back, so it restarted at 0 on every load. B3 re-scanning a piece that is not a museum piece said "is in your
+  Won tab" when there is no Won tab for it; it now names its own tab. B4 the 3D view never emptied (model-viewer's `src`
+  was set as a property, so `removeAttribute` did nothing): the model stayed in memory and the last piece showed under
+  the next one's name while it loaded; a viewer closed or switched mid-load no longer gets a late `src`. B5 the share
+  card listed a won study piece worn alone three times (Dress, Cloth, Sleeves); a piece's own fabric on its own cut is
+  now no row and one fabric on body and sleeves is one "Cloth" row, as on the Stage. B6 the card's "Won" row missed
+  study fabrics won up close. B7 a locked study piece could be worn without winning it: its fact card's "Find it at
+  MoMu" put it on the form when the tab matched its `wear` slot (Full tab, Cocktail dress → Black satin dress); locked
+  pieces now always go to their sticker or Up close. B8 a non-array `secondSkin.new.v1` (or a non-array detail list in
+  `secondSkin.found.v1`) threw during boot and stopped the Stage or Up close.
+- Why: Hassan asked for a QA pass to make the app bug free before the demo.
+- Decision: logic fixes only, no change to look, copy beyond the B3 toast, save schema or URL params. Known and left:
+  model-viewer's duplicate three.js warning. Re-checked after rebasing on PR #57 (narration audio): story audio plays.
+
 ## MoMu logo at momu.be's own shape (2026-11-21, branch hassan/H10-logo-ratio)
 - What: every MoMu logo now has the 1.786:1 shape momu.be shows in its header (measured 718 x 402 px): the large logo's
   polygons, unchanged, stretched vertically by 299/120. `assets/brand/momu-logo.svg` (viewBox 0 0 534 299), the favicon,
