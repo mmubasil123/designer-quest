@@ -4,12 +4,11 @@ Read this, then `LEDGER.md` (tickets, decisions D1 to D8, product-owner cut and 
 change with its reason. Agent rule (both people): work autonomously within your claimed ticket, inspect screenshots critically
 before calling anything done. Never deploy, push to `main` or publish without your person's explicit go.
 
-## Find-it game H11 (hassan, PR #48 open, not merged, 2026-11-21; takes in Basil's J5)
+## Find-it game H11 (hassan, PR #48 merged 2026-11-21; takes in Basil's J5)
 Up close is found on the piece now: tap the detail on the scan; the list is clues without numbers; "Hint" shows after a
 first miss or 20 s and rings the area (a tap in the ring counts); wrong taps get a ripple and a helping line; each find
 shows the record's Dutch words large, then "Now find it on the real piece in front of you." Only `up-close.html`.
-Checked in Chrome at 390 px on ST2435 and ST81190, front and back, console clean; not on a phone. Next: merge #48 on
-Hassan's word, mark H11 done in LEDGER and Notion (row "Find-it game: tap landmarks on the piece"). Left out: J5's
+Checked in Chrome at 390 px on ST2435 and ST81190, front and back, console clean; not on a phone. Done in LEDGER and Notion. Left out: J5's
 "next piece to win" on the Won card (`second-skin.html`).
 
 ## H13 Poetic narration (hassan, PR #46 open, not merged, 2026-11-21)
