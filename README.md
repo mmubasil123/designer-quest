@@ -22,6 +22,8 @@ Two things live here, for the MoMu Hackathon 2026 (MoMu is the Antwerp fashion m
 | `mockups/assets/src/` | Source photos and garment-only cutouts |
 | `mockups/tools/` | The 3D pipeline (below) |
 | `tools/craft/` | VectorCraft and TextureCraft CLIs, registered as MCP servers in `.mcp.json` |
+| `docs/PROJECT_NOTES.md` | The team's shared notes: problem statement, ideation, visitor flow, decisions, who owns what |
+| `presentation/STORYLINE.md` | Pitch story, persona, demo script, jury questions |
 | `AGENTS.md`, `ARCHITECTURE.md` | Rules for every agent and both people; components, data flow, invariants |
 | `LEDGER.md`, `TICKETS.md`, `CHANGELOG.md`, `HANDOVER.md` | Ticket ledger and decisions, earlier tickets, changes with reasons, next-session notes |
 

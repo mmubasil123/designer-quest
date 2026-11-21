@@ -59,6 +59,8 @@ just fail to connect.
 - Deploys: the Vercel project `second-skin` is on Mubasil's account. Only Mubasil deploys, and only on purpose.
 
 ## Delivery
-- Hackathon presentation: Stage turntable, Locker remix, time-span game. No demo script is written yet (tickets E1, E2 in `LEDGER.md`); the cut and its risks are at the end of `LEDGER.md`.
+- Hackathon presentation: story, persona and demo script in `presentation/STORYLINE.md` (slides still ticket E1,
+  recording E2 in `LEDGER.md`); the cut and its risks are at the end of `LEDGER.md`. Problem statement, ideation
+  and team roles: `docs/PROJECT_NOTES.md`.
 - CLO path: CLO on a personal machine, pattern files from MoMu, the `Lilbonner/clo3d-mcp` listener. Engine
   changes needed are in `HANDOVER.md` and ticket A7.
