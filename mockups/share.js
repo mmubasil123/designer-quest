@@ -87,21 +87,25 @@ export function drawCard({ grab, name, facts, url, scene, quote, won, kicker }) 
   ctx.fillStyle = wall; ctx.fillRect(0, 0, CARD_W, CARD_H);
   if (scene) {   // the period room of the look, as behind the Stage (H7); paper under the title keeps the red capitals at AA
     ctx.drawImage(scene, 0, 0, CARD_W, CARD_H);
-    const clear = ctx.createLinearGradient(0, 0, 0, 640);
+    const clear = ctx.createLinearGradient(0, 0, 0, 720);   // reaches below the masthead, title and span line
     clear.addColorStop(0, PAPER); clear.addColorStop(.62, PAPER); clear.addColorStop(1, "rgb(255 255 255 / 0)");
-    ctx.fillStyle = clear; ctx.fillRect(0, 0, CARD_W, 640);
+    ctx.fillStyle = clear; ctx.fillRect(0, 0, CARD_W, 720);
   }
-  ctx.textBaseline = "alphabetic"; ctx.fillStyle = MUTED; ctx.font = `500 24px ${MONO}`;
-  ctx.fillText(kicker.toUpperCase(), pad, 124);
-
-  // H10: MoMu's official logo (assets/brand/momu-logo.svg) at the right end of the date row, its foot on the row's baseline
-  const logoH = 40, logoW = logoH * 202 / 42;
-  ctx.save(); ctx.translate(CARD_W - pad - logoW, 124 - logoH); ctx.scale(logoH / 42, logoH / 42); ctx.fillStyle = INK;
+  // H10 masthead: MoMu's official logo (assets/brand/momu-logo.svg) top left on the text's own edge, as momu.be and the
+  // template set it: large enough (72 px) that its hairline diagonals hold. The date sits right, on the logo's foot.
+  const logoH = 72, logoW = logoH * 202 / 42, logoTop = 96, foot = logoTop + logoH;
+  ctx.save(); ctx.translate(pad, logoTop); ctx.scale(logoH / 42, logoH / 42); ctx.fillStyle = INK;
   for (const pts of MOMU_LOGO) { ctx.beginPath(); for (let i = 0; i < pts.length; i += 2) ctx[i ? "lineTo" : "moveTo"](pts[i], pts[i + 1]); ctx.closePath(); ctx.fill(); }
   ctx.restore();
+  ctx.textBaseline = "alphabetic"; ctx.fillStyle = MUTED; ctx.font = `500 24px ${MONO}`; ctx.textAlign = "right";
+  ctx.fillText(fit(ctx, kicker.toUpperCase(), CARD_W - 2 * pad - logoW - 40), CARD_W - pad, foot); ctx.textAlign = "left";
+
   ctx.fillStyle = RED; ctx.font = `400 84px ${MONO}`;   // titles are red capitals, as in MoMu's template
+  // a long unbreakable word (a long name) would run off the card: shrink the title just enough, down to 56 px
+  const widest = Math.max(...name.toUpperCase().split(" ").map(w => ctx.measureText(w).width));
+  if (widest > CARD_W - 2 * pad) ctx.font = `400 ${Math.max(56, Math.floor(84 * (CARD_W - 2 * pad) / widest))}px ${MONO}`;
   const lines = wrap(ctx, name.toUpperCase(), CARD_W - 2 * pad, 3);
-  let y = 214;
+  let y = foot + 124;   // about 64 px from the logo's foot to the title's cap height
   lines.forEach(l => { ctx.fillText(l, pad, y); y += 100; });
 
   const { oldest, newest, span } = facts;   // the span is a sentence, not a stat tile

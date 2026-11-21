@@ -2,6 +2,16 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## Share card: the MoMu logo as the masthead (2026-11-21, branch hassan/H10-card-logo)
+- What: the card's logo moves from a small 40 px mark at the right end of the date row to the masthead: 72 px tall, top
+  left on the text's own left edge, with the date right-aligned on the logo's foot and the title about 64 px below it.
+  The paper fade under the header reaches 720 px so the span line stays on white. A title word too wide for the card (a
+  long name) shrinks the title font just enough, down to 56 px, instead of running off the edge.
+- Why: Hassan, 2026-11-21: the logo looked messy and out of place. At 40 px its hairline diagonals nearly vanished, it
+  floated off the text column and competed with the date.
+- Decision: set it as momu.be and the hackathon template do, large and top left. Card stays 1080x1920; checked with no
+  name, a short name and a 21-letter name; console clean.
+
 ## MoMu logo on the outfit page (2026-11-21, H16, branch hassan/H16-outfit-logo)
 - What: `outfit.html` has the same header as Up close: back arrow, MoMu's logo (the H10 inline SVG), the piece id on
   the right. The piece's name moved from the header to above the wear buttons. The back arrow replaces the "My look"
