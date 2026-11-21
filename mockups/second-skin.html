@@ -24,7 +24,6 @@
   --lift: brightness(1.1) contrast(1.06); /* pushes grey studio backdrops to white so multiply hides them */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-sheet: cubic-bezier(0.32, 0.72, 0, 1);   /* iOS sheet curve */
-  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 * { box-sizing: border-box; margin: 0; }
 [hidden] { display: none !important; }
@@ -151,30 +150,11 @@ dt { color: var(--muted); }
 .var[aria-pressed="true"] .th { outline: 2px solid var(--ink); outline-offset: 2px; }
 .var.locked .th { display: grid; place-items: center; font-size: 18px; }
 .foot { padding: 12px 20px 22px; }
-.foot.two { display: flex; gap: 8px; }
 .bar-actions { display: flex; gap: 6px; }
 .pill.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
 .back-inline { width: 44px; height: 44px; margin: -10px 0 -10px -14px; font-size: 18px; }
 .app-only { display: none; }
 
-/* Track */
-.track { padding: 0 20px; flex: 1; overflow: auto; }
-.track h2 { font: 400 26px/1.1 Newsreader, serif; margin-top: 4px; }
-.steps { list-style: none; padding: 0; margin: 18px 0; position: relative; }
-.steps::before { content: ""; position: absolute; left: 13px; top: 14px; bottom: 14px; width: 1px; background: var(--line); }
-.step { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 10px 0; position: relative; }
-.dot { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: var(--paper); display: grid; place-items: center; font: 500 11px "IBM Plex Mono", monospace; transition: background-color 200ms ease, color 200ms ease; }
-.step.done .dot { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.step .k { font-weight: 600; }
-.step .d { color: var(--muted); font-size: 13px; }
-.step:not(.done) .k { color: var(--muted); }
-.card-wrap { perspective: 900px; margin: 4px 0 16px; }
-.card { position: relative; height: 150px; transform-style: preserve-3d; transition: transform 450ms var(--ease-in-out); }
-.card.flipped { transform: rotateY(180deg); }
-.face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 14px; border: 1px solid var(--line); background: var(--plinth); padding: 14px 16px; }
-.face.backside { transform: rotateY(180deg); display: grid; grid-template-columns: 90px 1fr; gap: 12px; align-items: center; }
-.face.backside img { width: 90px; height: 120px; object-fit: cover; border-radius: 8px; mix-blend-mode: multiply; background: var(--wall); }
-.story { font: italic 400 15px/1.4 Newsreader, serif; }
 
 @media (hover: hover) and (pointer: fine) {
   .tile img { transition: transform 200ms var(--ease-out); }
@@ -187,8 +167,7 @@ dt { color: var(--muted); }
   h1.sheet, p.sheet, .label { display: none; }
   .screens { display: block; height: 100%; }
   .screens > section { display: none; height: 100%; }
-  body[data-screen="stage"] [data-screen="stage"], body[data-screen="piece"] [data-screen="piece"],
-  body[data-screen="track"] [data-screen="track"] { display: block; animation: screen-in 260ms var(--ease-out); }
+  body[data-screen="stage"] [data-screen="stage"], body[data-screen="piece"] [data-screen="piece"] { display: block; animation: screen-in 260ms var(--ease-out); }
   .phone { width: 100%; height: 100dvh; border: 0; border-radius: 0; box-shadow: none;
     padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left); }
   .foot { padding-bottom: calc(22px + env(safe-area-inset-bottom)); }
@@ -199,7 +178,6 @@ dt { color: var(--muted); }
   /* at half the free space is the top 52% of the stage, so the taller phone turntable steps back further */
   .stage[data-snap="half"] .turntable, .stage[data-snap="full"] .turntable { transform: translateY(-4%) scale(.5); }
   .app-only { display: inline-flex; align-items: center; justify-content: center; }
-  .foot.two .btn { flex: 1; }
 }
 @keyframes screen-in { from { opacity: 0; transform: translateY(8px); } }
 .nfc { width: min(340px, calc(100% - 32px)); margin: auto; border: 0; border-radius: 24px; padding: 0; background: var(--paper); color: var(--ink);
@@ -215,7 +193,6 @@ dt { color: var(--muted); }
 .nfc .btn { width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   .press:active { transform: none; }
-  .card { transition: none; }
   .wardrobe, .stage .turntable { transition-duration: 1ms; }
   .screens > section { animation: none !important; }
   .nfc { transition: opacity 150ms ease; transform: none; }
@@ -289,35 +266,10 @@ dt { color: var(--muted); }
         <div class="mono" style="margin-bottom:6px">Versions from its real life</div>
         <div class="variants" id="variants"></div>
       </div>
-      <div class="foot two"><button class="btn ghost press app-only" data-go="track">Levels</button><button class="btn press" id="wearBtn">Wear it</button></div>
+      <div class="foot"><button class="btn press" id="wearBtn">Wear it</button></div>
     </div>
   </section>
 
-  <!-- 3. TRACK -->
-  <section data-screen="track">
-    <div class="label">3 · Knowledge track</div>
-    <div class="phone">
-      <div class="bar"><button class="back-inline press app-only" aria-label="Back to the kimono" data-go="piece">←</button><span class="brand">Second Skin</span><span class="mono">ST80881</span></div>
-      <div class="track">
-        <h2>Learn it to level it up</h2>
-        <ol class="steps" id="steps"></ol>
-        <div class="card-wrap">
-          <div class="card" id="card">
-            <div class="face">
-              <div class="mono">Next unlock</div>
-              <div class="serif" style="font-size:20px;margin-top:6px" id="nextName">The pattern</div>
-              <div class="mono" style="margin-top:8px">Read the story to reveal it</div>
-            </div>
-            <div class="face backside">
-              <img id="unlockImg" alt="">
-              <div><div class="mono">Unlocked</div><div class="story" id="unlockText"></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="foot"><button class="btn press" id="readBtn">Read the story</button></div>
-    </div>
-  </section>
 
 </div>
 
@@ -849,36 +801,7 @@ heroModel.addEventListener("load", () => {
   });
 });
 
-/* ---------- Knowledge track ---------- */
-const STEPS = [
-  { k: "Wear it", d: "Found at the museum card. Credit line added to your looks." },
-  { k: "The pattern", d: "Drafted from the real kimono by MoMu.", img: IMG("d9346b7588f720e04da602797c00d96dc67170af"),
-    story: "Every panel of a kimono is a straight rectangle. The shape comes from the body, not the cut." },
-  { k: "The fabric", d: "Detail view of the painted fabric.", img: IMG("34b6955bc31aceef7b78ed1a031475ff19cd6b95"),
-    story: "Long swinging sleeves mark a furisode, worn by young unmarried women on formal days." },
-  { k: "On your avatar", d: "Rebuilt in CLO 3D, turn it all the way round." },
-];
-let level = 1;
-const card = document.getElementById("card");
-function renderTrack() {
-  document.getElementById("steps").innerHTML = STEPS.map((s, i) =>
-    `<li class="step ${i < level ? "done" : ""}"><span class="dot">${i + 1}</span><div><div class="k">${s.k}</div><div class="d">${s.d}</div></div></li>`).join("");
-  const next = STEPS[level];
-  document.getElementById("nextName").textContent = next ? next.k : "All levels found";
-}
-document.getElementById("readBtn").addEventListener("click", () => {
-  const s = STEPS[level];
-  if (!s) { level = 1; card.classList.remove("flipped"); renderTrack(); return; }
-  if (s.img) {
-    document.getElementById("unlockImg").src = s.img;
-    document.getElementById("unlockText").textContent = s.story;
-    card.classList.add("flipped");
-    setTimeout(() => card.classList.remove("flipped"), 2600);
-  }
-  level++; renderTrack();
-});
-
-renderCredit(); renderCredit.ready = true; renderLocker(); renderTrack();
+renderCredit(); renderCredit.ready = true; renderLocker();
 
 /* Card scan: each museum card's QR opens ?card=<inventory id>; that piece unlocks and goes straight onto the form */
 if (scanned && !PIECES[scanned]?.glb) toast("This card isn't in the app yet");

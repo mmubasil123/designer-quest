@@ -14,7 +14,7 @@ Two things live here, for the MoMu Hackathon 2026 (MoMu is the Antwerp fashion m
 | `harvester/momu_harvest.py` | Two-stage harvester: `fetch` (API to `cache/`, polite, robots-aware) and `load` (cache to Postgres) |
 | `schema.sql` | Postgres schema (objects, values, concepts, agents, media, showcases) |
 | `seed/momu_seed.sql.gz`, `seed/momu_full.dump` | Loaded data: 4622 objects, 9323 media |
-| `mockups/second-skin.html` | The 4-screen mockup (Stage, Locker, Piece, Knowledge track); one file, three.js from a CDN |
+| `mockups/second-skin.html` | The mockup: Stage with the wardrobe sheet, and the Piece page; one file, three.js from a CDN |
 | `mockups/up-close.html` | Look closer: study a MoMu Gaussian splat, find its recorded details, win its fabric |
 | `mockups/pieces.json` | Piece manifest: slot, year, source photo, GLB kind (`scan` or `clo`), fit and pipeline hints |
 | `mockups/assets/*.glb` | One 3D model per piece, generated once and stored (the page never calls an API) |

@@ -4,6 +4,11 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### Levels (knowledge track) removed
+- Deleted the third screen, its Levels button on the Piece page, and its CSS and JS (`STEPS`, `renderTrack`, the flip card). Piece page footer is now one "Wear it" button.
+- Why: it was kimono-only, its two stories were not quoted from the MoMu record (D3), and its "Rebuilt in CLO 3D" step was never built. Up close now does the learning for 9 pieces with record quotes. Decision by the owner.
+- Checked in Chrome: desktop shows Stage and Piece; at 390 px Learn, Piece 3D (model-viewer kimono), Back and Wear it work with no horizontal scroll.
+
 ### NFC placeholder popup on grey Study tiles (branch basil/nfc-popup)
 - Tapping a Study piece whose card hasn't been scanned opens a popup: "Find it in the museum. Hold your phone to the NFC card beside the <piece> to study it up close." OK, the backdrop or Escape close it.
 - Why: the demo will use NFC cards (each opens `?card=<id>`), but they don't exist yet while the pages are designed; a grey tile that did nothing read as broken. Native `<dialog>` for focus and Escape handling; fades and scales in over 200 ms, opacity only under reduced motion.
