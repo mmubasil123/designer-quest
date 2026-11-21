@@ -4,11 +4,11 @@ Read this, then `LEDGER.md` (tickets, decisions D1 to D8, product-owner cut and 
 change with its reason. Agent rule (both people): work autonomously within your claimed ticket, inspect screenshots critically
 before calling anything done. Never deploy, push to `main` or publish without your person's explicit go.
 
-## E2 demo video (hassan, PR #56 open, 2026-11-22)
+## E2 demo video (hassan, PR #56 merged, 2026-11-22)
 A 44 s, 1920 x 1080 MoMu teaser rendered in code: `presentation/reel/` (Remotion), script and fact sources in
 `presentation/DEMO_VIDEO.md`, look in `presentation/reel/style.md`, `/reel <line>` skill for the next one. The MP4 is
-git-ignored (`presentation/reel/reels/momu-teaser/`); rebuild with `presentation/reel/README.md`. Next: after H13's
-narration merges, `node scripts/capture.mjs` and render again (story sheet); play it once on the venue projector.
+git-ignored (`presentation/reel/reels/momu-teaser/`); rebuild with `presentation/reel/README.md`. Captured after H13 and
+H18 merged. Next: play it once on the venue projector; re-capture and render after any screen change.
 The full-demo backup recording (old E2 acceptance) is not made.
 
 ## Find-it game: H11, H15, H17 (hassan, all merged 2026-11-21; takes in Basil's J5)

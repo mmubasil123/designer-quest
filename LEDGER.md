@@ -70,7 +70,7 @@ ST655/1, ST81299, ST2202, ST2434, ST81234/1-2, ST2435.
 | # | Ticket | Size | Acceptance | Status |
 |---|---|---|---|---|
 | E1 | Markdown slide outline in `presentation/` with one slide per beat: card scan, wear, learn, remix, share, CLO path | S | Any teammate can edit and reorder | Mubasil: done as a 6-slide pptx, `presentation/` |
-| E2 | Screen recording of the demo flow as the fallback | S | MP4 of 3 min or less plays offline on the presenter's laptop and shows every beat in the demo script | hassan, in progress 2026-11-21: PR #56 open, a 44 s 16:9 teaser made in code (Remotion), `presentation/DEMO_VIDEO.md`; Hassan chose a standalone teaser over the walkthrough fallback, so the full-demo backup recording is still open |
+| E2 | Screen recording of the demo flow as the fallback | S | MP4 of 3 min or less plays offline on the presenter's laptop and shows every beat in the demo script | done 2026-11-22 (hassan, PR #56): 44 s 16:9 MoMu teaser made in code (Remotion), real app screens, facts from the records; `presentation/DEMO_VIDEO.md`. Hassan chose the teaser over the walkthrough fallback, so no full-demo backup recording; not yet played on the venue projector |
 | E3 | Vercel preview deploy, only on the owner's go | S | Preview URL opens on a phone off the venue wifi and `?card=ST503` works | done 2026-11-21 (went out as production, see CHANGELOG): https://second-skin-ten.vercel.app |
 
 ## Track G: Splat Stage (approach A, picked 2026-11-21)
