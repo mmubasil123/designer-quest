@@ -4,6 +4,11 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### Study pieces: Museum view, claimed fabric goes to the wardrobe (branch basil/study-wardrobe)
+- **What:** the Study tab left the wardrobe sheet; a **Museum** button in the Stage header lists the 9 study pieces (the exhibition, each with an NFC card in the room). An NFC tap (`?card=<study id>`) now shows the story, then the piece's fact card with **Study it up close**, instead of jumping straight to Up close. Finding the 3 details shows **Claim its fabric**; back on the Stage the fabric sits in the Remix tab marked **New** and is not put on the form. Taking off the top (or full look) now clears its fabric with the toast "Its fabric went back to your wardrobe".
+- **Why:** owner feedback: claimed fabric went straight onto the current outfit, removing the top silently dropped its fabric (which then came back on the next top), and study pieces are exhibits to find, not wardrobe items.
+- **Decision:** the wardrobe holds only what you own (garments and fabrics); the museum is where you find more. A study card now boots the Stage (wearable GLBs load) so its fact card can show; `?fabric=` keeps its name but no longer wears the fabric (D2 row updated).
+
 ### H3 Story screen with narration (branch hassan/story-narration)
 - **What:** after a card scan the piece's story comes first, on its own sheet: name, years as a large serif number, a play/pause button (48 px) with progress and time, the transcript always on screen, then **Continue to the questions** (the curator's questions, no longer repeating the story) or straight back to the form / Up close when the piece has no questions. Audio never autoplays and downloads only on the first tap (`preload="none"`). Same sheet style as the quiz; reduced-motion safe.
 - **Text, one source:** `tools/narration.py` writes `narration.json` (a derived file) from the curator's stories in `questions.json` (her text wins, as written) and, for pieces she has not written yet, a **draft built only from the MoMu record** (`records.json`: date, place, the record's description in our English translation, materials and techniques). Drafts say on screen "Draft built only from the MoMu record; the curator's story is still to come" (D3). Nothing is added from model memory.

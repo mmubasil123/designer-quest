@@ -166,6 +166,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .tile .st { position: absolute; left: 6px; right: 6px; bottom: 6px; background: var(--paper); border-radius: 8px; padding: 6px 8px; text-align: left; }
 .tile .st b { display: block; font: 400 13px/1.2 var(--serif); }
 .tile .st span { font: 400 10px/1.4 var(--sans); color: var(--muted); }
+.tile.new::before { content: "New"; position: absolute; top: 8px; left: 8px; z-index: 1; padding: 2px 8px; border-radius: 999px; background: var(--ink); color: var(--paper); font: 500 11px/1.6 var(--sans); pointer-events: none; }
+.museum { width: min(420px, calc(100% - 32px)); text-align: left; }
+.museum .grid { max-height: min(60vh, 520px); overflow-y: auto; margin-bottom: 8px; }
 .tile.study:not(.seen) img { filter: grayscale(1) contrast(.2) brightness(1.4); }
 .tile.locked::after { pointer-events: none; content: "Tap the card in the museum"; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 10px; font: italic 13px/1.2 var(--serif); color: var(--muted); }
 
@@ -200,6 +203,7 @@ dt { color: var(--muted); }
 .var.locked .th { display: grid; place-items: center; font-size: 18px; }
 .foot { padding: 12px 20px 22px; }
 .bar-actions { display: flex; gap: 6px; }
+.bar-actions .pill { padding: 0 12px; white-space: nowrap; }   /* Museum, Share look and ? must fit beside the brand at 340 px */
 .pill.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
 .back-inline { width: 44px; height: 44px; margin: -10px 0 -10px -14px; font-size: 18px; }
 .app-only { display: none; }
@@ -283,7 +287,7 @@ dt { color: var(--muted); }
   <section data-screen="stage">
     <div class="label">1 · Stage</div>
     <div class="phone">
-      <div class="bar"><span class="brand">Second Skin</span><span class="bar-actions"><button class="pill ghost press app-only" data-go="piece">Learn</button><button class="pill press" id="shareBtn">Share look</button><button class="pill ghost press helpbtn" id="helpBtn" aria-label="How Second Skin works">?</button></span></div>
+      <div class="bar"><span class="brand">Second Skin</span><span class="bar-actions"><button class="pill ghost press app-only" data-go="piece">Learn</button><button class="pill ghost press" id="museumBtn">Museum</button><button class="pill press" id="shareBtn">Share look</button><button class="pill ghost press helpbtn" id="helpBtn" aria-label="How Second Skin works">?</button></span></div>
       <div class="stage" id="stage" data-snap="peek">
         <div class="credit">
           <div>
@@ -380,10 +384,9 @@ const scanned = params.get("card");
 // C2: the curator's story and questions (questions.json) show after a card scan; optional, nothing is locked behind them
 const quiz = scanned ? await createQuiz({ pieces: PIECES }) : null;   // only a card scan needs it, so a plain visit boots as before
 const story = scanned ? await createStory() : null;   // H3: story with narration before the questions (story.js)
-if (PIECES[scanned]?.splat) {   // before the Stage boots, so a study card never downloads the wearable GLBs
-  await showScan({ story, quiz, id: scanned, next: "Study it up close" });
-  location.replace(`up-close.html?id=${encodeURIComponent(scanned)}`);
-  await new Promise(() => {});
+if (PIECES[scanned]?.splat && !PIECES[scanned].seen) {   // the tap is what makes a study piece seen; its fact card then offers Up close
+  PIECES[scanned].seen = true;
+  try { const f = JSON.parse(localStorage.getItem("secondSkin.found.v1") || "{}") || {}; localStorage.setItem("secondSkin.found.v1", JSON.stringify({ ...f, [scanned]: [] })); } catch { /* blocked */ }
 }
 const SLOTS = ["top", "bottom", "feet", "full"];
 const look = { top: "ST503", bottom: "ST80931", feet: "ST2407/1-2", full: null, fabric: { body: null, sleeves: null }, skin: 1 };
@@ -908,31 +911,42 @@ function renderLocker() {
   const counted = Object.values(PIECES).filter(p => !p.locked || p.seen).length;
   document.getElementById("foundCount").textContent = `${counted} of ${Object.keys(PIECES).length} pieces found`;
   document.getElementById("slotTitle").textContent = activeSlot === "remix" ? "Remix the fabric" : LABEL[activeSlot];
-  document.getElementById("cats").innerHTML = [...SLOTS, "study", "remix"].map(s =>
+  document.getElementById("cats").innerHTML = [...SLOTS, "remix"].map(s =>
     `<button class="cat press" aria-pressed="${s === activeSlot}" data-slot="${s}">${LABEL[s]}</button>`).join("");
   renderWearing();
   const grid = document.getElementById("grid");
-  if (activeSlot === "study") {   // D2: only a scanned card opens a study piece
-    grid.innerHTML = Object.entries(PIECES).filter(([, p]) => p.splat).map(([id, p]) => {
-      const state = !p.seen ? "Tap the card in the museum" : p.locked ? `${p.found} of ${p.details} found` : "Fabric won";
-      const date = p.year.from === p.year.to ? p.year.from : `${p.year.from}–${p.year.to}`;
-      return tile(id, `study ${p.seen ? "seen" : ""}`, p.img, `<span class="st"><b>${esc(p.name)}</b><span>${date} · ${state}</span></span>`,
-        `${p.name}, ${date}: ${state}`);
-    }).join("");
-    return;
-  }
   if (activeSlot === "remix") {   // any unlocked piece's cloth, on the body or sleeves of your top or full look
     const zones = ["body", "sleeves"].map(z =>
       `<button class="cat press" aria-pressed="${z === activeZone}" data-zone="${z}">${z === "body" ? "Body" : "Sleeves"}</button>`).join("");
     const bare = !look.full && !look.top ? `<p class="zones none">Fabric goes on a top or a full look. Put one on first.</p>` : "";
     grid.innerHTML = `<div class="zones">${zones}</div>${bare}` + Object.entries(PIECES).filter(([, p]) => (p.glb || p.splat) && !p.locked).map(([id, p]) =>
-      tile(id, isWorn(id, "remix") ? "on" : "", swatchOf(id), `<span class="m">${esc(shortName(id))}</span>`, `${p.name} fabric on the ${activeZone}`)).join("");
+      tile(id, `${isWorn(id, "remix") ? "on" : ""} ${fresh.has(id) ? "new" : ""}`, swatchOf(id), `<span class="m">${esc(shortName(id))}</span>`, `${p.name} fabric on the ${activeZone}`)).join("");
     return;
   }
   grid.innerHTML = Object.entries(PIECES).filter(([, p]) => p.slot === activeSlot).map(([id, p]) =>
     tile(id, `${isWorn(id, activeSlot) ? "on" : ""} ${p.locked ? "locked" : ""}`, p.img, `<span class="m">${esc(shortName(id))}</span>`,
       isWorn(id, activeSlot) ? `Take off ${p.name}` : `Wear ${p.name}`)).join("");
 }
+/* Museum: the study pieces stand in the room with an NFC card; they are found there, not owned, so they live outside the wardrobe.
+   Finding a piece's 3 details on Up close adds its fabric to the wardrobe (D2). */
+const museumEl = document.getElementById("museum");
+function renderMuseum() {
+  document.getElementById("museumGrid").innerHTML = Object.entries(PIECES).filter(([, p]) => p.splat).map(([id, p]) => {
+    const state = !p.seen ? "Tap the card in the museum" : p.locked ? `${p.found} of ${p.details} found` : "Fabric in your wardrobe";
+    const date = p.year.from === p.year.to ? p.year.from : `${p.year.from}–${p.year.to}`;
+    return tile(id, `study ${p.seen ? "seen" : ""}`, p.img, `<span class="st"><b>${esc(p.name)}</b><span>${date} · ${state}</span></span>`,
+      `${p.name}, ${date}: ${state}`);
+  }).join("");
+}
+document.getElementById("museumBtn").addEventListener("click", () => { renderMuseum(); museumEl.showModal(); });
+museumEl.addEventListener("click", e => {
+  if (e.target === museumEl) { museumEl.close(); return; }   // backdrop tap closes
+  const info = e.target.closest("[data-info]");
+  if (info) { museumEl.close(); openFact(info.dataset.info); return; }
+  const t = e.target.closest(".pick") && e.target.closest("[data-id]");
+  if (t) { museumEl.close(); act(t.dataset.id, "study"); }
+});
+const fresh = new Set();   // fabrics claimed this visit, marked New in the Remix tab until worn
 /* What the form wears, always in the sheet's peek: tap a chip to change that part, × to take it off */
 function renderWearing() {
   const parts = (look.full ? [["full", look.full], ["feet", look.feet]] : [["top", look.top], ["bottom", look.bottom], ["feet", look.feet]])
@@ -947,7 +961,14 @@ function renderWearing() {
     <button class="off press" data-off="${w.slot}" data-zone="${w.zone}" aria-label="Take off ${esc(PIECES[w.id].name)}">×</button></span>`).join("")
     : `<span class="none">Nothing on yet. Pick a piece below.</span>`;
 }
-function dress() { turntables.forEach(t => t.draw()); renderLocker(); renderCredit(); }
+function dress() {
+  if (!look.full && !look.top && (look.fabric.body || look.fabric.sleeves)) {   // fabric sits on a top: without one it would come back unseen on the next
+    look.fabric = { body: null, sleeves: null };
+    toast("Its fabric went back to your wardrobe");
+  }
+  [look.fabric.body, look.fabric.sleeves].forEach(id => fresh.delete(id));
+  turntables.forEach(t => t.draw()); renderLocker(); renderCredit();
+}
 /* Study preload: tapping a study tile that still needs its card starts fetching that scan (about 17 MB) and the Up close page's
    scripts right away, so by the time the visitor taps the NFC card the page finds them in the cache. Not now, Escape or a
    backdrop tap aborts the download and drops the preload hints; nothing is parsed or kept in memory here. */
@@ -1211,7 +1232,8 @@ if (!phoneLayout.matches) enterPiece();
 phoneLayout.addEventListener("change", e => { if (!e.matches) enterPiece(); });
 
 /* Card scan: each museum card's QR opens ?card=<inventory id>; that piece unlocks and goes straight onto the form */
-if (scanned && !PIECES[scanned]?.glb) toast("This card isn't in the app yet");
+if (PIECES[scanned]?.splat) showScan({ story, quiz, id: scanned, next: "Read its record" }).then(() => openFact(scanned));   // NFC on a study piece: its fact card, whose button opens Up close
+else if (scanned && !PIECES[scanned]?.glb) toast("This card isn't in the app yet");
 else if (scanned) {
   const p = PIECES[scanned];
   p.locked = false;
@@ -1224,13 +1246,13 @@ else if (scanned) {
 if (scanned) history.replaceState(null, "", location.pathname);   // a reload must not re-apply the card over later changes
 // first visit only, and not for a visitor who arrived by a museum card or from Up close: they already know what they want
 try { if (!scanned && !params.get("fabric") && !localStorage.getItem(HELP_KEY)) openHelp(); } catch { openHelp(); }
-// up-close.html sends ?fabric=<id> once every detail is found: wear that fabric on the body straight away
+// up-close.html sends ?fabric=<id> once every detail is found: the fabric joins the wardrobe; the visitor chooses where to wear it
 const won = params.get("fabric");
 if (won && PIECES[won]?.splat && !PIECES[won].locked) {
-  look.fabric.body = won;
+  fresh.add(won);
   activeSlot = "remix"; activeZone = "body";
-  turntables.forEach(t => t.draw()); renderLocker(); renderCredit(); setSnap("half");
-  toast(`Wearing the fabric of the ${PIECES[won].name.toLowerCase()}, ${PIECES[won].year.from}`);
+  renderLocker(); setSnap("half");
+  toast(`Added to your wardrobe: the ${PIECES[won].name.toLowerCase()}'s fabric. Tap it to wear it.`);
   history.replaceState(null, "", location.pathname);
 }
 </script>
@@ -1241,6 +1263,12 @@ if (won && PIECES[won]?.splat && !PIECES[won].locked) {
   <p class="mono status" id="nfcStatus" role="status"></p>
   <a class="btn press" id="nfcGo">Simulate NFC tap</a>
   <form method="dialog"><button class="btn ghost press">Not now</button></form>
+</div></dialog>
+<dialog class="nfc museum" id="museum" aria-labelledby="museumTitle"><div tabindex="-1" autofocus>
+  <h2 id="museumTitle">In the museum</h2>
+  <p>Each piece stands in the room with a card. Tap it with your phone to study the piece up close; find its 3 details to add its fabric to your wardrobe.</p>
+  <div class="grid" id="museumGrid"></div>
+  <form method="dialog"><button class="btn ghost press">Back to my look</button></form>
 </div></dialog>
 <dialog class="help" id="help" aria-labelledby="helpTitle"><div tabindex="-1" autofocus>
   <div class="step" aria-live="polite"><div class="mono" id="helpCount"></div><h2 id="helpTitle"></h2><p id="helpText"></p></div>
