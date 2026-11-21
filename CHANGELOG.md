@@ -9,6 +9,16 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 - **Checked:** every file transcribed back: none contains the old style line ("Read this aloud in a calm, warm voice..."), and the words match the story (83 to 97%; the gaps are numbers like "9th" heard as "ninth").
 - **Script:** `narration.py --force` with `--only` treats chosen pieces as missing, so `--scripts` and `--import` can redo them (for example to change voice).
 
+### A9 follow-up: kimono leg gap, dress lift, coat collar (branch basil/A9-avatar-polish)
+- **Kimono leg gap:** MetaPerson's body has no legs under its own clothes, and the avatar's outfit was hidden whenever a
+  full piece and boots were on. The furisode ends at the shin, so the shins between hem and boots were empty. The outfit
+  now hides under a full piece only when its hem reaches the boots (under 10 cm); under the kimono the avatar's jeans
+  show at the shin instead of a gap.
+- **Also:** the cocktail dress lifts 3 cm on the avatar (its shoulders sat under the avatar's); the coat's neck cut also
+  drops pale grey and white texels near the centre line (a rag of the form's cover in its collar), and each piece in
+  `FORM_CUT` can set its own colour tolerance.
+- **Decision:** dress-form rendering is unchanged (the cut runs only on the avatar).
+
 ### Narration from the story text alone (branch hassan/H3-narration-text)
 - **What:** `tools/narration.py` now sends the TTS only the story text. The old prompt put a style line before it ("Read this aloud in a calm, warm voice..."), and the model read that out. Every story is re-voiced; durations are shorter because the "unhurried" pace hint is gone.
 - **Hash:** the audio hash is now the text alone, so a file is remade only when its story changes, whatever voice made it. Each piece records its `voice` (`gemini:<model>:<voice>` or `picsart:<voice>`).
