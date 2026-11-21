@@ -12,9 +12,13 @@ html, body { height: 100%; }
 body { background: var(--paper); color: var(--ink); font: var(--t-body); display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
 button { font: inherit; color: inherit; background: none; border: 1px solid var(--ink); border-radius: 999px; padding: 10px 16px; min-height: 44px; cursor: pointer; }
 button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
-header { padding: max(12px, env(safe-area-inset-top)) 16px 8px; display: flex; gap: 12px; align-items: baseline; justify-content: space-between; }
-header a { white-space: nowrap; flex: none; }
-h1 { font: var(--t-display); letter-spacing: var(--track-title); text-transform: uppercase; color: var(--title-ink); font-size: 22px; }
+/* the same header as Up close (H10): back arrow, MoMu's logo, the piece id */
+header { display: flex; align-items: center; gap: 12px; padding: max(12px, env(safe-area-inset-top)) 16px 12px; }
+.back { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-size: 20px; color: inherit; text-decoration: none; flex: none; }
+.press { transition: transform 160ms var(--ease-out); }
+.press:active { transform: scale(0.97); }
+header .mono { margin-left: auto; }
+h1 { font: var(--t-display); letter-spacing: var(--track-title); text-transform: uppercase; color: var(--title-ink); font-size: 22px; text-wrap: balance; }
 #view { margin: 0 16px; background: var(--wall); border-radius: var(--r-pic); overflow: hidden; position: relative; touch-action: none; }
 #view canvas { display: block; width: 100%; height: 100%; }
 #status { position: absolute; inset: 0; display: grid; place-items: center; padding: 16px; text-align: center; color: var(--muted); }
@@ -29,9 +33,14 @@ footer { padding: 12px 16px max(16px, env(safe-area-inset-bottom)); display: gri
 } }</script>
 </head>
 <body>
-<header><h1 id="title">Cycling outfit</h1><a class="mono" id="back" href="second-skin.html">My look</a></header>
+<header>
+  <a class="back press" id="back" href="second-skin.html" aria-label="Back to your look">←</a>
+  <span class="brand lockup"><!-- H10: MoMu's official logo, as assets/brand/momu-logo.svg (inline so it takes currentColor) --><svg class="momu-logo" viewBox="0 0 202 42" role="img" aria-label="MoMu"><title>MoMu</title><g fill="currentColor" fill-rule="evenodd"><polygon points="93.7308089 0 50.1255238 40.3757678 4.82491673 0 0 0 0 42 25.9339274 42 25.9339274 19.7578271 50.6796291 42 74.57917 42 98.8387794 19.7578271 98.8387794 42 100 42 100 0"/><polygon points="195.731684 0 152.123526 40.3757678 106.825013 0 102 0 102 42 127.933446 42 127.933446 19.7578271 152.679643 42 176.579662 42 200.840757 19.7578271 200.840757 42 202 42 202 0"/></g></svg></span>
+  <span class="mono" id="pid"></span>
+</header>
 <div id="view"><div id="status" role="status">Loading</div></div>
 <footer>
+  <h1 id="title">Cycling outfit</h1>
   <div class="row" id="pieces" aria-label="Wear"></div>
   <div class="row" id="views" aria-label="View"><button data-v="front">Front</button><button data-v="side">Side</button><button data-v="back">Back</button></div>
   <p class="credit" id="credit"></p>
@@ -57,6 +66,7 @@ const clo = all.filter(p => p.assets.clo.avatar === avatarUrl);   // the pieces 
 const team = /avatar_web\.glb$/.test(avatarUrl);
 const word = clo[0].name.split(" ")[0];
 $("#title").textContent = clo.length > 1 && clo.every(p => p.name.startsWith(word)) ? `${word} outfit` : clo[0].name;
+$("#pid").textContent = clo.map(p => p.id).join(" · ");
 document.title = `${$("#title").textContent} · MoMu`;
 $("#credit").textContent = team ? "Models by the team, sewn in CLO 3D and draped on the team avatar. Worn as exported: nothing is fitted."
   : "MoMu's own CLO 3D model, on MoMu's mannequin in the pose it was draped in. Worn as exported: nothing is fitted.";
