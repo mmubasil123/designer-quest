@@ -90,7 +90,7 @@ export function drawCard({ grab, name, facts, url, scene, quote, won, kicker }) 
   ctx.fillText(kicker.toUpperCase(), pad, 124);
 
   // H10: MoMu's name as the same typographic wordmark as the app's top bar (no official logo file exists to draw),
-  // at the right end of the kicker's row so the two read as one header line
+  // at the right end of the date row so the two read as one header line
   ctx.fillStyle = INK; ctx.font = `600 46px ${MONO}`; ctx.letterSpacing = "-1px"; ctx.textAlign = "right";
   ctx.fillText("MoMu", CARD_W - pad, 124); ctx.letterSpacing = "0px"; ctx.textAlign = "left";
   ctx.fillStyle = RED; ctx.font = `400 84px ${MONO}`;   // titles are red capitals, as in MoMu's template
@@ -141,7 +141,7 @@ export function drawCard({ grab, name, facts, url, scene, quote, won, kicker }) 
   ctx.textAlign = "left"; ctx.fillStyle = INK; ctx.font = `400 38px ${SERIF}`;
   ctx.fillText(CREDIT, pad, FOOT_Y + 90);
   ctx.font = `400 26px ${MONO}`; ctx.fillStyle = MUTED;
-  ctx.fillText("Made in Second Skin · " + fit(ctx, url, CARD_W - 2 * pad - 330), pad, FOOT_Y + 142);
+  ctx.fillText(fit(ctx, url, CARD_W - 2 * pad), pad, FOOT_Y + 142);
   return cv;
 }
 
@@ -170,7 +170,7 @@ export function createShare({ tt, look, PIECES, getName, toast }) {
     <label class="share-name"><span>Your name <i>(optional)</i></span><input id="shareName" type="text" maxlength="20" autocomplete="off" autocapitalize="words" spellcheck="false" enterkeyhint="done" placeholder="Put your name on it"></label>
     <img class="share-img" id="shareImg" alt="" width="270" height="480">
     <p class="share-note" id="shareNote"></p>
-    <div class="row"><button class="btn press" id="shareGo" hidden>Share</button><a class="btn ghost press" id="shareSave" download="second-skin-look.png">Download image</a></div>
+    <div class="row"><button class="btn press" id="shareGo" hidden>Share</button><a class="btn ghost press" id="shareSave" download="momu-look.png">Download image</a></div>
     <button class="share-x press" data-close aria-label="Close" autofocus>×</button>
   </div>`;
   document.body.append(el);
@@ -180,7 +180,7 @@ export function createShare({ tt, look, PIECES, getName, toast }) {
   el.addEventListener("close", () => { clearTimeout(timer); run++; URL.revokeObjectURL(img.src); img.removeAttribute("src"); save.removeAttribute("href"); file = null; });
   go.addEventListener("click", async () => {
     if (!file) return;
-    try { await navigator.share({ files: [file], title: "Second Skin" }); }
+    try { await navigator.share({ files: [file], title: "My MoMu look" }); }
     catch (err) { if (err.name !== "AbortError") toast("Couldn't share from this browser, use Download"); }
   });
   save.addEventListener("click", () => toast("Saved to your downloads"));   // the link itself downloads the blob
@@ -200,14 +200,14 @@ export function createShare({ tt, look, PIECES, getName, toast }) {
     const won = readWon().filter(id => PIECES[id] && !wornIds.has(id)).map(id => PIECES[id].name);
     const shown = won.length > 2 ? [...won.slice(0, 2), `+${won.length - 2} more`] : won;
     const title = cardTitle(name, facts, getName());
-    const kicker = "Second Skin · " + new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+    const kicker = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
     const url = location.host + location.pathname.replace(/\/(index|second-skin)\.html$/, "/");
     const canvas = drawCard({ grab: h => grabStill(tt, h), name: title, facts, url, scene, quote: pickQuote(facts, stories), won: shown, kicker });
     const blob = await new Promise(res => canvas.toBlob(res, "image/png"));
     if (mine !== run) return;
     if (!blob) { toast("Couldn't make the card in this browser"); return; }
     URL.revokeObjectURL(img.src);
-    file = new File([blob], "second-skin-look.png", { type: "image/png" });
+    file = new File([blob], "momu-look.png", { type: "image/png" });
     img.src = URL.createObjectURL(file);
     img.alt = `Share card: ${title}, ${facts.span ? `from ${facts.oldest} to ${facts.newest}` : "years as recorded"}, ${CREDIT}`;
     const canShare = !!navigator.canShare?.({ files: [file] });

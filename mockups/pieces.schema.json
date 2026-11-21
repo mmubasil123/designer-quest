@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Second Skin pieces manifest",
+  "title": "MoMu app pieces manifest",
   "type": "object",
   "required": [
     "version",

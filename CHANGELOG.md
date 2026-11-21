@@ -2,6 +2,18 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## The app drops the name "Second Skin" (2026-11-21, branch hassan/H10-rename)
+- What: every place a visitor sees the name now says MoMu instead: the Stage bar and Up close header show the "MoMu" mark
+  alone (22 px, 44 px row), page titles are "MoMu", "Up close · MoMu", "<piece> · MoMu", "Cycling outfit · MoMu"; the
+  share card's top row is the date with MoMu on the right, its footer is the link alone, the shared file is
+  `momu-look.png` titled "My MoMu look"; help button label "How it works". README, AGENTS, ARCHITECTURE, TICKETS and the
+  pieces schema title call it the MoMu app.
+- Why: Hassan, 2026-11-21: the team is changing the name, so "Second Skin" goes from everywhere.
+- Decision: until a new name is picked the app carries MoMu's name only. Identifiers stay: `second-skin.html`, the Vercel
+  project `second-skin`, the sticker URLs, the `secondSkin.*` saved keys, `window.secondSkin` and the `second_skin` DB
+  schema (renaming them would break printed stickers and saved looks, and needs Mubasil for the deploy). History
+  (this changelog, past ledger rows, plans) is left as written. Checked in Chrome at 390 px, console clean.
+
 ## MoMu branding on every main screen (2026-11-21, branch hassan/H10-branding)
 - What: a stacked "MoMu / Second Skin" lockup replaces the plain "Second Skin" in the Stage bar and the Up close header
   (`.momu` and `.brand.lockup` in `theme.css`); the share card PNG carries the same "MoMu" wordmark at the right end of its "Second Skin · date" row (H12);
