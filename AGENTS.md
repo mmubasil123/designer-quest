@@ -31,8 +31,8 @@ just fail to connect.
 ## Working together (two people, several agents)
 - **Claim before you start.** Put your name in the ticket's Owner/Status in `LEDGER.md`, commit and push that
   alone, then start. Someone else's name there means hands off; ask the person, not their agent.
-- **One branch per ticket**, named `<name>/<ticket>` (e.g. `basil/A2`). Open a PR to `main`; the other person
-  reviews and merges. Nobody pushes straight to `main` except a claim or a `HANDOVER.md` update.
+- **One branch per ticket**, named `<name>/<ticket>` (e.g. `basil/A2`). Open a PR to `main`; no review is
+  needed, but a PR is merged only when its developer says so, never automatically (an agent asks first). Nobody pushes straight to `main` except a claim or a `HANDOVER.md` update.
 - **`mockups/second-skin.html` is one file:** only one open branch may change it at a time. Check
   `gh pr list` and the ledger before touching it; keep those PRs small and merge them quickly.
 - **Pull and rebase before you push** (`git pull --rebase origin main`). On a conflict in someone else's code,
