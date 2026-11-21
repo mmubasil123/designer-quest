@@ -827,7 +827,7 @@ const adj = id => PIECES[id].name.split(" ")[0].replace(/,$/, "");   // "Furisod
 function lookName() {   // a remixed look earns a name; an unremixed one keeps the screen's title
   const main = look.full || look.top, { body, sleeves } = look.fabric;
   if (!main || (!body && !sleeves)) return "Antwerp, any century";
-  if (body && body === sleeves && PIECES[body].splat && look.full) return `${shortName(body)}, its fabric`;   // a won study fabric worn alone
+  if (body && body === sleeves && PIECES[body].splat) return `${shortName(body)}, its fabric`;   // a won study fabric worn alone
   if (body && body === sleeves) return `${noun(main)} in ${adj(body)}`;
   return `${noun(main)}${body ? ` in ${adj(body)}` : ""}${sleeves ? `${body ? "," : ""} with ${adj(sleeves)} sleeves` : ""}`;
 }
@@ -949,8 +949,9 @@ function renderWearing() {
   const parts = (look.full ? [["full", look.full], ["feet", look.feet]] : [["top", look.top], ["bottom", look.bottom], ["feet", look.feet]])
     .filter(([, id]) => id).map(([slot, id]) => ({ slot, zone: "", id, kind: LABEL[slot], img: PIECES[id].img }));
   const { body, sleeves } = look.fabric;
-  if (look.full && body && body === sleeves && PIECES[body].splat) {   // a won study fabric on its plain cut reads as one piece: one chip, one ×
-    parts[0] = { slot: "won", zone: "", id: body, kind: "Won", img: swatchOf(body) };
+  if ((look.full || look.top) && body && body === sleeves && PIECES[body].splat) {   // a won study fabric on its cut reads as one piece: one chip, one ×
+    const at = parts.findIndex(w => w.slot === "full" || w.slot === "top");
+    parts[at] = { slot: "won", zone: "", id: body, kind: "Won", img: swatchOf(body), cut: parts[at].slot };
   } else if ((look.full || look.top) && body && body === sleeves) parts.push({ slot: "remix", zone: "both", id: body, kind: "Fabric", img: swatchOf(body) });
   else if (look.full || look.top) for (const zone of ["body", "sleeves"]) {
     const id = look.fabric[zone];
@@ -959,7 +960,7 @@ function renderWearing() {
   document.getElementById("wearing").innerHTML = parts.length ? parts.map(w => `<span class="wear">
     <button class="open press" data-open="${w.slot}" data-zone="${w.zone}" aria-label="Change the ${w.kind.toLowerCase()}: ${esc(PIECES[w.id].name)}">
       <img src="${w.img}" alt="" loading="lazy" decoding="async"><span><em>${w.kind}</em> ${esc(shortName(w.id))}</span></button>
-    <button class="off press" data-off="${w.slot}" data-zone="${w.zone}" aria-label="Take off ${esc(PIECES[w.id].name)}">×</button></span>`).join("")
+    <button class="off press" data-off="${w.slot}" data-zone="${w.zone}" data-cut="${w.cut ?? ""}" aria-label="Take off ${esc(PIECES[w.id].name)}">×</button></span>`).join("")
     : `<span class="none">Nothing on yet. Pick a piece below.</span>`;
 }
 function dress() {
@@ -1021,14 +1022,19 @@ function wearFabric(id) {
   dress();
 }
 /* A win goes on by itself, so the visitor sees exactly what they won and one × takes it off. A study piece's scan is not a
-   garment, so its cloth goes on one plain full-length cut (the cocktail dress), body and sleeves both. */
+   garment, so its cloth goes on the wardrobe cut closest to its own shape (CUT_OF), body and sleeves both. */
+const CUT_OF = {   // study piece -> the wearable whose cut is nearest: coats and uniform jackets on the coat, dresses on the dress, the kaftan on the kimono
+  "ST81190": "ST2434", "ST2431/1-4": "ST2434", "ST2432/1-2": "ST2434",
+  "ST2435": "ST655/1", "ST652/1": "ST655/1", "ST671": "ST655/1", "ST2203": "ST655/1", "ST673/1-2": "ST655/1",
+  "ST80998": "ST80881",
+};
 function wearAlone(id) {
   const p = PIECES[id], bare = { top: null, bottom: null, feet: null, full: null, fabric: { body: null, sleeves: null } };
   if (p.splat) {
-    const ok = k => k && PIECES[k]?.slot === "full" && PIECES[k].glb && !PIECES[k].locked;
-    const cut = ["ST655/1", ...Object.keys(PIECES)].find(ok);   // always the same plain cut, so every won fabric reads alike
+    const ok = k => k && ["top", "full"].includes(PIECES[k]?.slot) && PIECES[k].glb && !PIECES[k].locked;
+    const cut = [CUT_OF[id], "ST655/1", ...Object.keys(PIECES)].find(ok);
     if (!cut) return;
-    Object.assign(look, bare, { full: cut, fabric: { body: id, sleeves: id } });
+    Object.assign(look, bare, { [PIECES[cut].slot]: cut, fabric: { body: id, sleeves: id } });
   } else Object.assign(look, bare, { [p.slot]: id });
   activeSlot = "won"; activeZone = "body";
   dress(); setSnap("half");
@@ -1053,9 +1059,9 @@ document.getElementById("cats").addEventListener("click", e => {
 });
 document.getElementById("wearing").addEventListener("click", e => {
   const b = e.target.closest("[data-open], [data-off]"); if (!b) return;
-  const { open, off, zone } = b.dataset;
+  const { open, off, zone, cut } = b.dataset;
   if (off) {
-    if (off === "won") Object.assign(look, { full: null, fabric: { body: null, sleeves: null } });
+    if (off === "won") Object.assign(look, { [cut || "full"]: null, fabric: { body: null, sleeves: null } });   // the cut and its won cloth come off together
     else if (off === "remix" && zone === "both") look.fabric = { body: null, sleeves: null };
     else if (off === "remix") look.fabric[zone] = null; else look[off] = null;
     dress(); return;
@@ -1107,6 +1113,7 @@ async function openFact(id) {
   document.getElementById("factAsk").hidden = unwon;
   view3dBtn.hidden = !(p.glb && !unwon) && !(p.splat && p.seen);   // a study piece's 3D is its Up close scan, open once its sticker was tapped
   if (!factEl.open) factEl.showModal();
+  if (p.splat && p.seen) preloadStudy(id);   // "See it in 3D" opens its Up close scan: start it quietly after 2 s; closing the card aborts it
 }
 /* 3D view: any piece with a 3D file opens full screen, turnable and zoomable. Inside it model-viewer offers "See it in your
    room" only where AR can start; WebXR (in Chrome on Android) needs the viewer on screen, which is why AR lives here. */
@@ -1128,6 +1135,7 @@ viewEl.addEventListener("close", () => { viewMV.removeAttribute("src"); viewAR.h
 document.getElementById("factShares").addEventListener("click", e => { const b = e.target.closest("[data-fact]"); if (b) openFact(b.dataset.fact); });
 document.getElementById("factAct").addEventListener("click", () => { factEl.close(); PIECES[factId].locked && !PIECES[factId].splat ? tapCard(factId) : act(factId, ctxOf(factId)); });
 factEl.addEventListener("click", e => { if (e.target === factEl) factEl.close(); });   // backdrop tap closes
+factEl.addEventListener("close", () => { if (!document.getElementById("nfc").open) cancelStudy(); });   // closed without going on: stop the download
 const ask = createAsk();   // H2: questions answered only from this piece's MoMu record (ask.js)
 document.getElementById("factAsk").addEventListener("click", () => { factEl.close(); ask.open(factId, PIECES[factId].name); });
 
