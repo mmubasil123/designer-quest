@@ -4,11 +4,19 @@ Read this, then `LEDGER.md` (tickets, decisions D1 to D8, product-owner cut and 
 change with its reason. Agent rule (both people): work autonomously within your claimed ticket, inspect screenshots critically
 before calling anything done. Never deploy, push to `main` or publish without your person's explicit go.
 
-## Find-it game H11 (hassan, PR #48 merged 2026-11-21; takes in Basil's J5)
-Up close is found on the piece now: tap the detail on the scan; the list is clues without numbers; "Hint" shows after a
-first miss or 20 s and rings the area (a tap in the ring counts); wrong taps get a ripple and a helping line; each find
-shows the record's Dutch words large, then "Now find it on the real piece in front of you." Only `up-close.html`.
-Checked in Chrome at 390 px on ST2435 and ST81190, front and back, console clean; not on a phone. Done in LEDGER and Notion. J5's "next piece to win" landed as H15 (PR #50, merged): a "Next to win" row on the Won card (`win.js`, `win.css`); made tappable in H17 (PR #52, merged): it keeps the prize, then opens that piece like its Museum tile.
+## Find-it game: H11, H15, H17 (hassan, all merged 2026-11-21; takes in Basil's J5)
+- **H11 (PR #48), `up-close.html`:** you tap each recorded detail on the scan. The list gives clues without numbers.
+  "Hint" appears after a first miss or 20 s and rings the area, off-centre; a tap in the ring counts. A wrong tap gets a
+  ripple and a helping line. Each find shows the record's Dutch words large, then "Now find it on the real piece in
+  front of you."
+- **H15 (PR #50), `win.js` and `win.css`:** the Won card ends on a "Next to win" row. A study piece already started
+  comes first, otherwise the next locked room piece in `pieces.json` order. The row is gone once everything is won.
+- **H17 (PR #52):** the row is a button. It keeps the prize, then calls `tapCard` (`second-skin.html`): a started study
+  piece opens in Up close, any other shows its sticker prompt.
+- Checked in Chrome at 390 px (ST2435 and ST81190 front and back; fabric win and year win; back closes the prompt),
+  console clean. **Not on a phone yet:** on a real phone, check the 44 px tap reach and the hint ring size.
+- Possible next steps: tune `REACH` (44 px), `RING` (60 px) and `HINT_AFTER` (20 s) in `up-close.html` after a phone
+  test; Notion has a row for H11 only (Done).
 
 ## H13 Narrated stories (hassan, PR #46 open, not merged, 2026-11-21)
 - Every piece has a short spoken scene in `mockups/narration-scripts.json` (facts only from the record or the curator's story;
