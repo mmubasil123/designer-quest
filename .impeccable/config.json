@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "recon/hackathon_assets.html"
+        ],
+        "createdAt": "2026-11-21T16:18:30.695Z",
+        "reason": "claude: recon/hackathon_assets.html is a verbatim saved copy of a momu.be page (third-party capture, evidence), not our UI; editing it would falsify the capture"
+      },
+      {
+        "rule": "skipped-heading",
+        "value": "*",
+        "files": [
+          "recon/hackathon_assets.html"
+        ],
+        "createdAt": "2026-11-21T16:18:30.775Z",
+        "reason": "claude: recon/hackathon_assets.html is a verbatim saved copy of a momu.be page (third-party capture, evidence), not our UI; editing it would falsify the capture"
+      }
+    ]
+  }
+}
