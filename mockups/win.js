@@ -52,7 +52,7 @@ export function createWin({ PIECES, record, img }) {
       <button class="btn press" id="winAdd" data-pick="wear">Wear it now</button>
       <button class="btn ghost press" data-pick="keep">Keep it in my ${what === "fabric" ? "fabrics" : "wardrobe"}</button>
       ${nextRow(id)}`);
-    // resolves "wear" or "keep"; either way the prize is already the visitor's
+    // resolves "wear", "keep" or "next" (H17: keep it, then open win.next); either way the prize is already the visitor's
     return new Promise(resolve => el.querySelectorAll("[data-pick]").forEach(b => b.addEventListener("click", () => { el.close(); resolve(b.dataset.pick); }, { once: true })));
   }
 
@@ -63,16 +63,19 @@ export function createWin({ PIECES, record, img }) {
     const left = Object.entries(PIECES).filter(([id, q]) => id !== wonId && q.room && q.locked && (q.glb || q.splat));
     return left.find(([, q]) => q.splat && q.seen) ?? left[0];   // seen: opened up close once, so Museum opens it again
   }
+  let next = null;   // H17: the id the row points at, read by the Stage when the pick is "next"
   function nextRow(wonId) {
-    const next = nextPiece(wonId); if (!next) return "";
-    const [id, q] = next, n = q.details || 3;
-    const how = q.splat && q.seen ? (q.found > 0 ? `You found ${q.found} of ${n} details. Open it in Museum to finish.`
-        : `Open it in Museum and find its ${n} details.`)
+    const found = nextPiece(wonId); next = found?.[0] ?? null; if (!found) return "";
+    const [id, q] = found, n = q.details || 3;
+    const how = q.splat && q.seen ? (q.found > 0 ? `You found ${q.found} of ${n} details. Tap to finish up close.`
+        : `Tap to find its ${n} details up close.`)
       : q.splat ?`Find its sticker at MoMu, then find its ${n} details up close.`
       : "Find its sticker at MoMu and guess when it was made.";
-    return `<div class="next"><img src="${img(id)}" alt="">
-      <p><span class="mono">Next to win</span><b>${esc(q.name)}</b><span class="how">${esc(how)}</span></p></div>`;
+    // H17: a button, so one win leads straight to the next; the Stage opens it after keeping this prize
+    return `<button class="next press" data-pick="next"><img src="${img(id)}" alt="">
+      <span class="txt"><span class="mono">Next to win</span><b>${esc(q.name)}</b><span class="how">${esc(how)}</span></span>
+      <svg class="go" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
   }
 
-  return { guess, won };
+  return { guess, won, get next() { return next; } };
 }
