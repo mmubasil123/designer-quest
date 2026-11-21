@@ -85,6 +85,41 @@
   "quote": "Broek, kniebroek voor een man, in crèmekleurig wollen laken.",
   "quoteEn": "Trousers: men's knee breeches in cream woollen broadcloth."
  },
+ "ST81114AB": {
+  "uri": "http://data.momu.be/ark:34546/m2rbtz",
+  "heron": "m2rbtz",
+  "date": [
+   "1890-1920"
+  ],
+  "place": [],
+  "medium": [
+   "cotton (fiber)",
+   "mother of pearl",
+   "weaving",
+   "stitching (generic process)",
+   "whitework (technique)",
+   "broderie anglaise (technique)",
+   "gauze point stitch"
+  ],
+  "quote": "Witte blouse gedragen als fietskleding, gemaakt van katoenbatist.",
+  "quoteEn": "White blouse worn as cycling wear, made of cotton batiste."
+ },
+ "ST81116": {
+  "uri": "http://data.momu.be/ark:34546/mt76pz",
+  "heron": "mt76pz",
+  "date": [
+   "1890-1920"
+  ],
+  "place": [],
+  "medium": [
+   "wool (hair material)",
+   "cotton (fiber)",
+   "manmade material",
+   "stitching (generic process)"
+  ],
+  "quote": "Zwarte wollen knielange broek gebruikt om te fietsen.",
+  "quoteEn": "Black woollen knee-length trousers used for cycling."
+ },
  "ST2407/1-2": {
   "uri": "http://data.momu.be/item/id/mfxpx0",
   "heron": "mfxpx0",

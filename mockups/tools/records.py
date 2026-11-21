@@ -16,6 +16,8 @@ EN = {
     "ST2434": ("Jas in groen laken, met slippen", "Coat in green broadcloth, with tails."),
     "ST80931": ("Donkerblauwe pofbroek", 'Dark blue puffed trousers, or "monpe", in ikat with light blue spots and red squares.'),
     "ST2062": ("Broek, kniebroek voor een man", "Trousers: men's knee breeches in cream woollen broadcloth."),
+    "ST81114AB": ("Witte blouse gedragen als fietskleding", "White blouse worn as cycling wear, made of cotton batiste."),
+    "ST81116": ("Zwarte wollen knielange broek", "Black woollen knee-length trousers used for cycling."),
     "ST2407/1-2": ("Paar voetbalschoenen", "Pair of football boots in white, with leather in blue circular stripes."),
     "ST80881": ("Ecru furisode kimono", "Ecru furisode kimono, painted and with a gold print."),
     "ST655/1": ("Kuit- tot enkellange japon", "Calf- to ankle-length button-through gown, a cocktail dress, in green and black "

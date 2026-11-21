@@ -41,14 +41,40 @@ def parse(md, heron):
         facts = [[text(k).rstrip(":").strip(), text(v)] for k, v in re.findall(r"<b>([^<]+?:)\s*</b>(.*?)(?=<br\s*/?>|<b>|\n|$)", intro)]
         story = [text(p) for p in re.split(r"\n\s*\n", sections.get("Story", "")) if text(p)]
         qtext = next((v for k, v in sections.items() if k.startswith("Questions")), "")
-        questions = []
-        for line in qtext.splitlines():
-            if m := re.match(r"^\d+\.\s+(.+)", line):
-                questions.append({"q": text(m.group(1)), "a": None})
-            elif (m := re.match(r"^\s+\d+\.\s+Answer:\s*(.+)", line)) and questions:
-                questions[-1]["a"] = text(m.group(1))
-        out.append({"id": pid, "title": title, "link": link, "facts": facts, "story": story, "questions": questions})
+        out.append({"id": pid, "title": title, "link": link, "source": "curator", "facts": facts, "story": story,
+                    "questions": questions_from(qtext)})
     return out
+
+
+def questions_from(qtext):
+    """Her numbered questions, each with its answer one list level deeper. She writes the lists as Markdown ("1. ...",
+    indented 3 spaces per level, the answer sometimes prefixed "Answer:") or as HTML <ol><li>, mixed within one list."""
+    questions, ols, cur = [], [], None   # ols: the Markdown indent level of each open <ol>; cur: level of the open <li>
+    for line in qtext.splitlines():
+        s, indent = line.strip(), (len(line) - len(line.lstrip(" "))) // 3
+        depth = len(ols) + sum(ols)   # list level that a <li> of the innermost open <ol> sits at
+        if s == "<ol>":
+            ols.append(indent)
+        elif s == "</ol>":
+            ols and ols.pop()
+        elif s == "<li>":
+            cur = depth
+        elif s == "</li>":
+            cur = None
+        elif m := re.match(r"^\d+\.\s+(.+)", s):
+            put(questions, depth + indent + 1, m.group(1))
+        elif text(s) and cur:
+            put(questions, cur, s)
+    return questions
+
+
+def put(questions, level, s):
+    s = re.sub(r"^Answer:\s*", "", text(s))
+    if level == 1:
+        questions.append({"q": s, "a": None})
+    elif level == 2 and questions:
+        q = questions[-1]
+        q["a"] = f"{q['a']} {s}" if q["a"] else s
 
 
 def check(doc, pieces):
@@ -57,6 +83,10 @@ def check(doc, pieces):
         err = lambda m: errors.append(f"{p.get('id')}: {m}")
         if p.get("id") not in pieces:
             err("not a piece in pieces.json")
+        # Her answers may be things to observe on the garment ("count the seams"), not record fields: allowed because
+        # her text is the curated source (D3 exception). Any other source would need each answer tied to a record field.
+        if p.get("source") != "curator":
+            err(f"source must be 'curator' (got {p.get('source')!r})")
         if not p.get("story") and not p.get("questions"):
             err("no story and no questions")
         for q in p.get("questions", []):

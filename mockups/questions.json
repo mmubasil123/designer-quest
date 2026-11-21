@@ -7,6 +7,7 @@
       "id": "ST81190",
       "title": "A.F. Vandevorst Jacket",
       "link": "https://heron.libis.be/momu/s/studiecollectie/item/m2v73p#lg=1&slide=0",
+      "source": "curator",
       "facts": [
         [
           "Object",
@@ -49,6 +50,102 @@
         {
           "q": "Considering the material and style, what seasons was this jacket made for?",
           "a": "Autumn and winter"
+        }
+      ]
+    },
+    {
+      "id": "ST81114AB",
+      "title": "Blouse",
+      "link": "https://heron.libis.be/momu/s/studiecollectie/item/m2rbtz#lg=1&slide=0",
+      "source": "curator",
+      "facts": [
+        [
+          "Object",
+          "Blouse"
+        ],
+        [
+          "Materials",
+          "Cotton, Mother of pearl"
+        ],
+        [
+          "Techniques",
+          "weaving, whitework, broderie anglaise, stitching"
+        ],
+        [
+          "Date",
+          "1890-1920"
+        ],
+        [
+          "Country",
+          "Belgium, Europe"
+        ]
+      ],
+      "story": [
+        "This white cotton blouse has machine-made lace on the front, the collar, and the ends of the sleeves (named the cuffs). Take a look at the centre front of the blouse, the lace pieces frame a panel of pleats (the columns of fabric folded double and sewed). If you look closely you can see this pleated panel is attached to the rest of the blouse with buttons. These shiny white buttons are made of mother of pearl, the strong and smooth inner layer of certain sea shells, such as oysters. The buttonholes are hand sewn",
+        "The blouse is part of an outfit that would have been worn by women for cycling around 1900. The type of fabric used for the blouse, called ‘cotton batiste’ is very light and breathable, making it a good fit for cycling and exercising."
+      ],
+      "questions": [
+        {
+          "q": "How many vertical seams (the line where two or more pieces of fabric are stitched together) can you see at the back of the blouse?",
+          "a": "3"
+        },
+        {
+          "q": "Do the lace pieces on the ends of the sleeves and on the collar have any of the same patterns?",
+          "a": "Yes, one of the flower motifs"
+        },
+        {
+          "q": "Name one specific element of the blouse that is hand sewn",
+          "a": "buttonholes or seams"
+        },
+        {
+          "q": "What type of fabric is the blouse made of that makes it light and good for exercise?",
+          "a": "Cotton batiste"
+        }
+      ]
+    },
+    {
+      "id": "ST81116",
+      "title": "Trousers",
+      "link": "https://heron.libis.be/momu/s/studiecollectie/item/mt76pz#lg=1&slide=0",
+      "source": "curator",
+      "facts": [
+        [
+          "Object",
+          "Trousers"
+        ],
+        [
+          "Materials",
+          "Wool, cotton, synthetic fibre"
+        ],
+        [
+          "Techniques",
+          "weaving, stitching"
+        ],
+        [
+          "Date",
+          "1890-1920"
+        ],
+        [
+          "Country",
+          "Belgium, Europe"
+        ]
+      ],
+      "story": [
+        "Take a look at these black woollen trousers. They are wide and gather at the knees with an elastic, forming a kind of balloon shape. Both in the front and the back are six deep pleats or folds which hide the part where the left and right pant legs are attached.",
+        "If you take a few steps back, you may find it is hard to see whether these are trousers or a skirt. The voluminous trousers are part of an outfit worn by women around 1900 for cycling. Around this time, many women started wearing trousers to cycle as long skirts could get caught in the wheels. In contrast to their daily clothing, newly designed sports clothes gave women more comfort and room to move when exercising."
+      ],
+      "questions": [
+        {
+          "q": "What do you see hidden between the folded pleats at the top right of the trousers?",
+          "a": "a pocket"
+        },
+        {
+          "q": "Why was it dangerous to wear long skirts whilst cycling?",
+          "a": "the fabric could get caught in the wheels"
+        },
+        {
+          "q": "Would the ends of the pant legs be stretchy?",
+          "a": "yes, they have an elastic"
         }
       ]
     }
