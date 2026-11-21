@@ -17,7 +17,7 @@ from pathlib import Path
 
 MOCKUPS = Path(__file__).resolve().parents[1]
 SOURCE = "https://www.notion.so/41f8b3bb922780c1be22c63ccd5cb7c1"
-HEAD = re.compile(r"\[(?:\s*<[^>]+>)*\s*(\d+)\s*:\s*(.*?)(?:<[^>]+>\s*)*\]\((https?://[^)\s]+)\)")
+HEAD = re.compile(r"\[(?:\s*<[^>]+>)*\s*(\d+)\s*[:.]\s*(.*?)(?:<[^>]+>\s*)*\]\((https?://[^)\s]+)\)")   # "1: Title" or "2. Title"
 
 
 def text(s):
@@ -36,7 +36,7 @@ def parse(md, heron):
         if not pid:
             print(f"SKIP {title!r}: its link {link} matches no piece in the app")
             continue
-        parts = re.split(r"<u>\s*(Story|Questions[^<]*)\s*</u>", body)
+        parts = re.split(r"<u>\s*(Story|Questions)[^<]*</u>", body)   # "Story", "Story:", "Questions (pick 3)"
         intro, sections = parts[0], dict(zip(parts[1::2], parts[2::2]))
         facts = [[text(k).rstrip(":").strip(), text(v)] for k, v in re.findall(r"<b>([^<]+?:)\s*</b>(.*?)(?=<br\s*/?>|<b>|\n|$)", intro)]
         story = [text(p) for p in re.split(r"\n\s*\n", sections.get("Story", "")) if text(p)]

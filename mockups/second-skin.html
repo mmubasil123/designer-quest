@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="quiz.css">
 <link rel="stylesheet" href="ask.css">
 <link rel="stylesheet" href="share.css">
+<link rel="stylesheet" href="story.css">
 <style>
 :root {
   --paper: #f3efe7;
@@ -349,6 +350,7 @@ import { createQuiz } from "./quiz.js";
 import { createAsk } from "./ask.js";
 import { createShare } from "./share.js";
 import { AVATAR_URL, AVATAR_FIT, FORM_CUT, prepAvatar, placeFeet, fitWorn, restoreShape } from "./avatar-body.js";
+import { createStory, showScan } from "./story.js";
 
 const IMG = id => `https://heron.libis.be/momu/files/large/${id}.jpg`;
 const ZOOM_MAX = 3;
@@ -376,8 +378,9 @@ const params = new URLSearchParams(location.search);
 const scanned = params.get("card");
 // C2: the curator's story and questions (questions.json) show after a card scan; optional, nothing is locked behind them
 const quiz = scanned ? await createQuiz({ pieces: PIECES }) : null;   // only a card scan needs it, so a plain visit boots as before
+const story = scanned ? await createStory() : null;   // H3: story with narration before the questions (story.js)
 if (PIECES[scanned]?.splat) {   // before the Stage boots, so a study card never downloads the wearable GLBs
-  if (quiz?.has(scanned)) await quiz.show(scanned, { found: true, next: "Study it up close" });
+  await showScan({ story, quiz, id: scanned, next: "Study it up close" });
   location.replace(`up-close.html?id=${encodeURIComponent(scanned)}`);
   await new Promise(() => {});
 }
@@ -1215,7 +1218,7 @@ else if (scanned) {
   else { if (p.slot !== "feet") look.full = null; look[p.slot] = scanned; }
   turntables.forEach(t => t.draw()); renderLocker(); renderCredit();
   toast(`Found in the museum: ${p.name}, ${p.year.from}`);
-  if (quiz?.has(scanned)) quiz.show(scanned, { found: true, next: "Back to the form" });
+  showScan({ story, quiz, id: scanned, next: "Back to the form" });
 }
 if (scanned) history.replaceState(null, "", location.pathname);   // a reload must not re-apply the card over later changes
 // first visit only, and not for a visitor who arrived by a museum card or from Up close: they already know what they want
