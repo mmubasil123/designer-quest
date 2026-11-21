@@ -1,0 +1,36 @@
+/* C2 quiz sheet and locked-fabric tiles; tokens come from second-skin.html */
+.quiz { width: min(340px, calc(100% - 32px)); max-height: calc(100% - 32px); margin: auto; border: 0; border-radius: 24px; padding: 0;
+  background: var(--paper); color: var(--ink); box-shadow: 0 12px 40px rgb(0 0 0 / .18); opacity: 0; transform: scale(.96);
+  transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), display 200ms allow-discrete, overlay 200ms allow-discrete; }
+.quiz[open] { opacity: 1; transform: none; }
+@starting-style { .quiz[open] { opacity: 0; transform: scale(.96); } }
+.quiz::backdrop { background: rgb(27 26 23 / .35); }
+.quiz > div { padding: 22px 22px 20px; outline: none; }
+.quiz h3 { font: 400 22px/1.15 Newsreader, serif; margin: 4px 0 8px; }
+.quiz .prompt { font-size: 15px; margin-bottom: 14px; text-wrap: pretty; }
+.quiz .opts { display: grid; gap: 8px; }
+.quiz .opt { min-height: 44px; padding: 10px 14px; border-radius: 14px; border: 1px solid var(--line); background: var(--plinth); text-align: left;
+  transition: background-color 200ms var(--ease-out), border-color 200ms var(--ease-out), opacity 200ms var(--ease-out); }
+.quiz .opt:disabled { cursor: default; opacity: .5; }
+.quiz .opt.right { opacity: 1; border-color: var(--ink); background: var(--wall); }
+.quiz .opt.right::after { content: " ✓"; }
+.quiz .opt.picked:not(.right) { opacity: .8; text-decoration: line-through; text-decoration-color: var(--muted); }
+.quiz .result:empty { display: none; }
+.quiz .result { margin-top: 14px; }
+.quiz .verdict { font: 400 17px/1.3 Newsreader, serif; }
+.quiz .result blockquote { margin: 10px 0 0; padding-left: 12px; border-left: 2px solid var(--line); }
+.quiz .result q { font: italic 14px/1.4 Newsreader, serif; display: block; margin: 4px 0; }
+.quiz .result blockquote p { color: var(--muted); font-size: 13px; }
+.quiz .won { color: var(--muted); font-size: 14px; margin-top: 10px; text-wrap: pretty; }
+.quiz .row { display: grid; gap: 8px; margin-top: 16px; }
+.quiz .row .btn { min-height: 44px; }
+/* Remix tile of a fabric still behind its question */
+.tile.qlock img { filter: grayscale(1) contrast(.2) brightness(1.4); }
+.tile.qlock::after { pointer-events: none; content: "Answer its question"; position: absolute; inset: 0; display: grid; place-items: center; text-align: center;
+  padding: 10px; font: italic 13px/1.2 Newsreader, serif; color: var(--muted); }
+.tile.qlock.wrong::after { content: "Scan its card again"; }
+@media (prefers-reduced-motion: reduce) {
+  .quiz { transition: opacity 150ms ease; transform: none; }
+  @starting-style { .quiz[open] { transform: none; } }
+  .quiz .opt { transition: none; }
+}

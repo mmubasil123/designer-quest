@@ -26,7 +26,9 @@ trousers, plinth removed, dressing-order render.
 2. **E3 Vercel preview**, only after the owner says go: Root Directory should become `app/` once A3 lands; until
    then deploy `mockups/` as a static site and exclude nothing else.
 3. **A6 LRU + render on demand**, **A5 GLB optimisation** (meshopt + webp, keep `gltf-transform` inside the project).
-4. **C2** questions for 3 pieces quoting MoMu fields, **C1** fabric cards.
+4. **C2** in review on `hassan/C2` (questions for ST503, ST80931, ST2407/1-2; the curator to rewrite and approve the draft
+   text in `mockups/questions.json`, then set `draft: false` and rerun `tools/questions_check.py`). C1 done.
+   Console: `secondSkinQuiz.reset()` clears answers for a demo rerun.
 5. **B7** share card, **E2** screen recording, **E1** slides in `presentation/`.
 
 ## Left / known issues

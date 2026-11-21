@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "about": "C2: one question per piece. `answer` and every option are verbatim values of `field` in MoMu record `record` (mockups/records.json, built from cache/ by tools/records.py). Distractors are real values of the same field from other records. `prompt` and `label` text are drafts until `draft` is false (the curator approves). Check: python3 -I mockups/tools/questions_check.py",
+  "questions": [
+    {
+      "id": "ST503",
+      "record": "ST503",
+      "field": "place",
+      "draft": true,
+      "prompt": "This jak was worn around 1750 to 1780. Where was it made?",
+      "answer": "Netherlands",
+      "options": ["Belgium", "Netherlands", "Japan", "Palestine"]
+    },
+    {
+      "id": "ST80931",
+      "record": "ST80931",
+      "field": "date",
+      "draft": true,
+      "prompt": "These monpe, dark blue puffed trousers in ikat, come from Japan. When were they made?",
+      "answer": "1965",
+      "options": ["1850-1870", "1750-1780", "1965", "2005-2009"]
+    },
+    {
+      "id": "ST2407/1-2",
+      "record": "ST2407/1-2",
+      "field": "medium",
+      "draft": true,
+      "prompt": "Dirk Bikkembergs made these football boots partly from man-made material. What else are they made of?",
+      "answer": "leather",
+      "options": ["silk taffeta", "broadcloth (woollen fabric)", "leather", "cotton (fiber)"]
+    }
+  ]
+}

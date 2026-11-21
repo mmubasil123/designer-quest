@@ -12,6 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/" } }</script>
 <link rel="preconnect" href="https://heron.libis.be" crossorigin>
+<link rel="stylesheet" href="quiz.css">
 <style>
 :root {
   --paper: #f3efe7;
@@ -337,6 +338,7 @@ dt { color: var(--muted); }
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { createQuiz } from "./quiz.js";
 
 const IMG = id => `https://heron.libis.be/momu/files/large/${id}.jpg`;
 const ZOOM_MAX = 3;
@@ -369,12 +371,15 @@ if (PIECES[scanned]?.splat) {   // before the Stage boots, so a study card never
 const SLOTS = ["top", "bottom", "feet", "full"];
 const look = { top: "ST503", bottom: "ST80931", feet: "ST2407/1-2", full: null, fabric: { body: null, sleeves: null }, skin: 1 };
 const SAVE_KEY = "secondSkin.save.v1";
+// C2: a wearable piece with a question keeps its fabric locked (p.fabricLocked) until answered right; state saves as `quiz`
+const quiz = await createQuiz({ pieces: PIECES, saveKey: SAVE_KEY, onAnswer: () => { renderLocker(); renderCredit(); }, onClose: quizClosed });
 try {   // restore the visitor's look; ids are checked against the manifest, since storage is user-controlled
   const saved = JSON.parse(localStorage.getItem(SAVE_KEY) || "null");
   const ok = (id, slots) => id === null || (PIECES[id] && !PIECES[id].locked && slots.includes(PIECES[id].slot));
+  const okFabric = id => ok(id, ["top", "bottom", "feet", "full", "study"]) && !PIECES[id]?.fabricLocked;
   const l = saved?.v === 1 && saved.look;
   if (l && ok(l.top, ["top"]) && ok(l.bottom, ["bottom"]) && ok(l.feet, ["feet"]) && ok(l.full, ["full"])
-      && ok(l.fabric?.body ?? null, ["top", "bottom", "feet", "full", "study"]) && ok(l.fabric?.sleeves ?? null, ["top", "bottom", "feet", "full", "study"])
+      && okFabric(l.fabric?.body ?? null) && okFabric(l.fabric?.sleeves ?? null)
       && Number.isInteger(l.skin) && l.skin >= 0 && l.skin < 4) {
     Object.assign(look, { top: l.top, bottom: l.bottom, feet: l.feet, full: l.full, skin: l.skin,
       fabric: { body: l.fabric?.body ?? null, sleeves: l.fabric?.sleeves ?? null } });
@@ -781,7 +786,7 @@ function renderCredit() {   // the evening game: build the look that spans the m
   widest = Math.max(widest, span);
   document.getElementById("lookSpan").textContent = span ? `Spans ${span} years · your widest ${widest}` : "";
   document.getElementById("lookName").textContent = lookName();
-  try { localStorage.setItem(SAVE_KEY, JSON.stringify({ v: 1, look, widest })); } catch { /* storage full or blocked */ }
+  try { localStorage.setItem(SAVE_KEY, JSON.stringify({ v: 1, look, widest, quiz: quiz.state })); } catch { /* storage full or blocked */ }
   if (!renderCredit.ready) return;   // the page's opening look earns nothing; the visitor's first change can
   const fresh = FIRSTS.filter(f => !earned.has(f.k) && f.test(span, fabricIds.length));
   fresh.forEach(f => earned.add(f.k));
@@ -833,7 +838,9 @@ function renderLocker() {
       `<button class="cat press" aria-pressed="${z === activeZone}" data-zone="${z}">${z === "body" ? "Body" : "Sleeves"}</button>`).join("");
     const bare = !look.full && !look.top ? `<p class="zones none">Fabric goes on a top or a full look. Put one on first.</p>` : "";
     grid.innerHTML = `<div class="zones">${zones}</div>${bare}` + Object.entries(PIECES).filter(([, p]) => (p.glb || p.splat) && !p.locked).map(([id, p]) =>
-      tile(id, isWorn(id, "remix") ? "on" : "", swatchOf(id), `<span class="m">${esc(shortName(id))}</span>`, `${p.name} fabric on the ${activeZone}`)).join("");
+      p.fabricLocked ? tile(id, `qlock ${quiz.result(id) === "wrong" ? "wrong" : ""}`, swatchOf(id), `<span class="m">${esc(shortName(id))}</span>`,
+        quiz.result(id) === "wrong" ? `${p.name} fabric: scan its card again to unlock` : `${p.name} fabric: answer its question to unlock`)
+      : tile(id, isWorn(id, "remix") ? "on" : "", swatchOf(id), `<span class="m">${esc(shortName(id))}</span>`, `${p.name} fabric on the ${activeZone}`)).join("");
     return;
   }
   grid.innerHTML = Object.entries(PIECES).filter(([, p]) => p.slot === activeSlot).map(([id, p]) =>
@@ -895,6 +902,10 @@ function act(id, ctx) {   // the one action a tile, or its fact card, performs
       document.getElementById("nfc").showModal();
       preloadStudy(id);
     }
+    return;
+  }
+  if (ctx === "remix" && PIECES[id].fabricLocked) {   // C2: the fabric is won by the piece's question, asked once per card scan
+    if (quiz.result(id) === "wrong") toast(`Scan the ${shortName(id).toLowerCase()} card again for another go`); else quiz.ask(id);
     return;
   }
   if (ctx === "remix" && !look.full && !look.top) {   // cloth goes on a top's body or sleeves: without one it would vanish
@@ -965,6 +976,15 @@ async function openFact(id) {
 document.getElementById("factShares").addEventListener("click", e => { const b = e.target.closest("[data-fact]"); if (b) openFact(b.dataset.fact); });
 document.getElementById("factAct").addEventListener("click", () => { factEl.close(); act(factId, ctxOf(factId)); });
 factEl.addEventListener("click", e => { if (e.target === factEl) factEl.close(); });   // backdrop tap closes
+
+function quizClosed(id, { answered, tryFabric }) {   // C2: toasts wait until the question sheet is gone
+  if (tryFabric) {
+    if (look.full || look.top) { look.fabric.body = id; activeSlot = "remix"; activeZone = "body"; dress(); setSnap("half"); }
+    else { activeSlot = "top"; renderLocker(); setSnap("half"); }
+    toast(look.full || look.top ? `Wearing the fabric of the ${shortName(id).toLowerCase()}, ${PIECES[id].year.from}` : "Put on a top first, then its fabric");
+  } else if (answered) toast(`Fabric unlocked: ${shortName(id)}. Find it in Remix`);
+}
+window.secondSkinQuiz = { ask: quiz.ask, state: quiz.state, reset() { quiz.reset(); renderLocker(); renderCredit(); } };   // console checks
 
 /* ---------- Wardrobe sheet: drag the grab area, snap to peek / half / full ---------- */
 const stageEl = document.getElementById("stage"), wardrobe = document.getElementById("wardrobe");
@@ -1127,6 +1147,7 @@ else if (scanned) {
   else { if (p.slot !== "feet") look.full = null; look[p.slot] = scanned; }
   turntables.forEach(t => t.draw()); renderLocker(); renderCredit();
   toast(`Found in the museum: ${p.name}, ${p.year.from}`);
+  if (quiz.result(scanned) !== "right") quiz.ask(scanned, { found: true });   // C2: no question for this piece is a no-op
 }
 if (scanned) history.replaceState(null, "", location.pathname);   // a reload must not re-apply the card over later changes
 // first visit only, and not for a visitor who arrived by a museum card or from Up close: they already know what they want
