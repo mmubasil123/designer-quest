@@ -2,7 +2,6 @@
    tools/questions_sync.py). Optional and on top: the piece is collected by the scan itself, nothing is locked behind a
    question, and there is no score, timer or streak (D2). Each question shows its answer on a tap. */
 
-const SHOWN = 3;   // her page lists more and says "pick 3": the first 3 in her order are shown
 const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
 export async function createQuiz({ pieces }) {
@@ -28,7 +27,7 @@ export async function createQuiz({ pieces }) {
   function show(id, { found = false, next = "Close" } = {}) {
     const p = byId[id];
     if (!p) return Promise.resolve();
-    const qs = p.questions.slice(0, SHOWN);
+    const qs = p.questions;   // every question on her page, in her order
     el.innerHTML = `<div tabindex="-1" autofocus>
       <div class="mono">${found ? "Found in the museum" : "Story"} · ${esc(id)}</div>
       <h3 id="quizName">${esc(p.title)}</h3>
