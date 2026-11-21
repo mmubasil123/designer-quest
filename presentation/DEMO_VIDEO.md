@@ -19,24 +19,26 @@ in QuickTime, PowerPoint and any browser). Rebuild it with the commands in `pres
 | 4 | 13.8 | Guess when it was made, and you win it. | Guess 1900, "Earlier", 1760, "You won it! Made 1750 to 1780" | ST503 year |
 | 5 | 17.8 | Every piece you win goes into your wardrobe. | Wardrobe with the jak marked New, "7 in your wardrobe", then the jak on the form | the app |
 | 6 | 21.3 | Dress the form across the centuries: a 1979 furisode kimono, the fabric of a 1998 Vandevorst coat. | A timeline drawing itself, 1750, 1979, 1998, 2005; the kimono look | ST80881, ST81190, ST2407/1-2 |
-| 7 | 28.4 | Look closer, and find the metal rivets the record describes, on a 3D scan. | Up close on the coat, zoom to a rivet, "Found 1 of 3: Rivets instead of seams", the story's sentence | `narration.json` ST81190 (verbatim) |
-| 8 | 34.3 | Your look spans 255 years, and every share credits MoMu. | 255 counting up; Noor's share card, ring on its MoMu credit | the app's share card (H12) |
+| 7 | 28.4 | Look closer, and find the metal rivets the record describes, on a 3D scan. | Up close on the coat (MoMu's CLO model since H18), zoom to a rivet, "Found 1 of 3: Rivets instead of seams", the story's sentence | `narration.json` ST81190 (verbatim) |
+| 8 | 34.3 | Your look spans 255 years, and every share credits MoMu. | 255 counting up; Noor's share card, ring on its MoMu masthead | the app's share card (H12) |
 | 9 | 38.6 | The rest of the collection is waiting for you. | MoMu logo, second-skin-ten.vercel.app, @momuantwerp / #momuantwerp | the deck's closing slide |
 
 Scene 6 first said "a 1998 Vandevorst coat" as if worn on the form; the coat is a study piece whose fabric you win,
 so the caption says "the fabric of".
 
 ## Checks on the last render (2026-11-22)
-- Dead spots (nothing changes for over 1 s, frames every 0.5 s): none, except the end card's 1.8 s hold, kept on
-  purpose so the address can be read.
+- Dead spots (nothing changes for over 1 s, frames every 0.5 s): the end card's 1.8 s hold, kept on purpose so the
+  address can be read, and about 1 s at the end of scene 6 (after the red span draws), left as is.
 - Too busy (over half the picture changing without a cut): none.
 - Reading sheet at 12 moments: no text cut off or outside the 80 px safe area; smallest text 24 px at 1080p.
 - Audio and video both run to 44.4 s.
 - Not yet checked on the venue projector or with the presenter's laptop speakers.
 
 ## Re-record after merges
-The screens are captured from `main` on 2026-11-22 (after H10 branding, H11 find-it, H12 personal share, H15). Re-run
-`node scripts/capture.mjs`, then render, when these land:
-- **H13 poetic narration (PR #46, audio pending):** scenes 3 and 4 (story sheet). The quote on the left is the
-  record's own words, so it does not change.
-- Any change to the share card, the Won card, the wardrobe or Up close: scenes 4, 5, 7, 8.
+The screens were re-captured from `main` on 2026-11-22 after H10 (logo and masthead), H11, H12, H13 (poetic
+narration on the story sheet and share card), H15 and H18 (Up close shows MoMu's CLO model for the coat). Re-run
+`node scripts/capture.mjs`, then render, after any change to the story sheet, the Won card, the wardrobe, Up close or
+the share card (scenes 3, 4, 5, 7, 8).
+
+**Open question for Hassan:** scene 7 still says "on a 3D scan", but since H18 Up close shows MoMu's CLO model of the
+coat, not a scan. Proposed caption: "Look closer, and find the metal rivets the record describes, on MoMu's 3D model."

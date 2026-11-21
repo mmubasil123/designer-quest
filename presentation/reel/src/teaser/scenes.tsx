@@ -190,8 +190,8 @@ export const Closer: React.FC<P> = ({ scene }) => {
         <div style={{ marginTop: 14 }}><Label>The piece's story · ST81190</Label></div>
       </div>
       <Phone src="upclose.png" x={PX} y={PY} style={usePhoneIn(0)}
-        screen={{ transformOrigin: `${pt(180)}px ${pt(238)}px`, scale: `${1 + 0.7 * arrive(f, s(1.1), 12)}` }}>
-        <Ring x={150} y={208} w={60} h={60} at={found} round />
+        screen={{ transformOrigin: `${pt(190)}px ${pt(178)}px`, scale: `${1 + 0.7 * arrive(f, s(1.1), 12)}` }}>
+        <Ring x={168} y={156} w={44} h={44} at={found} round />
       </Phone>
     </AbsoluteFill>
   );
@@ -201,7 +201,7 @@ export const Closer: React.FC<P> = ({ scene }) => {
 export const Share: React.FC<P> = ({ scene }) => {
   const f = useCurrentFrame();
   const card = arrive(f, 0, 12);
-  const CROP = 0.958, H = 900, Wc = Math.round((H * 1080) / 1920 / CROP), k = Wc / 1080;
+  const CROP = 0.925, H = 900, Wc = Math.round((H * 1080) / 1920 / CROP), k = Wc / 1080;
   return (
     <AbsoluteFill style={{ background: C.paper }}>
       <Caption phrases={scene.phrases} />
@@ -212,11 +212,11 @@ export const Share: React.FC<P> = ({ scene }) => {
       <div style={{ position: "absolute", left: 120, top: 690, opacity: arrive(f, scene.phrases[1].at, 9) }}>
         <Label>Collection: MoMu Fashion Museum Antwerp</Label>
       </div>
-      {/* the card cropped above its last line (the capture shows the local test address there) */}
+      {/* the card cropped above its last lines (the capture shows the local test address there); the ring marks MoMu's masthead */}
       <div style={{ position: "absolute", left: 1920 - 120 - Wc, top: 90, width: Wc, height: H, overflow: "hidden", boxShadow: "0 30px 70px rgb(0 0 0 / .2)",
         opacity: card, translate: `0px ${(1 - card) * 80}px` }}>
         <Img src={staticFile("shots/share-card.png")} style={{ width: Wc, display: "block" }} />
-        <div style={{ position: "absolute", left: 70 * k, top: 1780 * k, width: 790 * k, height: 70 * k, border: `5px solid ${C.accent}`, borderRadius: 10,
+        <div style={{ position: "absolute", left: 44 * k, top: 60 * k, width: 376 * k, height: 236 * k, border: `5px solid ${C.accent}`, borderRadius: 10,
           opacity: arrive(f, scene.phrases[1].at + s(0.8), 9), scale: `${1.15 - 0.15 * arrive(f, scene.phrases[1].at + s(0.8), 9)}` }} />
       </div>
     </AbsoluteFill>
