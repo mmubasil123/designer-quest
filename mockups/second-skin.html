@@ -674,7 +674,7 @@ function renderLocker() {
   document.getElementById("slotTitle").textContent = activeSlot === "remix" ? "Remix the fabric" : LABEL[activeSlot];
   document.getElementById("cats").innerHTML = [...SLOTS, "study", "remix"].map(s =>
     `<button class="cat press" aria-pressed="${s === activeSlot}" data-slot="${s}">${LABEL[s]}</button>`).join("");
-  if (activeSlot === "study") {   // splat pieces: studied on up-close.html, never worn; the card in the room opens them
+  if (activeSlot === "study") {   // D2: only a scanned card opens a study piece
     document.getElementById("grid").innerHTML = Object.entries(PIECES).filter(([, p]) => p.splat).map(([id, p]) => {
       const state = !p.seen ? "Tap the card in the museum" : p.locked ? `${p.found} of ${p.details} found` : "Fabric won";
       const date = p.year.from === p.year.to ? p.year.from : `${p.year.from}–${p.year.to}`;
