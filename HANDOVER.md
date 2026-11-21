@@ -4,6 +4,13 @@ Read this, then `LEDGER.md` (tickets, decisions D1 to D8, product-owner cut and 
 change with its reason. Agent rule (both people): work autonomously within your claimed ticket, inspect screenshots critically
 before calling anything done. Never deploy, push to `main` or publish without your person's explicit go.
 
+## Find-it game H11 (hassan, PR #48 merged 2026-11-21; takes in Basil's J5)
+Up close is found on the piece now: tap the detail on the scan; the list is clues without numbers; "Hint" shows after a
+first miss or 20 s and rings the area (a tap in the ring counts); wrong taps get a ripple and a helping line; each find
+shows the record's Dutch words large, then "Now find it on the real piece in front of you." Only `up-close.html`.
+Checked in Chrome at 390 px on ST2435 and ST81190, front and back, console clean; not on a phone. Done in LEDGER and Notion. Left out: J5's
+"next piece to win" on the Won card (`second-skin.html`).
+
 ## H13 Poetic narration (hassan, PR #46 open, not merged, 2026-11-21)
 - The 16 record-built stories are short poems in `mockups/narration-poems.json` (facts only from each record, each
   traced to the record's Dutch words; check: `python3 -I mockups/tools/narration_facts.py <path to cache/>`). the curator's 3
@@ -15,11 +22,12 @@ before calling anything done. Never deploy, push to `main` or publish without yo
   export MP4), then `narration.py --import DIR --voice "picsart:Adeline"`, `--check`, transcribe each file back, commit
   to `hassan/H13-narration`. Then merge on Hassan's word, mark H13 done in LEDGER and Notion.
 
-## MoMu branding (H10, PR #44 open, not merged, 2026-11-21)
-"MoMu / Second Skin" lockup in the Stage bar and the Up close header, the "MoMu" wordmark on the share card, and
-"at MoMu" instead of "in the museum" in the copy. Typographic only: no official MoMu logo file is in the repo or the
-template. Checked in Chrome at 390 px, not on a phone. Small overlaps with H11/H12/H13 in `quiz.js`, `share.js`,
-`story.js` (one to three lines each). Next: Hassan reviews and merges; then mark H10 done in LEDGER and Notion.
+## MoMu branding (H10, PR #44 merged, PR #47 open, 2026-11-21)
+PR #44: the MoMu wordmark in the Stage bar, the Up close header and the share card, and "at MoMu" in the copy. PR #47:
+the name "Second Skin" is gone from everything a visitor sees (the team is renaming the app; until then it says MoMu).
+Kept: `second-skin.html`, the Vercel project, sticker URLs, `secondSkin.*` keys, `second_skin` DB schema. Typographic
+mark only (no official logo file in the repo or template). Checked in Chrome at 390 px, not on a phone. Next: merge
+#47, then mark H10 done in LEDGER and Notion; rename the identifiers only once the new name is picked (Mubasil deploys).
 
 ## Personal share card (H12, PR #45, merged 2026-11-21)
 Share sheet takes an optional name (device only) and draws a personal 1080x1920 card: name title, period room, pieces

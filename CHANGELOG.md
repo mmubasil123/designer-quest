@@ -24,6 +24,21 @@ Newest first. Each entry: what changed, why, and the decision behind it.
   project `second-skin`, the sticker URLs, the `secondSkin.*` saved keys, `window.secondSkin` and the `second_skin` DB
   schema (renaming them would break printed stickers and saved looks, and needs Mubasil for the deploy). History
   (this changelog, past ledger rows, plans) is left as written. Checked in Chrome at 390 px, console clean.
+## Find-it game: tap the details on the piece (2026-11-21, branch hassan/H11-find-it, H11 with J5)
+- What: in Up close the visitor finds each recorded detail by tapping it on the 3D scan. The list shows the clues
+  without numbers, and a line under the count says how to play. "Show me" is now "Hint". It appears only after a first
+  wrong tap or 20 s without a find. A hint turns the piece and rings the area around the detail, off-centre, and a tap
+  anywhere in the ring counts. A wrong tap gets a ripple and a helpful line ("Close. Look a little nearer.",
+  "Nothing left to find on this side. Turn the piece."). A find opens a card on the scan with the record's Dutch words
+  large, the English below and "Now find it on the real piece in front of you." The last find's card has "Win its
+  fabric". Found marks on the piece are plain dots. Before all are found, the bottom button never shows the answer.
+- Why: feedback 2026-11-21. Visitors tapped "Show me" in the list and only then saw the detail on the piece, so the
+  list was the way in, not the scan. J5 (no order numbers, the record's words large, then the real piece) is the same
+  flow, so Hassan took it over from Basil and it lands here.
+- Decision: the scan comes first and the text is a hint. Hints stay so nobody gets stuck (D2). The ring shows an area,
+  never the spot. Quotes are the record's own (`details[].quote`, unchanged). Not done: J5's "then the next piece to
+  win" belongs on the Won card in `second-skin.html`, outside this ticket, so it is left for a follow-up. Checked in Chrome at
+  390 px on ST2435 and ST81190, front and back; not on a phone.
 
 ## MoMu branding on every main screen (2026-11-21, branch hassan/H10-branding)
 - What: a stacked "MoMu / Second Skin" lockup replaces the plain "Second Skin" in the Stage bar and the Up close header
