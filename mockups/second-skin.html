@@ -525,7 +525,6 @@ class Turntable {
     const n = ((Math.round(f) % FRAMES) + FRAMES) % FRAMES;
     if (n !== this.shown) { this.shown = n; this.onFrame?.(n); }
   }
-  swap() { this.draw(); }
   draw() {   // bring the worn pieces in line with `look`
     this.form.userData.cloth.color.set(SKINS[look.skin]);
     const want = look.full ? { full: look.full, feet: look.feet } : { top: look.top, bottom: look.bottom, feet: look.feet };
