@@ -2,6 +2,18 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## Next piece to win on the Won card (2026-11-21, branch hassan/H15-next-piece, H15)
+- What: the Won card (`mockups/win.js`, `win.css`) ends on a "Next to win" row with the piece's photo, its name and
+  how to win it. A study piece the visitor has already opened up close comes first ("You found 1 of 3 details. Open it
+  in Museum to finish."). Otherwise it shows the next locked room piece in `pieces.json` order, either "Find its
+  sticker at MoMu and guess when it was made." or "...then find its 3 details up close." Once every piece is won,
+  the row is not shown. It shows after both year wins and fabric wins.
+- Why: the rest of J5 ("then the next piece to win"), left out of H11. A win now points to the next one.
+- Decision: a plain row, not a button. Opening a piece belongs to the Stage in `second-skin.html`, which PR #47 had
+  open, so this change stays out of it. It uses the same list as Museum (room pieces with a GLB or a splat). Facts come only from
+  `pieces.json` (D3). Checked in Chrome at 390 px (fabric win with a half-found coat, year win on the jak) and with
+  test data (wearable copy, nothing left); not on a phone.
+
 ## MoMu's official logo in the app (2026-11-21, branch hassan/H10-rename)
 - What: MoMu's two-M logo replaces the typed "MoMu": `assets/brand/momu-logo.svg` (the small 202x42 proportion, copied
   unchanged from the inline SVG on momu.be), inlined in the Stage bar and Up close header (87x18 px, down to 62 px wide in
