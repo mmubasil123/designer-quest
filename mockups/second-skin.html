@@ -314,6 +314,19 @@ const FRAMES = 36; // matches CLO export_turntable's default frame count
 
 const SKINS = ["#e9dfcc", "#d2bf9c", "#2a2724", "#8a6a48"];   // dress-form finishes, in FINISH_NAMES order
 const FINISH_NAMES = ["Linen", "Calico", "Black jersey", "Oak"];
+/* Back from Up close can show this page from the back-forward cache, frozen as it was. A ?card= study scan parks this page
+   before the wardrobe is drawn and hands over to Up close, so a frozen copy is a blank sheet with only "Top", and a win
+   left there would wait for some later page load. So: any restore before boot finished, or with a win waiting or details
+   found since, starts the page again (the look is saved). Registered before the first await, so a parked page has it too. */
+const CLAIM_KEY = "secondSkin.claim";   // H6: Up close steps back to this page and leaves the won fabric here, instead of ?fabric= on a new entry
+const readFound = () => { try { return localStorage.getItem("secondSkin.found.v1"); } catch { return null; } };
+const foundAtBoot = readFound();
+let booted = false;
+addEventListener("pageshow", e => {
+  if (!e.persisted) return;
+  let waiting = false; try { waiting = !!sessionStorage.getItem(CLAIM_KEY); } catch { /* storage blocked */ }
+  if (!booted || waiting || readFound() !== foundAtBoot) location.reload();
+});
 // pieces.json (schema: pieces.schema.json) is the single source of truth; the pipeline reads the same file
 const manifest = await (await fetch("pieces.json")).json();
 const PIECES = Object.fromEntries(manifest.pieces.map(p => [p.id, {
@@ -338,7 +351,7 @@ const params = new URLSearchParams(location.search);
 const scanned = params.get("card");
 // C2: the curator's story and questions (questions.json) show after a card scan; optional, nothing is locked behind them
 const quiz = null;   // shortcut: the curator's questions (C2) are left out of the tap flow to keep it to story then challenge; bring them back on the Won card if wanted
-const story = scanned ? await createStory({ img: id => PIECES[id].img, name: id => PIECES[id].name }) : null;   // H3: story with narration before the questions (story.js)
+let story = scanned ? await createStory({ img: id => PIECES[id].img, name: id => PIECES[id].name }) : null;   // H3: story with narration before the questions (story.js)
 if (PIECES[scanned]?.splat && PIECES[scanned].locked) {   // before the Stage boots, so a study card never downloads the wearable GLBs; Up close is its challenge
   await showScan({ story, quiz, id: scanned, next: "Study it up close" });
   await window.momuPreload?.handoff(scanned);   // H5: a download still running would be cancelled by the jump, so wait for it (preload.js)
@@ -348,7 +361,7 @@ if (PIECES[scanned]?.splat && PIECES[scanned].locked) {   // before the Stage bo
   await new Promise(() => {});
 }
 const SLOTS = ["top", "bottom", "feet", "full"];
-const look = { top: "ST2434", bottom: "ST80931", feet: "ST2407/1-2", full: null, fabric: { body: null, sleeves: null }, skin: 1 };
+const look = { top: null, bottom: null, feet: null, full: "ST80881", fabric: { body: null, sleeves: null }, skin: 1 };   // first look: the furisode, the cleanest scan and the most recognisable piece
 const SAVE_KEY = "secondSkin.save.v1";
 try {   // restore the visitor's look; ids are checked against the manifest, since storage is user-controlled
   const saved = JSON.parse(localStorage.getItem(SAVE_KEY) || "null");
@@ -508,7 +521,7 @@ function trimGlbs() {
 }
 const loadGlb = id => {
   glbUse.delete(id); glbUse.set(id, true);   // most recent last
-  return scenes[id] ??= (window.momuPreload?.glbSource(id, PIECES[id].glb) ?? Promise.resolve(PIECES[id].glb)).then(u => loader.loadAsync(u))   // H5: reuse the card's preloaded bytes
+  return scenes[id] ??= (window.momuPreload?.glbSource(id, PIECES[id].glb) ?? Promise.resolve(PIECES[id].glb)).then(u => loader.loadAsync(u).finally(() => { if (u.startsWith("blob:")) URL.revokeObjectURL(u); }))   // H5: reuse the card's preloaded bytes
     .then(g => { const sc = prepGarment(g.scene, PIECES[id], id); setTimeout(trimGlbs); return sc; })
     .catch(e => { delete scenes[id]; glbUse.delete(id); throw e; });   // a failed load must not stick in the cache
 };
@@ -814,6 +827,8 @@ const adj = id => PIECES[id].name.split(" ")[0].replace(/,$/, "");   // "Furisod
 function lookName() {   // a remixed look earns a name; an unremixed one keeps the screen's title
   const main = look.full || look.top, { body, sleeves } = look.fabric;
   if (!main || (!body && !sleeves)) return "Antwerp, any century";
+  if (body && body === sleeves && PIECES[body].splat && look.full) return `${shortName(body)}, its fabric`;   // a won study fabric worn alone
+  if (body && body === sleeves) return `${noun(main)} in ${adj(body)}`;
   return `${noun(main)}${body ? ` in ${adj(body)}` : ""}${sleeves ? `${body ? "," : ""} with ${adj(sleeves)} sleeves` : ""}`;
 }
 /* Firsts: each shows once, then stays earned. Milestones reward range and curiosity, never time spent or streaks. */
@@ -853,14 +868,16 @@ skinsEl.addEventListener("click", e => {
   turntables.forEach(t => t.draw());
 });
 
-let activeSlot = "top", activeZone = "body";
-const LABEL = { top: "Top", bottom: "Bottom", feet: "Feet", full: "Full", study: "Study", remix: "Fabrics" };
+let activeSlot = look.full ? "full" : "top", activeZone = "body";
+const LABEL = { won: "Won", top: "Top", bottom: "Bottom", feet: "Feet", full: "Full", study: "Study", remix: "Fabrics" };
+const wonIds = () => Object.keys(PIECES).filter(id => PIECES[id].room && !PIECES[id].locked && (PIECES[id].glb || PIECES[id].splat));
 const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const shortName = id => PIECES[id].name.split(",")[0];
 const swatchOf = id => `assets/swatch/${fileOf(id)}.jpg`;
 // ctx is how a tap on this piece acts: "remix" puts its cloth on activeZone, a slot wears it, "study" opens Up close
-const ctxOf = id => activeSlot === "remix" && !PIECES[id].locked && (PIECES[id].glb || PIECES[id].splat) ? "remix" : PIECES[id].slot;
+const ctxOf = id => activeSlot === "won" ? "won" : activeSlot === "remix" && !PIECES[id].locked && (PIECES[id].glb || PIECES[id].splat) ? "remix" : PIECES[id].slot;
 function isWorn(id, ctx) {
+  if (ctx === "won") return PIECES[id].splat ? look.fabric.body === id : PIECES[id].slot === "full" ? look.full === id : !look.full && look[PIECES[id].slot] === id;
   if (ctx === "remix") return look.fabric[activeZone] === id;
   if (ctx === "full") return look.full === id;
   return (ctx === "feet" || !look.full) && look[ctx] === id;
@@ -871,13 +888,21 @@ const tile = (id, cls, img, label, aria) => `<div class="tile ${cls}" data-id="$
 const newFirst = ([a], [b]) => fresh.has(b) - fresh.has(a);   // a piece just won leads its tab
 function renderLocker() {
   document.getElementById("foundCount").textContent = `${Object.values(PIECES).filter(p => !p.locked && p.glb).length} in your wardrobe`;
+  const won = wonIds();
+  if (activeSlot === "won" && !won.length) activeSlot = "top";
   document.getElementById("slotTitle").textContent = LABEL[activeSlot];
-  document.getElementById("cats").innerHTML = [...SLOTS, "remix"].map(s =>
+  document.getElementById("cats").innerHTML = [...(won.length ? ["won"] : []), ...SLOTS, "remix"].map(s =>
     `<button class="cat press" aria-pressed="${s === activeSlot}" data-slot="${s}">${LABEL[s]}</button>`).join("");
   const cats = document.getElementById("cats"), on = cats.querySelector('[aria-pressed="true"]');   // the chosen tab must be on screen, even the last one
   cats.scrollLeft += on.getBoundingClientRect().right - cats.getBoundingClientRect().right + 48;
   renderWearing();
   const grid = document.getElementById("grid");
+  if (activeSlot === "won") {   // everything won in the museum, garments and fabrics alike; a tap puts that one piece on by itself
+    grid.innerHTML = won.map(id => [id, PIECES[id]]).sort(newFirst).map(([id, p]) =>
+      tile(id, `${isWorn(id, "won") ? "on" : ""} ${fresh.has(id) ? "new" : ""}`, p.splat ? swatchOf(id) : p.img,
+        `<span class="m">${esc(shortName(id))}${p.splat ? " fabric" : ""}</span>`, isWorn(id, "won") ? `Take off ${p.name}` : `Wear ${p.name} on its own`)).join("");
+    return;
+  }
   if (activeSlot === "remix") {   // any unlocked piece's cloth, on the body or sleeves of your top or full look
     const zones = ["body", "sleeves"].map(z =>
       `<button class="cat press" aria-pressed="${z === activeZone}" data-zone="${z}">${z === "body" ? "Body" : "Sleeves"}</button>`).join("");
@@ -912,7 +937,8 @@ museumEl.addEventListener("click", e => {
   if (!t) return;
   museumEl.close();
   const id = t.dataset.id;
-  if (PIECES[id].splat || PIECES[id].locked) tapCard(id);
+  if (PIECES[id].room && !PIECES[id].locked) replayStory(id);   // won: hear its story again, then find it in Won
+  else if (PIECES[id].splat || PIECES[id].locked) tapCard(id);
   else { activeSlot = PIECES[id].slot; renderLocker(); setSnap("half"); }
 });
 const FRESH_KEY = "secondSkin.new.v1";   // pieces and fabrics won but not yet worn, marked New
@@ -922,7 +948,11 @@ const keepFresh = () => { try { localStorage.setItem(FRESH_KEY, JSON.stringify([
 function renderWearing() {
   const parts = (look.full ? [["full", look.full], ["feet", look.feet]] : [["top", look.top], ["bottom", look.bottom], ["feet", look.feet]])
     .filter(([, id]) => id).map(([slot, id]) => ({ slot, zone: "", id, kind: LABEL[slot], img: PIECES[id].img }));
-  if (look.full || look.top) for (const zone of ["body", "sleeves"]) {
+  const { body, sleeves } = look.fabric;
+  if (look.full && body && body === sleeves && PIECES[body].splat) {   // a won study fabric on its plain cut reads as one piece: one chip, one ×
+    parts[0] = { slot: "won", zone: "", id: body, kind: "Won", img: swatchOf(body) };
+  } else if ((look.full || look.top) && body && body === sleeves) parts.push({ slot: "remix", zone: "both", id: body, kind: "Fabric", img: swatchOf(body) });
+  else if (look.full || look.top) for (const zone of ["body", "sleeves"]) {
     const id = look.fabric[zone];
     if (id) parts.push({ slot: "remix", zone, id, kind: zone === "body" ? "Body" : "Sleeves", img: swatchOf(id) });
   }
@@ -952,8 +982,11 @@ function preloadStudy(id) {
   const ctl = new AbortController();
   const links = UPCLOSE_MODULES.map(href => { const l = document.createElement("link"); l.rel = "modulepreload"; l.href = href; document.head.append(l); return l; });
   study = { ctl, links };
-  nfcStatus.textContent = "Getting the scan ready…";
-  fetch(PIECES[id].splat, { signal: ctl.signal }).then(async r => {
+  // the 15 MB scan waits 2 s (a visitor who taps Not now at once downloads nothing) and then goes at low priority,
+  // so the popup and the page stay smooth; Not now, Escape or a backdrop tap clears the timer and aborts it
+  const wait = new Promise(r => { study.timer = setTimeout(r, 2000); });
+  wait.then(() => { if (!ctl.signal.aborted) nfcStatus.textContent = "Getting the scan ready…"; });
+  wait.then(() => fetch(PIECES[id].splat, { signal: ctl.signal, priority: "low" })).then(async r => {
     if (!r.ok) throw new Error(r.status);
     const total = +r.headers.get("content-length") || 0, reader = r.body.getReader();
     let got = 0;
@@ -968,7 +1001,7 @@ function preloadStudy(id) {
 }
 function cancelStudy() {
   if (!study) return;
-  study.ctl.abort(); study.links.forEach(l => l.remove()); study = null;
+  clearTimeout(study.timer); study.ctl.abort(); study.links.forEach(l => l.remove()); study = null;
   nfcStatus.textContent = "";
 }
 function tapCard(id) {   // shortcut: stands in for walking to the sticker; a real tap opens the same ?card=<id>
@@ -987,7 +1020,25 @@ function wearFabric(id) {
   look.fabric.body = id; activeSlot = "remix"; activeZone = "body";
   dress();
 }
+/* A win goes on by itself, so the visitor sees exactly what they won and one × takes it off. A study piece's scan is not a
+   garment, so its cloth goes on one plain full-length cut (the cocktail dress), body and sleeves both. */
+function wearAlone(id) {
+  const p = PIECES[id], bare = { top: null, bottom: null, feet: null, full: null, fabric: { body: null, sleeves: null } };
+  if (p.splat) {
+    const ok = k => k && PIECES[k]?.slot === "full" && PIECES[k].glb && !PIECES[k].locked;
+    const cut = ["ST655/1", ...Object.keys(PIECES)].find(ok);   // always the same plain cut, so every won fabric reads alike
+    if (!cut) return;
+    Object.assign(look, bare, { full: cut, fabric: { body: id, sleeves: id } });
+  } else Object.assign(look, bare, { [p.slot]: id });
+  activeSlot = "won"; activeZone = "body";
+  dress(); setSnap("half");
+}
 function act(id, ctx) {   // the one action a tile, or its fact card, performs
+  if (ctx === "won") {
+    if (!isWorn(id, "won")) { wearAlone(id); return; }
+    if (PIECES[id].splat) look.fabric = { body: null, sleeves: null }; else look[PIECES[id].slot] = null;
+    dress(); return;
+  }
   if (ctx === "study") { tapCard(id); return; }
   if (ctx === "remix" && !look.full && !look.top) { wearFabric(id); return; }
   const off = isWorn(id, ctx);
@@ -1004,10 +1055,12 @@ document.getElementById("wearing").addEventListener("click", e => {
   const b = e.target.closest("[data-open], [data-off]"); if (!b) return;
   const { open, off, zone } = b.dataset;
   if (off) {
-    if (off === "remix") look.fabric[zone] = null; else look[off] = null;
+    if (off === "won") Object.assign(look, { full: null, fabric: { body: null, sleeves: null } });
+    else if (off === "remix" && zone === "both") look.fabric = { body: null, sleeves: null };
+    else if (off === "remix") look.fabric[zone] = null; else look[off] = null;
     dress(); return;
   }
-  activeSlot = open; if (zone) activeZone = zone;
+  activeSlot = open; if (zone) activeZone = zone === "both" ? "body" : zone;
   renderLocker(); if (snap === "peek") setSnap("half");
 });
 document.getElementById("grid").addEventListener("click", e => {
@@ -1173,38 +1226,37 @@ renderCredit(); renderCredit.ready = true; renderLocker();
 
 /* Card scan: a sticker in the room opens ?card=<id>. A room piece is won first (story, Win it), then waits in the wardrobe */
 const win = createWin({ PIECES, record: id => RECORDS[id], img: id => PIECES[id].img });
-const welcome = (id, text) => { activeSlot = PIECES[id].splat ? "remix" : PIECES[id].slot; activeZone = "body"; renderLocker(); document.getElementById("grid").scrollTop = 0; setSnap("half"); toast(text); };
+const welcome = (id, text) => { activeSlot = PIECES[id].room ? "won" : PIECES[id].splat ? "remix" : PIECES[id].slot; activeZone = "body"; renderLocker(); document.getElementById("grid").scrollTop = 0; setSnap("half"); toast(text); };
+const recordsSoon = () => Promise.race([recordsReady, new Promise(r => setTimeout(r, 400))]);   // the Won card never waits on the network; its quote shows if records.json is in by then
+async function replayStory(id) {   // a piece already won keeps its story and audio tour: the sticker or its Museum tile plays it again
+  story ??= await createStory({ img: i => PIECES[i].img, name: i => PIECES[i].name });
+  await showScan({ story, quiz, id, next: "Back to my look" });
+  welcome(id, `${shortName(id)} is in your Won tab`);
+}
 async function scan(id) {
   const p = PIECES[id];
-  if (!p.locked) { welcome(id, p.splat ? `Its fabric is already in your Fabrics: ${shortName(id).toLowerCase()}` : `Already in your wardrobe: ${p.name}`); return; }
+  if (!p.locked) { await replayStory(id); return; }
   await showScan({ story, quiz, id, next: "Win it", years: false });
   const off = await win.guess(id);
-  await recordsReady; const pick = await win.won(id, { off });
+  await recordsSoon(); const pick = await win.won(id, { off });
   p.locked = false;
   try { localStorage.setItem(WON_KEY, JSON.stringify([...new Set([...readWon(), id])])); } catch { /* blocked: the win lasts this visit */ }
-  if (pick === "wear") { activeSlot = p.slot; act(id, p.slot); setSnap("half"); toast(`Wearing the ${shortName(id).toLowerCase()}`); return; }
+  if (pick === "wear") { wearAlone(id); toast(`Wearing the ${shortName(id).toLowerCase()}`); return; }
   fresh.add(id); keepFresh();
-  welcome(id, `${p.name.split(",")[0]} is in your wardrobe. Tap it to wear it.`);
+  welcome(id, `${shortName(id)} is in your Won tab. Tap it to wear it.`);
 }
 if (scanned && !PIECES[scanned]?.glb && !PIECES[scanned]?.splat) toast("This sticker isn't in the app yet");
 else if (scanned) scan(scanned);
 // up-close.html sends ?fabric=<id> once every detail is found: the same Won card, then the fabric waits in the Remix tab
-const CLAIM_KEY = "secondSkin.claim";   // H6: Up close steps back to this page and leaves the won fabric here, instead of ?fabric= on a new entry
 const takeClaim = () => { try { const c = sessionStorage.getItem(CLAIM_KEY); sessionStorage.removeItem(CLAIM_KEY); return c; } catch { return null; } };
 const claimed = takeClaim() ?? params.get("fabric");   // read the claim either way, so it is used once
-if (claimed && PIECES[claimed]?.splat && !PIECES[claimed].locked) recordsReady.then(() => win.won(claimed, { what: "fabric" })).then(pick => {
-  if (pick === "wear") { wearFabric(claimed); setSnap("half"); return; }
+if (claimed && PIECES[claimed]?.splat && !PIECES[claimed].locked) recordsSoon().then(() => win.won(claimed, { what: "fabric" })).then(pick => {
+  if (pick === "wear") { wearAlone(claimed); toast(`Wearing the ${shortName(claimed).toLowerCase()}'s fabric`); return; }
   fresh.add(claimed); keepFresh();
-  welcome(claimed, `New in Fabrics: ${PIECES[claimed].name.split(",")[0].toLowerCase()}. Tap it to wear it.`);
+  welcome(claimed, `${shortName(claimed)} is in your Won tab. Tap it to wear it.`);
 });
 if (scanned || claimed) history.replaceState(null, "", location.pathname);   // a reload must not replay the card
-// H6: back from Up close may show this page from the back-forward cache, frozen as it was; details found or a fabric won
-// there since then are only read at boot, so start again (the look is saved)
-const foundAtBoot = (() => { try { return localStorage.getItem("secondSkin.found.v1"); } catch { return null; } })();
-addEventListener("pageshow", e => {
-  if (!e.persisted) return;
-  try { if (sessionStorage.getItem(CLAIM_KEY) || localStorage.getItem("secondSkin.found.v1") !== foundAtBoot) location.reload(); } catch { /* storage blocked: nothing new to show */ }
-});
+booted = true;
 // first visit only, and not for a visitor who arrived by a sticker or from Up close: they already know what they want
 try { if (!scanned && !claimed && !localStorage.getItem(HELP_KEY)) openHelp(); } catch { openHelp(); }
 </script>

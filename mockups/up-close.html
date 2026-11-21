@@ -299,6 +299,15 @@ function fracAt(sx, sy, fz) {
 }
 window.upClose = { piece, points, camera, controls, found, box, fracAt };
 renderer.setAnimationLoop(now => { stepTurn(now); controls.update(); placePins(); renderer.render(scene, camera); });
+// Leaving for the Stage: release the scan and the GPU now instead of keeping 15 MB of splats alive in the back-forward
+// cache; if the browser shows this page again from that cache, it starts over (the scan comes from the HTTP cache)
+addEventListener("pagehide", () => {
+  renderer.setAnimationLoop(null);
+  scene.remove(mesh); mesh.dispose?.(); controls.dispose();
+  renderer.dispose(); renderer.forceContextLoss();
+  delete window.upClose;
+});
+addEventListener("pageshow", e => { if (e.persisted) location.reload(); });
 </script>
 </body>
 </html>
