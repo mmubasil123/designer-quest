@@ -50,9 +50,28 @@ export function createWin({ PIECES, record, img }) {
       <p class="date">Made ${esc(span(p.year))}${off === null ? "" : off === 0 ? " · spot on" : ` · you were ${off} years off`}</p>
       ${quote ? `<blockquote>${esc(quote)}<span class="mono">MoMu says${r.quoteEn ? ", our translation" : ""}</span></blockquote>` : ""}
       <button class="btn press" id="winAdd" data-pick="wear">Wear it now</button>
-      <button class="btn ghost press" data-pick="keep">Keep it in my ${what === "fabric" ? "fabrics" : "wardrobe"}</button>`);
+      <button class="btn ghost press" data-pick="keep">Keep it in my ${what === "fabric" ? "fabrics" : "wardrobe"}</button>
+      ${nextRow(id)}`);
     // resolves "wear" or "keep"; either way the prize is already the visitor's
     return new Promise(resolve => el.querySelectorAll("[data-pick]").forEach(b => b.addEventListener("click", () => { el.close(); resolve(b.dataset.pick); }, { once: true })));
+  }
+
+  /* H15 (the rest of J5): the Won card ends on the next piece to win, so one win leads to the next. A study piece the
+     visitor has started comes first, else the next room piece still locked, in pieces.json order. Facts: name, photo
+     and detail count from pieces.json only (D3). Nothing shows once every piece is won. */
+  function nextPiece(wonId) {
+    const left = Object.entries(PIECES).filter(([id, q]) => id !== wonId && q.room && q.locked && (q.glb || q.splat));
+    return left.find(([, q]) => q.splat && q.seen) ?? left[0];   // seen: opened up close once, so Museum opens it again
+  }
+  function nextRow(wonId) {
+    const next = nextPiece(wonId); if (!next) return "";
+    const [id, q] = next, n = q.details || 3;
+    const how = q.splat && q.seen ? (q.found > 0 ? `You found ${q.found} of ${n} details. Open it in Museum to finish.`
+        : `Open it in Museum and find its ${n} details.`)
+      : q.splat ?`Find its sticker at MoMu, then find its ${n} details up close.`
+      : "Find its sticker at MoMu and guess when it was made.";
+    return `<div class="next"><img src="${img(id)}" alt="">
+      <p><span class="mono">Next to win</span><b>${esc(q.name)}</b><span class="how">${esc(how)}</span></p></div>`;
   }
 
   return { guess, won };
