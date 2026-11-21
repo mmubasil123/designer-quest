@@ -4,6 +4,37 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### Garment colours: scans were rendering as solid metal (branch basil/fix-garment-colors)
+Basil's phone showed the cocktail dress near black and brown with a mirror-like sheen, while its photo is green and black stripes.
+- **Root cause:** the TRELLIS GLBs write a material with a base colour texture and `roughnessFactor` but no `metallicFactor`, and the glTF default for that is 1. Every wearable loaded as solid metal. Metal has no diffuse colour, only reflections, so cloth went dark with a glossy sheen; the room environment added in the Turntable only hid the worst of it. This is in our loader code, not in the GLBs.
+- **Fix:** `prepGarment` sets `metalness = 0` on every scan material. No change to lights, exposure or tone mapping: a sweep of ACES, Khronos Neutral and none at several exposures against the photos found the current ACES 1.1 settings fit best once the metal was gone.
+- **Evidence (headless Chromium, garment alone, mean sRGB over its pixels, against the mean of its garment cutout photo):** cocktail dress 13,11,8 before, 59,57,53 after, photo 60,60,53. Monpe trousers 8,13,19 before, 52,59,66 after, photo 56,58,64. Top ST80930 18,22,27 before, 68,72,79 after, photo 58,59,66. Green coat ST2434 27,35,14 before, 78,89,59 after, photo 68,81,49. Jak ST503 70,82,79 before, 134,146,143 after, photo 97,110,113 (still about 1.3x too bright). Kimono 172,149,124 before, 213,194,175 after, photo 195,163,140. Side by side for all 7 wearables: `docs/color-check/before-after.jpg`.
+- **What this does not fix:** the cocktail dress texture itself is browner and less green than its photo (TRELLIS lost the green in the bake), so it now renders dark olive-brown, not striped green. That needs a regenerated GLB, which costs GPU quota, so it is not done here. The kimono's rescan without its stand is ticket T11.
+- **Study (splat) pieces:** they do not use this material, so this bug cannot affect them. I could not render them here (software WebGL stalls on the 17 MB scans), so their colours are not checked against the photos; that needs your phone.
+
+### Faster loading, study preload and avatar zoom (branch basil/load-and-zoom, on top of basil/onboarding)
+Raised by Basil after a phone test: 3D scans take about 10 s, and the main avatar is also slow.
+
+**What the boot was doing (measured in headless Chromium, local files only; jsDelivr, Google Fonts and heron.libis.be are blocked from the cloud container, so their timings are unmeasured):**
+- At first paint the page requested the three default GLBs (2.0 + 1.7 + 2.1 MB, all at once, sharing the connection), plus `pieces.json`, `records.json`, the `ST80881_cutout.png` (243 KB), up to 8 full-size photos from heron.libis.be (the three Piece-page variants, which sit on a screen nobody is looking at, plus tile photos) and the whole model-viewer library from jsDelivr (never used until the Piece page).
+- The splat pages are a separate load: one 15 to 17.6 MB `.sog` per piece, plus a fresh three 0.180 and Spark from jsDelivr, a HEAD request before the real one, and nothing fetched ahead. So the 10 s scan load and the slow avatar are two different downloads that only share the phone's connection; they do not block each other.
+- Neither GLBs nor `.sog` files are compressed beyond what the pipeline gave them (A5, meshopt and webp, is open and is the team's ticket). Production caches `/assets` for one day.
+
+**Changes:**
+- Piece-page photos, the cutout and the model-viewer library now load on the first visit to the Piece screen (`enterPiece`). Tile and wearing-row photos decode async. `records.json` no longer blocks anything: the fact card waits for it.
+- Background warm-up: once the first look is on the form, the other wearable GLBs are fetched at low priority, one at a time, streamed and dropped (nothing parsed, nothing held in memory), so wardrobe taps find them in the HTTP cache. Skipped on Save-Data and on 2g/3g.
+- Study preload: tapping a study tile that still needs its card starts the `.sog` download and `modulepreload` hints for Up close's OrbitControls and Spark. The popup shows "Getting the scan ready… n%", then "Scan ready". Not now, Escape or a backdrop tap aborts the fetch and removes the hints. Tapping Simulate NFC tap navigates, and a navigation cancels a download still in flight, so a visitor who taps before it finishes gets a partial head start only.
+- `up-close.html`: the HEAD request is only made on a dev machine; the deployed site always has the `.sog`.
+- Zoom on the main avatar: pinch, mouse wheel and trackpad pinch, plus + and − buttons (44 px, hidden while the wardrobe is open). 1x to 3x, zooms toward the fingers or cursor, a vertical drag moves the view when zoomed, and the view is clamped to the form's height. Opening the wardrobe resets to 1x. The turntable is now `touch-action: none`, so on a phone a pinch or drag on the avatar never scrolls the page.
+- Checked in headless Chromium at 390 px: boot requests, warm-up skipping loaded pieces, wheel clamps (1x to 3x), buttons, synthetic two-pointer pinch, study preload progress, abort on Not now with the hints removed, console clean. Not checked on a real phone, with a real two-finger pinch, or on real mobile bandwidth.
+- Decision: no change to file formats here. The biggest remaining lever is file size (A5 for GLBs, and a smaller `.sog` for the splats), which needs the pipeline and the raw captures on Basil's or the team's machine.
+
+### Onboarding help pop-up and help button (branch basil/onboarding; Notion task "Onboarding help pop-up (with skip) + help button", no ledger ticket)
+- A three-step card (dress the form, remix a fabric, read the record) opens once on a first visit with Next and Skip; the last step's button is "Start dressing". A "?" button in the top bar (44 px) reopens it any time. The backdrop and Escape close it.
+- It does not open for a visitor who arrived by a museum card (`?card=`) or back from Up close (`?fabric=`), so it never covers their toast. Seen state is `secondSkin.help.v1` in localStorage; if storage is blocked it shows each visit.
+- Why: the Ideation page lists "first-time help pop-up with a skip button" and a help button as UX must-haves. The copy only describes what the app does today and makes no claim about MoMu facts (D3).
+- Checked in headless Chromium at 390 px: opens on first visit, steps through, closes on Start, stays closed on reload, "?" reopens at step 1, Skip closes, no popup on a `?card=ST503` arrival, no horizontal overflow, console clean. Not checked on a real phone or with a screen reader.
+
 ### Team notes and storyline (branch hassan/docs-storyline)
 - New `docs/PROJECT_NOTES.md`: problem statement, Lotus Blossom outcomes, the visitor flow with what is built,
   team decisions, roles for all four of us, open questions.
