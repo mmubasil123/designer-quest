@@ -47,7 +47,9 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
   function captions(p, guess) {
     const beats = p.form === "script" ? p.beats : p.paragraphs.map(t => ({ t }));
     const words = []; let total = 0, at = 0, cut = null;
+    const beatStarts = [];
     const html = beats.map(b => {
+      beatStarts.push(total);
       const parts = b.t.split(/\s+/);
       if (guess && b.reveal) { if (cut === null) cut = total; parts.forEach((w, i) => { total += weight(w, i === parts.length - 1); }); return ""; }
       const spans = parts.map((w, i) => {
@@ -58,7 +60,7 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
       return `<span class="beat">${spans.join(" ")}</span>`;
     }).join(" ");
     const spoken = beats.filter(b => !(guess && b.reveal)).map(b => b.t).join(" ");
-    return { html, words, total, cut, spoken };
+    return { html, words, total, cut, spoken, beatStarts };
   }
 
   function player(p, cap, guess) {
@@ -94,6 +96,15 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
     };
     const hide = () => { el.querySelector(".player").hidden = true; };
     const indexAt = share => { let i = -1; while (i + 1 < cap.words.length && cap.words[i + 1].start <= share) i++; return i; };
+    /* With measured beat starts (`cues`), each beat's words are spread over that beat's own time; without them, over
+       the whole file by word length (an estimate that drifts a little on long stories). */
+    const beatStarts = cap.beatStarts;
+    const shareAt = (t, d) => {
+      if (!p.cues || p.cues.length !== beatStarts.length) return (t + 0.15) / d * cap.total;
+      let k = 0; while (k + 1 < p.cues.length && p.cues[k + 1] <= t) k++;
+      const t0 = p.cues[k], t1 = p.cues[k + 1] ?? d, w0 = beatStarts[k], w1 = beatStarts[k + 1] ?? cap.total;
+      return w0 + Math.min(1, Math.max(0, (t - t0 + 0.1) / Math.max(0.1, t1 - t0))) * (w1 - w0);
+    };
 
     // Fallback: the phone's own voice reads the captions; its word boundaries drive the highlight (estimated if it sends none)
     const browserVoice = () => {
@@ -122,13 +133,13 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
     const length = () => audio.duration || p.seconds || 0;
     // before a guess the file plays only up to the first beat that names the date (cue from the import, else estimated)
     const stopAt = () => guess && cap.cut !== null ? (p.revealAt ?? cap.cut / cap.total * length() - 0.3) : Infinity;
-    if (p.seconds) time.textContent = `0:00 / ${clock(guess && cap.cut !== null ? cap.cut / cap.total * p.seconds : p.seconds)}`;
+    if (p.seconds) time.textContent = `0:00 / ${clock(guess && cap.cut !== null ? (p.revealAt ?? cap.cut / cap.total * p.seconds) : p.seconds)}`;
     let raf = 0;
     const tick = () => {
       const d = length(), t = audio.currentTime, end = Math.min(d, stopAt());
       bar.max = end || 1; bar.value = t;
       time.textContent = `${clock(t)} / ${clock(end || 0)}`;
-      if (d) light(indexAt((t + 0.15) / d * cap.total));
+      if (d) light(indexAt(shareAt(t, d)));
       if (t >= end) { audio.pause(); audio.currentTime = 0; finish(); return; }
       if (!audio.paused) raf = requestAnimationFrame(tick);
     };
