@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Splat viewer</title>
+<style>
+  body { margin: 0; background: #1b1a18; color: #eee; font: 14px system-ui, sans-serif; overflow: hidden; }
+  #bar { position: fixed; top: 12px; left: 12px; display: flex; gap: 8px; align-items: center; }
+  select, button { font: inherit; padding: 6px 10px; }
+  #status { opacity: .8; }
+</style>
+<script type="importmap">{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/",
+  "@sparkjsdev/spark": "https://cdn.jsdelivr.net/npm/@sparkjsdev/spark@2.4.0/dist/spark.module.js"
+} }</script>
+</head>
+<body>
+<div id="bar"><select id="pick"></select><button id="flip">Flip</button><span id="status"></span></div>
+<script type="module">
+// Local look at the MoMu splats in ../splats/ (git-ignored). Serve the project root, not mockups/.
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { SparkRenderer, SplatMesh } from "@sparkjsdev/spark";
+
+const FILES = ["MOMU-1_st673", "MOMU-2_st81190", "MOMU-3_st2435", "MOMU-4_st80998", "MOMU-6_st2431",
+  "MOMU-7_st2432", "MOMU-8_st671", "MOMU-9_st2203", "MOMU-10_st652"];
+const pick = document.getElementById("pick"), status = document.getElementById("status");
+pick.innerHTML = FILES.map(f => `<option>${f}</option>`).join("");
+
+const renderer = new THREE.WebGLRenderer({ antialias: false });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+renderer.setSize(innerWidth, innerHeight);
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.add(new SparkRenderer({ renderer }));
+const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.01, 1000);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+addEventListener("resize", () => {
+  camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight);
+});
+
+let mesh;
+async function load(name) {
+  pick.value = name;
+  if (mesh) { scene.remove(mesh); mesh.dispose(); }
+  status.textContent = `loading ${name} (about 220 MB)...`;
+  const t0 = performance.now();
+  mesh = new SplatMesh({ url: `../splats/${name}.ply` });
+  mesh.quaternion.set(1, 0, 0, 0);   // COLMAP-style captures are y-down; Flip undoes this if a file is not
+  scene.add(mesh);
+  await mesh.initialized;
+  const box = mesh.getBoundingBox(), c = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3());
+  c.applyQuaternion(mesh.quaternion);
+  controls.target.copy(c);
+  camera.position.copy(c).add(new THREE.Vector3(0, 0, Math.max(size.x, size.y, size.z) * 1.6));
+  status.textContent = `${name}: ${mesh.packedSplats?.numSplats ?? "?"} splats, ${((performance.now() - t0) / 1000).toFixed(1)} s`;
+}
+pick.onchange = () => load(pick.value);
+document.getElementById("flip").onclick = () => mesh?.rotateX(Math.PI);
+window.splatViewer = { load, camera, controls, get mesh() { return mesh; } };
+renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+load(FILES[0]);
+</script>
+</body>
+</html>

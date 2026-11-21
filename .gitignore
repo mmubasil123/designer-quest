@@ -9,3 +9,4 @@ tools/craft/
 *.dmg
 splats/
 *.zip
+mockups/assets/splat/*.ply

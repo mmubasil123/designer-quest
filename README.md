@@ -15,6 +15,7 @@ Two things live here, for the MoMu Hackathon 2026 (MoMu is the Antwerp fashion m
 | `schema.sql` | Postgres schema (objects, values, concepts, agents, media, showcases) |
 | `seed/momu_seed.sql.gz`, `seed/momu_full.dump` | Loaded data: 4622 objects, 9323 media |
 | `mockups/second-skin.html` | The 4-screen mockup (Stage, Locker, Piece, Knowledge track); one file, three.js from a CDN |
+| `mockups/up-close.html` | Look closer: study a MoMu Gaussian splat, find its recorded details, win its fabric |
 | `mockups/pieces.json` | Piece manifest: slot, year, source photo, GLB kind (`scan` or `clo`), fit and pipeline hints |
 | `mockups/assets/*.glb` | One 3D model per piece, generated once and stored (the page never calls an API) |
 | `mockups/assets/swatch/*.jpg` | Tileable fabric swatches for the Remix tab |

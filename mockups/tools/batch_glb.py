@@ -19,7 +19,7 @@ MOCKUPS = Path(__file__).resolve().parents[1]
 def pieces():
     """Unlocked pieces from the manifest (mockups/pieces.json), the same file the page loads."""
     manifest = json.loads((MOCKUPS / "pieces.json").read_text())
-    return [p for p in manifest["pieces"] if not p["locked"]]
+    return [p for p in manifest["pieces"] if not p["locked"] and p["assets"]["glb"]]   # splat pieces get no GLB
 
 
 def run():

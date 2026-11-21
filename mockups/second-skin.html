@@ -115,6 +115,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .tile .m { position: absolute; left: 6px; bottom: 6px; font: 400 10px "IBM Plex Mono", monospace; background: var(--paper); padding: 2px 5px; border-radius: 4px; }
 .tile.on { outline: 2px solid var(--ink); outline-offset: 2px; }
 .tile.locked img { filter: grayscale(1) contrast(.2) brightness(1.4); }
+.tile.closer img { opacity: .45; }
+.tile.closer::after { content: "Look closer to win its fabric"; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 10px; font: italic 13px/1.2 Newsreader, serif; color: var(--ink); }
 .tile.locked::after { content: "Tap the card in the museum"; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 10px; font: italic 13px/1.2 Newsreader, serif; color: var(--muted); }
 
 /* Piece */
@@ -320,7 +322,16 @@ const manifest = await (await fetch("pieces.json")).json();
 const PIECES = Object.fromEntries(manifest.pieces.map(p => [p.id, {
   ...p.fit, slot: p.slot, name: p.name, year: p.year, locked: p.locked,
   img: IMG(p.source.imgSha), glb: p.assets.glb?.path ?? null, kind: p.assets.glb?.kind ?? null,
+  splat: p.assets.splat?.path ?? null, details: p.details?.length ?? 0,
 }]));
+// Splat pieces (study slot) are studied on up-close.html, not worn: finding every detail there unlocks their fabric
+try {
+  const found = JSON.parse(localStorage.getItem("secondSkin.found.v1") || "{}") || {};
+  Object.entries(PIECES).filter(([, p]) => p.splat).forEach(([id, p]) => {
+    p.seen = Array.isArray(found[id]);
+    if (p.seen && new Set(found[id]).size >= p.details) p.locked = false;
+  });
+} catch { /* storage blocked: splat fabrics stay locked */ }
 const SLOTS = ["top", "bottom", "feet", "full"];
 const look = { top: "ST503", bottom: "ST80931", feet: "ST2407/1-2", full: null, fabric: { body: null, sleeves: null }, skin: 1 };
 const SAVE_KEY = "secondSkin.save.v1";
@@ -329,7 +340,7 @@ try {   // restore the visitor's look; ids are checked against the manifest, sin
   const ok = (id, slots) => id === null || (PIECES[id] && !PIECES[id].locked && slots.includes(PIECES[id].slot));
   const l = saved?.v === 1 && saved.look;
   if (l && ok(l.top, ["top"]) && ok(l.bottom, ["bottom"]) && ok(l.feet, ["feet"]) && ok(l.full, ["full"])
-      && ok(l.fabric?.body ?? null, ["top", "bottom", "feet", "full"]) && ok(l.fabric?.sleeves ?? null, ["top", "bottom", "feet", "full"])
+      && ok(l.fabric?.body ?? null, ["top", "bottom", "feet", "full", "study"]) && ok(l.fabric?.sleeves ?? null, ["top", "bottom", "feet", "full", "study"])
       && Number.isInteger(l.skin) && l.skin >= 0 && l.skin < 4) {
     Object.assign(look, { top: l.top, bottom: l.bottom, feet: l.feet, full: l.full, skin: l.skin,
       fabric: { body: l.fabric?.body ?? null, sleeves: l.fabric?.sleeves ?? null } });
@@ -656,8 +667,10 @@ function renderLocker() {
     const zones = ["body", "sleeves"].map(z =>
       `<button class="cat press" aria-pressed="${z === activeZone}" data-zone="${z}">${z === "body" ? "Body" : "Sleeves"}</button>`).join("");
     document.getElementById("grid").innerHTML = `<div class="zones">${zones}</div>` +
-      Object.entries(PIECES).filter(([, p]) => p.glb && !p.locked).map(([id, p]) =>
-      `<button class="tile press ${look.fabric[activeZone] === id ? "on" : ""}" data-id="${id}" aria-label="${p.name} fabric on the ${activeZone}">
+      Object.entries(PIECES).filter(([, p]) => (p.glb && !p.locked) || p.splat).map(([id, p]) => p.locked
+      ? `<button class="tile press ${p.seen ? "closer" : "locked"}" data-id="${id}" aria-label="${p.name}: ${p.seen ? "look closer to win its fabric" : "tap the card in the museum"}">
+        <img src="assets/swatch/${fileOf(id)}.jpg" alt=""><span class="m">${id}</span></button>`
+      : `<button class="tile press ${look.fabric[activeZone] === id ? "on" : ""}" data-id="${id}" aria-label="${p.name} fabric on the ${activeZone}">
         <img src="assets/swatch/${fileOf(id)}.jpg" alt="" style="mix-blend-mode:normal"><span class="m">${id}</span></button>`).join("");
     return;
   }
@@ -676,6 +689,7 @@ document.getElementById("grid").addEventListener("click", e => {
   if (z) { activeZone = z.dataset.zone; renderLocker(); return; }
   const b = e.target.closest("[data-id]"); if (!b || b.classList.contains("locked")) return;
   const id = b.dataset.id;
+  if (b.classList.contains("closer")) { location.href = `up-close.html?id=${encodeURIComponent(id)}`; return; }
   if (activeSlot === "remix") look.fabric[activeZone] = look.fabric[activeZone] === id ? null : id;
   else if (activeSlot === "full") look.full = look.full === id ? null : id;
   else { if (activeSlot !== "feet") look.full = null; look[activeSlot] = id; }
@@ -822,14 +836,25 @@ document.getElementById("readBtn").addEventListener("click", () => {
 renderCredit(); renderCredit.ready = true; renderLocker(); renderTrack();
 
 /* Card scan: each museum card's QR opens ?card=<inventory id>; that piece unlocks and goes straight onto the form */
-const scanned = new URLSearchParams(location.search).get("card");
-if (scanned && PIECES[scanned]?.glb) {
+const params = new URLSearchParams(location.search);
+const scanned = params.get("card");
+if (scanned && PIECES[scanned]?.splat) location.replace(`up-close.html?id=${encodeURIComponent(scanned)}`);
+else if (scanned && PIECES[scanned]?.glb) {
   const p = PIECES[scanned];
   p.locked = false;
   if (p.slot === "full") look.full = scanned;
   else { if (p.slot !== "feet") look.full = null; look[p.slot] = scanned; }
   turntables.forEach(t => t.draw()); renderLocker(); renderCredit();
   toast(`Found in the museum: ${p.name}, ${p.year.from}`);
+}
+// up-close.html sends ?fabric=<id> once every detail is found: wear that fabric on the body straight away
+const won = params.get("fabric");
+if (won && PIECES[won]?.splat && !PIECES[won].locked) {
+  look.fabric.body = won;
+  activeSlot = "remix"; activeZone = "body";
+  turntables.forEach(t => t.draw()); renderLocker(); renderCredit();
+  toast(`Wearing the fabric of the ${PIECES[won].name.toLowerCase()}, ${PIECES[won].year.from}`);
+  history.replaceState(null, "", location.pathname);
 }
 </script>
 </body>

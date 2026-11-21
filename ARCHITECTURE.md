@@ -40,6 +40,9 @@ mockups/pieces.json  (single source of truth for pieces) ───────�
   sleeves zones, scaled by `meanLuma`).
 - UI: screens via `go(screen)`; wardrobe bottom sheet `setSnap()`/`snapY()`; `renderLocker()`, `renderCredit()`
   (time-span game), `renderTrack()` (knowledge track); `?card=<id>` unlocks and wears a piece.
+- `up-close.html`: separate page for splat pieces (three 0.180.0 + Spark 2.4.0, while the main page stays on
+  0.169.0). Detail hunt; progress in localStorage `secondSkin.found.v1` (`{id: [detail index]}`), which the main
+  page reads to unlock a splat piece's fabric. `splat-viewer.html` is a local-only viewer for `splats/`.
 - Deploy: Vercel project `second-skin`, root `mockups/`, `.vercelignore` drops tools and sources;
   `vercel.json` rewrites `/` to the page.
 
@@ -47,6 +50,8 @@ mockups/pieces.json  (single source of truth for pieces) ───────�
 - `pieces.json` is the only piece list; page and pipeline both read it. Validate against `pieces.schema.json`.
   An id with `/` maps to a file name with `_`.
 - Render order: form, clear depth, garments. Reordering lets the form show through scans.
+- A `study` piece (has `assets.splat`, `glb: null`) is never worn: it is studied on `up-close.html`, and only its
+  fabric reaches the main page. `batch_glb.py` skips it.
 - A CLO GLB (`kind: "clo"`, `origin: "avatar"`) must skip auto-fit rescaling (D5, A7 not built yet).
 - The page never calls an API at runtime except the CDN and its own static files; no accounts, no PII (D2).
 - Piece facts on screen trace to a record field; Dutch-only text is marked as a translation.

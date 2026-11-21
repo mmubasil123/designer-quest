@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Up close · Second Skin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f3efe7; --wall: #e8e2d6; --ink: #1b1a17; --muted: #6f695e; --line: #d9d1c2; --found: #3f5a3c;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; }
+body { background: var(--paper); color: var(--ink); font: 15px/1.45 Inter, system-ui, sans-serif; display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto; -webkit-font-smoothing: antialiased; }
+button, a { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; text-decoration: none; }
+.mono { font: 500 11px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.press { transition: transform 160ms var(--ease-out); }
+.press:active { transform: scale(0.97); }
+
+header { display: flex; align-items: center; gap: 12px; padding: max(12px, env(safe-area-inset-top)) 16px 12px; }
+.back { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-size: 20px; }
+.brand { font: italic 400 20px/1 Newsreader, serif; }
+header .mono { margin-left: auto; }
+
+#view { position: relative; background: var(--wall); margin: 0 16px; border-radius: 24px; overflow: hidden; touch-action: none; }
+#view canvas { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 400ms var(--ease-out); }
+#view.ready canvas { opacity: 1; }
+#loading { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; }
+#view.ready #loading { display: none; }
+.pin { position: absolute; left: 0; top: 0; width: 28px; height: 28px; margin: -14px 0 0 -14px; border-radius: 50%;
+  border: 2px solid var(--paper); background: var(--found); color: var(--paper); display: grid; place-items: center;
+  font: 600 12px/1 Inter, sans-serif; pointer-events: none; transition: opacity 200ms var(--ease-out);
+  box-shadow: 0 1px 6px rgb(0 0 0 / .25); }
+.pin[hidden] { display: grid; opacity: 0; }
+.pin.hint { background: var(--ink); animation: pulse 1.2s var(--ease-out) infinite; }
+@keyframes pulse { 50% { box-shadow: 0 0 0 10px rgb(27 26 23 / 0); } 0%, 100% { box-shadow: 0 0 0 0 rgb(27 26 23 / .35); } }
+.miss { position: absolute; width: 36px; height: 36px; margin: -18px 0 0 -18px; border-radius: 50%;
+  border: 1.5px solid var(--ink); pointer-events: none; animation: miss 500ms var(--ease-out) forwards; }
+@keyframes miss { from { transform: scale(.6); opacity: .6; } to { transform: scale(1.1); opacity: 0; } }
+#toast { position: absolute; left: 50%; bottom: 16px; transform: translate(-50%, 8px); opacity: 0; pointer-events: none;
+  background: var(--ink); color: var(--paper); padding: 10px 14px; border-radius: 999px; font-size: 13px; white-space: nowrap;
+  transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out); }
+#toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+aside { padding: 20px 16px max(16px, env(safe-area-inset-bottom)); display: grid; gap: 16px; }
+h1 { font: 400 26px/1.1 Newsreader, serif; }
+.meta { display: flex; gap: 10px; margin-top: 8px; }
+.progress { display: flex; align-items: center; justify-content: space-between; }
+.dots { display: flex; gap: 6px; }
+.dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); transition: background-color 200ms ease; }
+.dots i.on { background: var(--found); }
+ol { list-style: none; padding: 0; display: grid; border-top: 1px solid var(--line); }
+li { border-bottom: 1px solid var(--line); }
+.row { width: 100%; min-height: 52px; display: grid; grid-template-columns: 28px 1fr auto; gap: 12px; align-items: center; text-align: left; padding: 8px 0; }
+.num { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--line); display: grid; place-items: center;
+  font: 600 11px/1 Inter, sans-serif; color: var(--muted); transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease; }
+li.found .num { background: var(--found); border-color: var(--found); color: var(--paper); }
+.find { font-weight: 500; }
+.show { font-size: 13px; color: var(--muted); padding: 10px 0 10px 12px; min-height: 44px; }
+li.found .show { display: none; }
+.fact { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 250ms var(--ease-out); }
+li.found .fact { grid-template-rows: 1fr; }
+.fact > div { overflow: hidden; padding-left: 40px; }
+.fact q { display: block; font: italic 400 17px/1.35 Newsreader, serif; quotes: "“" "”"; }
+.fact p { color: var(--muted); font-size: 13px; margin: 6px 0 14px; }
+.fact .mono { font-size: 10px; margin-right: 6px; }
+.cta { min-height: 52px; border-radius: 999px; background: var(--ink); color: var(--paper); font-weight: 500; font-size: 15px;
+  opacity: .25; pointer-events: none; transition: opacity 200ms ease, transform 160ms var(--ease-out); }
+.cta.on { opacity: 1; pointer-events: auto; }
+.credit { font-size: 12px; color: var(--muted); }
+
+@media (min-width: 860px) {
+  body { grid-template-columns: minmax(0, 1fr) 400px; grid-template-rows: auto minmax(0, 1fr); }
+  header { grid-column: 1 / -1; }
+  #view { margin: 0 0 24px 24px; }
+  aside { padding: 0 24px 24px; align-content: start; overflow: auto; }
+}
+@media (max-width: 859px) {   /* phone: the page scrolls; the scan keeps a fixed share of the screen */
+  html, body { height: auto; }
+  body { grid-template-rows: auto auto auto; }
+  #view { height: 58svh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pin.hint { animation: none; } .miss { animation: fade 300ms ease forwards; } .fact { transition: none; }
+  @keyframes fade { from { opacity: .6; } to { opacity: 0; } }
+}
+</style>
+<script type="importmap">{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/",
+  "@sparkjsdev/spark": "https://cdn.jsdelivr.net/npm/@sparkjsdev/spark@2.4.0/dist/spark.module.js"
+} }</script>
+</head>
+<body>
+<header>
+  <a class="back press" href="second-skin.html" aria-label="Back to your look">←</a>
+  <span class="brand">Second Skin</span>
+  <span class="mono" id="pid"></span>
+</header>
+
+<main id="view" aria-label="3D scan of the piece. Drag to turn, pinch to zoom, tap a detail to find it.">
+  <div id="loading" class="mono">Loading the 3D scan</div>
+  <div id="toast" role="status"></div>
+</main>
+
+<aside>
+  <div>
+    <h1 id="name"></h1>
+    <div class="meta"><span class="mono" id="date"></span><span class="mono">MoMu study collection</span></div>
+  </div>
+  <div class="progress"><span class="mono" id="count"></span><span class="dots" id="dots" aria-hidden="true"></span></div>
+  <ol id="details"></ol>
+  <button class="cta press" id="wear">Wear its fabric</button>
+  <p class="credit">Quotes from the MoMu record (dcterms:description). English is our translation.</p>
+</aside>
+
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { SparkRenderer, SplatMesh } from "@sparkjsdev/spark";
+
+const FOUND_KEY = "secondSkin.found.v1";   // { [pieceId]: [detail index, ...] }; second-skin.html reads it
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const id = new URLSearchParams(location.search).get("id");
+const manifest = await (await fetch("pieces.json")).json();
+const piece = manifest.pieces.find(p => p.id === id && p.assets.splat);
+if (!piece) { location.replace("second-skin.html"); throw new Error("no splat piece " + id); }
+
+const readFound = () => { try { return JSON.parse(localStorage.getItem(FOUND_KEY) || "{}") || {}; } catch { return {}; } };
+const found = new Set((readFound()[id] || []).filter(i => Number.isInteger(i) && i >= 0 && i < piece.details.length));
+const saveFound = () => {   // opening the page counts as having seen the card, so the id is stored even with none found
+  try { localStorage.setItem(FOUND_KEY, JSON.stringify({ ...readFound(), [id]: [...found] })); } catch { /* blocked */ }
+};
+saveFound();
+
+/* ---------- Panel ---------- */
+const $ = s => document.querySelector(s);
+document.title = `${piece.name} · Second Skin`;
+$("#pid").textContent = id;
+$("#name").textContent = piece.name;
+$("#date").textContent = piece.year.from === piece.year.to ? piece.year.from : `${piece.year.from}–${piece.year.to}`;
+// quotes are cut from longer record sentences: an ellipsis marks each cut so the quote never reads as complete
+const excerpt = q => `${/^[a-z]/.test(q) ? "…" : ""}${q}${/[.!?]$/.test(q) ? "" : "…"}`;
+$("#dots").innerHTML = piece.details.map(() => "<i></i>").join("");
+$("#details").innerHTML = piece.details.map((d, i) => `
+  <li data-i="${i}">
+    <div class="row"><span class="num">${i + 1}</span><span class="find">${d.find}</span>
+      <button class="show press" data-show="${i}">Show me</button></div>
+    <div class="fact"><div><q lang="nl">${excerpt(d.quote)}</q><p><span class="mono">EN</span>${d.en}</p></div></div>
+  </li>`).join("");
+function renderPanel() {
+  const n = found.size, total = piece.details.length;
+  $("#count").textContent = n === total ? "All details found" : `${n} of ${total} found`;
+  document.querySelectorAll("#dots i").forEach((el, i) => el.classList.toggle("on", i < n));
+  document.querySelectorAll("#details li").forEach(li => li.classList.toggle("found", found.has(+li.dataset.i)));
+  $("#wear").classList.toggle("on", n === total);
+}
+renderPanel();
+$("#wear").addEventListener("click", () => { location.href = `second-skin.html?fabric=${encodeURIComponent(id)}`; });
+
+/* ---------- Scene ---------- */
+const view = $("#view");
+const renderer = new THREE.WebGLRenderer({ antialias: false });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+view.prepend(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue("--wall").trim());
+scene.add(new SparkRenderer({ renderer }));
+const camera = new THREE.PerspectiveCamera(40, 1, 0.01, 100);
+const controls = new OrbitControls(camera, renderer.domElement);
+Object.assign(controls, { enableDamping: true, enablePan: false, minPolarAngle: Math.PI * 0.3, maxPolarAngle: Math.PI * 0.62 });
+function resize() {
+  const { clientWidth: w, clientHeight: h } = view;
+  renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(view);
+
+// .sog is what deploys; a local .ply of the same name is the fallback while only the raw capture exists
+let url = piece.assets.splat.path;
+if (!(await fetch(url, { method: "HEAD" })).ok) url = url.replace(/\.sog$/, ".ply");
+const mesh = new SplatMesh({ url });
+mesh.quaternion.set(1, 0, 0, 0);   // the captures are y-down
+scene.add(mesh);
+await mesh.initialized;
+
+const box = new THREE.Box3().setFromPoints(corners(mesh.getBoundingBox()).map(p => p.applyQuaternion(mesh.quaternion)));
+const centre = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3());
+const points = piece.details.map(d => new THREE.Vector3(...d.at.map((f, k) => box.min.getComponent(k) + f * size.getComponent(k))));
+const dist = size.y * 1.55;
+controls.target.copy(centre);
+controls.minDistance = size.y * 0.55; controls.maxDistance = size.y * 2.6;
+camera.position.set(centre.x, centre.y, centre.z - dist);   // the captures face -z
+view.classList.add("ready");
+
+function corners(b) {
+  return [0, 1, 2, 3, 4, 5, 6, 7].map(i => new THREE.Vector3(i & 1 ? b.max.x : b.min.x, i & 2 ? b.max.y : b.min.y, i & 4 ? b.max.z : b.min.z));
+}
+
+/* ---------- Pins: found details stay marked; a hint pulses on the asked one ---------- */
+const pins = points.map((_, i) => {
+  const el = document.createElement("div"); el.className = "pin"; el.textContent = i + 1; el.hidden = true;
+  view.append(el); return el;
+});
+let hint = -1;
+function facing(p) {   // a detail on the far side of the dress is hidden, so it can't be found through the cloth
+  const n = new THREE.Vector3(p.x - centre.x, 0, p.z - centre.z), v = camera.position.clone().sub(p);
+  return n.lengthSq() < 1e-6 || n.normalize().dot(v.setY(0).normalize()) > 0.25;
+}
+function screenOf(p) {
+  const s = p.clone().project(camera);
+  return { x: (s.x + 1) / 2 * view.clientWidth, y: (1 - s.y) / 2 * view.clientHeight };
+}
+function placePins() {
+  points.forEach((p, i) => {
+    const on = (found.has(i) || i === hint) && facing(p);
+    pins[i].hidden = !on; pins[i].classList.toggle("hint", i === hint && !found.has(i));
+    if (on) { const { x, y } = screenOf(p); pins[i].style.transform = `translate(${x}px, ${y}px)`; }
+  });
+}
+
+/* ---------- Tap to find: a tap, not the end of a drag, within reach of an unfound detail facing you ---------- */
+const REACH = 44;
+let down = null;
+renderer.domElement.addEventListener("pointerdown", e => { down = { x: e.clientX, y: e.clientY, t: performance.now() }; });
+renderer.domElement.addEventListener("pointerup", e => {
+  if (!down || Math.hypot(e.clientX - down.x, e.clientY - down.y) > 6 || performance.now() - down.t > 400) return;
+  const r = view.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+  let best = -1, bestD = REACH;
+  points.forEach((p, i) => {
+    if (found.has(i) || !facing(p)) return;
+    const s = screenOf(p), d = Math.hypot(s.x - x, s.y - y);
+    if (d < bestD) { best = i; bestD = d; }
+  });
+  if (best < 0) { const m = document.createElement("div"); m.className = "miss"; m.style.left = x + "px"; m.style.top = y + "px";
+    view.append(m); setTimeout(() => m.remove(), 500); return; }
+  found.add(best); if (hint === best) hint = -1;
+  saveFound(); renderPanel();
+  toast(found.size === piece.details.length ? "All found. Its fabric is yours to wear." : `Found: ${piece.details[best].find}`);
+});
+
+let toastTimer;
+function toast(text) {
+  const t = $("#toast"); t.textContent = text; t.classList.add("on");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("on"), 2200);
+}
+
+/* ---------- Show me: turn to face the detail and pulse its pin ---------- */
+let turn = null;
+$("#details").addEventListener("click", e => {
+  const b = e.target.closest("[data-show]"); if (!b) return;
+  hint = +b.dataset.show;
+  const p = points[hint], dir = new THREE.Vector3(p.x - centre.x, 0, p.z - centre.z);
+  if (dir.lengthSq() < 1e-6) dir.set(0, 0, -1);
+  const r = camera.position.distanceTo(centre);
+  const to = centre.clone().add(dir.normalize().multiplyScalar(Math.sqrt(r * r - (camera.position.y - centre.y) ** 2)));
+  to.y = camera.position.y;
+  if (reduce) camera.position.copy(to);
+  else turn = { from: camera.position.clone(), to, t0: performance.now() };
+});
+function stepTurn(now) {
+  if (!turn) return;
+  const k = Math.min(1, (now - turn.t0) / 700), e = 1 - Math.pow(1 - k, 3);
+  const a = turn.from.clone().sub(centre), b = turn.to.clone().sub(centre);
+  const ang = Math.atan2(a.x, a.z) + angleDiff(Math.atan2(a.x, a.z), Math.atan2(b.x, b.z)) * e;
+  const rr = Math.hypot(a.x, a.z);
+  camera.position.set(centre.x + Math.sin(ang) * rr, turn.from.y, centre.z + Math.cos(ang) * rr);
+  if (k === 1) turn = null;
+}
+const angleDiff = (a, b) => Math.atan2(Math.sin(b - a), Math.cos(b - a));
+controls.addEventListener("start", () => { turn = null; });
+
+// fracAt(clientX, clientY, fz): the `details[].at` value for a screen point, at depth fz of the box (front is low)
+function fracAt(sx, sy, fz) {
+  const r = view.getBoundingClientRect();
+  const dir = new THREE.Vector3((sx - r.left) / r.width * 2 - 1, -(sy - r.top) / r.height * 2 + 1, 0.5)
+    .unproject(camera).sub(camera.position).normalize();
+  const p = camera.position.clone().addScaledVector(dir, (box.min.z + fz * size.z - camera.position.z) / dir.z);
+  return [(p.x - box.min.x) / size.x, (p.y - box.min.y) / size.y, fz].map(v => +v.toFixed(3));
+}
+window.upClose = { piece, points, camera, controls, found, box, fracAt };
+renderer.setAnimationLoop(now => { stepTurn(now); controls.update(); placePins(); renderer.render(scene, camera); });
+</script>
+</body>
+</html>

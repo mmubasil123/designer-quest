@@ -11,10 +11,12 @@ import numpy as np
 from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).parent))
+import json  # noqa: E402
+
 from batch_glb import MOCKUPS, pieces  # noqa: E402
 
 # pieces with no usable cutout (segformer misses shoes and the kimono): centre of a plain fabric area, as fractions
-POINT = {"ST80881": (0.2, 0.4), "ST2407/1-2": (0.62, 0.62)}
+POINT = {"ST80881": (0.2, 0.4), "ST2407/1-2": (0.62, 0.62), "ST2435": (0.5, 0.75), "ST652/1": (0.4, 0.63)}
 
 
 # side to crop from, as a fraction of garment width left of centre; the double-breasted coat buttons on the left
@@ -38,7 +40,9 @@ def square_in_mask(alpha, shift=0.22):
 def main():
     out_dir = MOCKUPS / "assets" / "swatch"
     out_dir.mkdir(exist_ok=True)
-    for p in pieces():
+    # splat pieces stay locked until found on up-close.html, but their fabric still needs a swatch
+    splats = [p for p in json.loads((MOCKUPS / "pieces.json").read_text())["pieces"] if p["assets"].get("splat")]
+    for p in pieces() + splats:
         pid = p["id"]
         name = pid.replace("/", "_")
         cut = MOCKUPS / "assets" / "src" / f"{name}_garment.png"
