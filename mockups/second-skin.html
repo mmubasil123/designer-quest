@@ -1038,7 +1038,7 @@ async function openFact(id) {
 }
 /* 3D view: any piece with a 3D file opens full screen, turnable and zoomable. Inside it model-viewer offers "See it in your
    room" only where AR can start; WebXR (in Chrome on Android) needs the viewer on screen, which is why AR lives here. */
-const viewEl = document.getElementById("view3d"), viewMV = document.getElementById("viewMV"), view3dBtn = document.getElementById("factAR");
+const viewEl = document.getElementById("view3d"), viewMV = document.getElementById("viewMV"), view3dBtn = document.getElementById("fact3d");
 let mvReady = null;
 view3dBtn.addEventListener("click", async () => {
   const id = factId;
@@ -1208,7 +1208,7 @@ try { if (!scanned && !claimed && !localStorage.getItem(HELP_KEY)) openHelp(); }
   <dl id="factFields"></dl>
   <blockquote id="factQuote"></blockquote>
   <div class="shares" id="factShares"></div>
-  <button class="btn ghost press ar" id="factAR" hidden>See it in 3D</button>
+  <button class="btn ghost press ar" id="fact3d" hidden>See it in 3D</button>
   <div class="row"><button class="btn press" id="factAct"></button><button class="ask-open press" id="factAsk">Ask</button><a id="factLink" target="_blank" rel="noopener">MoMu record ↗</a></div>
 </div></dialog>
 </body>
