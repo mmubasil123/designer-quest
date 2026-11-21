@@ -1014,7 +1014,7 @@ async function openFact(id) {
   document.getElementById("factQuote").innerHTML = r.quote
     ? `<div class="mono">MoMu says</div><q>${esc(r.quoteEn || r.quote)}</q>${r.quoteEn ? `<p lang="nl">${esc(r.quote)} <span class="mono">Dutch original</span></p>` : ""}`
     : `<span class="nr">No description recorded</span>`;
-  const links = (r.medium || []).filter(t => !GENERIC.has(t)).map(t => [t, Object.keys(RECORDS).filter(o => o !== id && RECORDS[o].medium?.includes(t))])
+  const links = (r.medium || []).filter(t => !GENERIC.has(t)).map(t => [t, Object.keys(RECORDS).filter(o => o !== id && (PIECES[o]?.glb || PIECES[o]?.splat) && RECORDS[o].medium?.includes(t))])
     .filter(([, o]) => o.length).slice(0, 2);
   document.getElementById("factShares").innerHTML = links.map(([t, o]) =>
     `<div><span>${esc(plain(t)[0].toUpperCase() + plain(t).slice(1))} also in:</span>${o.slice(0, 3).map(x => `<button data-fact="${x}">${esc(shortName(x))}</button>`).join("")}</div>`).join("");
