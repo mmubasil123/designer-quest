@@ -8,8 +8,12 @@
 .share::backdrop { background: var(--scrim); }
 .share-in { padding: 20px 22px; }
 .share :is(h2, h3) { font: var(--t-title); letter-spacing: var(--track-title); margin: 0 48px 14px 0; }
-.share-img { display: block; width: auto; max-width: 100%; max-height: calc(100dvh - 260px); margin: 0 auto; height: auto; aspect-ratio: 9 / 16;   /* the whole sheet fits a 667 px phone, so Close is never scrolled away */
+.share-img { display: block; width: auto; max-width: 100%; max-height: calc(100dvh - 340px); margin: 0 auto; height: auto; aspect-ratio: 9 / 16;   /* the whole sheet fits a 667 px phone, so Close is never scrolled away */
   border-radius: var(--r-pic); border: 1px solid var(--line); background: var(--wall); }
+.share-name { display: grid; gap: 6px; margin: 0 0 12px; font-size: 13px; color: var(--muted); }
+.share-name i { font-style: normal; }
+.share-name input { min-height: 44px; padding: 0 12px; border: 1px solid var(--line); border-radius: var(--r-pic); background: var(--paper); color: var(--ink); font: 16px/1.2 var(--sans); }   /* 16 px: iOS does not zoom the page on focus */
+.share-name input:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
 .share-note { font-size: 13px; color: var(--muted); margin-top: 8px; }
 .share-note:empty { display: none; }
 .share .row { display: grid; gap: 8px; margin-top: 14px; }
