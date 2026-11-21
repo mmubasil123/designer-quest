@@ -71,7 +71,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 .stage { flex: 1; position: relative; background: linear-gradient(var(--wall), var(--paper) 78%); }
-.stage .turntable { bottom: 164px; height: 420px; }   /* 164: the peeking grab area */
+.stage .turntable { top: var(--credit-h, 128px); bottom: 164px; height: auto; }   /* below the look title, above the peeking grab area */
 .zoom { position: absolute; right: 12px; top: 150px; display: flex; flex-direction: column; gap: 8px; z-index: 1; transition: opacity 200ms var(--ease-out); }
 .zoom button { width: 44px; height: 44px; border-radius: 50%; background: var(--paper); border: 1px solid var(--line); font: 400 22px/1 var(--serif); }
 .zoom button:disabled { opacity: .35; }
@@ -170,7 +170,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .museum { width: min(420px, calc(100% - 32px)); text-align: left; }
 .museum .grid { max-height: min(60vh, 520px); overflow-y: auto; margin-bottom: 8px; }
 .tile.study:not(.seen) img { filter: grayscale(1) contrast(.2) brightness(1.4); }
-.tile.locked::after { pointer-events: none; content: "Tap the card in the museum"; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 10px; font: italic 13px/1.2 var(--serif); color: var(--muted); }
+.tile.locked::after { pointer-events: none; content: "Win it in the museum"; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 10px; font: italic 13px/1.2 var(--serif); color: var(--muted); }
 
 dl { display: grid; grid-template-columns: 84px 1fr; gap: 4px 10px; margin: 12px 0; font-size: 13px; }
 dt { color: var(--muted); }
@@ -195,7 +195,7 @@ dt { color: var(--muted); }
     padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left); }
   .wardrobe .grid { padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
   /* the form fills the space between the look credit and the peeking wardrobe; the camera keeps its 22 degree height */
-  .stage .turntable { left: 0; margin-left: 0; width: 100%; height: auto; top: 128px; bottom: 164px; }   /* 164: the peeking grab area */
+  .stage .turntable { left: 0; margin-left: 0; width: 100%; }
   /* at half the free space is the top 52% of the stage, so the taller phone turntable steps back further */
   .stage[data-snap="half"] .turntable, .stage[data-snap="full"] .turntable { transform: translateY(-4%) scale(.5); }
 }
@@ -1043,6 +1043,9 @@ function setSnap(name) {
 }
 setSnap("peek");
 new ResizeObserver(() => setSnap(snap)).observe(stageEl);
+// the look title wraps to 1 to 3 lines as names change; the form starts below it so it never draws over the text
+const creditEl = stageEl.querySelector(".credit");
+new ResizeObserver(() => stageEl.style.setProperty("--credit-h", `${creditEl.offsetTop + creditEl.offsetHeight + 8}px`)).observe(creditEl);
 {
   let y0 = null, from, y, vel = 0, lastY, lastT, dragged = false;
   grabEl.addEventListener("pointerdown", e => { y0 = lastY = e.clientY; lastT = e.timeStamp; from = y = snapY(snap); vel = 0; dragged = false; });
