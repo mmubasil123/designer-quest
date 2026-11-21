@@ -29,7 +29,9 @@ Check with a front/side/back render and on the Stage at 390 px.
 `splat-transform` in `tools/node` (see AGENTS.md), or point `SPLAT_TRANSFORM` at it.
 
 ## Status (2026-11-21)
-- ST81190 Riveted wool coat: done, worn as a top (collar, yoke, rivets, red cross all show). Cloth still a bit mottled.
-- ST2431/1-4 cavalry uniform: done as a full look (frogging, back braid, sleeve knots). Colours duller than the photo.
-- To run: ST2432/1-2, ST2435, ST652/1, ST673/1-2, ST80998, ST671, ST2203 (each needs its drop rules for form/hands).
-- Photo route still to run for pieces with no 3D: ST81114AB, ST81116, ST2062.
+All 9 scan pieces are meshed, registered and checked on the Stage at 390 px (headless; not on a phone yet):
+coat ST81190 (top), cavalry ST2431/1-4, tailcoat ST2432/1-2, sequin dress ST2435, polka-dot ST652/1, combinaison
+ST673/1-2, kaftan ST80998, walking dress ST671, black satin ST2203 (all full).
+Known flaws: coat wool a bit mottled; tailcoat keeps the wooden hands and a hole where the open front shows the
+(uncaptured) form torso; sequin dress keeps slivers of the form's arms; black dress has ragged gaps at the hem.
+Photo route still to run (on a machine with HF_TOKEN): ST81114AB, ST81116, ST2062.

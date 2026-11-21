@@ -115,7 +115,9 @@ def mesh_from_splats(P, O, cfg):
     level = np.percentile(F[F > 1e-4], cfg.get("pct", 55))
     v, f, _, _ = measure.marching_cubes(F, level)
     m = trimesh.Trimesh(v * res + lo, f[:, ::-1], process=True)
-    parts = [p for p in m.split(only_watertight=False) if len(p.faces) > cfg.get("minfaces", 2000)]   # loose crumbs out
+    parts = m.split(only_watertight=False)
+    big = max(len(p.faces) for p in parts)
+    parts = [p for p in parts if len(p.faces) > max(cfg.get("minfaces", 2000), 0.03 * big)]   # loose crumbs (a stray neck ring) out
     m = trimesh.util.concatenate(parts)
     vv, ff = fast_simplification.simplify(m.vertices.astype(np.float32), m.faces.astype(np.int32),
                                           target_reduction=max(0.0, 1 - cfg.get("faces", 40000) / len(m.faces)))

@@ -4,7 +4,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## Wearable scans (2026-11-21, branch basil/wear-scans)
 - What: `mockups/tools/garment.py` turns a piece's splat scan into a wearable GLB (or runs the TRELLIS photo route) and
-  registers it. ST81190 (coat, worn as a top) and ST2431/1-4 (cavalry uniform, full) now wear as themselves once won,
+  registers it. All 9 scan pieces (coat ST81190 as a top, the other 8 as full looks) now wear as themselves once won,
   and appear in their slot's tab. New `wear` field and `fit.split`, `pipeline.mesh` in the schema.
 - Why: Basil: a won coat shown on another coat's cut "looks nothing like" the real piece; Higgsfield images for every
   combination would cost about 40x the credit cap.
