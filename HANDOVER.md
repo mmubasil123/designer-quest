@@ -4,7 +4,7 @@ Read this, then `LEDGER.md` (tickets, decisions D1 to D8, product-owner cut and 
 change with its reason. Agent rule (both people): work autonomously within your claimed ticket, inspect screenshots critically
 before calling anything done. Never deploy, push to `main` or publish without your person's explicit go.
 
-## Storytelling backgrounds (H7, branch hassan/H7-story-backgrounds, PR #42, 2026-11-21, not merged)
+## Storytelling backgrounds (H7, PR #42, merged 2026-11-21)
 Six period rooms behind the Stage, 3D view and Up close, picked by date (`mockups/scenes.js`). Checked in Chrome at
 390 px, not on a phone. Next: a per-piece `scene` override in `pieces.json` if a room fits a piece badly (heads-up first).
 
