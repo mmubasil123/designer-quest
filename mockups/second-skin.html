@@ -227,7 +227,24 @@ dt { color: var(--muted); }
 .nfc p { color: var(--muted); font-size: 14px; margin-bottom: 20px; text-wrap: balance; }
 .nfc .btn { width: 100%; display: flex; align-items: center; justify-content: center; text-decoration: none; }
 .nfc form { margin-top: 8px; }
+.help { width: min(340px, calc(100% - 32px)); margin: auto; border: 0; border-radius: 24px; padding: 0; background: var(--paper); color: var(--ink);
+  box-shadow: 0 12px 40px rgb(0 0 0 / .18); opacity: 0; transform: scale(.96);
+  transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), display 200ms allow-discrete, overlay 200ms allow-discrete; }
+.help[open] { opacity: 1; transform: none; }
+@starting-style { .help[open] { opacity: 0; transform: scale(.96); } }
+.help::backdrop { background: rgb(27 26 23 / .35); }
+.help > div { padding: 24px; outline: none; }
+.help .step { text-align: center; min-height: 148px; }
+.help h3 { font: 400 22px/1.15 Newsreader, serif; margin: 6px 0 8px; }
+.help p { color: var(--muted); font-size: 14px; text-wrap: balance; }
+.help .dots { display: flex; justify-content: center; gap: 6px; margin: 4px 0 18px; }
+.help .dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--line); }
+.help .dots i[aria-current="true"] { background: var(--ink); }
+.help .btn { width: 100%; }
+.help .skip { margin-top: 8px; }
+.helpbtn { width: 44px; min-height: 44px; padding: 0; font: italic 600 17px/1 Newsreader, serif; }
 @media (prefers-reduced-motion: reduce) {
+  .help { transition: opacity 150ms ease; transform: none; }
   .fact { transition: opacity 150ms ease; transform: none; }
   .press:active { transform: none; }
   .wardrobe, .stage .turntable { transition-duration: 1ms; }
@@ -251,7 +268,7 @@ dt { color: var(--muted); }
   <section data-screen="stage">
     <div class="label">1 · Stage</div>
     <div class="phone">
-      <div class="bar"><span class="brand">Second Skin</span><span class="bar-actions"><button class="pill ghost press app-only" data-go="piece">Learn</button><button class="pill press" id="shareBtn">Share look</button></span></div>
+      <div class="bar"><span class="brand">Second Skin</span><span class="bar-actions"><button class="pill ghost press app-only" data-go="piece">Learn</button><button class="pill press" id="shareBtn">Share look</button><button class="pill ghost press helpbtn" id="helpBtn" aria-label="How Second Skin works">?</button></span></div>
       <div class="stage" id="stage" data-snap="peek">
         <div class="credit">
           <div>
@@ -882,6 +899,31 @@ new ResizeObserver(() => setSnap(snap)).observe(stageEl);
 // choosing a category from the peeking sheet opens it so the pieces are visible
 document.getElementById("cats").addEventListener("click", e => { if (e.target.closest("[data-slot]") && snap === "peek") setSnap("half"); });
 
+/* ---------- Help: three steps, shown once on a first visit, always reopenable with the ? button ---------- */
+const HELP = [
+  { t: "Dress the form", d: "Pull up the wardrobe from the bottom. Tap a piece to wear it, tap it again to take it off. Drag the form to turn it." },
+  { t: "Remix a fabric", d: "In the Remix tab, put one piece's cloth on another piece's cut, and see how many years your look spans." },
+  { t: "Read the record", d: "The i on any piece opens what MoMu has recorded about it. Cards in the museum unlock the rest." },
+];
+const HELP_KEY = "secondSkin.help.v1", helpEl = document.getElementById("help");
+let helpStep = 0;
+function renderHelp() {
+  const last = helpStep === HELP.length - 1;
+  document.getElementById("helpCount").textContent = `${helpStep + 1} of ${HELP.length}`;
+  document.getElementById("helpTitle").textContent = HELP[helpStep].t;
+  document.getElementById("helpText").textContent = HELP[helpStep].d;
+  document.getElementById("helpDots").innerHTML = HELP.map((_, i) => `<i${i === helpStep ? ' aria-current="true"' : ""}></i>`).join("");
+  document.getElementById("helpNext").textContent = last ? "Start dressing" : "Next";
+  document.getElementById("helpSkip").hidden = last;
+}
+function openHelp() { helpStep = 0; renderHelp(); if (!helpEl.open) helpEl.showModal(); }
+document.getElementById("helpBtn").addEventListener("click", openHelp);
+document.getElementById("helpNext").addEventListener("click", () => {
+  if (helpStep < HELP.length - 1) { helpStep++; renderHelp(); } else helpEl.close();
+});
+document.getElementById("helpSkip").addEventListener("click", () => helpEl.close());
+helpEl.addEventListener("close", () => { try { localStorage.setItem(HELP_KEY, "1"); } catch { /* storage blocked: it will show again next visit */ } });
+helpEl.addEventListener("click", e => { if (e.target === helpEl) helpEl.close(); });   // backdrop tap closes
 /* ---------- Screens: on a phone one screen shows at a time (CSS keys on body[data-screen]) ---------- */
 function go(screen) {
   document.body.dataset.screen = screen;
@@ -960,6 +1002,8 @@ else if (scanned) {
   toast(`Found in the museum: ${p.name}, ${p.year.from}`);
 }
 if (scanned) history.replaceState(null, "", location.pathname);   // a reload must not re-apply the card over later changes
+// first visit only, and not for a visitor who arrived by a museum card or from Up close: they already know what they want
+try { if (!scanned && !params.get("fabric") && !localStorage.getItem(HELP_KEY)) openHelp(); } catch { openHelp(); }
 // up-close.html sends ?fabric=<id> once every detail is found: wear that fabric on the body straight away
 const won = params.get("fabric");
 if (won && PIECES[won]?.splat && !PIECES[won].locked) {
@@ -976,6 +1020,12 @@ if (won && PIECES[won]?.splat && !PIECES[won].locked) {
   <p id="nfcText"></p>
   <a class="btn press" id="nfcGo">Simulate NFC tap</a>
   <form method="dialog"><button class="btn ghost press">Not now</button></form>
+</div></dialog>
+<dialog class="help" id="help" aria-labelledby="helpTitle"><div tabindex="-1" autofocus>
+  <div class="step" aria-live="polite"><div class="mono" id="helpCount"></div><h3 id="helpTitle"></h3><p id="helpText"></p></div>
+  <div class="dots" id="helpDots" aria-hidden="true"></div>
+  <button class="btn press" id="helpNext"></button>
+  <button class="btn ghost press skip" id="helpSkip">Skip</button>
 </div></dialog>
 <dialog class="fact" id="fact" aria-labelledby="factName"><div tabindex="-1" autofocus>
   <div class="mono" id="factId"></div>
