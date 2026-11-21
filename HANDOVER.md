@@ -16,6 +16,11 @@ before calling anything done. Never deploy, push to `main` or publish without yo
   to `main` (owner's rule, 2026-11-21). Last deploy: `ed1d4c1`, spike page included.
 - Serve: `cd mockups && python3 -m http.server 8765 --bind 127.0.0.1`; console handle `window.secondSkin`.
 
+## A7 Archive vs Reconstruction (hassan, branch hassan/A7, PR pending)
+- Up close for ST81190: Archive / Compare / Wear it, all in `mockups/reconstruction.js`; `window.upClose.recon` (`setMode`, `wear`, `takeOff`) for checks.
+- Add another CLO piece: put its GLB in `assets/clo/` (run `clo/optimise_glb.mjs` on the CLO branch), add `assets.clo` to its `pieces.json` entry with the same `avatar`, and read `onScan` (hem and collar as fractions of the splat box height) off Up close. It must be draped on the same avatar (`avatar_web.glb` is the team's avatar slimmed; the coat fits it because the skin is kept).
+- Not done: remix of the CLO coat by named material (`rig.material(id, "wool_grey")` is there), layered variants over the blouse (the files exist on `hassan/clo-st81190`, 3.9 MB blouse), any CLO piece on the Stage (D1).
+
 ## H3 Story screen + narration (hassan, branch hassan/story-narration, PR pending)
 - Card scan -> story sheet (`story.js`, `story.css`) -> Continue -> the curator's questions (`quiz.js`, story not repeated).
 - Text and audio list: `mockups/narration.json`, built by `python3 -I mockups/tools/narration.py` from `questions.json`
