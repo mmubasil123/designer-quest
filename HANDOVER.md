@@ -11,16 +11,17 @@ shows the record's Dutch words large, then "Now find it on the real piece in fro
 Checked in Chrome at 390 px on ST2435 and ST81190, front and back, console clean; not on a phone. Done in LEDGER and Notion. Left out: J5's
 "next piece to win" on the Won card (`second-skin.html`).
 
-## H13 Poetic narration (hassan, PR #46 open, not merged, 2026-11-21)
-- The 16 record-built stories are short poems in `mockups/narration-poems.json` (facts only from each record, each
-  traced to the record's Dutch words; check: `python3 -I mockups/tools/narration_facts.py <path to cache/>`). the curator's 3
-  stories unchanged. Story sheet leads with play and a few lines; full transcript under "Read the story".
-  Old drafts beside new poems: `docs/H13-NARRATION-REVIEW.md` (for the curator to read).
-- **Half done: audio.** The 16 poems are not voiced yet; they play in the phone's voice. No Gemini key in `.env`, and the
-  house voice is Picsart Adeline (manual export). Scripts: `narration.py --scripts DIR` (a copy of the 16 is in the side
-  sessions' notes folder `h13-voice-scripts/`). Voice in Picsart (AI Audio Generator, Adeline, one line per script,
-  export MP4), then `narration.py --import DIR --voice "picsart:Adeline"`, `--check`, transcribe each file back, commit
-  to `hassan/H13-narration`. Then merge on Hassan's word, mark H13 done in LEDGER and Notion.
+## H13 Narrated stories (hassan, PR #46 open, not merged, 2026-11-21)
+- Every piece has a short spoken scene in `mockups/narration-scripts.json` (facts only from the record or the curator's story;
+  check: `python3 -I mockups/tools/narration_facts.py <path to cache/>`). The story sheet opens with the photo settling
+  in; captions light up word by word with the voice; the photo drifts while it plays. Wearables leave out their date
+  before Guess the year and end on a `tease`. the curator's text unchanged, under "Read the story". Review doc:
+  `docs/H13-NARRATION-REVIEW.md` (for the curator to read).
+- **Half done: audio.** None of the 19 new scripts is voiced (the curator's 3 old files no longer match); all play in the
+  phone's voice, highlight included. House voice is Picsart Adeline (manual export, no key in `.env`). Scripts:
+  `narration.py --scripts DIR` (a copy is in the side sessions' notes folder `h13-voice-scripts/`). Voice in Picsart,
+  export MP4, `narration.py --import DIR --voice "picsart:Adeline"`, `--check`, transcribe back, commit to
+  `hassan/H13-narration`; set `revealAt` on a wearable if the estimated stop before its date lands badly.
 
 ## MoMu branding (H10, PR #44 and PR #47 merged, 2026-11-21)
 MoMu's official two-M logo (`mockups/assets/brand/momu-logo.svg`, copied from momu.be) in the Stage bar, the Up close
