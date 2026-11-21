@@ -409,6 +409,7 @@
     {
       "id": "ST81190",
       "slot": "study",
+      "wear": "top",
       "name": "Riveted wool coat",
       "year": {
         "from": 1998,
@@ -419,14 +420,53 @@
       },
       "locked": true,
       "assets": {
-        "glb": null,
+        "glb": {
+          "path": "assets/ST81190.glb",
+          "kind": "scan",
+          "units": "norm",
+          "origin": "bbox"
+        },
         "splat": {
           "path": "assets/splat/ST81190.sog"
         }
       },
-      "fit": {},
+      "fit": {
+        "sleeveTo": 0.08,
+        "split": 0.64
+      },
       "pipeline": {
-        "cutout": "none"
+        "cutout": "none",
+        "mesh": {
+          "wear": "top",
+          "drop": [
+            {
+              "sat": [
+                0.28,
+                1
+              ],
+              "H": [
+                0,
+                0.22
+              ]
+            },
+            {
+              "lum": [
+                0.42,
+                1
+              ],
+              "sat": [
+                0,
+                0.3
+              ]
+            },
+            {
+              "H": [
+                0,
+                0.12
+              ]
+            }
+          ]
+        }
       },
       "details": [
         {
@@ -519,6 +559,7 @@
     {
       "id": "ST2431/1-4",
       "slot": "study",
+      "wear": "full",
       "name": "Light-blue cavalry uniform",
       "year": {
         "from": 1870,
@@ -529,14 +570,63 @@
       },
       "locked": true,
       "assets": {
-        "glb": null,
+        "glb": {
+          "path": "assets/ST2431_1-4.glb",
+          "kind": "scan",
+          "units": "norm",
+          "origin": "bbox"
+        },
         "splat": {
           "path": "assets/splat/ST2431_1-4.sog"
         }
       },
       "fit": {},
       "pipeline": {
-        "cutout": "none"
+        "cutout": "none",
+        "mesh": {
+          "wear": "full",
+          "pct": 45,
+          "drop": [
+            {
+              "H": [
+                0.855,
+                1
+              ]
+            },
+            {
+              "H": [
+                0,
+                0.02
+              ]
+            },
+            {
+              "ax": [
+                0.11,
+                1
+              ],
+              "H": [
+                0,
+                0.475
+              ]
+            },
+            {
+              "lum": [
+                0.45,
+                1
+              ],
+              "sat": [
+                0,
+                0.25
+              ],
+              "H": [
+                0.78,
+                1
+              ]
+            }
+          ],
+          "matchk": 0.75,
+          "satk": 1.5
+        }
       },
       "details": [
         {

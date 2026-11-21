@@ -330,12 +330,14 @@ addEventListener("pageshow", e => {
 // pieces.json (schema: pieces.schema.json) is the single source of truth; the pipeline reads the same file
 const manifest = await (await fetch("pieces.json")).json();
 const PIECES = Object.fromEntries(manifest.pieces.map(p => [p.id, {
-  ...p.fit, slot: p.slot, name: p.name, year: p.year, locked: p.locked, room: p.locked,   // room: has a sticker in the museum, won there
+  ...p.fit, slot: p.slot, wear: p.wear ?? null, name: p.name, year: p.year, locked: p.locked, room: p.locked,   // room: has a sticker in the museum, won there
   // a piece without a photo must not take the app down
   img: p.source?.imgSha ? IMG(p.source.imgSha) : `assets/swatch/${p.id.replace("/", "_")}.jpg`, glb: p.assets.glb?.path ?? null, kind: p.assets.glb?.kind ?? null,
   splat: p.assets.splat?.path ?? null, details: p.details?.length ?? 0,
 }]));
-// Splat pieces (study slot) are studied on up-close.html, not worn: finding every detail there unlocks their fabric
+// Splat pieces (study slot) are studied on up-close.html: finding every detail there unlocks their fabric, and a piece with
+// `wear` and a GLB (a mesh made from its own scan) is then worn in that slot as well
+const slotOf = id => PIECES[id].wear ?? PIECES[id].slot;   // where a piece goes on the form
 try {
   const found = JSON.parse(localStorage.getItem("secondSkin.found.v1") || "{}") || {};
   Object.entries(PIECES).filter(([, p]) => p.splat).forEach(([id, p]) => {
@@ -365,7 +367,7 @@ const look = { top: null, bottom: null, feet: null, full: "ST80881", fabric: { b
 const SAVE_KEY = "secondSkin.save.v1";
 try {   // restore the visitor's look; ids are checked against the manifest, since storage is user-controlled
   const saved = JSON.parse(localStorage.getItem(SAVE_KEY) || "null");
-  const ok = (id, slots) => id === null || (PIECES[id] && !PIECES[id].locked && (PIECES[id].glb || PIECES[id].splat) && slots.includes(PIECES[id].slot));
+  const ok = (id, slots) => id === null || (PIECES[id] && !PIECES[id].locked && (PIECES[id].glb || PIECES[id].splat) && slots.includes(slotOf(id)));
   const l = saved?.v === 1 && saved.look;
   if (l && ok(l.top, ["top"]) && ok(l.bottom, ["bottom"]) && ok(l.feet, ["feet"]) && ok(l.full, ["full"])
       && ok(l.fabric?.body ?? null, ["top", "bottom", "feet", "full", "study"]) && ok(l.fabric?.sleeves ?? null, ["top", "bottom", "feet", "full", "study"])
@@ -456,7 +458,7 @@ function prepGarment(scene, piece, id) {
     const u = m.userData.u = { uFabricA: { value: null }, uFabricB: { value: null }, uRemixA: { value: 0 }, uRemixB: { value: 0 },
       uMean: { value: m.map ? meanLuma(m.map) : 0.2 },
       uCx: { value: (g.boundingBox.max.x + g.boundingBox.min.x) / 2 },
-      uSplit: { value: half * 0.5 },   // scans hang sleeves outside about half the full width
+      uSplit: { value: half * (piece.split ?? 0.5) },   // scans hang sleeves outside about half the full width (fit.split per piece)
       uSleeveY: { value: g.boundingBox.min.y + (piece.sleeveTo ?? 0.4) * (g.boundingBox.max.y - g.boundingBox.min.y) },
       uDrop: { value: piece.hideStand ? 0.03 : -1 },   // 0.03 is linear: the stand's near-black, under any fabric's darkest dye
       uOn: { value: 0 }, uCut: { value: FORM_CUT[id] ? 1 : 0 }, uCutHalf: { value: half * 0.4 }, uCutTol: { value: FORM_CUT[id]?.[3] ?? 0.09 }, uCutPale: { value: FORM_CUT[id]?.[4] ?? 0 },
@@ -875,7 +877,7 @@ const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;",
 const shortName = id => PIECES[id].name.split(",")[0];
 const swatchOf = id => `assets/swatch/${fileOf(id)}.jpg`;
 // ctx is how a tap on this piece acts: "remix" puts its cloth on activeZone, a slot wears it, "study" opens Up close
-const ctxOf = id => activeSlot === "won" ? "won" : activeSlot === "remix" && !PIECES[id].locked && (PIECES[id].glb || PIECES[id].splat) ? "remix" : PIECES[id].slot;
+const ctxOf = id => activeSlot === "won" ? "won" : activeSlot === "remix" && !PIECES[id].locked && (PIECES[id].glb || PIECES[id].splat) ? "remix" : PIECES[id].wear === activeSlot ? activeSlot : PIECES[id].slot;
 function isWorn(id, ctx) {
   if (ctx === "won") return PIECES[id].splat ? look.fabric.body === id : PIECES[id].slot === "full" ? look.full === id : !look.full && look[PIECES[id].slot] === id;
   if (ctx === "remix") return look.fabric[activeZone] === id;
@@ -911,7 +913,7 @@ function renderLocker() {
       tile(id, `${isWorn(id, "remix") ? "on" : ""} ${fresh.has(id) ? "new" : ""}`, swatchOf(id), `<span class="m">${esc(shortName(id))}</span>`, `${p.name} fabric on the ${activeZone}`)).join("");
     return;
   }
-  grid.innerHTML = Object.entries(PIECES).filter(([, p]) => p.slot === activeSlot && p.glb).sort(newFirst).map(([id, p]) =>
+  grid.innerHTML = Object.entries(PIECES).filter(([, p]) => (p.slot === activeSlot || (p.wear === activeSlot && !p.locked)) && p.glb).sort(newFirst).map(([id, p]) =>
     tile(id, `${isWorn(id, activeSlot) ? "on" : ""} ${p.locked ? "locked" : ""} ${fresh.has(id) ? "new" : ""}`, p.img, `<span class="m">${esc(shortName(id))}</span>`,
       isWorn(id, activeSlot) ? `Take off ${p.name}` : `Wear ${p.name}`)).join("");
 }
@@ -921,7 +923,7 @@ function renderMuseum() {
   const room = Object.entries(PIECES).filter(([, p]) => p.room && (p.glb || p.splat));   // a piece with no 3D yet has nothing to win
   document.getElementById("museumCount").textContent = `${room.filter(([, p]) => !p.locked).length} of ${room.length} won`;
   document.getElementById("museumGrid").innerHTML = room.map(([id, p]) => {
-    const state = !p.locked ? (p.splat ? "Fabric won" : "Won") : p.seen ? `${p.found} of ${p.details} details found` : "Still to find";
+    const state = !p.locked ? (p.splat && !p.wear ? "Fabric won" : "Won") : p.seen ? `${p.found} of ${p.details} details found` : "Still to find";
     const date = p.year.from === p.year.to ? p.year.from : `${p.year.from} to ${p.year.to}`;
     const when = p.locked && !p.splat ? "" : `${date} · `;   // a wearable's year is the answer to its Win it guess
     return tile(id, `study ${p.seen || !p.locked ? "seen" : ""}`, p.img, `<span class="st"><b>${esc(p.name)}</b><span>${when}${state}</span></span>`,
@@ -1021,8 +1023,9 @@ function wearFabric(id) {
   look.fabric.body = id; activeSlot = "remix"; activeZone = "body";
   dress();
 }
-/* A win goes on by itself, so the visitor sees exactly what they won and one × takes it off. A study piece's scan is not a
-   garment, so its cloth goes on the wardrobe cut closest to its own shape (CUT_OF), body and sleeves both. */
+/* A win goes on by itself, so the visitor sees exactly what they won and one × takes it off. A study piece with its own
+   wearable mesh (`wear`) goes on as itself; one without is not a garment, so its cloth goes on the wardrobe cut closest to
+   its own shape (CUT_OF), body and sleeves both. */
 const CUT_OF = {   // study piece -> the wearable whose cut is nearest: coats and uniform jackets on the coat, dresses on the dress, the kaftan on the kimono
   "ST81190": "ST2434", "ST2431/1-4": "ST2434", "ST2432/1-2": "ST2434",
   "ST2435": "ST655/1", "ST652/1": "ST655/1", "ST671": "ST655/1", "ST2203": "ST655/1", "ST673/1-2": "ST655/1",
@@ -1031,10 +1034,10 @@ const CUT_OF = {   // study piece -> the wearable whose cut is nearest: coats an
 function wearAlone(id) {
   const p = PIECES[id], bare = { top: null, bottom: null, feet: null, full: null, fabric: { body: null, sleeves: null } };
   if (p.splat) {
-    const ok = k => k && ["top", "full"].includes(PIECES[k]?.slot) && PIECES[k].glb && !PIECES[k].locked;
-    const cut = [CUT_OF[id], "ST655/1", ...Object.keys(PIECES)].find(ok);
+    const ok = k => k && PIECES[k] && ["top", "full"].includes(slotOf(k)) && PIECES[k].glb && !PIECES[k].locked;
+    const cut = [id, CUT_OF[id], "ST655/1", ...Object.keys(PIECES)].find(ok);   // its own mesh first (its own cloth then reads as original)
     if (!cut) return;
-    Object.assign(look, bare, { [PIECES[cut].slot]: cut, fabric: { body: id, sleeves: id } });
+    Object.assign(look, bare, { [slotOf(cut)]: cut, fabric: { body: id, sleeves: id } });
   } else Object.assign(look, bare, { [p.slot]: id });
   activeSlot = "won"; activeZone = "body";
   dress(); setSnap("half");
@@ -1042,7 +1045,8 @@ function wearAlone(id) {
 function act(id, ctx) {   // the one action a tile, or its fact card, performs
   if (ctx === "won") {
     if (!isWorn(id, "won")) { wearAlone(id); return; }
-    if (PIECES[id].splat) look.fabric = { body: null, sleeves: null }; else look[PIECES[id].slot] = null;
+    if (PIECES[id].splat) { look.fabric = { body: null, sleeves: null }; if (PIECES[id].wear && look[PIECES[id].wear] === id) look[PIECES[id].wear] = null; }   // its own mesh comes off with its cloth
+    else look[PIECES[id].slot] = null;
     dress(); return;
   }
   if (ctx === "study") { tapCard(id); return; }

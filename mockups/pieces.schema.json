@@ -50,6 +50,15 @@
             "study"
           ]
         },
+        "wear": {
+          "description": "A study piece that also has a wearable GLB: the slot it is worn in once won",
+          "enum": [
+            "top",
+            "bottom",
+            "feet",
+            "full"
+          ]
+        },
         "name": {
           "type": "string",
           "minLength": 1
@@ -162,6 +171,12 @@
               "minimum": 0,
               "maximum": 1
             },
+            "split": {
+              "description": "Body/sleeve boundary for fabric remix, as a fraction of the half width (default 0.5)",
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
             "hideStand": {
               "type": "boolean"
             }
@@ -180,6 +195,10 @@
                 "none",
                 "vectorcraft"
               ]
+            },
+            "mesh": {
+              "description": "Splat-to-garment settings for mockups/tools/garment.py (see docs/WEARABLE-PIPELINE.md)",
+              "type": "object"
             }
           }
         },
