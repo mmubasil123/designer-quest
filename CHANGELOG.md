@@ -4,6 +4,12 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### A won fabric is easy to find (branch basil/fabrics-clarity)
+- **What:** the Remix tab is now **Fabrics** (tab, sheet title, help text, toast "New in Fabrics: ..."); the Won card's button says "Add to my fabrics" or "Add to my wardrobe". A piece or fabric won this visit sorts first in its tab, the grid scrolls to the top, the chosen tab chip scrolls into view, and long toasts wrap.
+- **Why:** owner: after "Add its fabric to my wardrobe" it "goes nowhere". The new swatch was the last tile below the fold, the Remix chip was cut off at the right edge, and the toast ran off the phone.
+- **Decision:** one name for one thing: the place fabrics live is called Fabrics everywhere it appears.
+
+
 ### Working rule: PRs need no review (branch hassan/drop-review-rule)
 - **What:** `AGENTS.md` no longer says the other person reviews and merges a PR. No review is needed, but a PR is merged only on its developer's say, never automatically; agents ask first. Claims and `HANDOVER.md` updates may still go straight to `main`.
 - **Why:** Hassan: nobody needs to review. Mubasil still deploys alone (unchanged).

@@ -82,6 +82,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   background: var(--ink); color: var(--paper); font: 500 12px var(--sans); padding: 7px 12px; border-radius: 999px; white-space: nowrap;
   transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out); }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
+.stage .toast { white-space: normal; width: max-content; max-width: calc(100% - 40px); text-align: center; line-height: 1.35; border-radius: 16px; }   /* long piece names wrap instead of running off the phone */
 .credit { position: absolute; left: 20px; top: 8px; right: 20px; display: flex; justify-content: space-between; gap: 8px; }
 .credit .t { font: 400 22px/1.15 var(--serif); }
 .skins { display: flex; margin-right: -12px; }
@@ -835,7 +836,7 @@ skinsEl.addEventListener("click", e => {
 });
 
 let activeSlot = "top", activeZone = "body";
-const LABEL = { top: "Top", bottom: "Bottom", feet: "Feet", full: "Full", study: "Study", remix: "Remix" };
+const LABEL = { top: "Top", bottom: "Bottom", feet: "Feet", full: "Full", study: "Study", remix: "Fabrics" };
 const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const shortName = id => PIECES[id].name.split(",")[0];
 const swatchOf = id => `assets/swatch/${fileOf(id)}.jpg`;
@@ -849,22 +850,25 @@ function isWorn(id, ctx) {
 const tile = (id, cls, img, label, aria) => `<div class="tile ${cls}" data-id="${id}">
   <button class="pick press" aria-label="${esc(aria)}" aria-pressed="${cls.includes("on")}"><img src="${img}" alt="" decoding="async"${img.startsWith("assets/swatch") ? ' style="mix-blend-mode:normal"' : ""}></button>${label}
   <button class="info" data-info="${id}" aria-label="About ${esc(PIECES[id].name)}"><span aria-hidden="true">i</span></button></div>`;
+const newFirst = ([a], [b]) => fresh.has(b) - fresh.has(a);   // a piece just won leads its tab
 function renderLocker() {
   document.getElementById("foundCount").textContent = `${Object.values(PIECES).filter(p => !p.locked).length} in your wardrobe`;
-  document.getElementById("slotTitle").textContent = activeSlot === "remix" ? "Remix the fabric" : LABEL[activeSlot];
+  document.getElementById("slotTitle").textContent = LABEL[activeSlot];
   document.getElementById("cats").innerHTML = [...SLOTS, "remix"].map(s =>
     `<button class="cat press" aria-pressed="${s === activeSlot}" data-slot="${s}">${LABEL[s]}</button>`).join("");
+  const cats = document.getElementById("cats"), on = cats.querySelector('[aria-pressed="true"]');   // the chosen tab must be on screen, even the last one
+  cats.scrollLeft += on.getBoundingClientRect().right - cats.getBoundingClientRect().right + 48;
   renderWearing();
   const grid = document.getElementById("grid");
   if (activeSlot === "remix") {   // any unlocked piece's cloth, on the body or sleeves of your top or full look
     const zones = ["body", "sleeves"].map(z =>
       `<button class="cat press" aria-pressed="${z === activeZone}" data-zone="${z}">${z === "body" ? "Body" : "Sleeves"}</button>`).join("");
     const bare = !look.full && !look.top ? `<p class="zones none">Fabric goes on a top or a full look. Put one on first.</p>` : "";
-    grid.innerHTML = `<div class="zones">${zones}</div>${bare}` + Object.entries(PIECES).filter(([, p]) => (p.glb || p.splat) && !p.locked).map(([id, p]) =>
+    grid.innerHTML = `<div class="zones">${zones}</div>${bare}` + Object.entries(PIECES).filter(([, p]) => (p.glb || p.splat) && !p.locked).sort(newFirst).map(([id, p]) =>
       tile(id, `${isWorn(id, "remix") ? "on" : ""} ${fresh.has(id) ? "new" : ""}`, swatchOf(id), `<span class="m">${esc(shortName(id))}</span>`, `${p.name} fabric on the ${activeZone}`)).join("");
     return;
   }
-  grid.innerHTML = Object.entries(PIECES).filter(([, p]) => p.slot === activeSlot).map(([id, p]) =>
+  grid.innerHTML = Object.entries(PIECES).filter(([, p]) => p.slot === activeSlot).sort(newFirst).map(([id, p]) =>
     tile(id, `${isWorn(id, activeSlot) ? "on" : ""} ${p.locked ? "locked" : ""} ${fresh.has(id) ? "new" : ""}`, p.img, `<span class="m">${esc(shortName(id))}</span>`,
       isWorn(id, activeSlot) ? `Take off ${p.name}` : `Wear ${p.name}`)).join("");
 }
@@ -1087,7 +1091,7 @@ document.getElementById("cats").addEventListener("click", e => { if (e.target.cl
 /* ---------- Help: three steps, shown once on a first visit, always reopenable with the ? button ---------- */
 const HELP = [
   { t: "Dress the form", d: "Pull up the wardrobe from the bottom. Tap a piece to wear it, tap it again to take it off. Drag the form to turn it." },
-  { t: "Remix a fabric", d: "In the Remix tab, put one piece's cloth on another piece's cut, and see how many years your look spans." },
+  { t: "Remix a fabric", d: "In the Fabrics tab, put one piece's cloth on another piece's cut, and see how many years your look spans." },
   { t: "Read the record", d: "The i on any piece opens what MoMu has recorded about it. Tap the stickers in the museum to win more pieces and fabrics." },
 ];
 const HELP_KEY = "secondSkin.help.v1", helpEl = document.getElementById("help");
@@ -1120,7 +1124,7 @@ renderCredit(); renderCredit.ready = true; renderLocker();
 
 /* Card scan: a sticker in the room opens ?card=<id>. A room piece is won first (story, Win it), then waits in the wardrobe */
 const win = createWin({ PIECES, record: id => RECORDS[id], img: id => PIECES[id].img });
-const welcome = (id, text) => { activeSlot = PIECES[id].splat ? "remix" : PIECES[id].slot; activeZone = "body"; renderLocker(); setSnap("half"); toast(text); };
+const welcome = (id, text) => { activeSlot = PIECES[id].splat ? "remix" : PIECES[id].slot; activeZone = "body"; renderLocker(); document.getElementById("grid").scrollTop = 0; setSnap("half"); toast(text); };
 async function scan(id) {
   const p = PIECES[id];
   if (!p.locked) { welcome(id, `Already in your wardrobe: ${p.name}`); return; }
@@ -1129,7 +1133,7 @@ async function scan(id) {
   await recordsReady; await win.won(id, { off });
   p.locked = false; fresh.add(id);
   try { localStorage.setItem(WON_KEY, JSON.stringify([...new Set([...readWon(), id])])); } catch { /* blocked: the win lasts this visit */ }
-  welcome(id, `Added to your wardrobe: ${p.name}. Tap it to wear it.`);
+  welcome(id, `${p.name.split(",")[0]} is in your wardrobe. Tap it to wear it.`);
 }
 if (scanned && !PIECES[scanned]?.glb) toast("This sticker isn't in the app yet");
 else if (scanned) scan(scanned);
@@ -1137,7 +1141,7 @@ else if (scanned) scan(scanned);
 const claimed = params.get("fabric");
 if (claimed && PIECES[claimed]?.splat && !PIECES[claimed].locked) recordsReady.then(() => win.won(claimed, { what: "fabric" })).then(() => {
   fresh.add(claimed);
-  welcome(claimed, `Added to your wardrobe: the ${PIECES[claimed].name.split(",")[0].toLowerCase()}'s fabric. Tap it to wear it.`);
+  welcome(claimed, `New in Fabrics: ${PIECES[claimed].name.split(",")[0].toLowerCase()}. Tap it to wear it.`);
 });
 if (scanned || claimed) history.replaceState(null, "", location.pathname);   // a reload must not replay the card
 // first visit only, and not for a visitor who arrived by a sticker or from Up close: they already know what they want
