@@ -79,6 +79,11 @@ ST655/1, ST81299, ST2202, ST2434, ST81234/1-2, ST2435.
 | G3 | Cut rules as `pieces.json` hints; parts for ST81190 and the full looks | M | Each splat piece has parts that pass the G1 acceptance | open |
 | G4 | Splat engine in the Stage (three 0.180, Spark) replacing the GLB form | L | Stage wears splat parts from the wardrobe sheet; remix works on splats | open |
 
+## Track H: AI
+| # | Ticket | Size | Acceptance | Status |
+|---|---|---|---|---|
+| H2 | Ask the archive: a visitor asks about a piece and gets an answer built only from that piece's MoMu record (D3), labelled as AI; serverless `api/ask` keeps the key off the browser; field-only fallback with no key or network | M | At 390 px: ask, answer shows its field line; an unrecorded question says "That is not recorded for this piece"; with no key the suggested questions still answer from fields; eval script passes on 2 pieces x 10 questions | hassan, in progress on `hassan/H2-ask-archive` |
+
 ## Track F: Later (after the hackathon)
 | # | Ticket |
 |---|---|
