@@ -4,6 +4,12 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### Cocktail dress (ST655/1): texture recoloured to follow its photo (branch basil/fix-cocktail-dress-texture)
+- **Problem:** after the metalness fix the dress was no longer black on Basil's phone, but still dark grey-brown with no green. The TRELLIS bake lost the colour: the baked texture's mean is 16,15,14 (near black, no hue), while the photo of the dress is dark green and olive-gold stripes (mean 60,61,54).
+- **Fix (no GPU, no credits):** `tools/recolor_glb_texture.py` re-colours the baked texture by matching each texel's luminance rank to the colour ramp of the garment cutout photo, then scales the light so the lit render matches (factor 0.15). Same mesh and UVs, so the shape does not change. Rendered mean sRGB of the dress alone: before 55,52,48; after 64,65,55; photo 60,61,54.
+- **File name:** the GLB is now `assets/ST655_1_v2.glb` (pieces.json updated) because /assets is cached for a day on Vercel, so a phone that already holds the old file would not see the fix under the old name. The old file is removed from the tree (still in git history).
+- **Limits:** the horizontal stripes of the real fabric are not reproduced; the dress reads green-black rather than grey-brown. A true fix needs a regenerated GLB (GPU quota).
+
 ### Fix: Piece photo missing on desktop (branch basil/piece-photo-desktop)
 - **Bug:** the faster-loading change made the Piece screen photo (and the 3D viewer) wait for the first visit to that screen. On a window wider than 600 px the Piece screen is shown beside the Stage and is never "visited", so its photo stayed empty and showed only the alt text.
 - **Fix:** `enterPiece()` also runs at boot when the window is wider than a phone, and when a narrow window is widened. Phones keep the lazy load.
