@@ -67,9 +67,9 @@ li.found .fact { grid-template-rows: 1fr; }
 .fact q { display: block; font: italic 400 17px/1.35 Newsreader, serif; quotes: "“" "”"; }
 .fact p { color: var(--muted); font-size: 13px; margin: 6px 0 14px; }
 .fact .mono { font-size: 10px; margin-right: 6px; }
-.cta { min-height: 52px; border-radius: 999px; background: var(--ink); color: var(--paper); font-weight: 500; font-size: 15px;
-  opacity: .25; pointer-events: none; transition: opacity 200ms ease, transform 160ms var(--ease-out); }
-.cta.on { opacity: 1; pointer-events: auto; }
+.cta { min-height: 52px; border-radius: 999px; font-weight: 500; font-size: 15px; background: transparent; color: var(--ink);
+  box-shadow: inset 0 0 0 1.5px var(--ink); transition: background-color 200ms ease, color 200ms ease, transform 160ms var(--ease-out); }
+.cta.on { background: var(--ink); color: var(--paper); }
 .credit { font-size: 12px; color: var(--muted); }
 
 @media (min-width: 860px) {
@@ -157,9 +157,14 @@ function renderPanel() {
   document.querySelectorAll("#dots i").forEach((el, i) => el.classList.toggle("on", i < n));
   document.querySelectorAll("#details li").forEach(li => li.classList.toggle("found", found.has(+li.dataset.i)));
   $("#wear").classList.toggle("on", n === total);
+  $("#wear").textContent = n === total ? "Wear its fabric" : `Find ${total - n} more to wear its fabric`;
 }
 renderPanel();
-$("#wear").addEventListener("click", () => { location.href = `second-skin.html?fabric=${encodeURIComponent(id)}`; });
+$("#wear").addEventListener("click", () => {   // never a dead button: until all are found it points at the next one
+  const next = piece.details.findIndex((_, i) => !found.has(i));
+  if (next < 0) location.href = `second-skin.html?fabric=${encodeURIComponent(id)}`;
+  else if (view.classList.contains("ready")) showMe(next);
+});
 
 /* ---------- Scene ---------- */
 const view = $("#view");
@@ -250,8 +255,10 @@ function toast(text) {
 /* ---------- Show me: turn to face the detail and pulse its pin ---------- */
 let turn = null;
 $("#details").addEventListener("click", e => {
-  const b = e.target.closest("[data-show]"); if (!b) return;
-  hint = +b.dataset.show;
+  const b = e.target.closest("[data-show]"); if (b && view.classList.contains("ready")) showMe(+b.dataset.show);
+});
+function showMe(i) {
+  hint = i;
   const p = points[hint], dir = new THREE.Vector3(p.x - centre.x, 0, p.z - centre.z);
   if (dir.lengthSq() < 1e-6) dir.set(0, 0, -1);
   const r = camera.position.distanceTo(centre);
@@ -259,7 +266,7 @@ $("#details").addEventListener("click", e => {
   to.y = camera.position.y;
   if (reduce) camera.position.copy(to);
   else turn = { from: camera.position.clone(), to, t0: performance.now() };
-});
+}
 function stepTurn(now) {
   if (!turn) return;
   const k = Math.min(1, (now - turn.t0) / 700), e = 1 - Math.pow(1 - k, 3);

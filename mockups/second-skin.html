@@ -756,6 +756,16 @@ function go(screen) {
   if (screen === "stage") turntables.forEach(t => t.render());   // it was display:none, so its canvas went stale
 }
 document.addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (b) go(b.dataset.go); });
+document.getElementById("shareBtn").addEventListener("click", async () => {   // shortcut: shares text and link, B7 adds the 9:16 image
+  const span = document.getElementById("lookSpan").textContent.split(" · ")[0];
+  const name = look.fabric.body || look.fabric.sleeves ? lookName() : "My look";   // unremixed looks have no name
+  const text = `${name}${span ? `, ${span.toLowerCase()}` : ""}. Made from the MoMu collection in Second Skin.`;
+  const url = location.origin + location.pathname;
+  try {
+    if (navigator.share) await navigator.share({ title: "Second Skin", text, url });
+    else { await navigator.clipboard.writeText(`${text} ${url}`); toast("Look copied, paste it anywhere"); }
+  } catch (err) { if (err.name !== "AbortError") toast("Couldn't share from this browser"); }
+});
 document.getElementById("wearBtn").addEventListener("click", () => {   // the Piece page's kimono goes onto the form
   look.full = "ST80881";
   turntables.forEach(t => t.draw()); renderLocker(); renderCredit();
