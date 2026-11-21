@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 860" preserveAspectRatio="xMidYMax slice">
+  <!-- 19th century: a gaslit iron-and-glass arcade at dusk -->
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2f3f5"/><stop offset="1" stop-color="#dfe3e8"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6f8"/><stop offset="1" stop-color="#e6eaee"/></linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9dde1"/><stop offset="1" stop-color="#c9ced3"/></linearGradient>
+    <radialGradient id="lamp" r=".5"><stop offset="0" stop-color="#ffe7b8"/><stop offset="1" stop-color="#ffe7b8" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="400" height="860" fill="url(#wall)"/>
+  <path d="M40 660V420a160 160 0 0 1 320 0V660Z" fill="url(#glass)"/>
+  <g fill="none" stroke="#bcc4cd" stroke-width="2">
+    <path d="M40 420a160 160 0 0 1 320 0M64 420a136 136 0 0 1 272 0" stroke-width="3"/>
+    <path d="M200 260V284M120 281l12 21M280 281l-12 21M62 345l21 12M338 345l-21 12M40 420H64M360 420H336"/>
+    <path d="M40 470H360M40 520H360M40 590H360" stroke-width="1" opacity=".7"/>
+    <path d="M120 420V660M200 420V660M280 420V660" stroke-width="1" opacity=".7"/>
+  </g>
+  <g fill="#c3cad2"><rect x="30" y="400" width="14" height="260"/><rect x="356" y="400" width="14" height="260"/><rect x="24" y="392" width="26" height="10"/><rect x="350" y="392" width="26" height="10"/></g>
+  <circle cx="37" cy="372" r="34" fill="url(#lamp)"/><circle cx="363" cy="372" r="34" fill="url(#lamp)"/>
+  <g fill="#f6dca2" stroke="#b3bbc4" stroke-width="1.5"><path d="M31 362h12l-2 18h-8Z"/><path d="M357 362h12l-2 18h-8Z"/></g>
+  <rect y="660" width="400" height="200" fill="url(#floor)"/>
+  <path d="M0 660H400" stroke="#b7bec6" stroke-width="2"/>
+  <g stroke="#bfc5cc" stroke-width="1" opacity=".7"><path d="M200 660L-160 860M200 660L-20 860M200 660L90 860M200 660L200 860M200 660L310 860M200 660L420 860M200 660L560 860M0 690H400M0 734H400M0 796H400"/></g>
+</svg>

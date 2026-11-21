@@ -2,6 +2,24 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## Storytelling backgrounds behind every 3D view (2026-11-21, H7, branch hassan/H7-story-backgrounds)
+- **What:** the Stage, the full-screen 3D view and Up close no longer show the piece on white or grey. Each stands in
+  one of six period rooms (`mockups/assets/scenes/*.svg`): a candlelit salon (to 1799), a gaslit iron-and-glass arcade
+  (to 1889), an art nouveau doorway (to 1919), an art deco proscenium (to 1949), a modernist room (to 1969) and a
+  concrete runway (after). `mockups/scenes.js` picks the room from the middle of the piece's dated span in
+  `pieces.json` and cross-fades when it changes; `scenes.css` fades the top of the room to paper under the title.
+  On the Stage the room follows the look's main piece (full, else top, bottom, feet). Up close's renderer is now
+  transparent so the room shows behind the splat.
+- **Why:** feedback round 2026-11-21: no white backgrounds; the 3D views should be set in a scene that tells the
+  piece's story, to go with the poetic narration.
+- **Decision:** hand-drawn SVG rooms, light and low in contrast, so garments stay the brightest, sharpest thing on
+  screen and the red titles keep AA contrast; chosen by date only, with no label, because the room is atmosphere, not
+  a fact about the piece (D3). No `pieces.json` schema change; a per-piece `scene` override can come later
+  (Change policy: heads-up first).
+- **Checked:** at 390 x 844 in Chrome: all six rooms behind the furisode on the Stage; wearing the green wool coat
+  switches the Stage to the arcade; the coat's 3D view shows the arcade; Up close on the sequin silk dress shows the
+  art deco room behind the splat; console clean. Reduced motion shortens the cross-fade to 200 ms.
+
 ## Wearable scans (2026-11-21, branch basil/wear-scans)
 - What: `mockups/tools/garment.py` turns a piece's splat scan into a wearable GLB (or runs the TRELLIS photo route) and
   registers it. All 9 scan pieces (coat ST81190 as a top, the other 8 as full looks) now wear as themselves once won,

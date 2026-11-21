@@ -6,7 +6,8 @@
 <title>Up close · Second Skin</title>
 <link rel="preload" href="assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="theme.css"><!-- B9 MoMu theme: tokens and fonts -->
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="scenes.css"><!-- H7: the study piece stands in a room from its own time --><!-- B9 MoMu theme: tokens and fonts -->
 <style>
 /* colour, type and motion tokens come from theme.css */
 * { box-sizing: border-box; margin: 0; }
@@ -23,7 +24,7 @@ header { display: flex; align-items: center; gap: 12px; padding: max(12px, env(s
 .brand { font: 500 15px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
 header .mono { margin-left: auto; }
 
-#view { position: relative; background: var(--wall); margin: 0 16px; border-radius: var(--r-pic); overflow: hidden; touch-action: none; }
+#view { position: relative; isolation: isolate; background: var(--wall); margin: 0 16px; border-radius: var(--r-pic); overflow: hidden; touch-action: none; }
 #view canvas { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 400ms var(--ease-out); }
 #view.ready canvas { opacity: 1; }
 #loading { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; }
@@ -119,7 +120,8 @@ li.found .fact { grid-template-rows: 1fr; }
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { SparkRenderer, SplatMesh } from "@sparkjsdev/spark";
-import { backTo } from "./nav.js";   // H6: back gesture closes layers; ← steps back to the Stage instead of stacking a new page
+import { backTo } from "./nav.js";
+import { mountScene } from "./scenes.js";   // H6: back gesture closes layers; ← steps back to the Stage instead of stacking a new page
 
 const FOUND_KEY = "secondSkin.found.v1";   // { [pieceId]: [detail index, ...] }; second-skin.html reads it
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -172,11 +174,11 @@ $("#wear").addEventListener("click", () => {   // never a dead button: until all
 
 /* ---------- Scene ---------- */
 const view = $("#view");
-const renderer = new THREE.WebGLRenderer({ antialias: false });
+const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });   // H7: transparent, so the scene shows behind the splat
 renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
 view.prepend(renderer.domElement);
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue("--wall").trim());
+mountScene(view).set(piece.year);   // H7: a period room instead of the grey wall
 scene.add(new SparkRenderer({ renderer }));
 const camera = new THREE.PerspectiveCamera(40, 1, 0.01, 100);
 const controls = new OrbitControls(camera, renderer.domElement);
