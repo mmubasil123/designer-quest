@@ -26,7 +26,7 @@ export function createAsk({ endpoint = "api/ask" } = {}) {
       <input id="askQ" name="q" type="text" maxlength="${MAX_QUESTION}" enterkeyhint="send" placeholder="Ask about this piece">
       <button class="btn press" id="askGo" type="submit">Ask</button>
     </form>
-    <p class="ask-privacy">Please leave out names and personal details. Questions go to Anthropic's Claude, outside the EU, and we do not keep them.</p>
+    <p class="ask-privacy">Please leave out names and personal details. Questions go to an AI service and we do not keep them.</p>
   </div>`;
   document.body.append(el);
   const $ = id => el.querySelector(`#${id}`);

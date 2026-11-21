@@ -38,12 +38,12 @@ for (const id of Object.keys(RECORDS)) {
 console.log(offlineFail ? `${offlineFail} offline check(s) failed` : "all offline checks passed");
 
 /* 2. Model run. */
-if (!process.env.ANTHROPIC_API_KEY) {
-  console.log("\nANTHROPIC_API_KEY not set: model cases skipped. Put it in the repo's .env (chmod 600) and rerun.");
+if (!process.env.ANTHROPIC_API_KEY && !(process.env.ASK_API_KEY && process.env.ASK_MODEL)) {
+  console.log("\nNo model key: model cases skipped. Put ANTHROPIC_API_KEY, or ASK_PROVIDER + ASK_API_KEY + ASK_MODEL, in the repo's .env and rerun.");
   process.exit(offlineFail ? 1 : 0);
 }
-const { askModel, MODEL } = await import("../../api/ask.js");
-console.log(`\nModel cases on ${MODEL}`);
+const { askModel, MODEL, PROVIDER } = await import("../../api/ask.js");
+console.log(`\nModel cases on ${PROVIDER} ${MODEL}`);
 const results = [];
 for (const c of cases) {
   const t0 = Date.now();
@@ -69,7 +69,7 @@ const passed = results.filter(r => r.pass).length, ms = results.map(r => r.ms).s
 const summary = { model: MODEL, date: new Date().toISOString().slice(0, 10), passed, total: results.length,
   medianMs: ms[Math.floor(ms.length / 2)], maxMs: ms.at(-1), offlineChecks: offlineFail ? "failed" : "passed" };
 console.log(`\n${passed}/${results.length} passed · median ${summary.medianMs} ms · max ${summary.maxMs} ms`);
-writeFileSync(new URL(`results-${MODEL}.json`, here), JSON.stringify({ summary, results }, null, 1) + "\n");
+writeFileSync(new URL(`results-${MODEL.replace(/[^\w.-]+/g, "_")}.json`, here), JSON.stringify({ summary, results }, null, 1) + "\n");
 
 const md = [`# Ask the archive: eval results (${MODEL}, ${summary.date})`, "",
   `${passed} of ${results.length} cases pass · median ${summary.medianMs} ms, slowest ${summary.maxMs} ms · offline checks ${summary.offlineChecks}.`, "",
