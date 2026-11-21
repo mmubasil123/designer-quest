@@ -15,6 +15,15 @@ before calling anything done. Never deploy, push to `main` or publish without yo
   to `main` (owner's rule, 2026-11-21). Last deploy: `ed1d4c1`, spike page included.
 - Serve: `cd mockups && python3 -m http.server 8765 --bind 127.0.0.1`; console handle `window.secondSkin`.
 
+## H3 Story screen + narration (hassan, branch hassan/story-narration, PR pending)
+- Card scan -> story sheet (`story.js`, `story.css`) -> Continue -> the curator's questions (`quiz.js`, story not repeated).
+- Text and audio list: `mockups/narration.json`, built by `python3 -I mockups/tools/narration.py` from `questions.json`
+  (the curator) and `records.json` (drafts for pieces she hasn't written yet, marked on screen). Never hand-edit it.
+- Audio: `assets/audio/<id>.en.m4a`, Gemini TTS, key `GEMINI_API_KEY` in `.env`. 11 of 17 done; the free TTS quota
+  (daily) ran out. To finish: `python3 -I mockups/tools/narration.py --audio` (only the 6 missing study pieces are
+  made). Until then those play with the phone's own voice. After the curator edits her page: re-sync `questions.json`,
+  rerun the script (only changed stories are re-voiced), `--check` before committing.
+
 ## H2 Ask the archive (hassan, merged in PR #10)
 - Fact card **Ask** opens a sheet; `api/ask.js` (Vercel function) answers only from `ask-records.json` and labels
   answers as AI. Without `ANTHROPIC_API_KEY` it falls back to field answers for the 3 suggested questions.

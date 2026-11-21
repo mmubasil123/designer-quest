@@ -24,15 +24,15 @@ export async function createQuiz({ pieces }) {
     if (e.target.closest("[data-close]")) el.close();
   });
 
-  function show(id, { found = false, next = "Close" } = {}) {
+  function show(id, { found = false, next = "Close", story = true } = {}) {   // story: false when story.js already showed it
     const p = byId[id];
     if (!p) return Promise.resolve();
     const qs = p.questions;   // every question on her page, in her order
     el.innerHTML = `<div tabindex="-1" autofocus>
-      <div class="mono">${found ? "Found in the museum" : "Story"} · ${esc(id)}</div>
+      <div class="mono">${found ? "Found in the museum" : story ? "Story" : "Questions"} · ${esc(id)}</div>
       <h3 id="quizName">${esc(p.title)}</h3>
       ${p.facts.length ? `<dl>${p.facts.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>` : ""}
-      ${p.story.map(t => `<p class="story">${esc(t)}</p>`).join("")}
+      ${(story ? p.story : []).map(t => `<p class="story">${esc(t)}</p>`).join("")}
       ${p.link ? `<p class="cite"><a href="${esc(p.link)}" target="_blank" rel="noopener">Source: MoMu Study Collection ↗</a></p>` : ""}
       ${qs.length ? `<h4>Look closer</h4><ol class="qs">${qs.map((q, i) => `<li><p>${esc(q.q)}</p>
         <button class="reveal press" data-reveal aria-controls="quizA${i}">Show answer</button>
