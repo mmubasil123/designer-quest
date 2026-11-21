@@ -4,6 +4,10 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### Quick fixes and data guards from the audits (J2, J6; branch basil/ar-button)
+- **What:** the fact card has a close button; tapping a locked wardrobe tile opens the sticker prompt instead of nothing; a re-tapped study sticker whose fabric is won says it is already in Fabrics instead of replaying the story and challenge; New badges survive a reload (`secondSkin.new.v1`); "Simulate NFC tap" reads "Demo: tap the sticker"; the fabric toast says Fabrics. Guards: a piece without a photo id falls back to its swatch instead of crashing the app; a splat piece without details still opens Up close; the wardrobe count counts only wearable pieces; a saved look never restores a piece without 3D.
+- **Why:** found by the button-map and data audits; each checked at 390 px in Chrome.
+
 ### A prize can be worn straight away; every owned piece opens in 3D (branch basil/ar-button)
 - **What:** the Won card offers **Wear it now** (primary) or **Keep it in my wardrobe / fabrics**. Wear it now puts a won piece on, or a won fabric on the body of what you wear; on a bare form a fabric first puts on a full-length cut you own (the kimono), so it never needs "put on a top first". Tapping a fabric on a bare form does the same. **See it in 3D** shows for every piece you own: a study piece opens its Up close scan (its only 3D), an unwon room piece stays closed (D2).
 - **Why:** owner: you win a whole dress, but its fabric needs something on, so on a bare form the prize went nowhere; and some fabrics opened in 3D while others silently did not.
