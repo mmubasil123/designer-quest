@@ -202,11 +202,23 @@ dt { color: var(--muted); }
   .foot.two .btn { flex: 1; }
 }
 @keyframes screen-in { from { opacity: 0; transform: translateY(8px); } }
+.nfc { width: min(340px, calc(100% - 32px)); margin: auto; border: 0; border-radius: 24px; padding: 0; background: var(--paper); color: var(--ink);
+  text-align: center; box-shadow: 0 12px 40px rgb(0 0 0 / .18); opacity: 0; transform: scale(.96);
+  transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), display 200ms allow-discrete, overlay 200ms allow-discrete; }
+.nfc[open] { opacity: 1; transform: none; }
+@starting-style { .nfc[open] { opacity: 0; transform: scale(.96); } }
+.nfc::backdrop { background: rgb(27 26 23 / .35); }
+.nfc > div { padding: 24px; outline: none; }
+.nfc .ring { width: 56px; height: 56px; margin: 0 auto 14px; border-radius: 50%; border: 1.5px solid var(--ink); display: grid; place-items: center; }
+.nfc h3 { font: 400 22px/1.15 Newsreader, serif; margin-bottom: 8px; }
+.nfc p { color: var(--muted); font-size: 14px; margin-bottom: 20px; text-wrap: balance; }
+.nfc .btn { width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   .press:active { transform: none; }
   .card { transition: none; }
   .wardrobe, .stage .turntable { transition-duration: 1ms; }
   .screens > section { animation: none !important; }
+  .nfc { transition: opacity 150ms ease; transform: none; }
 }
 </style>
 </head>
@@ -707,7 +719,11 @@ document.getElementById("grid").addEventListener("click", e => {
   if (z) { activeZone = z.dataset.zone; renderLocker(); return; }
   const b = e.target.closest("[data-id]"); if (!b || b.classList.contains("locked")) return;
   const id = b.dataset.id;
-  if (activeSlot === "study") { if (PIECES[id].seen) location.href = `up-close.html?id=${encodeURIComponent(id)}`; return; }
+  if (activeSlot === "study") {   // shortcut: placeholder until the NFC cards exist; a tap on a card opens ?card=<id>
+    if (PIECES[id].seen) location.href = `up-close.html?id=${encodeURIComponent(id)}`;
+    else { document.getElementById("nfcText").textContent = `Hold your phone to the NFC card beside the ${PIECES[id].name.toLowerCase()} to study it up close.`; document.getElementById("nfc").showModal(); }
+    return;
+  }
   if (activeSlot === "remix") look.fabric[activeZone] = look.fabric[activeZone] === id ? null : id;
   else if (activeSlot === "full") look.full = look.full === id ? null : id;
   else { if (activeSlot !== "feet") look.full = null; look[activeSlot] = id; }
@@ -774,6 +790,7 @@ function go(screen) {
   if (screen === "stage") turntables.forEach(t => t.render());   // it was display:none, so its canvas went stale
 }
 document.addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (b) go(b.dataset.go); });
+document.getElementById("nfc").addEventListener("click", e => { if (e.target.id === "nfc") e.target.close(); });   // backdrop tap closes
 document.getElementById("shareBtn").addEventListener("click", async () => {   // shortcut: shares text and link, B7 adds the 9:16 image
   const span = document.getElementById("lookSpan").textContent.split(" · ")[0];
   const name = look.fabric.body || look.fabric.sleeves ? lookName() : "My look";   // unremixed looks have no name
@@ -884,5 +901,11 @@ if (won && PIECES[won]?.splat && !PIECES[won].locked) {
   history.replaceState(null, "", location.pathname);
 }
 </script>
+<dialog class="nfc" id="nfc" aria-labelledby="nfcTitle"><div tabindex="-1" autofocus>
+  <div class="ring" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 8.5a5 5 0 0 1 0 7M9.5 6a8.5 8.5 0 0 1 0 12M13 3.5a12 12 0 0 1 0 17"/></svg></div>
+  <h3 id="nfcTitle">Find it in the museum</h3>
+  <p id="nfcText"></p>
+  <form method="dialog"><button class="btn press">OK</button></form>
+</div></dialog>
 </body>
 </html>
