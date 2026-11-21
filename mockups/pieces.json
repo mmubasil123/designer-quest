@@ -422,6 +422,14 @@
         "glb": null,
         "splat": {
           "path": "assets/splat/ST81190.sog"
+        },
+        "clo": {
+          "path": "assets/clo/ST81190.glb",
+          "avatar": "assets/clo/avatar_web.glb",
+          "kind": "clo",
+          "units": "m",
+          "origin": "avatar",
+          "onScan": [0.19, 0.96]
         }
       },
       "fit": {},

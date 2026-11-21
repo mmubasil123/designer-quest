@@ -42,6 +42,7 @@ mockups/pieces.json  (single source of truth for pieces) ───────�
 - UI: screens via `go(screen)`; wardrobe bottom sheet `setSnap()`/`snapY()`; `renderLocker()`, `renderCredit()`
   (time-span game); `?card=<id>` unlocks and wears a piece. Learning happens on Up close (the Levels track was removed).
 - Study tab in the wardrobe sheet lists every `study` piece with its state (card not scanned, n of 3 found, fabric won); a scanned one opens Up close. Won fabrics appear in Remix.
+- `reconstruction.js` (A7): on Up close, for a piece with `assets.clo`, Archive / Compare (scissor-split slider, splat vs CLO, one renderer) / Wear it (OutfitRig from `clo/outfit.js`, CLO coat on the team avatar).
 - `up-close.html`: separate page for splat pieces (three 0.180.0 + Spark 2.4.0, while the main page stays on
   0.169.0). Detail hunt; progress in localStorage `secondSkin.found.v1` (`{id: [detail index]}`), which the main
   page reads to unlock a splat piece's fabric. `splat-viewer.html` is a local-only viewer for `splats/`.
@@ -57,7 +58,7 @@ mockups/pieces.json  (single source of truth for pieces) ───────�
 - Render order: form, clear depth, garments. Reordering lets the form show through scans.
 - A `study` piece (has `assets.splat`, `glb: null`) is never worn: it is studied on `up-close.html`, and only its
   fabric reaches the main page. `batch_glb.py` skips it.
-- A CLO GLB (`kind: "clo"`, `origin: "avatar"`) must skip auto-fit rescaling (D5, A7 not built yet).
+- A CLO GLB (`kind: "clo"`, `origin: "avatar"`) is never auto-fitted or rescaled against a body (D5). A7: a study piece's `assets.clo` is shown only on `up-close.html` (`reconstruction.js`), on the avatar it was draped on, with one uniform scale for the whole rig into the splat's units; the Stage never loads it.
 - The page never calls an API at runtime except the CDN, its own static files and its own `/api/ask` (H2); no
   accounts, no PII (D2). `/api/ask` sends only the question and one public record to the Claude API (outside the EU)
   and stores nothing.

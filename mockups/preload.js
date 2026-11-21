@@ -1,7 +1,9 @@
 /* H5: start downloading the scanned piece's 3D asset the moment a card is known, so "Study up close" (or wearing the
    piece) finds it already in the browser's HTTP cache.
 
-   What it fetches: the `.sog` splat for a study piece, the GLB for a wearable, and nothing else. One piece only (A6 memory
+   What it fetches: the `.sog` splat for a study piece, the GLB for a wearable, and nothing else. A study piece with a CLO
+   reconstruction (`assets.clo`, A7) then also gets its garment and avatar GLBs (about 1.7 MB), after the splat and only
+   once it is in; they are not part of status() or ready(). One piece only (A6 memory
    limits: the bytes are streamed and dropped, nothing is parsed or kept in memory; the real loader (Spark, GLTFLoader)
    fetches the same URL later and is served from cache). Study pieces also get the Up close page's two scripts via
    modulepreload.
@@ -34,6 +36,9 @@
 const HERE = import.meta.url;
 const UPCLOSE_MODULES = ["https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/controls/OrbitControls.js",
   "https://cdn.jsdelivr.net/npm/@sparkjsdev/spark@2.4.0/dist/spark.module.js"];   // same pins as up-close.html's import map
+const RECON_MODULES = ["https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/loaders/GLTFLoader.js",
+  "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/environments/RoomEnvironment.js",
+  new URL("reconstruction.js", import.meta.url).href, new URL("clo/outfit.js", import.meta.url).href];   // A7, same pins
 const IMAGE_FIRST_MAX_MS = 1500;
 const IMG = sha => `https://heron.libis.be/momu/files/large/${sha}.jpg`;   // the size second-skin.html uses for a piece
 
@@ -60,8 +65,8 @@ function warmImage(url) {   // resolves when the image is in cache, fails, or th
     setTimeout(end, IMAGE_FIRST_MAX_MS);
   });
 }
-function hintModules() {
-  for (const href of UPCLOSE_MODULES) {
+function hintModules(extra = []) {
+  for (const href of [...UPCLOSE_MODULES, ...extra]) {
     const l = document.createElement("link"); l.rel = "modulepreload"; l.href = href; document.head.append(l);
   }
 }
@@ -82,6 +87,10 @@ async function drain(j, url) {   // stream into the HTTP cache and drop the byte
   if (keep) j.blob = new Blob(keep, { type: r.headers.get("content-type") || "model/gltf-binary" });
 }
 
+function warmFiles(urls) {   // into the HTTP cache one after another; a failure only means Up close fetches it itself
+  urls.reduce((chain, url) => chain.then(() => fetch(url).then(r => r.arrayBuffer())).catch(() => {}), Promise.resolve());
+}
+
 async function run(j, id, imageOpt) {
   try {
     manifest ??= await (await fetch(new URL("pieces.json", HERE))).json();
@@ -93,11 +102,13 @@ async function run(j, id, imageOpt) {
     Object.assign(j.s, { kind: splat ? "splat" : "glb", url });
     if (saveData()) return set(j, { state: "skipped" }), false;
     set(j, { state: "waiting" });
-    if (splat) hintModules();
+    const clo = splat ? p.assets.clo : null;
+    if (splat) hintModules(clo ? RECON_MODULES : []);
     const img = imageOpt === false ? null : typeof imageOpt === "string" ? imageOpt : p.source?.imgSha ? IMG(p.source.imgSha) : null;
     if (img) await warmImage(img);
     await drain(j, url);
     set(j, { state: "ready", loaded: j.s.total || j.s.loaded });
+    if (clo) warmFiles([clo.path, clo.avatar].map(f => new URL(f, HERE).href));   // A7: after the splat, never beside it
     return true;
   } catch {
     set(j, { state: "error" });
