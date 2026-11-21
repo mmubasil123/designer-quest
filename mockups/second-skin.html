@@ -469,9 +469,32 @@ function contactShadow() {   // soft dark disc under the base so the form stands
 }
 
 const loader = new GLTFLoader(), scenes = {};
-const loadGlb = id => scenes[id] ??= loader.loadAsync(PIECES[id].glb)
-  .then(g => prepGarment(g.scene, PIECES[id]))
-  .catch(e => { delete scenes[id]; throw e; });   // a failed load must not stick in the cache
+/* A6: keep about 8 parsed GLBs. A phone that swaps pieces for a few minutes would otherwise hold every scan's geometry
+   and textures in GPU memory. The Map's insertion order is the recency order; a piece on the form is never evicted. */
+const GLB_KEEP = 8, glbUse = new Map();
+function disposeScene(scene) {
+  scene.traverse(o => {
+    if (!o.isMesh) return;
+    o.geometry.dispose();
+    for (const v of Object.values(o.material)) if (v?.isTexture) v.dispose();
+    o.material.dispose();
+  });
+}
+function trimGlbs() {
+  const wearing = new Set(turntables.flatMap(t => Object.values(t.worn).map(e => e.id)));
+  for (const id of [...glbUse.keys()]) {
+    if (glbUse.size <= GLB_KEEP) break;
+    if (wearing.has(id)) continue;
+    const gone = scenes[id]; delete scenes[id]; glbUse.delete(id);
+    gone?.then(disposeScene, () => {});
+  }
+}
+const loadGlb = id => {
+  glbUse.delete(id); glbUse.set(id, true);   // most recent last
+  return scenes[id] ??= loader.loadAsync(PIECES[id].glb)
+    .then(g => { const sc = prepGarment(g.scene, PIECES[id]); setTimeout(trimGlbs); return sc; })
+    .catch(e => { delete scenes[id]; glbUse.delete(id); throw e; });   // a failed load must not stick in the cache
+};
 
 function place(model, slot, adjust = 1) {   // wrapper keeps the model's own transform; the wrapper carries the fit
   const box = new THREE.Box3().setFromObject(model), c = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3());
@@ -507,14 +530,14 @@ class Turntable {
     this.form = makeForm(); this.rig.add(this.form);
     this.scene.add(contactShadow());
     new ResizeObserver(() => this.resize()).observe(el);
-    new IntersectionObserver(([e]) => { this.onScreen = e.isIntersecting; this.render(); }).observe(el);
+    new IntersectionObserver(([e]) => { this.onScreen = e.isIntersecting; this.render(); if (this.onScreen) this.wake?.(); }).observe(el);
     if (interactive) this.bindDrag();
     this.draw(); this.setFrame(frame);
   }
   resize() {
     const r = this.el.getBoundingClientRect();
     if (!r.width || !r.height) return;   // hidden element: an aspect of NaN would break the camera
-    this.renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+    this.renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.5));   // A6: 2x costs 78% more pixels for little gain on a scan
     this.renderer.setSize(r.width, r.height, false);
     this.camera.aspect = r.width / r.height; this.camera.updateProjectionMatrix();
     this.render();
@@ -579,21 +602,28 @@ class Turntable {
   bindDrag() {
     let x0, f0, last, vel = 0, raf, idle;
     // spin by elapsed time (a 120 Hz screen turns at the same speed), slowly, and ease up to speed after a drag
-    let t0, speed = 0;
+    let t0, speed = 0, coasting = false;
     const spin = t => {
+      if (document.hidden || this.onScreen === false) return;   // A6: no frames for a background tab or the Piece screen; wake() restarts
       speed += (0.0022 - speed) * 0.02;   // 0.0022 frames/ms is 22 degrees a second, one turn in about 16 s
       this.frame += speed * Math.min(t - (t0 ?? t), 50); t0 = t; this.setFrame(this.frame); raf = requestAnimationFrame(spin);
     };
     const coast = () => {   // momentum after release, then hand back to the idle spin
       vel *= 0.92; this.frame += vel; this.setFrame(this.frame);
       if (Math.abs(vel) > 0.02) raf = requestAnimationFrame(coast);
-      else idle = setTimeout(() => { if (!reduce) raf = requestAnimationFrame(spin); }, 2500);
+      else { coasting = false; idle = setTimeout(() => { if (!reduce) raf = requestAnimationFrame(spin); }, 2500); }
     };
+    // A6: the loop stops for a hidden tab or the Piece screen; this restarts it (not mid-drag or mid-coast)
+    this.wake = () => {
+      if (reduce || x0 != null || coasting || document.hidden || this.onScreen === false) return;
+      cancelAnimationFrame(raf); clearTimeout(idle); t0 = undefined; raf = requestAnimationFrame(spin);
+    };
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) this.wake(); });
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!reduce) raf = requestAnimationFrame(spin);
     this.el.addEventListener("pointerdown", e => {
       if (x0 != null) return;   // ignore a second finger mid-drag
-      cancelAnimationFrame(raf); clearTimeout(idle); speed = 0; t0 = undefined;
+      cancelAnimationFrame(raf); clearTimeout(idle); coasting = false; speed = 0; t0 = undefined;
       this.el.setPointerCapture(e.pointerId);
       x0 = e.clientX; f0 = this.frame; last = { x: e.clientX, t: performance.now() }; vel = 0;
     });
@@ -605,7 +635,7 @@ class Turntable {
       last = { x: e.clientX, t: now };
       this.setFrame(this.frame);
     });
-    const end = () => { if (x0 == null) return; x0 = null; raf = requestAnimationFrame(coast); };
+    const end = () => { if (x0 == null) return; x0 = null; coasting = true; raf = requestAnimationFrame(coast); };
     this.el.addEventListener("pointerup", end);
     this.el.addEventListener("pointercancel", end);
   }

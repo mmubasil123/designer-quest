@@ -4,6 +4,13 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### A6: phone memory (branch basil/A6)
+- GLB cache is now an LRU of 8 parsed scans: the oldest one not on the form is disposed (geometry, textures, material) after each load. Before, every piece ever worn stayed in GPU memory for the session.
+- The idle spin stops when the tab is hidden or the Stage is off screen (Piece screen), and restarts on return; before it kept running a loop that rendered nothing. Reduced motion still never spins.
+- Pixel ratio cap 2 to 1.5: 44% fewer pixels at 3x phones, not visible on a scan at Stage size.
+- Checked in headless Chromium at 390 px with three from npm (the cloud container cannot reach jsDelivr): cycling all 7 GLBs, a cap of 2 left 20 geometries and 6 textures on the GPU against 24 and 10 with no cap, the worn look intact, spin pausing on a hidden tab and resuming, no page errors. Not yet checked on a real phone: that is still the A6 acceptance (30 swaps, heap within 20%).
+- Decision: render-on-demand is only partly done. The idle spin is the one thing that needs frames, so it was gated rather than the whole loop rewritten; a still Stage with reduced motion already draws nothing.
+
 ### Wardrobe: see and take off what is worn; C1 fact cards (branch basil/c1-wardrobe)
 - A "Wearing" row in the sheet's peek lists the top, bottom, feet (or full look) and the body and sleeve fabrics, each with a thumbnail, name and ×. Tapping a chip opens that category; × takes it off. A worn tile tapped again also takes it off (before, top, bottom and feet could only be replaced). Tiles show short names instead of inventory ids; the id line under the look name went, since the row says the same.
 - Picking a fabric with no top or full look used to change nothing visible (and still fired the First remix toast): Remix now says to put a top on first, and a pick sends you to Tops.

@@ -25,7 +25,7 @@ write your name in it. Size: S (under 2 h), M (half a day), L (a day or more).
 | A3 | Split the module script into `src/` modules, then Vite with three 0.169.0 from npm | M | `npm run build` passes; page identical | open |
 | A4 | One shared `WebGLRenderer`; remove model-viewer (Piece page uses the engine) | M | Run `document.querySelectorAll("canvas").length` on Stage, Wardrobe and Piece page: each returns 1 | partly done: one renderer now (the Locker canvas is gone); model-viewer still on the Piece page |
 | A5 | Pipeline optimise step (meshopt + webp, 1024 px; 512 for feet) and `meanLuma` computed in the pipeline; meshopt decoder in the loader | M | GLBs under 700 KB; remix brightness unchanged | open |
-| A6 | LRU of about 8 GLBs with dispose; render on demand; pause when `document.hidden`; DPR cap 1.5 | S | After 30 piece swaps on a mid-range phone, no tab reload and heap within 20% of swap 1 (Chrome remote devtools) | open |
+| A6 | LRU of about 8 GLBs with dispose; render on demand; pause when `document.hidden`; DPR cap 1.5 | S | After 30 piece swaps on a mid-range phone, no tab reload and heap within 20% of swap 1 (Chrome remote devtools) | basil, in review on `basil/A6`: LRU of 8, spin pauses when hidden or off screen, DPR 1.5; real-phone check still open |
 | A7 | `kind: "clo"` branch in `place()` and remix by named material | M | A CLO test GLB sits on the form with no rescale | blocked: needs a CLO export |
 | A8 | `scripts/check-manifest.mjs`: schema + every referenced file exists; runs in `npm run build` | S | A missing GLB fails the build | open |
 
