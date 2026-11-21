@@ -36,11 +36,13 @@ export function pickQuote(facts, stories) {
 
 export const CARD_W = 1080, CARD_H = 1920;
 const CREDIT = "Collection: MoMu Fashion Museum Antwerp";
-// MoMu's official logo, the two polygons of assets/brand/momu-logo.svg (viewBox 0 0 202 42), for drawing on the canvas
+// MoMu's official logo, the two polygons of momu.be's large logo (x 0..534, y 0..120); drawn stretched to 1.786:1 like
+// assets/brand/momu-logo.svg and momu.be's header
 const MOMU_LOGO = [
-  [93.7308089, 0, 50.1255238, 40.3757678, 4.82491673, 0, 0, 0, 0, 42, 25.9339274, 42, 25.9339274, 19.7578271, 50.6796291, 42, 74.57917, 42, 98.8387794, 19.7578271, 98.8387794, 42, 100, 42, 100, 0],
-  [195.731684, 0, 152.123526, 40.3757678, 106.825013, 0, 102, 0, 102, 42, 127.933446, 42, 127.933446, 19.7578271, 152.679643, 42, 176.579662, 42, 200.840757, 19.7578271, 200.840757, 42, 202, 42, 202, 0],
+  [247.449335, 0, 132.331383, 115.359336, 12.7377802, 0, 0, 0, 0, 120, 68.4655685, 120, 68.4655685, 56.4509346, 133.794221, 120, 196.889009, 120, 260.934378, 56.4509346, 260.934378, 120, 264, 120, 264, 0],
+  [517.451645, 0, 402.326108, 115.359336, 282.738035, 0, 270, 0, 270, 120, 338.464298, 120, 338.464298, 56.4509346, 403.794257, 120, 466.890307, 120, 530.939597, 56.4509346, 530.939597, 120, 534, 120, 534, 0],
 ];
+const MOMU_RATIO = 534 / 299;
 // the canvas cannot read CSS variables per draw call cheaply, so these mirror theme.css (fonts and colour tokens): change both together
 const SERIF = '"Source Serif 4", Georgia, serif', MONO = '"Hanken Grotesk", "Helvetica Neue", Arial, sans-serif';   // MONO: the small label face (was a mono)
 const INK = "#000", MUTED = "#595959", LINE = "#cbcbcb", PAPER = "#fff", WALL = "#ededed", RED = "#d72f25";
@@ -87,14 +89,14 @@ export function drawCard({ grab, name, facts, url, scene, quote, won, kicker }) 
   ctx.fillStyle = wall; ctx.fillRect(0, 0, CARD_W, CARD_H);
   if (scene) {   // the period room of the look, as behind the Stage (H7); paper under the title keeps the red capitals at AA
     ctx.drawImage(scene, 0, 0, CARD_W, CARD_H);
-    const clear = ctx.createLinearGradient(0, 0, 0, 720);   // reaches below the masthead, title and span line
+    const clear = ctx.createLinearGradient(0, 0, 0, 820);   // reaches below the masthead, title and span line
     clear.addColorStop(0, PAPER); clear.addColorStop(.62, PAPER); clear.addColorStop(1, "rgb(255 255 255 / 0)");
-    ctx.fillStyle = clear; ctx.fillRect(0, 0, CARD_W, 720);
+    ctx.fillStyle = clear; ctx.fillRect(0, 0, CARD_W, 820);
   }
-  // H10 masthead: MoMu's official logo (assets/brand/momu-logo.svg) top left on the text's own edge, as momu.be and the
-  // template set it: large enough (72 px) that its hairline diagonals hold. The date sits right, on the logo's foot.
-  const logoH = 72, logoW = logoH * 202 / 42, logoTop = 96, foot = logoTop + logoH;
-  ctx.save(); ctx.translate(pad, logoTop); ctx.scale(logoH / 42, logoH / 42); ctx.fillStyle = INK;
+  // H10 masthead: MoMu's official logo (assets/brand/momu-logo.svg) top left on the text's own edge, at momu.be's 1.786:1
+  // shape and large enough (160 px) that its hairlines hold. The date sits right, on the logo's foot.
+  const logoH = 160, logoW = logoH * MOMU_RATIO, logoTop = 96, foot = logoTop + logoH;
+  ctx.save(); ctx.translate(pad, logoTop); ctx.scale(logoW / 534, logoH / 120); ctx.fillStyle = INK;
   for (const pts of MOMU_LOGO) { ctx.beginPath(); for (let i = 0; i < pts.length; i += 2) ctx[i ? "lineTo" : "moveTo"](pts[i], pts[i + 1]); ctx.closePath(); ctx.fill(); }
   ctx.restore();
   ctx.textBaseline = "alphabetic"; ctx.fillStyle = MUTED; ctx.font = `500 24px ${MONO}`; ctx.textAlign = "right";
