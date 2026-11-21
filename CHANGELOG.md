@@ -4,6 +4,11 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### Stage exposure 1.1 to 1.0 (branch basil/stage-exposure)
+- **What:** ACES tone-mapping exposure on the Stage goes from 1.1 to 1.0. Nothing else changes (environment map, contact shadow and `metalness = 0` were already in).
+- **Why:** after the colour fix, the palest piece (ST503) still rendered about 1.3x brighter than its photo. Measured mean sRGB of the garment alone against its cutout photo: ST503 photo 97,110,114, at 1.1 it is 134,146,143, at 1.0 it is 127,140,137; ST2434 photo 69,82,50, now 78,89,59, at 1.0 73,84,55; ST80930 photo 59,60,67, now 68,72,79, at 1.0 63,68,74; ST80931 photo 58,59,66, now 52,59,66, at 1.0 48,55,62; ST655 photo 60,61,54, now 59,57,53, at 1.0 55,53,49.
+- **Decision (Basil):** exposure 1.0, small gain. Khronos Neutral was tested against model-viewer and rejected: it crushes dark pieces (black dress 48,45,40 against a photo of 60,61,54). Per-piece exposure is possible later. Headless Chromium only; real phones not checked.
+
 ### Garment colours: scans were rendering as solid metal (branch basil/fix-garment-colors)
 Basil's phone showed the cocktail dress near black and brown with a mirror-like sheen, while its photo is green and black stripes.
 - **Root cause:** the TRELLIS GLBs write a material with a base colour texture and `roughnessFactor` but no `metallicFactor`, and the glTF default for that is 1. Every wearable loaded as solid metal. Metal has no diffuse colour, only reflections, so cloth went dark with a glossy sheen; the room environment added in the Turntable only hid the worst of it. This is in our loader code, not in the GLBs.
