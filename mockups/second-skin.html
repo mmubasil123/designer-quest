@@ -288,7 +288,6 @@ dt { color: var(--muted); }
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
-import { createQuiz } from "./quiz.js";
 import { createAsk } from "./ask.js";
 import { createShare } from "./share.js";
 import { AVATAR_URL, AVATAR_FIT, FORM_CUT, prepAvatar, placeFeet, fitWorn, restoreShape } from "./avatar-body.js";
@@ -323,8 +322,8 @@ readWon().forEach(id => { if (PIECES[id] && !PIECES[id].splat) PIECES[id].locked
 const params = new URLSearchParams(location.search);
 const scanned = params.get("card");
 // C2: the curator's story and questions (questions.json) show after a card scan; optional, nothing is locked behind them
-const quiz = scanned ? await createQuiz({ pieces: PIECES }) : null;   // only a card scan needs it, so a plain visit boots as before
-const story = scanned ? await createStory() : null;   // H3: story with narration before the questions (story.js)
+const quiz = null;   // shortcut: the curator's questions (C2) are left out of the tap flow to keep it to story then challenge; bring them back on the Won card if wanted
+const story = scanned ? await createStory({ img: id => PIECES[id].img }) : null;   // H3: story with narration before the questions (story.js)
 if (PIECES[scanned]?.splat) {   // before the Stage boots, so a study card never downloads the wearable GLBs; Up close is its challenge
   await showScan({ story, quiz, id: scanned, next: "Study it up close" });
   location.replace(`up-close.html?id=${encodeURIComponent(scanned)}`);
@@ -877,7 +876,8 @@ function renderMuseum() {
   document.getElementById("museumGrid").innerHTML = room.map(([id, p]) => {
     const state = !p.locked ? (p.splat ? "Fabric in your wardrobe" : "In your wardrobe") : p.seen ? `${p.found} of ${p.details} found` : "Tap its sticker in the room";
     const date = p.year.from === p.year.to ? p.year.from : `${p.year.from} to ${p.year.to}`;
-    return tile(id, `study ${p.seen || !p.locked ? "seen" : ""}`, p.img, `<span class="st"><b>${esc(p.name)}</b><span>${date} · ${state}</span></span>`,
+    const when = p.locked && !p.splat ? "" : `${date} · `;   // a wearable's year is the answer to its Win it guess
+    return tile(id, `study ${p.seen || !p.locked ? "seen" : ""}`, p.img, `<span class="st"><b>${esc(p.name)}</b><span>${when}${state}</span></span>`,
       `${p.name}, ${date}: ${state}`);
   }).join("");
 }
@@ -1121,7 +1121,7 @@ const welcome = (id, text) => { activeSlot = PIECES[id].splat ? "remix" : PIECES
 async function scan(id) {
   const p = PIECES[id];
   if (!p.locked) { welcome(id, `Already in your wardrobe: ${p.name}`); return; }
-  await showScan({ story, quiz, id, next: "Win it" });
+  await showScan({ story, quiz, id, next: "Win it", years: false });
   const off = await win.guess(id);
   await recordsReady; await win.won(id, { off });
   p.locked = false; fresh.add(id);

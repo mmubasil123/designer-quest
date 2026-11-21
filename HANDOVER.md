@@ -5,6 +5,7 @@ change with its reason. Agent rule (both people): work autonomously within your 
 before calling anything done. Never deploy, push to `main` or publish without your person's explicit go.
 
 ## State
+- **Win it flow (branch basil/study-wardrobe, 2026-11-21):** sticker -> story -> one challenge (Guess the year, or Up close for study pieces) -> You won it -> wardrobe (New). Jak ST503 and knee breeches ST2062 are the wearable room pieces; stickers point at `https://second-skin-ten.vercel.app/second-skin.html?card=<id>`. Piece screen removed. Details in CHANGELOG.
 - `mockups/second-skin.html` + `mockups/pieces.json` (schema `pieces.schema.json`): one three.js scene per
   turntable, a procedural dress form, 7 GLB scans auto-fitted by slot and drawn in dressing order, fabric remix on
   body and sleeves, look names, time span, Firsts toasts, card scan (`?card=<id>`), save in localStorage.

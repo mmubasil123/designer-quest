@@ -44,8 +44,8 @@ export function createWin({ PIECES, record, img }) {
   function won(id, { off = null, what = "piece" } = {}) {
     const p = PIECES[id], r = record(id) || {};
     const quote = r.quoteEn || r.quote;
-    open(`<div class="mono">Won · ${esc(id)}</div>
-      <h2 id="winTitle">${esc(p.name)}</h2>
+    open(`<p class="cheer">You won ${what === "fabric" ? "its fabric" : "it"}!</p>
+      <h2 id="winTitle" class="name">${esc(p.name)}</h2>
       <img class="pic won" src="${img(id)}" alt="">
       <p class="date">Made ${esc(span(p.year))}${off === null ? "" : off === 0 ? " · spot on" : ` · you were ${off} years off`}</p>
       ${quote ? `<blockquote>${esc(quote)}<span class="mono">MoMu says${r.quoteEn ? ", our translation" : ""}</span></blockquote>` : ""}
