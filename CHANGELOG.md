@@ -4,6 +4,10 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### AR button centred (branch basil/ar-button)
+- **What:** "See it in your room" is our own button below the 3D view (centred with margins, 340 px max), shown when model-viewer reports AR can start, instead of a button in model-viewer's `ar-button` slot.
+- **Why:** owner: the black button was not centred; model-viewer positions its slot itself, so our centring did not apply. Margins, not `transform`, because `.press:active` sets `transform`.
+
 ### A7 Archive vs Reconstruction: the CLO coat ST81190 on Up close (branch hassan/A7)
 - **What:** Up close for the A.F.Vandevorst coat ST81190 gets a segmented control over the 3D view: **Archive** (MoMu's splat, the detail hunt as before), **Compare** (a slider: the splat left of the handle, our CLO reconstruction right of it, through the same camera; the reconstruction is laid over the scan at the same spot and height, and wipes in once when Compare opens) and **Wear it** (the CLO coat on the team avatar it was draped on, front, side and back by dragging; a pill takes it off and puts it back on). New `mockups/reconstruction.js` holds all of it; `up-close.html` gets five one-line hooks. `mockups/clo/outfit.js` (OutfitRig) comes unchanged from `hassan/clo-st81190`.
 - **Data:** `pieces.json` ST81190 gains `assets.clo` (`path`, `avatar`, `kind: "clo"`, `units: "m"`, `origin: "avatar"`, `onScan` = where hem and collar sit on the splat box, for the overlay); `pieces.schema.json` allows it (optional, study pieces only use it). Assets: `assets/clo/ST81190.glb` (1.1 MB, byte-identical to the CLO build) and `assets/clo/avatar_web.glb` (0.55 MB: the team's 3.5 MB CLO avatar without teeth and lashes, 40% of its triangles, quantized; still skinned, so it is drawn in the pose the coat was draped on).
