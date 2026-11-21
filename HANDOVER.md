@@ -15,7 +15,7 @@ before calling anything done. Never deploy, push to `main` or publish without yo
   to `main` (owner's rule, 2026-11-21). Last deploy: `ed1d4c1`, spike page included.
 - Serve: `cd mockups && python3 -m http.server 8765 --bind 127.0.0.1`; console handle `window.secondSkin`.
 
-## H2 Ask the archive (hassan, branch `hassan/H2-ask-archive`)
+## H2 Ask the archive (hassan, merged in PR #10)
 - Fact card **Ask** opens a sheet; `api/ask.js` (Vercel function) answers only from `ask-records.json` and labels
   answers as AI. Without `ANTHROPIC_API_KEY` it falls back to field answers for the 3 suggested questions.
 - Run locally: `cd mockups && npm install && npm run dev:ask` (http://127.0.0.1:8768, key from the repo's `.env`).

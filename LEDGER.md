@@ -82,7 +82,7 @@ ST655/1, ST81299, ST2202, ST2434, ST81234/1-2, ST2435.
 ## Track H: AI
 | # | Ticket | Size | Acceptance | Status |
 |---|---|---|---|---|
-| H2 | Ask the archive: a visitor asks about a piece and gets an answer built only from that piece's MoMu record (D3), labelled as AI; serverless `api/ask` keeps the key off the browser; field-only fallback with no key or network | M | At 390 px: ask, answer shows its field line; an unrecorded question says "That is not recorded for this piece"; with no key the suggested questions still answer from fields; eval script passes on 2 pieces x 10 questions | hassan, in review on `hassan/H2-ask-archive`: eval 25/25 on OpenRouter Nemotron free, 7/7 subset on Gemini 3.5 Flash-Lite (demo default); needs the key env in Vercel |
+| H2 | Ask the archive: a visitor asks about a piece and gets an answer built only from that piece's MoMu record (D3), labelled as AI; serverless `api/ask` keeps the key off the browser; field-only fallback with no key or network | M | At 390 px: ask, answer shows its field line; an unrecorded question says "That is not recorded for this piece"; with no key the suggested questions still answer from fields; eval script passes on 2 pieces x 10 questions | done 2026-11-21 (hassan, PR #10): Ask on every fact card; Gemini 3.5 Flash-Lite free tier by default, eval 25/25 (Nemotron) and 7/7 subset (Gemini); live answers need the `ASK_*` env in Vercel |
 
 ## Track F: Later (after the hackathon)
 | # | Ticket |
