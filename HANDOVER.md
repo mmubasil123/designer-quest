@@ -4,6 +4,17 @@ Read this, then `LEDGER.md` (tickets, decisions D1 to D8, product-owner cut and 
 change with its reason. Agent rule (both people): work autonomously within your claimed ticket, inspect screenshots critically
 before calling anything done. Never deploy, push to `main` or publish without your person's explicit go.
 
+## H13 Poetic narration (hassan, PR #46 open, not merged, 2026-11-21)
+- The 16 record-built stories are short poems in `mockups/narration-poems.json` (facts only from each record, each
+  traced to the record's Dutch words; check: `python3 -I mockups/tools/narration_facts.py <path to cache/>`). the curator's 3
+  stories unchanged. Story sheet leads with play and a few lines; full transcript under "Read the story".
+  Old drafts beside new poems: `docs/H13-NARRATION-REVIEW.md` (for the curator to read).
+- **Half done: audio.** The 16 poems are not voiced yet; they play in the phone's voice. No Gemini key in `.env`, and the
+  house voice is Picsart Adeline (manual export). Scripts: `narration.py --scripts DIR` (a copy of the 16 is in the side
+  sessions' notes folder `h13-voice-scripts/`). Voice in Picsart (AI Audio Generator, Adeline, one line per script,
+  export MP4), then `narration.py --import DIR --voice "picsart:Adeline"`, `--check`, transcribe each file back, commit
+  to `hassan/H13-narration`. Then merge on Hassan's word, mark H13 done in LEDGER and Notion.
+
 ## MoMu branding (H10, PR #44 open, not merged, 2026-11-21)
 "MoMu / Second Skin" lockup in the Stage bar and the Up close header, the "MoMu" wordmark on the share card, and
 "at MoMu" instead of "in the museum" in the copy. Typographic only: no official MoMu logo file is in the repo or the
