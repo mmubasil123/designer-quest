@@ -6,13 +6,18 @@ The story text is not written here; this script only collects it:
     description (English translation of the Dutch record) and its materials and techniques. Marked draft: true for her.
 
 Narration is pre-generated, so playback needs no API at runtime and works on bad venue wifi. Each file is regenerated
-only when its text, voice or model changes (sha256 in narration.json). Provider: Google Gemini TTS (only the museum text above is sent). Key: GEMINI_API_KEY in the git-ignored .env, never printed.
-Audio: mono AAC (.m4a, 48 kbps) through macOS afconvert.
+only when its text changes (sha256 of the text in narration.json). Only the story text itself is sent to the voice, no
+style instructions: TTS models read such instructions out loud. Provider: Google Gemini TTS (key GEMINI_API_KEY in the
+git-ignored .env, never printed). When its free quota is spent, voice the rest elsewhere (Picsart text to speech) from
+the exported scripts and import the files. Audio: mono AAC (.m4a, 48 kbps) through macOS afconvert.
 
   python3 -I mockups/tools/narration.py                 # rebuild narration.json text only (no API calls)
   python3 -I mockups/tools/narration.py --audio         # also (re)generate audio whose text changed or is missing
   python3 -I mockups/tools/narration.py --audio --only ST503,ST81190 --lang en
   python3 -I mockups/tools/narration.py --check         # narration.json matches its sources and every file exists
+  python3 -I mockups/tools/narration.py --scripts DIR   # write DIR/<id>.en.txt: the exact text to voice, for any missing audio
+  python3 -I mockups/tools/narration.py --import DIR --voice "picsart:<voice name>"
+                                                        # adopt DIR/<id>.en.(mp3|wav|m4a|mp4) made elsewhere for missing audio
 """
 import base64
 import hashlib
@@ -33,7 +38,6 @@ OUT = MOCKUPS / "narration.json"
 AUDIO = MOCKUPS / "assets" / "audio"
 MODEL = "gemini-3.8-flash-tts"
 VOICE = "Sulafat"   # Gemini prebuilt voice described as "warm"
-STYLE = "Read this aloud in a calm, warm voice, like a museum guide talking to a young visitor, unhurried:"
 LANGS = {"en"}      # only English text exists so far; NL and FR need the curator's (or a marked) translation first
 
 
@@ -86,7 +90,7 @@ def build(lang="en"):
             "title": title, "years": when, "source": source, "draft": source != "curator",
             "paragraphs": paras if source == "curator" else paras[1:],   # the draft's first line is the heading itself
             "lang": lang, "text": text,
-            "hash": hashlib.sha256(f"{MODEL}|{VOICE}|{STYLE}|{text}".encode()).hexdigest()[:16],
+            "hash": hashlib.sha256(text.encode()).hexdigest()[:16],
             "audio": None,
         }
     return out
@@ -106,7 +110,7 @@ def key():
 
 def tts(text, api_key):
     body = json.dumps({
-        "contents": [{"parts": [{"text": f"{STYLE}\n\n{text}"}]}],
+        "contents": [{"parts": [{"text": text}]}],   # the story only: any instruction here gets read out
         "generationConfig": {"responseModalities": ["AUDIO"],
                              "speechConfig": {"voiceConfig": {"prebuiltVoiceConfig": {"voiceName": VOICE}}}},
     }).encode()
@@ -159,7 +163,35 @@ def main(argv):
     for pid, e in new.items():   # keep audio that still matches its text
         prev = old.get(pid, {})
         if prev.get("audio") and prev.get("audioHash") == e["hash"] and (MOCKUPS / prev["audio"]).exists():
-            e.update(audio=prev["audio"], audioHash=prev["audioHash"], seconds=prev.get("seconds"), bytes=prev.get("bytes"))
+            e.update(audio=prev["audio"], audioHash=prev["audioHash"], seconds=prev.get("seconds"), bytes=prev.get("bytes"),
+                     voice=prev.get("voice"))
+    if "--scripts" in argv:
+        d = Path(argv[argv.index("--scripts") + 1]); d.mkdir(parents=True, exist_ok=True)
+        todo = [(pid, e) for pid, e in new.items() if not e["audio"] and (not only or pid in only)]
+        for pid, e in todo:
+            (d / slug(pid, lang).replace(".m4a", ".txt")).write_text(e["text"] + "\n")
+        print(f"{len(todo)} scripts in {d}")
+        return 0
+    if "--import" in argv:
+        d = Path(argv[argv.index("--import") + 1])
+        voice = argv[argv.index("--voice") + 1] if "--voice" in argv else "imported"
+        for pid, e in new.items():
+            if e["audio"] or (only and pid not in only):
+                continue
+            key_ = re.sub(r"[^a-z0-9]", "", slug(pid, lang)[:-4].lower())   # export tools drop dots and slashes from names
+            src = next((f for f in sorted(d.iterdir()) if f.suffix.lower() in (".mp3", ".wav", ".m4a", ".mp4")
+                        and re.sub(r"[^a-z0-9]", "", f.stem.lower()) == key_), None)
+            if not src:
+                continue
+            dest = AUDIO / slug(pid, lang)
+            with tempfile.TemporaryDirectory() as tmp:   # decode (also the audio track of an .mp4) to mono WAV, then AAC
+                wav = Path(tmp) / "a.wav"
+                subprocess.run(["afconvert", str(src), str(wav), "-f", "WAVE", "-d", "LEI16@24000", "-c", "1", "--mix"], check=True)
+                subprocess.run(["afconvert", str(wav), str(dest), "-f", "m4af", "-d", "aac", "-b", "48000", "-c", "1"], check=True)
+            info = subprocess.run(["afinfo", str(dest)], capture_output=True, text=True).stdout
+            sec = round(float(re.search(r"estimated duration: ([\d.]+)", info).group(1)), 1)
+            e.update(audio=str(dest.relative_to(MOCKUPS)), audioHash=e["hash"], seconds=sec, bytes=dest.stat().st_size, voice=voice)
+            print(f"{pid}: imported {src.name}, {sec} s, {dest.stat().st_size // 1024} KB")
     if "--audio" in argv:
         AUDIO.mkdir(parents=True, exist_ok=True)
         api_key = key()
@@ -173,7 +205,8 @@ def main(argv):
                 print("  quota spent for today: stopping; rerun later and only the missing files are made")
                 break
             seconds = encode(pcm, rate, dest)
-            e.update(audio=str(dest.relative_to(MOCKUPS)), audioHash=e["hash"], seconds=seconds, bytes=dest.stat().st_size)
+            e.update(audio=str(dest.relative_to(MOCKUPS)), audioHash=e["hash"], seconds=seconds, bytes=dest.stat().st_size,
+                     voice=f"gemini:{MODEL}:{VOICE}")
             print(f"  {dest.name}: {seconds} s, {dest.stat().st_size // 1024} KB")
             save(new)   # after every file, so a stop keeps what is done
             time.sleep(7)   # stay under the free tier's requests per minute
@@ -186,7 +219,7 @@ def main(argv):
 def save(new):
     doc = {"version": 1, "about": "H3: story text and narration per piece, built by tools/narration.py from questions.json "
            "(the curator) and records.json (MoMu). Derived file: edit the sources, then rerun the script.",
-           "provider": f"Google Gemini TTS ({MODEL}, voice {VOICE}); AI-generated voice", "pieces": new}
+           "voices": "per piece in `voice`: gemini:<model>:<voice> or picsart:<voice>", "pieces": new}
     OUT.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n")
 
 
