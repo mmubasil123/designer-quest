@@ -66,7 +66,7 @@ None of the 8 demo pieces has a splat; ST2435 is on the season shortlist. Splats
 and they need a splat renderer (e.g. Spark for three.js, unverified) beside the dress form. 220 MB is too big
 for a phone page: test the `.sog` or compressed `.ply` size before any engine work.
 
-## Splat Stage: approach A picked, spike done (2026-11-21, branch basil/splat-spike, not pushed)
+## Splat Stage: approach A picked, spike done (2026-11-21, on main)
 Owner picked **approach A** (full splat Stage: splat form, splat garments cut by part, mixed across scans).
 Spike page `mockups/splat-stage-spike.html` (serve as usual, `window.spike` in the console): the form, ST2431
 cavalry jacket or ST2432 tailcoat on top, either uniform's trousers below, a fabric tint on the top. Parts are cut

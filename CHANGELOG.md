@@ -4,7 +4,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
-### Splat Stage spike (branch basil/splat-spike, ticket G1)
+### Splat Stage spike (ticket G1, pushed straight to main on the owner's go)
 - New throwaway page `mockups/splat-stage-spike.html`: a splat dress form wearing the ST2431 cavalry jacket or ST2432 tailcoat over either uniform's trousers, with a fabric tint on the top. Parts come from `mockups/tools/splat_spike_cut.py` (rules for these two scans only) into `mockups/assets/splat/spike/` (12 MB for all 7 parts).
 - Why: the owner picked approach A (all-splat Stage with mixed parts); the spike tests cut quality, fit and fabric on splats before any engine work.
 - Decisions: hands ship with their top (the form's arms were posed differently per capture); garment parts at 30% splats and SH 1 (looked the same as full at Stage distance, a look drops from 16 MB to under 7 MB); the dye keeps luminance and skips cream so the form stays undyed; parts are added and removed because Spark ignores `visible`.
