@@ -447,6 +447,9 @@ function prepGarment(scene, piece) {
     if (!o.isMesh) return;
     if (!o.geometry.attributes.normal) o.geometry.computeVertexNormals();   // TRELLIS ships none, which renders faceted
     const m = o.material, g = o.geometry;
+    // TRELLIS writes no metallicFactor, and the glTF default is 1: every scan loaded as solid metal, which has no diffuse
+    // colour, so cloth rendered near black with a mirror sheen (and the environment map below only hid the worst of it)
+    m.metalness = 0;
     g.computeBoundingBox();
     const half = (g.boundingBox.max.x - g.boundingBox.min.x) / 2;
     const u = m.userData.u = { uFabricA: { value: null }, uFabricB: { value: null }, uRemixA: { value: 0 }, uRemixB: { value: 0 },
@@ -537,7 +540,7 @@ class Turntable {
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     el.appendChild(this.renderer.domElement);
     this.scene = new THREE.Scene();
-    // TRELLIS materials are partly metallic and turn black without an environment to reflect
+    // cloth is lit by this soft room as well as the lights, so shadowed folds keep some colour
     this.scene.environment = new THREE.PMREMGenerator(this.renderer).fromScene(new RoomEnvironment(), 0.04).texture;
     const fill = new THREE.HemisphereLight(0xffffff, 0xd8cfc0, 0.6), key = new THREE.DirectionalLight(0xffffff, 1.2);
     key.position.set(-1.5, 2.5, 3);
