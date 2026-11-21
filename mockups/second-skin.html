@@ -67,7 +67,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 .stage { flex: 1; position: relative; background: linear-gradient(var(--wall), var(--paper) 78%); }
-.stage .turntable { bottom: 128px; }
+.stage .turntable { bottom: 164px; height: 420px; }   /* 164: the peeking grab area */
 .toast { position: absolute; left: 50%; top: 92px; transform: translate(-50%, -6px); opacity: 0; pointer-events: none;
   background: var(--ink); color: var(--paper); font: 500 12px Inter; padding: 7px 12px; border-radius: 999px; white-space: nowrap;
   transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out); }
@@ -102,6 +102,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .stage:not([data-snap="peek"]) .credit .mono { opacity: 0; }
 .cats { display: flex; gap: 6px; margin: 10px -18px 12px; padding: 0 18px; overflow-x: auto; scrollbar-width: none; }
 .cats .cat { flex: none; }
+/* chip rows scroll sideways: the fade at the right edge says there is more */
+.cats, .wearing { mask-image: linear-gradient(to right, #000 88%, transparent); }
 .cat { min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); font-size: 13px; }
 .cat[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
@@ -111,14 +113,47 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   background: var(--wall); border: 1px solid var(--line);
 }
 .tile img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; filter: var(--lift); }
-.tile .m { position: absolute; left: 6px; bottom: 6px; font: 400 10px "IBM Plex Mono", monospace; background: var(--paper); padding: 2px 5px; border-radius: 4px; }
+.tile .pick { position: absolute; inset: 0; width: 100%; }
+.tile .m { position: absolute; left: 6px; bottom: 6px; max-width: calc(100% - 12px); font: 400 13px/1.2 Newsreader, serif;
+  background: var(--paper); padding: 3px 6px; border-radius: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none; }
+/* 44 px hit area, 24 px painted dot */
+.tile .info { position: absolute; top: 0; right: 0; width: 44px; height: 44px; display: grid; place-items: center; }
+.tile .info span { width: 24px; height: 24px; border-radius: 50%; background: var(--paper); display: grid; place-items: center;
+  font: italic 600 14px/1 Newsreader, serif; box-shadow: 0 1px 4px rgb(0 0 0 / .18); }
+.wearing { display: flex; gap: 6px; margin: 0 -18px 10px; padding: 0 18px; overflow-x: auto; scrollbar-width: none; min-height: 44px; align-items: center; }
+.wear { flex: none; display: flex; align-items: center; height: 44px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); }
+.wear .open { display: flex; align-items: center; gap: 6px; height: 100%; padding: 0 0 0 5px; font-size: 13px; max-width: 150px; }
+.wear .open img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; mix-blend-mode: multiply; flex: none; }
+.wear .open em { font-style: normal; color: var(--muted); font-size: 11px; }
+.wear .open span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wear .off { width: 40px; height: 44px; font-size: 18px; color: var(--muted); }
+.wearing .none, .grid .none { font: italic 14px Newsreader, serif; color: var(--muted); }
+.fact { width: min(380px, calc(100% - 24px)); max-height: calc(100dvh - 48px); margin: auto auto 12px; border: 0; border-radius: 24px; padding: 0;
+  background: var(--paper); color: var(--ink); box-shadow: 0 12px 40px rgb(0 0 0 / .2); opacity: 0; transform: translateY(16px);
+  transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out), display 220ms allow-discrete, overlay 220ms allow-discrete; }
+.fact[open] { opacity: 1; transform: none; }
+@starting-style { .fact[open] { opacity: 0; transform: translateY(16px); } }
+.fact::backdrop { background: rgb(27 26 23 / .35); }
+.fact > div { padding: 22px 22px 18px; outline: none; }
+.fact h3 { font: 400 24px/1.15 Newsreader, serif; margin: 4px 0 10px; }
+.fact dl { margin: 0 0 14px; }
+.fact .nr { color: var(--muted); font-style: italic; }
+.fact blockquote { margin: 0 0 14px; padding-left: 12px; border-left: 2px solid var(--line); }
+.fact blockquote q { font: italic 15px/1.35 Newsreader, serif; quotes: none; }
+.fact blockquote p { margin-top: 6px; font-size: 13px; color: var(--muted); }
+.fact .shares { font-size: 13px; margin-bottom: 16px; }
+.fact .shares div { display: flex; flex-wrap: wrap; align-items: center; column-gap: 12px; }
+.fact .shares button { text-decoration: underline; text-underline-offset: 2px; min-height: 32px; }
+.fact .row { display: flex; gap: 8px; align-items: center; }
+.fact .row .btn { flex: 1; }
+.fact .row a { flex: none; min-height: 44px; display: flex; align-items: center; padding: 0 14px; font-size: 13px; color: var(--ink); }
 .tile.on { outline: 2px solid var(--ink); outline-offset: 2px; }
 .tile.locked img { filter: grayscale(1) contrast(.2) brightness(1.4); }
 .tile .st { position: absolute; left: 6px; right: 6px; bottom: 6px; background: var(--paper); border-radius: 8px; padding: 6px 8px; text-align: left; }
 .tile .st b { display: block; font: 400 13px/1.2 Newsreader, serif; }
 .tile .st span { font: 400 10px/1.4 "IBM Plex Mono", monospace; color: var(--muted); }
 .tile.study:not(.seen) img { filter: grayscale(1) contrast(.2) brightness(1.4); }
-.tile.locked::after { content: "Tap the card in the museum"; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 10px; font: italic 13px/1.2 Newsreader, serif; color: var(--muted); }
+.tile.locked::after { pointer-events: none; content: "Tap the card in the museum"; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 10px; font: italic 13px/1.2 Newsreader, serif; color: var(--muted); }
 
 /* Piece */
 .hero { position: relative; height: 330px; background: var(--wall); overflow: hidden; }
@@ -174,7 +209,7 @@ dt { color: var(--muted); }
   .wardrobe .grid { padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
   .hero { height: 46dvh; }
   /* the form fills the space between the look credit and the peeking wardrobe; the camera keeps its 22 degree height */
-  .stage .turntable { left: 0; margin-left: 0; width: 100%; height: auto; top: 128px; bottom: 124px; }
+  .stage .turntable { left: 0; margin-left: 0; width: 100%; height: auto; top: 128px; bottom: 164px; }   /* 164: the peeking grab area */
   /* at half the free space is the top 52% of the stage, so the taller phone turntable steps back further */
   .stage[data-snap="half"] .turntable, .stage[data-snap="full"] .turntable { transform: translateY(-4%) scale(.5); }
   .app-only { display: inline-flex; align-items: center; justify-content: center; }
@@ -193,6 +228,7 @@ dt { color: var(--muted); }
 .nfc .btn { width: 100%; display: flex; align-items: center; justify-content: center; text-decoration: none; }
 .nfc form { margin-top: 8px; }
 @media (prefers-reduced-motion: reduce) {
+  .fact { transition: opacity 150ms ease; transform: none; }
   .press:active { transform: none; }
   .wardrobe, .stage .turntable { transition-duration: 1ms; }
   .screens > section { animation: none !important; }
@@ -220,7 +256,6 @@ dt { color: var(--muted); }
         <div class="credit">
           <div>
             <div class="t" id="lookName">Antwerp, any century</div>
-            <div class="mono" id="lookCredit"></div>
             <div class="mono" id="lookSpan"></div>
           </div>
           <div class="skins" id="skins" aria-label="Form finish"></div>
@@ -232,6 +267,7 @@ dt { color: var(--muted); }
             <button class="handle" id="wardrobeHandle" aria-label="Open or close the wardrobe" aria-expanded="false"></button>
             <div class="wardrobe-head"><h2 id="slotTitle">Top</h2><span class="mono" id="foundCount"></span></div>
             <div class="cats" id="cats"></div>
+            <div class="wearing" id="wearing" aria-label="What the form is wearing"></div>
           </div>
           <div class="grid" id="grid"></div>
         </section>
@@ -612,8 +648,6 @@ function renderCredit() {   // the evening game: build the look that spans the m
   const years = [...ids, ...fabricIds].map(yearOf).filter(Boolean);
   const span = years.length > 1 ? Math.max(...years) - Math.min(...years) : 0;
   widest = Math.max(widest, span);
-  document.getElementById("lookCredit").textContent = [...ids,
-    look.fabric.body && `body ${look.fabric.body}`, look.fabric.sleeves && `sleeves ${look.fabric.sleeves}`].filter(Boolean).join(" · ");
   document.getElementById("lookSpan").textContent = span ? `Spans ${span} years · your widest ${widest}` : "";
   document.getElementById("lookName").textContent = lookName();
   try { localStorage.setItem(SAVE_KEY, JSON.stringify({ v: 1, look, widest })); } catch { /* storage full or blocked */ }
@@ -632,47 +666,66 @@ skinsEl.addEventListener("click", e => {
 });
 
 let activeSlot = "top", activeZone = "body";
+const LABEL = { top: "Top", bottom: "Bottom", feet: "Feet", full: "Full", study: "Study", remix: "Remix" };
+const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+const shortName = id => PIECES[id].name.split(",")[0];
+const swatchOf = id => `assets/swatch/${fileOf(id)}.jpg`;
+// ctx is how a tap on this piece acts: "remix" puts its cloth on activeZone, a slot wears it, "study" opens Up close
+const ctxOf = id => activeSlot === "remix" && !PIECES[id].locked && (PIECES[id].glb || PIECES[id].splat) ? "remix" : PIECES[id].slot;
+function isWorn(id, ctx) {
+  if (ctx === "remix") return look.fabric[activeZone] === id;
+  if (ctx === "full") return look.full === id;
+  return (ctx === "feet" || !look.full) && look[ctx] === id;
+}
+const tile = (id, cls, img, label, aria) => `<div class="tile ${cls}" data-id="${id}">
+  <button class="pick press" aria-label="${esc(aria)}" aria-pressed="${cls.includes("on")}"><img src="${img}" alt=""${img.startsWith("assets/swatch") ? ' style="mix-blend-mode:normal"' : ""}></button>${label}
+  <button class="info" data-info="${id}" aria-label="About ${esc(PIECES[id].name)}"><span aria-hidden="true">i</span></button></div>`;
 function renderLocker() {
-  const LABEL = { top: "Top", bottom: "Bottom", feet: "Feet", full: "Full", study: "Study", remix: "Remix" };
   const counted = Object.values(PIECES).filter(p => !p.locked || p.seen).length;
   document.getElementById("foundCount").textContent = `${counted} of ${Object.keys(PIECES).length} pieces found`;
   document.getElementById("slotTitle").textContent = activeSlot === "remix" ? "Remix the fabric" : LABEL[activeSlot];
   document.getElementById("cats").innerHTML = [...SLOTS, "study", "remix"].map(s =>
     `<button class="cat press" aria-pressed="${s === activeSlot}" data-slot="${s}">${LABEL[s]}</button>`).join("");
+  renderWearing();
+  const grid = document.getElementById("grid");
   if (activeSlot === "study") {   // D2: only a scanned card opens a study piece
-    document.getElementById("grid").innerHTML = Object.entries(PIECES).filter(([, p]) => p.splat).map(([id, p]) => {
+    grid.innerHTML = Object.entries(PIECES).filter(([, p]) => p.splat).map(([id, p]) => {
       const state = !p.seen ? "Tap the card in the museum" : p.locked ? `${p.found} of ${p.details} found` : "Fabric won";
       const date = p.year.from === p.year.to ? p.year.from : `${p.year.from}–${p.year.to}`;
-      return `<button class="tile press study ${p.seen ? "seen" : ""}" data-id="${id}" aria-label="${p.name}, ${date}: ${state}">
-        <img src="${p.img}" alt=""><span class="st"><b>${p.name}</b><span>${date} · ${state}</span></span></button>`;
+      return tile(id, `study ${p.seen ? "seen" : ""}`, p.img, `<span class="st"><b>${esc(p.name)}</b><span>${date} · ${state}</span></span>`,
+        `${p.name}, ${date}: ${state}`);
     }).join("");
     return;
   }
   if (activeSlot === "remix") {   // any unlocked piece's cloth, on the body or sleeves of your top or full look
     const zones = ["body", "sleeves"].map(z =>
       `<button class="cat press" aria-pressed="${z === activeZone}" data-zone="${z}">${z === "body" ? "Body" : "Sleeves"}</button>`).join("");
-    document.getElementById("grid").innerHTML = `<div class="zones">${zones}</div>` +
-      Object.entries(PIECES).filter(([, p]) => (p.glb || p.splat) && !p.locked).map(([id, p]) =>
-      `<button class="tile press ${look.fabric[activeZone] === id ? "on" : ""}" data-id="${id}" aria-label="${p.name} fabric on the ${activeZone}">
-        <img src="assets/swatch/${fileOf(id)}.jpg" alt="" style="mix-blend-mode:normal"><span class="m">${id}</span></button>`).join("");
+    const bare = !look.full && !look.top ? `<p class="zones none">Fabric goes on a top or a full look. Put one on first.</p>` : "";
+    grid.innerHTML = `<div class="zones">${zones}</div>${bare}` + Object.entries(PIECES).filter(([, p]) => (p.glb || p.splat) && !p.locked).map(([id, p]) =>
+      tile(id, isWorn(id, "remix") ? "on" : "", swatchOf(id), `<span class="m">${esc(shortName(id))}</span>`, `${p.name} fabric on the ${activeZone}`)).join("");
     return;
   }
-  document.getElementById("grid").innerHTML = Object.entries(PIECES).filter(([, p]) => p.slot === activeSlot).map(([id, p]) => {
-    const on = activeSlot === "full" ? look.full === id : (activeSlot === "feet" || !look.full) && look[activeSlot] === id;
-    return `<button class="tile press ${on ? "on" : ""} ${p.locked ? "locked" : ""}" data-id="${id}" aria-label="${p.name}">
-      <img src="${p.img}" alt=""><span class="m">${id}</span></button>`;
-  }).join("");
+  grid.innerHTML = Object.entries(PIECES).filter(([, p]) => p.slot === activeSlot).map(([id, p]) =>
+    tile(id, `${isWorn(id, activeSlot) ? "on" : ""} ${p.locked ? "locked" : ""}`, p.img, `<span class="m">${esc(shortName(id))}</span>`,
+      isWorn(id, activeSlot) ? `Take off ${p.name}` : `Wear ${p.name}`)).join("");
 }
-document.getElementById("cats").addEventListener("click", e => {
-  const b = e.target.closest("[data-slot]"); if (!b) return;
-  activeSlot = b.dataset.slot; renderLocker();
-});
-document.getElementById("grid").addEventListener("click", e => {
-  const z = e.target.closest("[data-zone]");
-  if (z) { activeZone = z.dataset.zone; renderLocker(); return; }
-  const b = e.target.closest("[data-id]"); if (!b || b.classList.contains("locked")) return;
-  const id = b.dataset.id;
-  if (activeSlot === "study") {   // shortcut: placeholder until the NFC cards exist; a tap on a card opens ?card=<id>
+/* What the form wears, always in the sheet's peek: tap a chip to change that part, × to take it off */
+function renderWearing() {
+  const parts = (look.full ? [["full", look.full], ["feet", look.feet]] : [["top", look.top], ["bottom", look.bottom], ["feet", look.feet]])
+    .filter(([, id]) => id).map(([slot, id]) => ({ slot, zone: "", id, kind: LABEL[slot], img: PIECES[id].img }));
+  if (look.full || look.top) for (const zone of ["body", "sleeves"]) {
+    const id = look.fabric[zone];
+    if (id) parts.push({ slot: "remix", zone, id, kind: zone === "body" ? "Body" : "Sleeves", img: swatchOf(id) });
+  }
+  document.getElementById("wearing").innerHTML = parts.length ? parts.map(w => `<span class="wear">
+    <button class="open press" data-open="${w.slot}" data-zone="${w.zone}" aria-label="Change the ${w.kind.toLowerCase()}: ${esc(PIECES[w.id].name)}">
+      <img src="${w.img}" alt=""><span><em>${w.kind}</em> ${esc(shortName(w.id))}</span></button>
+    <button class="off press" data-off="${w.slot}" data-zone="${w.zone}" aria-label="Take off ${esc(PIECES[w.id].name)}">×</button></span>`).join("")
+    : `<span class="none">Nothing on yet. Pick a piece below.</span>`;
+}
+function dress() { turntables.forEach(t => t.draw()); renderLocker(); renderCredit(); }
+function act(id, ctx) {   // the one action a tile, or its fact card, performs
+  if (ctx === "study") {   // shortcut: placeholder until the NFC cards exist; a tap on a card opens ?card=<id>
     if (PIECES[id].seen) location.href = `up-close.html?id=${encodeURIComponent(id)}`;
     else {
       document.getElementById("nfcText").textContent = `Hold your phone to the NFC card beside the ${PIECES[id].name.toLowerCase()} to study it up close.`;
@@ -681,22 +734,81 @@ document.getElementById("grid").addEventListener("click", e => {
     }
     return;
   }
-  if (activeSlot === "remix") look.fabric[activeZone] = look.fabric[activeZone] === id ? null : id;
-  else if (activeSlot === "full") look.full = look.full === id ? null : id;
-  else { if (activeSlot !== "feet") look.full = null; look[activeSlot] = id; }
-  const layer = activeSlot === "full" ? "top" : activeSlot;
-  turntables.forEach(t => { t.swap(layer); if (layer === "top") t.swap("bottom"); });
-  renderLocker(); renderCredit();
+  if (ctx === "remix" && !look.full && !look.top) {   // cloth goes on a top's body or sleeves: without one it would vanish
+    activeSlot = "top"; renderLocker(); toast("Put on a top first, then its fabric"); return;
+  }
+  const off = isWorn(id, ctx);
+  if (ctx === "remix") look.fabric[activeZone] = off ? null : id;
+  else if (ctx === "full") look.full = off ? null : id;
+  else { if (ctx !== "feet" && !off) look.full = null; look[ctx] = off ? null : id; }
+  dress();
+}
+document.getElementById("cats").addEventListener("click", e => {
+  const b = e.target.closest("[data-slot]"); if (!b) return;
+  activeSlot = b.dataset.slot; renderLocker();
 });
+document.getElementById("wearing").addEventListener("click", e => {
+  const b = e.target.closest("[data-open], [data-off]"); if (!b) return;
+  const { open, off, zone } = b.dataset;
+  if (off) {
+    if (off === "remix") look.fabric[zone] = null; else look[off] = null;
+    dress(); return;
+  }
+  activeSlot = open; if (zone) activeZone = zone;
+  renderLocker(); if (snap === "peek") setSnap("half");
+});
+document.getElementById("grid").addEventListener("click", e => {
+  const z = e.target.closest("[data-zone]");
+  if (z) { activeZone = z.dataset.zone; renderLocker(); return; }
+  const info = e.target.closest("[data-info]");
+  if (info) { openFact(info.dataset.info); return; }
+  const t = e.target.closest(".pick") && e.target.closest("[data-id]");
+  if (t && !t.classList.contains("locked")) act(t.dataset.id, ctxOf(t.dataset.id));
+});
+
+/* ---------- Fact card (C1): every field is copied from the MoMu record by tools/records.py; gaps say so (D3) ---------- */
+const RECORDS = await (await fetch("records.json")).json();
+const GENERIC = new Set(["metal", "weaving", "sewing (needleworking technique)", "handmade", "machine-made"]);   // shared by too many to link
+const plain = t => t.replace(/ \([^)]*\)$/, "");   // "cotton (fiber)" -> "cotton"
+const NR = '<span class="nr">not recorded</span>';
+const factEl = document.getElementById("fact");
+let factId = null;
+function openFact(id) {
+  const p = PIECES[id], r = RECORDS[id] || {}, ctx = ctxOf(id);
+  factId = id;
+  document.getElementById("factId").textContent = `${id} · MoMu study collection`;
+  document.getElementById("factName").textContent = p.name;
+  const made = (r.medium || []).map(plain).join(", ");
+  document.getElementById("factFields").innerHTML = `<dt>Made with</dt><dd>${made ? esc(made[0].toUpperCase() + made.slice(1)) : NR}</dd>
+    <dt>Date</dt><dd>${r.date?.length ? esc(r.date.join(", ")) : NR}</dd><dt>Place</dt><dd>${r.place?.length ? esc(r.place.join(", ")) : NR}</dd>`;
+  document.getElementById("factQuote").innerHTML = r.quote
+    ? `<div class="mono">MoMu says</div><q lang="nl">${esc(r.quote)}</q><p>${esc(r.quoteEn)} <span class="mono">Our translation</span></p>`
+    : `<span class="nr">No description recorded</span>`;
+  const links = (r.medium || []).filter(t => !GENERIC.has(t)).map(t => [t, Object.keys(RECORDS).filter(o => o !== id && RECORDS[o].medium?.includes(t))])
+    .filter(([, o]) => o.length).slice(0, 2);
+  document.getElementById("factShares").innerHTML = links.map(([t, o]) =>
+    `<div><span>${esc(plain(t)[0].toUpperCase() + plain(t).slice(1))} also in:</span>${o.slice(0, 3).map(x => `<button data-fact="${x}">${esc(shortName(x))}</button>`).join("")}</div>`).join("");
+  const link = document.getElementById("factLink");
+  link.hidden = !r.uri; if (r.uri) link.href = r.uri;
+  const actBtn = document.getElementById("factAct");
+  const label = ctx === "study" ? (p.seen ? "Study it up close" : "Find it in the museum")
+    : p.locked ? null : ctx === "remix" ? (isWorn(id, ctx) ? `Take it off the ${activeZone}` : `Use on the ${activeZone}`)
+    : isWorn(id, ctx) ? "Take it off" : "Wear it";
+  actBtn.hidden = !label; actBtn.textContent = label ?? "";
+  if (!factEl.open) factEl.showModal();
+}
+document.getElementById("factShares").addEventListener("click", e => { const b = e.target.closest("[data-fact]"); if (b) openFact(b.dataset.fact); });
+document.getElementById("factAct").addEventListener("click", () => { factEl.close(); act(factId, ctxOf(factId)); });
+factEl.addEventListener("click", e => { if (e.target === factEl) factEl.close(); });   // backdrop tap closes
 
 /* ---------- Wardrobe sheet: drag the grab area, snap to peek / half / full ---------- */
 const stageEl = document.getElementById("stage"), wardrobe = document.getElementById("wardrobe");
 const grabEl = document.getElementById("wardrobeGrab"), handleEl = document.getElementById("wardrobeHandle");
-const SNAPS = ["peek", "half", "full"], PEEK = 124;   // peek shows the handle, the title and the category chips
+const SNAPS = ["peek", "half", "full"];
 let snap = "peek";
 function snapY(name) {   // translateY for a snap point: sheet height minus the part left visible
   const sheetH = wardrobe.offsetHeight;
-  return sheetH - { peek: PEEK, half: stageEl.clientHeight * 0.48, full: sheetH }[name];
+  return sheetH - { peek: grabEl.offsetHeight, half: stageEl.clientHeight * 0.48, full: sheetH }[name];
 }
 function setSnap(name) {
   snap = name; stageEl.dataset.snap = name;
@@ -835,6 +947,14 @@ if (won && PIECES[won]?.splat && !PIECES[won].locked) {
   <p id="nfcText"></p>
   <a class="btn press" id="nfcGo">Simulate NFC tap</a>
   <form method="dialog"><button class="btn ghost press">Not now</button></form>
+</div></dialog>
+<dialog class="fact" id="fact" aria-labelledby="factName"><div tabindex="-1" autofocus>
+  <div class="mono" id="factId"></div>
+  <h3 id="factName"></h3>
+  <dl id="factFields"></dl>
+  <blockquote id="factQuote"></blockquote>
+  <div class="shares" id="factShares"></div>
+  <div class="row"><button class="btn press" id="factAct"></button><a id="factLink" target="_blank" rel="noopener">MoMu record ↗</a></div>
 </div></dialog>
 </body>
 </html>

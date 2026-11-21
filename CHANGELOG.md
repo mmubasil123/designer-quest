@@ -4,6 +4,13 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### Wardrobe: see and take off what is worn; C1 fact cards (branch basil/c1-wardrobe)
+- A "Wearing" row in the sheet's peek lists the top, bottom, feet (or full look) and the body and sleeve fabrics, each with a thumbnail, name and ×. Tapping a chip opens that category; × takes it off. A worn tile tapped again also takes it off (before, top, bottom and feet could only be replaced). Tiles show short names instead of inventory ids; the id line under the look name went, since the row says the same.
+- Picking a fabric with no top or full look used to change nothing visible (and still fired the First remix toast): Remix now says to put a top on first, and a pick sends you to Tops.
+- C1: every tile has an ⓘ that opens a fact card: materials and techniques, date and place, the record's first description sentence in Dutch with our English translation, up to two "also in" material links to other pieces' cards, the card's own action (Wear it, Take it off, Use on the body, Study it up close) and a link to the MoMu record. Missing fields say "not recorded" (D3).
+- The card reads `mockups/records.json`, written by `mockups/tools/records.py` from the harvest cache (every value verbatim; translations are keyed to the Dutch sentence so a changed record fails the script). Five records leave their medium terms untagged; those list Dutch then English terms, each A to Z, and the script splits at the restart, checked against the tags the same terms have elsewhere.
+- Checked in Chrome in a 390 px frame: wear, take off by × and by tile, Remix with and without a top, cards for top, full, remix and study pieces, card-to-card links, desktop layout; console clean.
+
 ### Splat Stage spike (ticket G1, pushed straight to main on the owner's go)
 - New throwaway page `mockups/splat-stage-spike.html`: a splat dress form wearing the ST2431 cavalry jacket or ST2432 tailcoat over either uniform's trousers, with a fabric tint on the top. Parts come from `mockups/tools/splat_spike_cut.py` (rules for these two scans only) into `mockups/assets/splat/spike/` (12 MB for all 7 parts).
 - Why: the owner picked approach A (all-splat Stage with mixed parts); the spike tests cut quality, fit and fabric on splats before any engine work.
