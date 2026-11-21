@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 860" preserveAspectRatio="xMidYMax slice">
+  <!-- 18th century: a candlelit salon, panelled walls and a tall arched window -->
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7f1e8"/><stop offset="1" stop-color="#eadcc6"/></linearGradient>
+    <linearGradient id="win" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3f5f6"/><stop offset="1" stop-color="#dfe5e8"/></linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dcc6a2"/><stop offset="1" stop-color="#cfb58b"/></linearGradient>
+    <radialGradient id="glow" cx=".5" cy=".62" r=".55"><stop offset="0" stop-color="#fff8ea" stop-opacity=".9"/><stop offset="1" stop-color="#fff8ea" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="400" height="860" fill="url(#wall)"/>
+  <g fill="none" stroke="#d6c09b" stroke-width="1.5">
+    <rect x="18" y="250" width="78" height="300"/><rect x="26" y="258" width="62" height="284" stroke-width=".8"/>
+    <rect x="304" y="250" width="78" height="300"/><rect x="312" y="258" width="62" height="284" stroke-width=".8"/>
+    <rect x="18" y="580" width="78" height="72"/><rect x="304" y="580" width="78" height="72"/>
+    <path d="M0 566H400M0 572H400"/>
+  </g>
+  <path d="M118 660V320a82 82 0 0 1 164 0V660Z" fill="url(#win)" stroke="#d2bc95" stroke-width="5"/>
+  <g stroke="#d2bc95" stroke-width="2.5" fill="none"><path d="M200 240V660M118 420H282M118 540H282M139 300a62 62 0 0 1 122 0"/></g>
+  <g fill="#f2d9a6"><circle cx="57" cy="232" r="3"/><circle cx="343" cy="232" r="3"/></g>
+  <g stroke="#d1b98f" stroke-width="1.5" fill="none"><path d="M45 238q12 10 24 0M331 238q12 10 24 0M57 238v12M343 238v12"/></g>
+  <rect y="660" width="400" height="200" fill="url(#floor)"/>
+  <path d="M0 660H400" stroke="#c9ae83" stroke-width="3"/>
+  <g stroke="#c8ad81" stroke-width="1" opacity=".55"><path d="M200 660L-120 860M200 660L40 860M200 660L200 860M200 660L360 860M200 660L520 860M0 700H400M0 752H400M0 820H400"/></g>
+  <rect width="400" height="860" fill="url(#glow)"/>
+</svg>
