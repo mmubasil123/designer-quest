@@ -190,7 +190,8 @@ dt { color: var(--muted); }
 .nfc .ring { width: 56px; height: 56px; margin: 0 auto 14px; border-radius: 50%; border: 1.5px solid var(--ink); display: grid; place-items: center; }
 .nfc h3 { font: 400 22px/1.15 Newsreader, serif; margin-bottom: 8px; }
 .nfc p { color: var(--muted); font-size: 14px; margin-bottom: 20px; text-wrap: balance; }
-.nfc .btn { width: 100%; }
+.nfc .btn { width: 100%; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+.nfc form { margin-top: 8px; }
 @media (prefers-reduced-motion: reduce) {
   .press:active { transform: none; }
   .wardrobe, .stage .turntable { transition-duration: 1ms; }
@@ -673,7 +674,11 @@ document.getElementById("grid").addEventListener("click", e => {
   const id = b.dataset.id;
   if (activeSlot === "study") {   // shortcut: placeholder until the NFC cards exist; a tap on a card opens ?card=<id>
     if (PIECES[id].seen) location.href = `up-close.html?id=${encodeURIComponent(id)}`;
-    else { document.getElementById("nfcText").textContent = `Hold your phone to the NFC card beside the ${PIECES[id].name.toLowerCase()} to study it up close.`; document.getElementById("nfc").showModal(); }
+    else {
+      document.getElementById("nfcText").textContent = `Hold your phone to the NFC card beside the ${PIECES[id].name.toLowerCase()} to study it up close.`;
+      document.getElementById("nfcGo").href = `?card=${encodeURIComponent(id)}`;   // the same URL a real card will open
+      document.getElementById("nfc").showModal();
+    }
     return;
   }
   if (activeSlot === "remix") look.fabric[activeZone] = look.fabric[activeZone] === id ? null : id;
@@ -828,7 +833,8 @@ if (won && PIECES[won]?.splat && !PIECES[won].locked) {
   <div class="ring" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 8.5a5 5 0 0 1 0 7M9.5 6a8.5 8.5 0 0 1 0 12M13 3.5a12 12 0 0 1 0 17"/></svg></div>
   <h3 id="nfcTitle">Find it in the museum</h3>
   <p id="nfcText"></p>
-  <form method="dialog"><button class="btn press">OK</button></form>
+  <a class="btn press" id="nfcGo">Simulate NFC tap</a>
+  <form method="dialog"><button class="btn ghost press">Not now</button></form>
 </div></dialog>
 </body>
 </html>

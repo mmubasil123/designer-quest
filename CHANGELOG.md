@@ -4,6 +4,10 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### NFC popup: Simulate NFC tap
+- The popup's OK only closed it, so a grey Study piece was unreachable while the screens are being designed. Primary button is now "Simulate NFC tap", which opens `?card=<id>`, the same URL a real card will open; "Not now" closes.
+- Checked in Chrome at 390 px: Simulate opens that piece's Up close, coming back shows it as "0 of 3 found", Not now closes.
+
 ### Levels (knowledge track) removed
 - Deleted the third screen, its Levels button on the Piece page, and its CSS and JS (`STEPS`, `renderTrack`, the flip card). Piece page footer is now one "Wear it" button.
 - Why: it was kimono-only, its two stories were not quoted from the MoMu record (D3), and its "Rebuilt in CLO 3D" step was never built. Up close now does the learning for 9 pieces with record quotes. Decision by the owner.
