@@ -1289,6 +1289,7 @@ async function scan(id) {
   if (pick === "wear") { wearAlone(id); toast(`Wearing the ${shortName(id).toLowerCase()}`); return; }
   fresh.add(id); keepFresh();
   welcome(id, `${shortName(id)} is in your Won tab. Tap it to wear it.`);
+  if (pick === "next" && win.next) tapCard(win.next);   // H17: the Won card's next piece, opened like its Museum tile
 }
 if (scanned && !PIECES[scanned]?.glb && !PIECES[scanned]?.splat) toast("This sticker isn't in the app yet");
 else if (scanned) scan(scanned);
@@ -1299,6 +1300,7 @@ if (claimed && PIECES[claimed]?.splat && !PIECES[claimed].locked) recordsSoon().
   if (pick === "wear") { wearAlone(claimed); toast(`Wearing the ${shortName(claimed).toLowerCase()}'s fabric`); return; }
   fresh.add(claimed); keepFresh();
   welcome(claimed, `${shortName(claimed)} is in your Won tab. Tap it to wear it.`);
+  if (pick === "next" && win.next) tapCard(win.next);   // H17
 });
 if (scanned || claimed) history.replaceState(null, "", location.pathname);   // a reload must not replay the card
 booted = true;

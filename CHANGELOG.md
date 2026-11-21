@@ -11,6 +11,18 @@ Newest first. Each entry: what changed, why, and the decision behind it.
   floated off the text column and competed with the date.
 - Decision: set it as momu.be and the hackathon template do, large and top left. Card stays 1080x1920; checked with no
   name, a short name and a 21-letter name; console clean.
+## Tappable next piece on the Won card (2026-11-21, branch hassan/H17-next-tap, H17)
+- What: the Won card's "Next to win" row (H15) is now a button with a chevron. A tap keeps the prize, just as "Keep
+  it" does, then opens that piece. A study piece already started goes straight to Up close; any other piece shows its
+  sticker prompt ("Find it at MoMu"), the same path as its Museum tile (`tapCard`). `win.js` resolves "next" and exposes
+  `win.next`; `second-skin.html` adds one line after each of the two Won-card calls. The study-piece copy now says
+  "Tap to finish up close."
+- Why: H15 had to leave the row static while `second-skin.html` was open in PR #47. Now one win leads straight to the
+  next.
+- Decision: reuse `tapCard` rather than a new route, so back and the demo sticker behave as everywhere else (H6).
+  Checked in Chrome at 390 px: a fabric win on ST2435 opens the half-found coat ST81190 in Up close; a year win on the
+  jak ST503 keeps it (New in the wardrobe) and opens the sequin dress's sticker prompt; back closes the prompt; console
+  clean. Not on a phone.
 
 ## MoMu logo on the outfit page (2026-11-21, H16, branch hassan/H16-outfit-logo)
 - What: `outfit.html` has the same header as Up close: back arrow, MoMu's logo (the H10 inline SVG), the piece id on
