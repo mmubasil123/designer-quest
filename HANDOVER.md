@@ -21,14 +21,16 @@ before calling anything done. Never deploy, push to `main` or publish without yo
 - Add another CLO piece: put its GLB in `assets/clo/` (run `clo/optimise_glb.mjs` on the CLO branch), add `assets.clo` to its `pieces.json` entry with the same `avatar`, and read `onScan` (hem and collar as fractions of the splat box height) off Up close. It must be draped on the same avatar (`avatar_web.glb` is the team's avatar slimmed; the coat fits it because the skin is kept).
 - Not done: remix of the CLO coat by named material (`rig.material(id, "wool_grey")` is there), layered variants over the blouse (the files exist on `hassan/clo-st81190`, 3.9 MB blouse), any CLO piece on the Stage (D1).
 
-## H3 Story screen + narration (hassan, branch hassan/story-narration, PR pending)
+## H3 Story screen + narration (hassan, merged PR #14; re-voiced on hassan/H3-narration-text)
 - Card scan -> story sheet (`story.js`, `story.css`) -> Continue -> the curator's questions (`quiz.js`, story not repeated).
 - Text and audio list: `mockups/narration.json`, built by `python3 -I mockups/tools/narration.py` from `questions.json`
   (the curator) and `records.json` (drafts for pieces she hasn't written yet, marked on screen). Never hand-edit it.
-- Audio: `assets/audio/<id>.en.m4a`, Gemini TTS, key `GEMINI_API_KEY` in `.env`. 11 of 17 done; the free TTS quota
-  (daily) ran out. To finish: `python3 -I mockups/tools/narration.py --audio` (only the 6 missing study pieces are
-  made). Until then those play with the phone's own voice. After the curator edits her page: re-sync `questions.json`,
-  rerun the script (only changed stories are re-voiced), `--check` before committing.
+- Audio: `assets/audio/<id>.en.m4a`, all 19 done, English only. Only the story text goes to the voice (no style line:
+  models read it out). Each piece's `voice` says who made it: 3 Gemini (Sulafat), 16 Picsart (Adeline).
+- After the curator edits her page: re-sync `questions.json`, then `narration.py --audio` (Gemini, key `GEMINI_API_KEY` in
+  `.env`; stops cleanly when the free daily quota is spent). For what's left: `--scripts DIR`, voice those texts in
+  Picsart (AI Audio Generator, Adeline, one line per script, export MP4), then `--import DIR --voice "picsart:Adeline"`.
+  `--check` before committing.
 
 ## H4 MoMu theme (hassan, merged in PR #15)
 - The look lives in `mockups/theme.css`: change a colour or font in its `:root` block, not in the pages. It must load
