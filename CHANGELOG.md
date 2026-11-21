@@ -4,6 +4,11 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### One narration voice throughout (branch hassan/H3-one-voice)
+- **What:** the 3 stories still in Gemini's voice (ST81190, ST503, ST80930) are re-made in Picsart's Adeline, so all 19 now share one voice. Made from the story text alone, like the rest.
+- **Checked:** every file transcribed back: none contains the old style line ("Read this aloud in a calm, warm voice..."), and the words match the story (83 to 97%; the gaps are numbers like "9th" heard as "ninth").
+- **Script:** `narration.py --force` with `--only` treats chosen pieces as missing, so `--scripts` and `--import` can redo them (for example to change voice).
+
 ### A9 follow-up: kimono leg gap, dress lift, coat collar (branch basil/A9-avatar-polish)
 - **Kimono leg gap:** MetaPerson's body has no legs under its own clothes, and the avatar's outfit was hidden whenever a
   full piece and boots were on. The furisode ends at the shin, so the shins between hem and boots were empty. The outfit

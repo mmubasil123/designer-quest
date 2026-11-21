@@ -16,6 +16,7 @@ the exported scripts and import the files. Audio: mono AAC (.m4a, 48 kbps) throu
   python3 -I mockups/tools/narration.py --audio --only ST503,ST81190 --lang en
   python3 -I mockups/tools/narration.py --check         # narration.json matches its sources and every file exists
   python3 -I mockups/tools/narration.py --scripts DIR   # write DIR/<id>.en.txt: the exact text to voice, for any missing audio
+  python3 -I mockups/tools/narration.py --scripts DIR --only ST503 --force   # redo chosen pieces (say, to change voice)
   python3 -I mockups/tools/narration.py --import DIR --voice "picsart:<voice name>"
                                                         # adopt DIR/<id>.en.(mp3|wav|m4a|mp4) made elsewhere for missing audio
 """
@@ -165,6 +166,9 @@ def main(argv):
         if prev.get("audio") and prev.get("audioHash") == e["hash"] and (MOCKUPS / prev["audio"]).exists():
             e.update(audio=prev["audio"], audioHash=prev["audioHash"], seconds=prev.get("seconds"), bytes=prev.get("bytes"),
                      voice=prev.get("voice"))
+    if "--force" in argv and only:   # redo these pieces (e.g. to move them to another voice): treat their audio as missing
+        for pid in only & set(new):
+            new[pid].update(audio=None, audioHash=None, seconds=None, bytes=None, voice=None)
     if "--scripts" in argv:
         d = Path(argv[argv.index("--scripts") + 1]); d.mkdir(parents=True, exist_ok=True)
         todo = [(pid, e) for pid, e in new.items() if not e["audio"] and (not only or pid in only)]
