@@ -4,6 +4,9 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### AGENTS.md: splat setup and rules
+- First-time setup now says where the raw splats come from and how to install `splat-transform` in `tools/node/`; Rules say to commit only `.sog`, quote records verbatim and place details with `fracAt`. Why: the second person's agents had no way to learn this from the entry file.
+
 ### All 9 MoMu splats, Study tab, flow fixes (branch basil/splats-7)
 - 7 more study pieces: ST673/1-2, ST81190, ST80998, ST2431/1-4, ST2432/1-2, ST671, ST2203. `.sog` 14 to 17 MB each; 3 details per piece quoted verbatim from `dcterms:description` (checked by script), placed with `upClose.fracAt` on front and back views; swatches cropped clear of buttons, lace and background.
 - Study chip in the wardrobe sheet (after an analysis-agent review of placement): tiles show name, date and state; a scanned piece opens Up close; an unscanned one stays put (D2). Remix now shows only won fabrics. "Full look" chip is "Full" so 6 chips fit at 390 px; the "6 of 20 pieces found" line is computed.

@@ -17,6 +17,10 @@ cp .env.example .env && chmod 600 .env    # then: zsh tools/set_hf_token.sh (you
 createdb momu && pg_restore -d momu --no-owner seed/momu_full.dump                # only for DB queries
 ```
 The mockup alone needs none of this: it is static files plus three.js from a CDN.
+Splat work only: the raw MoMu `.ply` captures (about 220 MB each) live in the git-ignored `splats/`; get them
+from MoMu's hackathon page (Splatting_FOLDER on Google Drive) or from Mubasil. The converter is PlayCanvas
+`splat-transform` in the git-ignored `tools/node/`:
+`mkdir -p tools/node && cd tools/node && npm init -y && npm install @playcanvas/splat-transform@3.10.3`.
 `tools/craft/` (VectorCraft, TextureCraft CLIs for `.mcp.json`) is not in git; without it those two MCP servers
 just fail to connect.
 
@@ -49,6 +53,9 @@ just fail to connect.
 - Facts about MoMu pieces (dates, techniques, history) come from the collection data (DB or `cache/`), never from
   model memory. A missing field shows "not recorded" (D3).
 - Change a decision in `LEDGER.md` only by editing its row and saying why.
+- Study pieces (splats): commit only the `.sog` (under 50 MB), never a `.ply`. Each detail's `quote` is cut
+  verbatim from the record's `dcterms:description` (check it with a script); place `details[].at` with
+  `upClose.fracAt(x, y, fz)` in the console on `up-close.html`, checking front and back. Steps are in `HANDOVER.md`.
 - Deploys: the Vercel project `second-skin` is on Mubasil's account. Only Mubasil deploys, and only on purpose.
 
 ## Delivery
