@@ -307,6 +307,131 @@
    }
   ]
  },
+ "ST81114AB": {
+  "uri": "http://data.momu.be/ark:34546/m2rbtz",
+  "fields": [
+   {
+    "key": "date",
+    "label": "Date",
+    "property": "dcterms:date",
+    "values": [
+     "1890-1920"
+    ]
+   },
+   {
+    "key": "subject",
+    "label": "Type of object",
+    "property": "dcterms:subject",
+    "values": [
+     "blouse",
+     "blouses"
+    ]
+   },
+   {
+    "key": "medium",
+    "label": "Materials and techniques",
+    "property": "dcterms:medium",
+    "values": [
+     "katoen (vezel)",
+     "paarlemoer",
+     "weven",
+     "batist",
+     "stikken (procedé)",
+     "witborduurwerk (techniek)",
+     "gaatjesborduurwerk (techniek)",
+     "gaaskantsteek"
+    ],
+    "en": [
+     "cotton (fiber)",
+     "mother of pearl",
+     "weaving",
+     "stitching (generic process)",
+     "whitework (technique)",
+     "broderie anglaise (technique)",
+     "gauze point stitch"
+    ]
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "property": "dcterms:description",
+    "values": [
+     "Witte blouse gedragen als fietskleding, gemaakt van katoenbatist. Opstaande kraag met aan elkaar genaaide stroken machinaal witborduurwerk. Sluiting vooraan met 20 knopen gemaakt van parelmoer; met de hand genaaide knoopsgaten (gaaskantsteek). Centraal zijn twee verticale stroken machinaal witborduurwerk opgenaaid, die de knoopsgaten van het borststuk verbergen. Het losse borststuk heeft fijne plooien en wordt met 14 knopen van parelmoer (waarvan 4 ontbreken) over de sluiting bevestigd. Aangezette mouwen, gerimpeld op de kop en aan het manchet. Hoge smalle manchet zonder sluiting, gemaakt van een strook katoenbatist met machinaal borduurwerk. Sterk getailleerde snit. De naden zijn aan de binnenzijde aan de naadwaarde omgevouwen en met de hand toegenaaid. Aan de achterzijde een split afgewerkt met dezelfde stroken borduurwerk, die los afhangen."
+    ],
+    "en": [
+     "White blouse worn as cycling wear, made of cotton batiste."
+    ],
+    "enNote": "our translation of the first sentence only"
+   },
+   {
+    "key": "shortDescription",
+    "label": "About the maker or collection",
+    "property": "bibo:shortDescription",
+    "values": [
+     "Dit fietsensemble getuigt van de controversiële stap die vooruitstrevende vrouwen rond de eeuwwisseling zetten door tijdens het sporten een broek te dragen, een kledingstuk dat tot dan toe voor mannen was voorbehouden. Vrouwen op de fiets hoefden niet langer begeleid te worden door een man, wat hen een grotere vrijheid gaf. Tussen 1890-1900 leerden een miljoen vrouwen fietsen. Speciaal vervaardigde sportkleding gaf hen meer beweegruimte dan de dagelijkse kledij. Omdat fietsen met de gewoonlijke lange rokken met sleep te gevaarlijk was, werden knierokken geïntroduceerd. Ook broekrokken en bloomers, knielange pofbroeken, werden gedragen. Gezien het controversiële karakter van de broekrok, verkozen veel vrouwen om een rok te dragen over hun broek of ‘knickerbockers’. Een volledig fietskostuum bestond uit: een broek(rok), al dan niet met rok, een jasje, blouse, platte strohoed, lederen schoenen of beenkappen en handschoenen."
+    ]
+   }
+  ]
+ },
+ "ST81116": {
+  "uri": "http://data.momu.be/ark:34546/mt76pz",
+  "fields": [
+   {
+    "key": "date",
+    "label": "Date",
+    "property": "dcterms:date",
+    "values": [
+     "1890-1920"
+    ]
+   },
+   {
+    "key": "subject",
+    "label": "Type of object",
+    "property": "dcterms:subject",
+    "values": [
+     "broek"
+    ]
+   },
+   {
+    "key": "medium",
+    "label": "Materials and techniques",
+    "property": "dcterms:medium",
+    "values": [
+     "wol (haar)",
+     "katoen (vezel)",
+     "kunststof",
+     "weven",
+     "stikken (procedé)"
+    ],
+    "en": [
+     "wool (hair material)",
+     "cotton (fiber)",
+     "manmade material",
+     "stitching (generic process)"
+    ]
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "property": "dcterms:description",
+    "values": [
+     "Zwarte wollen knielange broek gebruikt om te fietsen. Tailleband gevoerd met zwart katoen, sluiting in de linker zijnaad met 3 kunststof knopen (1 ontbreekt). Eén zak in de rechter zijnaad, weggewerkt onder een plooi. Zowel vooraan als achteraan zes diepe plooien die het laaghangend kruis verbergen. Onderaan zijn de pijpen samengetrokken met elastiek. Geen voering."
+    ],
+    "en": [
+     "Black woollen knee-length trousers used for cycling."
+    ],
+    "enNote": "our translation of the first sentence only"
+   },
+   {
+    "key": "shortDescription",
+    "label": "About the maker or collection",
+    "property": "bibo:shortDescription",
+    "values": [
+     "Dit fietsensemble getuigt van de controversiële stap die vooruitstrevende vrouwen rond de eeuwwisseling zetten door tijdens het sporten een broek te dragen, een kledingstuk dat tot dan toe voor mannen was voorbehouden. Vrouwen op de fiets hoefden niet langer begeleid te worden door een man, wat hen een grotere vrijheid gaf. Tussen 1890-1900 leerden een miljoen vrouwen fietsen. Speciaal vervaardigde sportkleding gaf hen meer beweegruimte dan de dagelijkse kledij. Omdat fietsen met de gewoonlijke lange rokken met sleep te gevaarlijk was, werden knierokken geïntroduceerd. Ook broekrokken en bloomers, knielange pofbroeken, werden gedragen. Gezien het controversiële karakter van de broekrok, verkozen veel vrouwen om een rok te dragen over hun broek of ‘knickerbockers’. Een volledig fietskostuum bestond uit: een broek(rok), al dan niet met rok, een jasje, blouse, platte strohoed, lederen schoenen of beenkappen en handschoenen."
+    ]
+   }
+  ]
+ },
  "ST2407/1-2": {
   "uri": "http://data.momu.be/item/id/mfxpx0",
   "fields": [
