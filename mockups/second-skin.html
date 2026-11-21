@@ -869,14 +869,14 @@ function renderLocker() {
       tile(id, `${isWorn(id, "remix") ? "on" : ""} ${fresh.has(id) ? "new" : ""}`, swatchOf(id), `<span class="m">${esc(shortName(id))}</span>`, `${p.name} fabric on the ${activeZone}`)).join("");
     return;
   }
-  grid.innerHTML = Object.entries(PIECES).filter(([, p]) => p.slot === activeSlot).sort(newFirst).map(([id, p]) =>
+  grid.innerHTML = Object.entries(PIECES).filter(([, p]) => p.slot === activeSlot && p.glb).sort(newFirst).map(([id, p]) =>
     tile(id, `${isWorn(id, activeSlot) ? "on" : ""} ${p.locked ? "locked" : ""} ${fresh.has(id) ? "new" : ""}`, p.img, `<span class="m">${esc(shortName(id))}</span>`,
       isWorn(id, activeSlot) ? `Take off ${p.name}` : `Wear ${p.name}`)).join("");
 }
 /* Museum: the room pieces (each with a sticker) are won there, not owned yet, so they live outside the wardrobe (D2) */
 const museumEl = document.getElementById("museum");
 function renderMuseum() {
-  const room = Object.entries(PIECES).filter(([, p]) => p.room);
+  const room = Object.entries(PIECES).filter(([, p]) => p.room && (p.glb || p.splat));   // a piece with no 3D yet has nothing to win
   document.getElementById("museumCount").textContent = `${room.filter(([, p]) => !p.locked).length} of ${room.length} won`;
   document.getElementById("museumGrid").innerHTML = room.map(([id, p]) => {
     const state = !p.locked ? (p.splat ? "Fabric won" : "Won") : p.seen ? `${p.found} of ${p.details} details found` : "Still to find";
