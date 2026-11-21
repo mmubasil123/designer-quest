@@ -1,8 +1,11 @@
-/* MoMu theme (B9). One place for the look: tokens, fonts and the component skin for second-skin.html.
-   Read from momu.be (2026-11-21): white ground, black ink, one signal red, a grotesque for the interface, a serif for
-   titles, floating white pills with a soft offset shadow, sharp-cornered pictures, hairline rules.
-   MoMu's own faces are commercial (Roobert, Reckless); the stand-ins here are OFL and self-hosted in assets/fonts/:
-   Hanken Grotesk for Roobert, Source Serif 4 for Reckless. No font is fetched from a third party.
+/* MoMu theme (H4). One place for the look: tokens, fonts and the component skin for second-skin.html.
+   Two sources. MoMu's hackathon presentation template (the one the museum asked teams to use) decides where they
+   differ: white ground, black text, headings in red capitals set in a plain grotesque (Arial in the file), red #d72f25.
+   momu.be (read 2026-11-21) fills in what a slide template has no opinion on: floating white pills with a soft offset
+   shadow, sharp-cornered pictures, hairline rules, red underlines on links, a serif for editorial reading text.
+   Fonts are OFL and self-hosted in assets/fonts/: Hanken Grotesk for the template's Arial and the site's Roobert
+   (commercial), Source Serif 4 for the site's Reckless (commercial), used only for stories and record quotes.
+   No font is fetched from a third party.
    Load this file AFTER a page's own <style>: it overrides the older paper-and-mono look selector by selector.
    Every page and sheet (quiz.css, ask.css, share.css, up-close.html) reads these tokens. */
 
@@ -22,8 +25,9 @@
   --ink: #000;
   --muted: #595959;         /* 7:1 on white, 6:1 on --wall */
   --line: #cbcbcb;          /* hairlines and control borders */
-  --accent: #e32118;        /* MoMu red: underlines, dots, pins. Never body text (4.4:1 on white) */
-  --accent-ink: #c4170d;    /* the same red where white text sits on it or it is text (5.9:1) */
+  --accent: #d72f25;        /* the template's red: titles, underlines, dots (4.9:1 on white) */
+  --accent-ink: #c00000;    /* the template's darker red, where white text sits on it (6.5:1) */
+  --title-ink: var(--accent);
   --found: var(--accent-ink);
 
   /* type */
@@ -33,11 +37,11 @@
   --t-small: 400 13px/1.4 var(--sans);
   --t-body: 400 15px/1.45 var(--sans);
   --t-quote: italic 400 17px/1.4 var(--serif);
-  --t-title-s: 400 22px/1.15 var(--serif);
-  --t-title: 400 28px/1.08 var(--serif);
-  --t-display: 400 32px/1.04 var(--serif);
+  --t-title-s: 400 18px/1.2 var(--sans);       /* titles: red capitals, regular weight, as in the template */
+  --t-title: 400 22px/1.15 var(--sans);
+  --t-display: 400 27px/1.1 var(--sans);
   --track-label: .06em;
-  --track-title: -.012em;
+  --track-title: .01em;
 
   /* shape and depth */
   --r-card: 6px;            /* dialogs */
@@ -60,7 +64,7 @@ body { font: var(--t-body); font-optical-sizing: auto; -webkit-font-smoothing: a
 input, textarea { caret-color: var(--accent); }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .serif { font-family: var(--serif); }
-.brand { font: 400 22px/1 var(--serif); letter-spacing: var(--track-title); }
+.brand { font: 500 15px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
 /* the old mono lines: ids, counts, credits */
 .mono { font: var(--t-small); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; letter-spacing: 0; text-transform: none; }
 .label { font: var(--t-label); letter-spacing: var(--track-label); }
@@ -70,8 +74,12 @@ input, textarea { caret-color: var(--accent); }
 .pill.ghost { border: 0; background: var(--paper); box-shadow: var(--shadow-pill); }
 .helpbtn { font: 500 16px/1 var(--sans); }
 
+/* every title on every sheet: the template's red capitals */
+h1.sheet, .stage .credit .t, .wardrobe h2, dialog.fact :is(h2, h3), .nfc :is(h2, h3), .help :is(h2, h3), .body :is(h2, h3),
+.quiz #quizName, .ask-head :is(h2, h3), .share :is(h2, h3) { text-transform: uppercase; color: var(--title-ink); }
+
 /* ---------- desktop pitch layout ---------- */
-h1.sheet { font: 400 44px/1.05 var(--serif); letter-spacing: var(--track-title); }
+h1.sheet { font: 400 40px/1.05 var(--sans); letter-spacing: var(--track-title); }
 p.sheet { font-size: 16px; text-wrap: pretty; }
 .phone { box-shadow: 0 30px 70px -30px rgb(0 0 0 / .4); border-color: transparent; }
 
@@ -85,7 +93,7 @@ p.sheet { font-size: 16px; text-wrap: pretty; }
 .stage .credit .t { grid-area: 1 / 1; }
 .stage .credit .skins { grid-area: 1 / 2; }
 .stage .credit .mono { grid-area: 2 / 1 / 3 / 3; }
-.stage .credit .t { font: var(--t-display); font-size: 26px; letter-spacing: var(--track-title); text-wrap: balance; }
+.stage .credit .t { font: var(--t-display); font-size: 22px; letter-spacing: var(--track-title); text-wrap: balance; }
 .stage .credit .mono { margin-top: 4px; font-size: 13px; }
 .skin { box-shadow: inset 0 0 0 1px rgb(0 0 0 / .22); }
 .zoom button { border: 0; background: var(--paper); box-shadow: var(--shadow-pill); font: 300 24px/1 var(--sans); }
@@ -142,8 +150,3 @@ dialog.fact .row a { font-size: 14px; padding: 0 8px; white-space: nowrap; }
 .model-missing { font: var(--t-small); font-size: 14px; }
 .var .th { border: 0; border-radius: var(--r-pic); }
 .var .th .badge { font: 500 11px/1 var(--sans); border-radius: 0; padding: 2px 4px; }
-
-@media (max-width: 600px) {
-  .stage .credit .t { font-size: 32px; }   /* the desktop pitch frame is narrower than a phone */
-  .stage .turntable { top: 136px; }   /* the look name is larger now */
-}

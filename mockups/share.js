@@ -7,7 +7,7 @@ export const CARD_W = 1080, CARD_H = 1920;
 const CREDIT = "Collection: MoMu Fashion Museum Antwerp";
 // the canvas cannot read CSS variables per draw call cheaply, so these mirror theme.css (fonts and colour tokens): change both together
 const SERIF = '"Source Serif 4", Georgia, serif', MONO = '"Hanken Grotesk", "Helvetica Neue", Arial, sans-serif';   // MONO: the small label face (was a mono)
-const INK = "#000", MUTED = "#595959", LINE = "#cbcbcb", PAPER = "#fff", WALL = "#ededed";
+const INK = "#000", MUTED = "#595959", LINE = "#cbcbcb", PAPER = "#fff", WALL = "#ededed", RED = "#d72f25";
 const FOOT_Y = 1740;   // the credit block starts here; the form and the list share the space between the title and this line
 
 const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
@@ -51,8 +51,8 @@ export function drawCard({ grab, name, facts, url }) {
   ctx.fillStyle = wall; ctx.fillRect(0, 0, CARD_W, CARD_H);
   ctx.textBaseline = "alphabetic"; ctx.fillStyle = INK;
 
-  ctx.fillStyle = INK; ctx.font = `400 96px ${SERIF}`;
-  const lines = wrap(ctx, name, CARD_W - 2 * pad, 3);
+  ctx.fillStyle = RED; ctx.font = `400 84px ${MONO}`;   // titles are red capitals, as in MoMu's template
+  const lines = wrap(ctx, name.toUpperCase(), CARD_W - 2 * pad, 3);
   let y = 214;
   lines.forEach(l => { ctx.fillText(l, pad, y); y += 100; });
 
@@ -130,7 +130,7 @@ export function createShare({ tt, look, PIECES, getName, toast }) {
   save.addEventListener("click", () => toast("Saved to your downloads"));   // the link itself downloads the blob
 
   async function open() {
-    try { await Promise.all(['400 80px "Source Serif 4"', 'italic 400 44px "Source Serif 4"', '500 26px "Hanken Grotesk"', '400 26px "Hanken Grotesk"'].map(f => document.fonts.load(f))); } catch { /* system fonts */ }
+    try { await Promise.all(['400 34px "Source Serif 4"', 'italic 400 44px "Source Serif 4"', '400 84px "Hanken Grotesk"', '500 26px "Hanken Grotesk"', '400 26px "Hanken Grotesk"'].map(f => document.fonts.load(f))); } catch { /* system fonts */ }
     const facts = lookFacts(look, PIECES), name = getName();
     const url = location.host + location.pathname.replace(/\/(index|second-skin)\.html$/, "/");
     const canvas = drawCard({ grab: h => grabStill(tt, h), name, facts, url });

@@ -41,7 +41,7 @@ write your name in it. Size: S (under 2 h), M (half a day), L (a day or more).
 | B6 | Locked pieces as silhouettes with name and room; unlock clip-path reveal 600 ms, once | M | Locked tile shows "Find card in room N" | open |
 | B7 | Share card 9:16: still of the form, look name, span, MoMu credit | M | Exported PNG is 1080x1920 and shows the form still, look name, span in years and MoMu credit line | done 2026-11-21 (hassan, PR #12): Share image (file share where supported) and Download image; PNG 1080x1920 checked in Chrome; real-phone share sheet not yet tried |
 | B8 | Reduced-motion pass: no idle spin, 150 ms crossfades | S | Emulated reduce shows no transforms | open |
-| B9 | Hierarchy: span as a large serif number; tiles show short names, ids move to the fact card; drop IBM Plex Mono | S | Stage reads name, then span, then credit | in review (hassan, `hassan/B9-momu-theme`): MoMu theme in `mockups/theme.css` (tokens, self-hosted Hanken Grotesk and Source Serif 4, mono dropped, name before id); span as a large number still open |
+| B9 | Hierarchy: span as a large serif number; tiles show short names, ids move to the fact card; drop IBM Plex Mono | S | Stage reads name, then span, then credit | open |
 
 ## Track C: Game and facts
 | # | Ticket | Size | Acceptance | Status |
@@ -85,6 +85,7 @@ ST655/1, ST81299, ST2202, ST2434, ST81234/1-2, ST2435.
 |---|---|---|---|---|
 | H2 | Ask the archive: a visitor asks about a piece and gets an answer built only from that piece's MoMu record (D3), labelled as AI; serverless `api/ask` keeps the key off the browser; field-only fallback with no key or network | M | At 390 px: ask, answer shows its field line; an unrecorded question says "That is not recorded for this piece"; with no key the suggested questions still answer from fields; eval script passes on 2 pieces x 10 questions | done 2026-11-21 (hassan, PR #10): Ask on every fact card; Gemini 3.5 Flash-Lite free tier by default, eval 25/25 (Nemotron) and 7/7 subset (Gemini); live answers need the `ASK_*` env in Vercel |
 | H3 | Story screen with narration: after a card scan the piece's story (the curator's text, else a draft built only from its MoMu record, D3) with a play button for pre-generated narration, transcript always visible, then Continue to the questions | M | At 390 px: scan -> story -> play -> continue to questions for 4 pieces; a missing audio file falls back to the browser voice; console clean | done 2026-11-21 (hassan, PR #14): story sheet with narration before the questions; 17 stories (1 by the curator, 16 record drafts for her), audio for 11 (2.3 MB); 6 study pieces wait for the TTS quota (`narration.py --audio`) and use the phone voice |
+| H4 | MoMu theme: the app follows MoMu's presentation template (red capital headings, white, black) and momu.be for what the template leaves open; all look tokens in `mockups/theme.css`, fonts free and self-hosted | M | At 390 px Stage, wardrobe, fact card, story, Ask, share card and Up close use the theme; AA contrast; console clean; no third-party font request | in review (hassan, `hassan/B9-momu-theme`). B9 (span as a large number, short tile names) stays Mubasil's |
 
 ## Track F: Later (after the hackathon)
 | # | Ticket |

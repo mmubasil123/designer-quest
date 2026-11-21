@@ -23,12 +23,15 @@ before calling anything done. Never deploy, push to `main` or publish without yo
   (daily) ran out. To finish: `python3 -I mockups/tools/narration.py --audio` (only the 6 missing study pieces are
   made). Until then those play with the phone's own voice. After the curator edits her page: re-sync `questions.json`,
   rerun the script (only changed stories are re-voiced), `--check` before committing.
-## B9 MoMu theme (hassan, branch `hassan/B9-momu-theme`, not merged)
+
+## H4 MoMu theme (hassan, branch `hassan/B9-momu-theme`, not merged)
 - The look lives in `mockups/theme.css`: change a colour or font in its `:root` block, not in the pages. It must load
   after `second-skin.html`'s own style block. Fonts are self-hosted in `mockups/assets/fonts/` (OFL).
 - New CSS should use the tokens (`--serif`, `--sans`, `--t-title`, `--accent`, `--r-card`, `--shadow-pill`).
 - `share.js` draws on a canvas and mirrors the theme's fonts and colours as constants: change both together.
-- Open: span as a large serif number (`renderCredit()`); swap in the MoMu design folder's values if the team gets it.
+- Source of the look: MoMu's hackathon presentation template first (red capital titles, `#d72f25`), momu.be second.
+- Titles are red capitals: use `font: var(--t-title)` with `text-transform: uppercase; color: var(--title-ink)`.
+- B9 (span as a large number) is still open and Mubasil's.
 
 ## H2 Ask the archive (hassan, merged in PR #10)
 - Fact card **Ask** opens a sheet; `api/ask.js` (Vercel function) answers only from `ask-records.json` and labels
