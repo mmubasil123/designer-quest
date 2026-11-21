@@ -38,7 +38,7 @@ write your name in it. Size: S (under 2 h), M (half a day), L (a day or more).
 | B4 | Sheet velocity snap and friction past the top | S | A flick reaches the next snap | done 2026-11-21 with B3: flick over 0.11 px/ms moves one snap; 0.3x resistance past full |
 | B5 | Persistent tiles: toggle classes, no `innerHTML` rerender, so selection animates | S | Tile nodes survive tab changes | open |
 | B6 | Locked pieces as silhouettes with name and room; unlock clip-path reveal 600 ms, once | M | Locked tile shows "Find card in room N" | open |
-| B7 | Share card 9:16: still of the form, look name, span, MoMu credit | M | Exported PNG is 1080x1920 and shows the form still, look name, span in years and MoMu credit line | built on `hassan/B7` 2026-11-21 (hassan): Share + Download image, PNG 1080x1920 checked in Chrome; PR pending |
+| B7 | Share card 9:16: still of the form, look name, span, MoMu credit | M | Exported PNG is 1080x1920 and shows the form still, look name, span in years and MoMu credit line | done 2026-11-21 (hassan, PR #12): Share image (file share where supported) and Download image; PNG 1080x1920 checked in Chrome; real-phone share sheet not yet tried |
 | B8 | Reduced-motion pass: no idle spin, 150 ms crossfades | S | Emulated reduce shows no transforms | open |
 | B9 | Hierarchy: span as a large serif number; tiles show short names, ids move to the fact card; drop IBM Plex Mono | S | Stage reads name, then span, then credit | open |
 
