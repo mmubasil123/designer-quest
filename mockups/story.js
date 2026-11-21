@@ -89,7 +89,7 @@ export async function createStory() {
         <button class="play press" data-play type="button"></button>
         <div class="meta">
           <progress value="0" max="1" aria-label="Narration progress"></progress>
-          <div class="mono"><span data-voice>AI-generated voice</span> <span data-time></span></div>
+          <div class="mono"><span data-voice></span> <span data-time></span></div>
         </div>
       </div>
       <div class="transcript" aria-label="Transcript">${p.paragraphs.map(t => `<p>${esc(t)}</p>`).join("")}</div>
