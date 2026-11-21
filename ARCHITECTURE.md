@@ -46,6 +46,9 @@ mockups/pieces.json  (single source of truth for pieces) ───────�
   page reads to unlock a splat piece's fabric. `splat-viewer.html` is a local-only viewer for `splats/`.
 - Deploy: Vercel project `second-skin`, root `mockups/`, `.vercelignore` drops tools and sources;
   `vercel.json` rewrites `/` to the page.
+- Ask the archive (H2): fact card **Ask** opens `ask.js`'s sheet, which POSTs `{pieceId, question}` to
+  `api/ask.js` (Vercel function, key in env `ANTHROPIC_API_KEY`) or, offline, answers suggested questions from
+  `ask-records.json` fields. Local stand-in for Vercel: `tools/ask_dev_server.mjs`; eval: `tools/ask_eval/`.
 
 ## Invariants (break one and something silently goes wrong)
 - `pieces.json` is the only piece list; page and pipeline both read it. Validate against `pieces.schema.json`.
@@ -54,7 +57,11 @@ mockups/pieces.json  (single source of truth for pieces) ───────�
 - A `study` piece (has `assets.splat`, `glb: null`) is never worn: it is studied on `up-close.html`, and only its
   fabric reaches the main page. `batch_glb.py` skips it.
 - A CLO GLB (`kind: "clo"`, `origin: "avatar"`) must skip auto-fit rescaling (D5, A7 not built yet).
-- The page never calls an API at runtime except the CDN and its own static files; no accounts, no PII (D2).
+- The page never calls an API at runtime except the CDN, its own static files and its own `/api/ask` (H2); no
+  accounts, no PII (D2). `/api/ask` sends only the question and one public record to the Claude API (outside the EU)
+  and stores nothing.
+- Ask answers come only from `ask-records.json` (verbatim record fields); `ask-core.js` `checkAnswer()` drops any field
+  or quote not in that record (D3).
 - Piece facts on screen trace to a record field; Dutch-only text is marked as a translation.
 
 ## Where to go next
