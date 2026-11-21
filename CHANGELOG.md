@@ -2,6 +2,17 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## MoMu logo at momu.be's own shape (2026-11-21, branch hassan/H10-logo-ratio)
+- What: every MoMu logo now has the 1.786:1 shape momu.be shows in its header (measured 718 x 402 px): the large logo's
+  polygons, unchanged, stretched vertically by 299/120. `assets/brand/momu-logo.svg` (viewBox 0 0 534 299), the favicon,
+  the inline logos in the Stage bar, Up close header, Up close loading and outfit header, and the share card masthead.
+  Sizes: headers 64x36 px (no longer needs to shrink in the 340 px frame), Up close loading 86x48, share card 286x160 with
+  the date on its foot and the paper fade down to 820 px.
+- Why: Hassan, 2026-11-21, with a screenshot of momu.be's logo: "This is the aspect ratio the logo needs to maintain".
+  The small 202x42 proportion we used (about 4.8:1) read as a squashed strip.
+- Decision: one shape everywhere, taken from the site's own polygons, never redrawn. Checked at 390 px (Stage, Up close,
+  outfit) and the 1080x1920 card with no name and a 21-letter name; console clean.
+
 ## Share card: the MoMu logo as the masthead (2026-11-21, branch hassan/H10-card-logo)
 - What: the card's logo moves from a small 40 px mark at the right end of the date row to the masthead: 72 px tall, top
   left on the text's own left edge, with the date right-aligned on the logo's foot and the title about 64 px below it.
