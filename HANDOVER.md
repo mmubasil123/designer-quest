@@ -8,8 +8,7 @@ before calling anything done. Never deploy, push to `main` or publish without yo
 Up close is found on the piece now: tap the detail on the scan; the list is clues without numbers; "Hint" shows after a
 first miss or 20 s and rings the area (a tap in the ring counts); wrong taps get a ripple and a helping line; each find
 shows the record's Dutch words large, then "Now find it on the real piece in front of you." Only `up-close.html`.
-Checked in Chrome at 390 px on ST2435 and ST81190, front and back, console clean; not on a phone. Done in LEDGER and Notion. Left out: J5's
-"next piece to win" on the Won card (`second-skin.html`).
+Checked in Chrome at 390 px on ST2435 and ST81190, front and back, console clean; not on a phone. Done in LEDGER and Notion. J5's "next piece to win" landed as H15 (PR #50, merged): a "Next to win" row on the Won card (`win.js`, `win.css`); not a button yet, that would be a small change in `second-skin.html`.
 
 ## H13 Narrated stories (hassan, PR #46 open, not merged, 2026-11-21)
 - Every piece has a short spoken scene in `mockups/narration-scripts.json` (facts only from the record or the curator's story;
