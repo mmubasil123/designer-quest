@@ -15,11 +15,12 @@ before calling anything done. Never deploy, push to `main` or publish without yo
   export MP4), then `narration.py --import DIR --voice "picsart:Adeline"`, `--check`, transcribe each file back, commit
   to `hassan/H13-narration`. Then merge on Hassan's word, mark H13 done in LEDGER and Notion.
 
-## MoMu branding (H10, PR #44 open, not merged, 2026-11-21)
-"MoMu / Second Skin" lockup in the Stage bar and the Up close header, the "MoMu" wordmark on the share card, and
-"at MoMu" instead of "in the museum" in the copy. Typographic only: no official MoMu logo file is in the repo or the
-template. Checked in Chrome at 390 px, not on a phone. Small overlaps with H11/H12/H13 in `quiz.js`, `share.js`,
-`story.js` (one to three lines each). Next: Hassan reviews and merges; then mark H10 done in LEDGER and Notion.
+## MoMu branding (H10, PR #44 merged, PR #47 open, 2026-11-21)
+PR #44: the MoMu wordmark in the Stage bar, the Up close header and the share card, and "at MoMu" in the copy. PR #47:
+the name "Second Skin" is gone from everything a visitor sees (the team is renaming the app; until then it says MoMu).
+Kept: `second-skin.html`, the Vercel project, sticker URLs, `secondSkin.*` keys, `second_skin` DB schema. Typographic
+mark only (no official logo file in the repo or template). Checked in Chrome at 390 px, not on a phone. Next: merge
+#47, then mark H10 done in LEDGER and Notion; rename the identifiers only once the new name is picked (Mubasil deploys).
 
 ## Personal share card (H12, PR #45, merged 2026-11-21)
 Share sheet takes an optional name (device only) and draws a personal 1080x1920 card: name title, period room, pieces
