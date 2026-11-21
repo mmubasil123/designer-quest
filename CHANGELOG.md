@@ -4,6 +4,16 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### A9 follow-up: kimono leg gap, dress lift, coat collar (branch basil/A9-avatar-polish)
+- **Kimono leg gap:** MetaPerson's body has no legs under its own clothes, and the avatar's outfit was hidden whenever a
+  full piece and boots were on. The furisode ends at the shin, so the shins between hem and boots were empty. The outfit
+  now hides under a full piece only when its hem reaches the boots (under 10 cm); under the kimono the avatar's jeans
+  show at the shin instead of a gap.
+- **Also:** the cocktail dress lifts 3 cm on the avatar (its shoulders sat under the avatar's); the coat's neck cut also
+  drops pale grey and white texels near the centre line (a rag of the form's cover in its collar), and each piece in
+  `FORM_CUT` can set its own colour tolerance.
+- **Decision:** dress-form rendering is unchanged (the cut runs only on the avatar).
+
 ### H6 Navigation, PR 1: the back gesture closes the top layer (branch hassan/nav-ux)
 - **What:** new `mockups/nav.js`. Every modal `<dialog>` (help, fact card, Ask, share, Museum, NFC popup, story, Win it, See it in 3D, and any dialog a module adds later) gets one browser history entry while it is open, so the phone's back gesture closes that layer instead of leaving the site. Back behaves like Escape: the dialog's `cancel` fires first, so Win it, which refuses Escape, also refuses back. A dialog closed by its own button or the backdrop takes its entry off again; dialogs that hand over in one go (story to Win it, fact card to Ask) share one entry. No module calls it: it watches the `open` attribute. Up close: the story of a study card now leaves the Stage under Up close (its URL cleaned first), so back from Up close lands on the Stage; ← steps back instead of loading a new Stage (back no longer returns into Up close); once all three details are found, Up close steps back to the Stage and hands it the fabric through `sessionStorage` (`secondSkin.claim`), and `?fabric=` still works when there is no Stage behind it. A Stage shown again from the back-forward cache reloads only if details were found or a fabric won meanwhile. Audit and map: `docs/UX_AUDIT.md`.
 - **Checked** (Playwright Chromium, 390 x 844): back on help, fact card, Ask, share, Museum (and Museum closed by its button), 3D view: each closes and the Stage stays; help no longer reappears after leaving by back. `?card=ST503`: back on the story goes on to Win it (as Escape does today, PR 2 changes it), back on Win it stays. `?card=ST81190`: story, Up close, back lands on the Stage; forward, ←, back: no loop. All details found: Won card on the Stage, no leftover entry. Console clean; Impeccable detector 0 findings on both pages.

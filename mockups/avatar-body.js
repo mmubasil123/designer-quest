@@ -9,9 +9,11 @@ import * as THREE from "three";
 
 export const AVATAR_URL = "assets/avatar/demo.glb";   // the presenter's own likeness, used with consent; deploy-only
 // per piece on the demo body: size multiplier, lift in m, arm angle in degrees from vertical (null: measured)
-export const AVATAR_FIT = { ST80881: { arms: 14 }, ST2434: { arms: 8 }, ST80930: { arms: 18 } };
+export const AVATAR_FIT = { ST80881: { arms: 14 }, ST2434: { arms: 8 }, ST80930: { arms: 18 }, "ST655/1": { lift: 0.03 } };
 // colour of the dress form TRELLIS baked into a scan's neck (sRGB 0..255); on a person those texels are cut near the centre line
-export const FORM_CUT = { ST503: [184, 180, 169], ST80930: [179, 178, 173], ST2434: [198, 199, 199] };
+// optional: [3] how far (linear RGB) a texel may be from that colour and still count as the form; [4] also cut any pale
+// grey or white (the coat's collar holds a white rag of the form's cover, far from the sampled grey)
+export const FORM_CUT = { ST503: [184, 180, 169], ST80930: [179, 178, 173, 0.12], ST2434: [198, 199, 199, 0.12, 1] };
 const RELAXED = 9;   // arm angle with no top on
 
 const findBone = (root, re) => { let hit = null; root.traverse(o => { if (!hit && o.isBone && re.test(o.name)) hit = o; }); return hit; };
@@ -205,7 +207,10 @@ const shapes = new Map();
 // parent, unrotated (the caller zeroes the turntable's spin for the call).
 export function fitWorn(av, worn) {
   const upper = worn.full?.obj ? worn.full : worn.top?.obj ? worn.top : null;
-  const covered = !!(upper && (worn.full?.obj || worn.bottom?.obj) && worn.feet?.obj);
+  // MetaPerson's body has no legs or chest under its clothes, so its outfit hides only where pieces truly cover it:
+  // separates head to toe, or a full piece whose hem reaches the boots (a kimono ending at the shin would leave a gap)
+  const hem = worn.full?.obj && new THREE.Box3().setFromObject(worn.full.obj).min.y;
+  const covered = !!(worn.feet?.obj && (worn.full?.obj ? hem < 0.1 : worn.top?.obj && worn.bottom?.obj));
   av.own.forEach(m => { m.visible = !covered; });
   poseArms(av, upper ? (AVATAR_FIT[upper.id]?.arms ?? sleeveAngle(av, upper.obj)) : RELAXED);
   let surf = null;
