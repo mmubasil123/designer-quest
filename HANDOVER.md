@@ -66,7 +66,7 @@ None of the 8 demo pieces has a splat; ST2435 is on the season shortlist. Splats
 and they need a splat renderer (e.g. Spark for three.js, unverified) beside the dress form. 220 MB is too big
 for a phone page: test the `.sog` or compressed `.ply` size before any engine work.
 
-## Up close (branch basil/splats, not deployed)
+## Up close (branch basil/splats; preview https://second-skin-1qj77r0g2-mmubasilbokhari-6857s-projects.vercel.app, production not updated)
 `mockups/up-close.html?id=ST2435` or `?id=ST652/1`; demo entry is `second-skin.html?card=ST652/1`.
 `.sog` files (17 MB each, committed) are made from the raw `.ply` with PlayCanvas `splat-transform` 3.10.3,
 installed in the git-ignored `tools/node/`:
