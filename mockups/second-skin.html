@@ -162,8 +162,12 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .fact .shares button { text-decoration: underline; text-underline-offset: 2px; min-height: 32px; }
 .fact .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .fact .ar { width: 100%; margin-bottom: 8px; }
-/* AR hands the model to Scene Viewer or Quick Look; WebXR is left out because it must draw this element, which nobody sees */
-.mv-off { position: fixed; left: 0; top: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.view3d { width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; border: 0; padding: 0; background: var(--wall); }
+.view3d > div { position: relative; width: 100%; height: 100%; }
+.view3d model-viewer { width: 100%; height: 100%; --poster-color: transparent; }
+.view3d h2 { position: absolute; left: 20px; top: calc(20px + env(safe-area-inset-top)); right: 76px; font: var(--t-title); text-transform: uppercase; color: var(--title-ink); }
+.view3d .view-x { position: absolute; right: 16px; top: calc(14px + env(safe-area-inset-top)); width: 44px; height: 44px; border-radius: 50%; background: var(--paper); font: 300 24px/1 var(--sans); box-shadow: var(--shadow-pill); }
+.view3d .view-ar { position: absolute; left: 20px; right: 20px; bottom: calc(24px + env(safe-area-inset-bottom)); min-height: 48px; }
 .fact .row .btn { flex: 1; }
 .fact .row a { flex: none; min-height: 44px; display: flex; align-items: center; padding: 0 14px; font-size: 13px; color: var(--ink); }
 .tile.on { outline: 2px solid var(--ink); outline-offset: 2px; }
@@ -1029,29 +1033,22 @@ async function openFact(id) {
   actBtn.hidden = !label; actBtn.textContent = label ?? "";
   const unwon = p.room && p.locked && !p.splat;   // its date is the answer to Guess the year, so nothing may reveal it yet
   document.getElementById("factAsk").hidden = unwon;
-  prepAR(id);
+  view3dBtn.hidden = !p.glb;
   if (!factEl.open) factEl.showModal();
 }
-/* AR: a phone that can place 3D models (WebXR, Scene Viewer, Quick Look) gets "See it in your room" for any piece with a
-   3D file. model-viewer loads on the first fact card; the button shows only once that piece's file says AR can start,
-   so the tap that starts AR stays a direct user gesture. */
-const factMV = document.getElementById("factMV"), factAR = document.getElementById("factAR");
+/* 3D view: any piece with a 3D file opens full screen, turnable and zoomable. Inside it model-viewer offers "See it in your
+   room" only where AR can start; WebXR (in Chrome on Android) needs the viewer on screen, which is why AR lives here. */
+const viewEl = document.getElementById("view3d"), viewMV = document.getElementById("viewMV"), view3dBtn = document.getElementById("fact3d");
 let mvReady = null;
-// Scene Viewer is Android, Quick Look is iOS (rel="ar"); elsewhere model-viewer would only add a second three.js and renderer
-const AR_ABLE = /Android/i.test(navigator.userAgent) || document.createElement("a").relList.supports("ar");
-function prepAR(id) {
-  factAR.hidden = true;
-  if (!AR_ABLE || !PIECES[id].glb) return;
+view3dBtn.addEventListener("click", async () => {
+  const id = factId;
   mvReady ??= import("https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js").catch(() => null);
-  mvReady.then(ok => {
-    if (!ok || factId !== id) return;
-    const show = () => { factAR.hidden = !(factId === id && factMV.canActivateAR); };
-    if (factMV.getAttribute("src") === PIECES[id].glb && factMV.loaded) { show(); return; }   // same file: no new load event comes
-    factMV.addEventListener("load", show, { once: true });
-    factMV.src = PIECES[id].glb;
-  });
-}
-factAR.addEventListener("click", () => factMV.activateAR());
+  document.getElementById("viewName").textContent = PIECES[id].name;
+  viewMV.removeAttribute("src");
+  factEl.close(); viewEl.showModal();
+  if (await mvReady) viewMV.src = PIECES[id].glb;
+});
+viewEl.addEventListener("close", () => viewMV.removeAttribute("src"));   // frees the model and its GPU memory
 document.getElementById("factShares").addEventListener("click", e => { const b = e.target.closest("[data-fact]"); if (b) openFact(b.dataset.fact); });
 document.getElementById("factAct").addEventListener("click", () => { factEl.close(); PIECES[factId].locked && !PIECES[factId].splat ? tapCard(factId) : act(factId, ctxOf(factId)); });
 factEl.addEventListener("click", e => { if (e.target === factEl) factEl.close(); });   // backdrop tap closes
@@ -1191,6 +1188,14 @@ try { if (!scanned && !claimed && !localStorage.getItem(HELP_KEY)) openHelp(); }
   <div class="grid" id="museumGrid"></div>
   <form method="dialog"><button class="btn ghost press">Back to my look</button></form>
 </div></dialog>
+<dialog class="view3d" id="view3d" aria-labelledby="viewName"><div>
+  <model-viewer id="viewMV" camera-controls touch-action="pan-y" auto-rotate ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto"
+    shadow-intensity="0.8" exposure="1.05" interaction-prompt="none" alt="3D model of the piece">
+    <button slot="ar-button" class="btn press view-ar">See it in your room</button>
+  </model-viewer>
+  <h2 id="viewName"></h2>
+  <form method="dialog"><button class="view-x press" aria-label="Close the 3D view">×</button></form>
+</div></dialog>
 <dialog class="help" id="help" aria-labelledby="helpTitle"><div tabindex="-1" autofocus>
   <div class="step" aria-live="polite"><div class="mono" id="helpCount"></div><h2 id="helpTitle"></h2><p id="helpText"></p></div>
   <div class="dots" id="helpDots" aria-hidden="true"></div>
@@ -1203,8 +1208,7 @@ try { if (!scanned && !claimed && !localStorage.getItem(HELP_KEY)) openHelp(); }
   <dl id="factFields"></dl>
   <blockquote id="factQuote"></blockquote>
   <div class="shares" id="factShares"></div>
-  <button class="btn ghost press ar" id="factAR" hidden>See it in your room</button>
-  <model-viewer id="factMV" ar ar-modes="scene-viewer quick-look" ar-scale="auto" loading="eager" class="mv-off" aria-hidden="true"></model-viewer>
+  <button class="btn ghost press ar" id="fact3d" hidden>See it in 3D</button>
   <div class="row"><button class="btn press" id="factAct"></button><button class="ask-open press" id="factAsk">Ask</button><a id="factLink" target="_blank" rel="noopener">MoMu record ↗</a></div>
 </div></dialog>
 </body>

@@ -4,6 +4,11 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### See it in 3D, with AR inside (branch basil/view-3d)
+- **What:** every wearable's fact card has **See it in 3D**: the piece full screen in model-viewer 4.0.0 (turn, zoom, auto-rotate). Inside it, model-viewer shows **See it in your room** only where AR can start, with WebXR first (in Chrome on Android), then Scene Viewer, then Quick Look. The hidden 1 px viewer and the phone check are gone; model-viewer loads on the first tap of See it in 3D.
+- **Why:** owner on a Pixel 9 with Chrome: the AR button jumped to another screen and went nowhere (Scene Viewer handoff failing). WebXR runs inside Chrome but must draw a visible viewer, which the hidden one was not.
+- **Decision:** AR as an extra inside a visible 3D view, so a failed AR start leaves the visitor looking at the piece instead of a dead screen.
+
 ### the curator's cycling blouse and trousers in the app (branch hassan/curator-stories)
 - **What:** her Notion page "Story and Questions" now has three pieces. `questions.json` adds the blouse ST81114AB (4 questions) and trousers ST81116 (3, all taken: her page has no "pick 3" there); ST81190 is unchanged on her page. Each piece is marked `source: "curator"`, and `questions_sync.py --check` requires it: her answers may be things to observe on the garment (count the seams), not record fields. The parser now reads her new list styles (answers without "Answer:", HTML `<ol><li>` lists). `pieces.json` gets two minimal entries (top and bottom, 1890-1920, record photo, `locked`, no 3D file yet), so `records.json`, `ask-records.json` (Ask the archive) and `narration.json` cover them; `records.py` carries our English for each record's first sentence.
 - **Why:** the team's CLO blouse and trousers are being wired in next to the coat (A7); their stories had to be ready.
