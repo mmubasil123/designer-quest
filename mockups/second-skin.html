@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="ask.css">
 <link rel="stylesheet" href="share.css">
 <link rel="stylesheet" href="story.css">
+<link rel="stylesheet" href="win.css">
 <style>
 :root {
   --paper: #f3efe7;
@@ -172,41 +173,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .tile.study:not(.seen) img { filter: grayscale(1) contrast(.2) brightness(1.4); }
 .tile.locked::after { pointer-events: none; content: "Tap the card in the museum"; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 10px; font: italic 13px/1.2 var(--serif); color: var(--muted); }
 
-/* Piece */
-.hero { position: relative; height: 330px; background: var(--wall); overflow: hidden; }
-.hero img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; filter: var(--lift); transition: opacity 200ms var(--ease-out); }
-model-viewer { width: 100%; height: 100%; background: var(--wall); --poster-color: transparent; }
-.hotspot {
-  padding: 4px 9px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line);
-  font: 500 11px var(--sans); box-shadow: 0 4px 12px -6px rgba(0,0,0,.4);
-  transition: opacity 200ms var(--ease-out), transform 160ms var(--ease-out);
-}
-.hotspot:active { transform: scale(0.97); }
-.hotspot[data-visible="false"] { opacity: 0; pointer-events: none; }
-.model-missing { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; font: italic 15px var(--serif); color: var(--muted); }
-.hint { position: absolute; left: 0; right: 0; bottom: 12px; text-align: center; pointer-events: none; }
-.back { position: absolute; top: 14px; left: 14px; width: 44px; height: 44px; border-radius: 50%; background: var(--paper); display: grid; place-items: center; }
-.body { padding: 16px 20px 0; flex: 1; overflow: auto; }
-.body h3 { font: 400 24px/1.1 var(--serif); }
 dl { display: grid; grid-template-columns: 84px 1fr; gap: 4px 10px; margin: 12px 0; font-size: 13px; }
 dt { color: var(--muted); }
-.variants { display: flex; gap: 8px; margin: 6px 0 16px; }
-.var { width: 64px; text-align: center; font-size: 11px; color: var(--muted); }
-.var .th { width: 64px; height: 64px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background: var(--wall); margin-bottom: 4px; }
-.var .th img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; }
-/* pattern scans are tall sheets of faint pencil: show the labelled top edge so the thumbnail is not read as empty */
-.var .th img.pat { object-position: 0 0; transform: scale(2.6); transform-origin: 0 0; filter: url(#ink); }
-.hero img.pat { filter: url(#ink); }
-.var .th .badge { position: absolute; right: 4px; bottom: 4px; font: 500 10px var(--sans); background: var(--paper); padding: 1px 4px; border-radius: 4px; }
-.var .th { position: relative; }
-.var[aria-pressed="true"] .th { outline: 2px solid var(--ink); outline-offset: 2px; }
-.var.locked .th { display: grid; place-items: center; font-size: 18px; }
-.foot { padding: 12px 20px 22px; }
 .bar-actions { display: flex; gap: 6px; }
 .bar-actions .pill { padding: 0 12px; white-space: nowrap; }   /* Museum, Share look and ? must fit beside the brand at 340 px */
 .pill.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
-.back-inline { width: 44px; height: 44px; margin: -10px 0 -10px -14px; font-size: 18px; }
-.app-only { display: none; }
 
 
 @media (hover: hover) and (pointer: fine) {
@@ -220,17 +191,14 @@ dt { color: var(--muted); }
   h1.sheet, p.sheet, .label { display: none; }
   .screens { display: block; height: 100%; }
   .screens > section { display: none; height: 100%; }
-  body[data-screen="stage"] [data-screen="stage"], body[data-screen="piece"] [data-screen="piece"] { display: block; animation: screen-in 260ms var(--ease-out); }
+  body[data-screen="stage"] [data-screen="stage"] { display: block; animation: screen-in 260ms var(--ease-out); }
   .phone { width: 100%; height: 100dvh; border: 0; border-radius: 0; box-shadow: none;
     padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left); }
-  .foot { padding-bottom: calc(22px + env(safe-area-inset-bottom)); }
   .wardrobe .grid { padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
-  .hero { height: 46dvh; }
   /* the form fills the space between the look credit and the peeking wardrobe; the camera keeps its 22 degree height */
   .stage .turntable { left: 0; margin-left: 0; width: 100%; height: auto; top: 128px; bottom: 164px; }   /* 164: the peeking grab area */
   /* at half the free space is the top 52% of the stage, so the taller phone turntable steps back further */
   .stage[data-snap="half"] .turntable, .stage[data-snap="full"] .turntable { transform: translateY(-4%) scale(.5); }
-  .app-only { display: inline-flex; align-items: center; justify-content: center; }
 }
 @keyframes screen-in { from { opacity: 0; transform: translateY(8px); } }
 .nfc { width: min(340px, calc(100% - 32px)); margin: auto; border: 0; border-radius: 24px; padding: 0; background: var(--paper); color: var(--ink);
@@ -287,7 +255,7 @@ dt { color: var(--muted); }
   <section data-screen="stage">
     <div class="label">1 · Stage</div>
     <div class="phone">
-      <div class="bar"><span class="brand">Second Skin</span><span class="bar-actions"><button class="pill ghost press app-only" data-go="piece">Learn</button><button class="pill ghost press" id="museumBtn">Museum</button><button class="pill press" id="shareBtn">Share look</button><button class="pill ghost press helpbtn" id="helpBtn" aria-label="How Second Skin works">?</button></span></div>
+      <div class="bar"><span class="brand">Second Skin</span><span class="bar-actions"><button class="pill ghost press" id="museumBtn">Museum</button><button class="pill press" id="shareBtn">Share look</button><button class="pill ghost press helpbtn" id="helpBtn" aria-label="How Second Skin works">?</button></span></div>
       <div class="stage" id="stage" data-snap="peek">
         <div class="credit">
           <div>
@@ -312,37 +280,6 @@ dt { color: var(--muted); }
     </div>
   </section>
 
-  <!-- 2. PIECE -->
-  <section data-screen="piece">
-    <div class="label">2 · Piece</div>
-    <div class="phone">
-      <div class="hero">
-        <img id="heroImg" alt="Furisode kimono ST80881">
-        <model-viewer id="heroModel" hidden src="assets/ST80881.glb" alt="Furisode kimono ST80881 in 3D"
-          camera-controls auto-rotate auto-rotate-delay="1500" rotation-per-second="18deg" touch-action="pan-y"
-          ar ar-modes="webxr scene-viewer quick-look" shadow-intensity="0.8" exposure="1.05"
-          min-camera-orbit="auto auto 40%" interaction-prompt="none">
-          <button slot="hotspot-sleeve" class="hotspot" data-dim="-0.42 0.25 0.1">Sleeve</button>
-          <button slot="hotspot-hem" class="hotspot" data-dim="0.2 -0.42 0.1">Hem</button>
-        </model-viewer>
-        <div class="model-missing" id="modelMissing" hidden>No 3D file yet. Run mockups/tools/img2glb.py.</div>
-        <button class="back press" aria-label="Back to your look" data-go="stage">←</button>
-        <div class="hint mono" id="heroHint" hidden>Drag to turn · pinch to zoom</div>
-      </div>
-      <div class="body">
-        <div class="mono">ST80881 · Study collection</div>
-        <h2>Furisode kimono, painted with gold print</h2>
-        <dl>
-          <dt>Date</dt><dd>1979</dd>
-          <dt>Technique</dt><dd>Painted, gold print</dd>
-          <dt>Pattern by</dt><dd>Stijn Van den Bulck, MoMu</dd>
-        </dl>
-        <div class="mono" style="margin-bottom:6px">Versions from its real life</div>
-        <div class="variants" id="variants"></div>
-      </div>
-      <div class="foot"><button class="btn press" id="wearBtn">Wear it</button></div>
-    </div>
-  </section>
 
 
 </div>
@@ -356,6 +293,7 @@ import { createAsk } from "./ask.js";
 import { createShare } from "./share.js";
 import { AVATAR_URL, AVATAR_FIT, FORM_CUT, prepAvatar, placeFeet, fitWorn, restoreShape } from "./avatar-body.js";
 import { createStory, showScan } from "./story.js";
+import { createWin } from "./win.js";
 
 const IMG = id => `https://heron.libis.be/momu/files/large/${id}.jpg`;
 const ZOOM_MAX = 3;
@@ -366,7 +304,7 @@ const FINISH_NAMES = ["Linen", "Calico", "Black jersey", "Oak"];
 // pieces.json (schema: pieces.schema.json) is the single source of truth; the pipeline reads the same file
 const manifest = await (await fetch("pieces.json")).json();
 const PIECES = Object.fromEntries(manifest.pieces.map(p => [p.id, {
-  ...p.fit, slot: p.slot, name: p.name, year: p.year, locked: p.locked,
+  ...p.fit, slot: p.slot, name: p.name, year: p.year, locked: p.locked, room: p.locked,   // room: has a sticker in the museum, won there
   img: IMG(p.source.imgSha), glb: p.assets.glb?.path ?? null, kind: p.assets.glb?.kind ?? null,
   splat: p.assets.splat?.path ?? null, details: p.details?.length ?? 0,
 }]));
@@ -379,17 +317,21 @@ try {
     if (p.seen && p.found >= p.details) p.locked = false;
   });
 } catch { /* storage blocked: splat fabrics stay locked */ }
+const WON_KEY = "secondSkin.won.v1";   // wearable room pieces won with Win it; read before the save restore, which refuses locked ids
+const readWon = () => { try { const w = JSON.parse(localStorage.getItem(WON_KEY) || "[]"); return Array.isArray(w) ? w : []; } catch { return []; } };
+readWon().forEach(id => { if (PIECES[id] && !PIECES[id].splat) PIECES[id].locked = false; });
 const params = new URLSearchParams(location.search);
 const scanned = params.get("card");
 // C2: the curator's story and questions (questions.json) show after a card scan; optional, nothing is locked behind them
 const quiz = scanned ? await createQuiz({ pieces: PIECES }) : null;   // only a card scan needs it, so a plain visit boots as before
 const story = scanned ? await createStory() : null;   // H3: story with narration before the questions (story.js)
-if (PIECES[scanned]?.splat && !PIECES[scanned].seen) {   // the tap is what makes a study piece seen; its fact card then offers Up close
-  PIECES[scanned].seen = true;
-  try { const f = JSON.parse(localStorage.getItem("secondSkin.found.v1") || "{}") || {}; localStorage.setItem("secondSkin.found.v1", JSON.stringify({ ...f, [scanned]: [] })); } catch { /* blocked */ }
+if (PIECES[scanned]?.splat) {   // before the Stage boots, so a study card never downloads the wearable GLBs; Up close is its challenge
+  await showScan({ story, quiz, id: scanned, next: "Study it up close" });
+  location.replace(`up-close.html?id=${encodeURIComponent(scanned)}`);
+  await new Promise(() => {});
 }
 const SLOTS = ["top", "bottom", "feet", "full"];
-const look = { top: "ST503", bottom: "ST80931", feet: "ST2407/1-2", full: null, fabric: { body: null, sleeves: null }, skin: 1 };
+const look = { top: "ST2434", bottom: "ST80931", feet: "ST2407/1-2", full: null, fabric: { body: null, sleeves: null }, skin: 1 };
 const SAVE_KEY = "secondSkin.save.v1";
 try {   // restore the visitor's look; ids are checked against the manifest, since storage is user-controlled
   const saved = JSON.parse(localStorage.getItem(SAVE_KEY) || "null");
@@ -908,8 +850,7 @@ const tile = (id, cls, img, label, aria) => `<div class="tile ${cls}" data-id="$
   <button class="pick press" aria-label="${esc(aria)}" aria-pressed="${cls.includes("on")}"><img src="${img}" alt="" decoding="async"${img.startsWith("assets/swatch") ? ' style="mix-blend-mode:normal"' : ""}></button>${label}
   <button class="info" data-info="${id}" aria-label="About ${esc(PIECES[id].name)}"><span aria-hidden="true">i</span></button></div>`;
 function renderLocker() {
-  const counted = Object.values(PIECES).filter(p => !p.locked || p.seen).length;
-  document.getElementById("foundCount").textContent = `${counted} of ${Object.keys(PIECES).length} pieces found`;
+  document.getElementById("foundCount").textContent = `${Object.values(PIECES).filter(p => !p.locked).length} in your wardrobe`;
   document.getElementById("slotTitle").textContent = activeSlot === "remix" ? "Remix the fabric" : LABEL[activeSlot];
   document.getElementById("cats").innerHTML = [...SLOTS, "remix"].map(s =>
     `<button class="cat press" aria-pressed="${s === activeSlot}" data-slot="${s}">${LABEL[s]}</button>`).join("");
@@ -924,17 +865,19 @@ function renderLocker() {
     return;
   }
   grid.innerHTML = Object.entries(PIECES).filter(([, p]) => p.slot === activeSlot).map(([id, p]) =>
-    tile(id, `${isWorn(id, activeSlot) ? "on" : ""} ${p.locked ? "locked" : ""}`, p.img, `<span class="m">${esc(shortName(id))}</span>`,
+    tile(id, `${isWorn(id, activeSlot) ? "on" : ""} ${p.locked ? "locked" : ""} ${fresh.has(id) ? "new" : ""}`, p.img, `<span class="m">${esc(shortName(id))}</span>`,
       isWorn(id, activeSlot) ? `Take off ${p.name}` : `Wear ${p.name}`)).join("");
 }
 /* Museum: the study pieces stand in the room with an NFC card; they are found there, not owned, so they live outside the wardrobe.
    Finding a piece's 3 details on Up close adds its fabric to the wardrobe (D2). */
 const museumEl = document.getElementById("museum");
 function renderMuseum() {
-  document.getElementById("museumGrid").innerHTML = Object.entries(PIECES).filter(([, p]) => p.splat).map(([id, p]) => {
-    const state = !p.seen ? "Tap the card in the museum" : p.locked ? `${p.found} of ${p.details} found` : "Fabric in your wardrobe";
-    const date = p.year.from === p.year.to ? p.year.from : `${p.year.from}–${p.year.to}`;
-    return tile(id, `study ${p.seen ? "seen" : ""}`, p.img, `<span class="st"><b>${esc(p.name)}</b><span>${date} · ${state}</span></span>`,
+  const room = Object.entries(PIECES).filter(([, p]) => p.room);
+  document.getElementById("museumTitle").textContent = `In the museum · ${room.filter(([, p]) => !p.locked).length} of ${room.length} won`;
+  document.getElementById("museumGrid").innerHTML = room.map(([id, p]) => {
+    const state = !p.locked ? (p.splat ? "Fabric in your wardrobe" : "In your wardrobe") : p.seen ? `${p.found} of ${p.details} found` : "Tap its sticker in the room";
+    const date = p.year.from === p.year.to ? p.year.from : `${p.year.from} to ${p.year.to}`;
+    return tile(id, `study ${p.seen || !p.locked ? "seen" : ""}`, p.img, `<span class="st"><b>${esc(p.name)}</b><span>${date} · ${state}</span></span>`,
       `${p.name}, ${date}: ${state}`);
   }).join("");
 }
@@ -944,7 +887,11 @@ museumEl.addEventListener("click", e => {
   const info = e.target.closest("[data-info]");
   if (info) { museumEl.close(); openFact(info.dataset.info); return; }
   const t = e.target.closest(".pick") && e.target.closest("[data-id]");
-  if (t) { museumEl.close(); act(t.dataset.id, "study"); }
+  if (!t) return;
+  museumEl.close();
+  const id = t.dataset.id;
+  if (PIECES[id].splat || PIECES[id].locked) tapCard(id);
+  else { activeSlot = PIECES[id].slot; renderLocker(); setSnap("half"); }
 });
 const fresh = new Set();   // fabrics claimed this visit, marked New in the Remix tab until worn
 /* What the form wears, always in the sheet's peek: tap a chip to change that part, × to take it off */
@@ -966,7 +913,7 @@ function dress() {
     look.fabric = { body: null, sleeves: null };
     toast("Its fabric went back to your wardrobe");
   }
-  [look.fabric.body, look.fabric.sleeves].forEach(id => fresh.delete(id));
+  [look.top, look.bottom, look.feet, look.full, look.fabric.body, look.fabric.sleeves].forEach(id => fresh.delete(id));
   turntables.forEach(t => t.draw()); renderLocker(); renderCredit();
 }
 /* Study preload: tapping a study tile that still needs its card starts fetching that scan (about 17 MB) and the Up close page's
@@ -1000,17 +947,16 @@ function cancelStudy() {
   study.ctl.abort(); study.links.forEach(l => l.remove()); study = null;
   nfcStatus.textContent = "";
 }
+function tapCard(id) {   // shortcut: stands in for walking to the sticker; a real tap opens the same ?card=<id>
+  const p = PIECES[id];
+  if (p.splat && p.seen) { location.href = `up-close.html?id=${encodeURIComponent(id)}`; return; }
+  document.getElementById("nfcText").textContent = `Hold your phone to the sticker beside the ${p.name.split(",")[0].toLowerCase()} to ${p.splat ? "study it up close" : "win it"}.`;
+  document.getElementById("nfcGo").href = `?card=${encodeURIComponent(id)}`;
+  document.getElementById("nfc").showModal();
+  if (p.splat) preloadStudy(id);
+}
 function act(id, ctx) {   // the one action a tile, or its fact card, performs
-  if (ctx === "study") {   // shortcut: placeholder until the NFC cards exist; a tap on a card opens ?card=<id>
-    if (PIECES[id].seen) location.href = `up-close.html?id=${encodeURIComponent(id)}`;
-    else {
-      document.getElementById("nfcText").textContent = `Hold your phone to the NFC card beside the ${PIECES[id].name.toLowerCase()} to study it up close.`;
-      document.getElementById("nfcGo").href = `?card=${encodeURIComponent(id)}`;   // the same URL a real card will open
-      document.getElementById("nfc").showModal();
-      preloadStudy(id);
-    }
-    return;
-  }
+  if (ctx === "study") { tapCard(id); return; }
   if (ctx === "remix" && !look.full && !look.top) {   // cloth goes on a top's body or sleeves: without one it would vanish
     activeSlot = "top"; renderLocker(); toast("Put on a top first, then its fabric"); return;
   }
@@ -1139,7 +1085,7 @@ document.getElementById("cats").addEventListener("click", e => { if (e.target.cl
 const HELP = [
   { t: "Dress the form", d: "Pull up the wardrobe from the bottom. Tap a piece to wear it, tap it again to take it off. Drag the form to turn it." },
   { t: "Remix a fabric", d: "In the Remix tab, put one piece's cloth on another piece's cut, and see how many years your look spans." },
-  { t: "Read the record", d: "The i on any piece opens what MoMu has recorded about it. Cards in the museum unlock the rest." },
+  { t: "Read the record", d: "The i on any piece opens what MoMu has recorded about it. Tap the stickers in the museum to win more pieces and fabrics." },
 ];
 const HELP_KEY = "secondSkin.help.v1", helpEl = document.getElementById("help");
 let helpStep = 0;
@@ -1160,101 +1106,39 @@ document.getElementById("helpNext").addEventListener("click", () => {
 document.getElementById("helpSkip").addEventListener("click", () => helpEl.close());
 helpEl.addEventListener("close", () => { try { localStorage.setItem(HELP_KEY, "1"); } catch { /* storage blocked: it will show again next visit */ } });
 helpEl.addEventListener("click", e => { if (e.target === helpEl) helpEl.close(); });   // backdrop tap closes
-/* ---------- Screens: on a phone one screen shows at a time (CSS keys on body[data-screen]) ---------- */
-let pieceReady = false;
-function enterPiece() {   // the Piece screen is off screen at boot, so its photo and the 3D viewer wait for the first visit
-  if (pieceReady) return; pieceReady = true;
-  hero.src = VARIANTS[0].img;
-  import("https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js").catch(() => { heroModel.dataset.failed = "1"; });
-}
-function go(screen) {
-  document.body.dataset.screen = screen;
-  if (screen === "piece") enterPiece();
-  if (screen === "stage") turntables.forEach(t => t.render());   // it was display:none, so its canvas went stale
-}
-document.addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (b) go(b.dataset.go); });
 document.getElementById("nfc").addEventListener("click", e => { if (e.target.id === "nfc") e.target.close(); });   // backdrop tap closes
 document.getElementById("nfc").addEventListener("close", cancelStudy);   // Not now, Escape or the backdrop: stop downloading
 const share = createShare({ tt: stageTT, look, PIECES, toast, getName: () => look.fabric.body || look.fabric.sleeves ? lookName() : "My look" });   // B7: 9:16 card (share.js)
 document.getElementById("shareBtn").addEventListener("click", () => share.open());
-document.getElementById("wearBtn").addEventListener("click", () => {   // the Piece page's kimono goes onto the form
-  look.full = "ST80881";
-  turntables.forEach(t => t.draw()); renderLocker(); renderCredit();
-  go("stage");
-});
 
-/* ---------- Piece variants: real versions of ST80881 ---------- */
-const VARIANTS = [
-  { k: "Photo", img: IMG("34b6955bc31aceef7b78ed1a031475ff19cd6b95") },
-  { k: "Pattern", img: IMG("d9346b7588f720e04da602797c00d96dc67170af") },
-  { k: "Pattern 2", img: IMG("de25d0fe1e047e66d58e81f1df37dd8e65132fdc") },
-  { k: "3D", model: true },
-];
-const hero = document.getElementById("heroImg");
-const heroModel = document.getElementById("heroModel");
-const heroHint = document.getElementById("heroHint");
-const vEl = document.getElementById("variants");
-vEl.innerHTML = VARIANTS.map((v, i) =>
-  `<button class="var press" aria-pressed="${i === 0}" data-i="${i}"><div class="th">${v.model
-    ? `<img src="assets/ST80881_cutout.png" alt="" loading="lazy" decoding="async" style="object-fit:contain"><span class="badge">3D</span>`
-    : `<img src="${v.img}" alt="" loading="lazy" decoding="async"${v.k.startsWith("Pattern") ? ' class="pat"' : ""}>`}</div>${v.k}</button>`).join("");
-vEl.addEventListener("click", e => {
-  const b = e.target.closest("[data-i]"); if (!b) return;
-  vEl.querySelectorAll("[data-i]").forEach(x => x.setAttribute("aria-pressed", x === b));
-  const v = VARIANTS[b.dataset.i];
-  hero.classList.toggle("pat", v.k.startsWith("Pattern"));
-  heroModel.hidden = heroHint.hidden = !v.model;
-  document.getElementById("modelMissing").hidden = !(v.model && heroModel.dataset.failed);
-  hero.hidden = !!v.model;
-  if (v.model) return;
-  hero.style.opacity = 0;
-  setTimeout(() => { hero.src = v.img; hero.style.opacity = 1; }, 150);
-});
-// Hotspots are placed as fractions of the model's size, so they survive swapping in a CLO export of a different scale
-heroModel.addEventListener("error", () => {
-  heroModel.dataset.failed = "1";
-  document.getElementById("modelMissing").hidden = heroModel.hidden;
-});
-heroModel.addEventListener("load", () => {
-  delete heroModel.dataset.failed; document.getElementById("modelMissing").hidden = true;
-  const c = heroModel.getBoundingBoxCenter(), d = heroModel.getDimensions();
-  heroModel.querySelectorAll(".hotspot").forEach(h => {
-    const [fx, fy, fz] = h.dataset.dim.split(" ").map(Number);
-    heroModel.updateHotspot({ name: h.slot, position: `${c.x + fx * d.x}m ${c.y + fy * d.y}m ${c.z + fz * d.z}m` });
-  });
-});
 
 renderCredit(); renderCredit.ready = true; renderLocker();
 
-// Wider than a phone, the Piece screen sits beside the Stage and is on screen from the start, so it loads at boot (and if a window is resized wide)
-const phoneLayout = matchMedia("(max-width: 600px)");
-if (!phoneLayout.matches) enterPiece();
-phoneLayout.addEventListener("change", e => { if (!e.matches) enterPiece(); });
 
-/* Card scan: each museum card's QR opens ?card=<inventory id>; that piece unlocks and goes straight onto the form */
-if (PIECES[scanned]?.splat) showScan({ story, quiz, id: scanned, next: "Read its record" }).then(() => openFact(scanned));   // NFC on a study piece: its fact card, whose button opens Up close
-else if (scanned && !PIECES[scanned]?.glb) toast("This card isn't in the app yet");
-else if (scanned) {
-  const p = PIECES[scanned];
-  p.locked = false;
-  if (p.slot === "full") look.full = scanned;
-  else { if (p.slot !== "feet") look.full = null; look[p.slot] = scanned; }
-  turntables.forEach(t => t.draw()); renderLocker(); renderCredit();
-  toast(`Found in the museum: ${p.name}, ${p.year.from}`);
-  showScan({ story, quiz, id: scanned, next: "Back to the form" });
+/* Card scan: a sticker in the room opens ?card=<id>. A room piece is won first (story, Win it), then waits in the wardrobe */
+const win = createWin({ PIECES, record: id => RECORDS[id], img: id => PIECES[id].img });
+const welcome = (id, text) => { activeSlot = PIECES[id].splat ? "remix" : PIECES[id].slot; activeZone = "body"; renderLocker(); setSnap("half"); toast(text); };
+async function scan(id) {
+  const p = PIECES[id];
+  if (!p.locked) { welcome(id, `Already in your wardrobe: ${p.name}`); return; }
+  await showScan({ story, quiz, id, next: "Win it" });
+  const off = await win.guess(id);
+  await recordsReady; await win.won(id, { off });
+  p.locked = false; fresh.add(id);
+  try { localStorage.setItem(WON_KEY, JSON.stringify([...new Set([...readWon(), id])])); } catch { /* blocked: the win lasts this visit */ }
+  welcome(id, `Added to your wardrobe: ${p.name}. Tap it to wear it.`);
 }
-if (scanned) history.replaceState(null, "", location.pathname);   // a reload must not re-apply the card over later changes
-// first visit only, and not for a visitor who arrived by a museum card or from Up close: they already know what they want
-try { if (!scanned && !params.get("fabric") && !localStorage.getItem(HELP_KEY)) openHelp(); } catch { openHelp(); }
-// up-close.html sends ?fabric=<id> once every detail is found: the fabric joins the wardrobe; the visitor chooses where to wear it
-const won = params.get("fabric");
-if (won && PIECES[won]?.splat && !PIECES[won].locked) {
-  fresh.add(won);
-  activeSlot = "remix"; activeZone = "body";
-  renderLocker(); setSnap("half");
-  toast(`Added to your wardrobe: the ${PIECES[won].name.toLowerCase()}'s fabric. Tap it to wear it.`);
-  history.replaceState(null, "", location.pathname);
-}
+if (scanned && !PIECES[scanned]?.glb) toast("This sticker isn't in the app yet");
+else if (scanned) scan(scanned);
+// up-close.html sends ?fabric=<id> once every detail is found: the same Won card, then the fabric waits in the Remix tab
+const claimed = params.get("fabric");
+if (claimed && PIECES[claimed]?.splat && !PIECES[claimed].locked) recordsReady.then(() => win.won(claimed, { what: "fabric" })).then(() => {
+  fresh.add(claimed);
+  welcome(claimed, `Added to your wardrobe: the ${PIECES[claimed].name.split(",")[0].toLowerCase()}'s fabric. Tap it to wear it.`);
+});
+if (scanned || claimed) history.replaceState(null, "", location.pathname);   // a reload must not replay the card
+// first visit only, and not for a visitor who arrived by a sticker or from Up close: they already know what they want
+try { if (!scanned && !claimed && !localStorage.getItem(HELP_KEY)) openHelp(); } catch { openHelp(); }
 </script>
 <dialog class="nfc" id="nfc" aria-labelledby="nfcTitle"><div tabindex="-1" autofocus>
   <div class="ring" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 8.5a5 5 0 0 1 0 7M9.5 6a8.5 8.5 0 0 1 0 12M13 3.5a12 12 0 0 1 0 17"/></svg></div>
