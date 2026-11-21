@@ -2,6 +2,15 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## Way in to the CLO models (2026-11-21, H14, branch hassan/H14-clo-links)
+- What: a piece with a MoMu CLO model (`assets.clo`) links to its page. Fact card: a "See it on a mannequin" button
+  under "See it in 3D", for won pieces (furisode, jak, knee breeches, coat, kaftan). Up close: the same link under
+  the fabric button for the two study pieces (coat, kaftan). `outfit.html`: "My look" steps back to the Stage
+  (`backTo`) instead of stacking a new one.
+- Why: the five pages opened by address only.
+- Decision: reuse the fact card's ghost button and Up close's underlined link; no new styles beyond one `.more` rule.
+  A locked piece shows no link (it is won first). The card-scan flow is unchanged: a scan leads to the Won tab or Up
+  close, and the link is one tap from there.
 ## MoMu branding on every main screen (2026-11-21, branch hassan/H10-branding)
 - What: a stacked "MoMu / Second Skin" lockup replaces the plain "Second Skin" in the Stage bar and the Up close header
   (`.momu` and `.brand.lockup` in `theme.css`); the share card PNG carries the same "MoMu" wordmark at the right end of its "Second Skin · date" row (H12);
