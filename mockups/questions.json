@@ -1,0 +1,56 @@
+{
+  "version": 2,
+  "source": "https://www.notion.so/41f8b3bb922780c1be22c63ccd5cb7c1",
+  "about": "C2: the curator's stories and questions, copied from her Notion page by tools/questions_sync.py. Edit them there, not here.",
+  "pieces": [
+    {
+      "id": "ST81190",
+      "title": "A.F. Vandevorst Jacket",
+      "link": "https://heron.libis.be/momu/s/studiecollectie/item/m2v73p#lg=1&slide=0",
+      "facts": [
+        [
+          "Object",
+          "Jacket"
+        ],
+        [
+          "Materials",
+          "Wool, synthetic fiber, cotton, metal, felt"
+        ],
+        [
+          "Techniques",
+          "Felting"
+        ],
+        [
+          "Date",
+          "1998-1999"
+        ],
+        [
+          "Country",
+          "Belgium"
+        ]
+      ],
+      "story": [
+        "This grey woolen jacket from 1998-1999 by Belgian fashion house A.F. Vandevorst has some remarkable details. It is made up of separate parts; the sleeve, front, shoulder, and breast panels are not sewn together. If you look closely, how are they held together? The pieces, as well as the darts and side seams are fastened with metal rivets, bolt-like fasteners that attach two fabrics. The jacket is closed in the centre front by a column of press buttons, a type of releasable closure.",
+        "Now look at the back of the piece. What stands out? The red cross stitched at the nape of the neck is the iconic logo of A.F. Vandevorst. Since their early collections, their visual language has been inspired by German artist Joseph Beuys, religion, horses and their tack, uniforms, rivets, lingerie, and fetish shoes. This jacket is part of their first collection."
+      ],
+      "questions": [
+        {
+          "q": "What part of the jacket is stitched with red thread?",
+          "a": "the cross at the nape of the neck"
+        },
+        {
+          "q": "Which element of the jacket clearly shows the designer’s visual language?",
+          "a": "rivets"
+        },
+        {
+          "q": "How many snap buttons does the jacket have?",
+          "a": "9"
+        },
+        {
+          "q": "Considering the material and style, what seasons was this jacket made for?",
+          "a": "Autumn and winter"
+        }
+      ]
+    }
+  ]
+}

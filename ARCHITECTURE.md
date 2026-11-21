@@ -35,6 +35,7 @@ mockups/pieces.json  (single source of truth for pieces) ───────�
 - `second-skin.html`: one file, one `<script type="module">`. three.js 0.169.0 from jsDelivr via import map;
   model-viewer only on the Piece page (to be replaced, A4).
 - Boot: `fetch("pieces.json")`, restore save from `localStorage` key `secondSkin.save.v1` (ids validated).
+- Story and questions (C2): on a card scan only, `quiz.js` loads `questions.json` (the curator's Notion page, copied by `tools/questions_sync.py`) and shows that piece's story and questions before the Stage or Up close; nothing is saved or locked.
 - Engine: `Turntable` class owns one renderer and scene: `makeForm()` procedural dress form, each worn GLB via
   `prepGarment()` + `place()` (auto-fit by slot from the bounding box), `setFabric()` remix (triplanar, body and
   sleeves zones, scaled by `meanLuma`).
