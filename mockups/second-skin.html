@@ -12,7 +12,6 @@
 <link rel="preload" href="assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/" } }</script>
 <link rel="preconnect" href="https://heron.libis.be" crossorigin>
-<link rel="stylesheet" href="quiz.css">
 <link rel="stylesheet" href="ask.css">
 <link rel="stylesheet" href="share.css">
 <link rel="stylesheet" href="story.css">
@@ -867,8 +866,7 @@ function renderLocker() {
     tile(id, `${isWorn(id, activeSlot) ? "on" : ""} ${p.locked ? "locked" : ""} ${fresh.has(id) ? "new" : ""}`, p.img, `<span class="m">${esc(shortName(id))}</span>`,
       isWorn(id, activeSlot) ? `Take off ${p.name}` : `Wear ${p.name}`)).join("");
 }
-/* Museum: the study pieces stand in the room with an NFC card; they are found there, not owned, so they live outside the wardrobe.
-   Finding a piece's 3 details on Up close adds its fabric to the wardrobe (D2). */
+/* Museum: the room pieces (each with a sticker) are won there, not owned yet, so they live outside the wardrobe (D2) */
 const museumEl = document.getElementById("museum");
 function renderMuseum() {
   const room = Object.entries(PIECES).filter(([, p]) => p.room);
@@ -893,7 +891,7 @@ museumEl.addEventListener("click", e => {
   if (PIECES[id].splat || PIECES[id].locked) tapCard(id);
   else { activeSlot = PIECES[id].slot; renderLocker(); setSnap("half"); }
 });
-const fresh = new Set();   // fabrics claimed this visit, marked New in the Remix tab until worn
+const fresh = new Set();   // pieces and fabrics won this visit, marked New until worn
 /* What the form wears, always in the sheet's peek: tap a chip to change that part, × to take it off */
 function renderWearing() {
   const parts = (look.full ? [["full", look.full], ["feet", look.feet]] : [["top", look.top], ["bottom", look.bottom], ["feet", look.feet]])
