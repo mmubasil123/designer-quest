@@ -190,7 +190,7 @@
       "locked": false,
       "assets": {
         "glb": {
-          "path": "assets/ST655_1.glb",
+          "path": "assets/ST655_1_v2.glb",
           "kind": "scan",
           "units": "norm",
           "origin": "bbox"
