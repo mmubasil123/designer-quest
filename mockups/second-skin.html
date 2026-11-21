@@ -1118,6 +1118,11 @@ heroModel.addEventListener("load", () => {
 
 renderCredit(); renderCredit.ready = true; renderLocker();
 
+// Wider than a phone, the Piece screen sits beside the Stage and is on screen from the start, so it loads at boot (and if a window is resized wide)
+const phoneLayout = matchMedia("(max-width: 600px)");
+if (!phoneLayout.matches) enterPiece();
+phoneLayout.addEventListener("change", e => { if (!e.matches) enterPiece(); });
+
 /* Card scan: each museum card's QR opens ?card=<inventory id>; that piece unlocks and goes straight onto the form */
 if (scanned && !PIECES[scanned]?.glb) toast("This card isn't in the app yet");
 else if (scanned) {

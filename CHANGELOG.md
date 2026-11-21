@@ -4,6 +4,11 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### Fix: Piece photo missing on desktop (branch basil/piece-photo-desktop)
+- **Bug:** the faster-loading change made the Piece screen photo (and the 3D viewer) wait for the first visit to that screen. On a window wider than 600 px the Piece screen is shown beside the Stage and is never "visited", so its photo stayed empty and showed only the alt text.
+- **Fix:** `enterPiece()` also runs at boot when the window is wider than a phone, and when a narrow window is widened. Phones keep the lazy load.
+- **Learn button:** hidden above 600 px on purpose (`.app-only`), because the Piece screen is already beside the Stage there. Not changed.
+
 ### Stage exposure 1.1 to 1.0 (branch basil/stage-exposure)
 - **What:** ACES tone-mapping exposure on the Stage goes from 1.1 to 1.0. Nothing else changes (environment map, contact shadow and `metalness = 0` were already in).
 - **Why:** after the colour fix, the palest piece (ST503) still rendered about 1.3x brighter than its photo. Measured mean sRGB of the garment alone against its cutout photo: ST503 photo 97,110,114, at 1.1 it is 134,146,143, at 1.0 it is 127,140,137; ST2434 photo 69,82,50, now 78,89,59, at 1.0 73,84,55; ST80930 photo 59,60,67, now 68,72,79, at 1.0 63,68,74; ST80931 photo 58,59,66, now 52,59,66, at 1.0 48,55,62; ST655 photo 60,61,54, now 59,57,53, at 1.0 55,53,49.
