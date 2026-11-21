@@ -1,0 +1,16 @@
+{
+  "name": "second-skin",
+  "private": true,
+  "type": "module",
+  "description": "Static mockup plus one Vercel function (api/ask.js, ticket H2). The page itself needs no build.",
+  "scripts": {
+    "dev:ask": "node --env-file-if-exists=../.env tools/ask_dev_server.mjs",
+    "eval:ask": "node --env-file-if-exists=../.env tools/ask_eval/run.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "1.12.0"
+  }
+}

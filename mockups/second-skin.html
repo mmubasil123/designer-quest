@@ -12,6 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/" } }</script>
 <link rel="preconnect" href="https://heron.libis.be" crossorigin>
+<link rel="stylesheet" href="ask.css">
 <style>
 :root {
   --paper: #f3efe7;
@@ -337,6 +338,7 @@ dt { color: var(--muted); }
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { createAsk } from "./ask.js";
 
 const IMG = id => `https://heron.libis.be/momu/files/large/${id}.jpg`;
 const ZOOM_MAX = 3;
@@ -965,6 +967,8 @@ async function openFact(id) {
 document.getElementById("factShares").addEventListener("click", e => { const b = e.target.closest("[data-fact]"); if (b) openFact(b.dataset.fact); });
 document.getElementById("factAct").addEventListener("click", () => { factEl.close(); act(factId, ctxOf(factId)); });
 factEl.addEventListener("click", e => { if (e.target === factEl) factEl.close(); });   // backdrop tap closes
+const ask = createAsk();   // H2: questions answered only from this piece's MoMu record (ask.js)
+document.getElementById("factAsk").addEventListener("click", () => { factEl.close(); ask.open(factId, PIECES[factId].name); });
 
 /* ---------- Wardrobe sheet: drag the grab area, snap to peek / half / full ---------- */
 const stageEl = document.getElementById("stage"), wardrobe = document.getElementById("wardrobe");
@@ -1161,7 +1165,7 @@ if (won && PIECES[won]?.splat && !PIECES[won].locked) {
   <dl id="factFields"></dl>
   <blockquote id="factQuote"></blockquote>
   <div class="shares" id="factShares"></div>
-  <div class="row"><button class="btn press" id="factAct"></button><a id="factLink" target="_blank" rel="noopener">MoMu record ↗</a></div>
+  <div class="row"><button class="btn press" id="factAct"></button><button class="ask-open press" id="factAsk">Ask</button><a id="factLink" target="_blank" rel="noopener">MoMu record ↗</a></div>
 </div></dialog>
 </body>
 </html>
