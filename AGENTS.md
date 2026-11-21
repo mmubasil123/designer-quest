@@ -33,6 +33,8 @@ just fail to connect.
   `gh pr list` and the ledger before touching it; keep those PRs small and merge them quickly.
 - **Pull and rebase before you push** (`git pull --rebase origin main`). On a conflict in someone else's code,
   stop and ask; never resolve it by dropping their side.
+- **Shared contracts:** follow the Change policy at the end of `LEDGER.md` (what is safe without asking, what needs
+  a heads-up to the other person first: `pieces.json` schema, save schema, URL params, GLB names, D1 to D8).
 - **End of session:** update `HANDOVER.md` (state, what is half done, next step) so the other person's agent can
   continue without asking.
 
@@ -50,6 +52,6 @@ just fail to connect.
 - Deploys: the Vercel project `second-skin` is on Mubasil's account. Only Mubasil deploys, and only on purpose.
 
 ## Delivery
-- Hackathon presentation: Stage turntable, Locker remix, time-span game. Demo flow is in `HANDOVER.md`.
+- Hackathon presentation: Stage turntable, Locker remix, time-span game. No demo script is written yet (tickets E1, E2 in `LEDGER.md`); the cut and its risks are at the end of `LEDGER.md`.
 - CLO path: CLO on a personal machine, pattern files from MoMu, the `Lilbonner/clo3d-mcp` listener. Engine
   changes needed are in `HANDOVER.md` and ticket A7.

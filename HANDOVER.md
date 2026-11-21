@@ -1,8 +1,8 @@
 # Handover: next session (2026-11-21, late night)
 
 Read this, then `LEDGER.md` (tickets, decisions D1 to D8, product-owner cut and lanes). `CHANGELOG.md` has every
-change with its reason. Owner rule: work autonomously, no check-in questions, inspect screenshots critically
-before calling anything done. Never deploy, push or publish without the owner's explicit go.
+change with its reason. Agent rule (both people): work autonomously within your claimed ticket, inspect screenshots critically
+before calling anything done. Never deploy, push to `main` or publish without your person's explicit go.
 
 ## State
 - `mockups/second-skin.html` + `mockups/pieces.json` (schema `pieces.schema.json`): one three.js scene per
