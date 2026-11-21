@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 860" preserveAspectRatio="xMidYMax slice">
+  <!-- 1920 to 1949: an art deco proscenium with a sunburst behind the stage -->
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8f2ed"/><stop offset="1" stop-color="#ecdcd1"/></linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2d0c3"/><stop offset=".35" stop-color="#ead9cd"/><stop offset="1" stop-color="#d5bfae"/></linearGradient>
+  </defs>
+  <rect width="400" height="860" fill="url(#wall)"/>
+  <g fill="#f1e4da" transform="translate(200 660)">
+    <path d="M0 0L-200-260H-150Z"/><path d="M0 0L-110-330H-60Z"/><path d="M0 0L-15-360H15Z"/>
+    <path d="M0 0L60-330H110Z"/><path d="M0 0L150-260H200Z"/><path d="M0 0L-250-140V-180Z"/><path d="M0 0L250-180V-140Z"/>
+  </g>
+  <g fill="none" stroke="#d5b9a4" stroke-width="2">
+    <path d="M60 660V340H90V300H120V270H280V300H310V340H340V660"/>
+    <path d="M72 660V352H102V312H132V282H268V312H298V352H328V660" stroke-width="1"/>
+    <path d="M150 270V250H250V270M175 250V236H225V250" stroke-width="1.5"/>
+  </g>
+  <g fill="none" stroke="#dcc6b4" stroke-width="1"><path d="M20 260V660M28 260V660M380 260V660M372 260V660"/></g>
+  <rect y="660" width="400" height="200" fill="url(#floor)"/>
+  <path d="M0 660H400" stroke="#cdb19b" stroke-width="2.5"/>
+  <g fill="none" stroke="#d2b8a3" stroke-width="1" opacity=".7"><ellipse cx="200" cy="742" rx="170" ry="28"/><ellipse cx="200" cy="742" rx="120" ry="18"/></g>
+</svg>

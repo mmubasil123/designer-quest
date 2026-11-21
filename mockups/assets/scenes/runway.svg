@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 860" preserveAspectRatio="xMidYMax slice">
+  <!-- 1970 to 2009: a concrete show space, one spotlight and a runway -->
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#efefee"/><stop offset="1" stop-color="#d6d6d4"/></linearGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity=".25"/></linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfcfcd"/><stop offset="1" stop-color="#bdbdbb"/></linearGradient>
+    <radialGradient id="pool" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="400" height="860" fill="url(#wall)"/>
+  <g stroke="#cacac8" stroke-width="1"><path d="M0 330H400M0 500H400M100 160V660M300 160V660"/></g>
+  <g fill="#c4c4c2"><circle cx="100" cy="330" r="2"/><circle cx="300" cy="330" r="2"/><circle cx="100" cy="500" r="2"/><circle cx="300" cy="500" r="2"/></g>
+  <path d="M176 160H224L330 700H70Z" fill="url(#beam)"/>
+  <rect y="660" width="400" height="200" fill="url(#floor)"/>
+  <path d="M150 660H250L360 860H40Z" fill="#dadad8"/>
+  <path d="M0 660H400" stroke="#b5b5b3" stroke-width="2"/>
+  <g fill="#f4efe2"><circle cx="146" cy="672" r="1.6"/><circle cx="132" cy="698" r="1.8"/><circle cx="114" cy="732" r="2"/><circle cx="90" cy="776" r="2.3"/><circle cx="62" cy="828" r="2.6"/>
+    <circle cx="254" cy="672" r="1.6"/><circle cx="268" cy="698" r="1.8"/><circle cx="286" cy="732" r="2"/><circle cx="310" cy="776" r="2.3"/><circle cx="338" cy="828" r="2.6"/></g>
+  <ellipse cx="200" cy="700" rx="120" ry="26" fill="url(#pool)"/>
+</svg>

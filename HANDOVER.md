@@ -4,6 +4,10 @@ Read this, then `LEDGER.md` (tickets, decisions D1 to D8, product-owner cut and 
 change with its reason. Agent rule (both people): work autonomously within your claimed ticket, inspect screenshots critically
 before calling anything done. Never deploy, push to `main` or publish without your person's explicit go.
 
+## Storytelling backgrounds (H7, PR #42, merged 2026-11-21)
+Six period rooms behind the Stage, 3D view and Up close, picked by date (`mockups/scenes.js`). Checked in Chrome at
+390 px, not on a phone. Next: a per-piece `scene` override in `pieces.json` if a room fits a piece badly (heads-up first).
+
 ## Wearable scans (branch basil/wear-scans, 2026-11-21, not merged)
 Read `docs/WEARABLE-PIPELINE.md`. Coat ST81190 and cavalry uniform ST2431/1-4 are meshed and registered; the other 7
 scan pieces and 3 photo-only pieces are next. Checked headless at 390 px; not on a phone. Uniform colours still dull

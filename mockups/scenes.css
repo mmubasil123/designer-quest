@@ -1,0 +1,10 @@
+/* H7 storytelling backgrounds (scenes.js). The host gets `isolation: isolate` so the scene can sit behind every child
+   at z-index -1 without changing their stacking. */
+.scene { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; background: var(--wall); }
+.scene i { position: absolute; inset: 0; background: center bottom / cover no-repeat; opacity: 0;
+  transition: opacity 700ms var(--ease-out); }
+.scene i.on { opacity: 1; }
+/* paper under the title, then the room rises out of it */
+.scene::after { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(var(--paper) var(--scene-clear, 0px), rgb(255 255 255 / 0) calc(var(--scene-clear, 0px) + 120px)); }
+@media (prefers-reduced-motion: reduce) { .scene i { transition-duration: 200ms; } }
