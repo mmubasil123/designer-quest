@@ -11,8 +11,8 @@ before calling anything done. Never deploy, push to `main` or publish without yo
 - All 7 wearable scans are garment-only except the kimono (stand hidden by the `hideStand` shortcut).
 - Live at https://second-skin-ten.vercel.app (Vercel project `second-skin`, deployed from `mockups/`; the first
   deploy went out as production). Redeploy: `cd mockups && npx vercel deploy` (preview) and confirm `target`.
-- Phone app build is on preview https://second-skin-ar90y2hhq-mmubasilbokhari-6857s-projects.vercel.app
-  (production not updated). Promote with `npx vercel deploy --prod` from `mockups/` only on the owner's go.
+- Production tracks `main`: Mubasil's sessions redeploy (`cd mockups && npx vercel deploy --prod`) after each push
+  to `main` (owner's rule, 2026-11-21). Last deploy: `ed1d4c1`, spike page included.
 - Serve: `cd mockups && python3 -m http.server 8765 --bind 127.0.0.1`; console handle `window.secondSkin`.
 
 ## Done tonight (from the ledger)
