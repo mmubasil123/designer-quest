@@ -4,6 +4,12 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### Won fabrics go on the nearest cut; the fact card warms the scan (branch basil/won-cut)
+- **Problem (Basil's phone):** the won riveted wool coat showed as a dress, because every won study fabric went on the cocktail dress cut. He also asked whether the piece card loads the 3D scan and whether closing it cleans up.
+- **What:** `CUT_OF` in `second-skin.html` maps each study piece to the wearable whose cut is nearest: the coat and both uniform jackets on the green wool coat, the five dresses and the combinaison on the cocktail dress, the bridal kaftan on the kimono. Still one "Won" chip; its × takes off that cut and its cloth only, so boots added afterwards stay. The fact card of a study piece whose scan you have opened before now starts the scan download quietly after 2 s at low priority ("See it in 3D" opens it); closing the card aborts it. Before, the card loaded nothing.
+- **Decision:** the map lives in the page, not in `pieces.json`, to avoid a schema change before the demo; move it to a `cut` field later (Change policy: heads-up to Hassan).
+- **Checked** headless Chromium at 390 x 844: coat on the coat cut, sequin dress on the cocktail dress, kaftan on the kimono, each one chip; adding boots then × on Won leaves the boots; fact card requests the `.sog` about 2.9 s after opening on a slowed network and aborts it on close.
+
 ### Win and wear: the claim lands, a win goes on alone, the story stays (branch basil/win-and-wear)
 - **Problems (Basil's phone):** "Win its fabric" on the riveted wool coat landed on a blank sheet that only said Top; the "you won" card then popped up later on another piece; "Wear it now" put 2 or 3 pieces on ("Jak in riveted") and × took them all off; won pieces only showed under Fabrics; a won piece's audio tour was gone; the scan took about 5 s.
 - **Causes:** back from Up close returns to the `?card=` page, which parks before the wardrobe is drawn and before its page-restore handler existed, so the phone showed that frozen copy and the claim waited in sessionStorage for the next boot. A study win is a fabric and was painted onto whatever top was worn. Splat pieces have no GLB, so only the Fabrics tab listed them. A won piece's sticker and Museum tile skipped the story.
