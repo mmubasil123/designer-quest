@@ -25,13 +25,13 @@ The full-demo backup recording (old E2 acceptance) is not made.
 - Possible next steps: tune `REACH` (44 px), `RING` (60 px) and `HINT_AFTER` (20 s) in `up-close.html` after a phone
   test; Notion has a row for H11 only (Done).
 
-## H13 Narrated stories (hassan, PR #46 merged 2026-11-22; audio in PR #57, open)
+## H13 Narrated stories (hassan, done 2026-11-22: PR #46 and PR #57 merged)
 - Every piece has a short spoken scene in `mockups/narration-scripts.json` (facts only from the record or the curator's story;
   check: `python3 -I mockups/tools/narration_facts.py <path to cache/>`). The story sheet opens with the photo settling
   in; captions light up word by word with the voice; the photo drifts while it plays. Wearables leave out their date
   before Guess the year and end on a `tease`. the curator's text unchanged, under "Read the story". Review doc:
   `docs/H13-NARRATION-REVIEW.md` (for the curator to read).
-- **Audio in PR #57 (open):** PR #46 was merged before its audio commit, so main plays every story in the phone's voice until #57 merges. All 19 are voiced in Picsart Adeline and transcribed back there. To re-voice a changed script: Picsart editor >
+- **Audio:** all 19 voiced in Picsart Adeline and transcribed back. To re-voice a changed script: Picsart editor >
   AI Audio Generator, voice Adeline, paste the exact text from `narration.py --scripts DIR`, Generate; add the voiceover
   to the canvas with "+" (the editor then loads its MP3 from `gcdn.picsart.com/editing-temp/...`, visible in
   `performance.getEntriesByType('resource')`), download it as `DIR/<id>.en.mp3`; then
