@@ -158,7 +158,7 @@
             },
             "clo": {
               "type": "object",
-              "description": "A garment made in CLO 3D and exported already draped on the team avatar (D5: kind clo, origin avatar, metres). Worn on that avatar on outfit.html through OutfitRig; never fitted to the Stage dress form.",
+              "description": "A garment made in CLO 3D and exported already draped on a body (D5: kind clo, origin avatar, metres). `avatar` is that body: the team avatar for the team's pieces, or the mannequin of MoMu's own CLO project in the size and pose it was draped in (one per project). Worn on it on outfit.html through OutfitRig; never fitted to the Stage dress form.",
               "required": ["path", "avatar", "kind", "units", "origin"],
               "additionalProperties": false,
               "properties": {
