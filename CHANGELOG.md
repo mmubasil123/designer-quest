@@ -2,6 +2,18 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## Personal share card (2026-11-21, branch hassan/H12-share)
+- What: the share sheet has an optional name field. The card now reads "<Name>'s look across N years" (without a name:
+  "A look across N years"), stands the form in the period room of the look's middle year (`scenes.js`), shows the date,
+  the pieces worn with years, the pieces won (`secondSkin.won.v1`) and one line from a worn piece's story (the curator's text
+  first, else the first sentence of the MoMu record in `narration.json`, credited as the record). Name: max 20 characters,
+  stored in this browser only (`secondSkin.name.v1`), the card re-draws 400 ms after typing stops. Still 1080x1920.
+  Only `share.js` and `share.css` changed; `second-skin.html` is untouched.
+- Why: feedback 2026-11-21, sharing should feel personal to the visitor.
+- Decision: no account, no upload, no name sent anywhere (D2); every fact still comes from `pieces.json` or the records (D3);
+  "Won" lists the pieces won, not "today", because no win date is stored. The sheet does not autofocus the field, so the
+  phone keyboard stays down until the visitor taps it.
+
 ## MoMu's own CLO models on the outfit page (2026-11-21, branch hassan/momu-clo-pieces)
 - What: five pieces that have a MoMu CLO project are shown on `outfit.html` on MoMu's mannequin: furisode ST80881,
   jak ST503, knee breeches ST2062, riveted coat ST81190, bridal kaftan ST80998 (`outfit.html?card=<id>`). Each has

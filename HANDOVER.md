@@ -10,6 +10,11 @@ before calling anything done. Never deploy, push to `main` or publish without yo
 template. Checked in Chrome at 390 px, not on a phone. Small overlaps with H11/H12/H13 in `quiz.js`, `share.js`,
 `story.js` (one to three lines each). Next: Hassan reviews and merges; then mark H10 done in LEDGER and Notion.
 
+## Personal share card (H12, PR #45, merged 2026-11-21)
+Share sheet takes an optional name (device only) and draws a personal 1080x1920 card: name title, period room, pieces
+worn, pieces won, one story line (`mockups/share.js`, `share.css`). Checked in Chrome (window floor 570 px wide, not
+390; not on a phone): two looks differ, with and without a name, PNG 1080x1920, console clean. Next: a Won line with dates if wins ever store one (save schema, heads-up first).
+
 ## Storytelling backgrounds (H7, PR #42, merged 2026-11-21)
 Six period rooms behind the Stage, 3D view and Up close, picked by date (`mockups/scenes.js`). Checked in Chrome at
 390 px, not on a phone. Next: a per-piece `scene` override in `pieces.json` if a room fits a piece badly (heads-up first).
