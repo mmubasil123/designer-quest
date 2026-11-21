@@ -4,6 +4,12 @@ Read this, then `LEDGER.md` (tickets, decisions D1 to D8, product-owner cut and 
 change with its reason. Agent rule (both people): work autonomously within your claimed ticket, inspect screenshots critically
 before calling anything done. Never deploy, push to `main` or publish without your person's explicit go.
 
+## MoMu branding (H10, PR #44 open, not merged, 2026-11-21)
+"MoMu / Second Skin" lockup in the Stage bar and the Up close header, the "MoMu" wordmark on the share card, and
+"at MoMu" instead of "in the museum" in the copy. Typographic only: no official MoMu logo file is in the repo or the
+template. Checked in Chrome at 390 px, not on a phone. Small overlaps with H11/H12/H13 in `quiz.js`, `share.js`,
+`story.js` (one to three lines each). Next: Hassan reviews and merges; then mark H10 done in LEDGER and Notion.
+
 ## Storytelling backgrounds (H7, PR #42, merged 2026-11-21)
 Six period rooms behind the Stage, 3D view and Up close, picked by date (`mockups/scenes.js`). Checked in Chrome at
 390 px, not on a phone. Next: a per-piece `scene` override in `pieces.json` if a room fits a piece badly (heads-up first).
