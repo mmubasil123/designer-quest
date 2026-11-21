@@ -186,7 +186,8 @@ new ResizeObserver(resize).observe(view);
 // .sog is what deploys; a local .ply of the same name is the fallback while only the raw capture exists
 let url = piece.assets.splat.path, mesh;
 try {
-  if (!(await fetch(url, { method: "HEAD" })).ok) url = url.replace(/\.sog$/, ".ply");
+  // the HEAD round trip only matters on a dev machine that has the raw .ply but not the .sog; the deployed site always has the .sog
+  if (/^(localhost|127\.0\.0\.1|.*\.local)$/.test(location.hostname) && !(await fetch(url, { method: "HEAD" })).ok) url = url.replace(/\.sog$/, ".ply");
   mesh = new SplatMesh({ url });
   mesh.quaternion.set(1, 0, 0, 0);   // the captures are y-down
   scene.add(mesh);
