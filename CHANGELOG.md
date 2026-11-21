@@ -4,6 +4,16 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### Fix: Piece photo missing on desktop (branch basil/piece-photo-desktop)
+- **Bug:** the faster-loading change made the Piece screen photo (and the 3D viewer) wait for the first visit to that screen. On a window wider than 600 px the Piece screen is shown beside the Stage and is never "visited", so its photo stayed empty and showed only the alt text.
+- **Fix:** `enterPiece()` also runs at boot when the window is wider than a phone, and when a narrow window is widened. Phones keep the lazy load.
+- **Learn button:** hidden above 600 px on purpose (`.app-only`), because the Piece screen is already beside the Stage there. Not changed.
+
+### Stage exposure 1.1 to 1.0 (branch basil/stage-exposure)
+- **What:** ACES tone-mapping exposure on the Stage goes from 1.1 to 1.0. Nothing else changes (environment map, contact shadow and `metalness = 0` were already in).
+- **Why:** after the colour fix, the palest piece (ST503) still rendered about 1.3x brighter than its photo. Measured mean sRGB of the garment alone against its cutout photo: ST503 photo 97,110,114, at 1.1 it is 134,146,143, at 1.0 it is 127,140,137; ST2434 photo 69,82,50, now 78,89,59, at 1.0 73,84,55; ST80930 photo 59,60,67, now 68,72,79, at 1.0 63,68,74; ST80931 photo 58,59,66, now 52,59,66, at 1.0 48,55,62; ST655 photo 60,61,54, now 59,57,53, at 1.0 55,53,49.
+- **Decision (Basil):** exposure 1.0, small gain. Khronos Neutral was tested against model-viewer and rejected: it crushes dark pieces (black dress 48,45,40 against a photo of 60,61,54). Per-piece exposure is possible later. Headless Chromium only; real phones not checked.
+
 ### C2 switched to the curator's stories and questions (branch hassan/C2)
 - **What:** our 3 drafted multiple-choice questions (ST503, ST80931, ST2407/1-2), the fabric lock and the `quiz` save field are gone. `questions.json` now holds the curator's text from her Notion page "Story and Questions", copied as written by `mockups/tools/questions_sync.py` (her Heron link maps to the inventory number through a new `heron` field in `records.json`, added by `records.py`). Her page has one piece so far: the A.F. Vandevorst jacket ST81190.
 - **Flow:** a card scan of a piece with a story shows a sheet: her facts, her story, a "Source: MoMu Study Collection" link to the Heron page, and every question on her page in her order (all 4 for the jacket; Hassan chose all over her "pick 3"), each with "Show answer". For a study piece the sheet comes first and "Study it up close" then opens Up close as before; find-3-details is unchanged. A plain visit does not load `questions.json`.

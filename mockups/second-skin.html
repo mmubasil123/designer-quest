@@ -553,7 +553,7 @@ class Turntable {
     for (const light of [fill, key]) { light.layers.enableAll(); this.scene.add(light); }   // lights must reach both render passes
     this.renderer.autoClear = false;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;   // softer highlights on pale silks than the default linear clip
-    this.renderer.toneMappingExposure = 1.1;
+    this.renderer.toneMappingExposure = 1.0;
     const rim = new THREE.DirectionalLight(0xfff4e6, 0.7); rim.position.set(1.2, 2, -3);   // back light separates dark cloth from the wall
     rim.layers.enableAll(); this.scene.add(rim);
     // fov 19 at 4.8 m frames the floor to 8 cm above the neck (1.46 m), so the form fills the stage
@@ -1123,6 +1123,11 @@ heroModel.addEventListener("load", () => {
 });
 
 renderCredit(); renderCredit.ready = true; renderLocker();
+
+// Wider than a phone, the Piece screen sits beside the Stage and is on screen from the start, so it loads at boot (and if a window is resized wide)
+const phoneLayout = matchMedia("(max-width: 600px)");
+if (!phoneLayout.matches) enterPiece();
+phoneLayout.addEventListener("change", e => { if (!e.matches) enterPiece(); });
 
 /* Card scan: each museum card's QR opens ?card=<inventory id>; that piece unlocks and goes straight onto the form */
 if (scanned && !PIECES[scanned]?.glb) toast("This card isn't in the app yet");
