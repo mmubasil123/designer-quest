@@ -8,96 +8,83 @@
       "years": "1750 to 1780",
       "source": "record",
       "draft": true,
+      "form": "poem",
       "paragraphs": [
-        "The museum's record describes it like this: The jacket reaches to the waist and has long skirts, a square neckline and close-fitting sleeves to the elbow.",
-        "Materials and techniques in the record: silk, silk taffeta, flax, metal, sewing, handmade."
+        "Blue taffeta, fine and smooth,\nwith a soft shine.\nAlong the warp, white and yellow\nthreads float free:\na zigzag that breaks into flowers.",
+        "Square at the neck,\nclose to the elbow,\nlong skirts falling from the waist.\nMetal hooks and eyes\nhold the open front,\nand inside, unseen, blue linen\nstriped white and yellow."
       ],
       "lang": "en",
-      "text": "Jak, 1750 to 1780, Netherlands.\n\nThe museum's record describes it like this: The jacket reaches to the waist and has long skirts, a square neckline and close-fitting sleeves to the elbow.\n\nMaterials and techniques in the record: silk, silk taffeta, flax, metal, sewing, handmade.",
-      "hash": "ac91b9f0f010d5ce",
-      "audio": "assets/audio/ST503.en.m4a",
-      "audioHash": "ac91b9f0f010d5ce",
-      "seconds": 22.9,
-      "bytes": 143243,
-      "voice": "picsart:Adeline"
+      "text": "Jak, 1750 to 1780, Netherlands.\n\nBlue taffeta, fine and smooth,\nwith a soft shine.\nAlong the warp, white and yellow\nthreads float free:\na zigzag that breaks into flowers.\n\nSquare at the neck,\nclose to the elbow,\nlong skirts falling from the waist.\nMetal hooks and eyes\nhold the open front,\nand inside, unseen, blue linen\nstriped white and yellow.",
+      "hash": "d1f1cd3d54a1e9a1",
+      "audio": null
     },
     "ST80930": {
       "title": "Ikat vest",
       "years": "1950 to 1960",
       "source": "record",
       "draft": true,
+      "form": "poem",
       "paragraphs": [
-        "The museum's record describes it like this: Dark blue waistcoat or jacket in ikat with light blue spots and red squares.",
-        "Materials and techniques in the record: double ikat, cotton."
+        "Dark blue cotton in double ikat,\nlight blue spots\nand small red squares.",
+        "Long sleeves, puffed full.\nThe front panels cross\nover each other\nand close at the waist with ribbons.",
+        "A waistcoat, or a jacket?\nThe record calls it both."
       ],
       "lang": "en",
-      "text": "Ikat vest, 1950 to 1960, Japan.\n\nThe museum's record describes it like this: Dark blue waistcoat or jacket in ikat with light blue spots and red squares.\n\nMaterials and techniques in the record: double ikat, cotton.",
-      "hash": "95d3631bf34edb26",
-      "audio": "assets/audio/ST80930.en.m4a",
-      "audioHash": "95d3631bf34edb26",
-      "seconds": 19.2,
-      "bytes": 120684,
-      "voice": "picsart:Adeline"
+      "text": "Ikat vest, 1950 to 1960, Japan.\n\nDark blue cotton in double ikat,\nlight blue spots\nand small red squares.\n\nLong sleeves, puffed full.\nThe front panels cross\nover each other\nand close at the waist with ribbons.\n\nA waistcoat, or a jacket?\nThe record calls it both.",
+      "hash": "1f4632b0e77f23df",
+      "audio": null
     },
     "ST2434": {
       "title": "Green wool coat",
       "years": "1795 to 1840",
       "source": "record",
       "draft": true,
+      "form": "poem",
       "paragraphs": [
-        "The museum's record describes it like this: Coat in green broadcloth, with tails.",
-        "Materials and techniques in the record: cotton, twilled weave, broadcloth, brass, weaving, wool."
+        "Green broadcloth,\nfalling into tails.\nTwo rows of four buttonholes,\nand no buttons left to close them.",
+        "Eight round brass buttons\nwait apart, loose,\nonce, most likely,\nsewn on at the back.\nTwo flat ones stay,\nsigned M and Cie, Paris.\nLater, someone added\na broad band of red,\nand inside, a lining\nof glossy purple."
       ],
       "lang": "en",
-      "text": "Green wool coat, 1795 to 1840.\n\nThe museum's record describes it like this: Coat in green broadcloth, with tails.\n\nMaterials and techniques in the record: cotton, twilled weave, broadcloth, brass, weaving, wool.",
-      "hash": "0fedeba05b36cfa5",
-      "audio": "assets/audio/ST2434.en.m4a",
-      "audioHash": "0fedeba05b36cfa5",
-      "seconds": 17.8,
-      "bytes": 112954,
-      "voice": "picsart:Adeline"
+      "text": "Green wool coat, 1795 to 1840.\n\nGreen broadcloth,\nfalling into tails.\nTwo rows of four buttonholes,\nand no buttons left to close them.\n\nEight round brass buttons\nwait apart, loose,\nonce, most likely,\nsewn on at the back.\nTwo flat ones stay,\nsigned M and Cie, Paris.\nLater, someone added\na broad band of red,\nand inside, a lining\nof glossy purple.",
+      "hash": "811d140897e1c34d",
+      "audio": null
     },
     "ST80931": {
       "title": "Monpe trousers",
       "years": "1965",
       "source": "record",
       "draft": true,
+      "form": "poem",
       "paragraphs": [
-        "The museum's record describes it like this: Dark blue puffed trousers, or \"monpe\", in ikat with light blue spots and red squares.",
-        "Materials and techniques in the record: cotton."
+        "Dark blue cotton in ikat,\nlight blue spots,\nsmall red squares:\nmonpe, trousers that puff.",
+        "A broad waistband,\nand long ribbons to close it.\nAt the ankles, ribbons too,\nto tie them close,\nif you wish."
       ],
       "lang": "en",
-      "text": "Monpe trousers, 1965, Japan.\n\nThe museum's record describes it like this: Dark blue puffed trousers, or \"monpe\", in ikat with light blue spots and red squares.\n\nMaterials and techniques in the record: cotton.",
-      "hash": "8c896a30903ad0e7",
-      "audio": "assets/audio/ST80931.en.m4a",
-      "audioHash": "8c896a30903ad0e7",
-      "seconds": 18.1,
-      "bytes": 114506,
-      "voice": "picsart:Adeline"
+      "text": "Monpe trousers, 1965, Japan.\n\nDark blue cotton in ikat,\nlight blue spots,\nsmall red squares:\nmonpe, trousers that puff.\n\nA broad waistband,\nand long ribbons to close it.\nAt the ankles, ribbons too,\nto tie them close,\nif you wish.",
+      "hash": "5011732674034127",
+      "audio": null
     },
     "ST2062": {
       "title": "Knee breeches",
       "years": "1850 to 1870",
       "source": "record",
       "draft": true,
+      "form": "poem",
       "paragraphs": [
-        "The museum's record describes it like this: Trousers: men's knee breeches in cream woollen broadcloth.",
-        "Materials and techniques in the record: handmade, broadcloth, brass, wool, silk."
+        "Cream woollen broadcloth,\nevery stitch by hand.\nSix buttons close the long fly,\na small pocket hides\nin the waistband at the right hip,\na brass buckle draws in the back.",
+        "At each knee, a slit\nand three buttons.\nInside, a glimpse\nof glossy cream twill,\nprobably silk.\nOnce, part of\na Russian military costume."
       ],
       "lang": "en",
-      "text": "Knee breeches, 1850 to 1870.\n\nThe museum's record describes it like this: Trousers: men's knee breeches in cream woollen broadcloth.\n\nMaterials and techniques in the record: handmade, broadcloth, brass, wool, silk.",
-      "hash": "9e98006637d99cee",
-      "audio": "assets/audio/ST2062.en.m4a",
-      "audioHash": "9e98006637d99cee",
-      "seconds": 18.3,
-      "bytes": 115679,
-      "voice": "picsart:Adeline"
+      "text": "Knee breeches, 1850 to 1870.\n\nCream woollen broadcloth,\nevery stitch by hand.\nSix buttons close the long fly,\na small pocket hides\nin the waistband at the right hip,\na brass buckle draws in the back.\n\nAt each knee, a slit\nand three buttons.\nInside, a glimpse\nof glossy cream twill,\nprobably silk.\nOnce, part of\na Russian military costume.",
+      "hash": "c2d0901aa308f5eb",
+      "audio": null
     },
     "ST81114AB": {
       "title": "Blouse",
       "years": "1890 to 1920",
       "source": "curator",
       "draft": false,
+      "form": "prose",
       "paragraphs": [
         "This white cotton blouse has machine-made lace on the front, the collar, and the ends of the sleeves (named the cuffs). Take a look at the centre front of the blouse, the lace pieces frame a panel of pleats (the columns of fabric folded double and sewed). If you look closely you can see this pleated panel is attached to the rest of the blouse with buttons. These shiny white buttons are made of mother of pearl, the strong and smooth inner layer of certain sea shells, such as oysters. The buttonholes are hand sewn",
         "The blouse is part of an outfit that would have been worn by women for cycling around 1900. The type of fabric used for the blouse, called ‘cotton batiste’ is very light and breathable, making it a good fit for cycling and exercising."
@@ -116,6 +103,7 @@
       "years": "1890 to 1920",
       "source": "curator",
       "draft": false,
+      "form": "prose",
       "paragraphs": [
         "Take a look at these black woollen trousers. They are wide and gather at the knees with an elastic, forming a kind of balloon shape. Both in the front and the back are six deep pleats or folds which hide the part where the left and right pant legs are attached.",
         "If you take a few steps back, you may find it is hard to see whether these are trousers or a skirt. The voluminous trousers are part of an outfit worn by women around 1900 for cycling. Around this time, many women started wearing trousers to cycle as long skirts could get caught in the wheels. In contrast to their daily clothing, newly designed sports clothes gave women more comfort and room to move when exercising."
@@ -134,114 +122,97 @@
       "years": "2005 to 2009",
       "source": "record",
       "draft": true,
+      "form": "poem",
       "paragraphs": [
-        "The museum's record describes it like this: Pair of football boots in white, with leather in blue circular stripes.",
-        "Materials and techniques in the record: manmade material, leather."
+        "White leather,\nwound with blue circles,\nmade for a football club:\nFC Bikkembergs Fossombrone,\nin the Marche, Italy.",
+        "Look under the studs:\nthe clear sole shows\na drawing in red and blue.\nA leather circle covers the laces,\nheld on with elastic.\nOne heel blue, one heel red,\nthe club's badge on the left,\nthe label's on the right."
       ],
       "lang": "en",
-      "text": "Football boots, Dirk Bikkembergs, 2005 to 2009.\n\nThe museum's record describes it like this: Pair of football boots in white, with leather in blue circular stripes.\n\nMaterials and techniques in the record: manmade material, leather.",
-      "hash": "be84aae7eaae7fa4",
-      "audio": "assets/audio/ST2407_1-2.en.m4a",
-      "audioHash": "be84aae7eaae7fa4",
-      "seconds": 18.6,
-      "bytes": 117285,
-      "voice": "picsart:Adeline"
+      "text": "Football boots, Dirk Bikkembergs, 2005 to 2009.\n\nWhite leather,\nwound with blue circles,\nmade for a football club:\nFC Bikkembergs Fossombrone,\nin the Marche, Italy.\n\nLook under the studs:\nthe clear sole shows\na drawing in red and blue.\nA leather circle covers the laces,\nheld on with elastic.\nOne heel blue, one heel red,\nthe club's badge on the left,\nthe label's on the right.",
+      "hash": "48354c923d4aaf57",
+      "audio": null
     },
     "ST80881": {
       "title": "Furisode kimono",
       "years": "1979",
       "source": "record",
       "draft": true,
+      "form": "poem",
       "paragraphs": [
-        "The museum's record describes it like this: Ecru furisode kimono, painted and with a gold print.",
-        "Materials and techniques in the record: silk, textile printing, hand-painted, embroidering, weaving, sewing."
+        "Ecru silk, painted,\ntouched with gold.\nBroad ribbons billow across it\nin many colours,\nand behind them a landscape drifts:\nhouses, clouds,\npeonies and chrysanthemums,\nplum blossom,\nJapanese maple, bamboo.",
+        "Look closer at the flowers:\ntheir details are embroidered\nin silk and metal thread."
       ],
       "lang": "en",
-      "text": "Furisode kimono, 1979, Japan.\n\nThe museum's record describes it like this: Ecru furisode kimono, painted and with a gold print.\n\nMaterials and techniques in the record: silk, textile printing, hand-painted, embroidering, weaving, sewing.",
-      "hash": "72e0ae05f418e483",
-      "audio": "assets/audio/ST80881.en.m4a",
-      "audioHash": "72e0ae05f418e483",
-      "seconds": 21.2,
-      "bytes": 133955,
-      "voice": "picsart:Adeline"
+      "text": "Furisode kimono, 1979, Japan.\n\nEcru silk, painted,\ntouched with gold.\nBroad ribbons billow across it\nin many colours,\nand behind them a landscape drifts:\nhouses, clouds,\npeonies and chrysanthemums,\nplum blossom,\nJapanese maple, bamboo.\n\nLook closer at the flowers:\ntheir details are embroidered\nin silk and metal thread.",
+      "hash": "e78510241329d9c8",
+      "audio": null
     },
     "ST655/1": {
       "title": "Cocktail dress",
       "years": "1947 to 1950",
       "source": "record",
       "draft": true,
+      "form": "poem",
       "paragraphs": [
-        "The museum's record describes it like this: Calf- to ankle-length button-through gown, a cocktail dress, in green and black horizontally striped synthetic material.",
-        "Materials and techniques in the record: synthetic fiber, velvet, metal."
+        "Green and black,\nin horizontal stripes,\neleven covered buttons\ndown the front.\nA shawl collar of black velvet,\nshort sleeves edged in velvet too.",
+        "And a secret in the cut:\nthe skirt is made of half circles,\nwith no side seams,\nso the stripes run across the front\nand turn upright at the back.\nInside, a black ribbon holds the hem,\nfixed by hand in fine stitches."
       ],
       "lang": "en",
-      "text": "Cocktail dress, 1947 to 1950, Belgium.\n\nThe museum's record describes it like this: Calf- to ankle-length button-through gown, a cocktail dress, in green and black horizontally striped synthetic material.\n\nMaterials and techniques in the record: synthetic fiber, velvet, metal.",
-      "hash": "09e1ad7e91093e76",
-      "audio": "assets/audio/ST655_1.en.m4a",
-      "audioHash": "09e1ad7e91093e76",
-      "seconds": 22.4,
-      "bytes": 140903,
-      "voice": "picsart:Adeline"
+      "text": "Cocktail dress, 1947 to 1950, Belgium.\n\nGreen and black,\nin horizontal stripes,\neleven covered buttons\ndown the front.\nA shawl collar of black velvet,\nshort sleeves edged in velvet too.\n\nAnd a secret in the cut:\nthe skirt is made of half circles,\nwith no side seams,\nso the stripes run across the front\nand turn upright at the back.\nInside, a black ribbon holds the hem,\nfixed by hand in fine stitches.",
+      "hash": "e3a29244324c20f9",
+      "audio": null
     },
     "ST2435": {
       "title": "Sequin silk dress",
       "years": "1920 to 1925",
       "source": "record",
       "draft": true,
+      "form": "poem",
       "paragraphs": [
-        "The museum's record describes it like this: Calf-length dress in ecru woven silk, covered all over in sequin embroidery with the iridescent effect of pearls.",
-        "Materials and techniques in the record: embroidering, metal, sequin, weaving, silk."
+        "Ecru silk, calf-length,\ncovered all over in sequins\nthat shimmer like pearls.",
+        "A wide boat neck.\nStraight panels, falling.\nThe sides stay open,\ncaught by three hooks and eyes\non the left,\nand short strips at the hips\nthat draw the line in.\nOver it all, machine stitching\nin metal thread\ntraces curls and eyes."
       ],
       "lang": "en",
-      "text": "Sequin silk dress, 1920 to 1925.\n\nThe museum's record describes it like this: Calf-length dress in ecru woven silk, covered all over in sequin embroidery with the iridescent effect of pearls.\n\nMaterials and techniques in the record: embroidering, metal, sequin, weaving, silk.",
-      "hash": "639fca8d9cc3a930",
-      "audio": "assets/audio/ST2435.en.m4a",
-      "audioHash": "639fca8d9cc3a930",
-      "seconds": 23.6,
-      "bytes": 147679,
-      "voice": "picsart:Adeline"
+      "text": "Sequin silk dress, 1920 to 1925.\n\nEcru silk, calf-length,\ncovered all over in sequins\nthat shimmer like pearls.\n\nA wide boat neck.\nStraight panels, falling.\nThe sides stay open,\ncaught by three hooks and eyes\non the left,\nand short strips at the hips\nthat draw the line in.\nOver it all, machine stitching\nin metal thread\ntraces curls and eyes.",
+      "hash": "f16a0a2eb51992a6",
+      "audio": null
     },
     "ST652/1": {
       "title": "Polka-dot mended dress",
       "years": "1940 to 1945",
       "source": "record",
       "draft": true,
+      "form": "poem",
       "paragraphs": [
-        "The museum's record describes it like this: Button-through dress of printed cotton, blue with small white and red dots.",
-        "Materials and techniques in the record: printing, cotton, manmade material, artificial silk."
+        "Blue cotton, scattered\nwith small white and red dots,\nbuttoned all the way down.\nMended, and mended again,\nin patches of checked cloth.",
+        "Red edges the pockets\nand the sleeves,\nthree red lines trim the right lapel,\nand from the chest pocket\na red handkerchief\nseems to peek out.\nA cloth belt ties at the front\nto mark the waist."
       ],
       "lang": "en",
-      "text": "Polka-dot mended dress, 1940 to 1945.\n\nThe museum's record describes it like this: Button-through dress of printed cotton, blue with small white and red dots.\n\nMaterials and techniques in the record: printing, cotton, manmade material, artificial silk.",
-      "hash": "1cc827c0defc03f6",
-      "audio": "assets/audio/ST652_1.en.m4a",
-      "audioHash": "1cc827c0defc03f6",
-      "seconds": 22.0,
-      "bytes": 139853,
-      "voice": "picsart:Adeline"
+      "text": "Polka-dot mended dress, 1940 to 1945.\n\nBlue cotton, scattered\nwith small white and red dots,\nbuttoned all the way down.\nMended, and mended again,\nin patches of checked cloth.\n\nRed edges the pockets\nand the sleeves,\nthree red lines trim the right lapel,\nand from the chest pocket\na red handkerchief\nseems to peek out.\nA cloth belt ties at the front\nto mark the waist.",
+      "hash": "929e12a46f108b57",
+      "audio": null
     },
     "ST673/1-2": {
       "title": "Cotton combinaison",
       "years": "1880 to 1900",
       "source": "record",
       "draft": true,
+      "form": "poem",
       "paragraphs": [
-        "The museum's record describes it like this: Combination in white cotton: a bodice without boning, with long open drawers buttoned to it.",
-        "Materials and techniques in the record: bone, embroidering, knitting, cotton, mother of pearl."
+        "White cotton,\nand no boning at all:\na bodice and long drawers,\nbuttoned into one.\nBroderie anglaise frames\nthe V of the neck,\nruffles circle the arms,\nmother-of-pearl buttons\nclose the front.",
+        "Bone buttons ring the waist\nto hold what was worn on top.\nIt was made for sport:\ntennis, croquet,\nbadminton, archery."
       ],
       "lang": "en",
-      "text": "Cotton combinaison, 1880 to 1900.\n\nThe museum's record describes it like this: Combination in white cotton: a bodice without boning, with long open drawers buttoned to it.\n\nMaterials and techniques in the record: bone, embroidering, knitting, cotton, mother of pearl.",
-      "hash": "c770664bfb8b3c06",
-      "audio": "assets/audio/ST673_1-2.en.m4a",
-      "audioHash": "c770664bfb8b3c06",
-      "seconds": 22.4,
-      "bytes": 141254,
-      "voice": "picsart:Adeline"
+      "text": "Cotton combinaison, 1880 to 1900.\n\nWhite cotton,\nand no boning at all:\na bodice and long drawers,\nbuttoned into one.\nBroderie anglaise frames\nthe V of the neck,\nruffles circle the arms,\nmother-of-pearl buttons\nclose the front.\n\nBone buttons ring the waist\nto hold what was worn on top.\nIt was made for sport:\ntennis, croquet,\nbadminton, archery.",
+      "hash": "b3942efc1cbe7cbf",
+      "audio": null
     },
     "ST81190": {
       "title": "A.F. Vandevorst Jacket",
       "years": "1998 to 1999",
       "source": "curator",
       "draft": false,
+      "form": "prose",
       "paragraphs": [
         "This grey woolen jacket from 1998-1999 by Belgian fashion house A.F. Vandevorst has some remarkable details. It is made up of separate parts; the sleeve, front, shoulder, and breast pieces are not sewn together. If you look closely, how are they held together? The pieces, as well as the darts and side seams are fastened with metal rivets, bolt-like fasteners that attach two fabrics. The jacket is closed in the centre front by a column of snap buttons, a type of button you can easily close by pressing the two ends together.",
         "Now look at the back of the piece. What stands out? The red cross stitched at the nape of the neck is the iconic logo of A.F. Vandevorst. Since their early collections, their designs have been inspired by German artist Joseph Beuys, religion, horses and their tack, uniforms, rivets, lingerie, and fetish shoes. This jacket is part of their first collection."
@@ -260,90 +231,75 @@
       "years": "1900 to 1925",
       "source": "record",
       "draft": true,
+      "form": "poem",
       "paragraphs": [
-        "The museum's record describes it like this: Bridal kaftan in burgundy, red, green and black striped velvet, with a round neckline ending in a point and long pointed sleeves.",
-        "Materials and techniques in the record: appliqué, embroidering, printing, velvet, cotton, machine-made, silk."
+        "A bride's kaftan,\nin velvet striped\nburgundy, red, green and black.\nThe neckline rounds,\nthen falls to a point,\nand the long sleeves taper\nto points of their own.",
+        "Over the chest, along the sides,\nacross the sleeves,\ncords and metal thread\nare sewn on in many colours,\non grounds of orange,\nlight brown and green.\nUnder the sleeves' embroidery,\na lining of pink cotton."
       ],
       "lang": "en",
-      "text": "Striped velvet bridal kaftan, 1900 to 1925, Palestine.\n\nThe museum's record describes it like this: Bridal kaftan in burgundy, red, green and black striped velvet, with a round neckline ending in a point and long pointed sleeves.\n\nMaterials and techniques in the record: appliqué, embroidering, printing, velvet, cotton, machine-made, silk.",
-      "hash": "8e5bd9ab426f1c4e",
-      "audio": "assets/audio/ST80998.en.m4a",
-      "audioHash": "8e5bd9ab426f1c4e",
-      "seconds": 28.1,
-      "bytes": 179724,
-      "voice": "picsart:Adeline"
+      "text": "Striped velvet bridal kaftan, 1900 to 1925, Palestine.\n\nA bride's kaftan,\nin velvet striped\nburgundy, red, green and black.\nThe neckline rounds,\nthen falls to a point,\nand the long sleeves taper\nto points of their own.\n\nOver the chest, along the sides,\nacross the sleeves,\ncords and metal thread\nare sewn on in many colours,\non grounds of orange,\nlight brown and green.\nUnder the sleeves' embroidery,\na lining of pink cotton.",
+      "hash": "01c4a6167e1eb06f",
+      "audio": null
     },
     "ST2431/1-4": {
       "title": "Light-blue cavalry uniform",
       "years": "1870 to 1900",
       "source": "record",
       "draft": true,
+      "form": "poem",
       "paragraphs": [
-        "The museum's record describes it like this: Military uniform for a man, in light blue and red wool, of a lieutenant of the National Guard, in the 9th or 18th regiment of mounted chasseurs (Chasseurs à cheval, France).",
-        "Materials and techniques in the record: cotton, leather, metal, satin, weaving, wool."
+        "A lieutenant's uniform,\nlight blue and red,\nfor the National Guard,\nthe mounted chasseurs of France,\nthe ninth regiment\nor the eighteenth.",
+        "Black braid crosses the chest\nand becomes the fastening.\nA red collar stands up,\nworked in coiled metal thread.\nRed trousers carry a blue stripe,\nand a kepi,\nfifteen centimetres tall,\nwears a black leather peak."
       ],
       "lang": "en",
-      "text": "Light-blue cavalry uniform, 1870 to 1900.\n\nThe museum's record describes it like this: Military uniform for a man, in light blue and red wool, of a lieutenant of the National Guard, in the 9th or 18th regiment of mounted chasseurs (Chasseurs à cheval, France).\n\nMaterials and techniques in the record: cotton, leather, metal, satin, weaving, wool.",
-      "hash": "63dbf2e8fcfb6c43",
-      "audio": "assets/audio/ST2431_1-4.en.m4a",
-      "audioHash": "63dbf2e8fcfb6c43",
-      "seconds": 31.2,
-      "bytes": 198008,
-      "voice": "picsart:Adeline"
+      "text": "Light-blue cavalry uniform, 1870 to 1900.\n\nA lieutenant's uniform,\nlight blue and red,\nfor the National Guard,\nthe mounted chasseurs of France,\nthe ninth regiment\nor the eighteenth.\n\nBlack braid crosses the chest\nand becomes the fastening.\nA red collar stands up,\nworked in coiled metal thread.\nRed trousers carry a blue stripe,\nand a kepi,\nfifteen centimetres tall,\nwears a black leather peak.",
+      "hash": "bf86f94baafa1e1c",
+      "audio": null
     },
     "ST2432/1-2": {
       "title": "Dark-blue tailcoat uniform",
       "years": "1800 to 1940",
       "source": "record",
       "draft": true,
+      "form": "poem",
       "paragraphs": [
-        "The museum's record describes it like this: Costume in the form of a military uniform for a man, a member of the National Guard: an original coat and trousers made later, both altered.",
-        "Materials and techniques in the record: cotton, leather, metal, passementerie, weaving, wool."
+        "A coat for the National Guard.\nDark blue broadcloth,\na high red collar,\nred cuffs, tails lined in red,\ntheir points turned out\nso the red shows below the blue.\nThree white-metal buttons\nstill say Garde Nationale.",
+        "The trousers came later,\nand a red lace was set\ninto their back later still.\nCoat and trousers,\nboth altered with time."
       ],
       "lang": "en",
-      "text": "Dark-blue tailcoat uniform, 1800 to 1940.\n\nThe museum's record describes it like this: Costume in the form of a military uniform for a man, a member of the National Guard: an original coat and trousers made later, both altered.\n\nMaterials and techniques in the record: cotton, leather, metal, passementerie, weaving, wool.",
-      "hash": "d656073cbabc5550",
-      "audio": "assets/audio/ST2432_1-2.en.m4a",
-      "audioHash": "d656073cbabc5550",
-      "seconds": 27.1,
-      "bytes": 174746,
-      "voice": "picsart:Adeline"
+      "text": "Dark-blue tailcoat uniform, 1800 to 1940.\n\nA coat for the National Guard.\nDark blue broadcloth,\na high red collar,\nred cuffs, tails lined in red,\ntheir points turned out\nso the red shows below the blue.\nThree white-metal buttons\nstill say Garde Nationale.\n\nThe trousers came later,\nand a red lace was set\ninto their back later still.\nCoat and trousers,\nboth altered with time.",
+      "hash": "c59841cb798f085a",
+      "audio": null
     },
     "ST671": {
       "title": "Silk walking dress",
       "years": "1900 to 1915",
       "source": "record",
       "draft": true,
+      "form": "poem",
       "paragraphs": [
-        "The museum's record describes it like this: Long gown, a walking gown, in beige silk rep.",
-        "Materials and techniques in the record: embroidering, cotton, machine lace, metal, weaving, silk."
+        "Beige silk rep,\na long gown for walking.\nOn the waistband, a printed name:\nMadame Guédon Deschamps,\n83 Boulevard Magenta, Paris.",
+        "Machine lace at the throat,\nin imitation of Lille bobbin lace,\nits standing collar\nheld up with bones.\nBeneath, a second dress of silk,\nits pleats showing under the hem.\nAt both sides,\nthe hem hangs a little lower."
       ],
       "lang": "en",
-      "text": "Silk walking dress, 1900 to 1915.\n\nThe museum's record describes it like this: Long gown, a walking gown, in beige silk rep.\n\nMaterials and techniques in the record: embroidering, cotton, machine lace, metal, weaving, silk.",
-      "hash": "7475a38bb5731f19",
-      "audio": "assets/audio/ST671.en.m4a",
-      "audioHash": "7475a38bb5731f19",
-      "seconds": 19.0,
-      "bytes": 120419,
-      "voice": "picsart:Adeline"
+      "text": "Silk walking dress, 1900 to 1915.\n\nBeige silk rep,\na long gown for walking.\nOn the waistband, a printed name:\nMadame Guédon Deschamps,\n83 Boulevard Magenta, Paris.\n\nMachine lace at the throat,\nin imitation of Lille bobbin lace,\nits standing collar\nheld up with bones.\nBeneath, a second dress of silk,\nits pleats showing under the hem.\nAt both sides,\nthe hem hangs a little lower.",
+      "hash": "065af76721708788",
+      "audio": null
     },
     "ST2203": {
       "title": "Black satin dress",
       "years": "1937 to 1948",
       "source": "record",
       "draft": true,
+      "form": "poem",
       "paragraphs": [
-        "The museum's record describes it like this: Dress of black silk satin.",
-        "Materials and techniques in the record: velvet, metal, satin weave, silk."
+        "Black silk satin,\nclose to the body.\nA deep V, edged in black velvet,\nbroad shoulders\npadded with white cotton.",
+        "Down the front and the back,\nthe satin gathers and drapes.\nTwo draped pockets\nsit at the hips,\nfive fabric buttons\nclose each cuff,\nand from the point of the V\na black metal zip\nruns twenty centimetres,\nto the waist."
       ],
       "lang": "en",
-      "text": "Black satin dress, 1937 to 1948.\n\nThe museum's record describes it like this: Dress of black silk satin.\n\nMaterials and techniques in the record: velvet, metal, satin weave, silk.",
-      "hash": "802733a3718f10ca",
-      "audio": "assets/audio/ST2203.en.m4a",
-      "audioHash": "802733a3718f10ca",
-      "seconds": 16.5,
-      "bytes": 105210,
-      "voice": "picsart:Adeline"
+      "text": "Black satin dress, 1937 to 1948.\n\nBlack silk satin,\nclose to the body.\nA deep V, edged in black velvet,\nbroad shoulders\npadded with white cotton.\n\nDown the front and the back,\nthe satin gathers and drapes.\nTwo draped pockets\nsit at the hips,\nfive fabric buttons\nclose each cuff,\nand from the point of the V\na black metal zip\nruns twenty centimetres,\nto the waist.",
+      "hash": "235ec0f2a74890f3",
+      "audio": null
     }
   }
 }

@@ -1,8 +1,9 @@
 /* H3: the piece's story with narration, shown after a card scan and before its questions (quiz.js).
    Text and audio come from narration.json (built by tools/narration.py from the curator's questions.json, else a draft from
    the piece's MoMu record, D3). Audio is pre-generated, so playback needs no API; it never autoplays. If a file is
-   missing or fails, the browser's own voice reads the same text; with neither, the play button is hidden. The
-   transcript is always on screen. */
+   missing or fails, the browser's own voice reads the same text; with neither, the play button is hidden. H13: the
+   sheet leads with play and a few lines (a poem's first stanza, or a prose story's opening sentence); the full
+   transcript opens on "Read the story". */
 
 const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const clock = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
@@ -22,9 +23,22 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
   let stop = () => {};
   el.addEventListener("close", () => stop());
   el.addEventListener("click", e => {
-    if (e.target.closest("[data-more]")) { el.querySelector(".transcript").classList.remove("clamp"); e.target.closest("[data-more]").remove(); return; }
+    const more = e.target.closest("[data-more]");
+    if (more) { toggle(more); return; }
     if (e.target === el || e.target.closest("[data-close]")) el.close();
   });
+
+  // H13: the sheet leads with play and a few lines; the rest of the transcript opens on "Read the story"
+  let full = "", lead = "";
+  function toggle(btn) {
+    const open = btn.getAttribute("aria-expanded") !== "true", rest = el.querySelector(".rest");
+    btn.setAttribute("aria-expanded", String(open));
+    btn.textContent = open ? "Hide the story" : "Read the story";
+    rest.classList.toggle("open", open);
+    rest.inert = !open;
+    const first = el.querySelector(".lead");
+    if (first && full !== lead) first.textContent = open ? full : lead;   // prose: the opening sentence grows into its paragraph
+  }
 
   function player(p) {
     const btn = el.querySelector("[data-play]"), bar = el.querySelector("progress"), time = el.querySelector("[data-time]");
@@ -83,7 +97,13 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
     if (!p) return Promise.resolve();
     // shortcut: drops the drafts' lead-in on screen only (the audio still says it); move it into tools/narration.py at the next audio run
     const paras = p.paragraphs.map(t => t.replace(/^The museum's record describes it like this: /, ""));
-    const long = paras.join(" ").length > 140;   // past about 3 lines the sheet shows a teaser; the audio carries the rest
+    const poem = p.form === "poem";
+    // the lead: a poem's first stanza, or the opening sentence of a prose story (the curator's text, never shortened in the transcript)
+    full = paras[0] || "";
+    lead = poem || full.length <= 160 ? full : (full.match(/^.+?[a-z0-9)”'’][.!?](?=\s+[A-Z“"‘'])/)?.[0] ?? full);
+    const rest = paras.slice(1);
+    const para = t => poem ? t.split("\n").map(l => `<span class="ln">${esc(l)}</span>`).join("") : esc(t);   // verse: one block per line, so a wrapped line hangs
+    const hasMore = rest.length > 0 || lead !== full;
     el.innerHTML = `<div tabindex="-1" autofocus>
       ${img ? `<img class="pic" src="${img(id)}" alt="">` : ""}
       <div class="mono">${found ? "Found in the museum" : "Story"} · ${esc(id)}</div>
@@ -97,8 +117,11 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
           <div class="mono"><span data-voice></span> <span data-time></span></div>
         </div>
       </div>
-      <div class="transcript${long ? " clamp" : ""}" aria-label="Transcript">${paras.map(t => `<p>${esc(t)}</p>`).join("")}</div>
-      ${long ? `<button class="more press" data-more type="button">Read the whole story</button>` : ""}
+      <div class="transcript${poem ? " verse" : ""}" aria-label="Transcript">
+        <p class="lead">${para(lead)}</p>
+        ${hasMore ? `<div class="rest" id="storyRest" inert><div>${rest.map(t => `<p>${para(t)}</p>`).join("")}</div></div>` : ""}
+      </div>
+      ${hasMore ? `<button class="more press" data-more type="button" aria-expanded="false" aria-controls="storyRest">Read the story</button>` : ""}
       <div class="row"><button class="btn press" data-close type="button">${esc(next)}</button></div>
     </div>`;
     player(p);

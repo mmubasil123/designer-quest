@@ -2,6 +2,8 @@
 
 The story text is not written here; this script only collects it:
   - the curator's story from questions.json (synced from her Notion page by questions_sync.py) wins whenever she wrote one;
+  - otherwise a short poem from narration-poems.json (H13): a few lines of verse using only facts from the piece's MoMu
+    record, each traced to the record's own words and checked by narration_facts.py (D3). Marked draft: true for her;
   - otherwise a draft built only from the piece's MoMu record (records.json, D3): date, place, the record's own
     description (English translation of the Dutch record) and its materials and techniques. Marked draft: true for her.
 
@@ -70,6 +72,7 @@ def build(lang="en"):
     pieces = json.loads((MOCKUPS / "pieces.json").read_text())["pieces"]
     records = json.loads((MOCKUPS / "records.json").read_text())
     curator = {p["id"]: p for p in json.loads((MOCKUPS / "questions.json").read_text())["pieces"] if p.get("story")}
+    poems = json.loads((MOCKUPS / "narration-poems.json").read_text())["pieces"]
     out = {}
     for piece in pieces:
         pid, rec = piece["id"], records.get(piece["id"]) or {}
@@ -80,6 +83,10 @@ def build(lang="en"):
             date = dict(m.get("facts") or []).get("Date")
             title, when, paras, source = m["title"], years(date) if date else span, m["story"], "curator"
             spoken = [f"{title}, {when}." if when else f"{title}."] + paras
+        elif pid in poems and rec:   # H13: verse from the record's facts; spoken after the same heading line as the drafts
+            title, when, source = piece["name"], span, "record"
+            paras = draft_from_record(piece, rec)[:1] + poems[pid]["stanzas"]
+            spoken = paras
         elif rec:
             title, when, source = piece["name"], span, "record"
             paras = draft_from_record(piece, rec)
@@ -89,6 +96,7 @@ def build(lang="en"):
         text = "\n\n".join(spoken)
         out[pid] = {
             "title": title, "years": when, "source": source, "draft": source != "curator",
+            "form": "poem" if source == "record" and pid in poems else "prose",
             "paragraphs": paras if source == "curator" else paras[1:],   # the draft's first line is the heading itself
             "lang": lang, "text": text,
             "hash": hashlib.sha256(text.encode()).hexdigest()[:16],

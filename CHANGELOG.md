@@ -13,6 +13,20 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 - Decision: no account, no upload, no name sent anywhere (D2); every fact still comes from `pieces.json` or the records (D3);
   "Won" lists the pieces won, not "today", because no win date is stored. The sheet does not autofocus the field, so the
   phone keyboard stays down until the visitor taps it.
+## Poetic narration on the story sheet (2026-11-21, branch hassan/H13-narration, ticket H13)
+- What: the 16 stories built from MoMu records are now short poems (36 to 68 words, a few lines of verse) in the new
+  `mockups/narration-poems.json`; `tools/narration.py` uses them in place of the old record drafts. the curator's 3 stories
+  are unchanged, word for word. The story sheet now leads with play and a few lines (a poem's first stanza, or the
+  opening sentence of a prose story); the full transcript unfolds under "Read the story" (a button with
+  `aria-expanded`, the rest `inert` while closed), instead of a clamped wall of text. Verse is set one line per block
+  with a hanging indent. New `tools/narration_facts.py` checks each poem against the harvest cache.
+- Why: feedback 2026-11-21: "a bit of story and narration on the look instead of the amount of text", and the story
+  should be poetic, not plain.
+- Decision: facts only from each piece's record (D3), each listed beside the record's own Dutch words in the poem's
+  `trace`; the checker fails if those words are not in the record or a number in the poem is not. Old drafts and new
+  poems side by side for review in `docs/H13-NARRATION-REVIEW.md`. Audio: the 16 changed stories need re-voicing in
+  the same voice (Picsart Adeline, manual export); until then they play in the phone's own voice (the old files read
+  the old text, so `narration.py` no longer points at them). the curator's 3 keep their Adeline audio.
 
 ## MoMu's own CLO models on the outfit page (2026-11-21, branch hassan/momu-clo-pieces)
 - What: five pieces that have a MoMu CLO project are shown on `outfit.html` on MoMu's mannequin: furisode ST80881,
