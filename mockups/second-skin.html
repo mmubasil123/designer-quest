@@ -818,11 +818,18 @@ if (params.has("demo")) {
   const btn = document.getElementById("bodyBtn");
   btn.hidden = false;
   idle(() => loadAvatar().catch(() => {}));
+  // rigid scans only read as worn on the avatar for this pair; the others clip through it or hide under its jeans
+  const AVATAR_LOOK = { top: null, bottom: null, feet: "ST2407/1-2", full: "ST80881" };
+  let formLook = null;
   btn.addEventListener("click", async () => {
     const on = btn.getAttribute("aria-pressed") !== "true";
     btn.setAttribute("aria-busy", "true");
     try {
-      stageTT.setBody(on ? await loadAvatar() : null);
+      const body = on ? await loadAvatar() : null;
+      if (on) { formLook = { top: look.top, bottom: look.bottom, feet: look.feet, full: look.full }; Object.assign(look, AVATAR_LOOK); }
+      else if (formLook) Object.assign(look, formLook);
+      stageTT.setBody(body);
+      dress();
       btn.setAttribute("aria-pressed", on);
       skinsEl.hidden = on;   // finishes colour the dress form only
     } catch (e) { console.warn("demo avatar failed", e); toast("The demo avatar did not load"); }

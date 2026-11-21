@@ -17,6 +17,13 @@ Newest first. Each entry: what changed, why, and the decision behind it.
   fabric and the neck cut stay put when conform moves the cloth. Dress-form rendering is unchanged.
 - **Decision:** presenter-only behind `?demo`, no selfie flow and no MetaPerson keys in production (GDPR, and the setup
   takes minutes). Basil chose to commit the avatar file to the repo.
+- **One look on the avatar:** switching to the avatar puts on the furisode kimono (ST80881) and football boots
+  (ST2407/1-2) and switching back restores the form's look. Checked every wearable piece on the avatar: the rigid scans
+  cannot drape, so the jak and coat show the avatar's T-shirt, the monpe hangs off the hip and the knee breeches vanish
+  under its jeans. Only this pair reads as worn from front, side and back. The wardrobe still works; the presenter keeps
+  to this look. Real fitting stays with CLO (A7).
+- **Skin tone:** the Stage light is tuned for dark museum cloth and washed the avatar's skin out. Its body and head
+  materials now get half the environment light and 80% colour; garments are unchanged.
 
 ### B7 Share card: the look as a 1080x1920 PNG, shared or downloaded (branch hassan/B7)
 - **What:** **Share look** now opens a preview of a 9:16 card with two actions: **Share** (Web Share API with the PNG file, shown only where `navigator.canShare({files})` is true, i.e. most phones) and **Download image** (always there, the main action on a laptop). The card shows the look name (existing `lookName()`, "My look" when unremixed), "Worn across N years" with the oldest to newest year, the form still, every piece worn with its inventory id and years (cloth and sleeve remixes included), the credit "Collection: MoMu Fashion Museum Antwerp" and the app URL.

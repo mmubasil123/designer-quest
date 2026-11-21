@@ -53,6 +53,8 @@ export function prepAvatar(root, base) {
   root.updateWorldMatrix(true, true); box = new THREE.Box3().setFromObject(root);
   root.position.set(-(box.min.x + box.max.x) / 2, -box.min.y, -(box.min.z + box.max.z) / 2);
   root.traverse(o => { if (o.isMesh) o.frustumCulled = false; });   // skinned bounds do not follow the pose
+  // the Stage light is tuned for dark museum cloth and washes the skin out; tone only the skin, not the garments
+  root.traverse(o => { if (o.isMesh && /Body|Head/.test(o.name)) { o.material.envMapIntensity = 0.5; o.material.color.setScalar(0.8); } });
   const av = { root, arms: [] };
   for (const side of ["Left", "Right"]) {
     const upper = findBone(root, new RegExp(`(${side}Arm$|${side}UpperArm|${side[0]}_?UpperArm|upperarm_${side[0].toLowerCase()})`, "i"));
