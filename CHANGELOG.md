@@ -58,6 +58,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 - **Also:** the wearing chips and the "also in" links are now 44 px tall; the "3D" badge is 11 px (was 10).
 - **Checked:** Chrome at 390 px: Stage (front, side, back), wardrobe sheet, Study tab, fact card, story and questions, Ask, NFC, help, Piece page, Up close. Console: only the old model-viewer "multiple three.js" warning. `impeccable detect` on the served page: no findings. Before and after screenshots are in the session notes folder, not in the repo.
 - **Not done:** B9 itself (span as a large number, short tile names) stays open and Mubasil's; this ticket is H4. No dark theme (photos need the light wall).
+- **Story screen (H3):** `story.css` reads the tokens too (red capital title first, years in the sans, transcript in the serif); its title is an `h2`.
 - **Share card:** `share.js` draws on a canvas, so it cannot read the CSS tokens; its font and colour constants now mirror `theme.css` (change both together). `share.css` reads the tokens.
 - **Merge order:** rebased on B7. If A9 (PR #11) merges first, rebase this again: in `second-skin.html` it only touches the head, the font names in the style block and four heading tags.
 - **Decision:** a separate stylesheet over rewriting the inline CSS, so open branches on `second-skin.html` merge cleanly and a brand guide can later be applied by editing one `:root` block.

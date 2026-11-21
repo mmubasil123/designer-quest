@@ -82,7 +82,7 @@ export async function createStory() {
     if (!p) return Promise.resolve();
     el.innerHTML = `<div tabindex="-1" autofocus>
       <div class="mono">${found ? "Found in the museum" : "Story"} · ${esc(id)}</div>
-      <h3 id="storyName">${esc(p.title)}</h3>
+      <h2 id="storyName">${esc(p.title)}</h2>
       ${p.years ? `<p class="years">${esc(p.years)}</p>` : ""}
       ${p.draft ? `<p class="draft">Draft built only from the MoMu record; the curator's story is still to come.</p>` : ""}
       <div class="player">
