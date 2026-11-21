@@ -25,7 +25,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { SparkRenderer, SplatMesh } from "@sparkjsdev/spark";
 
 const FILES = ["MOMU-1_st673", "MOMU-2_st81190", "MOMU-3_st2435", "MOMU-4_st80998", "MOMU-6_st2431",
-  "MOMU-7_st2432", "MOMU-8_st671", "MOMU-9_st2203", "MOMU-10_st652"];
+  "MOMU-7_st2432", "MOMU-8_st671", "MOMU-9_st2203", "MOMU-10_st652", "MOMU_5_261121.sog"];   // a name with an extension loads as is
 const pick = document.getElementById("pick"), status = document.getElementById("status");
 pick.innerHTML = FILES.map(f => `<option>${f}</option>`).join("");
 
@@ -48,7 +48,7 @@ async function load(name) {
   if (mesh) { scene.remove(mesh); mesh.dispose(); }
   status.textContent = `loading ${name} (about 220 MB)...`;
   const t0 = performance.now();
-  mesh = new SplatMesh({ url: `../splats/${name}.ply` });
+  mesh = new SplatMesh({ url: `../splats/${name.includes(".") ? name : name + ".ply"}` });
   mesh.quaternion.set(1, 0, 0, 0);   // COLMAP-style captures are y-down; Flip undoes this if a file is not
   scene.add(mesh);
   await mesh.initialized;
