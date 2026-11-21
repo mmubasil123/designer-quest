@@ -2,6 +2,16 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## MoMu branding on every main screen (2026-11-21, branch hassan/H10-branding)
+- What: a stacked "MoMu / Second Skin" lockup replaces the plain "Second Skin" in the Stage bar and the Up close header
+  (`.momu` and `.brand.lockup` in `theme.css`); the share card PNG carries the same "MoMu" wordmark at the right end of its "Second Skin · date" row (H12);
+  copy names MoMu where it said "the museum" (Found at MoMu on the story and quiz sheets, Find it at MoMu, Win it at
+  MoMu, At MoMu, Win pieces at MoMu); page titles end in "· MoMu"; Up close loads "MoMu's 3D scan".
+- Why: feedback round 2026-11-21, "Add more MoMu branding". The app read as Second Skin with MoMu only in small credits.
+- Decision: a typographic wordmark ("MoMu" in its own mixed case, Hanken Grotesk 600, black as on momu.be), not a
+  logo: neither the repo nor MoMu's hackathon presentation template holds an official logo file, and we do not draw
+  one. Red stays for titles only. Fact card left as it is: it already says MoMu study collection, MoMu says, MoMu record.
+  Checked in Chrome at 390 px (Stage, story, fact card, share card, Up close), console clean; not on a phone.
 ## Personal share card (2026-11-21, branch hassan/H12-share)
 - What: the share sheet has an optional name field. The card now reads "<Name>'s look across N years" (without a name:
   "A look across N years"), stands the form in the period room of the look's middle year (`scenes.js`), shows the date,

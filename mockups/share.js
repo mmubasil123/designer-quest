@@ -89,6 +89,10 @@ export function drawCard({ grab, name, facts, url, scene, quote, won, kicker }) 
   ctx.textBaseline = "alphabetic"; ctx.fillStyle = MUTED; ctx.font = `500 24px ${MONO}`;
   ctx.fillText(kicker.toUpperCase(), pad, 124);
 
+  // H10: MoMu's name as the same typographic wordmark as the app's top bar (no official logo file exists to draw),
+  // at the right end of the kicker's row so the two read as one header line
+  ctx.fillStyle = INK; ctx.font = `600 46px ${MONO}`; ctx.letterSpacing = "-1px"; ctx.textAlign = "right";
+  ctx.fillText("MoMu", CARD_W - pad, 124); ctx.letterSpacing = "0px"; ctx.textAlign = "left";
   ctx.fillStyle = RED; ctx.font = `400 84px ${MONO}`;   // titles are red capitals, as in MoMu's template
   const lines = wrap(ctx, name.toUpperCase(), CARD_W - 2 * pad, 3);
   let y = 214;
