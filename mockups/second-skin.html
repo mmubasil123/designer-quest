@@ -353,7 +353,7 @@ try {
   const found = JSON.parse(localStorage.getItem("secondSkin.found.v1") || "{}") || {};
   Object.entries(PIECES).filter(([, p]) => p.splat).forEach(([id, p]) => {
     p.seen = Array.isArray(found[id]);
-    p.found = p.seen ? new Set(found[id]).size : 0;
+    p.found = p.seen ? new Set(found[id].filter(i => Number.isInteger(i) && i >= 0 && i < p.details)).size : 0;   // the same check as Up close, so only real details count
     if (p.seen && p.found >= p.details) p.locked = false;
   });
 } catch { /* storage blocked: splat fabrics stay locked */ }
@@ -383,10 +383,12 @@ if (PIECES[scanned]?.clo && !PIECES[scanned].glb) {   // a CLO garment is worn o
 const SLOTS = ["top", "bottom", "feet", "full"];
 const look = { top: null, bottom: null, feet: null, full: "ST80881", fabric: { body: null, sleeves: null }, skin: 1 };   // first look: the furisode, the cleanest scan and the most recognisable piece
 const SAVE_KEY = "secondSkin.save.v1";
+let widest = 0;   // the widest span this visitor has built; saved with the look, so a reload keeps the record
 try {   // restore the visitor's look; ids are checked against the manifest, since storage is user-controlled
   const saved = JSON.parse(localStorage.getItem(SAVE_KEY) || "null");
   const ok = (id, slots) => id === null || (PIECES[id] && !PIECES[id].locked && (PIECES[id].glb || PIECES[id].splat) && slots.includes(slotOf(id)));
   const l = saved?.v === 1 && saved.look;
+  if (Number.isFinite(saved?.widest) && saved.widest > 0) widest = Math.min(Math.round(saved.widest), 1000);
   if (l && ok(l.top, ["top"]) && ok(l.bottom, ["bottom"]) && ok(l.feet, ["feet"]) && ok(l.full, ["full"])
       && ok(l.fabric?.body ?? null, ["top", "bottom", "feet", "full", "study"]) && ok(l.fabric?.sleeves ?? null, ["top", "bottom", "feet", "full", "study"])
       && Number.isInteger(l.skin) && l.skin >= 0 && l.skin < 4) {
@@ -849,7 +851,6 @@ window.secondSkin = { look, turntables, avatar: avatarState };   // handle for d
 
 /* ---------- Look state, skins, locker ---------- */
 const yearOf = id => PIECES[id].year.from;
-let widest = 0;
 const noun = id => PIECES[id].name.split(",")[0].split(" ").pop().replace(/^./, c => c.toUpperCase());   // "Green wool coat" -> "Coat"
 const adj = id => PIECES[id].name.split(" ")[0].replace(/,$/, "");   // "Furisode kimono, 1979" -> "Furisode"
 function lookName() {   // a remixed look earns a name; an unremixed one keeps the screen's title
@@ -873,6 +874,7 @@ function toast(text) {
   el.textContent = text; el.classList.add("show");
   clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove("show"), 2600);
 }
+const saveLook = () => { try { localStorage.setItem(SAVE_KEY, JSON.stringify({ v: 1, look, widest })); } catch { /* storage full or blocked */ } };
 const stageScene = mountScene(document.getElementById("stage"));
 function renderCredit() {   // the evening game: build the look that spans the most years
   const lead = look.full || look.top || look.bottom || look.feet;   // the room follows the look's main piece
@@ -884,7 +886,7 @@ function renderCredit() {   // the evening game: build the look that spans the m
   widest = Math.max(widest, span);
   document.getElementById("lookSpan").textContent = span ? `Spans ${span} years · your widest ${widest}` : "";
   document.getElementById("lookName").textContent = lookName();
-  try { localStorage.setItem(SAVE_KEY, JSON.stringify({ v: 1, look, widest })); } catch { /* storage full or blocked */ }
+  saveLook();
   if (!renderCredit.ready) return;   // the page's opening look earns nothing; the visitor's first change can
   const fresh = FIRSTS.filter(f => !earned.has(f.k) && f.test(span, fabricIds.length));
   fresh.forEach(f => earned.add(f.k));
@@ -897,6 +899,7 @@ skinsEl.addEventListener("click", e => {
   look.skin = +b.dataset.i;
   skinsEl.querySelectorAll("[data-i]").forEach(x => x.setAttribute("aria-pressed", x === b));
   turntables.forEach(t => t.draw());
+  saveLook();   // the finish is part of the saved look: a reload must not reset it
 });
 
 let activeSlot = look.full ? "full" : "top", activeZone = "body";
@@ -906,7 +909,8 @@ const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;",
 const shortName = id => PIECES[id].name.split(",")[0];
 const swatchOf = id => `assets/swatch/${fileOf(id)}.jpg`;
 // ctx is how a tap on this piece acts: "remix" puts its cloth on activeZone, a slot wears it, "study" opens Up close
-const ctxOf = id => activeSlot === "won" ? "won" : activeSlot === "remix" && !PIECES[id].locked && (PIECES[id].glb || PIECES[id].splat) ? "remix" : PIECES[id].wear === activeSlot ? activeSlot : PIECES[id].slot;
+// a locked study piece is never worn: its `wear` slot counts only once it is won, else a fact card in that tab put it on
+const ctxOf = id => activeSlot === "won" ? "won" : activeSlot === "remix" && !PIECES[id].locked && (PIECES[id].glb || PIECES[id].splat) ? "remix" : PIECES[id].wear === activeSlot && !PIECES[id].locked ? activeSlot : PIECES[id].slot;
 function isWorn(id, ctx) {
   if (ctx === "won") return PIECES[id].splat ? look.fabric.body === id : PIECES[id].slot === "full" ? look.full === id : !look.full && look[PIECES[id].slot] === id;
   if (ctx === "remix") return look.fabric[activeZone] === id;
@@ -973,7 +977,7 @@ museumEl.addEventListener("click", e => {
   else { activeSlot = PIECES[id].slot; renderLocker(); setSnap("half"); }
 });
 const FRESH_KEY = "secondSkin.new.v1";   // pieces and fabrics won but not yet worn, marked New
-const fresh = new Set((() => { try { return JSON.parse(localStorage.getItem(FRESH_KEY) || "[]"); } catch { return []; } })().filter(id => PIECES[id]));
+const fresh = new Set((() => { try { const f = JSON.parse(localStorage.getItem(FRESH_KEY) || "[]"); return Array.isArray(f) ? f : []; } catch { return []; } })().filter(id => PIECES[id]));   // storage is user-controlled: a non-array must not stop the page
 const keepFresh = () => { try { localStorage.setItem(FRESH_KEY, JSON.stringify([...fresh])); } catch { /* blocked: New lasts this visit */ } };
 /* What the form wears, always in the sheet's peek: tap a chip to change that part, × to take it off */
 function renderWearing() {
@@ -1154,6 +1158,8 @@ async function openFact(id) {
 const viewEl = document.getElementById("view3d"), viewMV = document.getElementById("viewMV"), view3dBtn = document.getElementById("fact3d");
 const viewScene = mountScene(viewEl.firstElementChild);
 let mvReady = null;
+// src is set as a property, which model-viewer does not reflect to the attribute, so removeAttribute alone left the model loaded
+const clearView = () => { viewMV.removeAttribute("src"); if (viewMV.src) viewMV.src = null; };
 document.getElementById("factClo").addEventListener("click", () => { const id = factId; factEl.close(); go(`outfit.html?card=${encodeURIComponent(id)}`); });
 view3dBtn.addEventListener("click", async () => {
   const id = factId;
@@ -1161,16 +1167,17 @@ view3dBtn.addEventListener("click", async () => {
   mvReady ??= import("https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js").catch(() => null);
   document.getElementById("viewName").textContent = PIECES[id].name;
   viewScene.set(PIECES[id].year);
-  viewMV.removeAttribute("src");
+  clearView();   // the last piece must not show under this one's name while it loads
   factEl.close(); viewEl.showModal();
-  if (await mvReady) viewMV.src = PIECES[id].glb;
+  const token = viewEl.dataset.id = id;
+  if (await mvReady && viewEl.open && viewEl.dataset.id === token) viewMV.src = PIECES[id].glb;   // closed or switched while the viewer loaded: leave it empty
 });
 const viewAR = document.getElementById("viewAR");   // our own button: model-viewer's ar-button slot positions itself, off centre
 viewMV.addEventListener("load", () => { viewAR.hidden = !viewMV.canActivateAR; });
 viewAR.addEventListener("click", () => viewMV.activateAR());
-viewEl.addEventListener("close", () => { viewMV.removeAttribute("src"); viewAR.hidden = true; });   // frees the model and its GPU memory
+viewEl.addEventListener("close", () => { clearView(); viewAR.hidden = true; });   // frees the model and its GPU memory
 document.getElementById("factShares").addEventListener("click", e => { const b = e.target.closest("[data-fact]"); if (b) openFact(b.dataset.fact); });
-document.getElementById("factAct").addEventListener("click", () => { factEl.close(); PIECES[factId].locked && !PIECES[factId].splat ? tapCard(factId) : act(factId, ctxOf(factId)); });
+document.getElementById("factAct").addEventListener("click", () => { factEl.close(); PIECES[factId].locked ? tapCard(factId) : act(factId, ctxOf(factId)); });   // anything locked goes to its sticker (or Up close once seen), never onto the form
 factEl.addEventListener("click", e => { if (e.target === factEl) factEl.close(); });   // backdrop tap closes
 factEl.addEventListener("close", () => { if (!document.getElementById("nfc").open) cancelStudy(); });   // closed without going on: stop the download
 const ask = createAsk();   // H2: questions answered only from this piece's MoMu record (ask.js)
@@ -1276,7 +1283,7 @@ const recordsSoon = () => Promise.race([recordsReady, new Promise(r => setTimeou
 async function replayStory(id) {   // a piece already won keeps its story and audio tour: the sticker or its Museum tile plays it again
   story ??= await createStory({ img: i => PIECES[i].img, name: i => PIECES[i].name });
   await showScan({ story, quiz, id, next: "Back to my look" });
-  welcome(id, `${shortName(id)} is in your Won tab`);
+  welcome(id, PIECES[id].room ? `${shortName(id)} is in your Won tab` : `${shortName(id)} is in your ${LABEL[PIECES[id].slot]} tab`);   // only museum wins live in Won
 }
 async function scan(id) {
   const p = PIECES[id];

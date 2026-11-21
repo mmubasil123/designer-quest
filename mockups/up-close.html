@@ -176,7 +176,7 @@ if (piece?.assets.clo) { const a = document.getElementById("clo"); a.href = `out
 if (!piece) { location.replace("second-skin.html"); throw new Error("no splat piece " + id); }
 
 const readFound = () => { try { return JSON.parse(localStorage.getItem(FOUND_KEY) || "{}") || {}; } catch { return {}; } };
-const found = new Set((readFound()[id] || []).filter(i => Number.isInteger(i) && i >= 0 && i < piece.details.length));
+const found = new Set([].concat(readFound()[id] || []).filter(i => Number.isInteger(i) && i >= 0 && i < piece.details.length));
 const saveFound = () => {   // opening the page counts as having seen the card, so the id is stored even with none found
   try { localStorage.setItem(FOUND_KEY, JSON.stringify({ ...readFound(), [id]: [...found] })); } catch { /* blocked */ }
 };
