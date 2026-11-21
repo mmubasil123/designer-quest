@@ -60,13 +60,24 @@ function warmImage(url) {   // resolves when the image is in cache, fails, or th
     setTimeout(end, IMAGE_FIRST_MAX_MS);
   });
 }
+const AUDIO_FIRST_MAX_MS = 1500;
+async function warmNarration(id) {   // fetch the story's audio file into the HTTP cache (100 to 450 KB), 1.5 s at most
+  try {
+    const doc = await (await fetch(new URL("narration.json", HERE))).json();   // story.js asks for the same file: one cache entry
+    const audio = doc.pieces?.[id]?.audio;
+    if (!audio) return;
+    const ctl = new AbortController(), cap = setTimeout(() => ctl.abort(), AUDIO_FIRST_MAX_MS);
+    try { const r = await fetch(new URL(audio, HERE), { priority: "high", signal: ctl.signal }); await r.arrayBuffer(); }
+    finally { clearTimeout(cap); }
+  } catch { /* no narration, or slow: the scan goes on anyway */ }
+}
 function hintModules() {
   for (const href of UPCLOSE_MODULES) {
     const l = document.createElement("link"); l.rel = "modulepreload"; l.href = href; document.head.append(l);
   }
 }
 async function drain(j, url) {   // stream into the HTTP cache and drop the bytes
-  const r = await fetch(url, { priority: "high" });
+  const r = await fetch(url, { priority: j.s.kind === "glb" ? "high" : "low" });   // a study scan must not hold up the story's audio
   if (!r.ok || !r.body) throw new Error(String(r.status));
   set(j, { state: "loading", total: +r.headers.get("content-length") || 0 });
   const reader = r.body.getReader();
@@ -96,6 +107,7 @@ async function run(j, id, imageOpt) {
     if (splat) hintModules();
     const img = imageOpt === false ? null : typeof imageOpt === "string" ? imageOpt : p.source?.imgSha ? IMG(p.source.imgSha) : null;
     if (img) await warmImage(img);
+    if (splat) await warmNarration(id);   // the story (and its audio) shows before Up close, so its audio goes before the 15 MB scan
     await drain(j, url);
     set(j, { state: "ready", loaded: j.s.total || j.s.loaded });
     return true;
@@ -124,7 +136,10 @@ async function glbSource(id, fallbackUrl) {
   const j = jobs.get(id);
   if (!j || j.s.kind !== "glb") return fallbackUrl;
   await j.done;
-  return j.blob ? URL.createObjectURL(j.blob) : fallbackUrl;
+  if (!j.blob) return fallbackUrl;
+  const u = URL.createObjectURL(j.blob);
+  j.blob = null;   // handed over once: the caller revokes the URL after loading, and the bytes are not kept twice
+  return u;
 }
 
 export const preload = {
