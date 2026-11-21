@@ -24,7 +24,7 @@ before calling anything done. Never deploy, push to `main` or publish without yo
   made). Until then those play with the phone's own voice. After the curator edits her page: re-sync `questions.json`,
   rerun the script (only changed stories are re-voiced), `--check` before committing.
 
-## H4 MoMu theme (hassan, branch `hassan/B9-momu-theme`, not merged)
+## H4 MoMu theme (hassan, merged in PR #15)
 - The look lives in `mockups/theme.css`: change a colour or font in its `:root` block, not in the pages. It must load
   after `second-skin.html`'s own style block. Fonts are self-hosted in `mockups/assets/fonts/` (OFL).
 - New CSS should use the tokens (`--serif`, `--sans`, `--t-title`, `--accent`, `--r-card`, `--shadow-pill`).
