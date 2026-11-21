@@ -2,6 +2,22 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## MoMu's own CLO models on the outfit page (2026-11-21, branch hassan/momu-clo-pieces)
+- What: five pieces that have a MoMu CLO project are shown on `outfit.html` on MoMu's mannequin: furisode ST80881,
+  jak ST503, knee breeches ST2062, riveted coat ST81190, bridal kaftan ST80998 (`outfit.html?card=<id>`). Each has
+  `assets.clo` with its own body file (`assets/clo/<id>.glb` + `<id>_body.glb`, about 10 MB in all). New
+  `clo/obj2glb.mjs` splits a CLO OBJ export (Multiple Objects, Thin, mm) into garment and mannequin GLBs; then
+  `clo/optimise_glb.mjs`. The page now picks the body from the piece (`assets.clo.avatar`), lists the pieces draped on
+  that body, frames a static mannequin by its own box, and takes its title and credit from the piece.
+- Why: the team wants every piece it can as a draped CLO garment. MoMu's projects are draped on MoMu's mannequin, sized
+  and posed per project (1.55 m to 1.88 m, some arms out), so they do not fit the team avatar as exported.
+- Decision: show each on the body it was draped on rather than re-drape (no simulation by us, nothing fitted, D5).
+  Exported from CLO by hand-confirmed OBJ export: the clo3d-mcp GLB export fails on CLO 2026.1. Not done: no way in
+  from the wardrobe or card scans yet; cavalry uniform ST2431 left out (its project holds part 1 of 4, undraped).
+  Caveat: ST81190, ST80998 and ST2431_1 `.zprj` were re-saved on 2026-11-21 while our dropped CLO sessions had them
+  open; they carry MoMu's mannequin and pattern names, but a fresh Drive copy would confirm they are unchanged. Coat
+  included on Hassan's say. The 11 other pieces have no CLO project.
+
 ## the team's cycling outfit on the avatar (2026-11-21, branch hassan/team-models)
 - What: the team's CLO blouse (ST81114AB) and trousers (ST81116) are worn on the team avatar on a new page,
   `mockups/outfit.html` (OutfitRig, toggles per piece, front / side / back). Scanning either card shows its story, then

@@ -12,6 +12,7 @@ body { background: var(--paper); color: var(--ink); font: var(--t-body); display
 button { font: inherit; color: inherit; background: none; border: 1px solid var(--ink); border-radius: 999px; padding: 10px 16px; min-height: 44px; cursor: pointer; }
 button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 header { padding: max(12px, env(safe-area-inset-top)) 16px 8px; display: flex; gap: 12px; align-items: baseline; justify-content: space-between; }
+header a { white-space: nowrap; flex: none; }
 h1 { font: var(--t-display); letter-spacing: var(--track-title); text-transform: uppercase; color: var(--title-ink); font-size: 22px; }
 #view { margin: 0 16px; background: var(--wall); border-radius: var(--r-pic); overflow: hidden; position: relative; touch-action: none; }
 #view canvas { display: block; width: 100%; height: 100%; }
@@ -32,12 +33,13 @@ footer { padding: 12px 16px max(16px, env(safe-area-inset-bottom)); display: gri
 <footer>
   <div class="row" id="pieces" aria-label="Wear"></div>
   <div class="row" id="views" aria-label="View"><button data-v="front">Front</button><button data-v="side">Side</button><button data-v="back">Back</button></div>
-  <p class="credit">Models by the team, sewn in CLO 3D and draped on the team avatar. Worn as exported (D5): nothing is fitted.</p>
+  <p class="credit" id="credit"></p>
 </footer>
 <script type="module">
-/* Look-first preview of the team's cycling outfit. Every wearable piece with `assets.clo` in pieces.json is worn on the avatar it
-   was draped on, through OutfitRig (slots bottom, top).
-   ?card=<id> starts with that piece on. Console handle: window.outfit = { rig, view(name) }. */
+/* CLO garments on the body they were draped on, through OutfitRig. A piece with `assets.clo` in pieces.json names its
+   body (`assets.clo.avatar`): the team's pieces share the team avatar, a MoMu CLO project comes with MoMu's mannequin in the
+   pose it was draped in. The page shows one body and the pieces draped on it (D5: nothing is fitted or rescaled).
+   ?card=<id> picks that piece's body and starts with it on. Console handle: window.outfit = { rig, view(name) }. */
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
@@ -46,8 +48,16 @@ import { OutfitRig } from "./clo/outfit.js";
 
 const $ = s => document.querySelector(s), view = $("#view"), status = $("#status");
 const manifest = await (await fetch("pieces.json")).json();
-const clo = manifest.pieces.filter(p => p.assets.clo && p.slot !== "study");   // the team's models only; the study coat stays on Up close
-const avatarUrl = clo[0].assets.clo.avatar;
+const card = new URLSearchParams(location.search).get("card");
+const all = manifest.pieces.filter(p => p.assets.clo);
+const avatarUrl = (all.find(p => p.id === card) ?? all.find(p => /avatar_web\.glb$/.test(p.assets.clo.avatar)) ?? all[0]).assets.clo.avatar;   // no card: the team avatar's outfit
+const clo = all.filter(p => p.assets.clo.avatar === avatarUrl);   // the pieces draped on this body
+const team = /avatar_web\.glb$/.test(avatarUrl);
+const word = clo[0].name.split(" ")[0];
+$("#title").textContent = clo.length > 1 && clo.every(p => p.name.startsWith(word)) ? `${word} outfit` : clo[0].name;
+document.title = `${$("#title").textContent} · Second Skin`;
+$("#credit").textContent = team ? "Models by the team, sewn in CLO 3D and draped on the team avatar. Worn as exported: nothing is fitted."
+  : "MoMu's own CLO 3D model, on MoMu's mannequin in the pose it was draped in. Worn as exported: nothing is fitted.";
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
@@ -70,17 +80,27 @@ controls.target.set(0, 0.9, 0);
 
 const rig = new OutfitRig({ loader: new GLTFLoader(), cacheSize: 4 });
 scene.add(rig.root);
-for (const p of clo) rig.register({ id: p.id, slot: p.slot, glb: p.assets.clo.path, label: p.name,
+const slotOf = p => ["top", "bottom", "full", "outer"].includes(p.wear ?? p.slot) ? (p.wear ?? p.slot) : "full";   // a study piece wears where `wear` says
+for (const p of clo) rig.register({ id: p.id, slot: slotOf(p), glb: p.assets.clo.path, label: p.name,
   variants: (p.assets.clo.variants || []).map(v => ({ over: v.over, glb: v.path })) });
 
 const FORM = 0xe4ddd2;
 const av = await rig.setAvatar(avatarUrl);
 av.traverse(o => { if (!o.isMesh) return; o.material = new THREE.MeshStandardMaterial({ color: FORM, roughness: 0.85 }); o.frustumCulled = false; });
 
+// a static body (MoMu's mannequin, arms out) is framed by its own box; the skinned team avatar's box is its bind pose, so it keeps a fixed frame
+let skinned = false; av.traverse(o => { skinned ||= !!o.isSkinnedMesh; });
+const box = skinned ? null : new THREE.Box3().setFromObject(av);
 const views = { front: 0, side: Math.PI / 2, back: Math.PI };   // garments face +z
 function setView(name) {
-  const a = views[name], d = 3.4;
-  camera.position.set(Math.sin(a) * d, 1.1, Math.cos(a) * d); controls.update();
+  const a = views[name]; let d = 3.4, y = 0.9;
+  if (box) {
+    const s = box.getSize(new THREE.Vector3()), t = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)), w = name === "side" ? s.z : s.x;
+    d = 1.08 * Math.max(s.y / (2 * t), w / (2 * t * camera.aspect)) + s.z / 2; y = (box.min.y + box.max.y) / 2;
+    controls.maxDistance = Math.max(6, d * 1.2);
+  }
+  controls.target.set(0, y, 0);
+  camera.position.set(Math.sin(a) * d, y + 0.2, Math.cos(a) * d); controls.update();
 }
 function size() {
   const { clientWidth: w, clientHeight: h } = view; renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix();
@@ -103,7 +123,6 @@ rig.addEventListener("change", e => {
 });
 $("#views").addEventListener("click", e => { const v = e.target.closest("button")?.dataset.v; if (v) setView(v); });
 status.textContent = "";
-const card = new URLSearchParams(location.search).get("card");
 if (card && rig.items.has(card)) await rig.wear(card);
 window.outfit = { rig, view: setView, camera, controls, renderer, scene };
 </script>

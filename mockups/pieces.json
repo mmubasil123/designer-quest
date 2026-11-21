@@ -20,6 +20,13 @@
           "kind": "scan",
           "units": "norm",
           "origin": "bbox"
+        },
+        "clo": {
+          "path": "assets/clo/ST503.glb",
+          "avatar": "assets/clo/ST503_body.glb",
+          "kind": "clo",
+          "units": "m",
+          "origin": "avatar"
         }
       },
       "fit": {
@@ -117,7 +124,14 @@
       },
       "locked": true,
       "assets": {
-        "glb": null
+        "glb": null,
+        "clo": {
+          "path": "assets/clo/ST2062.glb",
+          "avatar": "assets/clo/ST2062_body.glb",
+          "kind": "clo",
+          "units": "m",
+          "origin": "avatar"
+        }
       },
       "fit": {},
       "pipeline": {
@@ -224,6 +238,13 @@
           "kind": "scan",
           "units": "norm",
           "origin": "bbox"
+        },
+        "clo": {
+          "path": "assets/clo/ST80881.glb",
+          "avatar": "assets/clo/ST80881_body.glb",
+          "kind": "clo",
+          "units": "m",
+          "origin": "avatar"
         }
       },
       "fit": {
@@ -557,6 +578,13 @@
         },
         "splat": {
           "path": "assets/splat/ST81190.sog"
+        },
+        "clo": {
+          "path": "assets/clo/ST81190.glb",
+          "avatar": "assets/clo/ST81190_body.glb",
+          "kind": "clo",
+          "units": "m",
+          "origin": "avatar"
         }
       },
       "fit": {
@@ -652,6 +680,13 @@
         },
         "splat": {
           "path": "assets/splat/ST80998.sog"
+        },
+        "clo": {
+          "path": "assets/clo/ST80998.glb",
+          "avatar": "assets/clo/ST80998_body.glb",
+          "kind": "clo",
+          "units": "m",
+          "origin": "avatar"
         }
       },
       "fit": {},
