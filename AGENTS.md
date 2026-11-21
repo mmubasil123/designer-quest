@@ -43,6 +43,8 @@ just fail to connect.
   continue without asking.
 
 ## Rules
+- **Research log.** Before any research (web, agents, audits), search `docs/RESEARCH-LOG.md` and reuse what is
+  there; research only the gap. When an analysis is done, append one row (date, topic, conclusion, where).
 - Every change gets a `CHANGELOG.md` entry: what, why, and the decision.
 - Verify UI changes in Chrome before calling them done (front, side and back of the turntable, console clean).
 - Python runs from the project `.venv` with `-I`; install only into `.venv` and add the pin to `requirements.txt`.
