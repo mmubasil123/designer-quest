@@ -137,7 +137,17 @@
       },
       "locked": true,
       "assets": {
-        "glb": null
+        "glb": null,
+        "clo": {
+          "path": "assets/clo/ST81114AB.glb",
+          "avatar": "assets/clo/avatar_web.glb",
+          "kind": "clo",
+          "units": "m",
+          "origin": "avatar",
+          "variants": [
+            { "over": ["ST81116"], "path": "assets/clo/ST81114AB_in_ST81116.glb" }
+          ]
+        }
       },
       "fit": {},
       "pipeline": {
@@ -157,7 +167,14 @@
       },
       "locked": true,
       "assets": {
-        "glb": null
+        "glb": null,
+        "clo": {
+          "path": "assets/clo/ST81116.glb",
+          "avatar": "assets/clo/avatar_web.glb",
+          "kind": "clo",
+          "units": "m",
+          "origin": "avatar"
+        }
       },
       "fit": {},
       "pipeline": {
