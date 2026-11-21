@@ -4,6 +4,10 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### Git repo on GitHub
+- Project is now a private repo, github.com/mmubasil123/momu-collection-db, pushed with the personal `mubasil123_github` SSH key (repo-local `core.sshCommand`), never the GitLab key.
+- `.gitignore` keeps out `.env`, `.venv/`, `cache/`, `_to_delete/`, `tools/craft/` binaries and the `.dmg`: secrets, reproducible downloads and files over GitHub's 100 MB limit.
+
 ### Single full-screen phone app
 - On screens up to 600 px wide the page is now one full-screen app: one screen at a time (`body[data-screen]`),
   no page scroll, safe-area insets for notches, `viewport-fit=cover`, theme colour and home-screen meta tags.

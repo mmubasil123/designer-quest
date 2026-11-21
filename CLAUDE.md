@@ -8,7 +8,7 @@
 
 ## Scope
 - MoMu Hackathon 2026: the harvested collection DB and the Second Skin mockup.
-- Not a git repo yet. Discards go to `_to_delete/`, never `rm`.
+- Private git repo: github.com/mmubasil123/momu-collection-db (personal SSH key, never the GitLab one). Discards go to `_to_delete/`, never `rm`.
 
 ## Rules
 - Every change gets a `CHANGELOG.md` entry: what, why, and the decision (the user asked for this).
