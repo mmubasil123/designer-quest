@@ -160,7 +160,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .fact .shares { font-size: 13px; margin-bottom: 16px; }
 .fact .shares div { display: flex; flex-wrap: wrap; align-items: center; column-gap: 12px; }
 .fact .shares button { text-decoration: underline; text-underline-offset: 2px; min-height: 32px; }
-.fact .row { display: flex; gap: 8px; align-items: center; }
+.fact .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.fact .ar { width: 100%; margin-bottom: 8px; }
 .fact .row .btn { flex: 1; }
 .fact .row a { flex: none; min-height: 44px; display: flex; align-items: center; padding: 0 14px; font-size: 13px; color: var(--ink); }
 .tile.on { outline: 2px solid var(--ink); outline-offset: 2px; }
@@ -876,9 +877,9 @@ function renderLocker() {
 const museumEl = document.getElementById("museum");
 function renderMuseum() {
   const room = Object.entries(PIECES).filter(([, p]) => p.room);
-  document.getElementById("museumTitle").textContent = `In the museum · ${room.filter(([, p]) => !p.locked).length} of ${room.length} won`;
+  document.getElementById("museumCount").textContent = `${room.filter(([, p]) => !p.locked).length} of ${room.length} won`;
   document.getElementById("museumGrid").innerHTML = room.map(([id, p]) => {
-    const state = !p.locked ? (p.splat ? "Fabric in your wardrobe" : "In your wardrobe") : p.seen ? `${p.found} of ${p.details} found` : "Tap its sticker in the room";
+    const state = !p.locked ? (p.splat ? "Fabric won" : "Won") : p.seen ? `${p.found} of ${p.details} details found` : "Still to find";
     const date = p.year.from === p.year.to ? p.year.from : `${p.year.from} to ${p.year.to}`;
     const when = p.locked && !p.splat ? "" : `${date} · `;   // a wearable's year is the answer to its Win it guess
     return tile(id, `study ${p.seen || !p.locked ? "seen" : ""}`, p.img, `<span class="st"><b>${esc(p.name)}</b><span>${when}${state}</span></span>`,
@@ -1009,9 +1010,9 @@ async function openFact(id) {
   document.getElementById("factName").textContent = p.name;
   const made = (r.medium || []).map(plain).join(", ");
   document.getElementById("factFields").innerHTML = `<dt>Made with</dt><dd>${made ? esc(made[0].toUpperCase() + made.slice(1)) : NR}</dd>
-    <dt>Date</dt><dd>${r.date?.length ? esc(r.date.join(", ")) : NR}</dd><dt>Place</dt><dd>${r.place?.length ? esc(r.place.join(", ")) : NR}</dd>`;
+    <dt>Date</dt><dd>${p.room && p.locked && !p.splat ? '<span class="nr">Win it to find out</span>' : r.date?.length ? esc(r.date.join(", ")) : NR}</dd><dt>Place</dt><dd>${r.place?.length ? esc(r.place.join(", ")) : NR}</dd>`;
   document.getElementById("factQuote").innerHTML = r.quote
-    ? `<div class="mono">MoMu says</div><q lang="nl">${esc(r.quote)}</q><p>${esc(r.quoteEn)} <span class="mono">Our translation</span></p>`
+    ? `<div class="mono">MoMu says</div><q>${esc(r.quoteEn || r.quote)}</q>${r.quoteEn ? `<p lang="nl">${esc(r.quote)} <span class="mono">Dutch original</span></p>` : ""}`
     : `<span class="nr">No description recorded</span>`;
   const links = (r.medium || []).filter(t => !GENERIC.has(t)).map(t => [t, Object.keys(RECORDS).filter(o => o !== id && RECORDS[o].medium?.includes(t))])
     .filter(([, o]) => o.length).slice(0, 2);
@@ -1021,13 +1022,34 @@ async function openFact(id) {
   link.hidden = !r.uri; if (r.uri) link.href = r.uri;
   const actBtn = document.getElementById("factAct");
   const label = ctx === "study" ? (p.seen ? "Study it up close" : "Find it in the museum")
-    : p.locked ? null : ctx === "remix" ? (isWorn(id, ctx) ? `Take it off the ${activeZone}` : `Use on the ${activeZone}`)
+    : p.locked ? "Find it in the museum" : ctx === "remix" ? (isWorn(id, ctx) ? `Take it off the ${activeZone}` : `Use on the ${activeZone}`)
     : isWorn(id, ctx) ? "Take it off" : "Wear it";
   actBtn.hidden = !label; actBtn.textContent = label ?? "";
+  const unwon = p.room && p.locked && !p.splat;   // its date is the answer to Guess the year, so nothing may reveal it yet
+  document.getElementById("factAsk").hidden = unwon;
+  prepAR(id);
   if (!factEl.open) factEl.showModal();
 }
+/* AR: a phone that can place 3D models (WebXR, Scene Viewer, Quick Look) gets "See it in your room" for any piece with a
+   3D file. model-viewer loads on the first fact card; the button shows only once that piece's file says AR can start,
+   so the tap that starts AR stays a direct user gesture. */
+const factMV = document.getElementById("factMV"), factAR = document.getElementById("factAR");
+let mvReady = null;
+function prepAR(id) {
+  factAR.hidden = true;
+  if (!PIECES[id].glb) return;
+  mvReady ??= import("https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js").catch(() => null);
+  mvReady.then(ok => {
+    if (!ok || factId !== id) return;
+    const show = () => { factAR.hidden = !(factId === id && factMV.canActivateAR); };
+    if (factMV.getAttribute("src") === PIECES[id].glb && factMV.loaded) { show(); return; }   // same file: no new load event comes
+    factMV.addEventListener("load", show, { once: true });
+    factMV.src = PIECES[id].glb;
+  });
+}
+factAR.addEventListener("click", () => factMV.activateAR());
 document.getElementById("factShares").addEventListener("click", e => { const b = e.target.closest("[data-fact]"); if (b) openFact(b.dataset.fact); });
-document.getElementById("factAct").addEventListener("click", () => { factEl.close(); act(factId, ctxOf(factId)); });
+document.getElementById("factAct").addEventListener("click", () => { factEl.close(); PIECES[factId].locked && !PIECES[factId].splat ? tapCard(factId) : act(factId, ctxOf(factId)); });
 factEl.addEventListener("click", e => { if (e.target === factEl) factEl.close(); });   // backdrop tap closes
 const ask = createAsk();   // H2: questions answered only from this piece's MoMu record (ask.js)
 document.getElementById("factAsk").addEventListener("click", () => { factEl.close(); ask.open(factId, PIECES[factId].name); });
@@ -1091,8 +1113,8 @@ document.getElementById("cats").addEventListener("click", e => { if (e.target.cl
 /* ---------- Help: three steps, shown once on a first visit, always reopenable with the ? button ---------- */
 const HELP = [
   { t: "Dress the form", d: "Pull up the wardrobe from the bottom. Tap a piece to wear it, tap it again to take it off. Drag the form to turn it." },
-  { t: "Remix a fabric", d: "In the Fabrics tab, put one piece's cloth on another piece's cut, and see how many years your look spans." },
-  { t: "Read the record", d: "The i on any piece opens what MoMu has recorded about it. Tap the stickers in the museum to win more pieces and fabrics." },
+  { t: "Win pieces in the museum", d: "Tap the sticker beside a piece. Guess its year, or find its details up close, and it joins your wardrobe. Museum shows what is left to find." },
+  { t: "Remix a fabric", d: "In the Fabrics tab, put one piece's cloth on another piece's cut. The i on any piece shows what MoMu recorded about it." },
 ];
 const HELP_KEY = "secondSkin.help.v1", helpEl = document.getElementById("help");
 let helpStep = 0;
@@ -1115,7 +1137,7 @@ helpEl.addEventListener("close", () => { try { localStorage.setItem(HELP_KEY, "1
 helpEl.addEventListener("click", e => { if (e.target === helpEl) helpEl.close(); });   // backdrop tap closes
 document.getElementById("nfc").addEventListener("click", e => { if (e.target.id === "nfc") e.target.close(); });   // backdrop tap closes
 document.getElementById("nfc").addEventListener("close", cancelStudy);   // Not now, Escape or the backdrop: stop downloading
-const share = createShare({ tt: stageTT, look, PIECES, toast, getName: () => look.fabric.body || look.fabric.sleeves ? lookName() : "My look" });   // B7: 9:16 card (share.js)
+const share = createShare({ tt: stageTT, look, PIECES, toast, getName: lookName });   // B7: 9:16 card (share.js)
 document.getElementById("shareBtn").addEventListener("click", () => share.open());
 
 
@@ -1157,6 +1179,7 @@ try { if (!scanned && !claimed && !localStorage.getItem(HELP_KEY)) openHelp(); }
 </div></dialog>
 <dialog class="nfc museum" id="museum" aria-labelledby="museumTitle"><div tabindex="-1" autofocus>
   <h2 id="museumTitle">In the museum</h2>
+  <p class="mono status" id="museumCount"></p>
   <p>Tap a piece's sticker in the room to win it.</p>
   <div class="grid" id="museumGrid"></div>
   <form method="dialog"><button class="btn ghost press">Back to my look</button></form>
@@ -1173,6 +1196,8 @@ try { if (!scanned && !claimed && !localStorage.getItem(HELP_KEY)) openHelp(); }
   <dl id="factFields"></dl>
   <blockquote id="factQuote"></blockquote>
   <div class="shares" id="factShares"></div>
+  <button class="btn ghost press ar" id="factAR" hidden>See it in your room</button>
+  <model-viewer id="factMV" ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto" loading="eager" hidden></model-viewer>
   <div class="row"><button class="btn press" id="factAct"></button><button class="ask-open press" id="factAsk">Ask</button><a id="factLink" target="_blank" rel="noopener">MoMu record ↗</a></div>
 </div></dialog>
 </body>

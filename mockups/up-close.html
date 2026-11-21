@@ -111,7 +111,7 @@ li.found .fact { grid-template-rows: 1fr; }
   </div>
   <div class="progress"><span class="mono" id="count"></span><span class="dots" id="dots" aria-hidden="true"></span></div>
   <ol id="details"></ol>
-  <button class="cta press" id="wear">Claim its fabric</button>
+  <button class="cta press" id="wear">Win its fabric</button>
   <p class="credit">Quotes from the MoMu record (dcterms:description). English is our translation.</p>
 </aside>
 
@@ -155,7 +155,7 @@ function renderPanel() {
   document.querySelectorAll("#dots i").forEach((el, i) => el.classList.toggle("on", i < n));
   document.querySelectorAll("#details li").forEach(li => li.classList.toggle("found", found.has(+li.dataset.i)));
   $("#wear").classList.toggle("on", n === total);
-  $("#wear").textContent = n === total ? "Claim its fabric" : `Find ${total - n} more to claim its fabric`;
+  $("#wear").textContent = n === total ? "Win its fabric" : `Find ${total - n} more to win its fabric`;
 }
 renderPanel();
 $("#wear").addEventListener("click", () => {   // never a dead button: until all are found it points at the next one
@@ -247,7 +247,7 @@ renderer.domElement.addEventListener("pointerup", e => {
     view.append(m); setTimeout(() => m.remove(), 500); return; }
   found.add(best); if (hint === best) hint = -1;
   saveFound(); renderPanel();
-  toast(found.size === piece.details.length ? "All found. Claim its fabric for your wardrobe." : `Found: ${piece.details[best].find}`);
+  toast(found.size === piece.details.length ? "All found. Its fabric is yours to win." : `Found: ${piece.details[best].find}`);
 });
 
 let toastTimer;

@@ -36,7 +36,7 @@ export function createWin({ PIECES, record, img }) {
       const r = judge(+slider.value, p.year);
       tries++;
       if (r.won || tries >= 3) { this.removeEventListener("click", go); resolve(r.off); return; }
-      hint.textContent = `${r.hint === "later" ? "Later" : "Earlier"}! ${tries === 1 ? "Try again." : "Last try."}`;
+      hint.textContent = `${r.hint === "later" ? "Later" : "Earlier"} than ${slider.value}. ${tries === 1 ? "Try again." : "One more try."}`;
       hint.classList.remove("nudge"); void hint.offsetWidth; hint.classList.add("nudge");
     }));
   }

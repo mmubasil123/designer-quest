@@ -4,6 +4,11 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### Polish sweep at phone width (branch basil/polish)
+- **What:** "See it in your room" (AR via model-viewer 4.0.0) is back, now on every wearable's fact card, shown only when the phone can start AR. The green wool coat ST2434's texture is cleaned of white mannequin bleed by the new `tools/clean_glb_white.py` (12% of texels refilled from nearby cloth; the cutout photo has no white of its own; original kept in `_to_delete/`). An unwon room piece no longer gives its year away: its fact card shows "Win it to find out", hides Ask, and offers "Find it in the museum"; the story hides the narration player before Guess the year. Fact cards lead with our English and show the Dutch original small. Museum: title and "0 of 11 won" on separate lines, tiles say "Still to find" or "Won". Guess hints name the guess ("Later than 1700"). Up close says "Win its fabric". Help step 2 explains winning pieces. The share card uses the Stage's look name and fits a 667 px phone with Close on screen; the fact card's button row wraps.
+- **Why:** owner asked for a sweep for bugs and inconsistencies until none are left; each item was found in Chrome at 390 px.
+- **Decision:** a year is never shown before its guess, anywhere; English first because the audience reads English; AR only where the device supports it, rather than a button that fails.
+
 ### A won fabric is easy to find (branch basil/fabrics-clarity)
 - **What:** the Remix tab is now **Fabrics** (tab, sheet title, help text, toast "New in Fabrics: ..."); the Won card's button says "Add to my fabrics" or "Add to my wardrobe". A piece or fabric won this visit sorts first in its tab, the grid scrolls to the top, the chosen tab chip scrolls into view, and long toasts wrap.
 - **Why:** owner: after "Add its fabric to my wardrobe" it "goes nowhere". The new swatch was the last tile below the fold, the Remix chip was cut off at the right edge, and the toast ran off the phone.

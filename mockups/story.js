@@ -102,6 +102,7 @@ export async function createStory({ img } = {}) {   // img(id): the piece's phot
       <div class="row"><button class="btn press" data-close type="button">${esc(next)}</button></div>
     </div>`;
     player(p);
+    if (!years) el.querySelector(".player").hidden = true;   // the narration opens with the years
     if (!el.open) el.showModal();
     return new Promise(resolve => el.addEventListener("close", resolve, { once: true }));
   }
