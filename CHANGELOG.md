@@ -13,6 +13,10 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### Gamification findings doc in the repo (branch basil/gamification-findings)
+- **What:** `docs/GAMIFICATION_FINDINGS.md` (museum gamification research, how Second Skin maps to it, open ideas) is now tracked, refreshed against `main` at 8fb18f6; the research log row points at it.
+- **Why:** the research log listed this doc as "location unknown". Open ideas are for Hassan to pick up or drop; nothing in the app changes.
+
 ### Brighter cavalry uniform; unreached texels no longer bake black (branch basil/wear-scans)
 - **What:** ST2431/1-4 rebuilt with `satk` 2.0 and `matchk` 0.85, so its blue is close to the photo. `garment.py` now leaves texels no splat reaches (composite weight under 0.05) to the gutter fill instead of baking them black; the other GLBs are unchanged until rebuilt. `requirements.txt` pins the pipeline's packages.
 - **Also:** `AGENTS.md` drops the rule against using a second HF account for TRELLIS quota (Basil, 2026-11-21).
