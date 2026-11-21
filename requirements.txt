@@ -49,3 +49,4 @@ scikit-image==0.26.0
 trimesh==5.2.1
 xatlas==0.0.11
 fast-simplification==0.2.0
+faster-whisper==1.2.1   # H13: narration_listen.py transcribes voiced narration back and measures beat cues, locally

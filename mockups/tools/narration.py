@@ -21,6 +21,7 @@ the exported scripts and import the files. Audio: mono AAC (.m4a, 48 kbps) throu
   python3 -I mockups/tools/narration.py --check         # narration.json matches its sources and every file exists
   python3 -I mockups/tools/narration.py --scripts DIR   # write DIR/<id>.en.txt: the exact text to voice, for any missing audio
   python3 -I mockups/tools/narration.py --scripts DIR --only ST503 --force   # redo chosen pieces (say, to change voice)
+  python3 -I mockups/tools/narration.py --cues cues.json   # beat start times measured in each audio file (H13)
   python3 -I mockups/tools/narration.py --import DIR --voice "picsart:<voice name>"
                                                         # adopt DIR/<id>.en.(mp3|wav|m4a|mp4) made elsewhere for missing audio
 """
@@ -177,7 +178,7 @@ def main(argv):
         prev = old.get(pid, {})
         if prev.get("audio") and prev.get("audioHash") == e["hash"] and (MOCKUPS / prev["audio"]).exists():
             e.update(audio=prev["audio"], audioHash=prev["audioHash"], seconds=prev.get("seconds"), bytes=prev.get("bytes"),
-                     voice=prev.get("voice"))
+                     voice=prev.get("voice"), **{k: prev[k] for k in ("cues", "revealAt") if k in prev})
     if "--force" in argv and only:   # redo these pieces (e.g. to move them to another voice): treat their audio as missing
         for pid in only & set(new):
             new[pid].update(audio=None, audioHash=None, seconds=None, bytes=None, voice=None)
@@ -208,6 +209,17 @@ def main(argv):
             sec = round(float(re.search(r"estimated duration: ([\d.]+)", info).group(1)), 1)
             e.update(audio=str(dest.relative_to(MOCKUPS)), audioHash=e["hash"], seconds=sec, bytes=dest.stat().st_size, voice=voice)
             print(f"{pid}: imported {src.name}, {sec} s, {dest.stat().st_size // 1024} KB")
+    if "--cues" in argv:   # H13: measured start (s) of each beat in its audio; the caption highlight and the guess cut use them
+        cues = json.loads(Path(argv[argv.index("--cues") + 1]).read_text())
+        for pid, starts in cues.items():
+            e = new.get(pid)
+            if not e or not e.get("audio") or len(starts) != len(e.get("beats") or []) or None in starts:
+                print(f"{pid}: cues skipped (no audio, or they do not fit its beats)"); continue
+            e["cues"] = [round(float(t), 2) for t in starts]
+            first = next((i for i, b in enumerate(e["beats"]) if b.get("reveal")), None)
+            if first is not None:
+                e["revealAt"] = round(max(0.0, e["cues"][first] - 0.15), 2)   # before a guess, stop just before the date
+        print(f"cues for {sum(1 for e in new.values() if e.get('cues'))} stories")
     if "--audio" in argv:
         AUDIO.mkdir(parents=True, exist_ok=True)
         api_key = key()

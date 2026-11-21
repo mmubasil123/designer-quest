@@ -140,6 +140,12 @@ Newest first. Each entry: what changed, why, and the decision behind it.
   voicing in the same voice (Picsart Adeline, manual export); until then they play in the phone's voice, highlight
   included. Also: H12's share card credits a narration line to the piece, not to "MoMu's record".
 - Reduced motion: no scale, blur, drift or rise; fades only. The muted upcoming words stay at 7:1 (AA).
+- Voiced (2026-11-22): all 19 scripts in Picsart's Adeline, the app's one voice (AI Audio Generator, about 115 credits;
+  MP3s from Picsart's CDN, converted to mono AAC, 4.1 MB). Each file transcribed back locally (new
+  `tools/narration_listen.py`, faster-whisper base.en in `.venv`): 91 to 100% of each script heard, no extra speech
+  beyond the transcriber's spellings of names and numbers. The same pass measures each beat's start (`narration.py
+  --cues`, kept in `tools/narration-cues.json`), so the caption highlight follows the real voice per beat, and a
+  wearable stops right before its date (`revealAt`; the jak stops at 0:34, after "striped white and yellow").
 
 ## MoMu's own CLO models on the outfit page (2026-11-21, branch hassan/momu-clo-pieces)
 - What: five pieces that have a MoMu CLO project are shown on `outfit.html` on MoMu's mannequin: furisode ST80881,
