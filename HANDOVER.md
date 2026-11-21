@@ -67,7 +67,7 @@ and they need a splat renderer (e.g. Spark for three.js, unverified) beside the 
 for a phone page: test the `.sog` or compressed `.ply` size before any engine work.
 
 ## Up close (branch basil/splats; live on production https://second-skin-ten.vercel.app since 2026-11-21)
-`mockups/up-close.html?id=ST2435` or `?id=ST652/1`; demo entry is `second-skin.html?card=ST652/1`.
+9 study pieces (every MoMu splat but MOMU-5, which was not in the download), each with 3 details placed in Chrome. Entry: a card scan `second-skin.html?card=<id>` (redirects before the Stage boots), or the wardrobe's Study tab once scanned. Review of placement and flow (2026-11-21): Study chip in the sheet; open items are a 'tap to scan' demo button (C3), a hotspot for venue wifi (scans are 14 to 17 MB), and model-viewer on the Piece page (A4).
 `.sog` files (17 MB each, committed) are made from the raw `.ply` with PlayCanvas `splat-transform` 3.10.3,
 installed in the git-ignored `tools/node/`:
 `tools/node/node_modules/.bin/splat-transform -q splats/MOMU-3_st2435.ply mockups/assets/splat/ST2435.sog`.

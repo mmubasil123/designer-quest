@@ -184,12 +184,17 @@ function resize() {
 new ResizeObserver(resize).observe(view);
 
 // .sog is what deploys; a local .ply of the same name is the fallback while only the raw capture exists
-let url = piece.assets.splat.path;
-if (!(await fetch(url, { method: "HEAD" })).ok) url = url.replace(/\.sog$/, ".ply");
-const mesh = new SplatMesh({ url });
-mesh.quaternion.set(1, 0, 0, 0);   // the captures are y-down
-scene.add(mesh);
-await mesh.initialized;
+let url = piece.assets.splat.path, mesh;
+try {
+  if (!(await fetch(url, { method: "HEAD" })).ok) url = url.replace(/\.sog$/, ".ply");
+  mesh = new SplatMesh({ url });
+  mesh.quaternion.set(1, 0, 0, 0);   // the captures are y-down
+  scene.add(mesh);
+  await Promise.race([mesh.initialized, new Promise((_, no) => setTimeout(() => no(new Error("timeout")), 45000))]);
+} catch {   // a 15 MB scan on venue wifi can fail: say so instead of loading forever
+  $("#loading").innerHTML = `<div>The scan didn't load<br><br><a href="" style="text-decoration:underline">Try again</a></div>`;
+  await new Promise(() => {});
+}
 
 const box = new THREE.Box3().setFromPoints(corners(mesh.getBoundingBox()).map(p => p.applyQuaternion(mesh.quaternion)));
 const centre = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3());

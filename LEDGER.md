@@ -9,7 +9,7 @@ write your name in it. Size: S (under 2 h), M (half a day), L (a day or more).
 | # | Decision | Why |
 |---|---|---|
 | D1 | Avatar stays a dress form for the demo; finishes (linen, calico, black jersey, oak) replace skin tones | Rigid TRELLIS scans were shot on forms and clip on a human body; a form reads as "this museum" (product lead). The avatar agent preferred a stylised CC0 mannequin; kept as A7 for after |
-| D2 | Pieces unlock only from the card in the room; fabrics unlock by answering that piece's question | The visit is the point; learning, not grinding. No streaks, timers, purchases, leaderboards, accounts or PII |
+| D2 | Pieces unlock only from the card in the room; fabrics unlock by answering that piece's question. Study pieces (Gaussian splats, 2026-11-21): the card opens Up close, and finding the 3 recorded details is the question that wins the fabric. Wearable pieces still ship unlocked for the demo | The visit is the point; learning, not grinding. No streaks, timers, purchases, leaderboards, accounts or PII |
 | D3 | Facts come only from MoMu metadata; a missing field shows "not recorded" | Truthfulness; several descriptions are Dutch only |
 | D4 | `pieces.json` + `fabrics.json` become the single source of truth, validated at the pipeline and at build | Today the pipeline regex-parses the HTML; CLO pieces need typed fields (`kind`, `units`, `origin`) |
 | D5 | CLO garments load with `kind: "clo"`, `origin: "avatar"`: no rescale; remix swaps named panel materials | Draped garments are already sized; scans keep auto-fit and the triplanar shader |

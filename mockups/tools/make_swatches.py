@@ -16,7 +16,9 @@ import json  # noqa: E402
 from batch_glb import MOCKUPS, pieces  # noqa: E402
 
 # pieces with no usable cutout (segformer misses shoes and the kimono): centre of a plain fabric area, as fractions
-POINT = {"ST80881": (0.2, 0.4), "ST2407/1-2": (0.62, 0.62), "ST2435": (0.5, 0.75), "ST652/1": (0.4, 0.63)}
+POINT = {"ST80881": (0.2, 0.4), "ST2407/1-2": (0.62, 0.62), "ST2435": (0.5, 0.75), "ST652/1": (0.4, 0.63),
+         "ST673/1-2": (0.42, 0.66), "ST81190": (0.6, 0.47), "ST80998": (0.45, 0.6), "ST2431/1-4": (0.4, 0.4),
+         "ST2432/1-2": (0.45, 0.75), "ST671": (0.45, 0.55), "ST2203": (0.5, 0.55)}
 
 
 # side to crop from, as a fraction of garment width left of centre; the double-breasted coat buttons on the left

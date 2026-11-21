@@ -40,6 +40,7 @@ mockups/pieces.json  (single source of truth for pieces) ───────�
   sleeves zones, scaled by `meanLuma`).
 - UI: screens via `go(screen)`; wardrobe bottom sheet `setSnap()`/`snapY()`; `renderLocker()`, `renderCredit()`
   (time-span game), `renderTrack()` (knowledge track); `?card=<id>` unlocks and wears a piece.
+- Study tab in the wardrobe sheet lists every `study` piece with its state (card not scanned, n of 3 found, fabric won); a scanned one opens Up close. Won fabrics appear in Remix.
 - `up-close.html`: separate page for splat pieces (three 0.180.0 + Spark 2.4.0, while the main page stays on
   0.169.0). Detail hunt; progress in localStorage `secondSkin.found.v1` (`{id: [detail index]}`), which the main
   page reads to unlock a splat piece's fabric. `splat-viewer.html` is a local-only viewer for `splats/`.
