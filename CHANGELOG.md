@@ -64,6 +64,9 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 - **Fallback provider:** `--scripts DIR` writes the exact text for every piece still missing audio, and `--import DIR --voice "picsart:<name>"` adopts files voiced elsewhere (Picsart text to speech when the Gemini free quota is spent), converting them to the same mono AAC 48 kbps.
 - **Decision:** no style or pacing instructions in TTS input at all; tone comes from the choice of voice.
 - **Result:** all 19 stories voiced (3.2 MB). Gemini free quota covered 3 (ST81190, ST503, ST80930, voice Sulafat); the other 16 were made in Picsart's AI Audio Generator, voice Adeline, exported as MP4 and imported (audio track only). Spot checks by transcribing back: 94 to 97% word match (differences are "9th" read as "ninth" and similar). English only.
+### Show only the form (branch basil/focus)
+- **What:** a button under the zoom controls hides the header, the look title and the wardrobe so the form fills the screen; the same button (its icon turns to "shrink") or Escape brings them back. Zoom stays available.
+- **Why:** owner: an easy way to collapse the menus to see the whole avatar on a phone.
 
 ### Lighter, cleaner 3D models (A5, J1, J3; branch basil/ar-button)
 - **What:** every wearable GLB's texture is now WebP (q85, `EXT_texture_webp`) via `tools/glb_webp.py`: 12.2 MB to 4.9 MB for the 7 models, the starter look 5.4 MB to 2.3 MB. The monpe ST80931 lost its baked tan mannequin-hand strips and white patches, and the ikat vest ST80930 its large white blobs, with `tools/clean_glb_texture.py` (replaces `clean_glb_white.py`; rules `white`, `blobs` (large patches only, so pale print dots survive) and `tan`; `FIXES` records what each GLB got). `tools/glb_io.py` is the shared GLB reader and writer. Tile images load lazily and the page preconnects to the CDN. Originals are in `_to_delete/`.
