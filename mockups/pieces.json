@@ -125,6 +125,46 @@
       }
     },
     {
+      "id": "ST81114AB",
+      "slot": "top",
+      "name": "Cycling blouse",
+      "year": {
+        "from": 1890,
+        "to": 1920
+      },
+      "source": {
+        "imgSha": "d2c9a28dc1b4dab90a2d587044fe1033c7aa94a2"
+      },
+      "locked": true,
+      "assets": {
+        "glb": null
+      },
+      "fit": {},
+      "pipeline": {
+        "cutout": "none"
+      }
+    },
+    {
+      "id": "ST81116",
+      "slot": "bottom",
+      "name": "Cycling trousers",
+      "year": {
+        "from": 1890,
+        "to": 1920
+      },
+      "source": {
+        "imgSha": "47c0f538e7e0b8ac78ea772d7f10b615cc405273"
+      },
+      "locked": true,
+      "assets": {
+        "glb": null
+      },
+      "fit": {},
+      "pipeline": {
+        "cutout": "none"
+      }
+    },
+    {
       "id": "ST2407/1-2",
       "slot": "feet",
       "name": "Football boots, Dirk Bikkembergs",
