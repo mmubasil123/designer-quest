@@ -78,6 +78,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .zoom button { width: 44px; height: 44px; border-radius: 50%; background: var(--paper); border: 1px solid var(--line); font: 400 22px/1 var(--serif); }
 .zoom button:disabled { opacity: .35; }
 .stage:not([data-snap="peek"]) .zoom { opacity: 0; pointer-events: none; }
+/* Focus: the form alone; the header, the look title and the wardrobe step out of the way and come back on the same button */
+.zoom button svg { display: block; margin: auto; }
+.phone .bar, .stage .credit { transition: opacity 200ms var(--ease-out); }
+.phone.focus .bar, .phone.focus .stage .credit { opacity: 0; pointer-events: none; }
+.phone.focus .stage .wardrobe { transform: translateY(100%); }
+.phone.focus .stage .turntable { top: 0; bottom: 0; transform: none; }
+.phone.focus .zoom { top: 16px; opacity: 1; pointer-events: auto; }
 .nfc .status { min-height: 1.4em; margin: -10px 0 14px; font-size: 12px; }
 .toast { position: absolute; left: 50%; top: 92px; transform: translate(-50%, -6px); opacity: 0; pointer-events: none;
   background: var(--ink); color: var(--paper); font: 500 12px var(--sans); padding: 7px 12px; border-radius: 999px; white-space: nowrap;
@@ -278,7 +285,7 @@ dt { color: var(--muted); }
           <div class="bodies"><button class="pill ghost press" id="bodyBtn" hidden aria-pressed="false">Avatar</button><div class="skins" id="skins" aria-label="Form finish"></div></div>
         </div>
         <div class="turntable" id="stageTT" role="img" aria-label="Your avatar, drag to turn"></div>
-        <div class="zoom" aria-label="Zoom the form"><button class="press" id="zoomIn" aria-label="Zoom in">+</button><button class="press" id="zoomOut" aria-label="Zoom out" disabled>&minus;</button></div>
+        <div class="zoom" aria-label="Zoom the form"><button class="press" id="zoomIn" aria-label="Zoom in">+</button><button class="press" id="zoomOut" aria-label="Zoom out" disabled>&minus;</button><button class="press" id="focusBtn" aria-pressed="false" aria-label="Show only the form"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div>
         <div class="toast" id="toast" role="status" aria-live="polite"></div>
         <section class="wardrobe" id="wardrobe" aria-label="Wardrobe">
           <div class="grab" id="wardrobeGrab">
@@ -789,6 +796,14 @@ const turntables = [stageTT];
   stageTT.onZoom = z => { zin.disabled = z >= ZOOM_MAX - 0.01; zout.disabled = z <= 1.01; };
   zin.addEventListener("click", () => stageTT.setZoom(stageTT.zoom * 1.5));
   zout.addEventListener("click", () => stageTT.setZoom(stageTT.zoom / 1.5));
+  const focusBtn = document.getElementById("focusBtn"), phone = focusBtn.closest(".phone");
+  const setFocus = on => {
+    phone.classList.toggle("focus", on);
+    focusBtn.setAttribute("aria-pressed", on); focusBtn.setAttribute("aria-label", on ? "Show the menus again" : "Show only the form");
+    focusBtn.querySelector("path").setAttribute("d", on ? "M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" : "M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5");
+  };
+  focusBtn.addEventListener("click", () => setFocus(!phone.classList.contains("focus")));
+  addEventListener("keydown", e => { if (e.key === "Escape" && phone.classList.contains("focus") && !document.querySelector("dialog[open]")) setFocus(false); });
 }
 /* A9 demo avatar, presenter only: `?demo` shows an "Avatar" toggle beside the form finishes. Ordinary visitors never
    load the file. The avatar is fetched when the page is idle, so the switch during a talk is instant. */
