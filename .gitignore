@@ -10,3 +10,5 @@ tools/craft/
 splats/
 *.zip
 mockups/assets/splat/*.ply
+node_modules/
+tools/node/

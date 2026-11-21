@@ -68,9 +68,9 @@ for a phone page: test the `.sog` or compressed `.ply` size before any engine wo
 
 ## Up close (branch basil/splats, not deployed)
 `mockups/up-close.html?id=ST2435` or `?id=ST652/1`; demo entry is `second-skin.html?card=ST652/1`.
-Deploy is blocked until `mockups/assets/splat/ST2435.sog` and `ST652_1.sog` exist: locally the page falls back to
-the git-ignored `.ply` symlinks, which `.vercelignore` keeps out. Make them with PlayCanvas `splat-transform`
-(install inside the project, e.g. `tools/node/`) or take them from MoMu's "Standard .sog Files" folder.
+`.sog` files (17 MB each, committed) are made from the raw `.ply` with PlayCanvas `splat-transform` 3.10.3,
+installed in the git-ignored `tools/node/`:
+`tools/node/node_modules/.bin/splat-transform -q splats/MOMU-3_st2435.ply mockups/assets/splat/ST2435.sog`.
 Adding a splat piece: an entry with `slot: "study"`, `assets.splat`, and `details[].at` from `upClose.fracAt(x, y, fz)` in the console
 (screen point to bounding-box fraction, front of the scan is low fz), then a `POINT` in `make_swatches.py`.
 
