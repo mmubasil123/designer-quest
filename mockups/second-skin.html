@@ -1143,6 +1143,7 @@ async function openFact(id) {
   actBtn.hidden = !label; actBtn.textContent = label ?? "";
   const unwon = p.room && p.locked && !p.splat;   // its date is the answer to Guess the year, so nothing may reveal it yet
   document.getElementById("factAsk").hidden = unwon;
+  document.getElementById("factClo").hidden = !p.clo || p.locked;   // H14: MoMu's draped CLO model, on its own page (outfit.html); a won piece only
   view3dBtn.hidden = !(p.glb && !unwon) && !(p.splat && p.seen);   // a study piece's 3D is its Up close scan, open once its sticker was tapped
   if (!factEl.open) factEl.showModal();
   if (p.splat && p.seen) preloadStudy(id);   // "See it in 3D" opens its Up close scan: start it quietly after 2 s; closing the card aborts it
@@ -1152,6 +1153,7 @@ async function openFact(id) {
 const viewEl = document.getElementById("view3d"), viewMV = document.getElementById("viewMV"), view3dBtn = document.getElementById("fact3d");
 const viewScene = mountScene(viewEl.firstElementChild);
 let mvReady = null;
+document.getElementById("factClo").addEventListener("click", () => { const id = factId; factEl.close(); go(`outfit.html?card=${encodeURIComponent(id)}`); });
 view3dBtn.addEventListener("click", async () => {
   const id = factId;
   if (!PIECES[id].glb) { location.href = `up-close.html?id=${encodeURIComponent(id)}`; return; }
@@ -1340,6 +1342,7 @@ try { if (!scanned && !claimed && !localStorage.getItem(HELP_KEY)) openHelp(); }
   <blockquote id="factQuote"></blockquote>
   <div class="shares" id="factShares"></div>
   <button class="btn ghost press ar" id="fact3d" hidden>See it in 3D</button>
+  <button class="btn ghost press ar" id="factClo" hidden>See it on a mannequin</button>
   <div class="row"><button class="btn press" id="factAct"></button><button class="ask-open press" id="factAsk">Ask</button><a id="factLink" target="_blank" rel="noopener">MoMu record ↗</a></div>
 </div></dialog>
 </body>
