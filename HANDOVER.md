@@ -23,6 +23,8 @@ before calling anything done. Never deploy, push to `main` or publish without yo
 - To go live: Mubasil sets the key env in the Vercel project (Production and Preview) before deploying:
   `ANTHROPIC_API_KEY`, or `ASK_PROVIDER` + `ASK_API_KEY` + `ASK_MODEL` for a free OpenAI-compatible tier.
   GDPR and non-EU processing were set aside for the hackathon; revisit before real visitors use it.
+- Demo risk: OpenRouter free accounts get 50 free requests a day (1000 after 10 USD of credits). Past that, Ask
+  answers suggested questions from fields only. Add credits before the presentation.
 - Regenerate records after a harvest: `.venv/bin/python -I mockups/tools/ask_records.py`.
 
 ## Done tonight (from the ledger)

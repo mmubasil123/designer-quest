@@ -1,7 +1,7 @@
 /* H2 Ask the archive eval. Runs every case in cases.json through the same askModel() the function uses, checks it,
    and writes results-<model>.json plus RESULTS.md for the curator's review. Without a key it runs only the offline checks
    (cases are sound against the records, the grounding guard drops invented fields and quotes, fallback answers).
-   Run from mockups/: npm run eval:ask   (ASK_MODEL=claude-sonnet-5-5 npm run eval:ask to compare models) */
+   Run from mockups/: npm run eval:ask   (add -- --resume to reuse answers already in results-<model>.json) */
 import { readFileSync, writeFileSync } from "node:fs";
 import RECORDS from "../../ask-records.json" with { type: "json" };
 import { NOT_RECORDED, checkAnswer, fieldAnswer, suggestions } from "../../ask-core.js";
@@ -44,12 +44,22 @@ if (!process.env.ANTHROPIC_API_KEY && !(process.env.ASK_API_KEY && process.env.A
 }
 const { askModel, MODEL, PROVIDER } = await import("../../api/ask.js");
 console.log(`\nModel cases on ${PROVIDER} ${MODEL}`);
+// --resume keeps last run's answers for this model (free tiers cap requests a day); rate limits wait and retry
+const resultsFile = new URL(`results-${MODEL.replace(/[^\w.-]+/g, "_")}.json`, here);
+const previous = new Map();
+if (process.argv.includes("--resume")) {
+  try { for (const r of JSON.parse(readFileSync(resultsFile, "utf8")).results) if (r.got && r.piece) previous.set(`${r.piece}|${r.q}`, r); } catch { /* first run */ }
+}
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 const results = [];
 for (const c of cases) {
   const t0 = Date.now();
-  let a, err = null;
-  try { a = await askModel(c.piece, c.q); } catch (e) { err = `${e?.status ?? ""} ${e?.constructor?.name ?? "Error"}`.trim(); a = null; }
-  const ms = Date.now() - t0, why = [];
+  let a = previous.get(`${c.piece}|${c.q}`)?.got ?? null, err = null;
+  for (let tries = 0; !a && tries < 4; tries++) {
+    try { a = await askModel(c.piece, c.q); err = null; }
+    catch (e) { err = `${e?.status ?? ""} ${e?.constructor?.name ?? "Error"}`.trim(); if (e?.status !== 429) break; await sleep(15_000 * (tries + 1)); }
+  }
+  const ms = previous.get(`${c.piece}|${c.q}`)?.got ? previous.get(`${c.piece}|${c.q}`).ms : Date.now() - t0, why = [];
   if (err) why.push(`error ${err}`);
   else if (c.expect === "not_recorded") { if (a.answerable) why.push("answered, expected not recorded"); }
   else {
@@ -69,7 +79,7 @@ const passed = results.filter(r => r.pass).length, ms = results.map(r => r.ms).s
 const summary = { model: MODEL, date: new Date().toISOString().slice(0, 10), passed, total: results.length,
   medianMs: ms[Math.floor(ms.length / 2)], maxMs: ms.at(-1), offlineChecks: offlineFail ? "failed" : "passed" };
 console.log(`\n${passed}/${results.length} passed · median ${summary.medianMs} ms · max ${summary.maxMs} ms`);
-writeFileSync(new URL(`results-${MODEL.replace(/[^\w.-]+/g, "_")}.json`, here), JSON.stringify({ summary, results }, null, 1) + "\n");
+writeFileSync(resultsFile, JSON.stringify({ summary, results }, null, 1) + "\n");
 
 const md = [`# Ask the archive: eval results (${MODEL}, ${summary.date})`, "",
   `${passed} of ${results.length} cases pass · median ${summary.medianMs} ms, slowest ${summary.maxMs} ms · offline checks ${summary.offlineChecks}.`, "",

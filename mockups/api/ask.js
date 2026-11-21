@@ -89,7 +89,8 @@ async function askCompatible(pieceId, rec, question, model) {
     { role: "user", content: `<question>${question}</question>` },
   ];
   const formats = [{ type: "json_schema", json_schema: { name: "answer", strict: true, schema: ANSWER_SCHEMA } }, { type: "json_object" }, null];
-  for (const response_format of formats) {
+  for (let i = 0, retried = false; i < formats.length; i++) {
+    const response_format = formats[i];
     const r = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${process.env.ASK_API_KEY}` },
@@ -97,6 +98,8 @@ async function askCompatible(pieceId, rec, question, model) {
       signal: AbortSignal.timeout(25_000),
     });
     if (r.status === 400 && response_format) continue;   // this model does not take that output format: try a looser one
+    // free tiers throttle bursts: one short wait and retry hides most of it from the visitor
+    if (r.status === 429 && !retried) { retried = true; i--; await new Promise(ok => setTimeout(ok, 2500)); continue; }
     if (!r.ok) throw Object.assign(new Error("provider"), { status: r.status });
     const text = (await r.json()).choices?.[0]?.message?.content ?? "";
     const json = text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1);

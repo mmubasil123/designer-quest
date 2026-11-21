@@ -70,8 +70,8 @@ export function createAsk({ endpoint = "api/ask" } = {}) {
   async function send(raw, key) {
     const q = cleanQuestion(raw);
     if (!q || busy || !piece) return;
+    busy = true; $("askGo").disabled = true; $("askQ").value = "";   // before any await, so a double tap cannot send twice
     const id = piece, rec = (await recordsOf())[id];
-    busy = true; $("askGo").disabled = true; $("askQ").value = "";
     bubble("q", esc(q));
     const wait = bubble("a pending", `<p>Reading the record…</p>`);
     let a = null, ai = true;
