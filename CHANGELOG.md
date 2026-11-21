@@ -70,22 +70,25 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 - Decision: no account, no upload, no name sent anywhere (D2); every fact still comes from `pieces.json` or the records (D3);
   "Won" lists the pieces won, not "today", because no win date is stored. The sheet does not autofocus the field, so the
   phone keyboard stays down until the visitor taps it.
-## Poetic narration on the story sheet (2026-11-21, branch hassan/H13-narration, ticket H13)
-- What: the 16 stories built from MoMu records are now short poems (36 to 68 words, a few lines of verse) in the new
-  `mockups/narration-poems.json`; `tools/narration.py` uses them in place of the old record drafts. the curator's 3 stories
-  are unchanged, word for word. The story sheet now leads with play and a few lines (a poem's first stanza, or the
-  opening sentence of a prose story); the full transcript unfolds under "Read the story" (a button with
-  `aria-expanded`, the rest `inert` while closed), instead of a clamped wall of text. Verse is set one line per block
-  with a hanging indent. New `tools/narration_facts.py` checks each poem against the harvest cache.
-- Why: feedback 2026-11-21: "a bit of story and narration on the look instead of the amount of text", and the story
-  should be poetic, not plain.
-- Decision: facts only from each piece's record (D3), each listed beside the record's own Dutch words in the poem's
-  `trace`; the checker fails if those words are not in the record or a number in the poem is not. Old drafts and new
-  poems side by side for review in `docs/H13-NARRATION-REVIEW.md`. Audio: the 16 changed stories need re-voicing in
-  the same voice (Picsart Adeline, manual export); until then they play in the phone's own voice (the old files read
-  the old text, so `narration.py` no longer points at them). the curator's 3 keep their Adeline audio.
-- Also: H12's share card quotes a story's first line; for a poem it now joins the verse lines and credits the piece
-  ("Jak, 1750–1780") instead of "MoMu's record of the jak", since the poem's words are ours, not the record's.
+## Narrated stories on the story sheet (2026-11-21, branch hassan/H13-narration, ticket H13)
+- What: every piece (19, the curator's 3 included) has a short spoken story in the new `mockups/narration-scripts.json`:
+  an audio-guide scene of about 30 to 40 seconds (a hook, the history, a detail to look closer at), replacing the
+  read-out record drafts. The story sheet opens with the photo settling in (scale, blur and fade, 900 ms) and the lines
+  rising in one after another; while the story plays the photo drifts slowly and the captions light up word by word
+  under a red highlighter stroke, following the voice (audio: timed by word length and pauses, or by `revealAt`; phone
+  voice: its own word boundaries). Before a Guess the year the beat that names the date is left out and the narration
+  ends on a question (`tease`). "Read the story" opens the full captions and, on the curator's pieces, her own story word for
+  word. `tools/narration_facts.py` checks each script against the harvest cache and the curator's text.
+- Why: feedback 2026-11-21: narration on the look instead of the amount of text; then Hassan: poetic does not mean a
+  poem; make it immersive and entertaining, not the app's text read out, with the voiceover highlighting the text, a
+  small animation as the popup opens, and real history (the grey coat's first collection).
+- Decision: facts only from each piece's record or the curator's story (D3), each listed beside the source's own words; the
+  checker fails if those words are not in the source, a number is not in it, or a wearable says its date before the
+  guess. The grey coat's script says "first collection" (record and the curator), not "first fashion show" (in neither). the curator's
+  own text is never changed. Old text beside each new script in `docs/H13-NARRATION-REVIEW.md`. Audio: all 19 need
+  voicing in the same voice (Picsart Adeline, manual export); until then they play in the phone's voice, highlight
+  included. Also: H12's share card credits a narration line to the piece, not to "MoMu's record".
+- Reduced motion: no scale, blur, drift or rise; fades only. The muted upcoming words stay at 7:1 (AA).
 
 ## MoMu's own CLO models on the outfit page (2026-11-21, branch hassan/momu-clo-pieces)
 - What: five pieces that have a MoMu CLO project are shown on `outfit.html` on MoMu's mannequin: furisode ST80881,

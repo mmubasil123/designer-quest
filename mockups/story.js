@@ -1,16 +1,20 @@
-/* H3: the piece's story with narration, shown after a card scan and before its questions (quiz.js).
-   Text and audio come from narration.json (built by tools/narration.py from the curator's questions.json, else a draft from
-   the piece's MoMu record, D3). Audio is pre-generated, so playback needs no API; it never autoplays. If a file is
-   missing or fails, the browser's own voice reads the same text; with neither, the play button is hidden. H13: the
-   sheet leads with play and a few lines (a poem's first stanza, or a prose story's opening sentence); the full
-   transcript opens on "Read the story". */
+/* H3 + H13: the piece's story with narration, shown after a card scan and before its questions (quiz.js).
+   Text and audio come from narration.json (built by tools/narration.py). H13: the narration is a short spoken scene
+   (`beats`), shown as captions that light up word by word as the voice reads them; the sheet opens with the piece's
+   photo settling in, and the photo drifts slowly while the story plays. Before a Guess the year (`years: false`) the
+   beats that name the date are left out and the narration ends on a `tease` instead. the curator's own text is shown word
+   for word under "Read the story". Audio is pre-generated and never autoplays; if a file is missing or fails, the
+   browser's own voice reads the same captions (its word boundaries drive the highlight). */
 
 const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const clock = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const ICON = {
   play: `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>`,
   pause: `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>`,
 };
+// Reading time of a word, in arbitrary units: its letters, plus the pause a voice leaves after punctuation
+const weight = (word, beatEnd) => word.length + (/[.!?:]$/.test(word) ? 9 : /[,;]$/.test(word) ? 4 : 0) + (beatEnd ? 6 : 0);
 
 export async function createStory({ img, name } = {}) {   // img(id): the piece's photo, which leads the sheet; name(id): its name everywhere else in the app
   let doc = { pieces: {} };
@@ -28,40 +32,84 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
     if (e.target === el || e.target.closest("[data-close]")) el.close();
   });
 
-  // H13: the sheet leads with play and a few lines; the rest of the transcript opens on "Read the story"
-  let full = "", lead = "";
-  function toggle(btn) {
-    const open = btn.getAttribute("aria-expanded") !== "true", rest = el.querySelector(".rest");
+  function toggle(btn) {   // "Read the story": the whole caption text, and the curator's own story for her pieces
+    const open = btn.getAttribute("aria-expanded") !== "true";
     btn.setAttribute("aria-expanded", String(open));
-    btn.textContent = open ? "Hide the story" : "Read the story";
-    rest.classList.toggle("open", open);
-    rest.inert = !open;
-    const first = el.querySelector(".lead");
-    if (first && full !== lead) first.textContent = open ? full : lead;   // prose: the opening sentence grows into its paragraph
+    btn.textContent = open ? "Show less" : "Read the story";
+    el.querySelector(".captions").classList.toggle("clamp", !open);
+    const rest = el.querySelector(".rest");
+    if (rest) { rest.classList.toggle("open", open); rest.inert = !open; }
+    if (open) el.querySelector(".tease")?.classList.add("show");
   }
 
-  function player(p) {
+  /* Captions: every word is a span with its place in the spoken text (for the browser voice's boundary events) and
+     its start time as a share of the whole narration (for an audio file, which has no word timings). */
+  function captions(p, guess) {
+    const beats = p.form === "script" ? p.beats : p.paragraphs.map(t => ({ t }));
+    const words = []; let total = 0, at = 0, cut = null;
+    const html = beats.map(b => {
+      const parts = b.t.split(/\s+/);
+      if (guess && b.reveal) { if (cut === null) cut = total; parts.forEach((w, i) => { total += weight(w, i === parts.length - 1); }); return ""; }
+      const spans = parts.map((w, i) => {
+        words.push({ at, start: total, beat: words.length && i === 0 });
+        at += w.length + 1; total += weight(w, i === parts.length - 1);
+        return `<span class="w">${esc(w)}</span>`;
+      });
+      return `<span class="beat">${spans.join(" ")}</span>`;
+    }).join(" ");
+    const spoken = beats.filter(b => !(guess && b.reveal)).map(b => b.t).join(" ");
+    return { html, words, total, cut, spoken };
+  }
+
+  function player(p, cap, guess) {
     const btn = el.querySelector("[data-play]"), bar = el.querySelector("progress"), time = el.querySelector("[data-time]");
-    const label = el.querySelector("[data-voice]");
+    const label = el.querySelector("[data-voice]"), box = el.querySelector(".captions");
+    const spans = [...box.querySelectorAll(".w")];
+    let lit = -1;
     const set = playing => {
       btn.innerHTML = playing ? ICON.pause : ICON.play;
       btn.setAttribute("aria-label", playing ? "Pause narration" : "Play narration");
       btn.setAttribute("aria-pressed", String(playing));
+      el.classList.toggle("playing", playing);
+      if (playing) box.classList.add("live");
+    };
+    const light = i => {   // words up to i are said; i is the one being said; the caption window follows its line
+      if (i === lit) return;
+      if (i < lit) spans.forEach(s => s.classList.remove("said", "now"));
+      for (let k = Math.max(0, lit); k <= i && k < spans.length; k++) spans[k].classList.add("said");
+      spans[lit]?.classList.remove("now"); spans[i]?.classList.add("now");
+      lit = i;
+      const s = spans[i];
+      if (s && box.classList.contains("clamp")) {
+        const top = s.offsetTop - box.clientHeight / 3;
+        if (Math.abs(box.scrollTop - top) > s.offsetHeight) box.scrollTo({ top: Math.max(0, top), behavior: reduced() ? "auto" : "smooth" });
+        box.classList.toggle("scrolled", top > 0);   // a soft top edge once lines have scrolled away
+      }
+    };
+    const finish = () => {   // after the last word: captions back to plain reading, from the top
+      set(false); box.classList.remove("live"); spans.forEach(s => s.classList.remove("said", "now")); lit = -1;
+      if (box.classList.contains("clamp")) box.scrollTo({ top: 0 });
+      box.classList.remove("scrolled");
+      if (guess) el.querySelector(".tease")?.classList.add("show");
     };
     const hide = () => { el.querySelector(".player").hidden = true; };
+    const indexAt = share => { let i = -1; while (i + 1 < cap.words.length && cap.words[i + 1].start <= share) i++; return i; };
 
-    // Fallback: the phone's own voice reads the transcript (no progress, just play and stop)
+    // Fallback: the phone's own voice reads the captions; its word boundaries drive the highlight (estimated if it sends none)
     const browserVoice = () => {
       if (!speech) return hide();
       label.textContent = "Read by your phone's built-in voice";
       bar.hidden = true; time.hidden = true;
-      let speaking = false;
+      let speaking = false, raf = 0;
       btn.onclick = () => {
         if (speaking) { speech.cancel(); return; }
-        const u = new SpeechSynthesisUtterance(p.text);
+        const u = new SpeechSynthesisUtterance(cap.spoken);
         u.lang = p.lang || "en"; u.rate = 0.95;
-        u.onend = u.onerror = () => { speaking = false; set(false); };
-        speech.cancel(); speech.speak(u); speaking = true; set(true);
+        let bounded = false; const t0 = performance.now(), cps = 13.5 * u.rate;   // about 13.5 characters a second at rate 1
+        u.onboundary = e => { if (e.name !== "word") return; bounded = true; let i = -1; while (i + 1 < cap.words.length && cap.words[i + 1].at <= e.charIndex) i++; light(i); };
+        const tick = () => { if (!bounded) { const c = (performance.now() - t0) / 1000 * cps; let i = -1; while (i + 1 < cap.words.length && cap.words[i + 1].at <= c) i++; light(i); } raf = requestAnimationFrame(tick); };
+        u.onend = u.onerror = () => { cancelAnimationFrame(raf); speaking = false; finish(); };
+        speech.cancel(); speech.speak(u); speaking = true; set(true); raf = requestAnimationFrame(tick);
       };
       stop = () => speech.cancel();
     };
@@ -71,15 +119,22 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
     const audio = new Audio();
     audio.preload = "none";   // nothing downloads until the visitor asks for it
     audio.src = p.audio;
-    if (p.seconds) time.textContent = `0:00 / ${clock(p.seconds)}`;
-    audio.addEventListener("timeupdate", () => {
-      const d = audio.duration || p.seconds || 0;
-      bar.max = d || 1; bar.value = audio.currentTime;
-      time.textContent = `${clock(audio.currentTime)} / ${clock(d)}`;
-    });
-    audio.addEventListener("play", () => set(true));
-    audio.addEventListener("pause", () => set(false));
-    audio.addEventListener("ended", () => { set(false); audio.currentTime = 0; });
+    const length = () => audio.duration || p.seconds || 0;
+    // before a guess the file plays only up to the first beat that names the date (cue from the import, else estimated)
+    const stopAt = () => guess && cap.cut !== null ? (p.revealAt ?? cap.cut / cap.total * length() - 0.3) : Infinity;
+    if (p.seconds) time.textContent = `0:00 / ${clock(guess && cap.cut !== null ? cap.cut / cap.total * p.seconds : p.seconds)}`;
+    let raf = 0;
+    const tick = () => {
+      const d = length(), t = audio.currentTime, end = Math.min(d, stopAt());
+      bar.max = end || 1; bar.value = t;
+      time.textContent = `${clock(t)} / ${clock(end || 0)}`;
+      if (d) light(indexAt((t + 0.15) / d * cap.total));
+      if (t >= end) { audio.pause(); audio.currentTime = 0; finish(); return; }
+      if (!audio.paused) raf = requestAnimationFrame(tick);
+    };
+    audio.addEventListener("play", () => { set(true); raf = requestAnimationFrame(tick); });
+    audio.addEventListener("pause", () => { cancelAnimationFrame(raf); if (audio.currentTime) set(false); });
+    audio.addEventListener("ended", () => { cancelAnimationFrame(raf); audio.currentTime = 0; finish(); });
     let wanted = false;   // the visitor pressed play: if the file fails, the phone's voice takes over on that same tap
     audio.addEventListener("error", () => {
       audio.removeAttribute("src"); browserVoice(); set(false);
@@ -95,38 +150,34 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
   function show(id, { found = false, next = "Continue", years = true } = {}) {   // years: false before Guess the year, so the story does not give it away
     const p = doc.pieces[id];
     if (!p) return Promise.resolve();
-    // shortcut: drops the drafts' lead-in on screen only (the audio still says it); move it into tools/narration.py at the next audio run
-    const paras = p.paragraphs.map(t => t.replace(/^The museum's record describes it like this: /, ""));
-    const poem = p.form === "poem";
-    // the lead: a poem's first stanza, or the opening sentence of a prose story (the curator's text, never shortened in the transcript)
-    full = paras[0] || "";
-    lead = poem || full.length <= 160 ? full : (full.match(/^.+?[a-z0-9)”'’][.!?](?=\s+[A-Z“"‘'])/)?.[0] ?? full);
-    const rest = paras.slice(1);
-    const para = t => poem ? t.split("\n").map(l => `<span class="ln">${esc(l)}</span>`).join("") : esc(t);   // verse: one block per line, so a wrapped line hangs
-    const hasMore = rest.length > 0 || lead !== full;
+    const guess = !years;
+    const cap = captions(p, guess);
+    const curator = p.source === "curator" && p.form === "script" ? p.paragraphs : null;   // her own words, never changed
+    const seconds = p.seconds || Math.max(25, cap.total / 14);   // the photo drifts for about as long as the story lasts
+    let i = 0; const n = () => `style="--i:${i++}"`;   // stagger order for the opening
     el.innerHTML = `<div tabindex="-1" autofocus>
-      ${img ? `<img class="pic" src="${img(id)}" alt="">` : ""}
-      <div class="mono">${found ? "Found at MoMu" : "Story"} · ${esc(id)}</div>
-      <h2 id="storyName">${esc(name?.(id) ?? p.title)}</h2>
-      ${years && p.years ? `<p class="years">${esc(p.years)}</p>` : ""}
-      ${p.draft ? `<p class="draft">From the MoMu record</p>` : ""}
-      <div class="player">
+      ${img ? `<figure class="pic"><img src="${img(id)}" alt="" style="--drift:${seconds}s"></figure>` : ""}
+      <div class="mono rise" ${n()}>${found ? "Found in the museum" : "Story"} · ${esc(id)}</div>
+      <h2 id="storyName" class="rise" ${n()}>${esc(name?.(id) ?? p.title)}</h2>
+      ${years && p.years ? `<p class="years rise" ${n()}>${esc(p.years)}</p>` : ""}
+      ${p.draft ? `<p class="draft rise" ${n()}>Told from the MoMu record</p>` : ""}
+      <div class="player rise" ${n()}>
         <button class="play press" data-play type="button"></button>
         <div class="meta">
           <progress value="0" max="1" aria-label="Narration progress"></progress>
           <div class="mono"><span data-voice></span> <span data-time></span></div>
         </div>
       </div>
-      <div class="transcript${poem ? " verse" : ""}" aria-label="Transcript">
-        <p class="lead">${para(lead)}</p>
-        ${hasMore ? `<div class="rest" id="storyRest" inert><div>${rest.map(t => `<p>${para(t)}</p>`).join("")}</div></div>` : ""}
-      </div>
-      ${hasMore ? `<button class="more press" data-more type="button" aria-expanded="false" aria-controls="storyRest">Read the story</button>` : ""}
-      <div class="row"><button class="btn press" data-close type="button">${esc(next)}</button></div>
+      <div class="captions clamp rise" ${n()} aria-label="Narration text">${cap.html}</div>
+      ${guess && p.tease ? `<p class="tease rise" ${n()}>${esc(p.tease)}</p>` : ""}
+      ${curator ? `<div class="rest" id="storyRest" inert><div><h3 class="more-title">More about this piece</h3>${curator.map(t => `<p>${esc(t)}</p>`).join("")}</div></div>` : ""}
+      <button class="more press rise" ${n()} data-more type="button" aria-expanded="false" ${curator ? `aria-controls="storyRest"` : ""}>Read the story</button>
+      <div class="row rise" ${n()}><button class="btn press" data-close type="button">${esc(next)}</button></div>
     </div>`;
-    player(p);
-    if (!years) el.querySelector(".player").hidden = true;   // the narration opens with the years
+    player(p, cap, guess);
     if (!el.open) el.showModal();
+    const box = el.querySelector(".captions");
+    if (!curator && box.scrollHeight <= box.clientHeight + 2) { box.classList.remove("clamp"); el.querySelector("[data-more]").remove(); }   // it all fits: nothing to open
     return new Promise(resolve => el.addEventListener("close", resolve, { once: true }));
   }
 

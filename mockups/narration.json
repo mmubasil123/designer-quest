@@ -8,14 +8,40 @@
       "years": "1750 to 1780",
       "source": "record",
       "draft": true,
-      "form": "poem",
+      "form": "script",
+      "beats": [
+        {
+          "t": "In the Netherlands, someone made this jacket from blue silk taffeta: fine, smooth, with a soft shine."
+        },
+        {
+          "t": "Follow the threads. White and yellow floats run with the warp, and a zigzag breaks into flowers."
+        },
+        {
+          "t": "It stops at the waist, then falls into long skirts. The neckline is square. The sleeves hug the arm and end at the elbow."
+        },
+        {
+          "t": "The front stays open, held by small metal hooks and eyes."
+        },
+        {
+          "t": "Even the lining is dressed up: blue linen, striped white and yellow."
+        },
+        {
+          "t": "It was made between 1750 and 1780.",
+          "reveal": true
+        }
+      ],
+      "tease": "How old do you think it is? Make your guess.",
       "paragraphs": [
-        "Blue taffeta, fine and smooth,\nwith a soft shine.\nAlong the warp, white and yellow\nthreads float free:\na zigzag that breaks into flowers.",
-        "Square at the neck,\nclose to the elbow,\nlong skirts falling from the waist.\nMetal hooks and eyes\nhold the open front,\nand inside, unseen, blue linen\nstriped white and yellow."
+        "In the Netherlands, someone made this jacket from blue silk taffeta: fine, smooth, with a soft shine.",
+        "Follow the threads. White and yellow floats run with the warp, and a zigzag breaks into flowers.",
+        "It stops at the waist, then falls into long skirts. The neckline is square. The sleeves hug the arm and end at the elbow.",
+        "The front stays open, held by small metal hooks and eyes.",
+        "Even the lining is dressed up: blue linen, striped white and yellow.",
+        "It was made between 1750 and 1780."
       ],
       "lang": "en",
-      "text": "Jak, 1750 to 1780, Netherlands.\n\nBlue taffeta, fine and smooth,\nwith a soft shine.\nAlong the warp, white and yellow\nthreads float free:\na zigzag that breaks into flowers.\n\nSquare at the neck,\nclose to the elbow,\nlong skirts falling from the waist.\nMetal hooks and eyes\nhold the open front,\nand inside, unseen, blue linen\nstriped white and yellow.",
-      "hash": "d1f1cd3d54a1e9a1",
+      "text": "In the Netherlands, someone made this jacket from blue silk taffeta: fine, smooth, with a soft shine.\n\nFollow the threads. White and yellow floats run with the warp, and a zigzag breaks into flowers.\n\nIt stops at the waist, then falls into long skirts. The neckline is square. The sleeves hug the arm and end at the elbow.\n\nThe front stays open, held by small metal hooks and eyes.\n\nEven the lining is dressed up: blue linen, striped white and yellow.\n\nIt was made between 1750 and 1780.",
+      "hash": "53a5b34ecc606647",
       "audio": null
     },
     "ST80930": {
@@ -23,15 +49,36 @@
       "years": "1950 to 1960",
       "source": "record",
       "draft": true,
-      "form": "poem",
+      "form": "script",
+      "beats": [
+        {
+          "t": "From Japan comes this little jacket in dark blue cotton."
+        },
+        {
+          "t": "Its pattern is double ikat: light blue spots, and small red squares, scattered like confetti."
+        },
+        {
+          "t": "The sleeves are long and puffed. The front panels cross over each other, and close at the waist with ribbons."
+        },
+        {
+          "t": "Waistcoat, or jacket? Even the museum's record cannot decide: it says one or the other."
+        },
+        {
+          "t": "It dates from the 1950s.",
+          "reveal": true
+        }
+      ],
+      "tease": "When was it made? Make your guess.",
       "paragraphs": [
-        "Dark blue cotton in double ikat,\nlight blue spots\nand small red squares.",
-        "Long sleeves, puffed full.\nThe front panels cross\nover each other\nand close at the waist with ribbons.",
-        "A waistcoat, or a jacket?\nThe record calls it both."
+        "From Japan comes this little jacket in dark blue cotton.",
+        "Its pattern is double ikat: light blue spots, and small red squares, scattered like confetti.",
+        "The sleeves are long and puffed. The front panels cross over each other, and close at the waist with ribbons.",
+        "Waistcoat, or jacket? Even the museum's record cannot decide: it says one or the other.",
+        "It dates from the 1950s."
       ],
       "lang": "en",
-      "text": "Ikat vest, 1950 to 1960, Japan.\n\nDark blue cotton in double ikat,\nlight blue spots\nand small red squares.\n\nLong sleeves, puffed full.\nThe front panels cross\nover each other\nand close at the waist with ribbons.\n\nA waistcoat, or a jacket?\nThe record calls it both.",
-      "hash": "1f4632b0e77f23df",
+      "text": "From Japan comes this little jacket in dark blue cotton.\n\nIts pattern is double ikat: light blue spots, and small red squares, scattered like confetti.\n\nThe sleeves are long and puffed. The front panels cross over each other, and close at the waist with ribbons.\n\nWaistcoat, or jacket? Even the museum's record cannot decide: it says one or the other.\n\nIt dates from the 1950s.",
+      "hash": "c56d0a625a6bf9c3",
       "audio": null
     },
     "ST2434": {
@@ -39,14 +86,40 @@
       "years": "1795 to 1840",
       "source": "record",
       "draft": true,
-      "form": "poem",
+      "form": "script",
+      "beats": [
+        {
+          "t": "This green broadcloth coat, with its long tails, has a puzzle for you."
+        },
+        {
+          "t": "Count the buttonholes on the front: two rows of four. Now count the buttons. None."
+        },
+        {
+          "t": "Eight round brass buttons were kept loose. Most likely, they once sat on the back."
+        },
+        {
+          "t": "Two large flat brass buttons are still there, low on the tails, signed: M and Cie, Paris."
+        },
+        {
+          "t": "Later, someone added a broad red band to the front. And inside, there is a lining of glossy purple."
+        },
+        {
+          "t": "It was made somewhere between 1795 and 1840.",
+          "reveal": true
+        }
+      ],
+      "tease": "How old is this coat? Make your guess.",
       "paragraphs": [
-        "Green broadcloth,\nfalling into tails.\nTwo rows of four buttonholes,\nand no buttons left to close them.",
-        "Eight round brass buttons\nwait apart, loose,\nonce, most likely,\nsewn on at the back.\nTwo flat ones stay,\nsigned M and Cie, Paris.\nLater, someone added\na broad band of red,\nand inside, a lining\nof glossy purple."
+        "This green broadcloth coat, with its long tails, has a puzzle for you.",
+        "Count the buttonholes on the front: two rows of four. Now count the buttons. None.",
+        "Eight round brass buttons were kept loose. Most likely, they once sat on the back.",
+        "Two large flat brass buttons are still there, low on the tails, signed: M and Cie, Paris.",
+        "Later, someone added a broad red band to the front. And inside, there is a lining of glossy purple.",
+        "It was made somewhere between 1795 and 1840."
       ],
       "lang": "en",
-      "text": "Green wool coat, 1795 to 1840.\n\nGreen broadcloth,\nfalling into tails.\nTwo rows of four buttonholes,\nand no buttons left to close them.\n\nEight round brass buttons\nwait apart, loose,\nonce, most likely,\nsewn on at the back.\nTwo flat ones stay,\nsigned M and Cie, Paris.\nLater, someone added\na broad band of red,\nand inside, a lining\nof glossy purple.",
-      "hash": "811d140897e1c34d",
+      "text": "This green broadcloth coat, with its long tails, has a puzzle for you.\n\nCount the buttonholes on the front: two rows of four. Now count the buttons. None.\n\nEight round brass buttons were kept loose. Most likely, they once sat on the back.\n\nTwo large flat brass buttons are still there, low on the tails, signed: M and Cie, Paris.\n\nLater, someone added a broad red band to the front. And inside, there is a lining of glossy purple.\n\nIt was made somewhere between 1795 and 1840.",
+      "hash": "7b16378194d1822d",
       "audio": null
     },
     "ST80931": {
@@ -54,14 +127,32 @@
       "years": "1965",
       "source": "record",
       "draft": true,
-      "form": "poem",
+      "form": "script",
+      "beats": [
+        {
+          "t": "These are monpe: puffed trousers from Japan."
+        },
+        {
+          "t": "Dark blue cotton in ikat, with light blue spots and small red squares."
+        },
+        {
+          "t": "A broad waistband closes with long ribbons. And at the ankles? More ribbons, so you can tie the legs in close."
+        },
+        {
+          "t": "They were made in 1965.",
+          "reveal": true
+        }
+      ],
+      "tease": "When were they made? Make your guess.",
       "paragraphs": [
-        "Dark blue cotton in ikat,\nlight blue spots,\nsmall red squares:\nmonpe, trousers that puff.",
-        "A broad waistband,\nand long ribbons to close it.\nAt the ankles, ribbons too,\nto tie them close,\nif you wish."
+        "These are monpe: puffed trousers from Japan.",
+        "Dark blue cotton in ikat, with light blue spots and small red squares.",
+        "A broad waistband closes with long ribbons. And at the ankles? More ribbons, so you can tie the legs in close.",
+        "They were made in 1965."
       ],
       "lang": "en",
-      "text": "Monpe trousers, 1965, Japan.\n\nDark blue cotton in ikat,\nlight blue spots,\nsmall red squares:\nmonpe, trousers that puff.\n\nA broad waistband,\nand long ribbons to close it.\nAt the ankles, ribbons too,\nto tie them close,\nif you wish.",
-      "hash": "5011732674034127",
+      "text": "These are monpe: puffed trousers from Japan.\n\nDark blue cotton in ikat, with light blue spots and small red squares.\n\nA broad waistband closes with long ribbons. And at the ankles? More ribbons, so you can tie the legs in close.\n\nThey were made in 1965.",
+      "hash": "9b48d73c2501da2b",
       "audio": null
     },
     "ST2062": {
@@ -69,14 +160,36 @@
       "years": "1850 to 1870",
       "source": "record",
       "draft": true,
-      "form": "poem",
+      "form": "script",
+      "beats": [
+        {
+          "t": "Every stitch in these breeches was sewn by hand."
+        },
+        {
+          "t": "Cream woollen broadcloth, made for a man, and once part of a Russian military costume."
+        },
+        {
+          "t": "Six buttons close the long fly. A small pocket hides in the waistband at the right hip. At the back, a brass buckle pulls them tight."
+        },
+        {
+          "t": "Down at each knee: a slit and three buttons. And inside, a glimpse of glossy cream twill, probably silk."
+        },
+        {
+          "t": "They date from between 1850 and 1870.",
+          "reveal": true
+        }
+      ],
+      "tease": "When were they sewn? Make your guess.",
       "paragraphs": [
-        "Cream woollen broadcloth,\nevery stitch by hand.\nSix buttons close the long fly,\na small pocket hides\nin the waistband at the right hip,\na brass buckle draws in the back.",
-        "At each knee, a slit\nand three buttons.\nInside, a glimpse\nof glossy cream twill,\nprobably silk.\nOnce, part of\na Russian military costume."
+        "Every stitch in these breeches was sewn by hand.",
+        "Cream woollen broadcloth, made for a man, and once part of a Russian military costume.",
+        "Six buttons close the long fly. A small pocket hides in the waistband at the right hip. At the back, a brass buckle pulls them tight.",
+        "Down at each knee: a slit and three buttons. And inside, a glimpse of glossy cream twill, probably silk.",
+        "They date from between 1850 and 1870."
       ],
       "lang": "en",
-      "text": "Knee breeches, 1850 to 1870.\n\nCream woollen broadcloth,\nevery stitch by hand.\nSix buttons close the long fly,\na small pocket hides\nin the waistband at the right hip,\na brass buckle draws in the back.\n\nAt each knee, a slit\nand three buttons.\nInside, a glimpse\nof glossy cream twill,\nprobably silk.\nOnce, part of\na Russian military costume.",
-      "hash": "c2d0901aa308f5eb",
+      "text": "Every stitch in these breeches was sewn by hand.\n\nCream woollen broadcloth, made for a man, and once part of a Russian military costume.\n\nSix buttons close the long fly. A small pocket hides in the waistband at the right hip. At the back, a brass buckle pulls them tight.\n\nDown at each knee: a slit and three buttons. And inside, a glimpse of glossy cream twill, probably silk.\n\nThey date from between 1850 and 1870.",
+      "hash": "10297ed90edc892f",
       "audio": null
     },
     "ST81114AB": {
@@ -84,52 +197,114 @@
       "years": "1890 to 1920",
       "source": "curator",
       "draft": false,
-      "form": "prose",
+      "form": "script",
+      "beats": [
+        {
+          "t": "Picture a woman setting off on a bicycle."
+        },
+        {
+          "t": "This is what she wore on top: a white blouse of cotton batiste, light and breathable, made for the ride."
+        },
+        {
+          "t": "Machine-made lace runs along the collar, the cuffs, and down the front."
+        },
+        {
+          "t": "Look at the centre. A panel of fine pleats is buttoned on, with buttons of mother of pearl, the smooth inner layer of a sea shell."
+        },
+        {
+          "t": "And every buttonhole? Sewn by hand."
+        },
+        {
+          "t": "Outfits like this one were worn by women for cycling, around 1900.",
+          "reveal": true
+        }
+      ],
+      "tease": "So when did she ride? Make your guess.",
       "paragraphs": [
         "This white cotton blouse has machine-made lace on the front, the collar, and the ends of the sleeves (named the cuffs). Take a look at the centre front of the blouse, the lace pieces frame a panel of pleats (the columns of fabric folded double and sewed). If you look closely you can see this pleated panel is attached to the rest of the blouse with buttons. These shiny white buttons are made of mother of pearl, the strong and smooth inner layer of certain sea shells, such as oysters. The buttonholes are hand sewn",
         "The blouse is part of an outfit that would have been worn by women for cycling around 1900. The type of fabric used for the blouse, called ‘cotton batiste’ is very light and breathable, making it a good fit for cycling and exercising."
       ],
       "lang": "en",
-      "text": "Blouse, 1890 to 1920.\n\nThis white cotton blouse has machine-made lace on the front, the collar, and the ends of the sleeves (named the cuffs). Take a look at the centre front of the blouse, the lace pieces frame a panel of pleats (the columns of fabric folded double and sewed). If you look closely you can see this pleated panel is attached to the rest of the blouse with buttons. These shiny white buttons are made of mother of pearl, the strong and smooth inner layer of certain sea shells, such as oysters. The buttonholes are hand sewn\n\nThe blouse is part of an outfit that would have been worn by women for cycling around 1900. The type of fabric used for the blouse, called ‘cotton batiste’ is very light and breathable, making it a good fit for cycling and exercising.",
-      "hash": "7d54ed8b176b9af5",
-      "audio": "assets/audio/ST81114AB.en.m4a",
-      "audioHash": "7d54ed8b176b9af5",
-      "seconds": 55.2,
-      "bytes": 346106,
-      "voice": "picsart:Adeline"
+      "text": "Picture a woman setting off on a bicycle.\n\nThis is what she wore on top: a white blouse of cotton batiste, light and breathable, made for the ride.\n\nMachine-made lace runs along the collar, the cuffs, and down the front.\n\nLook at the centre. A panel of fine pleats is buttoned on, with buttons of mother of pearl, the smooth inner layer of a sea shell.\n\nAnd every buttonhole? Sewn by hand.\n\nOutfits like this one were worn by women for cycling, around 1900.",
+      "hash": "3015d9f3ee6898c1",
+      "audio": null
     },
     "ST81116": {
       "title": "Trousers",
       "years": "1890 to 1920",
       "source": "curator",
       "draft": false,
-      "form": "prose",
+      "form": "script",
+      "beats": [
+        {
+          "t": "Take a few steps back. Trousers, or a skirt? It is hard to tell."
+        },
+        {
+          "t": "Black wool, wide, gathered at the knee with elastic into a kind of balloon."
+        },
+        {
+          "t": "Six deep pleats, at the front and at the back, hide where the legs meet."
+        },
+        {
+          "t": "Why so much fabric? Because a long skirt could get caught in the wheels of a bicycle."
+        },
+        {
+          "t": "These gave women room to move."
+        },
+        {
+          "t": "Around 1900, many women started wearing trousers like these to cycle.",
+          "reveal": true
+        }
+      ],
+      "tease": "When did women first ride in these? Make your guess.",
       "paragraphs": [
         "Take a look at these black woollen trousers. They are wide and gather at the knees with an elastic, forming a kind of balloon shape. Both in the front and the back are six deep pleats or folds which hide the part where the left and right pant legs are attached.",
         "If you take a few steps back, you may find it is hard to see whether these are trousers or a skirt. The voluminous trousers are part of an outfit worn by women around 1900 for cycling. Around this time, many women started wearing trousers to cycle as long skirts could get caught in the wheels. In contrast to their daily clothing, newly designed sports clothes gave women more comfort and room to move when exercising."
       ],
       "lang": "en",
-      "text": "Trousers, 1890 to 1920.\n\nTake a look at these black woollen trousers. They are wide and gather at the knees with an elastic, forming a kind of balloon shape. Both in the front and the back are six deep pleats or folds which hide the part where the left and right pant legs are attached.\n\nIf you take a few steps back, you may find it is hard to see whether these are trousers or a skirt. The voluminous trousers are part of an outfit worn by women around 1900 for cycling. Around this time, many women started wearing trousers to cycle as long skirts could get caught in the wheels. In contrast to their daily clothing, newly designed sports clothes gave women more comfort and room to move when exercising.",
-      "hash": "bff569fe0236c4a5",
-      "audio": "assets/audio/ST81116.en.m4a",
-      "audioHash": "bff569fe0236c4a5",
-      "seconds": 52.7,
-      "bytes": 329445,
-      "voice": "picsart:Adeline"
+      "text": "Take a few steps back. Trousers, or a skirt? It is hard to tell.\n\nBlack wool, wide, gathered at the knee with elastic into a kind of balloon.\n\nSix deep pleats, at the front and at the back, hide where the legs meet.\n\nWhy so much fabric? Because a long skirt could get caught in the wheels of a bicycle.\n\nThese gave women room to move.\n\nAround 1900, many women started wearing trousers like these to cycle.",
+      "hash": "fd8b63c1113e7128",
+      "audio": null
     },
     "ST2407/1-2": {
       "title": "Football boots, Dirk Bikkembergs",
       "years": "2005 to 2009",
       "source": "record",
       "draft": true,
-      "form": "poem",
+      "form": "script",
+      "beats": [
+        {
+          "t": "Dirk Bikkembergs made these football boots for a real club: FC Bikkembergs Fossombrone, in the Marche, in Italy."
+        },
+        {
+          "t": "White leather, wound with blue circles."
+        },
+        {
+          "t": "Turn them over. Through the clear, studded sole, you can see a drawing in red and blue."
+        },
+        {
+          "t": "A leather circle covers the laces, held on with elastic, and carries the logo of Bikkembergs Sport."
+        },
+        {
+          "t": "One heel is blue, the other red. The club's badge on the left, the label's on the right."
+        },
+        {
+          "t": "They were made between 2005 and 2009.",
+          "reveal": true
+        }
+      ],
+      "tease": "How new are they? Make your guess.",
       "paragraphs": [
-        "White leather,\nwound with blue circles,\nmade for a football club:\nFC Bikkembergs Fossombrone,\nin the Marche, Italy.",
-        "Look under the studs:\nthe clear sole shows\na drawing in red and blue.\nA leather circle covers the laces,\nheld on with elastic.\nOne heel blue, one heel red,\nthe club's badge on the left,\nthe label's on the right."
+        "Dirk Bikkembergs made these football boots for a real club: FC Bikkembergs Fossombrone, in the Marche, in Italy.",
+        "White leather, wound with blue circles.",
+        "Turn them over. Through the clear, studded sole, you can see a drawing in red and blue.",
+        "A leather circle covers the laces, held on with elastic, and carries the logo of Bikkembergs Sport.",
+        "One heel is blue, the other red. The club's badge on the left, the label's on the right.",
+        "They were made between 2005 and 2009."
       ],
       "lang": "en",
-      "text": "Football boots, Dirk Bikkembergs, 2005 to 2009.\n\nWhite leather,\nwound with blue circles,\nmade for a football club:\nFC Bikkembergs Fossombrone,\nin the Marche, Italy.\n\nLook under the studs:\nthe clear sole shows\na drawing in red and blue.\nA leather circle covers the laces,\nheld on with elastic.\nOne heel blue, one heel red,\nthe club's badge on the left,\nthe label's on the right.",
-      "hash": "48354c923d4aaf57",
+      "text": "Dirk Bikkembergs made these football boots for a real club: FC Bikkembergs Fossombrone, in the Marche, in Italy.\n\nWhite leather, wound with blue circles.\n\nTurn them over. Through the clear, studded sole, you can see a drawing in red and blue.\n\nA leather circle covers the laces, held on with elastic, and carries the logo of Bikkembergs Sport.\n\nOne heel is blue, the other red. The club's badge on the left, the label's on the right.\n\nThey were made between 2005 and 2009.",
+      "hash": "576f553055f612ad",
       "audio": null
     },
     "ST80881": {
@@ -137,14 +312,40 @@
       "years": "1979",
       "source": "record",
       "draft": true,
-      "form": "poem",
+      "form": "script",
+      "beats": [
+        {
+          "t": "Open this furisode kimono from Japan, and a whole landscape unfolds."
+        },
+        {
+          "t": "Ecru silk, painted, and printed with gold."
+        },
+        {
+          "t": "Broad ribbons billow across it in many colours. Behind them: houses, clouds, peonies, chrysanthemums, plum blossom, Japanese maple, and bamboo."
+        },
+        {
+          "t": "Come closer to the flowers. Their details are embroidered in silk and metal thread."
+        },
+        {
+          "t": "Inside, the lining changes halfway: white at the top, printed below."
+        },
+        {
+          "t": "It dates from 1979.",
+          "reveal": true
+        }
+      ],
+      "tease": "When was it made? Make your guess.",
       "paragraphs": [
-        "Ecru silk, painted,\ntouched with gold.\nBroad ribbons billow across it\nin many colours,\nand behind them a landscape drifts:\nhouses, clouds,\npeonies and chrysanthemums,\nplum blossom,\nJapanese maple, bamboo.",
-        "Look closer at the flowers:\ntheir details are embroidered\nin silk and metal thread."
+        "Open this furisode kimono from Japan, and a whole landscape unfolds.",
+        "Ecru silk, painted, and printed with gold.",
+        "Broad ribbons billow across it in many colours. Behind them: houses, clouds, peonies, chrysanthemums, plum blossom, Japanese maple, and bamboo.",
+        "Come closer to the flowers. Their details are embroidered in silk and metal thread.",
+        "Inside, the lining changes halfway: white at the top, printed below.",
+        "It dates from 1979."
       ],
       "lang": "en",
-      "text": "Furisode kimono, 1979, Japan.\n\nEcru silk, painted,\ntouched with gold.\nBroad ribbons billow across it\nin many colours,\nand behind them a landscape drifts:\nhouses, clouds,\npeonies and chrysanthemums,\nplum blossom,\nJapanese maple, bamboo.\n\nLook closer at the flowers:\ntheir details are embroidered\nin silk and metal thread.",
-      "hash": "e78510241329d9c8",
+      "text": "Open this furisode kimono from Japan, and a whole landscape unfolds.\n\nEcru silk, painted, and printed with gold.\n\nBroad ribbons billow across it in many colours. Behind them: houses, clouds, peonies, chrysanthemums, plum blossom, Japanese maple, and bamboo.\n\nCome closer to the flowers. Their details are embroidered in silk and metal thread.\n\nInside, the lining changes halfway: white at the top, printed below.\n\nIt dates from 1979.",
+      "hash": "67ff232ec3220583",
       "audio": null
     },
     "ST655/1": {
@@ -152,14 +353,36 @@
       "years": "1947 to 1950",
       "source": "record",
       "draft": true,
-      "form": "poem",
+      "form": "script",
+      "beats": [
+        {
+          "t": "From Belgium, a cocktail dress in green and black stripes, with a secret in its cut."
+        },
+        {
+          "t": "Eleven covered buttons run down the front. The shawl collar is black velvet, and so are the bands on the short sleeves."
+        },
+        {
+          "t": "Now, the secret. The skirt is made of half circles, with no side seams. So the stripes run across at the front, and turn upright at the back."
+        },
+        {
+          "t": "No pockets. No lining. Just a black ribbon inside the hem, fixed by hand with fine stitches."
+        },
+        {
+          "t": "It was made between 1947 and 1950.",
+          "reveal": true
+        }
+      ],
+      "tease": "When was it made? Make your guess.",
       "paragraphs": [
-        "Green and black,\nin horizontal stripes,\neleven covered buttons\ndown the front.\nA shawl collar of black velvet,\nshort sleeves edged in velvet too.",
-        "And a secret in the cut:\nthe skirt is made of half circles,\nwith no side seams,\nso the stripes run across the front\nand turn upright at the back.\nInside, a black ribbon holds the hem,\nfixed by hand in fine stitches."
+        "From Belgium, a cocktail dress in green and black stripes, with a secret in its cut.",
+        "Eleven covered buttons run down the front. The shawl collar is black velvet, and so are the bands on the short sleeves.",
+        "Now, the secret. The skirt is made of half circles, with no side seams. So the stripes run across at the front, and turn upright at the back.",
+        "No pockets. No lining. Just a black ribbon inside the hem, fixed by hand with fine stitches.",
+        "It was made between 1947 and 1950."
       ],
       "lang": "en",
-      "text": "Cocktail dress, 1947 to 1950, Belgium.\n\nGreen and black,\nin horizontal stripes,\neleven covered buttons\ndown the front.\nA shawl collar of black velvet,\nshort sleeves edged in velvet too.\n\nAnd a secret in the cut:\nthe skirt is made of half circles,\nwith no side seams,\nso the stripes run across the front\nand turn upright at the back.\nInside, a black ribbon holds the hem,\nfixed by hand in fine stitches.",
-      "hash": "e3a29244324c20f9",
+      "text": "From Belgium, a cocktail dress in green and black stripes, with a secret in its cut.\n\nEleven covered buttons run down the front. The shawl collar is black velvet, and so are the bands on the short sleeves.\n\nNow, the secret. The skirt is made of half circles, with no side seams. So the stripes run across at the front, and turn upright at the back.\n\nNo pockets. No lining. Just a black ribbon inside the hem, fixed by hand with fine stitches.\n\nIt was made between 1947 and 1950.",
+      "hash": "a8d200b5dd3027b1",
       "audio": null
     },
     "ST2435": {
@@ -167,14 +390,35 @@
       "years": "1920 to 1925",
       "source": "record",
       "draft": true,
-      "form": "poem",
+      "form": "script",
+      "beats": [
+        {
+          "t": "Somewhere between 1920 and 1925, this dress was made to shimmer."
+        },
+        {
+          "t": "Ecru silk, calf-length, and covered all over in sequins that glow like pearls."
+        },
+        {
+          "t": "It falls almost straight, from a wide boat neck."
+        },
+        {
+          "t": "The sides are left open. Only three hooks and eyes on the left, and short strips at the hips, draw it in."
+        },
+        {
+          "t": "Look closely at the surface: machine stitching in metal thread draws curls, and eyes."
+        }
+      ],
+      "tease": null,
       "paragraphs": [
-        "Ecru silk, calf-length,\ncovered all over in sequins\nthat shimmer like pearls.",
-        "A wide boat neck.\nStraight panels, falling.\nThe sides stay open,\ncaught by three hooks and eyes\non the left,\nand short strips at the hips\nthat draw the line in.\nOver it all, machine stitching\nin metal thread\ntraces curls and eyes."
+        "Somewhere between 1920 and 1925, this dress was made to shimmer.",
+        "Ecru silk, calf-length, and covered all over in sequins that glow like pearls.",
+        "It falls almost straight, from a wide boat neck.",
+        "The sides are left open. Only three hooks and eyes on the left, and short strips at the hips, draw it in.",
+        "Look closely at the surface: machine stitching in metal thread draws curls, and eyes."
       ],
       "lang": "en",
-      "text": "Sequin silk dress, 1920 to 1925.\n\nEcru silk, calf-length,\ncovered all over in sequins\nthat shimmer like pearls.\n\nA wide boat neck.\nStraight panels, falling.\nThe sides stay open,\ncaught by three hooks and eyes\non the left,\nand short strips at the hips\nthat draw the line in.\nOver it all, machine stitching\nin metal thread\ntraces curls and eyes.",
-      "hash": "f16a0a2eb51992a6",
+      "text": "Somewhere between 1920 and 1925, this dress was made to shimmer.\n\nEcru silk, calf-length, and covered all over in sequins that glow like pearls.\n\nIt falls almost straight, from a wide boat neck.\n\nThe sides are left open. Only three hooks and eyes on the left, and short strips at the hips, draw it in.\n\nLook closely at the surface: machine stitching in metal thread draws curls, and eyes.",
+      "hash": "c251e4ce5c9a2b96",
       "audio": null
     },
     "ST652/1": {
@@ -182,14 +426,39 @@
       "years": "1940 to 1945",
       "source": "record",
       "draft": true,
-      "form": "poem",
+      "form": "script",
+      "beats": [
+        {
+          "t": "Between 1940 and 1945, this dress was mended, and mended again."
+        },
+        {
+          "t": "Blue cotton, with small white and red dots, buttoned all the way down."
+        },
+        {
+          "t": "Look for the patches: checked cloth, set in time after time."
+        },
+        {
+          "t": "Red edges the pockets and the sleeves. Three red lines trim the right lapel."
+        },
+        {
+          "t": "And that red handkerchief in the chest pocket? Look again. It only seems to be there."
+        },
+        {
+          "t": "A cloth belt ties at the front, to mark the waist."
+        }
+      ],
+      "tease": null,
       "paragraphs": [
-        "Blue cotton, scattered\nwith small white and red dots,\nbuttoned all the way down.\nMended, and mended again,\nin patches of checked cloth.",
-        "Red edges the pockets\nand the sleeves,\nthree red lines trim the right lapel,\nand from the chest pocket\na red handkerchief\nseems to peek out.\nA cloth belt ties at the front\nto mark the waist."
+        "Between 1940 and 1945, this dress was mended, and mended again.",
+        "Blue cotton, with small white and red dots, buttoned all the way down.",
+        "Look for the patches: checked cloth, set in time after time.",
+        "Red edges the pockets and the sleeves. Three red lines trim the right lapel.",
+        "And that red handkerchief in the chest pocket? Look again. It only seems to be there.",
+        "A cloth belt ties at the front, to mark the waist."
       ],
       "lang": "en",
-      "text": "Polka-dot mended dress, 1940 to 1945.\n\nBlue cotton, scattered\nwith small white and red dots,\nbuttoned all the way down.\nMended, and mended again,\nin patches of checked cloth.\n\nRed edges the pockets\nand the sleeves,\nthree red lines trim the right lapel,\nand from the chest pocket\na red handkerchief\nseems to peek out.\nA cloth belt ties at the front\nto mark the waist.",
-      "hash": "929e12a46f108b57",
+      "text": "Between 1940 and 1945, this dress was mended, and mended again.\n\nBlue cotton, with small white and red dots, buttoned all the way down.\n\nLook for the patches: checked cloth, set in time after time.\n\nRed edges the pockets and the sleeves. Three red lines trim the right lapel.\n\nAnd that red handkerchief in the chest pocket? Look again. It only seems to be there.\n\nA cloth belt ties at the front, to mark the waist.",
+      "hash": "de9637abac4e9918",
       "audio": null
     },
     "ST673/1-2": {
@@ -197,14 +466,35 @@
       "years": "1880 to 1900",
       "source": "record",
       "draft": true,
-      "form": "poem",
+      "form": "script",
+      "beats": [
+        {
+          "t": "Tennis. Croquet. Badminton. Archery. Between 1880 and 1900, this was made for sport."
+        },
+        {
+          "t": "White cotton: a bodice and long drawers, buttoned into one, with no boning at all."
+        },
+        {
+          "t": "Broderie anglaise frames the V of the neck, and ruffles circle the arms."
+        },
+        {
+          "t": "Mother-of-pearl buttons close the front. Bone buttons ring the waist, to hold whatever was worn on top."
+        },
+        {
+          "t": "And the drawers? Open at the front, open at the back, and closed over a single button."
+        }
+      ],
+      "tease": null,
       "paragraphs": [
-        "White cotton,\nand no boning at all:\na bodice and long drawers,\nbuttoned into one.\nBroderie anglaise frames\nthe V of the neck,\nruffles circle the arms,\nmother-of-pearl buttons\nclose the front.",
-        "Bone buttons ring the waist\nto hold what was worn on top.\nIt was made for sport:\ntennis, croquet,\nbadminton, archery."
+        "Tennis. Croquet. Badminton. Archery. Between 1880 and 1900, this was made for sport.",
+        "White cotton: a bodice and long drawers, buttoned into one, with no boning at all.",
+        "Broderie anglaise frames the V of the neck, and ruffles circle the arms.",
+        "Mother-of-pearl buttons close the front. Bone buttons ring the waist, to hold whatever was worn on top.",
+        "And the drawers? Open at the front, open at the back, and closed over a single button."
       ],
       "lang": "en",
-      "text": "Cotton combinaison, 1880 to 1900.\n\nWhite cotton,\nand no boning at all:\na bodice and long drawers,\nbuttoned into one.\nBroderie anglaise frames\nthe V of the neck,\nruffles circle the arms,\nmother-of-pearl buttons\nclose the front.\n\nBone buttons ring the waist\nto hold what was worn on top.\nIt was made for sport:\ntennis, croquet,\nbadminton, archery.",
-      "hash": "b3942efc1cbe7cbf",
+      "text": "Tennis. Croquet. Badminton. Archery. Between 1880 and 1900, this was made for sport.\n\nWhite cotton: a bodice and long drawers, buttoned into one, with no boning at all.\n\nBroderie anglaise frames the V of the neck, and ruffles circle the arms.\n\nMother-of-pearl buttons close the front. Bone buttons ring the waist, to hold whatever was worn on top.\n\nAnd the drawers? Open at the front, open at the back, and closed over a single button.",
+      "hash": "98c3d1877fd07426",
       "audio": null
     },
     "ST81190": {
@@ -212,33 +502,74 @@
       "years": "1998 to 1999",
       "source": "curator",
       "draft": false,
-      "form": "prose",
+      "form": "script",
+      "beats": [
+        {
+          "t": "Autumn-winter, 1998. A Belgian fashion house, A.F. Vandevorst, presents its very first collection."
+        },
+        {
+          "t": "This grey wool coat is part of it. The museum's record gives it a single word: Blessed."
+        },
+        {
+          "t": "Now look closer. The sleeves, the front, the shoulders: none of them are sewn together."
+        },
+        {
+          "t": "Brass-coloured rivets hold every piece in place, even the darts and the side seams."
+        },
+        {
+          "t": "Horses and their tack, uniforms, rivets: they inspired the house from the start, and you can see it here."
+        },
+        {
+          "t": "Nine snap buttons close the front."
+        },
+        {
+          "t": "And at the back of the neck, stitched in red, a cross: the mark of A.F. Vandevorst."
+        }
+      ],
+      "tease": null,
       "paragraphs": [
         "This grey woolen jacket from 1998-1999 by Belgian fashion house A.F. Vandevorst has some remarkable details. It is made up of separate parts; the sleeve, front, shoulder, and breast pieces are not sewn together. If you look closely, how are they held together? The pieces, as well as the darts and side seams are fastened with metal rivets, bolt-like fasteners that attach two fabrics. The jacket is closed in the centre front by a column of snap buttons, a type of button you can easily close by pressing the two ends together.",
         "Now look at the back of the piece. What stands out? The red cross stitched at the nape of the neck is the iconic logo of A.F. Vandevorst. Since their early collections, their designs have been inspired by German artist Joseph Beuys, religion, horses and their tack, uniforms, rivets, lingerie, and fetish shoes. This jacket is part of their first collection."
       ],
       "lang": "en",
-      "text": "A.F. Vandevorst Jacket, 1998 to 1999.\n\nThis grey woolen jacket from 1998-1999 by Belgian fashion house A.F. Vandevorst has some remarkable details. It is made up of separate parts; the sleeve, front, shoulder, and breast pieces are not sewn together. If you look closely, how are they held together? The pieces, as well as the darts and side seams are fastened with metal rivets, bolt-like fasteners that attach two fabrics. The jacket is closed in the centre front by a column of snap buttons, a type of button you can easily close by pressing the two ends together.\n\nNow look at the back of the piece. What stands out? The red cross stitched at the nape of the neck is the iconic logo of A.F. Vandevorst. Since their early collections, their designs have been inspired by German artist Joseph Beuys, religion, horses and their tack, uniforms, rivets, lingerie, and fetish shoes. This jacket is part of their first collection.",
-      "hash": "79b791e9fe668c5b",
-      "audio": "assets/audio/ST81190.en.m4a",
-      "audioHash": "79b791e9fe668c5b",
-      "seconds": 71.3,
-      "bytes": 447025,
-      "voice": "picsart:Adeline"
+      "text": "Autumn-winter, 1998. A Belgian fashion house, A.F. Vandevorst, presents its very first collection.\n\nThis grey wool coat is part of it. The museum's record gives it a single word: Blessed.\n\nNow look closer. The sleeves, the front, the shoulders: none of them are sewn together.\n\nBrass-coloured rivets hold every piece in place, even the darts and the side seams.\n\nHorses and their tack, uniforms, rivets: they inspired the house from the start, and you can see it here.\n\nNine snap buttons close the front.\n\nAnd at the back of the neck, stitched in red, a cross: the mark of A.F. Vandevorst.",
+      "hash": "a38b37505ae106e1",
+      "audio": null
     },
     "ST80998": {
       "title": "Striped velvet bridal kaftan",
       "years": "1900 to 1925",
       "source": "record",
       "draft": true,
-      "form": "poem",
+      "form": "script",
+      "beats": [
+        {
+          "t": "This kaftan was made for a bride in Palestine, between 1900 and 1925."
+        },
+        {
+          "t": "Velvet, in stripes of burgundy, red, green and black."
+        },
+        {
+          "t": "The neckline is round, then drops to a point. The long sleeves end in points too."
+        },
+        {
+          "t": "Now follow the embroidery: across the chest, along the sides, over the sleeves. Cords and metal thread, sewn on in many colours, on grounds of orange, light brown and green."
+        },
+        {
+          "t": "And under the embroidered sleeves, a hidden lining of pink cotton."
+        }
+      ],
+      "tease": null,
       "paragraphs": [
-        "A bride's kaftan,\nin velvet striped\nburgundy, red, green and black.\nThe neckline rounds,\nthen falls to a point,\nand the long sleeves taper\nto points of their own.",
-        "Over the chest, along the sides,\nacross the sleeves,\ncords and metal thread\nare sewn on in many colours,\non grounds of orange,\nlight brown and green.\nUnder the sleeves' embroidery,\na lining of pink cotton."
+        "This kaftan was made for a bride in Palestine, between 1900 and 1925.",
+        "Velvet, in stripes of burgundy, red, green and black.",
+        "The neckline is round, then drops to a point. The long sleeves end in points too.",
+        "Now follow the embroidery: across the chest, along the sides, over the sleeves. Cords and metal thread, sewn on in many colours, on grounds of orange, light brown and green.",
+        "And under the embroidered sleeves, a hidden lining of pink cotton."
       ],
       "lang": "en",
-      "text": "Striped velvet bridal kaftan, 1900 to 1925, Palestine.\n\nA bride's kaftan,\nin velvet striped\nburgundy, red, green and black.\nThe neckline rounds,\nthen falls to a point,\nand the long sleeves taper\nto points of their own.\n\nOver the chest, along the sides,\nacross the sleeves,\ncords and metal thread\nare sewn on in many colours,\non grounds of orange,\nlight brown and green.\nUnder the sleeves' embroidery,\na lining of pink cotton.",
-      "hash": "01c4a6167e1eb06f",
+      "text": "This kaftan was made for a bride in Palestine, between 1900 and 1925.\n\nVelvet, in stripes of burgundy, red, green and black.\n\nThe neckline is round, then drops to a point. The long sleeves end in points too.\n\nNow follow the embroidery: across the chest, along the sides, over the sleeves. Cords and metal thread, sewn on in many colours, on grounds of orange, light brown and green.\n\nAnd under the embroidered sleeves, a hidden lining of pink cotton.",
+      "hash": "de859b2c1178705e",
       "audio": null
     },
     "ST2431/1-4": {
@@ -246,14 +577,39 @@
       "years": "1870 to 1900",
       "source": "record",
       "draft": true,
-      "form": "poem",
+      "form": "script",
+      "beats": [
+        {
+          "t": "Imagine him on horseback: a lieutenant of the National Guard, with the mounted chasseurs of France, the ninth regiment, or the eighteenth."
+        },
+        {
+          "t": "His uniform is light blue and red wool, made between 1870 and 1900."
+        },
+        {
+          "t": "Black braid crosses his chest, and it is the fastening too. His red collar stands up, worked with coiled metal thread."
+        },
+        {
+          "t": "Red trousers with a blue stripe. Gold buttons on the waistband read: eighteenth chasseurs."
+        },
+        {
+          "t": "On his head, a kepi, fifteen centimetres tall, with a black leather peak."
+        },
+        {
+          "t": "One last detail: small slits in the side seams, just big enough for a small hand."
+        }
+      ],
+      "tease": null,
       "paragraphs": [
-        "A lieutenant's uniform,\nlight blue and red,\nfor the National Guard,\nthe mounted chasseurs of France,\nthe ninth regiment\nor the eighteenth.",
-        "Black braid crosses the chest\nand becomes the fastening.\nA red collar stands up,\nworked in coiled metal thread.\nRed trousers carry a blue stripe,\nand a kepi,\nfifteen centimetres tall,\nwears a black leather peak."
+        "Imagine him on horseback: a lieutenant of the National Guard, with the mounted chasseurs of France, the ninth regiment, or the eighteenth.",
+        "His uniform is light blue and red wool, made between 1870 and 1900.",
+        "Black braid crosses his chest, and it is the fastening too. His red collar stands up, worked with coiled metal thread.",
+        "Red trousers with a blue stripe. Gold buttons on the waistband read: eighteenth chasseurs.",
+        "On his head, a kepi, fifteen centimetres tall, with a black leather peak.",
+        "One last detail: small slits in the side seams, just big enough for a small hand."
       ],
       "lang": "en",
-      "text": "Light-blue cavalry uniform, 1870 to 1900.\n\nA lieutenant's uniform,\nlight blue and red,\nfor the National Guard,\nthe mounted chasseurs of France,\nthe ninth regiment\nor the eighteenth.\n\nBlack braid crosses the chest\nand becomes the fastening.\nA red collar stands up,\nworked in coiled metal thread.\nRed trousers carry a blue stripe,\nand a kepi,\nfifteen centimetres tall,\nwears a black leather peak.",
-      "hash": "bf86f94baafa1e1c",
+      "text": "Imagine him on horseback: a lieutenant of the National Guard, with the mounted chasseurs of France, the ninth regiment, or the eighteenth.\n\nHis uniform is light blue and red wool, made between 1870 and 1900.\n\nBlack braid crosses his chest, and it is the fastening too. His red collar stands up, worked with coiled metal thread.\n\nRed trousers with a blue stripe. Gold buttons on the waistband read: eighteenth chasseurs.\n\nOn his head, a kepi, fifteen centimetres tall, with a black leather peak.\n\nOne last detail: small slits in the side seams, just big enough for a small hand.",
+      "hash": "2db2c3088af8a498",
       "audio": null
     },
     "ST2432/1-2": {
@@ -261,14 +617,39 @@
       "years": "1800 to 1940",
       "source": "record",
       "draft": true,
-      "form": "poem",
+      "form": "script",
+      "beats": [
+        {
+          "t": "This uniform has lived more than one life."
+        },
+        {
+          "t": "The coat is the original, made for a member of the National Guard: dark blue broadcloth, a high red collar, red cuffs, and tails lined in red."
+        },
+        {
+          "t": "Look at the tails. Their points are turned out, so a flash of red shows below the blue."
+        },
+        {
+          "t": "Three white-metal buttons still say: Garde Nationale."
+        },
+        {
+          "t": "The trousers came later, from between 1910 and 1940. Later still, a red lace was set into their back."
+        },
+        {
+          "t": "Even the gold buttons on the front are newer, possibly from 1980 to 2000. Coat and trousers: both altered over the years."
+        }
+      ],
+      "tease": null,
       "paragraphs": [
-        "A coat for the National Guard.\nDark blue broadcloth,\na high red collar,\nred cuffs, tails lined in red,\ntheir points turned out\nso the red shows below the blue.\nThree white-metal buttons\nstill say Garde Nationale.",
-        "The trousers came later,\nand a red lace was set\ninto their back later still.\nCoat and trousers,\nboth altered with time."
+        "This uniform has lived more than one life.",
+        "The coat is the original, made for a member of the National Guard: dark blue broadcloth, a high red collar, red cuffs, and tails lined in red.",
+        "Look at the tails. Their points are turned out, so a flash of red shows below the blue.",
+        "Three white-metal buttons still say: Garde Nationale.",
+        "The trousers came later, from between 1910 and 1940. Later still, a red lace was set into their back.",
+        "Even the gold buttons on the front are newer, possibly from 1980 to 2000. Coat and trousers: both altered over the years."
       ],
       "lang": "en",
-      "text": "Dark-blue tailcoat uniform, 1800 to 1940.\n\nA coat for the National Guard.\nDark blue broadcloth,\na high red collar,\nred cuffs, tails lined in red,\ntheir points turned out\nso the red shows below the blue.\nThree white-metal buttons\nstill say Garde Nationale.\n\nThe trousers came later,\nand a red lace was set\ninto their back later still.\nCoat and trousers,\nboth altered with time.",
-      "hash": "c59841cb798f085a",
+      "text": "This uniform has lived more than one life.\n\nThe coat is the original, made for a member of the National Guard: dark blue broadcloth, a high red collar, red cuffs, and tails lined in red.\n\nLook at the tails. Their points are turned out, so a flash of red shows below the blue.\n\nThree white-metal buttons still say: Garde Nationale.\n\nThe trousers came later, from between 1910 and 1940. Later still, a red lace was set into their back.\n\nEven the gold buttons on the front are newer, possibly from 1980 to 2000. Coat and trousers: both altered over the years.",
+      "hash": "6348889197271f58",
       "audio": null
     },
     "ST671": {
@@ -276,14 +657,39 @@
       "years": "1900 to 1915",
       "source": "record",
       "draft": true,
-      "form": "poem",
+      "form": "script",
+      "beats": [
+        {
+          "t": "Paris, 83 Boulevard Magenta. That address is printed on this dress's waistband, with the name Madame Guédon Deschamps."
+        },
+        {
+          "t": "It is a walking gown: long, in beige silk rep, made between 1900 and 1915."
+        },
+        {
+          "t": "At the throat, machine lace made to imitate Lille bobbin lace, and a standing collar held up by bones."
+        },
+        {
+          "t": "Underneath is a second dress, of silk. Its pleats peek out below the hem."
+        },
+        {
+          "t": "Look at that hem: at both sides, it hangs a little lower than at the front and back."
+        },
+        {
+          "t": "And both dresses close at the back, with one long row of hooks and buttons."
+        }
+      ],
+      "tease": null,
       "paragraphs": [
-        "Beige silk rep,\na long gown for walking.\nOn the waistband, a printed name:\nMadame Guédon Deschamps,\n83 Boulevard Magenta, Paris.",
-        "Machine lace at the throat,\nin imitation of Lille bobbin lace,\nits standing collar\nheld up with bones.\nBeneath, a second dress of silk,\nits pleats showing under the hem.\nAt both sides,\nthe hem hangs a little lower."
+        "Paris, 83 Boulevard Magenta. That address is printed on this dress's waistband, with the name Madame Guédon Deschamps.",
+        "It is a walking gown: long, in beige silk rep, made between 1900 and 1915.",
+        "At the throat, machine lace made to imitate Lille bobbin lace, and a standing collar held up by bones.",
+        "Underneath is a second dress, of silk. Its pleats peek out below the hem.",
+        "Look at that hem: at both sides, it hangs a little lower than at the front and back.",
+        "And both dresses close at the back, with one long row of hooks and buttons."
       ],
       "lang": "en",
-      "text": "Silk walking dress, 1900 to 1915.\n\nBeige silk rep,\na long gown for walking.\nOn the waistband, a printed name:\nMadame Guédon Deschamps,\n83 Boulevard Magenta, Paris.\n\nMachine lace at the throat,\nin imitation of Lille bobbin lace,\nits standing collar\nheld up with bones.\nBeneath, a second dress of silk,\nits pleats showing under the hem.\nAt both sides,\nthe hem hangs a little lower.",
-      "hash": "065af76721708788",
+      "text": "Paris, 83 Boulevard Magenta. That address is printed on this dress's waistband, with the name Madame Guédon Deschamps.\n\nIt is a walking gown: long, in beige silk rep, made between 1900 and 1915.\n\nAt the throat, machine lace made to imitate Lille bobbin lace, and a standing collar held up by bones.\n\nUnderneath is a second dress, of silk. Its pleats peek out below the hem.\n\nLook at that hem: at both sides, it hangs a little lower than at the front and back.\n\nAnd both dresses close at the back, with one long row of hooks and buttons.",
+      "hash": "7f706436a89ede89",
       "audio": null
     },
     "ST2203": {
@@ -291,14 +697,35 @@
       "years": "1937 to 1948",
       "source": "record",
       "draft": true,
-      "form": "poem",
+      "form": "script",
+      "beats": [
+        {
+          "t": "Black silk satin, cut close to the body, somewhere between 1937 and 1948."
+        },
+        {
+          "t": "A deep V, edged in black velvet. Big shoulders, padded with white cotton."
+        },
+        {
+          "t": "The satin gathers and drapes, down the front and down the back."
+        },
+        {
+          "t": "Two draped pockets sit at the hips. Five fabric buttons close each cuff."
+        },
+        {
+          "t": "And from the point of the V, a black metal zip runs twenty centimetres down, to the waist."
+        }
+      ],
+      "tease": null,
       "paragraphs": [
-        "Black silk satin,\nclose to the body.\nA deep V, edged in black velvet,\nbroad shoulders\npadded with white cotton.",
-        "Down the front and the back,\nthe satin gathers and drapes.\nTwo draped pockets\nsit at the hips,\nfive fabric buttons\nclose each cuff,\nand from the point of the V\na black metal zip\nruns twenty centimetres,\nto the waist."
+        "Black silk satin, cut close to the body, somewhere between 1937 and 1948.",
+        "A deep V, edged in black velvet. Big shoulders, padded with white cotton.",
+        "The satin gathers and drapes, down the front and down the back.",
+        "Two draped pockets sit at the hips. Five fabric buttons close each cuff.",
+        "And from the point of the V, a black metal zip runs twenty centimetres down, to the waist."
       ],
       "lang": "en",
-      "text": "Black satin dress, 1937 to 1948.\n\nBlack silk satin,\nclose to the body.\nA deep V, edged in black velvet,\nbroad shoulders\npadded with white cotton.\n\nDown the front and the back,\nthe satin gathers and drapes.\nTwo draped pockets\nsit at the hips,\nfive fabric buttons\nclose each cuff,\nand from the point of the V\na black metal zip\nruns twenty centimetres,\nto the waist.",
-      "hash": "235ec0f2a74890f3",
+      "text": "Black silk satin, cut close to the body, somewhere between 1937 and 1948.\n\nA deep V, edged in black velvet. Big shoulders, padded with white cotton.\n\nThe satin gathers and drapes, down the front and down the back.\n\nTwo draped pockets sit at the hips. Five fabric buttons close each cuff.\n\nAnd from the point of the V, a black metal zip runs twenty centimetres down, to the waist.",
+      "hash": "355b91194c85a0a0",
       "audio": null
     }
   }
