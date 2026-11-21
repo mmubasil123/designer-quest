@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f3efe7">
+<meta name="theme-color" content="#ffffff">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>Second Skin mockups</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/" } }</script>
 <link rel="preconnect" href="https://heron.libis.be" crossorigin>
 <link rel="stylesheet" href="quiz.css">
@@ -33,13 +33,13 @@
 [hidden] { display: none !important; }
 body {
   background: var(--page); color: var(--ink);
-  font: 14px/1.45 Inter, system-ui, sans-serif;
+  font: 14px/1.45 var(--sans);
   padding: 32px 16px 64px;
 }
-h1.sheet { font: 400 28px/1.1 Newsreader, serif; text-align: center; }
+h1.sheet { font: 400 28px/1.1 var(--serif); text-align: center; }
 p.sheet { text-align: center; color: var(--muted); margin: 6px auto 28px; max-width: 620px; }
 .screens { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; }
-.label { font: 500 11px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; text-align: center; }
+.label { font: 500 11px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; text-align: center; }
 
 .phone {
   width: 340px; max-width: 100%; height: 700px;
@@ -50,9 +50,9 @@ p.sheet { text-align: center; color: var(--muted); margin: 6px auto 28px; max-wi
 }
 .bar { display: flex; justify-content: space-between; align-items: center; padding: 18px 16px 6px 22px; }
 .pill { min-height: 44px; padding: 0 16px; border-radius: 999px; background: var(--ink); color: var(--paper); font-size: 13px; font-weight: 500; }
-.brand { font: italic 400 20px/1 Newsreader, serif; }
-.mono { font: 400 11px/1.3 "IBM Plex Mono", monospace; color: var(--muted); }
-.serif { font-family: Newsreader, serif; }
+.brand { font: italic 400 20px/1 var(--serif); }
+.mono { font: 400 11px/1.3 var(--sans); color: var(--muted); }
+.serif { font-family: var(--serif); }
 
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .press { transition: transform 160ms var(--ease-out); }
@@ -73,16 +73,16 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .stage { flex: 1; position: relative; background: linear-gradient(var(--wall), var(--paper) 78%); }
 .stage .turntable { bottom: 164px; height: 420px; }   /* 164: the peeking grab area */
 .zoom { position: absolute; right: 12px; top: 150px; display: flex; flex-direction: column; gap: 8px; z-index: 1; transition: opacity 200ms var(--ease-out); }
-.zoom button { width: 44px; height: 44px; border-radius: 50%; background: var(--paper); border: 1px solid var(--line); font: 400 22px/1 Newsreader, serif; }
+.zoom button { width: 44px; height: 44px; border-radius: 50%; background: var(--paper); border: 1px solid var(--line); font: 400 22px/1 var(--serif); }
 .zoom button:disabled { opacity: .35; }
 .stage:not([data-snap="peek"]) .zoom { opacity: 0; pointer-events: none; }
 .nfc .status { min-height: 1.4em; margin: -10px 0 14px; font-size: 12px; }
 .toast { position: absolute; left: 50%; top: 92px; transform: translate(-50%, -6px); opacity: 0; pointer-events: none;
-  background: var(--ink); color: var(--paper); font: 500 12px Inter; padding: 7px 12px; border-radius: 999px; white-space: nowrap;
+  background: var(--ink); color: var(--paper); font: 500 12px var(--sans); padding: 7px 12px; border-radius: 999px; white-space: nowrap;
   transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out); }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 .credit { position: absolute; left: 20px; top: 8px; right: 20px; display: flex; justify-content: space-between; gap: 8px; }
-.credit .t { font: 400 22px/1.15 Newsreader, serif; }
+.credit .t { font: 400 22px/1.15 var(--serif); }
 .skins { display: flex; margin-right: -12px; }
 .bodies { display: flex; align-items: flex-start; gap: 4px; }
 #bodyBtn { min-height: 36px; margin-top: 4px; padding: 0 14px; }
@@ -105,7 +105,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .handle { display: block; width: 100%; height: 22px; position: relative; }
 .handle::before { content: ""; position: absolute; left: 50%; top: 9px; width: 40px; height: 4px; margin-left: -20px; border-radius: 2px; background: var(--line); }
 .wardrobe-head { display: flex; align-items: baseline; justify-content: space-between; }
-.wardrobe h2 { font: 400 22px/1 Newsreader, serif; margin: 0; }
+.wardrobe h2 { font: 400 22px/1 var(--serif); margin: 0; }
 /* max-content rows: the grid is a shrinking flex item and tiles clip (min-height 0), so auto rows were squeezed below the tiles' 3:4 height */
 .wardrobe .grid { padding: 4px 18px 24px; overflow-y: auto; overscroll-behavior: contain; grid-template-columns: repeat(3, 1fr); grid-auto-rows: max-content; }
 /* the form steps up and back so it stays visible above an open wardrobe */
@@ -128,12 +128,12 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .tile img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; filter: var(--lift); }
 .tile .pick { position: absolute; inset: 0; width: 100%; }
-.tile .m { position: absolute; left: 6px; bottom: 6px; max-width: calc(100% - 12px); font: 400 13px/1.2 Newsreader, serif;
+.tile .m { position: absolute; left: 6px; bottom: 6px; max-width: calc(100% - 12px); font: 400 13px/1.2 var(--serif);
   background: var(--paper); padding: 3px 6px; border-radius: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none; }
 /* 44 px hit area, 24 px painted dot */
 .tile .info { position: absolute; top: 0; right: 0; width: 44px; height: 44px; display: grid; place-items: center; }
 .tile .info span { width: 24px; height: 24px; border-radius: 50%; background: var(--paper); display: grid; place-items: center;
-  font: italic 600 14px/1 Newsreader, serif; box-shadow: 0 1px 4px rgb(0 0 0 / .18); }
+  font: italic 600 14px/1 var(--serif); box-shadow: 0 1px 4px rgb(0 0 0 / .18); }
 .wearing { display: flex; gap: 6px; margin: 0 -18px 10px; padding: 0 18px; overflow-x: auto; scrollbar-width: none; min-height: 44px; align-items: center; }
 .wear { flex: none; display: flex; align-items: center; height: 44px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); }
 .wear .open { display: flex; align-items: center; gap: 6px; height: 100%; padding: 0 0 0 5px; font-size: 13px; max-width: 150px; }
@@ -141,7 +141,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .wear .open em { font-style: normal; color: var(--muted); font-size: 11px; }
 .wear .open span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .wear .off { width: 40px; height: 44px; font-size: 18px; color: var(--muted); }
-.wearing .none, .grid .none { font: italic 14px Newsreader, serif; color: var(--muted); }
+.wearing .none, .grid .none { font: italic 14px var(--serif); color: var(--muted); }
 .fact { width: min(380px, calc(100% - 24px)); max-height: calc(100dvh - 48px); margin: auto auto 12px; border: 0; border-radius: 24px; padding: 0;
   background: var(--paper); color: var(--ink); box-shadow: 0 12px 40px rgb(0 0 0 / .2); opacity: 0; transform: translateY(16px);
   transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out), display 220ms allow-discrete, overlay 220ms allow-discrete; }
@@ -149,11 +149,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 @starting-style { .fact[open] { opacity: 0; transform: translateY(16px); } }
 .fact::backdrop { background: rgb(27 26 23 / .35); }
 .fact > div { padding: 22px 22px 18px; outline: none; }
-.fact h3 { font: 400 24px/1.15 Newsreader, serif; margin: 4px 0 10px; }
+.fact h3 { font: 400 24px/1.15 var(--serif); margin: 4px 0 10px; }
 .fact dl { margin: 0 0 14px; }
 .fact .nr { color: var(--muted); font-style: italic; }
 .fact blockquote { margin: 0 0 14px; padding-left: 12px; border-left: 2px solid var(--line); }
-.fact blockquote q { font: italic 15px/1.35 Newsreader, serif; quotes: none; }
+.fact blockquote q { font: italic 15px/1.35 var(--serif); quotes: none; }
 .fact blockquote p { margin-top: 6px; font-size: 13px; color: var(--muted); }
 .fact .shares { font-size: 13px; margin-bottom: 16px; }
 .fact .shares div { display: flex; flex-wrap: wrap; align-items: center; column-gap: 12px; }
@@ -164,10 +164,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .tile.on { outline: 2px solid var(--ink); outline-offset: 2px; }
 .tile.locked img { filter: grayscale(1) contrast(.2) brightness(1.4); }
 .tile .st { position: absolute; left: 6px; right: 6px; bottom: 6px; background: var(--paper); border-radius: 8px; padding: 6px 8px; text-align: left; }
-.tile .st b { display: block; font: 400 13px/1.2 Newsreader, serif; }
-.tile .st span { font: 400 10px/1.4 "IBM Plex Mono", monospace; color: var(--muted); }
+.tile .st b { display: block; font: 400 13px/1.2 var(--serif); }
+.tile .st span { font: 400 10px/1.4 var(--sans); color: var(--muted); }
 .tile.study:not(.seen) img { filter: grayscale(1) contrast(.2) brightness(1.4); }
-.tile.locked::after { pointer-events: none; content: "Tap the card in the museum"; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 10px; font: italic 13px/1.2 Newsreader, serif; color: var(--muted); }
+.tile.locked::after { pointer-events: none; content: "Tap the card in the museum"; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 10px; font: italic 13px/1.2 var(--serif); color: var(--muted); }
 
 /* Piece */
 .hero { position: relative; height: 330px; background: var(--wall); overflow: hidden; }
@@ -175,16 +175,16 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 model-viewer { width: 100%; height: 100%; background: var(--wall); --poster-color: transparent; }
 .hotspot {
   padding: 4px 9px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line);
-  font: 500 11px Inter, sans-serif; box-shadow: 0 4px 12px -6px rgba(0,0,0,.4);
+  font: 500 11px var(--sans); box-shadow: 0 4px 12px -6px rgba(0,0,0,.4);
   transition: opacity 200ms var(--ease-out), transform 160ms var(--ease-out);
 }
 .hotspot:active { transform: scale(0.97); }
 .hotspot[data-visible="false"] { opacity: 0; pointer-events: none; }
-.model-missing { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; font: italic 15px Newsreader, serif; color: var(--muted); }
+.model-missing { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; font: italic 15px var(--serif); color: var(--muted); }
 .hint { position: absolute; left: 0; right: 0; bottom: 12px; text-align: center; pointer-events: none; }
 .back { position: absolute; top: 14px; left: 14px; width: 44px; height: 44px; border-radius: 50%; background: var(--paper); display: grid; place-items: center; }
 .body { padding: 16px 20px 0; flex: 1; overflow: auto; }
-.body h3 { font: 400 24px/1.1 Newsreader, serif; }
+.body h3 { font: 400 24px/1.1 var(--serif); }
 dl { display: grid; grid-template-columns: 84px 1fr; gap: 4px 10px; margin: 12px 0; font-size: 13px; }
 dt { color: var(--muted); }
 .variants { display: flex; gap: 8px; margin: 6px 0 16px; }
@@ -194,7 +194,7 @@ dt { color: var(--muted); }
 /* pattern scans are tall sheets of faint pencil: show the labelled top edge so the thumbnail is not read as empty */
 .var .th img.pat { object-position: 0 0; transform: scale(2.6); transform-origin: 0 0; filter: url(#ink); }
 .hero img.pat { filter: url(#ink); }
-.var .th .badge { position: absolute; right: 4px; bottom: 4px; font: 500 10px Inter; background: var(--paper); padding: 1px 4px; border-radius: 4px; }
+.var .th .badge { position: absolute; right: 4px; bottom: 4px; font: 500 10px var(--sans); background: var(--paper); padding: 1px 4px; border-radius: 4px; }
 .var .th { position: relative; }
 .var[aria-pressed="true"] .th { outline: 2px solid var(--ink); outline-offset: 2px; }
 .var.locked .th { display: grid; place-items: center; font-size: 18px; }
@@ -237,7 +237,7 @@ dt { color: var(--muted); }
 .nfc::backdrop { background: rgb(27 26 23 / .35); }
 .nfc > div { padding: 24px; outline: none; }
 .nfc .ring { width: 56px; height: 56px; margin: 0 auto 14px; border-radius: 50%; border: 1.5px solid var(--ink); display: grid; place-items: center; }
-.nfc h3 { font: 400 22px/1.15 Newsreader, serif; margin-bottom: 8px; }
+.nfc h3 { font: 400 22px/1.15 var(--serif); margin-bottom: 8px; }
 .nfc p { color: var(--muted); font-size: 14px; margin-bottom: 20px; text-wrap: balance; }
 .nfc .btn { width: 100%; display: flex; align-items: center; justify-content: center; text-decoration: none; }
 .nfc form { margin-top: 8px; }
@@ -249,14 +249,14 @@ dt { color: var(--muted); }
 .help::backdrop { background: rgb(27 26 23 / .35); }
 .help > div { padding: 24px; outline: none; }
 .help .step { text-align: center; min-height: 148px; }
-.help h3 { font: 400 22px/1.15 Newsreader, serif; margin: 6px 0 8px; }
+.help h3 { font: 400 22px/1.15 var(--serif); margin: 6px 0 8px; }
 .help p { color: var(--muted); font-size: 14px; text-wrap: balance; }
 .help .dots { display: flex; justify-content: center; gap: 6px; margin: 4px 0 18px; }
 .help .dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--line); }
 .help .dots i[aria-current="true"] { background: var(--ink); }
 .help .btn { width: 100%; }
 .help .skip { margin-top: 8px; }
-.helpbtn { width: 44px; min-height: 44px; padding: 0; font: italic 600 17px/1 Newsreader, serif; }
+.helpbtn { width: 44px; min-height: 44px; padding: 0; font: italic 600 17px/1 var(--serif); }
 @media (prefers-reduced-motion: reduce) {
   .help { transition: opacity 150ms ease; transform: none; }
   .fact { transition: opacity 150ms ease; transform: none; }
@@ -266,6 +266,7 @@ dt { color: var(--muted); }
   .nfc { transition: opacity 150ms ease; transform: none; }
 }
 </style>
+<link rel="stylesheet" href="theme.css"><!-- B9 MoMu theme: tokens, fonts and the skin; must stay after the style block -->
 </head>
 <body data-screen="stage">
 <!-- pattern scans are under 1% light-grey pencil on white: a gamma of 10 keeps paper at 255 and takes 214 to about 30 -->
@@ -326,7 +327,7 @@ dt { color: var(--muted); }
       </div>
       <div class="body">
         <div class="mono">ST80881 · Study collection</div>
-        <h3>Furisode kimono, painted with gold print</h3>
+        <h2>Furisode kimono, painted with gold print</h2>
         <dl>
           <dt>Date</dt><dd>1979</dd>
           <dt>Technique</dt><dd>Painted, gold print</dd>
@@ -1235,21 +1236,21 @@ if (won && PIECES[won]?.splat && !PIECES[won].locked) {
 </script>
 <dialog class="nfc" id="nfc" aria-labelledby="nfcTitle"><div tabindex="-1" autofocus>
   <div class="ring" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 8.5a5 5 0 0 1 0 7M9.5 6a8.5 8.5 0 0 1 0 12M13 3.5a12 12 0 0 1 0 17"/></svg></div>
-  <h3 id="nfcTitle">Find it in the museum</h3>
+  <h2 id="nfcTitle">Find it in the museum</h2>
   <p id="nfcText"></p>
   <p class="mono status" id="nfcStatus" role="status"></p>
   <a class="btn press" id="nfcGo">Simulate NFC tap</a>
   <form method="dialog"><button class="btn ghost press">Not now</button></form>
 </div></dialog>
 <dialog class="help" id="help" aria-labelledby="helpTitle"><div tabindex="-1" autofocus>
-  <div class="step" aria-live="polite"><div class="mono" id="helpCount"></div><h3 id="helpTitle"></h3><p id="helpText"></p></div>
+  <div class="step" aria-live="polite"><div class="mono" id="helpCount"></div><h2 id="helpTitle"></h2><p id="helpText"></p></div>
   <div class="dots" id="helpDots" aria-hidden="true"></div>
   <button class="btn press" id="helpNext"></button>
   <button class="btn ghost press skip" id="helpSkip">Skip</button>
 </div></dialog>
 <dialog class="fact" id="fact" aria-labelledby="factName"><div tabindex="-1" autofocus>
   <div class="mono" id="factId"></div>
-  <h3 id="factName"></h3>
+  <h2 id="factName"></h2>
   <dl id="factFields"></dl>
   <blockquote id="factQuote"></blockquote>
   <div class="shares" id="factShares"></div>

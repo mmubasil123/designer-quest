@@ -5,8 +5,9 @@
 
 export const CARD_W = 1080, CARD_H = 1920;
 const CREDIT = "Collection: MoMu Fashion Museum Antwerp";
-const SERIF = "Newsreader, Georgia, serif", MONO = '"IBM Plex Mono", ui-monospace, monospace', SANS = "Inter, system-ui, sans-serif";
-const INK = "#1b1a17", MUTED = "#6f695e", LINE = "#d6cfc1", PAPER = "#f3efe7", WALL = "#e8e2d6";
+// the canvas cannot read CSS variables per draw call cheaply, so these mirror theme.css (fonts and colour tokens): change both together
+const SERIF = '"Source Serif 4", Georgia, serif', MONO = '"Hanken Grotesk", "Helvetica Neue", Arial, sans-serif';   // MONO: the small label face (was a mono)
+const INK = "#000", MUTED = "#595959", LINE = "#cbcbcb", PAPER = "#fff", WALL = "#ededed";
 const FOOT_Y = 1740;   // the credit block starts here; the form and the list share the space between the title and this line
 
 const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
@@ -45,8 +46,8 @@ export function drawCard({ grab, name, facts, url }) {
   const cv = document.createElement("canvas"); cv.width = CARD_W; cv.height = CARD_H;
   const ctx = cv.getContext("2d");
   const pad = 88;
-  const wall = ctx.createLinearGradient(0, 0, 0, CARD_H);   // the Stage's wall, top to 78% paper
-  wall.addColorStop(0, WALL); wall.addColorStop(.78, PAPER); wall.addColorStop(1, PAPER);
+  const wall = ctx.createLinearGradient(0, 0, 0, CARD_H);   // the Stage's wall: white at the top, gallery grey from 72%
+  wall.addColorStop(0, PAPER); wall.addColorStop(.72, WALL); wall.addColorStop(1, WALL);
   ctx.fillStyle = wall; ctx.fillRect(0, 0, CARD_W, CARD_H);
   ctx.textBaseline = "alphabetic"; ctx.fillStyle = INK;
 
@@ -110,7 +111,7 @@ export function createShare({ tt, look, PIECES, getName, toast }) {
   const el = document.createElement("dialog");
   el.className = "share"; el.setAttribute("aria-labelledby", "shareTitle");
   el.innerHTML = `<div class="share-in">
-    <h3 id="shareTitle">Your look, as a card</h3>
+    <h2 id="shareTitle">Your look, as a card</h2>
     <img class="share-img" id="shareImg" alt="" width="270" height="480">
     <p class="share-note" id="shareNote"></p>
     <div class="row"><button class="btn press" id="shareGo" hidden>Share</button><a class="btn ghost press" id="shareSave" download="second-skin-look.png">Download image</a></div>
@@ -129,7 +130,7 @@ export function createShare({ tt, look, PIECES, getName, toast }) {
   save.addEventListener("click", () => toast("Saved to your downloads"));   // the link itself downloads the blob
 
   async function open() {
-    try { await Promise.all(['600 80px Newsreader', 'italic 400 44px Newsreader', '400 36px Newsreader', '500 26px "IBM Plex Mono"', '400 26px "IBM Plex Mono"'].map(f => document.fonts.load(f))); } catch { /* system fonts */ }
+    try { await Promise.all(['400 80px "Source Serif 4"', 'italic 400 44px "Source Serif 4"', '500 26px "Hanken Grotesk"', '400 26px "Hanken Grotesk"'].map(f => document.fonts.load(f))); } catch { /* system fonts */ }
     const facts = lookFacts(look, PIECES), name = getName();
     const url = location.host + location.pathname.replace(/\/(index|second-skin)\.html$/, "/");
     const canvas = drawCard({ grab: h => grabStill(tt, h), name, facts, url });

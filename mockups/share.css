@@ -1,19 +1,20 @@
-/* B7 share card preview; tokens come from second-skin.html */
-.share { width: min(340px, calc(100% - 32px)); max-height: calc(100% - 32px); margin: auto; border: 0; border-radius: 24px; padding: 0; overflow: auto;
-  background: var(--paper); color: var(--ink); box-shadow: 0 12px 40px rgb(0 0 0 / .18); opacity: 0; transform: scale(.96);
+/* B7 share card preview; tokens come from theme.css */
+.share { width: min(340px, calc(100% - 32px)); max-height: calc(100% - 32px); margin: auto; border: 0; border-radius: var(--r-card); padding: 0; overflow: auto;
+  background: var(--paper); color: var(--ink); box-shadow: var(--shadow-card); opacity: 0; transform: scale(.96);
   transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), display 200ms allow-discrete, overlay 200ms allow-discrete; }
 .share[open] { opacity: 1; transform: none; }
+.share:not([open]) { transition-duration: var(--exit); }
 @starting-style { .share[open] { opacity: 0; transform: scale(.96); } }
-.share::backdrop { background: rgb(27 26 23 / .35); }
+.share::backdrop { background: var(--scrim); }
 .share-in { padding: 20px 22px; }
-.share h3 { font: 400 22px/1.15 Newsreader, serif; margin: 0 48px 12px 0; }
-.share-img { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; border-radius: 12px; border: 1px solid var(--line); background: var(--wall); }
+.share :is(h2, h3) { font: var(--t-title); letter-spacing: var(--track-title); margin: 0 48px 14px 0; }
+.share-img { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; border-radius: var(--r-pic); border: 1px solid var(--line); background: var(--wall); }
 .share-note { font-size: 13px; color: var(--muted); margin-top: 8px; }
 .share-note:empty { display: none; }
 .share .row { display: grid; gap: 8px; margin-top: 14px; }
 .share .row .btn { min-height: 44px; display: flex; align-items: center; justify-content: center; text-decoration: none; }
 .share-in { position: relative; }
-.share-x { position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; border-radius: 50%; background: var(--paper); border: 1px solid var(--line); font: 400 22px/1 Newsreader, serif; }
+.share-x { position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; border-radius: 50%; background: var(--paper); box-shadow: var(--shadow-pill); font: 300 24px/1 var(--sans); }
 .share-img { transition: opacity 200ms var(--ease-out); }
 .share-img:not([src]) { opacity: 0; }
 @media (prefers-reduced-motion: reduce) {
