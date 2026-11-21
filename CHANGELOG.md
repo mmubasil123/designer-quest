@@ -4,6 +4,14 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### Garment colours: scans were rendering as solid metal (branch basil/fix-garment-colors)
+Basil's phone showed the cocktail dress near black and brown with a mirror-like sheen, while its photo is green and black stripes.
+- **Root cause:** the TRELLIS GLBs write a material with a base colour texture and `roughnessFactor` but no `metallicFactor`, and the glTF default for that is 1. Every wearable loaded as solid metal. Metal has no diffuse colour, only reflections, so cloth went dark with a glossy sheen; the room environment added in the Turntable only hid the worst of it. This is in our loader code, not in the GLBs.
+- **Fix:** `prepGarment` sets `metalness = 0` on every scan material. No change to lights, exposure or tone mapping: a sweep of ACES, Khronos Neutral and none at several exposures against the photos found the current ACES 1.1 settings fit best once the metal was gone.
+- **Evidence (headless Chromium, garment alone, mean sRGB over its pixels, against the mean of its garment cutout photo):** cocktail dress 13,11,8 before, 59,57,53 after, photo 60,60,53. Monpe trousers 8,13,19 before, 52,59,66 after, photo 56,58,64. Top ST80930 18,22,27 before, 68,72,79 after, photo 58,59,66. Green coat ST2434 27,35,14 before, 78,89,59 after, photo 68,81,49. Jak ST503 70,82,79 before, 134,146,143 after, photo 97,110,113 (still about 1.3x too bright). Kimono 172,149,124 before, 213,194,175 after, photo 195,163,140. Side by side for all 7 wearables: `docs/color-check/before-after.jpg`.
+- **What this does not fix:** the cocktail dress texture itself is browner and less green than its photo (TRELLIS lost the green in the bake), so it now renders dark olive-brown, not striped green. That needs a regenerated GLB, which costs GPU quota, so it is not done here. The kimono's rescan without its stand is ticket T11.
+- **Study (splat) pieces:** they do not use this material, so this bug cannot affect them. I could not render them here (software WebGL stalls on the 17 MB scans), so their colours are not checked against the photos; that needs your phone.
+
 ### Faster loading, study preload and avatar zoom (branch basil/load-and-zoom, on top of basil/onboarding)
 Raised by Basil after a phone test: 3D scans take about 10 s, and the main avatar is also slow.
 
