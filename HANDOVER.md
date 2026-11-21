@@ -22,13 +22,12 @@ Checked in Chrome at 390 px on ST2435 and ST81190, front and back, console clean
   export MP4), then `narration.py --import DIR --voice "picsart:Adeline"`, `--check`, transcribe each file back, commit
   to `hassan/H13-narration`. Then merge on Hassan's word, mark H13 done in LEDGER and Notion.
 
-## MoMu branding (H10, PR #44 merged, PR #47 open, 2026-11-21)
-PR #44: the MoMu wordmark in the Stage bar, the Up close header and the share card, and "at MoMu" in the copy. PR #47:
-the name "Second Skin" is gone from everything a visitor sees (the team is renaming the app; until then it says MoMu).
-PR #47 also puts MoMu's official two-M logo (`mockups/assets/brand/momu-logo.svg`, copied from momu.be) in both headers,
-on the share card, as the tab icon and on the Up close loading screen.
-Kept: `second-skin.html`, the Vercel project, sticker URLs, `secondSkin.*` keys, `second_skin` DB schema. Checked in Chrome at 390 px, not on a phone. Next: merge
-#47, then mark H10 done in LEDGER and Notion; rename the identifiers only once the new name is picked (Mubasil deploys).
+## MoMu branding (H10, PR #44 and PR #47 merged, 2026-11-21)
+MoMu's official two-M logo (`mockups/assets/brand/momu-logo.svg`, copied from momu.be) in the Stage bar, the Up close
+header, the share card, the tab icon and the Up close loading screen; "at MoMu" in the copy; the name "Second Skin" is
+gone from everything a visitor sees (the team is renaming the app; until then it says MoMu). Kept: `second-skin.html`,
+the Vercel project, sticker URLs, `secondSkin.*` keys, `second_skin` DB schema. Checked in Chrome at 390 px, not on a
+phone. Next: once the new name is picked, decide whether to rename those identifiers (sticker URLs, Mubasil deploys).
 
 ## Personal share card (H12, PR #45, merged 2026-11-21)
 Share sheet takes an optional name (device only) and draws a personal 1080x1920 card: name title, period room, pieces
