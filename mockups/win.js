@@ -49,7 +49,7 @@ export function createWin({ PIECES, record, img }) {
       <img class="pic won" src="${img(id)}" alt="">
       <p class="date">Made ${esc(span(p.year))}${off === null ? "" : off === 0 ? " · spot on" : ` · you were ${off} years off`}</p>
       ${quote ? `<blockquote>${esc(quote)}<span class="mono">MoMu says${r.quoteEn ? ", our translation" : ""}</span></blockquote>` : ""}
-      <button class="btn press" id="winAdd">Add ${what === "fabric" ? "its fabric" : "it"} to my wardrobe</button>`);
+      <button class="btn press" id="winAdd">${what === "fabric" ? "Add to my fabrics" : "Add to my wardrobe"}</button>`);
     return new Promise(resolve => el.querySelector("#winAdd").addEventListener("click", () => { el.close(); resolve(true); }, { once: true }));
   }
 

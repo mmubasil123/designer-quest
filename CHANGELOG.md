@@ -4,6 +4,11 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### A won fabric is easy to find (branch basil/fabrics-clarity)
+- **What:** the Remix tab is now **Fabrics** (tab, sheet title, help text, toast "New in Fabrics: ..."); the Won card's button says "Add to my fabrics" or "Add to my wardrobe". A piece or fabric won this visit sorts first in its tab, the grid scrolls to the top, the chosen tab chip scrolls into view, and long toasts wrap.
+- **Why:** owner: after "Add its fabric to my wardrobe" it "goes nowhere". The new swatch was the last tile below the fold, the Remix chip was cut off at the right edge, and the toast ran off the phone.
+- **Decision:** one name for one thing: the place fabrics live is called Fabrics everywhere it appears.
+
 ### Stage: the form no longer covers the look title (branch basil/stage-overlap)
 - **What:** the turntable now starts 8 px below the look title block on every layout (`--credit-h`, set by a ResizeObserver on `.credit`), instead of a fixed 420 px box measured from the sheet. Locked wardrobe tiles say "Win it in the museum".
 - **Why:** owner screenshot: with the new starter coat the form's neck drew over "Spans 210 years" in the desktop mockup, and stayed there when the sheet opened, because the title wraps to 3 lines.
