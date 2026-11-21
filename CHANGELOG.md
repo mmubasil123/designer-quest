@@ -4,6 +4,11 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### Lighter, cleaner 3D models (A5, J1, J3; branch basil/ar-button)
+- **What:** every wearable GLB's texture is now WebP (q85, `EXT_texture_webp`) via `tools/glb_webp.py`: 12.2 MB to 4.9 MB for the 7 models, the starter look 5.4 MB to 2.3 MB. The monpe ST80931 lost its baked tan mannequin-hand strips and white patches, and the ikat vest ST80930 its large white blobs, with `tools/clean_glb_texture.py` (replaces `clean_glb_white.py`; rules `white`, `blobs` (large patches only, so pale print dots survive) and `tan`; `FIXES` records what each GLB got). `tools/glb_io.py` is the shared GLB reader and writer. Tile images load lazily and the page preconnects to the CDN. Originals are in `_to_delete/`.
+- **Why:** the speed audit measured the PNG texture as 60 to 70% of each GLB and the starter look as the critical path; the 3D audit found the bleed. Checked on the Stage front, side and back and in the 3D view; console clean.
+- **Decision:** WebP over a GPU rerun or KTX2: no decoder to add, three and model-viewer read it natively. Not done: the jak's mannequin chest (J7, needs a TRELLIS run), the boots' beige areas, the cocktail dress's dark recolour, meshopt geometry.
+
 ### Quick fixes and data guards from the audits (J2, J6; branch basil/ar-button)
 - **What:** the fact card has a close button; tapping a locked wardrobe tile opens the sticker prompt instead of nothing; a re-tapped study sticker whose fabric is won says it is already in Fabrics instead of replaying the story and challenge; New badges survive a reload (`secondSkin.new.v1`); "Simulate NFC tap" reads "Demo: tap the sticker"; the fabric toast says Fabrics. Guards: a piece without a photo id falls back to its swatch instead of crashing the app; a splat piece without details still opens Up close; the wardrobe count counts only wearable pieces; a saved look never restores a piece without 3D.
 - **Why:** found by the button-map and data audits; each checked at 390 px in Chrome.

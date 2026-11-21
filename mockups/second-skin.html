@@ -13,6 +13,7 @@
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/" } }</script>
 <script type="module" src="preload.js"></script><!-- H5: a ?card= scan starts fetching its 3D file at once; API in preload.js -->
 <link rel="preconnect" href="https://heron.libis.be" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="ask.css">
 <link rel="stylesheet" href="share.css">
 <link rel="stylesheet" href="story.css">
@@ -863,7 +864,7 @@ function isWorn(id, ctx) {
   return (ctx === "feet" || !look.full) && look[ctx] === id;
 }
 const tile = (id, cls, img, label, aria) => `<div class="tile ${cls}" data-id="${id}">
-  <button class="pick press" aria-label="${esc(aria)}" aria-pressed="${cls.includes("on")}"><img src="${img}" alt="" decoding="async"${img.startsWith("assets/swatch") ? ' style="mix-blend-mode:normal"' : ""}></button>${label}
+  <button class="pick press" aria-label="${esc(aria)}" aria-pressed="${cls.includes("on")}"><img src="${img}" alt="" loading="lazy" decoding="async"${img.startsWith("assets/swatch") ? ' style="mix-blend-mode:normal"' : ""}></button>${label}
   <button class="info" data-info="${id}" aria-label="About ${esc(PIECES[id].name)}"><span aria-hidden="true">i</span></button></div>`;
 const newFirst = ([a], [b]) => fresh.has(b) - fresh.has(a);   // a piece just won leads its tab
 function renderLocker() {
@@ -925,7 +926,7 @@ function renderWearing() {
   }
   document.getElementById("wearing").innerHTML = parts.length ? parts.map(w => `<span class="wear">
     <button class="open press" data-open="${w.slot}" data-zone="${w.zone}" aria-label="Change the ${w.kind.toLowerCase()}: ${esc(PIECES[w.id].name)}">
-      <img src="${w.img}" alt=""><span><em>${w.kind}</em> ${esc(shortName(w.id))}</span></button>
+      <img src="${w.img}" alt="" loading="lazy" decoding="async"><span><em>${w.kind}</em> ${esc(shortName(w.id))}</span></button>
     <button class="off press" data-off="${w.slot}" data-zone="${w.zone}" aria-label="Take off ${esc(PIECES[w.id].name)}">×</button></span>`).join("")
     : `<span class="none">Nothing on yet. Pick a piece below.</span>`;
 }
