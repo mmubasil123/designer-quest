@@ -1035,9 +1035,11 @@ async function openFact(id) {
    so the tap that starts AR stays a direct user gesture. */
 const factMV = document.getElementById("factMV"), factAR = document.getElementById("factAR");
 let mvReady = null;
+// Scene Viewer is Android, Quick Look is iOS (rel="ar"); elsewhere model-viewer would only add a second three.js and renderer
+const AR_ABLE = /Android/i.test(navigator.userAgent) || document.createElement("a").relList.supports("ar");
 function prepAR(id) {
   factAR.hidden = true;
-  if (!PIECES[id].glb) return;
+  if (!AR_ABLE || !PIECES[id].glb) return;
   mvReady ??= import("https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js").catch(() => null);
   mvReady.then(ok => {
     if (!ok || factId !== id) return;
@@ -1086,7 +1088,9 @@ new ResizeObserver(() => stageEl.style.setProperty("--credit-h", `${creditEl.off
       try { grabEl.setPointerCapture(e.pointerId); } catch { /* pointer already gone: the drag still works without capture */ }
     }
     y = from + dy;
+    const low = snapY("peek");
     if (y < 0) y *= 0.3;   // past fully open the sheet resists instead of stopping dead
+    else if (y > low) y = low + (y - low) * 0.3;   // and below its peek, so a drag can never push it off the phone
     wardrobe.style.setProperty("--y", `${y}px`);
     vel = (e.clientY - lastY) / Math.max(1, e.timeStamp - lastT); lastY = e.clientY; lastT = e.timeStamp;
   });
@@ -1104,6 +1108,7 @@ new ResizeObserver(() => stageEl.style.setProperty("--credit-h", `${creditEl.off
   };
   grabEl.addEventListener("pointerup", end);
   grabEl.addEventListener("pointercancel", end);
+  grabEl.addEventListener("lostpointercapture", end);   // a release outside the window still ends the drag
   grabEl.addEventListener("click", e => { if (dragged) e.stopPropagation(); }, true);   // a drag that ends on a chip is not a tap
   handleEl.addEventListener("click", () => setSnap(snap === "peek" ? "half" : "peek"));
 }

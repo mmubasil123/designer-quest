@@ -4,6 +4,11 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### The wardrobe sheet can no longer be dragged away (branch basil/sheet-drag)
+- **What:** a drag below the sheet's peek now meets the same 0.3x resistance as a drag past fully open, and `lostpointercapture` ends a drag like `pointerup`, so the sheet snaps back. model-viewer (AR) loads only on Android or on Safari with Quick Look (`rel="ar"`), not on laptops.
+- **Why:** owner: while moving the sheet it disappeared until a reload; nothing kept a drag above the bottom edge, and a release lost outside the window left it there. The site also felt slower: every fact card loaded model-viewer, a second three.js and a second renderer, even where AR can never start.
+- **Decision:** clamp with resistance rather than a hard stop, matching the top edge.
+
 ### Polish sweep at phone width (branch basil/polish)
 - **What:** "See it in your room" (AR via model-viewer 4.0.0) is back, now on every wearable's fact card, shown only when the phone can start AR. The green wool coat ST2434's texture is cleaned of white mannequin bleed by the new `tools/clean_glb_white.py` (12% of texels refilled from nearby cloth; the cutout photo has no white of its own; original kept in `_to_delete/`). An unwon room piece no longer gives its year away: its fact card shows "Win it to find out", hides Ask, and offers "Find it in the museum"; the story hides the narration player before Guess the year. Fact cards lead with our English and show the Dutch original small. Museum: title and "0 of 11 won" on separate lines, tiles say "Still to find" or "Won". Guess hints name the guess ("Later than 1700"). Up close says "Win its fabric". The story title uses the app's name for the piece (the curator's heading "A.F. Vandevorst Jacket" vs "Riveted wool coat" everywhere else). Help step 2 explains winning pieces. The share card uses the Stage's look name and fits a 667 px phone with Close on screen; the fact card's button row wraps. Pieces with no 3D file (the knee breeches ST2062) are hidden from the Museum and the wardrobe: their sticker had nothing to show.
 - **Why:** owner asked for a sweep for bugs and inconsistencies until none are left; each item was found in Chrome at 390 px.
