@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Splat Stage spike</title>
 <style>
-:root { --wall: #e6e1d6; --ink: #1d1b18; --line: #b9b2a4; }
+:root { --wall: #ededed; --ink: #000; --line: #cbcbcb; }   /* the app's grey wall, black ink and hairline (theme.css), so the spike judges splats on the colour they ship on */
 html, body { margin: 0; height: 100%; background: var(--wall); color: var(--ink); font: 15px/1.3 system-ui, sans-serif; }
 #view { position: fixed; inset: 0; }
 #view canvas { display: block; width: 100%; height: 100%; }
@@ -13,9 +13,9 @@ html, body { margin: 0; height: 100%; background: var(--wall); color: var(--ink)
   background: linear-gradient(transparent, var(--wall) 30%); }
 .row { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
 .row b { width: 58px; font-weight: 600; }
-button { min-height: 44px; padding: 0 14px; border: 1px solid var(--line); border-radius: 22px; background: #f6f3ec;
+button { min-height: 44px; padding: 0 14px; border: 1px solid var(--line); border-radius: 22px; background: #fff;
   color: var(--ink); font: inherit; }
-button[aria-pressed="true"] { background: var(--ink); color: #f6f3ec; border-color: var(--ink); }
+button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
 #status { position: fixed; top: 12px; left: 16px; font: 12px ui-monospace, monospace; }
 </style>
 <script type="importmap">{ "imports": {
