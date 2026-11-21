@@ -127,6 +127,7 @@ const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const id = new URLSearchParams(location.search).get("id");
 const manifest = await (await fetch("pieces.json")).json();
 const piece = manifest.pieces.find(p => p.id === id && p.assets.splat);
+if (piece) piece.details ??= [];   // a splat entry without details must still open
 if (!piece) { location.replace("second-skin.html"); throw new Error("no splat piece " + id); }
 
 const readFound = () => { try { return JSON.parse(localStorage.getItem(FOUND_KEY) || "{}") || {}; } catch { return {}; } };
