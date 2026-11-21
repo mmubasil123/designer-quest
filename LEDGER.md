@@ -71,6 +71,14 @@ ST655/1, ST81299, ST2202, ST2434, ST81234/1-2, ST2435.
 | E2 | Screen recording of the demo flow as the fallback | S | MP4 of 3 min or less plays offline on the presenter's laptop and shows every beat in the demo script | open |
 | E3 | Vercel preview deploy, only on the owner's go | S | Preview URL opens on a phone off the venue wifi and `?card=ST503` works | done 2026-11-21 (went out as production, see CHANGELOG): https://second-skin-ten.vercel.app |
 
+## Track G: Splat Stage (approach A, picked 2026-11-21)
+| # | Ticket | Size | Acceptance | Status |
+|---|---|---|---|---|
+| G1 | Spike: splat form, ST2431 and ST2432 tops and trousers cut and mixed, one fabric tint, on its own page | S | Every top and bottom pairing reads as one outfit front, side and back; a look loads under 8 MB | done 2026-11-21 (basil, branch basil/splat-spike): `mockups/splat-stage-spike.html`, 5.5 to 6.8 MB a look; findings in `HANDOVER.md` |
+| G2 | Phone check of the spike: load time on 4G and frame rate while turning | S | Look on screen under 10 s over 4G; turning stays smooth on a mid-range phone | open |
+| G3 | Cut rules as `pieces.json` hints; parts for ST81190 and the full looks | M | Each splat piece has parts that pass the G1 acceptance | open |
+| G4 | Splat engine in the Stage (three 0.180, Spark) replacing the GLB form | L | Stage wears splat parts from the wardrobe sheet; remix works on splats | open |
+
 ## Track F: Later (after the hackathon)
 | # | Ticket |
 |---|---|

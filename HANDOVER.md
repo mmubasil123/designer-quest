@@ -66,29 +66,32 @@ None of the 8 demo pieces has a splat; ST2435 is on the season shortlist. Splats
 and they need a splat renderer (e.g. Spark for three.js, unverified) beside the dress form. 220 MB is too big
 for a phone page: test the `.sog` or compressed `.ply` size before any engine work.
 
-## In progress: splat Stage brainstorm (2026-11-21, resume here)
-Run `/superpowers:brainstorming` again with this section as context; the owner approved the playback below and
-was about to pick an approach.
-- **Why (owner's words, condensed):** a hackathon demo showing a new way to engage with fashion heritage and the
-  MoMu collection, to bring newer audiences. Works cleanly for a small set of pieces and textiles, enough to
-  convey the vision to judges. Most users play (scan, dress, mix pieces and fabrics, share); facts sit behind a
-  tap for the fashion-curious ("About this fabric", ticket C1). Remix fabrics are crops of MoMu record photos.
-- **Wants:** splat garments on the avatar itself, mixed across scans (one scan's top with another's bottom);
-  the avatar itself a Gaussian splat; splats loading fast on phones. Owner: "you can fit them, do it".
-- **Facts measured:** MOMU-10 (ST652/1) as SOG: full 17 MB; SH 0 only 13 MB; 30% splats + SH 1 = 4.8 MB;
-  15% + SH 0 = 1.9 MB (`splat-transform -d 30%` to .ply, then `-H 1` to .sog; quality not checked yet).
-  Every scan is a whole outfit on MoMu's mannequin (head, hands, stand). Spark needs three >= 0.180; the Stage
-  is on 0.169. No splat of an empty mannequin exists.
-- **Approaches laid out (recommended A):** A full splat Stage: avatar = a MoMu form cut from a scan, garments =
-  splat parts cut by height and cluster (uniform jackets ST2431/ST2432, coat ST81190, uniform trousers; dresses,
-  combinaison, kaftan stay full looks), 2 to 5 MB each, placed by slot; fabric remix on splats via Spark recolour
-  (unverified). B hybrid: splat parts on today's mesh form beside the GLBs (lower risk, two visual worlds).
-  C whole-look swaps only (no top/bottom mixing, which the owner wants).
-- **Proposed first step:** a throwaway spike (about half a day) on its own page: one splat mannequin, the
-  ST2431 jacket and ST2432 trousers cut and placed together, one fabric tint, to test cut quality, fit and
-  fabric on splats before building.
-- **Open:** owner's pick of approach; whether to download more from the MoMu Drive (ask which folders exist:
-  pattern files, an empty mannequin or fabric scans would change the options); MOMU-5 still missing.
+## Splat Stage: approach A picked, spike done (2026-11-21, branch basil/splat-spike, not pushed)
+Owner picked **approach A** (full splat Stage: splat form, splat garments cut by part, mixed across scans).
+Spike page `mockups/splat-stage-spike.html` (serve as usual, `window.spike` in the console): the form, ST2431
+cavalry jacket or ST2432 tailcoat on top, either uniform's trousers below, a fabric tint on the top. Parts are cut
+by `mockups/tools/splat_spike_cut.py` (height, depth, colour and splat-footprint rules, these two scans only) into
+`mockups/assets/splat/spike/`, garments decimated to 30% and all at SH 1 (commands in the script's docstring).
+- **Works:** both uniforms were shot on the same MoMu form (floor within 3 mm, leg centres 15 mm apart, fixed by a
+  per-scan offset), so parts swap with no scaling and interleave cleanly (Spark sorts splats across meshes).
+  Every pairing checked front, side and back in Chrome; console clean.
+- **Size:** one look is 5.5 to 6.8 MB (form 0.9, top 3.1 to 4.0, hands 0.6 to 1.1, trousers 0.9), was 16 MB at
+  full density. 30% splats looked the same as 100% at Stage distance; not yet checked on a phone.
+- **Fabric remix on splats works:** a Spark dyno `objectModifier` keeps each splat's luminance (frogging, folds)
+  and swaps its hue; cream (lum above 0.45) stays undyed. Uniform changes need `mesh.updateVersion()`.
+- **Learned, carry into the build:** (1) Spark draws a SplatMesh with `visible = false`; add and remove it instead.
+  (2) The form's arms were posed differently per capture (ST2431 hands 5 cm wider), so hands travel with their
+  top as an undyed part; the shared avatar is only head, neck and feet. (3) Cut by footprint, not centre: blurry
+  splats (sigma up to 2.4 cm) otherwise drag the coat tails into the trousers. (4) Garment areas hidden in the
+  capture are simply missing: the back of the ST2432 trousers under the tails is ragged, and the open tailcoat
+  shows the form's torso, so the form has no torso of its own and a look always needs a top.
+- **Known flaws left:** the tailcoat keeps ST2432's own waistband in its opening (it gets dyed with the coat);
+  ST2432 trousers carry white knee streaks from the capture; the dye is strong on indigo (luminance scale 0.16 is
+  one constant for every part).
+- **Next:** test the spike on a real phone (load time, frame rate); then cut parts for the coat ST81190 and the
+  full looks (dresses, combinaison, kaftan as one part each), move the cut rules into `pieces.json` hints, and
+  bring the splat engine into the Stage (three 0.169 to 0.180 needed for Spark). Ticket G1 in `LEDGER.md`.
+- **Open:** whether more exists on the MoMu Drive (pattern files, an empty form, fabric scans); MOMU-5 missing.
 
 ## Up close (branch basil/splats; live on production https://second-skin-ten.vercel.app since 2026-11-21)
 9 study pieces (every MoMu splat but MOMU-5, which was not in the download), each with 3 details placed in Chrome. Entry: a card scan `second-skin.html?card=<id>` (redirects before the Stage boots), or the wardrobe's Study tab once scanned. Review of placement and flow (2026-11-21): Study chip in the sheet; open items are a 'tap to scan' demo button (C3), a hotspot for venue wifi (scans are 14 to 17 MB), and model-viewer on the Piece page (A4).
