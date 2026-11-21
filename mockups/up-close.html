@@ -29,20 +29,39 @@ header .mono { margin-left: auto; }
 #view.ready canvas { opacity: 1; }
 #loading { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; }
 #view.ready #loading { display: none; }
-.pin { position: absolute; left: 0; top: 0; width: 28px; height: 28px; margin: -14px 0 0 -14px; border-radius: 50%;
-  border: 2px solid var(--paper); background: var(--found); color: var(--paper); display: grid; place-items: center;
-  font: 600 12px/1 var(--sans); pointer-events: none; transition: opacity 200ms var(--ease-out);
-  box-shadow: 0 1px 6px rgb(0 0 0 / .25); }
-.pin[hidden] { display: grid; opacity: 0; }
-.pin.hint { background: var(--ink); animation: pulse 1.2s var(--ease-out) infinite; }
-@keyframes pulse { 50% { box-shadow: 0 0 0 10px rgb(0 0 0 / 0); } 0%, 100% { box-shadow: 0 0 0 0 rgb(0 0 0 / .35); } }
+/* H11: a found detail keeps a plain mark on the piece (no order number, J5) */
+.pin { position: absolute; left: 0; top: 0; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%;
+  border: 2px solid var(--paper); background: var(--found); pointer-events: none; transition: opacity 200ms var(--ease-out);
+  box-shadow: 0 1px 6px rgb(0 0 0 / .3); }
+.pin[hidden] { display: block; opacity: 0; }
+/* H11: a hint marks an area, never the exact spot: the visitor still finds it and taps it */
+.ring { position: absolute; left: 0; top: 0; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%;
+  border: 2px dashed var(--paper); background: rgb(255 255 255 / .14); box-shadow: 0 0 0 1px rgb(0 0 0 / .35), 0 2px 10px rgb(0 0 0 / .2);
+  pointer-events: none; transition: opacity 200ms var(--ease-out); }
+.ring[hidden] { display: block; opacity: 0; }
+.ring > i { position: absolute; inset: -2px; border-radius: 50%; border: 2px solid var(--paper); animation: breathe 1.6s var(--ease-out) infinite; }
+@keyframes breathe { from { transform: scale(.85); opacity: .9; } to { transform: scale(1.15); opacity: 0; } }
 .miss { position: absolute; width: 36px; height: 36px; margin: -18px 0 0 -18px; border-radius: 50%;
   border: 1.5px solid var(--ink); pointer-events: none; animation: miss 500ms var(--ease-out) forwards; }
 @keyframes miss { from { transform: scale(.6); opacity: .6; } to { transform: scale(1.1); opacity: 0; } }
-#toast { position: absolute; left: 50%; bottom: 16px; transform: translate(-50%, 8px); opacity: 0; pointer-events: none;
+#toast { position: absolute; z-index: 3; left: 50%; bottom: 16px; transform: translate(-50%, 8px); opacity: 0; pointer-events: none;
   background: var(--ink); color: var(--paper); padding: 10px 14px; border-radius: 999px; font-size: 13px; white-space: nowrap;
   transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out); }
 #toast.on { opacity: 1; transform: translate(-50%, 0); }
+#view.moment-on #toast { opacity: 0; }
+/* H11 + J5: the found moment, the record's own words large, then a nudge to the real piece in the room */
+#moment { position: absolute; left: 12px; right: 12px; bottom: 12px; background: var(--paper); border-radius: var(--r-card);
+  box-shadow: var(--shadow-card); padding: 16px 16px 8px; display: grid; z-index: 2; gap: 8px; max-height: calc(100% - 24px); overflow: auto;
+  opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity 150ms ease, transform 150ms ease; }
+#view.moment-on #moment { opacity: 1; transform: none; pointer-events: auto;
+  transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out); }
+#moment .mono { color: var(--found); }
+#moment q { display: block; font: italic 400 22px/1.3 var(--serif); quotes: "“" "”"; text-wrap: pretty; }
+#moment .en { color: var(--muted); font: var(--t-small); }
+#moment .room { font-weight: 500; padding-top: 4px; }
+#moment .acts { display: flex; justify-content: flex-end; gap: 8px; }
+#moment button { min-height: 44px; padding: 0 16px; border-radius: 999px; font-weight: 500; }
+#moment button.go { background: var(--ink); color: var(--paper); }
 
 aside { padding: 20px 16px max(16px, env(safe-area-inset-bottom)); display: grid; gap: 16px; }
 h1 { font: var(--t-display); letter-spacing: var(--track-title); text-wrap: balance; text-transform: uppercase; color: var(--title-ink); }
@@ -53,16 +72,22 @@ h1 { font: var(--t-display); letter-spacing: var(--track-title); text-wrap: bala
 .dots i.on { background: var(--found); }
 ol { list-style: none; padding: 0; display: grid; border-top: 1px solid var(--ink); }
 li { border-bottom: 1px solid var(--line); }
-.row { width: 100%; min-height: 52px; display: grid; grid-template-columns: 28px 1fr auto; gap: 12px; align-items: center; text-align: left; padding: 8px 0; }
-.num { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--line); display: grid; place-items: center;
-  font: 600 11px/1 var(--sans); color: var(--muted); transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease; }
-li.found .num { background: var(--found); border-color: var(--found); color: var(--paper); }
+.how { color: var(--muted); font: var(--t-small); margin-bottom: -6px; }
+.row { width: 100%; min-height: 52px; display: grid; grid-template-columns: 12px 1fr auto; gap: 12px; align-items: center; text-align: left; padding: 8px 0; }
+/* H11: an unfound clue is an open ring, a found one fills in; no order numbers (J5) */
+.mark { width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--muted);
+  transition: background-color 200ms ease, border-color 200ms ease; }
+li.found .mark { background: var(--found); border-color: var(--found); }
 .find { font-weight: 500; }
-.show { font-size: 13px; padding: 10px 0 10px 12px; min-height: 44px; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+/* H11: "Hint" stays out of the way until the visitor has tried (a miss) or looked for a while */
+.show { font-size: 13px; padding: 10px 0 10px 12px; min-height: 44px; text-decoration: underline; text-decoration-color: var(--accent);
+  text-decoration-thickness: 1.5px; text-underline-offset: 4px; opacity: 0; visibility: hidden;
+  transition: opacity 200ms var(--ease-out), visibility 0s 200ms, transform 160ms var(--ease-out); }
+aside.hints .show { opacity: 1; visibility: visible; transition: opacity 200ms var(--ease-out), visibility 0s, transform 160ms var(--ease-out); }
 li.found .show { display: none; }
 .fact { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 250ms var(--ease-out); }
 li.found .fact { grid-template-rows: 1fr; }
-.fact > div { overflow: hidden; padding-left: 40px; }
+.fact > div { overflow: hidden; padding-left: 24px; }
 .fact q { display: block; font: var(--t-quote); quotes: "“" "”"; }
 .fact p { color: var(--muted); font-size: 13px; margin: 6px 0 14px; }
 .fact .mono { font-size: 10px; margin-right: 6px; }
@@ -83,7 +108,8 @@ li.found .fact { grid-template-rows: 1fr; }
   #view { height: 58svh; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .pin.hint { animation: none; } .miss { animation: fade 300ms ease forwards; } .fact { transition: none; }
+  .ring > i { animation: none; opacity: 0; } .miss { animation: fade 300ms ease forwards; } .fact { transition: none; }
+  #moment, #view.moment-on #moment { transform: none; }
   @keyframes fade { from { opacity: .6; } to { opacity: 0; } }
 }
 </style>
@@ -100,9 +126,16 @@ li.found .fact { grid-template-rows: 1fr; }
   <span class="mono" id="pid"></span>
 </header>
 
-<main id="view" aria-label="3D scan of the piece. Drag to turn, pinch to zoom, tap a detail to find it.">
+<main id="view" aria-label="3D scan of the piece. Drag to turn, pinch to zoom, tap a detail on the piece to find it.">
   <div id="loading" class="mono">Loading MoMu’s 3D scan</div>
   <div id="toast" role="status"></div>
+  <section id="moment" aria-live="polite" aria-hidden="true">
+    <span class="mono" id="m-what"></span>
+    <q lang="nl" id="m-quote"></q>
+    <p class="en" id="m-en"></p>
+    <p class="room" id="m-room"></p>
+    <div class="acts"><button class="press" id="m-close" tabindex="-1">Keep looking</button></div>
+  </section>
 </main>
 
 <aside>
@@ -111,6 +144,7 @@ li.found .fact { grid-template-rows: 1fr; }
     <div class="meta"><span class="mono" id="date"></span><span class="mono">MoMu study collection</span></div>
   </div>
   <div class="progress"><span class="mono" id="count"></span><span class="dots" id="dots" aria-hidden="true"></span></div>
+  <p class="how" id="how">Turn the scan and look closely. When you spot one of these, tap it on the piece.</p>
   <ol id="details"></ol>
   <button class="cta press" id="wear">Win its fabric</button>
   <p class="credit">Quotes from the MoMu record (dcterms:description). English is our translation.</p>
@@ -149,8 +183,8 @@ const excerpt = q => `${/^[a-z]/.test(q) ? "…" : ""}${q}${/[.!?]$/.test(q) ? "
 $("#dots").innerHTML = piece.details.map(() => "<i></i>").join("");
 $("#details").innerHTML = piece.details.map((d, i) => `
   <li data-i="${i}">
-    <div class="row"><span class="num">${i + 1}</span><span class="find">${d.find}</span>
-      <button class="show press" data-show="${i}">Show me</button></div>
+    <div class="row"><span class="mark" aria-hidden="true"></span><span class="find">${d.find}</span>
+      <button class="show press" data-show="${i}" tabindex="-1">Hint</button></div>
     <div class="fact"><div><q lang="nl">${excerpt(d.quote)}</q><p><span class="mono">EN</span>${d.en}</p></div></div>
   </li>`).join("");
 function renderPanel() {
@@ -159,18 +193,32 @@ function renderPanel() {
   document.querySelectorAll("#dots i").forEach((el, i) => el.classList.toggle("on", i < n));
   document.querySelectorAll("#details li").forEach(li => li.classList.toggle("found", found.has(+li.dataset.i)));
   $("#wear").classList.toggle("on", n === total);
-  $("#wear").textContent = n === total ? "Win its fabric" : `Find ${total - n} more to win its fabric`;
+  $("#wear").textContent = n === total ? "Win its fabric" : `Find ${total - n} more on the piece to win its fabric`;
+  $("#how").hidden = n === total;
 }
 renderPanel();
 $("header .back").addEventListener("click", e => { e.preventDefault(); backTo("second-skin.html"); });   // H6: a link would stack a new Stage
-$("#wear").addEventListener("click", () => {   // never a dead button: until all are found it points at the next one
+const claim = () => {   // H6: back to the Stage underneath (it shows the Won card), never a new entry that back would return through
+  try { sessionStorage.setItem("secondSkin.claim", id); } catch { /* blocked: ?fabric= below still carries it */ }
+  backTo(`second-skin.html?fabric=${encodeURIComponent(id)}`);
+};
+$("#wear").addEventListener("click", () => {   // never a dead button; H11: before all are found it points at the piece, not at the answer
   const next = piece.details.findIndex((_, i) => !found.has(i));
-  if (next < 0) {   // H6: back to the Stage underneath (it shows the Won card), never a new entry that back would return through
-    try { sessionStorage.setItem("secondSkin.claim", id); } catch { /* blocked: ?fabric= below still carries it */ }
-    backTo(`second-skin.html?fabric=${encodeURIComponent(id)}`);
-  }
-  else if (view.classList.contains("ready")) showMe(next);
+  if (next < 0) claim();
+  else if (!view.classList.contains("ready")) return;
+  else if (hintsOpen) showMe(next);
+  else toast("Look on the piece and tap what you spot");
 });
+
+/* ---------- H11: hints open after a first try (a miss) or a while of looking, so nobody gets stuck (D2) ---------- */
+const HINT_AFTER = 20000;
+let hintsOpen = false, hintTimer;
+function openHints() {
+  if (hintsOpen) return;
+  hintsOpen = true; $("aside").classList.add("hints");
+  document.querySelectorAll("#details .show").forEach(b => b.removeAttribute("tabindex"));
+}
+const waitForHints = () => { clearTimeout(hintTimer); if (!hintsOpen) hintTimer = setTimeout(openHints, HINT_AFTER); };
 
 /* ---------- Scene ---------- */
 const view = $("#view");
@@ -211,17 +259,21 @@ controls.target.copy(centre);
 controls.minDistance = size.y * 0.55; controls.maxDistance = size.y * 2.6;
 camera.position.set(centre.x, centre.y, centre.z - dist);   // the captures face -z
 view.classList.add("ready");
+waitForHints();
 
 function corners(b) {
   return [0, 1, 2, 3, 4, 5, 6, 7].map(i => new THREE.Vector3(i & 1 ? b.max.x : b.min.x, i & 2 ? b.max.y : b.min.y, i & 4 ? b.max.z : b.min.z));
 }
 
-/* ---------- Pins: found details stay marked; a hint pulses on the asked one ---------- */
-const pins = points.map((_, i) => {
-  const el = document.createElement("div"); el.className = "pin"; el.textContent = i + 1; el.hidden = true;
+/* ---------- Pins: found details stay marked; a hint rings the area around the asked one, never the spot ---------- */
+const pins = points.map(() => {
+  const el = document.createElement("div"); el.className = "pin"; el.hidden = true;
   view.append(el); return el;
 });
-let hint = -1;
+const ring = document.createElement("div"); ring.className = "ring"; ring.hidden = true; ring.innerHTML = "<i></i>";
+view.append(ring);
+const RING = 60;   // px radius; a tap anywhere inside the ring finds the hinted detail
+let hint = -1, ringOff = { x: 0, y: 0 };
 function facing(p) {   // a detail on the far side of the dress is hidden, so it can't be found through the cloth
   const n = new THREE.Vector3(p.x - centre.x, 0, p.z - centre.z), v = camera.position.clone().sub(p);
   return n.lengthSq() < 1e-6 || n.normalize().dot(v.setY(0).normalize()) > 0.25;
@@ -232,45 +284,92 @@ function screenOf(p) {
 }
 function placePins() {
   points.forEach((p, i) => {
-    const on = (found.has(i) || i === hint) && facing(p);
-    pins[i].hidden = !on; pins[i].classList.toggle("hint", i === hint && !found.has(i));
+    const on = found.has(i) && facing(p);
+    pins[i].hidden = !on;
     if (on) { const { x, y } = screenOf(p); pins[i].style.transform = `translate(${x}px, ${y}px)`; }
   });
+  const ringOn = hint >= 0 && !turn && facing(points[hint]);
+  ring.hidden = !ringOn;
+  if (ringOn) { const { x, y } = ringAt(); ring.style.transform = `translate(${x}px, ${y}px)`; }
 }
+function ringAt() { const s = screenOf(points[hint]); return { x: s.x + ringOff.x, y: s.y + ringOff.y }; }
 
 /* ---------- Tap to find: a tap, not the end of a drag, within reach of an unfound detail facing you ---------- */
-const REACH = 44;
-let down = null;
-renderer.domElement.addEventListener("pointerdown", e => { down = { x: e.clientX, y: e.clientY, t: performance.now() }; });
+const REACH = 44, NEAR = 90;
+let down = null, misses = 0;
+renderer.domElement.addEventListener("pointerdown", e => {   // a tap that only puts the found card away is not a guess
+  down = { x: e.clientX, y: e.clientY, t: performance.now(), dismiss: momentOn }; closeMoment();
+});
 renderer.domElement.addEventListener("pointerup", e => {
-  if (!down || Math.hypot(e.clientX - down.x, e.clientY - down.y) > 6 || performance.now() - down.t > 400) return;
+  if (!down || down.dismiss || Math.hypot(e.clientX - down.x, e.clientY - down.y) > 6 || performance.now() - down.t > 400) return;
   const r = view.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
-  let best = -1, bestD = REACH;
+  let best = -1, bestD = REACH, near = Infinity, anyFacing = false;
   points.forEach((p, i) => {
     if (found.has(i) || !facing(p)) return;
+    anyFacing = true;
     const s = screenOf(p), d = Math.hypot(s.x - x, s.y - y);
+    near = Math.min(near, d);
     if (d < bestD) { best = i; bestD = d; }
   });
-  if (best < 0) { const m = document.createElement("div"); m.className = "miss"; m.style.left = x + "px"; m.style.top = y + "px";
-    view.append(m); setTimeout(() => m.remove(), 500); return; }
+  if (best < 0 && hint >= 0 && !found.has(hint) && facing(points[hint])) {   // inside the hint ring counts
+    const c = ringAt(); if (Math.hypot(c.x - x, c.y - y) <= RING) best = hint;
+  }
+  if (best < 0) return miss(x, y, anyFacing, near);
   found.add(best); if (hint === best) hint = -1;
-  saveFound(); renderPanel();
-  toast(found.size === piece.details.length ? "All found. Its fabric is yours to win." : `Found: ${piece.details[best].find}`);
+  saveFound(); renderPanel(); waitForHints();
+  showMoment(best);
 });
+// H11: a wrong tap is gentle: a ripple where the finger was, and a line that helps rather than scolds
+function miss(x, y, anyFacing, near) {
+  const m = document.createElement("div"); m.className = "miss"; m.style.left = x + "px"; m.style.top = y + "px";
+  view.append(m); setTimeout(() => m.remove(), 500);
+  misses++; openHints();
+  if (!anyFacing) toast("Nothing left to find on this side. Turn the piece.");
+  else if (near < NEAR) toast("Close. Look a little nearer.");
+  else if (misses === 1) toast("Not there. Turn the piece and keep looking.");
+  else if (misses % 3 === 0) toast("Stuck? Tap Hint next to a clue.");
+}
+
+/* ---------- H11 + J5: the found moment shows the record's words large, then sends the eye to the real piece ---------- */
+let momentOn = false;
+function showMoment(i) {
+  const d = piece.details[i], all = found.size === piece.details.length;
+  $("#m-what").textContent = all ? `All ${piece.details.length} found · ${d.find}` : `Found · ${d.find}`;
+  $("#m-quote").textContent = excerpt(d.quote);
+  $("#m-en").textContent = d.en;
+  $("#m-room").textContent = "Now find it on the real piece in front of you.";
+  const b = $("#m-close");
+  b.textContent = all ? "Win its fabric" : "Keep looking"; b.classList.toggle("go", all);
+  b.removeAttribute("tabindex");
+  $("#moment").setAttribute("aria-hidden", "false");
+  view.classList.add("moment-on"); momentOn = true;
+  toast.clear?.();
+}
+function closeMoment() {
+  if (!momentOn) return;
+  momentOn = false; view.classList.remove("moment-on");
+  $("#moment").setAttribute("aria-hidden", "true"); $("#m-close").setAttribute("tabindex", "-1");
+}
+$("#m-close").addEventListener("click", () => { if (found.size === piece.details.length) claim(); else closeMoment(); });
 
 let toastTimer;
 function toast(text) {
   const t = $("#toast"); t.textContent = text; t.classList.add("on");
   clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("on"), 2200);
 }
+toast.clear = () => { clearTimeout(toastTimer); $("#toast").classList.remove("on"); };
 
-/* ---------- Show me: turn to face the detail and pulse its pin ---------- */
+/* ---------- Hint: turn to face the detail and ring the area around it; the visitor still taps it on the piece ---------- */
 let turn = null;
 $("#details").addEventListener("click", e => {
-  const b = e.target.closest("[data-show]"); if (b && view.classList.contains("ready")) showMe(+b.dataset.show);
+  const b = e.target.closest("[data-show]"); if (b && hintsOpen && view.classList.contains("ready")) showMe(+b.dataset.show);
 });
 function showMe(i) {
+  closeMoment();
   hint = i;
+  const a = Math.random() * Math.PI * 2, k = RING * (0.25 + Math.random() * 0.3);   // off-centre, so the ring is not a bullseye
+  ringOff = { x: Math.cos(a) * k, y: Math.sin(a) * k };
+  toast("Somewhere in the ring. Tap it on the piece.");
   const p = points[hint], dir = new THREE.Vector3(p.x - centre.x, 0, p.z - centre.z);
   if (dir.lengthSq() < 1e-6) dir.set(0, 0, -1);
   const r = camera.position.distanceTo(centre);
