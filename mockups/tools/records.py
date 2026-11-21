@@ -79,6 +79,7 @@ def main():
         out[rid] = {
             "uri": next((x["@id"] for k in ("cidoc:P48_has_preferred_identifier", "cidoc:P1_is_identified_by")
                          for x in item.get(k, []) if "@id" in x), None),
+            "heron": next(iter(values(item, "dcterms:identifier")), None),   # Heron item id: heron.libis.be/momu/s/studiecollectie/item/<id>
             "date": [d.replace("herfst-winter", "autumn-winter") for d in values(item, "dcterms:date")],   # season names are Dutch
             "place": [PLACE_EN[p] for p in place],   # KeyError means a new place name to translate
             "medium": english_medium(rid, item, tagged),

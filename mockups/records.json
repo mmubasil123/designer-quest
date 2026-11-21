@@ -1,6 +1,7 @@
 {
  "ST503": {
   "uri": "http://data.momu.be/ark:34546/mcc2mf",
+  "heron": "mcc2mf",
   "date": [
    "1750-1780"
   ],
@@ -20,6 +21,7 @@
  },
  "ST80930": {
   "uri": "http://data.momu.be/ark:34546/mr22f0",
+  "heron": "mr22f0",
   "date": [
    "1950-1960"
   ],
@@ -35,6 +37,7 @@
  },
  "ST2434": {
   "uri": "http://data.momu.be/item/id/mv9sd6",
+  "heron": "mv9sd6",
   "date": [
    "1795-1840"
   ],
@@ -52,6 +55,7 @@
  },
  "ST80931": {
   "uri": "http://data.momu.be/ark:34546/mm90bn",
+  "heron": "mm90bn",
   "date": [
    "1965"
   ],
@@ -66,6 +70,7 @@
  },
  "ST2062": {
   "uri": "http://data.momu.be/ark:34546/m98sm0",
+  "heron": "m98sm0",
   "date": [
    "1850-1870"
   ],
@@ -82,6 +87,7 @@
  },
  "ST2407/1-2": {
   "uri": "http://data.momu.be/item/id/mfxpx0",
+  "heron": "mfxpx0",
   "date": [
    "2005-2009"
   ],
@@ -95,6 +101,7 @@
  },
  "ST80881": {
   "uri": "http://data.momu.be/ark:34546/m1jwzc",
+  "heron": "m1jwzc",
   "date": [
    "1979"
   ],
@@ -114,6 +121,7 @@
  },
  "ST655/1": {
   "uri": "http://data.momu.be/ark:34546/mwwq4q",
+  "heron": "mwwq4q",
   "date": [
    "1947-1950"
   ],
@@ -130,6 +138,7 @@
  },
  "ST2435": {
   "uri": "http://data.momu.be/item/id/mkps0g",
+  "heron": "mkps0g",
   "date": [
    "1920-1925"
   ],
@@ -146,6 +155,7 @@
  },
  "ST652/1": {
   "uri": "http://data.momu.be/ark:34546/mqbzrj",
+  "heron": "mqbzrj",
   "date": [
    "1940-1945"
   ],
@@ -161,6 +171,7 @@
  },
  "ST673/1-2": {
   "uri": "http://data.momu.be/item/id/m5x6jp",
+  "heron": "m5x6jp",
   "date": [
    "1880-1900"
   ],
@@ -177,6 +188,7 @@
  },
  "ST81190": {
   "uri": "http://data.momu.be/ark:34546/m2v73p",
+  "heron": "m2v73p",
   "date": [
    "autumn-winter 1998-1999"
   ],
@@ -193,6 +205,7 @@
  },
  "ST80998": {
   "uri": "http://data.momu.be/ark:34546/mp5hw9",
+  "heron": "mp5hw9",
   "date": [
    "1900-1925"
   ],
@@ -213,6 +226,7 @@
  },
  "ST2431/1-4": {
   "uri": "http://data.momu.be/item/id/m7h4cm",
+  "heron": "m7h4cm",
   "date": [
    "1870-1900"
   ],
@@ -230,6 +244,7 @@
  },
  "ST2432/1-2": {
   "uri": "http://data.momu.be/item/id/m3txj3",
+  "heron": "m3txj3",
   "date": [
    "1800-1940"
   ],
@@ -247,6 +262,7 @@
  },
  "ST671": {
   "uri": "http://data.momu.be/item/id/mfj6zb",
+  "heron": "mfj6zb",
   "date": [
    "1900-1915"
   ],
@@ -264,6 +280,7 @@
  },
  "ST2203": {
   "uri": "http://data.momu.be/ark:34546/mh70xw",
+  "heron": "mh70xw",
   "date": [
    "1937-1948"
   ],

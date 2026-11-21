@@ -26,10 +26,9 @@ trousers, plinth removed, dressing-order render.
 2. **E3 Vercel preview**, only after the owner says go: Root Directory should become `app/` once A3 lands; until
    then deploy `mockups/` as a static site and exclude nothing else.
 3. **A6 LRU + render on demand**, **A5 GLB optimisation** (meshopt + webp, keep `gltf-transform` inside the project).
-4. **C2** in review on `hassan/C2` (questions for ST503, ST80931, ST2407/1-2; the curator to rewrite and approve the draft
-   text in the Notion table "Quiz questions" (hub > "Quiz questions: review (the curator)"); then export the rows to JSON with
-   the Notion connector and run `python3 -I mockups/tools/questions_apply.py rows.json --cache ../cache`). C1 done.
-   Console: `secondSkinQuiz.reset()` clears answers for a demo rerun.
+4. **C2** in review on `hassan/C2`: the curator's Notion page "Story and Questions" is the source (read only, never edit it).
+   To refresh: fetch the page's Markdown with the Notion connector into a file, then
+   `python3 -I mockups/tools/questions_sync.py page.md`. So far it has ST81190 (A.F. Vandevorst jacket). C1 done.
 5. **B7** share card, **E2** screen recording, **E1** slides in `presentation/`.
 
 ## Left / known issues

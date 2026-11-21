@@ -1,47 +1,55 @@
 {
-  "version": 1,
-  "about": "C2: one question per piece. `answer` and every option are verbatim values of `field` in MoMu record `record` (mockups/records.json, built from cache/ by tools/records.py). Distractors are real values of the same field from other records. `prompt` text is a draft until `draft` is false: the curator reviews it in the team Notion table \"Quiz questions\", and tools/questions_apply.py brings her edits back here. Check: python3 -I mockups/tools/questions_check.py",
-  "questions": [
+  "version": 2,
+  "source": "https://www.notion.so/41f8b3bb922780c1be22c63ccd5cb7c1",
+  "about": "C2: the curator's stories and questions, copied from her Notion page by tools/questions_sync.py. Edit them there, not here.",
+  "pieces": [
     {
-      "id": "ST503",
-      "record": "ST503",
-      "field": "place",
-      "draft": true,
-      "prompt": "This jak was worn around 1750 to 1780. Where was it made?",
-      "answer": "Netherlands",
-      "options": [
-        "Belgium",
-        "Japan",
-        "Palestine",
-        "Netherlands"
-      ]
-    },
-    {
-      "id": "ST80931",
-      "record": "ST80931",
-      "field": "date",
-      "draft": true,
-      "prompt": "These monpe, dark blue puffed trousers in ikat, come from Japan. When were they made?",
-      "answer": "1965",
-      "options": [
-        "1965",
-        "1850-1870",
-        "1750-1780",
-        "2005-2009"
-      ]
-    },
-    {
-      "id": "ST2407/1-2",
-      "record": "ST2407/1-2",
-      "field": "medium",
-      "draft": true,
-      "prompt": "Dirk Bikkembergs made these football boots partly from man-made material. What else are they made of?",
-      "answer": "leather",
-      "options": [
-        "silk taffeta",
-        "broadcloth (woollen fabric)",
-        "cotton (fiber)",
-        "leather"
+      "id": "ST81190",
+      "title": "A.F. Vandevorst Jacket",
+      "link": "https://heron.libis.be/momu/s/studiecollectie/item/m2v73p#lg=1&slide=0",
+      "facts": [
+        [
+          "Object",
+          "Jacket"
+        ],
+        [
+          "Materials",
+          "Wool, synthetic fiber, cotton, metal, felt"
+        ],
+        [
+          "Techniques",
+          "Felting"
+        ],
+        [
+          "Date",
+          "1998-1999"
+        ],
+        [
+          "Country",
+          "Belgium"
+        ]
+      ],
+      "story": [
+        "This grey woolen jacket from 1998-1999 by Belgian fashion house A.F. Vandevorst has some remarkable details. It is made up of separate parts; the sleeve, front, shoulder, and breast panels are not sewn together. If you look closely, how are they held together? The pieces, as well as the darts and side seams are fastened with metal rivets, bolt-like fasteners that attach two fabrics. The jacket is closed in the centre front by a column of press buttons, a type of releasable closure.",
+        "Now look at the back of the piece. What stands out? The red cross stitched at the nape of the neck is the iconic logo of A.F. Vandevorst. Since their early collections, their visual language has been inspired by German artist Joseph Beuys, religion, horses and their tack, uniforms, rivets, lingerie, and fetish shoes. This jacket is part of their first collection."
+      ],
+      "questions": [
+        {
+          "q": "What part of the jacket is stitched with red thread?",
+          "a": "the cross at the nape of the neck"
+        },
+        {
+          "q": "Which element of the jacket clearly shows the designer’s visual language?",
+          "a": "rivets"
+        },
+        {
+          "q": "How many snap buttons does the jacket have?",
+          "a": "9"
+        },
+        {
+          "q": "Considering the material and style, what seasons was this jacket made for?",
+          "a": "Autumn and winter"
+        }
       ]
     }
   ]
