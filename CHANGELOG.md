@@ -4,6 +4,12 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### E1 Presentation deck: 6 slides for a 5 to 6 minute talk (branch basil/E1)
+- **What:** `presentation/TEAM C BLANCO_MoMu Hackathon presentation.pptx`, built on the MoMu template the team saved: QR code to https://second-skin-ten.vercel.app with the team names, concept, live demo beats (scan, wear, learn, remix, share), how it works, what is next (CLO), thank you. Every slide has speaker notes with a time budget (5:40 in total) and a `[presenter]` placeholder.
+- **Facts:** piece names and dates come from `pieces.json`; collection counts from `README.md`. No roles are given because the repo records none.
+- **Tooling:** the QR is made with `segno` (pinned in `requirements.txt`) and checked to decode to the exact URL.
+- **Decision:** a pptx on the museum's template over the Markdown outline the ticket named, because the talk is given from PowerPoint; the template's palette (black, red D72F25, Arial) wins over the mockup's cream and Newsreader.
+
 ### Demo avatar on the Stage, presenter only (branch basil/A9-live-avatar)
 - **What:** opening the app with `?demo` shows an "Avatar" button beside the form finishes. It swaps the dress form for
   Basil's own avatar (`mockups/assets/avatar/demo.glb`, a MetaPerson export, used with his consent) and refits every worn
