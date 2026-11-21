@@ -829,7 +829,7 @@ const adj = id => PIECES[id].name.split(" ")[0].replace(/,$/, "");   // "Furisod
 function lookName() {   // a remixed look earns a name; an unremixed one keeps the screen's title
   const main = look.full || look.top, { body, sleeves } = look.fabric;
   if (!main || (!body && !sleeves)) return "Antwerp, any century";
-  if (body && body === sleeves && PIECES[body].splat) return main === body ? shortName(body) : `${shortName(body)}, its fabric`;   // a won scan worn as itself is just its name   // a won study fabric worn alone
+  if (body && body === sleeves && PIECES[body].splat) return main === body ? shortName(body) : `${shortName(body)}, its fabric`;   // a won study piece on its own mesh is just its name; on another cut, its fabric
   if (body && body === sleeves) return `${noun(main)} in ${adj(body)}`;
   return `${noun(main)}${body ? ` in ${adj(body)}` : ""}${sleeves ? `${body ? "," : ""} with ${adj(sleeves)} sleeves` : ""}`;
 }

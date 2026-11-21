@@ -768,8 +768,8 @@
               ]
             }
           ],
-          "matchk": 0.75,
-          "satk": 1.5
+          "matchk": 0.85,
+          "satk": 2.0
         }
       },
       "details": [

@@ -13,6 +13,11 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### Brighter cavalry uniform; unreached texels no longer bake black (branch basil/wear-scans)
+- **What:** ST2431/1-4 rebuilt with `satk` 2.0 and `matchk` 0.85, so its blue is close to the photo. `garment.py` now leaves texels no splat reaches (composite weight under 0.05) to the gutter fill instead of baking them black; the other GLBs are unchanged until rebuilt. `requirements.txt` pins the pipeline's packages.
+- **Also:** `AGENTS.md` drops the rule against using a second HF account for TRELLIS quota (Basil, 2026-11-21).
+- **Checked:** uniform worn on the Stage in desktop Chrome, front and side; console clean.
+
 ### Won fabrics go on the nearest cut; the fact card warms the scan (branch basil/won-cut)
 - **Problem (Basil's phone):** the won riveted wool coat showed as a dress, because every won study fabric went on the cocktail dress cut. He also asked whether the piece card loads the 3D scan and whether closing it cleans up.
 - **What:** `CUT_OF` in `second-skin.html` maps each study piece to the wearable whose cut is nearest: the coat and both uniform jackets on the green wool coat, the five dresses and the combinaison on the cocktail dress, the bridal kaftan on the kimono. Still one "Won" chip; its × takes off that cut and its cloth only, so boots added afterwards stay. The fact card of a study piece whose scan you have opened before now starts the scan download quietly after 2 s at low priority ("See it in 3D" opens it); closing the card aborts it. Before, the card loaded nothing.

@@ -155,7 +155,7 @@ def bake(QP, QN, P, C, O, S, res, k=48):
     """Look at each texel along its normal from outside and alpha-composite the splats near that ray, front to back.
     Nearest-splat colour comes out mottled: single splats are noisy, only their blend is the cloth."""
     tree = cKDTree(P)
-    col = np.zeros((len(QP), 3))
+    col, wsum = np.zeros((len(QP), 3)), np.zeros(len(QP))
     for i in range(0, len(QP), 20000):
         qp, qn = QP[i:i + 20000], QN[i:i + 20000]
         _, nn = tree.query(qp, k=k)
@@ -167,8 +167,9 @@ def bake(QP, QN, P, C, O, S, res, k=48):
         a = np.take_along_axis(a, o, 1)
         cc = np.take_along_axis(C[nn], o[..., None], 1)
         w = a * np.cumprod(np.c_[np.ones(len(a)), 1 - a[:, :-1]], axis=1)
-        col[i:i + 20000] = (cc * w[..., None]).sum(1) / np.maximum(w.sum(1), 1e-6)[:, None]
-    return col
+        wsum[i:i + 20000] = w.sum(1)
+        col[i:i + 20000] = (cc * w[..., None]).sum(1) / np.maximum(wsum[i:i + 20000], 1e-6)[:, None]
+    return col, wsum
 
 
 def texture(Q, col, T, cfg):
@@ -203,7 +204,9 @@ def splat_route(piece, out):
     vmap, ind, uv = xatlas.parametrize(m.vertices, m.faces)
     V, VN, T = m.vertices[vmap], m.vertex_normals[vmap], cfg.get("tex", 1024)
     Q, QP, QN = raster(uv, ind, V, VN, T)
-    col = bake(QP, QN, P, C, O, S, res)
+    col, wsum = bake(QP, QN, P, C, O, S, res)
+    seen = wsum > 0.05   # a texel no splat reaches would bake black; leave it to the gutter fill instead
+    Q, col = Q[seen], col[seen]
     swatch = MOCKUPS / "assets/swatch" / f"{file_of(piece['id'])}.jpg"
     if swatch.exists():   # DC colour leaves out the view-dependent light: bring the median to the photo's
         ref = np.asarray(Image.open(swatch).convert("RGB")).reshape(-1, 3) / 255
