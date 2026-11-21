@@ -4,6 +4,11 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### See it in 3D, with AR inside (branch basil/view-3d)
+- **What:** every wearable's fact card has **See it in 3D**: the piece full screen in model-viewer 4.0.0 (turn, zoom, auto-rotate). Inside it, model-viewer shows **See it in your room** only where AR can start, with WebXR first (in Chrome on Android), then Scene Viewer, then Quick Look. The hidden 1 px viewer and the phone check are gone; model-viewer loads on the first tap of See it in 3D.
+- **Why:** owner on a Pixel 9 with Chrome: the AR button jumped to another screen and went nowhere (Scene Viewer handoff failing). WebXR runs inside Chrome but must draw a visible viewer, which the hidden one was not.
+- **Decision:** AR as an extra inside a visible 3D view, so a failed AR start leaves the visitor looking at the piece instead of a dead screen.
+
 ### The wardrobe sheet can no longer be dragged away (branch basil/sheet-drag)
 - **What:** a drag below the sheet's peek now meets the same 0.3x resistance as a drag past fully open, and `lostpointercapture` ends a drag like `pointerup`, so the sheet snaps back. model-viewer (AR) loads only on Android or on Safari with Quick Look (`rel="ar"`), not on laptops. "Also in" links skip pieces with no 3D (the hidden knee breeches). AR opens Scene Viewer or Quick Look directly (WebXR dropped: owner tapped "See it in your room" and nothing happened, since WebXR must draw the hidden viewer), and the viewer sits at 1 px instead of display: none.
 - **Why:** owner: while moving the sheet it disappeared until a reload; nothing kept a drag above the bottom edge, and a release lost outside the window left it there. The site also felt slower: every fact card loaded model-viewer, a second three.js and a second renderer, even where AR can never start.
