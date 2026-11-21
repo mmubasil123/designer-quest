@@ -4,6 +4,12 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### A7 reconstruction removed: Up close is splat-only again (branch hassan/A7-remove-reconstruction)
+- **What:** the Archive / Compare / Wear it control from PR #26 is gone from `up-close.html`; the coat ST81190, like every study piece, shows only MoMu's Gaussian splat with its detail hunt. `pieces.json` drops ST81190's `assets.clo` and `pieces.schema.json` the `clo` field; `preload.js` no longer warms the CLO coat and avatar after the splat. `mockups/reconstruction.js` and `assets/clo/ST81190.glb` moved to `_to_delete/`. Also restores the H6 comment on `up-close.html`'s `nav.js` import, which had absorbed the old A7 comment in a merge.
+- **Kept:** `clo/outfit.js` and `assets/clo/avatar_web.glb`, for the team's avatar, blouse and trousers (`hassan/team-models`).
+- **Why:** Hassan: the CLO reconstruction changes the fabric, so it misrepresents the piece; the archive object is the splat. The team has also stopped making its own CLO garments: models come only from the team.
+- **Decision:** A7 is cut in `LEDGER.md`; D1 and D5 are unchanged (neither named the coat).
+
 ### One narration voice throughout (branch hassan/H3-one-voice)
 - **What:** the 3 stories still in Gemini's voice (ST81190, ST503, ST80930) are re-made in Picsart's Adeline, so all 19 now share one voice. Made from the story text alone, like the rest.
 - **Checked:** every file transcribed back: none contains the old style line ("Read this aloud in a calm, warm voice..."), and the words match the story (83 to 97%; the gaps are numbers like "9th" heard as "ninth").
