@@ -1,13 +1,16 @@
 /* H2 Ask the archive eval. Runs every case in cases.json through the same askModel() the function uses, checks it,
    and writes results-<model>.json plus RESULTS.md for the curator's review. Without a key it runs only the offline checks
    (cases are sound against the records, the grounding guard drops invented fields and quotes, fallback answers).
-   Run from mockups/: npm run eval:ask   (add -- --resume to reuse answers already in results-<model>.json) */
+   Run from mockups/: npm run eval:ask   (-- --resume reuses answers in results-<model>.json; -- --only=1,8 runs a subset) */
 import { readFileSync, writeFileSync } from "node:fs";
 import RECORDS from "../../ask-records.json" with { type: "json" };
 import { NOT_RECORDED, checkAnswer, fieldAnswer, suggestions } from "../../ask-core.js";
 
 const here = new URL(".", import.meta.url);
-const { cases } = JSON.parse(readFileSync(new URL("cases.json", here), "utf8"));
+const all = JSON.parse(readFileSync(new URL("cases.json", here), "utf8")).cases;
+// --only=1,4,9 runs those cases (1-based, as numbered in RESULTS.md) to spare a free tier's daily quota
+const only = process.argv.find(a => a.startsWith("--only="))?.slice(7).split(",").map(Number);
+const cases = only ? all.filter((_, i) => only.includes(i + 1)) : all;
 const low = s => s.toLowerCase();
 let offlineFail = 0;
 const ok = (cond, msg) => { if (!cond) { offlineFail++; console.log(`  FAIL ${msg}`); } };

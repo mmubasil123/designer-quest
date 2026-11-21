@@ -23,8 +23,10 @@ before calling anything done. Never deploy, push to `main` or publish without yo
 - To go live: Mubasil sets the key env in the Vercel project (Production and Preview) before deploying:
   `ANTHROPIC_API_KEY`, or `ASK_PROVIDER` + `ASK_API_KEY` + `ASK_MODEL` for a free OpenAI-compatible tier.
   GDPR and non-EU processing were set aside for the hackathon; revisit before real visitors use it.
-- Demo risk: OpenRouter free accounts get 50 free requests a day (1000 after 10 USD of credits). Past that, Ask
-  answers suggested questions from fields only. Add credits before the presentation.
+- Demo model: Gemini free tier (`ASK_PROVIDER=gemini`, `ASK_MODEL=gemini-3.5-flash-lite`, key in `ASK_API_KEY`).
+  Its free limits live in AI Studio's Rate limit page (per project, reset midnight Pacific); check before the demo.
+  OpenRouter (Nemotron free, 25/25) stays a fallback but caps at 50 requests a day. Past any cap, Ask answers
+  suggested questions from fields only.
 - Regenerate records after a harvest: `.venv/bin/python -I mockups/tools/ask_records.py`.
 
 ## Done tonight (from the ledger)
