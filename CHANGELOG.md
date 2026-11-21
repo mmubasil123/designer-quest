@@ -4,6 +4,20 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### Demo avatar on the Stage, presenter only (branch basil/A9-live-avatar)
+- **What:** opening the app with `?demo` shows an "Avatar" button beside the form finishes. It swaps the dress form for
+  Basil's own avatar (`mockups/assets/avatar/demo.glb`, a MetaPerson export, used with his consent) and refits every worn
+  piece to it. Without `?demo` nothing changes and the file is never downloaded.
+- **How the fit works** (new `mockups/avatar-body.js`, tuned in `avatar-lab.html`): the slot boxes are scaled from the
+  avatar's measured shoulder line and deltoid width (capped at 1.3x the form); the arms hang at the angle of the worn
+  top's sleeves (presets in `AVATAR_FIT`); cloth inside the body is pushed out along its normal; boots are split and put
+  one per foot; the baked dress-form neck in the jak, ikat vest and coat is cut on a person; the avatar's own clothes are
+  hidden once top, legs and feet are all covered. The rig steps back to 85% so the head fits the frame.
+- **Shader:** garments now read their object-space position from a copy of the scan's vertices (`aObj`), so the remix
+  fabric and the neck cut stay put when conform moves the cloth. Dress-form rendering is unchanged.
+- **Decision:** presenter-only behind `?demo`, no selfie flow and no MetaPerson keys in production (GDPR, and the setup
+  takes minutes). Basil chose to commit the avatar file to the repo.
+
 ### B7 Share card: the look as a 1080x1920 PNG, shared or downloaded (branch hassan/B7)
 - **What:** **Share look** now opens a preview of a 9:16 card with two actions: **Share** (Web Share API with the PNG file, shown only where `navigator.canShare({files})` is true, i.e. most phones) and **Download image** (always there, the main action on a laptop). The card shows the look name (existing `lookName()`, "My look" when unremixed), "Worn across N years" with the oldest to newest year, the form still, every piece worn with its inventory id and years (cloth and sleeve remixes included), the credit "Collection: MoMu Fashion Museum Antwerp" and the app URL.
 - **How:** logic in `mockups/share.js`, styles in `share.css`; `second-skin.html` only imports it and wires the button (replaces the old text-only share). The still is an extra frame from the Stage's own WebGL renderer at card width (zoom 1, current angle, transparent), copied to a 2D canvas in the same task, then the renderer is restored; no `preserveDrawingBuffer`. The form takes whatever height the title and piece list leave, so short looks get a bigger form.

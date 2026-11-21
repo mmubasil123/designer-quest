@@ -28,6 +28,7 @@ write your name in it. Size: S (under 2 h), M (half a day), L (a day or more).
 | A6 | LRU of about 8 GLBs with dispose; render on demand; pause when `document.hidden`; DPR cap 1.5 | S | After 30 piece swaps on a mid-range phone, no tab reload and heap within 20% of swap 1 (Chrome remote devtools) | basil, in review on `basil/A6`: LRU of 8, spin pauses when hidden or off screen, DPR 1.5; real-phone check still open |
 | A7 | `kind: "clo"` branch in `place()` and remix by named material | M | A CLO test GLB sits on the form with no rescale | blocked: needs a CLO export |
 | A8 | `scripts/check-manifest.mjs`: schema + every referenced file exists; runs in `npm run build` | S | A missing GLB fails the build | open |
+| A9 | Demo avatar on the Stage behind `?demo`: the presenter's MetaPerson avatar as a second body, pieces fitted to it (arms, conform, boots per foot, neck cut) | M | `?demo` shows an Avatar toggle; every piece sits on the avatar front, side and back; without `?demo` the page is unchanged and no avatar file loads | Basil, in progress 2026-11-21 (branch basil/A9-live-avatar) |
 
 ## Track B: Phone UI
 | # | Ticket | Size | Acceptance | Status |

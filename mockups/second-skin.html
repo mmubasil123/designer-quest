@@ -83,6 +83,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .credit { position: absolute; left: 20px; top: 8px; right: 20px; display: flex; justify-content: space-between; gap: 8px; }
 .credit .t { font: 400 22px/1.15 Newsreader, serif; }
 .skins { display: flex; margin-right: -12px; }
+.bodies { display: flex; align-items: flex-start; gap: 4px; }
+#bodyBtn { min-height: 36px; margin-top: 4px; padding: 0 14px; }
+#bodyBtn[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+#bodyBtn[aria-busy="true"] { opacity: 0.6; }
 /* 44 px hit area, 20 px dot: the 12 px transparent border is touchable but not painted */
 .skin { width: 44px; height: 44px; border-radius: 50%; border: 12px solid transparent; background-clip: padding-box !important;
   box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); }
@@ -284,7 +288,7 @@ dt { color: var(--muted); }
             <div class="t" id="lookName">Antwerp, any century</div>
             <div class="mono" id="lookSpan"></div>
           </div>
-          <div class="skins" id="skins" aria-label="Form finish"></div>
+          <div class="bodies"><button class="pill ghost press" id="bodyBtn" hidden aria-pressed="false">Avatar</button><div class="skins" id="skins" aria-label="Form finish"></div></div>
         </div>
         <div class="turntable" id="stageTT" role="img" aria-label="Your avatar, drag to turn"></div>
         <div class="zoom" aria-label="Zoom the form"><button class="press" id="zoomIn" aria-label="Zoom in">+</button><button class="press" id="zoomOut" aria-label="Zoom out" disabled>&minus;</button></div>
@@ -344,6 +348,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { createQuiz } from "./quiz.js";
 import { createAsk } from "./ask.js";
 import { createShare } from "./share.js";
+import { AVATAR_URL, AVATAR_FIT, FORM_CUT, prepAvatar, placeFeet, fitWorn, restoreShape } from "./avatar-body.js";
 
 const IMG = id => `https://heron.libis.be/momu/files/large/${id}.jpg`;
 const ZOOM_MAX = 3;
@@ -422,11 +427,12 @@ const fileOf = id => id.replace("/", "_");
    uRemixA/B project another piece's fabric in object space (TRELLIS UVs are hundreds of scattered islands, so a
    swatch on the UVs would come out chopped) and multiply it by the scan's own brightness to keep folds and shading.
    Zone A is the body, zone B the sleeves: further than uSplit from the centre line uCx and above uSleeveY. */
-const GARMENT_VERT = ["#include <common>\nvarying vec3 vObjPos;\nvarying vec3 vObjN;", "#include <begin_vertex>\n  vObjPos = position; vObjN = normal;"];
+const GARMENT_VERT = ["#include <common>\nattribute vec3 aObj;\nvarying vec3 vObjPos;\nvarying vec3 vObjN;", "#include <begin_vertex>\n  vObjPos = aObj; vObjN = normal;"];
 const GARMENT_DECL = `varying vec3 vObjPos;
 varying vec3 vObjN;
 uniform sampler2D uFabricA, uFabricB;
-uniform float uRemixA, uRemixB, uMean, uDrop, uCx, uSplit, uSleeveY;
+uniform float uRemixA, uRemixB, uMean, uDrop, uCx, uSplit, uSleeveY, uOn, uCut, uCutHalf;
+uniform vec3 uForm;
 vec3 triplanar(sampler2D t) {
   vec3 w = pow(abs(normalize(vObjN)), vec3(4.0)); w /= w.x + w.y + w.z;
   vec3 p = vObjPos * 4.0;
@@ -435,6 +441,8 @@ vec3 triplanar(sampler2D t) {
 const GARMENT_FRAG = `#include <map_fragment>
   float lum = dot(diffuseColor.rgb, vec3(0.299, 0.587, 0.114));
   if (lum < uDrop) discard;
+  // on the demo avatar: drop the dress form TRELLIS baked into the neck (texels of the form's colour near the centre line)
+  if (uOn > 0.5 && uCut > 0.5 && abs(vObjPos.x - uCx) < uCutHalf && distance(diffuseColor.rgb, uForm) < 0.09) discard;
   float shade = clamp(lum / uMean, 0.35, 1.5);
   vec3 bodyCol = uRemixA > 0.5 ? triplanar(uFabricA) * shade : diffuseColor.rgb;
   vec3 sleeveCol = uRemixB > 0.5 ? triplanar(uFabricB) * shade : diffuseColor.rgb;
@@ -452,11 +460,13 @@ function meanLuma(tex) {   // linear brightness of the scan's texture, ignoring 
   }
   return Math.max(sum / Math.max(n, 1), 0.02);
 }
-function prepGarment(scene, piece) {
+function prepGarment(scene, piece, id) {
   scene.traverse(o => {
     if (!o.isMesh) return;
     if (!o.geometry.attributes.normal) o.geometry.computeVertexNormals();   // TRELLIS ships none, which renders faceted
     const m = o.material, g = o.geometry;
+    g.userData.orig = g.attributes.position.array.slice();   // the demo avatar's conform step moves a copy; this is the scan
+    g.setAttribute("aObj", new THREE.BufferAttribute(g.userData.orig.slice(), 3));
     // TRELLIS writes no metallicFactor, and the glTF default is 1: every scan loaded as solid metal, which has no diffuse
     // colour, so cloth rendered near black with a mirror sheen (and the environment map below only hid the worst of it)
     m.metalness = 0;
@@ -467,7 +477,9 @@ function prepGarment(scene, piece) {
       uCx: { value: (g.boundingBox.max.x + g.boundingBox.min.x) / 2 },
       uSplit: { value: half * 0.5 },   // scans hang sleeves outside about half the full width
       uSleeveY: { value: g.boundingBox.min.y + (piece.sleeveTo ?? 0.4) * (g.boundingBox.max.y - g.boundingBox.min.y) },
-      uDrop: { value: piece.hideStand ? 0.03 : -1 } };   // 0.03 is linear: the stand's near-black, under any fabric's darkest dye
+      uDrop: { value: piece.hideStand ? 0.03 : -1 },   // 0.03 is linear: the stand's near-black, under any fabric's darkest dye
+      uOn: { value: 0 }, uCut: { value: FORM_CUT[id] ? 1 : 0 }, uCutHalf: { value: half * 0.4 },
+      uForm: { value: new THREE.Color().setRGB(...(FORM_CUT[id] || [0, 0, 0]).map(v => v / 255), THREE.SRGBColorSpace) } };
     m.onBeforeCompile = sh => {
       Object.assign(sh.uniforms, u);
       sh.vertexShader = sh.vertexShader.replace("#include <common>", GARMENT_VERT[0]).replace("#include <begin_vertex>", GARMENT_VERT[1]);
@@ -529,18 +541,18 @@ function trimGlbs() {
 const loadGlb = id => {
   glbUse.delete(id); glbUse.set(id, true);   // most recent last
   return scenes[id] ??= loader.loadAsync(PIECES[id].glb)
-    .then(g => { const sc = prepGarment(g.scene, PIECES[id]); setTimeout(trimGlbs); return sc; })
+    .then(g => { const sc = prepGarment(g.scene, PIECES[id], id); setTimeout(trimGlbs); return sc; })
     .catch(e => { delete scenes[id]; glbUse.delete(id); throw e; });   // a failed load must not stick in the cache
 };
 
-function place(model, slot, adjust = 1) {   // wrapper keeps the model's own transform; the wrapper carries the fit
+function place(model, slot, adjust = 1, fit = SLOT_FIT, lift = 0) {   // wrapper keeps the model's own transform; the wrapper carries the fit
   const box = new THREE.Box3().setFromObject(model), c = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3());
-  const { width, top } = SLOT_FIT[slot];
+  const { width, top, floor = 0 } = fit[slot];
   const span = slot === "feet" ? Math.max(size.x, size.z) : size.x;   // a pair of shoes is longer than it is wide
   // bottoms are sized by length, waist to just above the base (`floor`); width only caps them
-  const s = Math.min(width / span, top ? (top - (SLOT_FIT[slot].floor ?? 0)) / size.y : Infinity) * adjust;
+  const s = Math.min(width / span, top ? (top - floor) / size.y : Infinity) * adjust;
   const wrap = new THREE.Group(); wrap.add(model);
-  wrap.scale.setScalar(s); wrap.position.set(-c.x * s, top ? top - box.max.y * s : -box.min.y * s, -c.z * s);
+  wrap.scale.setScalar(s); wrap.position.set(-c.x * s, (top ? top - box.max.y * s : -box.min.y * s) + lift, -c.z * s);
   return wrap;
 }
 
@@ -612,20 +624,20 @@ class Turntable {
       const id = want[slot], cur = this.worn[slot];
       if (cur && cur.id === id) { if (cur.obj) setFabric(cur.obj, this.fabricFor(slot, id)); continue; }
       if (!cur && !id) continue;
-      if (cur?.obj) this.rig.remove(cur.obj);
+      if (cur?.obj) { this.rig.remove(cur.obj); restoreShape(cur.obj); }
       delete this.worn[slot];
       if (!id || !PIECES[id].glb) continue;
       const entry = this.worn[slot] = { id };
       loadGlb(id).then(model => {
         if (this.worn[slot] !== entry) return;   // swapped again while loading
-        entry.obj = place(model.clone(), slot, PIECES[id].adjust);
+        entry.obj = this.placeOn(model.clone(), slot, id);
         entry.born = performance.now();
         entry.obj.traverse(o => o.layers.set(LAYER[slot]));
         setFabric(entry.obj, this.fabricFor(slot, id));
-        this.rig.add(entry.obj); this.fitForm(); this.settle(); maybeWarm();
+        this.rig.add(entry.obj); this.fitForm(); this.fitBody(); this.settle(); maybeWarm();
       }).catch(e => console.warn(`3D model for ${id} failed`, e));
     }
-    this.fitForm(); this.render();
+    this.fitForm(); this.fitBody(); this.render();
   }
   fabricFor(slot, id) {   // remix fabrics go on the main garment only; a piece's own fabric means "original"
     if (slot !== "top" && slot !== "full") return {};
@@ -634,6 +646,44 @@ class Turntable {
   }
   fitForm() {   // a loaded top hides the torso (scan shoulders rarely match the form's); the neck stays
     this.form.userData.torso.visible = !(this.worn.top?.obj || this.worn.full?.obj);
+  }
+  placeOn(model, slot, id) {   // on the dress form, or (?demo) on the demo avatar's measured body
+    const av = this.avatar;
+    if (!av) return place(model, slot, PIECES[id].adjust);
+    const f = AVATAR_FIT[id] || {};
+    return slot === "feet" ? placeFeet(av, model, f) : place(model, slot, f.size ?? 1, av.fit, f.lift ?? 0);
+  }
+  setBody(av) {   // null: the dress form. Every worn piece is placed again for the new body.
+    if (av === this.avatar) return;
+    if (this.avatar) this.rig.remove(this.avatar.root);
+    this.avatar = av;
+    this.form.visible = !av;
+    // the avatar is taller than the form (the frame tops out at 1.57 m): the whole rig steps back so the head fits
+    this.bodyScale = av ? Math.min(1, 1.55 / av.height) : 1;
+    this.rig.scale.setScalar(this.bodyScale);
+    if (av) this.rig.add(av.root);
+    for (const [slot, e] of Object.entries(this.worn)) {
+      if (!e.obj) continue;
+      this.rig.remove(e.obj); restoreShape(e.obj);
+      delete this.worn[slot];   // draw() loads (from cache) and places it again
+    }
+    this.draw();
+  }
+  fitBody() {   // pose the arms for the worn top and push cloth out of the body, measured unspun and unscaled
+    const on = !!this.avatar;
+    for (const e of Object.values(this.worn)) e.obj?.traverse(o => { const u = o.material?.userData.u; if (u) u.uOn.value = on ? 1 : 0; });
+    if (!on) return;
+    const rot = this.rig.rotation.y, held = [];
+    this.rig.rotation.y = 0; this.rig.scale.setScalar(1);
+    for (const e of Object.values(this.worn)) {   // a piece still easing in is measured where it will come to rest
+      const r = e.obj?.userData.rest; if (!r) continue;
+      held.push([e.obj, e.obj.position.y, e.obj.scale.x]); e.obj.position.y = r.y; e.obj.scale.setScalar(r.s);
+    }
+    this.rig.updateWorldMatrix(true, true);
+    fitWorn(this.avatar, this.worn);
+    for (const [o, y, sc] of held) { o.position.y = y; o.scale.setScalar(sc); }
+    this.rig.rotation.y = rot; this.rig.scale.setScalar(this.bodyScale);
+    this.rig.updateWorldMatrix(true, true);
   }
   settle() {   // a new piece drops 4 cm onto the form and eases in, instead of popping into place
     const tick = () => { this.render(); if (Object.values(this.worn).some(e => e.born)) requestAnimationFrame(tick); };
@@ -757,7 +807,29 @@ const turntables = [stageTT];
   zin.addEventListener("click", () => stageTT.setZoom(stageTT.zoom * 1.5));
   zout.addEventListener("click", () => stageTT.setZoom(stageTT.zoom / 1.5));
 }
-window.secondSkin = { look, turntables };   // handle for driving the mockup from the console
+/* A9 demo avatar, presenter only: `?demo` shows an "Avatar" toggle beside the form finishes. Ordinary visitors never
+   load the file. The avatar is fetched when the page is idle, so the switch during a talk is instant. */
+const avatarState = { promise: null, av: null };
+function loadAvatar() {
+  return avatarState.promise ??= loader.loadAsync(AVATAR_URL).then(g => avatarState.av = prepAvatar(g.scene, SLOT_FIT))
+    .catch(e => { avatarState.promise = null; throw e; });
+}
+if (params.has("demo")) {
+  const btn = document.getElementById("bodyBtn");
+  btn.hidden = false;
+  idle(() => loadAvatar().catch(() => {}));
+  btn.addEventListener("click", async () => {
+    const on = btn.getAttribute("aria-pressed") !== "true";
+    btn.setAttribute("aria-busy", "true");
+    try {
+      stageTT.setBody(on ? await loadAvatar() : null);
+      btn.setAttribute("aria-pressed", on);
+      skinsEl.hidden = on;   // finishes colour the dress form only
+    } catch (e) { console.warn("demo avatar failed", e); toast("The demo avatar did not load"); }
+    btn.removeAttribute("aria-busy");
+  });
+}
+window.secondSkin = { look, turntables, avatar: avatarState };   // handle for driving the mockup from the console
 
 /* ---------- Look state, skins, locker ---------- */
 const yearOf = id => PIECES[id].year.from;
