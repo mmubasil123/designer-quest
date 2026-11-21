@@ -1,0 +1,1098 @@
+{
+ "ST503": {
+  "uri": "http://data.momu.be/ark:34546/mcc2mf",
+  "fields": [
+   {
+    "key": "date",
+    "label": "Date",
+    "property": "dcterms:date",
+    "values": [
+     "1750-1780"
+    ]
+   },
+   {
+    "key": "place",
+    "label": "Place",
+    "property": "dcterms:spatial",
+    "values": [
+     "Nederland"
+    ],
+    "en": [
+     "Netherlands"
+    ]
+   },
+   {
+    "key": "subject",
+    "label": "Type of object",
+    "property": "dcterms:subject",
+    "values": [
+     "corsage",
+     "corsages"
+    ]
+   },
+   {
+    "key": "medium",
+    "label": "Materials and techniques",
+    "property": "dcterms:medium",
+    "values": [
+     "zijde (vezel)",
+     "tafzijde",
+     "vlas (vezel)",
+     "metaal",
+     "weven",
+     "naaien",
+     "handgemaakt"
+    ],
+    "en": [
+     "silk (silkworm material)",
+     "silk taffeta",
+     "flax",
+     "metal",
+     "sewing (needleworking technique)",
+     "handmade"
+    ]
+   },
+   {
+    "key": "extent",
+    "label": "Size",
+    "property": "dcterms:extent",
+    "values": [
+     "Algemeen: 78cm (30 11/16in.)"
+    ]
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "property": "dcterms:description",
+    "values": [
+     "Het jak reikt tot aan de taille en heeft lange schootpanden, een vierkante halslijn en nauw aansluitende mouwen tot aan de elleboog. Aan de voorkant is het open en het wordt in het midden gesloten met metalen haken en ogen. De buitenstof is gemaakt van blauwe tafzijde met een witgele versiering van plaatselijke vlottermotieven in de richting van de kettingdraden. Deze decoratie combineert een abstract zigzagpatroon met een bloemmotief. Tafzijde is een fijne, gladde en licht glanzende zijden stof. De voering bestaat uit een blauwe linnen stof die eveneens versierd is met witte en gele strepen, gevormd door gekleurde kettingdraden."
+    ],
+    "en": [
+     "The jacket reaches to the waist and has long skirts, a square neckline and close-fitting sleeves to the elbow."
+    ],
+    "enNote": "our translation of the first sentence only"
+   }
+  ]
+ },
+ "ST80930": {
+  "uri": "http://data.momu.be/ark:34546/mr22f0",
+  "fields": [
+   {
+    "key": "date",
+    "label": "Date",
+    "property": "dcterms:date",
+    "values": [
+     "1950-1960"
+    ]
+   },
+   {
+    "key": "place",
+    "label": "Place",
+    "property": "dcterms:spatial",
+    "values": [
+     "Japan"
+    ]
+   },
+   {
+    "key": "subject",
+    "label": "Type of object",
+    "property": "dcterms:subject",
+    "values": [
+     "jasje",
+     "jackets"
+    ]
+   },
+   {
+    "key": "medium",
+    "label": "Materials and techniques",
+    "property": "dcterms:medium",
+    "values": [
+     "dubbel ikat",
+     "katoen (vezel)"
+    ],
+    "en": [
+     "double ikat",
+     "cotton (fiber)"
+    ]
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "property": "dcterms:description",
+    "values": [
+     "Donkerblauwe vest of jasje in ikat met lichtblauwe vlekken en rode vierkanten. De vest heeft lange pofmouwen, overlappende voorpanden en sluit in de taille met linten."
+    ],
+    "en": [
+     "Dark blue waistcoat or jacket in ikat with light blue spots and red squares."
+    ],
+    "enNote": "our translation of the first sentence only"
+   }
+  ]
+ },
+ "ST2434": {
+  "uri": "http://data.momu.be/item/id/mv9sd6",
+  "fields": [
+   {
+    "key": "date",
+    "label": "Date",
+    "property": "dcterms:date",
+    "values": [
+     "1795-1840"
+    ]
+   },
+   {
+    "key": "subject",
+    "label": "Type of object",
+    "property": "dcterms:subject",
+    "values": [
+     "jas",
+     "coats"
+    ]
+   },
+   {
+    "key": "medium",
+    "label": "Materials and techniques",
+    "property": "dcterms:medium",
+    "values": [
+     "katoen (vezel)",
+     "keperbinding",
+     "laken (wollen stof)",
+     "messing",
+     "weven",
+     "wol"
+    ],
+    "en": [
+     "cotton (fiber)",
+     "twilled weave",
+     "broadcloth (woollen fabric)",
+     "brass",
+     "weaving",
+     "wool (hair material)"
+    ]
+   },
+   {
+    "key": "extent",
+    "label": "Size",
+    "property": "dcterms:extent",
+    "values": [
+     "Algemeen: 90cm (35 7/16in.)"
+    ]
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "property": "dcterms:description",
+    "values": [
+     "Jas in groen laken, met slippen. Lange aangezette mouwen en liggende kraag met korte revers. Knoopsluiting met twee keer vier knoopsgaten, double breasted, zonder knopen. Acht bolle, los aanwezige knopen in messing waren oorspronkelijk waarschijnlijk bevestigd op de achterzijde. Op beide slippen bevindt zicht een opgestikte patch in de vorm van een grote verticale steekzak die aan de binnenkant uitloopt in drie punten, met sporen van de knopen. Op de achterzijde bevinden zich onderaan de slippen twee grote, platte messing knopen, gesigneerd M & Cie PARIS. Onderaan de voorpanden werd later aan weerszijden een horizontale brede bies toegevoegd in rood laken. Gevoerd in paars geglansd keperkatoen."
+    ],
+    "en": [
+     "Coat in green broadcloth, with tails."
+    ],
+    "enNote": "our translation of the first sentence only"
+   }
+  ]
+ },
+ "ST80931": {
+  "uri": "http://data.momu.be/ark:34546/mm90bn",
+  "fields": [
+   {
+    "key": "date",
+    "label": "Date",
+    "property": "dcterms:date",
+    "values": [
+     "1965"
+    ]
+   },
+   {
+    "key": "place",
+    "label": "Place",
+    "property": "dcterms:spatial",
+    "values": [
+     "Japan"
+    ]
+   },
+   {
+    "key": "subject",
+    "label": "Type of object",
+    "property": "dcterms:subject",
+    "values": [
+     "broek",
+     "trousers"
+    ]
+   },
+   {
+    "key": "medium",
+    "label": "Materials and techniques",
+    "property": "dcterms:medium",
+    "values": [
+     "ikat",
+     "katoen (vezel)"
+    ],
+    "en": [
+     "cotton (fiber)"
+    ]
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "property": "dcterms:description",
+    "values": [
+     "Donkerblauwe pofbroek, ofwel \"monpe\", in ikat met lichtblauwe vlekken en rode vierkanten. Brede tailleband met lange linten als sluiting, kan ook onderaan rond de enkels gebonden worden met linten."
+    ],
+    "en": [
+     "Dark blue puffed trousers, or \"monpe\", in ikat with light blue spots and red squares."
+    ],
+    "enNote": "our translation of the first sentence only"
+   }
+  ]
+ },
+ "ST2062": {
+  "uri": "http://data.momu.be/ark:34546/m98sm0",
+  "fields": [
+   {
+    "key": "date",
+    "label": "Date",
+    "property": "dcterms:date",
+    "values": [
+     "1850-1870"
+    ]
+   },
+   {
+    "key": "subject",
+    "label": "Type of object",
+    "property": "dcterms:subject",
+    "values": [
+     "broek",
+     "trousers"
+    ]
+   },
+   {
+    "key": "medium",
+    "label": "Materials and techniques",
+    "property": "dcterms:medium",
+    "values": [
+     "handgemaakt",
+     "laken (wollen stof)",
+     "messing",
+     "wol",
+     "zijde (vezel)"
+    ],
+    "en": [
+     "handmade",
+     "broadcloth (woollen fabric)",
+     "brass",
+     "wool (hair material)",
+     "silk (silkworm material)"
+    ]
+   },
+   {
+    "key": "extent",
+    "label": "Size",
+    "property": "dcterms:extent",
+    "values": [
+     "Algemeen: 82cm (32 5/16in.)"
+    ]
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "property": "dcterms:description",
+    "values": [
+     "Broek, kniebroek voor een man, in crèmekleurig wollen laken. Lange gulp middenvoor, gesloten met zes knopen (materiaal onbekend). Zakje rechts op de heup: steekzak in de tailleband. Middenachter een riempje met een messing gesp; eveneens kleine split in de tailleband. Kniebroek is onderaan de pijpen afgewerkt met een split en drie knopen; de bies eindigt in een kort riempje en een knoopsgat aan de andere zijde (knopen beide afwezig). Broek is aan de bovenzijde deels gevoerd met glanzend crèmewit keperweefsel in waarschijnlijk zijde. Deel van een Russisch militair kostuum. Volledig met de hand genaaid."
+    ],
+    "en": [
+     "Trousers: men's knee breeches in cream woollen broadcloth."
+    ],
+    "enNote": "our translation of the first sentence only"
+   }
+  ]
+ },
+ "ST2407/1-2": {
+  "uri": "http://data.momu.be/item/id/mfxpx0",
+  "fields": [
+   {
+    "key": "creator",
+    "label": "Maker",
+    "property": "dcterms:creator",
+    "values": [
+     "Dirk Bikkembergs"
+    ]
+   },
+   {
+    "key": "date",
+    "label": "Date",
+    "property": "dcterms:date",
+    "values": [
+     "2005-2009"
+    ]
+   },
+   {
+    "key": "subject",
+    "label": "Type of object",
+    "property": "dcterms:subject",
+    "values": [
+     "schoenen",
+     "shoes"
+    ]
+   },
+   {
+    "key": "medium",
+    "label": "Materials and techniques",
+    "property": "dcterms:medium",
+    "values": [
+     "kunststof",
+     "leder"
+    ],
+    "en": [
+     "manmade material",
+     "leather"
+    ]
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "property": "dcterms:description",
+    "values": [
+     "Paar voetbalschoenen in wit met circulair blauw gestreept leder. Gemaakt voor de club FC Bikkembergs Fossombrone in De Marken, Italië. Zool met noppen in transparante kunststof, waardoorheen een grafisch ontwerp in rood en blauw zichtbaar is. Op de voorvoet bovenop een vetersluiting bevindt zich een cirkel in leder die het logo van het label Bikkembergs Sport bevat. Deze flap zit met elastiek bevestigd rondom de schoen. De hiel links is in blauw leder uitgevoerd; de hiel rechts in rood. Links op de hiel is het logo van de voetbalploeg FC Fossombrone opgestikte; rechts het logo van het label Bikkembergs Sport."
+    ],
+    "en": [
+     "Pair of football boots in white, with leather in blue circular stripes."
+    ],
+    "enNote": "our translation of the first sentence only"
+   }
+  ]
+ },
+ "ST80881": {
+  "uri": "http://data.momu.be/ark:34546/m1jwzc",
+  "fields": [
+   {
+    "key": "date",
+    "label": "Date",
+    "property": "dcterms:date",
+    "values": [
+     "1979"
+    ]
+   },
+   {
+    "key": "place",
+    "label": "Place",
+    "property": "dcterms:spatial",
+    "values": [
+     "Japan"
+    ]
+   },
+   {
+    "key": "subject",
+    "label": "Type of object",
+    "property": "dcterms:subject",
+    "values": [
+     "kimono",
+     "kimonos"
+    ]
+   },
+   {
+    "key": "medium",
+    "label": "Materials and techniques",
+    "property": "dcterms:medium",
+    "values": [
+     "zijde (vezel)",
+     "textieldruk",
+     "handbeschilderen",
+     "borduren",
+     "weven",
+     "naaien"
+    ],
+    "en": [
+     "silk (silkworm material)",
+     "textile printing",
+     "hand-painted",
+     "embroidering",
+     "weaving",
+     "sewing (needleworking technique)"
+    ]
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "property": "dcterms:description",
+    "values": [
+     "Ecru furisode kimono, beschilderd en met gouden opdruk. Veelkleurig motief van brede opwaaiende linten (mogelijk noshi- of kichô-motief) met op de achtergrond een abstract landschap met huizen, wolken en flora, waaronder pioenen, chrysanten, ume pruimenbloesem, Japanse esdoorn en bamboe. Details op bloemen zijn geborduurd met zijde en metaaldraad. Tweedelige voering, bovenaan wit, onderaan bedrukte stof."
+    ],
+    "en": [
+     "Ecru furisode kimono, painted and with a gold print."
+    ],
+    "enNote": "our translation of the first sentence only"
+   },
+   {
+    "key": "shortDescription",
+    "label": "About the maker or collection",
+    "property": "bibo:shortDescription",
+    "values": [
+     "In tegenstelling tot de westerse couturetraditie wordt er geen papieren patroon gebruikt en wordt het kledingstuk niet driedimensionaal geknipt; er zijn dus geen plooien of figuurnaden. Alle onderdelen van een kimono worden gesneden uit één enkel stuk stof (tanmono) met een vaste breedte. Variaties in maat worden bereikt door het strikken en knopen van de obi, de rijk versierde “sjerp” die rond de taille wordt gedragen, en niet door het aanpassen van halslijnen, zomen enzovoort.\n\nVóór het naaien worden de verschillende onderdelen van de kimono geverfd, beschilderd en bedrukt met een zich herhalend patroon waarin elk afwisselend motief ondersteboven is weergegeven. De naden worden losgemaakt en opnieuw gestikt telkens wanneer de kimono wordt gedragen. Overtollige stof wordt tussen de voering en de buitenstof gelaten, zodat het kledingstuk later kan worden vermaakt tot een andere maat of kan worden herwerkt tot een ander voorwerp.\n\nEen furisode is een gewaad met lange, zwierige mouwen dat traditioneel wordt gedragen door jonge, ongehuwde vrouwen bij formele en feestelijke gelegenheden. Meestal wordt deze gedragen met een fukuro-obi, die op de rug wordt geknoopt in een ingewikkelde, decoratieve strik. Het dunne koord dat over de obi loopt (obijime) en de sjerp die daarboven zichtbaar is (obiage) zijn afgestemd op het kleurenpalet van de kimono. De outfit wordt verder gecombineerd met formele sandalen (zōri) en witte sokken met gesplitste teen (tabi), evenals een opvouwbare waaier (sensu) en een buidel met trekkoord (kinchaku)."
+    ]
+   }
+  ]
+ },
+ "ST655/1": {
+  "uri": "http://data.momu.be/ark:34546/mwwq4q",
+  "fields": [
+   {
+    "key": "date",
+    "label": "Date",
+    "property": "dcterms:date",
+    "values": [
+     "1947-1950"
+    ]
+   },
+   {
+    "key": "place",
+    "label": "Place",
+    "property": "dcterms:spatial",
+    "values": [
+     "België"
+    ],
+    "en": [
+     "Belgium"
+    ]
+   },
+   {
+    "key": "subject",
+    "label": "Type of object",
+    "property": "dcterms:subject",
+    "values": [
+     "jurk",
+     "dresses"
+    ]
+   },
+   {
+    "key": "medium",
+    "label": "Materials and techniques",
+    "property": "dcterms:medium",
+    "values": [
+     "kunstvezel",
+     "fluweel",
+     "metaal",
+     "weefsel",
+     "stikken (procédé)",
+     "zomen (procédé)"
+    ],
+    "en": [
+     "synthetic fiber",
+     "velvet",
+     "metal"
+    ]
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "property": "dcterms:description",
+    "values": [
+     "Kuit- tot enkellange japon in doorknoopmodel, type cocktailjurk, van groen-zwart horizontaal gestreept synthetisch materiaal. Sluiting vooraan met 11 knopen, met dezelfde strepenstof en fluweel bekleed, machinaal genaaide knoopsgaten. Sjaalkraag met revers van zwart fluweel. Aangezette korte mouwen met aangezette boord van zwart fluweel. Zwart gehaakte riemlus ter hoogte van de rechterheup, deze ontbreekt links. \nEr zijn geen zakken en er is geen voering. Ingenaaide schoudervullingen gemaakt van dezelfde stof als de jurk. De zoom is aan de binnenzijde verstevigd met een zwart lint en is met fijne steekjes met de hand vastgezet. \nInteressant detail: de zelfkant van de onderpade nden is gebruikt aan de sluiting middenvoor en de onderste panden van de rok hebben geen zijnaden, omdat het halve cirkels zijn. Daardoor zijn de strepen vooraan horizontaal, maar lopen ze aan de achterzijde verticaal bij de aansluiting met het bovenstuk."
+    ],
+    "en": [
+     "Calf- to ankle-length button-through gown, a cocktail dress, in green and black horizontally striped synthetic material."
+    ],
+    "enNote": "our translation of the first sentence only"
+   }
+  ]
+ },
+ "ST2435": {
+  "uri": "http://data.momu.be/item/id/mkps0g",
+  "fields": [
+   {
+    "key": "date",
+    "label": "Date",
+    "property": "dcterms:date",
+    "values": [
+     "1920-1925"
+    ]
+   },
+   {
+    "key": "subject",
+    "label": "Type of object",
+    "property": "dcterms:subject",
+    "values": [
+     "jurk",
+     "dresses"
+    ]
+   },
+   {
+    "key": "medium",
+    "label": "Materials and techniques",
+    "property": "dcterms:medium",
+    "values": [
+     "borduren",
+     "metaal",
+     "paillette",
+     "weven",
+     "zijde (vezel)"
+    ],
+    "en": [
+     "embroidering",
+     "metal",
+     "sequin",
+     "weaving",
+     "silk (silkworm material)"
+    ]
+   },
+   {
+    "key": "extent",
+    "label": "Size",
+    "property": "dcterms:extent",
+    "values": [
+     "Algemeen: 70 × 120cm (27 9/16 × 47 1/4in.)"
+    ]
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "property": "dcterms:description",
+    "values": [
+     "Jurk in ecru zijdeweefsel, kuitlang, volledig voorzien van paillettenborduurwerk met het iridiserende effect van parels. Brede boothals; niet gesloten langs de zijnaden, behalve door links drie haken en ogen en korte opgezette stroken van dezelfde geborduurde stof op de heupen aan voor en achterzijde, die het rechte model tailleren. De grotendeels rechtvallende panden zijn volledig bedekt met machinale stiksels (binnenzijde: metaaldraad) in een organisch, oosters geïnspireerd motief van krullen en ogen."
+    ],
+    "en": [
+     "Calf-length dress in ecru woven silk, covered all over in sequin embroidery with the iridescent effect of pearls."
+    ],
+    "enNote": "our translation of the first sentence only"
+   }
+  ]
+ },
+ "ST652/1": {
+  "uri": "http://data.momu.be/ark:34546/mqbzrj",
+  "fields": [
+   {
+    "key": "date",
+    "label": "Date",
+    "property": "dcterms:date",
+    "values": [
+     "1940-1945"
+    ]
+   },
+   {
+    "key": "subject",
+    "label": "Type of object",
+    "property": "dcterms:subject",
+    "values": [
+     "jurk",
+     "dresses"
+    ]
+   },
+   {
+    "key": "medium",
+    "label": "Materials and techniques",
+    "property": "dcterms:medium",
+    "values": [
+     "drukprocedé",
+     "katoen (vezel)",
+     "kunststof",
+     "kunstzijde"
+    ],
+    "en": [
+     "printing (process)",
+     "cotton (fiber)",
+     "manmade material",
+     "artificial silk"
+    ]
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "property": "dcterms:description",
+    "values": [
+     "Doorknoopjurk van bedrukte katoen, blauw met witte en rode stipjes. Stelselmatig gerepareerd met geruite stof. Twee opgestikte zakken onder taillehoogte zijn afgebiesd met een rood weefsel, net als de mouwen. In een zak op borsthoogte steekt optisch een rood pochet. Rechter revers langs de rand gedecoreerd met drie rode biezen. Aan de achterkant is in het midden een ceintuurtje van stof bevestigd, die aan de voorkant vastgestrikt kan worden voor de markering van de taille."
+    ],
+    "en": [
+     "Button-through dress of printed cotton, blue with small white and red dots."
+    ],
+    "enNote": "our translation of the first sentence only"
+   }
+  ]
+ },
+ "ST673/1-2": {
+  "uri": "http://data.momu.be/item/id/m5x6jp",
+  "fields": [
+   {
+    "key": "date",
+    "label": "Date",
+    "property": "dcterms:date",
+    "values": [
+     "1880-1900"
+    ]
+   },
+   {
+    "key": "subject",
+    "label": "Type of object",
+    "property": "dcterms:subject",
+    "values": [
+     "combinaison",
+     "combinations"
+    ]
+   },
+   {
+    "key": "medium",
+    "label": "Materials and techniques",
+    "property": "dcterms:medium",
+    "values": [
+     "been",
+     "borduren",
+     "breien",
+     "katoen (vezel)",
+     "parelmoer"
+    ],
+    "en": [
+     "bone (material)",
+     "embroidering",
+     "knitting",
+     "cotton (fiber)",
+     "mother of pearl"
+    ]
+   },
+   {
+    "key": "extent",
+    "label": "Size",
+    "property": "dcterms:extent",
+    "values": [
+     "Algemeen: 99cm (39in.)"
+    ]
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "property": "dcterms:description",
+    "values": [
+     "Combinaison in wit katoen, bestaande uit een baleinloos onderlijf waaraan met knopen bevestigd een lange open onderbroek. Onderlijf: halslijn in V-vorm voorzien van stroken broderie anglaise; schouderpas die tot de borst reikt, in broderie anglaise, in de vorm van een U, met in ruches aangezette rand van broderie anglaise. Deze rand is ook gemonteerd rondom het armsgat. Getailleerd; nepen in de taille zijn aan de binnenzijde opengestreken en doorgestikt voor stevigdheid. Sluit middenvoor met parelmoeren knopen. Rondom de taille ecrukleurige benen knopen voor de bevestiging van de hierover gedragen kleding (mogelijk een onderrok). De onderbroek is aan de voorzijde open vanaf de taille, en aan de achterkant geheel open; de twee zijden worden gesloten overheen dezelfde knoop. Aan de achterkant is er ruimte gecreëerd door de stof horizontaal te rimpelen. De onderbroek kan op twee niveaus aan het lijf vastgemaakt worden, met dezelfde benen knopen. Te gebruiken tijdens het sporten (bv. tennis, croquet, badminton of boogschieten)."
+    ],
+    "en": [
+     "Combination in white cotton: a bodice without boning, with long open drawers buttoned to it."
+    ],
+    "enNote": "our translation of the first sentence only"
+   }
+  ]
+ },
+ "ST81190": {
+  "uri": "http://data.momu.be/ark:34546/m2v73p",
+  "fields": [
+   {
+    "key": "title",
+    "label": "Title",
+    "property": "dcterms:title",
+    "values": [
+     "BLESSED"
+    ]
+   },
+   {
+    "key": "creator",
+    "label": "Maker",
+    "property": "dcterms:creator",
+    "values": [
+     "A.F.Vandevorst"
+    ]
+   },
+   {
+    "key": "date",
+    "label": "Date",
+    "property": "dcterms:date",
+    "values": [
+     "herfst-winter 1998-1999"
+    ],
+    "en": [
+     "autumn-winter 1998-1999"
+    ]
+   },
+   {
+    "key": "subject",
+    "label": "Type of object",
+    "property": "dcterms:subject",
+    "values": [
+     "jas",
+     "coats"
+    ]
+   },
+   {
+    "key": "medium",
+    "label": "Materials and techniques",
+    "property": "dcterms:medium",
+    "values": [
+     "katoen (vezel)",
+     "kunstvezel",
+     "metaal",
+     "wol",
+     "vilt"
+    ],
+    "en": [
+     "cotton (fiber)",
+     "synthetic fiber",
+     "metal",
+     "wool (hair material)",
+     "felt"
+    ]
+   },
+   {
+    "key": "extent",
+    "label": "Size",
+    "property": "dcterms:extent",
+    "values": [
+     "Algemeen: 74cm (29 1/8in.)"
+    ]
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "property": "dcterms:description",
+    "values": [
+     "Getailleerde jas in grijs wolweefsel met opstaande kraag. De jas is opgebouwd uit losse onderdelen: mouwstukken, een schoot, schouderstukken en borstlappen, elk gevoerd met bruin katoen en aan elkaar vastgehecht met messingkleurige rivetten. Ook de nepen en zijnaden zijn niet gestikt, maar met rivetten vastgemaakt. De mouwen zijn gevoerd met 100% polyester en zijn open aan de oksels. De jas sluit middenvoor met negen messingkleurige drukknopen. Op de achterzijde ter hoogte van de hals is een rood kruis gestikt."
+    ],
+    "en": [
+     "Fitted coat in grey woven wool with a stand-up collar."
+    ],
+    "enNote": "our translation of the first sentence only"
+   },
+   {
+    "key": "shortDescription",
+    "label": "About the maker or collection",
+    "property": "bibo:shortDescription",
+    "values": [
+     "An Vandevorst en Filip Arickx leren elkaar in 1987 kennen op de modeafdeling van de Academie voor Schone Kunsten in Antwerpen. Ze worden er vrienden en geliefden. In 1998 starten ze samen een modelabel met een rood kruis als logo. Daarmee verwijzen ze naar een gedeelde passie voor de esthetiek van oude ziekenhuizen, die ze, los van elkaar, tijdens hun jeugdjaren ontwikkelden en die een belangrijke rol zou spelen in hun tweede show (lente-zomer 1999). De eerste collecties bevatten meteen de basisingrediënten die hun beeldtaal jarenlang definieert: een fascinatie voor de Duitse kunstenaar Joseph Beuys, religie, paarden en hun uitrusting, uniformen, rivetten, lingerie en fetisjschoenen. Deze jas maakt deel uit van hun eerste collectie. In 2020 besluiten ze hun label stop te zetten."
+    ]
+   }
+  ]
+ },
+ "ST80998": {
+  "uri": "http://data.momu.be/ark:34546/mp5hw9",
+  "fields": [
+   {
+    "key": "date",
+    "label": "Date",
+    "property": "dcterms:date",
+    "values": [
+     "1900-1925"
+    ]
+   },
+   {
+    "key": "place",
+    "label": "Place",
+    "property": "dcterms:spatial",
+    "values": [
+     "Palestina"
+    ],
+    "en": [
+     "Palestine"
+    ]
+   },
+   {
+    "key": "subject",
+    "label": "Type of object",
+    "property": "dcterms:subject",
+    "values": [
+     "japon",
+     "dresses"
+    ]
+   },
+   {
+    "key": "medium",
+    "label": "Materials and techniques",
+    "property": "dcterms:medium",
+    "values": [
+     "appliqueren",
+     "borduren",
+     "drukprocedé",
+     "fluweel",
+     "katoen (vezel)",
+     "machinaal",
+     "naaien",
+     "zijde (vezel)"
+    ],
+    "en": [
+     "appliqué (technique)",
+     "embroidering",
+     "printing (process)",
+     "velvet",
+     "cotton (fiber)",
+     "machine-made",
+     "silk (silkworm material)"
+    ]
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "property": "dcterms:description",
+    "values": [
+     "Bruidskaftan in bordeaux, rood, groen en zwart gestreepte fluweel met ronde halsuitsnijding, uitlopend in een punt en met lange puntmouwen. De zijkanten, bovenkanten van de mouwen en het borstvlak van de kaftan zijn versierd met veelkleurig borduurwerk van opgenaaide koorden en metaaldraad op oranje, lichtbruine en groene ondergronden. De geborduurde zones op de mouwen zijn gevoerd met een roze katoen met abstracte motieven."
+    ],
+    "en": [
+     "Bridal kaftan in burgundy, red, green and black striped velvet, with a round neckline ending in a point and long pointed sleeves."
+    ],
+    "enNote": "our translation of the first sentence only"
+   }
+  ]
+ },
+ "ST2431/1-4": {
+  "uri": "http://data.momu.be/item/id/m7h4cm",
+  "fields": [
+   {
+    "key": "date",
+    "label": "Date",
+    "property": "dcterms:date",
+    "values": [
+     "1870-1900"
+    ]
+   },
+   {
+    "key": "subject",
+    "label": "Type of object",
+    "property": "dcterms:subject",
+    "values": [
+     "uniform",
+     "uniforms"
+    ]
+   },
+   {
+    "key": "medium",
+    "label": "Materials and techniques",
+    "property": "dcterms:medium",
+    "values": [
+     "cannetille",
+     "katoen (vezel)",
+     "leder",
+     "metaal",
+     "passement",
+     "satijn (weefsel)",
+     "weven",
+     "wol"
+    ],
+    "en": [
+     "cotton (fiber)",
+     "leather",
+     "metal",
+     "satin",
+     "weaving",
+     "wool (hair material)"
+    ]
+   },
+   {
+    "key": "extent",
+    "label": "Size",
+    "property": "dcterms:extent",
+    "values": [
+     "Algemeen (Kepie): 15cm (5 7/8in.)  Algemeen (Jas): 71cm (27 15/16in.)  Algemeen (Broek): 112,5cm (44 5/16in.)"
+    ]
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "property": "dcterms:description",
+    "values": [
+     "Militair uniform voor een man, in lichtblauwe en rode wol, van een luitenant van de Nationale Garde, lid van het 9e of 18e regiment van de jagers te paard (Chasseurs à cheval, Frankrijk).  1. Jas, heuplang, in blauw laken (wol), wijd uitlopend, met een sluiting van donkergrijze, bolle, metallic knopen middenvoor (gemerkt CP Perfectionné Paris). Onder op de mouwen voorzien van een groot motief in passementerie in metaal, groot motief in zwarte passementerie op beide kanten van het voorpand (brandebourgs, die ook de sluiting vormen), epauletten in zwarte passementerie. Opstaande kraag in rood laken voorzien van decoratie in cannetille. Aan de achterzijde op de coupenaden aangebrachte zwarte passementerie. Kleine splitten in de zijnaden waardoorheen een kleine hand zou passen. Gevoerd met stevig zwart katoenweefsel; bijna het volledige voorpand werd ter versteviging doorstikt met oranje garen. Hand- en machinaal naaiwerk. Binnenin de kraag is een 20e-eeuwse witte losse opstaande kraag bevestigd (gemerkt DURAND, ST2431/4).  2. Broek in rode wol, met lange rechte pijpen, afgewerkt met een streep in blauwe wol aan de buitenkant. Binnenin de pijpen onderaan aan weerszijden een metalen knoop op een stukje leder. Lange gulpsluiting van goudkleurige knopen op lichtpaars geglansd katoen. Gouden knopen op de tailleband waarin de tekst 18e CHASSEURS TOUJAS, van het 18e regiment. Horizontaal riempje achter boven het zitvlak, met gesp. Handwerk en machinaal naaiwerk.  3. Pet, kepie, in rode en lichtblauwe wol, met een hoogte van 15 centimeter, gedecoreerd met metalen passement en cannetille en voorzien van een zwarte klep in leder."
+    ],
+    "en": [
+     "Military uniform for a man, in light blue and red wool, of a lieutenant of the National Guard, in the 9th or 18th regiment of mounted chasseurs (Chasseurs à cheval, France)."
+    ],
+    "enNote": "our translation of the first sentence only"
+   }
+  ]
+ },
+ "ST2432/1-2": {
+  "uri": "http://data.momu.be/item/id/m3txj3",
+  "fields": [
+   {
+    "key": "creator",
+    "label": "Maker",
+    "property": "dcterms:creator",
+    "values": [
+     "Keizer Napoleon I"
+    ]
+   },
+   {
+    "key": "date",
+    "label": "Date",
+    "property": "dcterms:date",
+    "values": [
+     "1800-1940"
+    ]
+   },
+   {
+    "key": "subject",
+    "label": "Type of object",
+    "property": "dcterms:subject",
+    "values": [
+     "uniform",
+     "uniforms"
+    ]
+   },
+   {
+    "key": "medium",
+    "label": "Materials and techniques",
+    "property": "dcterms:medium",
+    "values": [
+     "cannetille",
+     "katoen (vezel)",
+     "leder",
+     "metaal",
+     "passement",
+     "weven",
+     "wol"
+    ],
+    "en": [
+     "cotton (fiber)",
+     "leather",
+     "metal",
+     "passementerie (material)",
+     "weaving",
+     "wool (hair material)"
+    ]
+   },
+   {
+    "key": "extent",
+    "label": "Size",
+    "property": "dcterms:extent",
+    "values": [
+     "Algemeen (Jas): 102cm (40 3/16in.)  Algemeen (Broek): 108cm (42 1/2in.)"
+    ]
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "property": "dcterms:description",
+    "values": [
+     "Kostuum in de vorm van een militair uniform voor een man, lid van de Nationale Garde, bestaande uit een originele jas en een broek die later werd gemaakt; beide werden aangepast.  1. Jas met slippen in donkerblauw laken (wol), hoge opstaande kraag in rood laken, epauletten met cannetille en goudkleurig metaalweefsel, aangestikte manchetten in rood laken en slippen gevoerd in rood laken. De punten van elk van de slippen werden van binnen naar buiten gekeerd en aan elkaar verbonden, waardoor er een rood detail zichtbaar is onderaan de blauwe slippen. Op de slippen bevindt zicht een opgestikte patch in de vorm van een grote verticale steekzak die aan de binnenkant uitloopt in drie punten waarop zich drie witmetalen knopen bevinden, voorzien van de tekst 'Garde Nationale'. Uitgevoerd in handwerk en machinaal naaiwerk. Knoopsluiting vooraan met haak- en oogsluiting waarvan de haakjes grotendeels zijn verdwenen; aan de buitenkant vervangen door goudkleurige, nieuwe knopen in dezelfde stijl (knopen met embleem van de Keizerlijke Garde, datering mogelijk 1980-2000).  2. Bandplooibroek uit de jaren 1910-1940 in donkerblauw laken, twee gepaspelde zakken op het zitvlak voorzien van een kunststof knoop, gulpsluiting met kunststof knopen waarvan de knoopsgaten met de hand zijn afgewerkt, tailleband met broeklussen, horlogezakje, binnenwerk in grijs katoenweefsel, lange pijpen waaraan aan de buitenzijde twee banen in rode wol, aan de binnenzijde onderaan aan weerszijden voorzien van twee knopen op een stukje leder. Aan de achterkant van de broek werd een inkeping gemaakt in de tailleband en de bovenzijde van de achterkant. Hier werd een rijgsluiting ingezet met een rode veter uit de jaren 1970-1990. Zowel machinaal als met de hand vervaardigd."
+    ],
+    "en": [
+     "Costume in the form of a military uniform for a man, a member of the National Guard: an original coat and trousers made later, both altered."
+    ],
+    "enNote": "our translation of the first sentence only"
+   }
+  ]
+ },
+ "ST671": {
+  "uri": "http://data.momu.be/item/id/mfj6zb",
+  "fields": [
+   {
+    "key": "creator",
+    "label": "Maker",
+    "property": "dcterms:creator",
+    "values": [
+     "Mme Guédon Deschamps"
+    ]
+   },
+   {
+    "key": "date",
+    "label": "Date",
+    "property": "dcterms:date",
+    "values": [
+     "1900-1915"
+    ]
+   },
+   {
+    "key": "subject",
+    "label": "Type of object",
+    "property": "dcterms:subject",
+    "values": [
+     "japon",
+     "dresses"
+    ]
+   },
+   {
+    "key": "medium",
+    "label": "Materials and techniques",
+    "property": "dcterms:medium",
+    "values": [
+     "borduren",
+     "katoen (vezel)",
+     "machinale kant",
+     "metaal",
+     "weven",
+     "zijde (vezel)"
+    ],
+    "en": [
+     "embroidering",
+     "cotton (fiber)",
+     "machine lace",
+     "metal",
+     "weaving",
+     "silk (silkworm material)"
+    ]
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "property": "dcterms:description",
+    "values": [
+     "Lange japon, wandeljapon, in beige zijderips. De japon heeft een beige zijden onderjurk met een diepe, ronde halsuitsnijding en halflange mouwen. Het lijfje en de rok zijn apart gesneden en in de taille aan elkaar gezet. Het lijfje heeft een tailleband met daarop de bedrukking 'Mme Guédon Descham(?) 83, Boulevard Magenta, Paris'. Middenvoor is in het lijfje een balein genaaid. In de halsuitsnijding is een kraag gezet in beige machinale kant, een imitatie van Rijselse kloskant. Het opstaande deel van de kraag heeft baleinen. De onderkant van de mouwen is in dezelfde machinale kant. De mouwboorden zijn gegarneerd met een strook beige machinale kant, een imitatie van stropkant, en bijkomend afgeboord met veterborduurwerk. Het onderste deel van de rok is uitgevoerd in dezelfde zijderips als de japon, is in plooien aan de onderjurk gezet en komt onder de japon uit. De onderjurk is bij de middel aan de japon vastgenaaid.  Net als bij de onderjurk zijn het lijfje en de rok van de japon afzonderlijk gesneden en in de taille aan elkaar genaaid. Het lijfje heeft een ronde halsuitsnijding en korte mouwen, ze zijn afgeboord met dezelfde machinale stropkant en hetzelfde veterborduurwerk als bij de onderjurk. Een strook in dezelfde kant en borduurwerk loopt links vooraan van bij de hals tot onderaan de japon waar het de rok verder rondom afboordt. Aan beide zijkanten hangt de rokzoom lager dan middenvoor en middenachter.   De japon en de onderjurk sluiten beide middenachter met een rij haken en knopen tot voorbij het zitvlak. De transparante stroken machinale kant in het lijfje van japon en onderjurk zijn gedubbeld met beige zijdemousseline."
+    ],
+    "en": [
+     "Long gown, a walking gown, in beige silk rep."
+    ],
+    "enNote": "our translation of the first sentence only"
+   }
+  ]
+ },
+ "ST2203": {
+  "uri": "http://data.momu.be/ark:34546/mh70xw",
+  "fields": [
+   {
+    "key": "date",
+    "label": "Date",
+    "property": "dcterms:date",
+    "values": [
+     "1937-1948"
+    ]
+   },
+   {
+    "key": "subject",
+    "label": "Type of object",
+    "property": "dcterms:subject",
+    "values": [
+     "jurk",
+     "dresses"
+    ]
+   },
+   {
+    "key": "medium",
+    "label": "Materials and techniques",
+    "property": "dcterms:medium",
+    "values": [
+     "fluweel",
+     "metaal",
+     "satijnbinding",
+     "zijde (vezel)"
+    ],
+    "en": [
+     "velvet",
+     "metal",
+     "satin weave",
+     "silk (silkworm material)"
+    ]
+   },
+   {
+    "key": "extent",
+    "label": "Size",
+    "property": "dcterms:extent",
+    "values": [
+     "hoogte: 119 cm schouderbreedte: 35 cm tailleomvang: 64 cm"
+    ]
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "property": "dcterms:description",
+    "values": [
+     "Jurk van zwart zijden satijn. Nauwsluitend model met diepe V-hals die afgezet is met een band van zwart zijden fluweel. Grote schoudervullingen van witte, opgevulde katoen. Aan de voorkant aangeknipte, rechte lange mouwen met een manchet sluitend met vijf stofknopen en lusjes. De mouwen zijn aangerimpeld op borsthoogte. Spie aan onderzijde armstgat. De jurk is langs middenvoor- en middenachterlijn sterk ingerimpeld en gedrapeerd. Twee gedrapeerde zakken op heuphoogte die afgezet zijn met een band zwart fluweel en doorlopen tot aan de zij. Stolpplooi middenvoor vanaf ritssluiting naar zoom. Sluitend middenvoor door middel van een zwarte metalen rits (20cm) vanaf punt V-hals tot op taillehoogte.",
+     "Dress in black silk satin. Close-fitting model with deep V-neck trimmed with a band of black silk velvet. Large shoulder pads in white, padded cotton. Straight long sleeves with a cuff closed with five fabric buttons and loops. The sleeves are gathered at chest height. Gusset at the bottom of the armhole. The dress is heavily gathered and draped along the centre front and centre back seams. Two draped pockets at hip height trimmed with a band of black velvet and extending to the side. Box pleat at centre front from zip to hem. Closing at centre front with a black metal zip (20cm) from point of V-neck to waist height."
+    ],
+    "en": [
+     "Dress of black silk satin."
+    ],
+    "enNote": "our translation of the first sentence only"
+   },
+   {
+    "key": "shortDescription",
+    "label": "About the maker or collection",
+    "property": "bibo:shortDescription",
+    "values": [
+     "Niet verstopt in zijnaad of op de rug, maar middenvoor en zichtbaar aanwezig: een lange metalen rits. Deze sluitingsvorm heeft dan een hele ontwikkeling doorgemaakt om zo’n prominente plek in te nemen als in deze zwarte jurk uit de periode 1937-1948. \r\n\r\nDe eerste voorloper van de rits werd in 1893 in de Verenigde Staten gepatenteerd, waarna dit ontwerp gedurende de eerste twee decennia van de twintigste eeuw verder zal verfijnd worden. Het zal echter nog even duren vooraleer de rits op grote schaal zal gebruikt worden. \r\n\r\nEen vroege toepassing van ritsen is militair: tijdens de Eerste Wereldoorlog maakt de rits deel uit van de uitrusting van het Amerikaanse leger. In de tweede helft van de jaren ‘20 worden ritsen vaker functioneel toegepast in kinder- en herenkleding. Dameskleding blijft achter, al is de rits wel aanwezig in accessoires als handtassen en overschoenen.  \r\n\r\nDit verandert als de Engels-Amerikaanse couturier Charles James in 1929 zijn ‘Taxi’ jurk ontwerpt. Essentieel onderdeel van dit ontwerp is de lange rits die zichtbaar in een spiraal rondom het lichaam is ingezet. Ook modeontwerpster Elsa Schiaparelli gebruikt voor avondjurken uit haar wintercollectie voor 1935-1936 gekleurde ritsen van het dan nieuwe en zeer modieuze materiaal plastic. De ritssluiting is voortaan niet louter functioneel, maar mag ook decoratief en prominent aanwezig rondom halslijnen, op schouders en op heupen.  \r\n\r\nHoewel de kleur van de metalen ritssluiting haast wegvalt tegen het gefronselde zwarte zijdesatijn van deze jurk, is deze, in de geest van James’ en Schiaparelli’s modeontwerpen, niet enkel functioneel maar een ware blikvanger.",
+     "Not hidden in the side seam or at the back, but visibly present down the front of the dress: a long metal zipper. This closure has undergone quite the development to take such a prominent place, as in this black dress from the period 1937-1948.\r\n\r\nThe first precursor of the zipper was patented in the United States in 1893. After this, the design would be further refined during the first two decades of the twentieth century. However, it would take some time before the zipper would be used on a large scale.\r\n\r\nAn early application of zippers was for military use: during the First World War, the zipper was part of the kit of the American army. In the second half of the 1920s, zippers were more often used functionally in children's and men's clothing. Women's clothing lagged behind, although the zipper was present in accessories such as handbags and overshoes.\r\n\r\nThis changed when the English-American couturier Charles James designed his 'Taxi' dress in 1929. An essential part of this design is the long zipper that is visibly inserted in a spiral around the body. Fashion designer Elsa Schiaparelli also used coloured zippers of the then new and fashionable material, plastic, on evening dresses from her winter collection for 1935-1936. The zipper is now not only functional, but may also be decorative and prominently present around necklines, on shoulders and on hips.\r\n\r\nAlthough the colour of the metal zipper almost disappears against the wrinkled black silk satin of this dress, it is, in the spirit of James’ and Schiaparelli’s fashion designs, not only functional but a real eye-catcher."
+    ]
+   }
+  ]
+ }
+}
