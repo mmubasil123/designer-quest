@@ -11,7 +11,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 - Why: feedback 2026-11-21, make a great demo video rather than perfect the meshes.
 - Decision: Hassan picked a standalone teaser (16:9 for the projector, no voice, about 45 s, result first) and
   dropped Picsart AI clips; facts only from the collection data (D3), so scene 6 says "the fabric of" the Vandevorst
-  coat, a study piece. Videos, captures and copied assets stay git-ignored. Not shown on the venue projector yet.
+  coat, a study piece, and scene 7 says "on MoMu's 3D model" (Up close shows the CLO model since H18). Videos, captures and copied assets stay git-ignored. Not shown on the venue projector yet.
 ## MoMu logo at momu.be's own shape (2026-11-21, branch hassan/H10-logo-ratio)
 - What: every MoMu logo now has the 1.786:1 shape momu.be shows in its header (measured 718 x 402 px): the large logo's
   polygons, unchanged, stretched vertically by 299/120. `assets/brand/momu-logo.svg` (viewBox 0 0 534 299), the favicon,

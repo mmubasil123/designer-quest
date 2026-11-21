@@ -9,7 +9,7 @@ and dropped (Hassan, 2026-11-21).
 **File:** `presentation/reel/reels/momu-teaser/momu-teaser.mp4` (git-ignored, about 4 MB; H.264 + AAC, plays offline
 in QuickTime, PowerPoint and any browser). Rebuild it with the commands in `presentation/reel/README.md`.
 
-## Script (approved 2026-11-21; scene 6 corrected at the storyboard)
+## Script (approved 2026-11-21; scenes 6 and 7 corrected with Hassan)
 
 | # | Time | Caption | On screen | Source of every fact |
 |---|---|---|---|---|
@@ -19,12 +19,13 @@ in QuickTime, PowerPoint and any browser). Rebuild it with the commands in `pres
 | 4 | 13.8 | Guess when it was made, and you win it. | Guess 1900, "Earlier", 1760, "You won it! Made 1750 to 1780" | ST503 year |
 | 5 | 17.8 | Every piece you win goes into your wardrobe. | Wardrobe with the jak marked New, "7 in your wardrobe", then the jak on the form | the app |
 | 6 | 21.3 | Dress the form across the centuries: a 1979 furisode kimono, the fabric of a 1998 Vandevorst coat. | A timeline drawing itself, 1750, 1979, 1998, 2005; the kimono look | ST80881, ST81190, ST2407/1-2 |
-| 7 | 28.4 | Look closer, and find the metal rivets the record describes, on a 3D scan. | Up close on the coat (MoMu's CLO model since H18), zoom to a rivet, "Found 1 of 3: Rivets instead of seams", the story's sentence | `narration.json` ST81190 (verbatim) |
+| 7 | 28.4 | Look closer, and find the metal rivets the record describes, on MoMu's 3D model. | Up close on the coat (MoMu's CLO model since H18), zoom to a rivet, "Found 1 of 3: Rivets instead of seams", the story's sentence | `narration.json` ST81190 (verbatim) |
 | 8 | 34.3 | Your look spans 255 years, and every share credits MoMu. | 255 counting up; Noor's share card, ring on its MoMu masthead | the app's share card (H12) |
 | 9 | 38.6 | The rest of the collection is waiting for you. | MoMu logo, second-skin-ten.vercel.app, @momuantwerp / #momuantwerp | the deck's closing slide |
 
 Scene 6 first said "a 1998 Vandevorst coat" as if worn on the form; the coat is a study piece whose fabric you win,
-so the caption says "the fabric of".
+so the caption says "the fabric of". Scene 7 said "on a 3D scan"; since H18 Up close shows MoMu's CLO model of the
+coat, so it says "on MoMu's 3D model" (Hassan, 2026-11-22).
 
 ## Checks on the last render (2026-11-22)
 - Dead spots (nothing changes for over 1 s, frames every 0.5 s): the end card's 1.8 s hold, kept on purpose so the
@@ -36,9 +37,6 @@ so the caption says "the fabric of".
 
 ## Re-record after merges
 The screens were re-captured from `main` on 2026-11-22 after H10 (logo and masthead), H11, H12, H13 (poetic
-narration on the story sheet and share card), H15 and H18 (Up close shows MoMu's CLO model for the coat). Re-run
+narration and its audio, PR #46 and #57, on the story sheet and share card), H15 and H18 (Up close shows MoMu's CLO model for the coat). Re-run
 `node scripts/capture.mjs`, then render, after any change to the story sheet, the Won card, the wardrobe, Up close or
 the share card (scenes 3, 4, 5, 7, 8).
-
-**Open question for Hassan:** scene 7 still says "on a 3D scan", but since H18 Up close shows MoMu's CLO model of the
-coat, not a scan. Proposed caption: "Look closer, and find the metal rivets the record describes, on MoMu's 3D model."
