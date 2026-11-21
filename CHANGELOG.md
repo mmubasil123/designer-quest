@@ -5,7 +5,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 ## 2026-11-21
 
 ### Working rule: PRs need no review (branch hassan/drop-review-rule)
-- **What:** `AGENTS.md` no longer says the other person reviews and merges a PR; the author merges it. Claims and `HANDOVER.md` updates may still go straight to `main`.
+- **What:** `AGENTS.md` no longer says the other person reviews and merges a PR. No review is needed, but a PR is merged only on its developer's say, never automatically; agents ask first. Claims and `HANDOVER.md` updates may still go straight to `main`.
 - **Why:** Hassan: nobody needs to review. Mubasil still deploys alone (unchanged).
 
 ### H5 Preload the scanned piece's 3D file on card scan (branch hassan/nfc-preload)
