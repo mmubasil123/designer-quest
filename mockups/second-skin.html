@@ -343,7 +343,7 @@ const PIECES = Object.fromEntries(manifest.pieces.map(p => [p.id, {
   ...p.fit, slot: p.slot, wear: p.wear ?? null, name: p.name, year: p.year, locked: p.locked, room: p.locked,   // room: has a sticker in the museum, won there
   // a piece without a photo must not take the app down
   img: p.source?.imgSha ? IMG(p.source.imgSha) : `assets/swatch/${p.id.replace("/", "_")}.jpg`, glb: p.assets.glb?.path ?? null, kind: p.assets.glb?.kind ?? null,
-  splat: p.assets.splat?.path ?? null, details: p.details?.length ?? 0,
+  splat: p.assets.splat?.path ?? null, details: p.details?.length ?? 0, clo: p.assets.clo?.path ?? null,
 }]));
 // Splat pieces (study slot) are studied on up-close.html: finding every detail there unlocks their fabric, and a piece with
 // `wear` and a GLB (a mesh made from its own scan) is then worn in that slot as well
@@ -370,6 +370,13 @@ if (PIECES[scanned]?.splat && PIECES[scanned].locked) {   // before the Stage bo
   await settled();   // H6: the story's history step must be gone before this entry is rewritten
   history.replaceState(null, "", location.pathname);   // H6: the Stage stays under Up close, so back lands on it, not outside the app
   await go(`up-close.html?id=${encodeURIComponent(scanned)}`);
+  await new Promise(() => {});
+}
+if (PIECES[scanned]?.clo && !PIECES[scanned].glb) {   // a CLO garment is worn on the team avatar it was draped on (outfit.html), never on the dress form (D5)
+  await showScan({ story, quiz, id: scanned, next: "See it on the avatar" });
+  await settled();
+  history.replaceState(null, "", location.pathname);   // the Stage stays under the outfit page, so back lands on it
+  await go(`outfit.html?card=${encodeURIComponent(scanned)}`);
   await new Promise(() => {});
 }
 const SLOTS = ["top", "bottom", "feet", "full"];

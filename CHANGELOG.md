@@ -2,6 +2,22 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## the team's cycling outfit on the avatar (2026-11-21, branch hassan/team-models)
+- What: the team's CLO blouse (ST81114AB) and trousers (ST81116) are worn on the team avatar on a new page,
+  `mockups/outfit.html` (OutfitRig, toggles per piece, front / side / back). Scanning either card shows its story, then
+  "See it on the avatar" opens the page with that piece on; before, both cards said "This sticker isn't in the app yet".
+  Assets in `assets/clo/`: `ST81114AB.glb` (3.5 MB -> 1.43 MB), `ST81116.glb` (3.3 MB -> 0.72 MB) and
+  `ST81114AB_in_ST81116.glb` (1.33 MB, the blouse with its tail cut below the waistband, shown when both are worn).
+  Built with `clo/optimise_glb.mjs` and `clo/tuck_glb.mjs` (byte-identical on a rerun). `avatar_web.glb` is unchanged:
+  the team's `avatar.glb` is the same body (all 94 shared bones at the same positions).
+- Why: the team dropped its own CLO builds; the team's models are the source. His two files come from one drape with the
+  blouse tucked in, but worn together in the app the hidden blouse tail showed through the trousers.
+- Decision: static GLBs, nothing simulated in the browser. Layering is solved by a variant with the hidden part removed
+  (`assets.clo.variants`), not by moving cloth, which tore the meshes. The trousers' colour texture is plain black, so
+  a soft sheen (KHR_materials_sheen) is baked in to let the folds read; replace it when the team exports the denim maps.
+  Schema: `assets.clo` is back (removed with the coat reconstruction) with an optional `variants` list. The coat is not
+  part of this. MoMu's own project `ST81114ab.zprj` holds the same look on a shorter, arms-out mannequin and does not
+  fit the team avatar as exported.
 ## Storytelling backgrounds behind every 3D view (2026-11-21, H7, branch hassan/H7-story-backgrounds)
 - **What:** the Stage, the full-screen 3D view and Up close no longer show the piece on white or grey. Each stands in
   one of six period rooms (`mockups/assets/scenes/*.svg`): a candlelit salon (to 1799), a gaslit iron-and-glass arcade

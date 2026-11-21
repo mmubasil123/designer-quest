@@ -26,6 +26,7 @@ scan pieces and 3 photo-only pieces are next. Checked headless at 390 px; not on
 - Serve: `cd mockups && python3 -m http.server 8765 --bind 127.0.0.1`; console handle `window.secondSkin`.
 
 ## A7 Archive vs Reconstruction: cut (2026-11-21)
+- the team's cycling outfit (branch `hassan/team-models`): blouse ST81114AB and trousers ST81116 on the team avatar at `outfit.html`, reached from their card scans (story, then "See it on the avatar"). To add another of the team's pieces: run `clo/optimise_glb.mjs` on his GLB, put it in `assets/clo/`, add `assets.clo` to its `pieces.json` entry (same `avatar`); if it overlaps a piece already there, make a cut variant with `clo/tuck_glb.mjs` and list it under `variants`. Open: the outfit page is not in the wardrobe, only behind the two cards; the trousers' denim texture is plain black (sheen stands in).
 - Removed: Up close shows only the splat again for ST81190 and every study piece (our CLO coat changed the fabric, so it misrepresented the piece). `reconstruction.js` and `assets/clo/ST81190.glb` are in `_to_delete/`. Kept for the team's models (`hassan/team-models`): `clo/outfit.js`, `assets/clo/avatar_web.glb`. The team no longer makes its own CLO garments.
 
 ## H3 Story screen + narration (hassan, merged PR #14; re-voiced on hassan/H3-narration-text)

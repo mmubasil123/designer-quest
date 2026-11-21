@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cycling outfit · Second Skin</title>
+<link rel="stylesheet" href="theme.css">
+<style>
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; }
+body { background: var(--paper); color: var(--ink); font: var(--t-body); display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
+button { font: inherit; color: inherit; background: none; border: 1px solid var(--ink); border-radius: 999px; padding: 10px 16px; min-height: 44px; cursor: pointer; }
+button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+header { padding: max(12px, env(safe-area-inset-top)) 16px 8px; display: flex; gap: 12px; align-items: baseline; justify-content: space-between; }
+h1 { font: var(--t-display); letter-spacing: var(--track-title); text-transform: uppercase; color: var(--title-ink); font-size: 22px; }
+#view { margin: 0 16px; background: var(--wall); border-radius: var(--r-pic); overflow: hidden; position: relative; touch-action: none; }
+#view canvas { display: block; width: 100%; height: 100%; }
+#status { position: absolute; inset: 0; display: grid; place-items: center; padding: 16px; text-align: center; color: var(--muted); }
+#status:empty { display: none; }
+footer { padding: 12px 16px max(16px, env(safe-area-inset-bottom)); display: grid; gap: 10px; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; }
+.credit { color: var(--muted); font-size: 12px; }
+</style>
+<script type="importmap">{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+} }</script>
+</head>
+<body>
+<header><h1 id="title">Cycling outfit</h1><a class="mono" href="second-skin.html">My look</a></header>
+<div id="view"><div id="status" role="status">Loading</div></div>
+<footer>
+  <div class="row" id="pieces" aria-label="Wear"></div>
+  <div class="row" id="views" aria-label="View"><button data-v="front">Front</button><button data-v="side">Side</button><button data-v="back">Back</button></div>
+  <p class="credit">Models by the team, sewn in CLO 3D and draped on the team avatar. Worn as exported (D5): nothing is fitted.</p>
+</footer>
+<script type="module">
+/* Look-first preview of the team's cycling outfit. Every wearable piece with `assets.clo` in pieces.json is worn on the avatar it
+   was draped on, through OutfitRig (slots bottom, top).
+   ?card=<id> starts with that piece on. Console handle: window.outfit = { rig, view(name) }. */
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { OutfitRig } from "./clo/outfit.js";
+
+const $ = s => document.querySelector(s), view = $("#view"), status = $("#status");
+const manifest = await (await fetch("pieces.json")).json();
+const clo = manifest.pieces.filter(p => p.assets.clo && p.slot !== "study");   // the team's models only; the study coat stays on Up close
+const avatarUrl = clo[0].assets.clo.avatar;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+view.append(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue("--wall").trim());
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+// soft studio light, as in CLO's viewport: filmic tone mapping keeps the white voile from burning out, a low fill
+// keeps folds readable on the black denim
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 0.8; scene.environmentIntensity = 0.55;
+scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8680, 0.15));
+const key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(-1.2, 2.2, 2); scene.add(key);
+const rim = new THREE.DirectionalLight(0xffffff, 1.2); rim.position.set(1.5, 1.5, -2); scene.add(rim);
+const camera = new THREE.PerspectiveCamera(30, 1, 0.05, 20);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enablePan = false; controls.enableDamping = true;
+controls.minDistance = 1.5; controls.maxDistance = 6;
+controls.target.set(0, 0.9, 0);
+
+const rig = new OutfitRig({ loader: new GLTFLoader(), cacheSize: 4 });
+scene.add(rig.root);
+for (const p of clo) rig.register({ id: p.id, slot: p.slot, glb: p.assets.clo.path, label: p.name,
+  variants: (p.assets.clo.variants || []).map(v => ({ over: v.over, glb: v.path })) });
+
+const FORM = 0xe4ddd2;
+const av = await rig.setAvatar(avatarUrl);
+av.traverse(o => { if (!o.isMesh) return; o.material = new THREE.MeshStandardMaterial({ color: FORM, roughness: 0.85 }); o.frustumCulled = false; });
+
+const views = { front: 0, side: Math.PI / 2, back: Math.PI };   // garments face +z
+function setView(name) {
+  const a = views[name], d = 3.4;
+  camera.position.set(Math.sin(a) * d, 1.1, Math.cos(a) * d); controls.update();
+}
+function size() {
+  const { clientWidth: w, clientHeight: h } = view; renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+new ResizeObserver(size).observe(view); size(); setView("front");
+renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+
+const btns = $("#pieces");
+for (const p of clo) {
+  const b = document.createElement("button");
+  b.dataset.id = p.id; b.setAttribute("aria-pressed", "false"); b.textContent = p.name;
+  btns.append(b);
+}
+btns.addEventListener("click", async e => {
+  const id = e.target.closest("button")?.dataset.id; if (!id) return;
+  try { await rig.toggle(id); } catch (err) { console.error(err); status.textContent = "A piece did not load"; }
+});
+rig.addEventListener("change", e => {
+  for (const b of btns.children) b.setAttribute("aria-pressed", String(e.detail.worn.includes(b.dataset.id)));
+});
+$("#views").addEventListener("click", e => { const v = e.target.closest("button")?.dataset.v; if (v) setView(v); });
+status.textContent = "";
+const card = new URLSearchParams(location.search).get("card");
+if (card && rig.items.has(card)) await rig.wear(card);
+window.outfit = { rig, view: setView, camera, controls, renderer, scene };
+</script>
+</body>
+</html>
