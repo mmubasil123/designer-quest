@@ -2,6 +2,12 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## MoMu logo on the outfit page (2026-11-21, H16, branch hassan/H16-outfit-logo)
+- What: `outfit.html` has the same header as Up close: back arrow, MoMu's logo (the H10 inline SVG), the piece id on
+  the right. The piece's name moved from the header to above the wear buttons. The back arrow replaces the "My look"
+  text link and still steps back to the Stage (`backTo`).
+- Why: after H10 the outfit page was the one screen without MoMu's logo.
+- Decision: copy Up close's header rather than invent one, so the two 3D pages read as siblings. No new tokens.
 ## Next piece to win on the Won card (2026-11-21, branch hassan/H15-next-piece, H15)
 - What: the Won card (`mockups/win.js`, `win.css`) ends on a "Next to win" row with the piece's photo, its name and
   how to win it. A study piece the visitor has already opened up close comes first ("You found 1 of 3 details. Open it
