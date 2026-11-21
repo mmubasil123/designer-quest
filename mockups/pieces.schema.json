@@ -146,48 +146,6 @@
                   "pattern": "^assets/splat/.+\\.sog$"
                 }
               }
-            },
-            "clo": {
-              "type": "object",
-              "description": "A7: CLO reconstruction of a study piece (D5: kind clo, origin avatar, metres). Shown on up-close.html beside the splat and worn on the avatar it was draped on; never fitted to the Stage dress form.",
-              "required": [
-                "path",
-                "avatar",
-                "kind",
-                "units",
-                "origin"
-              ],
-              "additionalProperties": false,
-              "properties": {
-                "path": {
-                  "type": "string",
-                  "pattern": "^assets/clo/.+\\.glb$"
-                },
-                "avatar": {
-                  "type": "string",
-                  "pattern": "^assets/clo/.+\\.glb$"
-                },
-                "kind": {
-                  "const": "clo"
-                },
-                "units": {
-                  "const": "m"
-                },
-                "origin": {
-                  "const": "avatar"
-                },
-                "onScan": {
-                  "description": "Where the garment's lowest and highest points sit on the splat, as fractions of the splat's bounding-box height (0 bottom, 1 top), read off up-close.html. Used only to overlay the reconstruction on the scan for Compare.",
-                  "type": "array",
-                  "items": {
-                    "type": "number",
-                    "minimum": 0,
-                    "maximum": 1
-                  },
-                  "minItems": 2,
-                  "maxItems": 2
-                }
-              }
             }
           }
         },

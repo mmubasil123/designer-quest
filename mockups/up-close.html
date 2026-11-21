@@ -119,8 +119,7 @@ li.found .fact { grid-template-rows: 1fr; }
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { SparkRenderer, SplatMesh } from "@sparkjsdev/spark";
-import { createReconstruction } from "./reconstruction.js";
-import { backTo } from "./nav.js";   // H6: back gesture closes layers; ← steps back to the Stage instead of stacking a new page   // A7: Archive vs Reconstruction, only for pieces with assets.clo
+import { backTo } from "./nav.js";   // H6: back gesture closes layers; ← steps back to the Stage instead of stacking a new page
 
 const FOUND_KEY = "secondSkin.found.v1";   // { [pieceId]: [detail index, ...] }; second-skin.html reads it
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -210,7 +209,6 @@ controls.target.copy(centre);
 controls.minDistance = size.y * 0.55; controls.maxDistance = size.y * 2.6;
 camera.position.set(centre.x, centre.y, centre.z - dist);   // the captures face -z
 view.classList.add("ready");
-const recon = piece.assets.clo ? await createReconstruction({ renderer, view, camera, controls, piece, splatBox: box, reduce }) : null;
 
 function corners(b) {
   return [0, 1, 2, 3, 4, 5, 6, 7].map(i => new THREE.Vector3(i & 1 ? b.max.x : b.min.x, i & 2 ? b.max.y : b.min.y, i & 4 ? b.max.z : b.min.z));
@@ -232,7 +230,7 @@ function screenOf(p) {
 }
 function placePins() {
   points.forEach((p, i) => {
-    const on = (found.has(i) || i === hint) && facing(p) && (!recon || recon.hunting());
+    const on = (found.has(i) || i === hint) && facing(p);
     pins[i].hidden = !on; pins[i].classList.toggle("hint", i === hint && !found.has(i));
     if (on) { const { x, y } = screenOf(p); pins[i].style.transform = `translate(${x}px, ${y}px)`; }
   });
@@ -243,7 +241,7 @@ const REACH = 44;
 let down = null;
 renderer.domElement.addEventListener("pointerdown", e => { down = { x: e.clientX, y: e.clientY, t: performance.now() }; });
 renderer.domElement.addEventListener("pointerup", e => {
-  if (!down || (recon && !recon.hunting()) || Math.hypot(e.clientX - down.x, e.clientY - down.y) > 6 || performance.now() - down.t > 400) return;
+  if (!down || Math.hypot(e.clientX - down.x, e.clientY - down.y) > 6 || performance.now() - down.t > 400) return;
   const r = view.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
   let best = -1, bestD = REACH;
   points.forEach((p, i) => {
@@ -270,7 +268,6 @@ $("#details").addEventListener("click", e => {
   const b = e.target.closest("[data-show]"); if (b && view.classList.contains("ready")) showMe(+b.dataset.show);
 });
 function showMe(i) {
-  recon?.setMode("archive");   // the details are on the scan
   hint = i;
   const p = points[hint], dir = new THREE.Vector3(p.x - centre.x, 0, p.z - centre.z);
   if (dir.lengthSq() < 1e-6) dir.set(0, 0, -1);
@@ -300,8 +297,8 @@ function fracAt(sx, sy, fz) {
   const p = camera.position.clone().addScaledVector(dir, (box.min.z + fz * size.z - camera.position.z) / dir.z);
   return [(p.x - box.min.x) / size.x, (p.y - box.min.y) / size.y, fz].map(v => +v.toFixed(3));
 }
-window.upClose = { piece, points, camera, controls, found, box, fracAt, recon };
-renderer.setAnimationLoop(now => { stepTurn(now); controls.update(); placePins(); recon ? recon.render(scene, camera) : renderer.render(scene, camera); });
+window.upClose = { piece, points, camera, controls, found, box, fracAt };
+renderer.setAnimationLoop(now => { stepTurn(now); controls.update(); placePins(); renderer.render(scene, camera); });
 </script>
 </body>
 </html>
