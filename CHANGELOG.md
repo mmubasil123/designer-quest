@@ -4,6 +4,10 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### Working rule: PRs need no review (branch hassan/drop-review-rule)
+- **What:** `AGENTS.md` no longer says the other person reviews and merges a PR; the author merges it. Claims and `HANDOVER.md` updates may still go straight to `main`.
+- **Why:** Hassan: nobody needs to review. Mubasil still deploys alone (unchanged).
+
 ### H5 Preload the scanned piece's 3D file on card scan (branch hassan/nfc-preload)
 - **What:** new `mockups/preload.js`. As soon as `?card=<id>` is in the URL it fetches that one piece's 3D file: the `.sog` splat for a study piece, the GLB for a wearable. Study pieces also get `modulepreload` for Up close's two scripts (Spark, OrbitControls). The popup's article image is warmed first (small, high priority) and the 3D file follows right after it (at most 1.5 s later), so the 15 MB file never starves the image. Skipped on Save-Data. Nothing else is preloaded and no splat is parsed early, so memory (A6) is untouched.
 - **Study pieces:** the bytes are streamed into the HTTP cache and dropped; Up close's Spark loader then gets a cache hit (Vercel serves `assets/` with `max-age=86400`). Chrome cancels a running download when the page navigates, and `keepalive` does not prevent it (measured), so `second-skin.html` awaits `preload.handoff(id)` before jumping to Up close: instant when the file is ready, otherwise a one-line "Getting the scan ready 43%" over the page until it is.
