@@ -4,6 +4,11 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ## 2026-11-21
 
+### The wardrobe sheet can no longer be dragged away (branch basil/sheet-drag)
+- **What:** a drag below the sheet's peek now meets the same 0.3x resistance as a drag past fully open, and `lostpointercapture` ends a drag like `pointerup`, so the sheet snaps back. model-viewer (AR) loads only on Android or on Safari with Quick Look (`rel="ar"`), not on laptops. "Also in" links skip pieces with no 3D (the hidden knee breeches). AR opens Scene Viewer or Quick Look directly (WebXR dropped: owner tapped "See it in your room" and nothing happened, since WebXR must draw the hidden viewer), and the viewer sits at 1 px instead of display: none.
+- **Why:** owner: while moving the sheet it disappeared until a reload; nothing kept a drag above the bottom edge, and a release lost outside the window left it there. The site also felt slower: every fact card loaded model-viewer, a second three.js and a second renderer, even where AR can never start.
+- **Decision:** clamp with resistance rather than a hard stop, matching the top edge.
+
 ### Design detector findings fixed, design rule in CLAUDE.md (branch hassan/design-findings)
 - **Stage look title:** red `#d72f25` on the grey wall was 4.1:1; `.stage .credit .t` now uses `--accent-ink` (`#c00000`, 5.5:1) in `theme.css`. No change to `second-skin.html`, which Basil has open in PR #21.
 - **`splat-stage-spike.html`:** the cream wall became the app's grey wall `#ededed`, black ink and the theme hairline, so splats are judged on the colour they ship on.

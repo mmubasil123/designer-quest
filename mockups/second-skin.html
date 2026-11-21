@@ -162,6 +162,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .fact .shares button { text-decoration: underline; text-underline-offset: 2px; min-height: 32px; }
 .fact .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .fact .ar { width: 100%; margin-bottom: 8px; }
+/* AR hands the model to Scene Viewer or Quick Look; WebXR is left out because it must draw this element, which nobody sees */
+.mv-off { position: fixed; left: 0; top: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 .fact .row .btn { flex: 1; }
 .fact .row a { flex: none; min-height: 44px; display: flex; align-items: center; padding: 0 14px; font-size: 13px; color: var(--ink); }
 .tile.on { outline: 2px solid var(--ink); outline-offset: 2px; }
@@ -1014,7 +1016,7 @@ async function openFact(id) {
   document.getElementById("factQuote").innerHTML = r.quote
     ? `<div class="mono">MoMu says</div><q>${esc(r.quoteEn || r.quote)}</q>${r.quoteEn ? `<p lang="nl">${esc(r.quote)} <span class="mono">Dutch original</span></p>` : ""}`
     : `<span class="nr">No description recorded</span>`;
-  const links = (r.medium || []).filter(t => !GENERIC.has(t)).map(t => [t, Object.keys(RECORDS).filter(o => o !== id && RECORDS[o].medium?.includes(t))])
+  const links = (r.medium || []).filter(t => !GENERIC.has(t)).map(t => [t, Object.keys(RECORDS).filter(o => o !== id && (PIECES[o]?.glb || PIECES[o]?.splat) && RECORDS[o].medium?.includes(t))])
     .filter(([, o]) => o.length).slice(0, 2);
   document.getElementById("factShares").innerHTML = links.map(([t, o]) =>
     `<div><span>${esc(plain(t)[0].toUpperCase() + plain(t).slice(1))} also in:</span>${o.slice(0, 3).map(x => `<button data-fact="${x}">${esc(shortName(x))}</button>`).join("")}</div>`).join("");
@@ -1035,9 +1037,11 @@ async function openFact(id) {
    so the tap that starts AR stays a direct user gesture. */
 const factMV = document.getElementById("factMV"), factAR = document.getElementById("factAR");
 let mvReady = null;
+// Scene Viewer is Android, Quick Look is iOS (rel="ar"); elsewhere model-viewer would only add a second three.js and renderer
+const AR_ABLE = /Android/i.test(navigator.userAgent) || document.createElement("a").relList.supports("ar");
 function prepAR(id) {
   factAR.hidden = true;
-  if (!PIECES[id].glb) return;
+  if (!AR_ABLE || !PIECES[id].glb) return;
   mvReady ??= import("https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js").catch(() => null);
   mvReady.then(ok => {
     if (!ok || factId !== id) return;
@@ -1086,7 +1090,9 @@ new ResizeObserver(() => stageEl.style.setProperty("--credit-h", `${creditEl.off
       try { grabEl.setPointerCapture(e.pointerId); } catch { /* pointer already gone: the drag still works without capture */ }
     }
     y = from + dy;
+    const low = snapY("peek");
     if (y < 0) y *= 0.3;   // past fully open the sheet resists instead of stopping dead
+    else if (y > low) y = low + (y - low) * 0.3;   // and below its peek, so a drag can never push it off the phone
     wardrobe.style.setProperty("--y", `${y}px`);
     vel = (e.clientY - lastY) / Math.max(1, e.timeStamp - lastT); lastY = e.clientY; lastT = e.timeStamp;
   });
@@ -1104,6 +1110,7 @@ new ResizeObserver(() => stageEl.style.setProperty("--credit-h", `${creditEl.off
   };
   grabEl.addEventListener("pointerup", end);
   grabEl.addEventListener("pointercancel", end);
+  grabEl.addEventListener("lostpointercapture", end);   // a release outside the window still ends the drag
   grabEl.addEventListener("click", e => { if (dragged) e.stopPropagation(); }, true);   // a drag that ends on a chip is not a tap
   handleEl.addEventListener("click", () => setSnap(snap === "peek" ? "half" : "peek"));
 }
@@ -1197,7 +1204,7 @@ try { if (!scanned && !claimed && !localStorage.getItem(HELP_KEY)) openHelp(); }
   <blockquote id="factQuote"></blockquote>
   <div class="shares" id="factShares"></div>
   <button class="btn ghost press ar" id="factAR" hidden>See it in your room</button>
-  <model-viewer id="factMV" ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto" loading="eager" hidden></model-viewer>
+  <model-viewer id="factMV" ar ar-modes="scene-viewer quick-look" ar-scale="auto" loading="eager" class="mv-off" aria-hidden="true"></model-viewer>
   <div class="row"><button class="btn press" id="factAct"></button><button class="ask-open press" id="factAsk">Ask</button><a id="factLink" target="_blank" rel="noopener">MoMu record ↗</a></div>
 </div></dialog>
 </body>
