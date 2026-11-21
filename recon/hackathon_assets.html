@@ -1,0 +1,628 @@
+
+<!DOCTYPE html><html lang="en-US">	<head>
+		<meta charset="utf-8">
+<meta name="viewport" content="width&#x3D;device-width,&#x20;initial-scale&#x3D;1">		<title>Hackathon Assets · Studiecollectie · SBS MoMu</title>		<link href="https&#x3A;&#x2F;&#x2F;fonts.googleapis.com&#x2F;css2&#x3F;family&#x3D;Noto&#x2B;Serif&#x3A;ital,wght&#x40;0,400&#x3B;0,700&#x3B;1,400&#x3B;1,700&amp;display&#x3D;swap" media="screen" rel="stylesheet" type="text&#x2F;css">
+<link href="https&#x3A;&#x2F;&#x2F;fonts.googleapis.com&#x2F;css2&#x3F;family&#x3D;Open&#x2B;Sans&#x3A;ital,wght&#x40;0,300&#x3B;0,400&#x3B;0,600&#x3B;0,700&#x3B;1,300&#x3B;1,400&#x3B;1,600&#x3B;1,700&amp;display&#x3D;swap" media="screen" rel="stylesheet" type="text&#x2F;css">
+<link href="&#x2F;momu&#x2F;application&#x2F;asset&#x2F;css&#x2F;iconfonts.css&#x3F;v&#x3D;4.2.1" media="screen" rel="stylesheet" type="text&#x2F;css">
+<link href="&#x2F;momu&#x2F;themes&#x2F;freedom&#x2F;asset&#x2F;css&#x2F;style.css&#x3F;v&#x3D;1.1.0" media="screen" rel="stylesheet" type="text&#x2F;css">
+<link href="&#x2F;momu&#x2F;application&#x2F;asset&#x2F;css&#x2F;page-blocks.css&#x3F;v&#x3D;4.2.1" media="screen" rel="stylesheet" type="text&#x2F;css">				<script  src="https&#x3A;&#x2F;&#x2F;code.jquery.com&#x2F;jquery-3.7.1.min.js"></script>
+<script  src="&#x2F;momu&#x2F;modules&#x2F;AdvancedSearch&#x2F;asset&#x2F;js&#x2F;global.js&#x3F;v&#x3D;3.4.64"></script>
+<script >
+    //<!--
+    
+Omeka.jsTranslate = function(str) {
+    var jsTranslations = {"Something went wrong":"Something went wrong","Make private":"Make private","Make public":"Make public","Expand":"Expand","Collapse":"Collapse","You have unsaved changes.":"You have unsaved changes.","Restore item set":"Restore item set","Close icon set":"Close icon set","Open icon set":"Open icon set","[Untitled]":"[Untitled]","Failed loading resource template from API":"Failed loading resource template from API","Restore property":"Restore property","There are no available pages.":"There are no available pages.","Please enter a valid language tag":"Please enter a valid language tag","Title":"Title","Description":"Description","Unknown block layout":"Unknown block layout","Required field must be completed":"Required field must be completed","Automatic mapping of empty values":"Automatic mapping of empty values","Available":"Available","Enabled":"Enabled","Find":"Find","Find resources\u2026":"Find resources\u2026","Processing\u2026":"Processing\u2026","Try to map automatically the metadata and the properties that are not mapped yet with the fields of the index":"Try to map automatically the metadata and the properties that are not mapped yet with the fields of the index","[Edit below]":"[Edit below]","Batch edit":"Batch edit","Advanced":"Advanced","The actions are processed in the order of the form. Be careful when mixing them.":"The actions are processed in the order of the form. Be careful when mixing them.","To convert values to\/from mapping markers, use module DataTypeGeometry.":"To convert values to\/from mapping markers, use module DataTypeGeometry.","Processes that manage files and remote data can be slow, so it is recommended to process it in background with \"batch edit all\", not \"batch edit selected\".":"Processes that manage files and remote data can be slow, so it is recommended to process it in background with \"batch edit all\", not \"batch edit selected\".","Remove mapping":"Remove mapping","An error occurred.":"An error occurred.","Apply":"Apply","Cancel":"Cancel","Close":"Close","Information":"Information","No":"No","OK":"OK","Warning":"Warning","Yes":"Yes","Copy":"Copy","Message copied":"Message copied","Field":"Field","Type":"Type","Set sub-property":"Set sub-property","Choose a field\u2026":"Choose a field\u2026","Dynamic field":"Dynamic field","Are you sure you want to delete this group?":"Are you sure you want to delete this group?","Enter new group name":"Enter new group name","Enter new selection name":"Enter new selection name","Remove from selection?":"Remove from selection?","Resource updated for selections.":"Resource updated for selections.","Selection limit reached. Maximum %d resources allowed.":"Selection limit reached. Maximum %d resources allowed."};
+    return (str in jsTranslations) ? jsTranslations[str] : str;
+};
+    //-->
+</script>
+		<style media="screen">
+			:root {
+				--primary: #c10000;
+				--primary-dark: #a70000;
+				--primary-contrast: #fff;
+				--secondary: #cc0000;
+				--secondary-dark: #b20000;
+				--secondary-contrast: #fff;
+				--accent: #000435;
+				--accent-dark: #00001b;
+			}
+			
+					</style>
+	</head>
+
+	<body class="page&#x20;&#x20;site-page-hackathon-assets&#x20;main-header--inline">		<a id="skipnav" href="#content">Skip to main content</a>
+
+		
+<header class="main-header">
+
+	
+	<div class="main-header__top-bar container">
+		<a class="main-header__advanced-search" href="/momu/s/studiecollectie/item/search">Advanced search</a>
+		<div class="main-header__search-form">
+			
+<form action="/momu/s/studiecollectie/index/search" id="search-form" aria-label="Search" role="search">
+    <input type="text" id="fulltext-search" name="fulltext_search" value=""
+        aria-label="Query" aria-labelledby="search-form fulltext-search">
+    <button id="search-submit" type="submit" aria-label="Submit" title="Submit"><span class="o-icon-search" aria-hidden="true"></span></button>
+</form>
+		</div>
+	</div>
+	<hr class="alignfull">
+
+	<div class="main-header__main-bar container">
+		<h1 class="main-header__site-title site-title">
+			<a href="/momu/s/studiecollectie">
+							Studiecollectie						</a>
+		</h1>
+
+		<nav class="main-navigation">
+			<div class="main-navigation__container">
+				<ul class="navigation">
+    <li>
+        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;page&#x2F;welcome">Welcome</a>
+    </li>
+    <li>
+        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x3F;filter&#x25;5B0&#x25;5D&#x25;5Bjoin&#x25;5D&#x3D;and&amp;filter&#x25;5B0&#x25;5D&#x25;5Btype&#x25;5D&#x3D;eq&amp;resource_template_id&#x25;5B&#x25;5D&#x3D;3">All Objects</a>
+    </li>
+    <li>
+        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;page&#x2F;objectnamen">Object Names</a>
+    </li>
+    <li>
+        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;page&#x2F;medium">Materials and Techniques</a>
+    </li>
+    <li>
+        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;page&#x2F;stories">Stories</a>
+    </li>
+    <li>
+        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;page&#x2F;patterns">Patterns</a>
+    </li>
+    <li>
+        <span>[Missing Page]</span>
+    </li>
+</ul>			</div>
+			<button
+				 class="main-navigation__toggle"
+				 aria-expanded="false"
+				 aria-controls="menu-drawer">
+				<span class="sr-only">Open menu</span>
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+			</button>
+		</nav>
+
+		<nav id="menu-drawer" class="menu-drawer" aria-hidden="true" inert style="display: none;">
+	<div class="wrap">
+
+		<div class="navigation-controls">
+			<a href="."
+				id="menu-backer"
+				class="menu-backer is-empty"
+				aria-hidden="true"
+				tabindex="-1"
+				title="Close"
+			>
+                Close			</a>
+		</div><!-- .navigation-controls -->
+
+		<div id="menu-clones" class="menu-container">
+
+			
+		</div><!-- .menu-container -->
+
+	</div><!-- .wrap -->
+</nav><!-- menu-drawer -->
+
+<script>
+    const closeText = "Close";
+    const previousText = "Previous";
+</script>
+	</div>
+
+</header>
+
+		
+
+		<div id="content" class="container" role="main" tabindex="-1">
+			
+
+
+<div class="blocks">
+    <div class="blocks-inner page-layout-normal" style=""><div class="block block-html" style=""><h3 style="text-align: left;">Hackathon Assets</h3>
+</div><div class="block block-browsePreview" style="">
+<div class="preview-block clearfix">
+
+            <div class="preview-header">
+            <h3><a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x3F;sort_by&#x3D;id&amp;sort_order&#x3D;desc&amp;filter&#x25;5B0&#x25;5D&#x25;5Bjoin&#x25;5D&#x3D;and&amp;filter&#x25;5B0&#x25;5D&#x25;5Btype&#x25;5D&#x3D;eq&amp;item_set_id&#x25;5B0&#x25;5D&#x3D;410823">2026 Assets</a></h3>
+        </div>
+    
+            <div class="browse-controls">
+            <div class="layout-toggle">
+                <button type="button" aria-label="Grid" title="Grid" class="grid icon-btn o-icon-grid" disabled></button>
+                <button type="button" aria-label="List" title="List" class="list icon-btn o-icon-list" ></button>
+            </div>
+        </div>
+    
+
+    <ul class="resources resource-grid">
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mkps0g"><img alt="ST2435" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;c67a0b9c164a8ed48a3ed9139744e8ccb6d8f939.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mkps0g">ST2435</a>                    
+                                            <div class="description ellipsis">Jurk in ecru zijdeweefsel, kuitlang, volledig voorzien van paillettenborduurwerk met het iridiserende effect van parels. Brede boothals; niet gesloten langs de zijnaden, behalve door links drie haken en ogen en korte opgezette stroken van dezelfde geborduurde stof op de heupen aan voor en achterzijde, die het rechte model tailleren. De grotendeels rechtvallende panden zijn volledig bedekt met machinale stiksels (binnenzijde: metaaldraad) in een organisch, oosters geïnspireerd motief van krullen en ogen.</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mv9sd6"><img alt="ST2434" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;b1dbc01697681023ff7d7a0bbe14eb115293b7c5.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mv9sd6">ST2434</a>                    
+                                            <div class="description ellipsis">Jas in groen laken, met slippen. Lange aangezette mouwen en liggende kraag met korte revers. Knoopsluiting met twee keer vier knoopsgaten, double breasted, zonder knopen. Acht bolle, los aanwezige knopen in messing waren oorspronkelijk waarschijnlijk bevestigd op de achterzijde. Op beide slippen bevindt zicht een opgestikte patch in de vorm van een grote verticale steekzak die aan de binnenkant uitloopt in drie punten, met sporen van de knopen. Op de achterzijde bevinden zich onderaan de slippen twee grote, platte messing knopen, gesigneerd M &amp; Cie PARIS. Onderaan de voorpanden werd later aan weerszijden een horizontale brede bies toegevoegd in rood laken. Gevoerd in paars geglansd keperkatoen.</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;m02vfs"><img alt="ST2433" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;f1f9c4db950d72464de73180e0463f3f93358fca.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;m02vfs">ST2433</a>                    
+                                            <div class="description ellipsis">Broek, rijbroek, in ecru zeemleder, met de hand genaaid. Kuitbroek, sluitend met een flap aan de bovenzijde met knopen aan weerszijden en aan een deel sluitend rond de buik waarin een klein zakje voor een horloge; middenachter bovenaan een ingezette v-vorm in zeemleder; pijpen afgewerkt met een split met vijf kleine knopen en veters in zeemleder. Op het linkerbeen ter hoogte van de schenen is meer ruimte in het leder dan rechts (3 cm). Grotendeels met de hand genaaid en later verstevigd met stiknaden.</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;m3txj3"><img alt="ST2432&#x2F;1-2" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;de29055c56ed9a18d496d4aa50c576e8e809900e.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;m3txj3">ST2432/1-2</a>                    
+                                            <div class="description ellipsis">Kostuum in de vorm van een militair uniform voor een man, lid van de Nationale Garde, bestaande uit een originele jas en een broek die later werd gemaakt; beide werden aangepast.  1. Jas met slippen in donkerblauw laken (wol), hoge opstaande kraag in rood laken, epauletten met cannetille en goudkleurig metaalweefsel, aangestikte manchetten in rood laken en slippen gevoerd in rood laken. De punten van elk van de slippen werden van binnen naar buiten gekeerd en aan elkaar verbonden, waardoor er een rood detail zichtbaar is onderaan de blauwe slippen. Op de slippen bevindt zicht een opgestikte patch in de vorm van een grote verticale steekzak die aan de binnenkant uitloopt in drie punten waarop zich drie witmetalen knopen bevinden, voorzien van de tekst &#039;Garde Nationale&#039;. Uitgevoerd in handwerk en machinaal naaiwerk. Knoopsluiting vooraan met haak- en oogsluiting waarvan de haakjes grotendeels zijn verdwenen; aan de buitenkant vervangen door goudkleurige, nieuwe knopen in dezelfde stijl (knopen met embleem van de Keizerlijke Garde, datering mogelijk 1980-2000).  2. Bandplooibroek uit de jaren 1910-1940 in donkerblauw laken, twee gepaspelde zakken op het zitvlak voorzien van een kunststof knoop, gulpsluiting met kunststof knopen waarvan de knoopsgaten met de hand zijn afgewerkt, tailleband met broeklussen, horlogezakje, binnenwerk in grijs katoenweefsel, lange pijpen waaraan aan de buitenzijde twee banen in rode wol, aan de binnenzijde onderaan aan weerszijden voorzien van twee knopen op een stukje leder. Aan de achterkant van de broek werd een inkeping gemaakt in de tailleband en de bovenzijde van de achterkant. Hier werd een rijgsluiting ingezet met een rode veter uit de jaren 1970-1990. Zowel machinaal als met de hand vervaardigd.</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;m7h4cm"><img alt="ST2431&#x2F;1-4" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;61457de95a3a2c77335936ddea11241bc270ce0a.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;m7h4cm">ST2431/1-4</a>                    
+                                            <div class="description ellipsis">Militair uniform voor een man, in lichtblauwe en rode wol, van een luitenant van de Nationale Garde, lid van het 9e of 18e regiment van de jagers te paard (Chasseurs à cheval, Frankrijk).  1. Jas, heuplang, in blauw laken (wol), wijd uitlopend, met een sluiting van donkergrijze, bolle, metallic knopen middenvoor (gemerkt CP Perfectionné Paris). Onder op de mouwen voorzien van een groot motief in passementerie in metaal, groot motief in zwarte passementerie op beide kanten van het voorpand (brandebourgs, die ook de sluiting vormen), epauletten in zwarte passementerie. Opstaande kraag in rood laken voorzien van decoratie in cannetille. Aan de achterzijde op de coupenaden aangebrachte zwarte passementerie. Kleine splitten in de zijnaden waardoorheen een kleine hand zou passen. Gevoerd met stevig zwart katoenweefsel; bijna het volledige voorpand werd ter versteviging doorstikt met oranje garen. Hand- en machinaal naaiwerk. Binnenin de kraag is een 20e-eeuwse witte losse opstaande kraag bevestigd (gemerkt DURAND, ST2431/4).  2. Broek in rode wol, met lange rechte pijpen, afgewerkt met een streep in blauwe wol aan de buitenkant. Binnenin de pijpen onderaan aan weerszijden een metalen knoop op een stukje leder. Lange gulpsluiting van goudkleurige knopen op lichtpaars geglansd katoen. Gouden knopen op de tailleband waarin de tekst 18e CHASSEURS TOUJAS, van het 18e regiment. Horizontaal riempje achter boven het zitvlak, met gesp. Handwerk en machinaal naaiwerk.  3. Pet, kepie, in rode en lichtblauwe wol, met een hoogte van 15 centimeter, gedecoreerd met metalen passement en cannetille en voorzien van een zwarte klep in leder.</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;m5x6jp"><img alt="ST673&#x2F;1-2" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;64b5cc78b420f202ce9b4a0e037415fe8b37ef44.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;m5x6jp">ST673/1-2</a>                    
+                                            <div class="description ellipsis">Combinaison in wit katoen, bestaande uit een baleinloos onderlijf waaraan met knopen bevestigd een lange open onderbroek. Onderlijf: halslijn in V-vorm voorzien van stroken broderie anglaise; schouderpas die tot de borst reikt, in broderie anglaise, in de vorm van een U, met in ruches aangezette rand van broderie anglaise. Deze rand is ook gemonteerd rondom het armsgat. Getailleerd; nepen in de taille zijn aan de binnenzijde opengestreken en doorgestikt voor stevigdheid. Sluit middenvoor met parelmoeren knopen. Rondom de taille ecrukleurige benen knopen voor de bevestiging van de hierover gedragen kleding (mogelijk een onderrok). De onderbroek is aan de voorzijde open vanaf de taille, en aan de achterkant geheel open; de twee zijden worden gesloten overheen dezelfde knoop. Aan de achterkant is er ruimte gecreëerd door de stof horizontaal te rimpelen. De onderbroek kan op twee niveaus aan het lijf vastgemaakt worden, met dezelfde benen knopen. Te gebruiken tijdens het sporten (bv. tennis, croquet, badminton of boogschieten).</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mfj6zb"><img alt="ST671" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;52a0f25eb53c9ba40a34a7c873d4d3d324f5052a.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mfj6zb">ST671</a>                    
+                                            <div class="description ellipsis">Lange japon, wandeljapon, in beige zijderips. De japon heeft een beige zijden onderjurk met een diepe, ronde halsuitsnijding en halflange mouwen. Het lijfje en de rok zijn apart gesneden en in de taille aan elkaar gezet. Het lijfje heeft een tailleband met daarop de bedrukking &#039;Mme Guédon Descham(?) 83, Boulevard Magenta, Paris&#039;. Middenvoor is in het lijfje een balein genaaid. In de halsuitsnijding is een kraag gezet in beige machinale kant, een imitatie van Rijselse kloskant. Het opstaande deel van de kraag heeft baleinen. De onderkant van de mouwen is in dezelfde machinale kant. De mouwboorden zijn gegarneerd met een strook beige machinale kant, een imitatie van stropkant, en bijkomend afgeboord met veterborduurwerk. Het onderste deel van de rok is uitgevoerd in dezelfde zijderips als de japon, is in plooien aan de onderjurk gezet en komt onder de japon uit. De onderjurk is bij de middel aan de japon vastgenaaid.  Net als bij de onderjurk zijn het lijfje en de rok van de japon afzonderlijk gesneden en in de taille aan elkaar genaaid. Het lijfje heeft een ronde halsuitsnijding en korte mouwen, ze zijn afgeboord met dezelfde machinale stropkant en hetzelfde veterborduurwerk als bij de onderjurk. Een strook in dezelfde kant en borduurwerk loopt links vooraan van bij de hals tot onderaan de japon waar het de rok verder rondom afboordt. Aan beide zijkanten hangt de rokzoom lager dan middenvoor en middenachter.   De japon en de onderjurk sluiten beide middenachter met een rij haken en knopen tot voorbij het zitvlak. De transparante stroken machinale kant in het lijfje van japon en onderjurk zijn gedubbeld met beige zijdemousseline.</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mfxpx0"><img alt="ST2407&#x2F;1-2" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;e312cb64c61115e85acdf2de3b7e16a3ac43cb68.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mfxpx0">ST2407/1-2</a>                    
+                                            <div class="description ellipsis">Paar voetbalschoenen in wit met circulair blauw gestreept leder. Gemaakt voor de club FC Bikkembergs Fossombrone in De Marken, Italië. Zool met noppen in transparante kunststof, waardoorheen een grafisch ontwerp in rood en blauw zichtbaar is. Op de voorvoet bovenop een vetersluiting bevindt zich een cirkel in leder die het logo van het label Bikkembergs Sport bevat. Deze flap zit met elastiek bevestigd rondom de schoen. De hiel links is in blauw leder uitgevoerd; de hiel rechts in rood. Links op de hiel is het logo van de voetbalploeg FC Fossombrone opgestikte; rechts het logo van het label Bikkembergs Sport.</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;m2v73p"><img alt="ST81190" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;cbbc8b1c1d6f312c8f1ed00c2b8012970435e911.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;m2v73p">ST81190</a>                    
+                                            <div class="description ellipsis">Getailleerde jas in grijs wolweefsel met opstaande kraag. De jas is opgebouwd uit losse onderdelen: mouwstukken, een schoot, schouderstukken en borstlappen, elk gevoerd met bruin katoen en aan elkaar vastgehecht met messingkleurige rivetten. Ook de nepen en zijnaden zijn niet gestikt, maar met rivetten vastgemaakt. De mouwen zijn gevoerd met 100% polyester en zijn open aan de oksels. De jas sluit middenvoor met negen messingkleurige drukknopen. Op de achterzijde ter hoogte van de hals is een rood kruis gestikt.</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mt76pz"><img alt="ST81116" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;47c0f538e7e0b8ac78ea772d7f10b615cc405273.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mt76pz">ST81116</a>                    
+                                            <div class="description ellipsis">Zwarte wollen knielange broek gebruikt om te fietsen. Tailleband gevoerd met zwart katoen, sluiting in de linker zijnaad met 3 kunststof knopen (1 ontbreekt). Eén zak in de rechter zijnaad, weggewerkt onder een plooi. Zowel vooraan als achteraan zes diepe plooien die het laaghangend kruis verbergen. Onderaan zijn de pijpen samengetrokken met elastiek. Geen voering.</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mz08sb"><img alt="ST81115" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;1c9ee852be276cb76a749d35ec088f6b09b4d4bf.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mz08sb">ST81115</a>                    
+                                            <div class="description ellipsis">Ceintuur; deel van fietsensemble</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;m2rbtz"><img alt="ST81114AB" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;d2c9a28dc1b4dab90a2d587044fe1033c7aa94a2.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;m2rbtz">ST81114AB</a>                    
+                                            <div class="description ellipsis">Witte blouse gedragen als fietskleding, gemaakt van katoenbatist. Opstaande kraag met aan elkaar genaaide stroken machinaal witborduurwerk. Sluiting vooraan met 20 knopen gemaakt van parelmoer; met de hand genaaide knoopsgaten (gaaskantsteek). Centraal zijn twee verticale stroken machinaal witborduurwerk opgenaaid, die de knoopsgaten van het borststuk verbergen. Het losse borststuk heeft fijne plooien en wordt met 14 knopen van parelmoer (waarvan 4 ontbreken) over de sluiting bevestigd. Aangezette mouwen, gerimpeld op de kop en aan het manchet. Hoge smalle manchet zonder sluiting, gemaakt van een strook katoenbatist met machinaal borduurwerk. Sterk getailleerde snit. De naden zijn aan de binnenzijde aan de naadwaarde omgevouwen en met de hand toegenaaid. Aan de achterzijde een split afgewerkt met dezelfde stroken borduurwerk, die los afhangen.</div>
+                                    </div>
+            </li>
+
+            </ul>
+
+    
+</div>
+</div><div class="block block-browsePreview" style="">
+<div class="preview-block clearfix">
+
+            <div class="preview-header">
+            <h3><a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x3F;sort_by&#x3D;created&amp;sort_order&#x3D;asc&amp;filter&#x25;5B0&#x25;5D&#x25;5Bjoin&#x25;5D&#x3D;and&amp;filter&#x25;5B0&#x25;5D&#x25;5Btype&#x25;5D&#x3D;eq&amp;item_set_id&#x25;5B0&#x25;5D&#x3D;413025">All Assets</a></h3>
+        </div>
+    
+            <div class="browse-controls">
+            <div class="layout-toggle">
+                <button type="button" aria-label="Grid" title="Grid" class="grid icon-btn o-icon-grid" disabled></button>
+                <button type="button" aria-label="List" title="List" class="list icon-btn o-icon-list" ></button>
+            </div>
+        </div>
+    
+
+    <ul class="resources resource-grid">
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mcc2mf"><img alt="ST503" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;d854d7decbce09ccfb198297818c8dac50d8c2b9.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mcc2mf">ST503</a>                    
+                                            <div class="description ellipsis">Het jak reikt tot aan de taille en heeft lange schootpanden, een vierkante halslijn en nauw aansluitende mouwen tot aan de elleboog. Aan de voorkant is het open en het wordt in het midden gesloten met metalen haken en ogen. De buitenstof is gemaakt van blauwe tafzijde met een witgele versiering van plaatselijke vlottermotieven in de richting van de kettingdraden. Deze decoratie combineert een abstract zigzagpatroon met een bloemmotief. Tafzijde is een fijne, gladde en licht glanzende zijden stof. De voering bestaat uit een blauwe linnen stof die eveneens versierd is met witte en gele strepen, gevormd door gekleurde kettingdraden.</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;m1jwzc"><img alt="ST80881" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;34b6955bc31aceef7b78ed1a031475ff19cd6b95.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;m1jwzc">ST80881</a>                    
+                                            <div class="description ellipsis">Ecru furisode kimono, beschilderd en met gouden opdruk. Veelkleurig motief van brede opwaaiende linten (mogelijk noshi- of kichô-motief) met op de achtergrond een abstract landschap met huizen, wolken en flora, waaronder pioenen, chrysanten, ume pruimenbloesem, Japanse esdoorn en bamboe. Details op bloemen zijn geborduurd met zijde en metaaldraad. Tweedelige voering, bovenaan wit, onderaan bedrukte stof.</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mr22f0"><img alt="ST80930" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;571dc06fac9a8d24a6b96b40266dbc16de7604f0.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mr22f0">ST80930</a>                    
+                                            <div class="description ellipsis">Donkerblauwe vest of jasje in ikat met lichtblauwe vlekken en rode vierkanten. De vest heeft lange pofmouwen, overlappende voorpanden en sluit in de taille met linten.</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mm90bn"><img alt="ST80931" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;ff2b639af225b065918fd468eeb87ee5bc7992f4.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mm90bn">ST80931</a>                    
+                                            <div class="description ellipsis">Donkerblauwe pofbroek, ofwel &quot;monpe&quot;, in ikat met lichtblauwe vlekken en rode vierkanten. Brede tailleband met lange linten als sluiting, kan ook onderaan rond de enkels gebonden worden met linten.</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mp5hw9"><img alt="ST80998" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;9bc12107f1fc205abfa5cdb58b7659a6dc6710f8.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mp5hw9">ST80998</a>                    
+                                            <div class="description ellipsis">Bruidskaftan in bordeaux, rood, groen en zwart gestreepte fluweel met ronde halsuitsnijding, uitlopend in een punt en met lange puntmouwen. De zijkanten, bovenkanten van de mouwen en het borstvlak van de kaftan zijn versierd met veelkleurig borduurwerk van opgenaaide koorden en metaaldraad op oranje, lichtbruine en groene ondergronden. De geborduurde zones op de mouwen zijn gevoerd met een roze katoen met abstracte motieven.</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mwwq4q"><img alt="ST655&#x2F;1" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;a5677be4652b639aee899baf38d73fb905a11077.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mwwq4q">ST655/1</a>                    
+                                            <div class="description ellipsis">Kuit- tot enkellange japon in doorknoopmodel, type cocktailjurk, van groen-zwart horizontaal gestreept synthetisch materiaal. Sluiting vooraan met 11 knopen, met dezelfde strepenstof en fluweel bekleed, machinaal genaaide knoopsgaten. Sjaalkraag met revers van zwart fluweel. Aangezette korte mouwen met aangezette boord van zwart fluweel. Zwart gehaakte riemlus ter hoogte van de rechterheup, deze ontbreekt links. 
+Er zijn geen zakken en er is geen voering. Ingenaaide schoudervullingen gemaakt van dezelfde stof als de jurk. De zoom is aan de binnenzijde verstevigd met een zwart lint en is met fijne steekjes met de hand vastgezet. 
+Interessant detail: de zelfkant van de onderpade nden is gebruikt aan de sluiting middenvoor en de onderste panden van de rok hebben geen zijnaden, omdat het halve cirkels zijn. Daardoor zijn de strepen vooraan horizontaal, maar lopen ze aan de achterzijde verticaal bij de aansluiting met het bovenstuk.</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mcc2mj"><img alt="ST2013" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;0f6de2107fbec52225c10fc8d01f8d194435edc9.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mcc2mj">ST2013</a>                    
+                                            <div class="description ellipsis">Schermvest gemaakt van grof ongebleekt linnen met een bies van ecrukleurige tijk. Opstaande kraag, en lange mouwen met manchet met knoopsluiting op de pols. Rechtermouw van binnen gewatteerd ter versteviging en bescherming. Assymmetrische knoopsluiting met dertien knoopsgaten en corozo knopen (één ontbreekt) aan de voorzijde, vanaf de hals via de linkerschouder naar beneden. Bevestigingsriem van dezelfde stof vanaf het voorpand tussen de benen naar een parelmoeren knoop aan de binnenzijde van het achterpand.</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;m98sm0"><img alt="ST2062" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;db9135b2d52d9bdd3493371a59bd1c82a491f185.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;m98sm0">ST2062</a>                    
+                                            <div class="description ellipsis">Broek, kniebroek voor een man, in crèmekleurig wollen laken. Lange gulp middenvoor, gesloten met zes knopen (materiaal onbekend). Zakje rechts op de heup: steekzak in de tailleband. Middenachter een riempje met een messing gesp; eveneens kleine split in de tailleband. Kniebroek is onderaan de pijpen afgewerkt met een split en drie knopen; de bies eindigt in een kort riempje en een knoopsgat aan de andere zijde (knopen beide afwezig). Broek is aan de bovenzijde deels gevoerd met glanzend crèmewit keperweefsel in waarschijnlijk zijde. Deel van een Russisch militair kostuum. Volledig met de hand genaaid.</div>
+                                    </div>
+            </li>
+
+            </ul>
+
+    <a class="browse-all" href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x3F;sort_by&#x3D;created&amp;sort_order&#x3D;asc&amp;filter&#x25;5B0&#x25;5D&#x25;5Bjoin&#x25;5D&#x3D;and&amp;filter&#x25;5B0&#x25;5D&#x25;5Btype&#x25;5D&#x3D;eq&amp;item_set_id&#x25;5B0&#x25;5D&#x3D;413025">Browse all objects</a>
+</div>
+</div><div class="block block-browsePreview" style="">
+<div class="preview-block clearfix">
+
+            <div class="preview-header">
+            <h3><a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x3F;property&#x25;5B0&#x25;5D&#x25;5Bproperty&#x25;5D&#x25;5B0&#x25;5D&#x3D;&amp;resource_template_id&#x25;5B0&#x25;5D&#x3D;18">All Patterns</a></h3>
+        </div>
+    
+            <div class="browse-controls">
+            <div class="layout-toggle">
+                <button type="button" aria-label="Grid" title="Grid" class="grid icon-btn o-icon-grid" disabled></button>
+                <button type="button" aria-label="List" title="List" class="list icon-btn o-icon-list" ></button>
+            </div>
+        </div>
+    
+
+    <ul class="resources resource-grid">
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mfxq34"><img alt="Patroon&#x20;onderbroek&#x20;&#x28;ST860&#x29;" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;80741cb51f872b92eed3f001410994e36fe92db9.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mfxq34">Patroon onderbroek (ST860)</a>                    
+                                            <div class="description ellipsis">Patroon gemaakt in het kader van de MoMu Pattern-a-thons</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mkps5f"><img alt="Patroon&#x20;kimono&#x20;&#x28;ST80881&#x29;" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;d9346b7588f720e04da602797c00d96dc67170af.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mkps5f">Patroon kimono (ST80881)</a>                    
+                                            <div class="description ellipsis">Patroon gemaakt in het kader van de MoMu Pattern-a-thons</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mb5n0q"><img alt="Patroon&#x20;jas&#x20;&#x28;ST81129AB&#x29;" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;b5744b8cd58d236941b7c3bf0724ff41615afdbe.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mb5n0q">Patroon jas (ST81129AB)</a>                    
+                                            <div class="description ellipsis">Patroon gemaakt in het kader van de MoMu Pattern-a-thons</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mqc00z"><img alt="Patroon&#x20;muts&#x20;&#x28;ST114&#x29;" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;ce26a2842c86ca336a68125598c86ba9b0ad51f1.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;mqc00z">Patroon muts (ST114)</a>                    
+                                            <div class="description ellipsis">Patroon gemaakt in het kader van de MoMu Pattern-a-thons</div>
+                                    </div>
+            </li>
+
+            </ul>
+
+    <a class="browse-all" href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x3F;property&#x25;5B0&#x25;5D&#x25;5Bproperty&#x25;5D&#x25;5B0&#x25;5D&#x3D;&amp;resource_template_id&#x25;5B0&#x25;5D&#x3D;18">Browse all patterns</a>
+</div>
+</div><div class="block block-browsePreview" style="">
+<div class="preview-block clearfix">
+
+            <div class="preview-header">
+            <h3><a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x3F;property&#x25;5B0&#x25;5D&#x25;5Bproperty&#x25;5D&#x25;5B0&#x25;5D&#x3D;&amp;resource_template_id&#x25;5B0&#x25;5D&#x3D;22">All Textiles</a></h3>
+        </div>
+    
+            <div class="browse-controls">
+            <div class="layout-toggle">
+                <button type="button" aria-label="Grid" title="Grid" class="grid icon-btn o-icon-grid" disabled></button>
+                <button type="button" aria-label="List" title="List" class="list icon-btn o-icon-list" ></button>
+            </div>
+        </div>
+    
+
+    <ul class="resources resource-grid">
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;368916"><img alt="ST2431&#x2F;1-3&#x20;&#x2013;&#x20;Digital&#x20;textile&#x20;B" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;5c72fcb6d026bf9c6c06dbca33868387a6746f5a.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;368916">ST2431/1-3 – Digital textile B</a>                    
+                                            <div class="description ellipsis">Digital Textile</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;368907"><img alt="ST2431&#x2F;1-3&#x20;&#x2013;&#x20;Digital&#x20;textile&#x20;A" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;a5d016b0cad4529a8bcdc15b348a94cdbea33f85.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;368907">ST2431/1-3 – Digital textile A</a>                    
+                                            <div class="description ellipsis">Digital Textile</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;368898"><img alt="ST655&#x2F;1&#x20;&#x2013;&#x20;Digital&#x20;textile&#x20;B" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;93d136015e92313f62950d3b41499c7225b748c4.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;368898">ST655/1 – Digital textile B</a>                    
+                                            <div class="description ellipsis">Digital Textile</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;368889"><img alt="ST655&#x2F;1&#x20;&#x2013;&#x20;Digital&#x20;textile&#x20;A" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;2cdd02efca88cdb8b688de391382f1c351c86f95.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;368889">ST655/1 – Digital textile A</a>                    
+                                            <div class="description ellipsis">Digital Textile</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;368880"><img alt="ST2439&#x2F;1-2&#x20;&#x2013;&#x20;Digital&#x20;textile&#x20;C" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;6e436b1e3aaa8ad62af378147254c374f43fc6bc.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;368880">ST2439/1-2 – Digital textile C</a>                    
+                                            <div class="description ellipsis">Digital Textile</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;368871"><img alt="ST2439&#x2F;1-2&#x20;&#x2013;&#x20;Digital&#x20;textile&#x20;B" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;f7e8765992efa34c028b9dc0825ad33dc9346bc8.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;368871">ST2439/1-2 – Digital textile B</a>                    
+                                            <div class="description ellipsis">Digital Textile</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;368862"><img alt="ST2439&#x2F;1-2&#x20;&#x2013;&#x20;Digital&#x20;textile&#x20;A" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;ce27f6a9bfd286ed243229619288ffe392198905.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;368862">ST2439/1-2 – Digital textile A</a>                    
+                                            <div class="description ellipsis">Digital Textile</div>
+                                    </div>
+            </li>
+
+                    <li class="item resource ">
+                <!-- Thumbnail -->
+                                    <div class="resource__thumbnail ">
+                        <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;368832"><img alt="ST81234&#x2F;1-2&#x20;&#x2013;&#x20;Digital&#x20;textile&#x20;B" src="https&#x3A;&#x2F;&#x2F;heron.libis.be&#x2F;momu&#x2F;files&#x2F;large&#x2F;ffd5cfe675925509cdb0832c745c2e1ccb605e67.jpg"></a>                    </div>
+                
+                <!-- Content -->
+                <div class="resource__content">
+                                                                    <a href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x2F;368832">ST81234/1-2 – Digital textile B</a>                    
+                                            <div class="description ellipsis">Digital Textile</div>
+                                    </div>
+            </li>
+
+            </ul>
+
+    <a class="browse-all" href="&#x2F;momu&#x2F;s&#x2F;studiecollectie&#x2F;item&#x3F;property&#x25;5B0&#x25;5D&#x25;5Bproperty&#x25;5D&#x25;5B0&#x25;5D&#x3D;&amp;resource_template_id&#x25;5B0&#x25;5D&#x3D;22">Browse all textiles</a>
+</div>
+</div><div class="block block-html" style=""><p>More digital fabrics are available on <a href="https://www.bakermat.net/virtual-library/">Bakermat&#39;s virtual library</a></p>
+
+<p>Contact <a href="mailto:dieter.suls@momu.be?subject=CLO%203D%20ID">dieter.suls@momu.be</a> for a login.</p>
+</div></div></div>
+		</div>
+
+		
+<footer class="main-footer">
+
+	<!-- Footer Top -->
+	
+	<!-- Footer Bottom -->
+	<div class="main-footer__bottom">
+		<div class="container main-footer__bottom-container ">
+
+			<!-- Social Networks -->
+			
+			<!-- Copyright -->
+			<div class="main-footer__copyright">
+									Powered by Omeka S							</div>
+		</div>
+	</div>
+
+</footer>
+
+		<script  src="&#x2F;momu&#x2F;themes&#x2F;freedom&#x2F;asset&#x2F;js&#x2F;script.js&#x3F;v&#x3D;1.1.0"></script>
+<script  src="&#x2F;momu&#x2F;themes&#x2F;freedom&#x2F;asset&#x2F;js&#x2F;navigation.js&#x3F;v&#x3D;1.1.0"></script>
+<script  src="&#x2F;momu&#x2F;themes&#x2F;freedom&#x2F;asset&#x2F;js&#x2F;minimasonry.min.js&#x3F;v&#x3D;1.1.0"></script>
+<script  src="&#x2F;momu&#x2F;themes&#x2F;freedom&#x2F;asset&#x2F;js&#x2F;browse.js&#x3F;v&#x3D;1.1.0"></script>	</body>
+</html>

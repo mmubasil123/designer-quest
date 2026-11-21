@@ -1,0 +1,195 @@
+[studycenter] https://studycenter.momu.be/api
+  robots.txt: http 404: no robots.txt, allowed; delay 1.0s
+  vocabularies: page 1 (13 records) of ~13 total
+  properties: page 1 (100 records) of ~785 total
+  resource_classes: page 1 (100 records) of ~259 total
+  resource_templates: page 1 (25 records) of ~25 total
+  sites: page 1 (5 records) of ~5 total
+  item_sets: page 1 (32 records) of ~32 total
+  items: page 1 (100 records) of ~925 total
+  items: page 10 (25 records) of ~925 total
+  media: page 1 (100 records) of ~1000 total
+  media: page 10 (100 records) of ~1000 total
+{
+ "vocabularies": {
+  "pages_fetched": 1,
+  "pages_cached": 0,
+  "total_reported": 13,
+  "skipped": null
+ },
+ "properties": {
+  "pages_fetched": 8,
+  "pages_cached": 0,
+  "total_reported": 785,
+  "skipped": null
+ },
+ "resource_classes": {
+  "pages_fetched": 3,
+  "pages_cached": 0,
+  "total_reported": 259,
+  "skipped": null
+ },
+ "resource_templates": {
+  "pages_fetched": 1,
+  "pages_cached": 0,
+  "total_reported": 25,
+  "skipped": null
+ },
+ "sites": {
+  "pages_fetched": 1,
+  "pages_cached": 0,
+  "total_reported": 5,
+  "skipped": null
+ },
+ "item_sets": {
+  "pages_fetched": 1,
+  "pages_cached": 0,
+  "total_reported": 32,
+  "skipped": null
+ },
+ "items": {
+  "pages_fetched": 10,
+  "pages_cached": 0,
+  "total_reported": 925,
+  "skipped": null
+ },
+ "media": {
+  "pages_fetched": 11,
+  "pages_cached": 0,
+  "total_reported": 1000,
+  "skipped": null
+ }
+}
+[bikkembergs] https://studycenter.momu.be/archiefdirkbikkembergs/api
+  robots.txt: http 404: no robots.txt, allowed; delay 1.0s
+  vocabularies: page 1 (7 records) of ~7 total
+  properties: page 1 (100 records) of ~528 total
+  resource_classes: page 1 (100 records) of ~200 total
+  resource_templates: page 1 (2 records) of ~2 total
+  sites: page 1 (2 records) of ~2 total
+  item_sets: page 1 (1 records) of ~1 total
+  items: page 1 (100 records) of ~751 total
+  media: page 1 (100 records) of ~5529 total
+  media: page 10 (100 records) of ~5529 total
+  media: page 20 (100 records) of ~5529 total
+  media: page 30 (100 records) of ~5529 total
+  media: page 40 (100 records) of ~5529 total
+  media: page 50 (100 records) of ~5529 total
+{
+ "vocabularies": {
+  "pages_fetched": 1,
+  "pages_cached": 0,
+  "total_reported": 7,
+  "skipped": null
+ },
+ "properties": {
+  "pages_fetched": 6,
+  "pages_cached": 0,
+  "total_reported": 528,
+  "skipped": null
+ },
+ "resource_classes": {
+  "pages_fetched": 3,
+  "pages_cached": 0,
+  "total_reported": 200,
+  "skipped": null
+ },
+ "resource_templates": {
+  "pages_fetched": 1,
+  "pages_cached": 0,
+  "total_reported": 2,
+  "skipped": null
+ },
+ "sites": {
+  "pages_fetched": 1,
+  "pages_cached": 0,
+  "total_reported": 2,
+  "skipped": null
+ },
+ "item_sets": {
+  "pages_fetched": 1,
+  "pages_cached": 0,
+  "total_reported": 1,
+  "skipped": null
+ },
+ "items": {
+  "pages_fetched": 8,
+  "pages_cached": 0,
+  "total_reported": 751,
+  "skipped": null
+ },
+ "media": {
+  "pages_fetched": 56,
+  "pages_cached": 0,
+  "total_reported": 5529,
+  "skipped": null
+ }
+}
+[heron] https://heron.libis.be/momu/api
+  robots.txt: http 404: no robots.txt, allowed; delay 1.0s
+  vocabularies: page 1 (9 records) of ~9 total
+  properties: page 1 (100 records) of ~633 total
+  resource_classes: page 1 (100 records) of ~239 total
+  resource_templates: page 1 (20 records) of ~20 total
+  sites: page 1 (1 records) of ~1 total
+  item_sets: page 1 (100 records) of ~287 total
+  items: page 1 (100 records) of ~2946 total
+  items: page 10 (100 records) of ~2946 total
+    URLError: <urlopen error [Errno 60] Operation timed out>; retry 1 in 3s
+  items: page 20 (100 records) of ~2946 total
+    URLError: <urlopen error _ssl.c:1064: The handshake operation timed out>; retry 1 in 3s
+    URLError: <urlopen error [Errno 60] Operation timed out>; retry 1 in 3s
+  items: page 30 (46 records) of ~2946 total
+  media: page 1 (100 records) of ~2794 total
+  media: page 10 (100 records) of ~2794 total
+  media: page 20 (100 records) of ~2794 total
+{
+ "vocabularies": {
+  "pages_fetched": 1,
+  "pages_cached": 0,
+  "total_reported": 9,
+  "skipped": null
+ },
+ "properties": {
+  "pages_fetched": 7,
+  "pages_cached": 0,
+  "total_reported": 633,
+  "skipped": null
+ },
+ "resource_classes": {
+  "pages_fetched": 3,
+  "pages_cached": 0,
+  "total_reported": 239,
+  "skipped": null
+ },
+ "resource_templates": {
+  "pages_fetched": 1,
+  "pages_cached": 0,
+  "total_reported": 20,
+  "skipped": null
+ },
+ "sites": {
+  "pages_fetched": 1,
+  "pages_cached": 0,
+  "total_reported": 1,
+  "skipped": null
+ },
+ "item_sets": {
+  "pages_fetched": 3,
+  "pages_cached": 0,
+  "total_reported": 287,
+  "skipped": null
+ },
+ "items": {
+  "pages_fetched": 30,
+  "pages_cached": 0,
+  "total_reported": 2946,
+  "skipped": null
+ },
+ "media": {
+  "pages_fetched": 28,
+  "pages_cached": 0,
+  "total_reported": 2794,
+  "skipped": null
+ }
+}

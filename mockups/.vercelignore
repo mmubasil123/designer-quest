@@ -1,0 +1,8 @@
+# Only the page, the manifest and what the page loads are deployed.
+tools/
+assets/src/
+assets/ST80881_cutout.svg
+assets/ST80881_trace.png
+assets/ST80881_trace.svg
+assets/trace_kimono.json
+pieces.schema.json

@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="en" data-theme="light"><!-- photos blend into a light gallery wall; dark mode breaks the multiply blend -->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f3efe7">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Second Skin mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/" } }</script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
+<style>
+:root {
+  --paper: #f3efe7;
+  --wall: #e8e2d6;
+  --ink: #1b1a17;
+  --muted: #6f695e;
+  --line: #d6cfc1;
+  --plinth: #fbf9f4;
+  --page: #d9d3c6;
+  --lift: brightness(1.1) contrast(1.06); /* pushes grey studio backdrops to white so multiply hides them */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-sheet: cubic-bezier(0.32, 0.72, 0, 1);   /* iOS sheet curve */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+* { box-sizing: border-box; margin: 0; }
+[hidden] { display: none !important; }
+body {
+  background: var(--page); color: var(--ink);
+  font: 14px/1.45 Inter, system-ui, sans-serif;
+  padding: 32px 16px 64px;
+}
+h1.sheet { font: 400 28px/1.1 Newsreader, serif; text-align: center; }
+p.sheet { text-align: center; color: var(--muted); margin: 6px auto 28px; max-width: 620px; }
+.screens { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; }
+.label { font: 500 11px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; text-align: center; }
+
+.phone {
+  width: 340px; max-width: 100%; height: 700px;
+  background: var(--paper); border-radius: 36px; overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,.35);
+  display: flex; flex-direction: column; position: relative;
+}
+.bar { display: flex; justify-content: space-between; align-items: center; padding: 18px 16px 6px 22px; }
+.pill { min-height: 44px; padding: 0 16px; border-radius: 999px; background: var(--ink); color: var(--paper); font-size: 13px; font-weight: 500; }
+.brand { font: italic 400 20px/1 Newsreader, serif; }
+.mono { font: 400 11px/1.3 "IBM Plex Mono", monospace; color: var(--muted); }
+.serif { font-family: Newsreader, serif; }
+
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.press { transition: transform 160ms var(--ease-out); }
+.press:active { transform: scale(0.97); }
+.btn {
+  display: block; width: 100%; padding: 13px 16px; border-radius: 999px;
+  background: var(--ink); color: var(--paper); font-weight: 500; text-align: center;
+}
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+
+/* Turntable: one WebGL canvas per avatar */
+.turntable { position: absolute; left: 50%; margin-left: -110px; width: 220px; height: 440px; touch-action: pan-y; cursor: grab; }
+.turntable:active { cursor: grabbing; }
+.turntable canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+}
+
+.stage { flex: 1; position: relative; background: linear-gradient(var(--wall), var(--paper) 78%); }
+.stage .turntable { bottom: 128px; }
+.toast { position: absolute; left: 50%; top: 92px; transform: translate(-50%, -6px); opacity: 0; pointer-events: none;
+  background: var(--ink); color: var(--paper); font: 500 12px Inter; padding: 7px 12px; border-radius: 999px; white-space: nowrap;
+  transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out); }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.credit { position: absolute; left: 20px; top: 8px; right: 20px; display: flex; justify-content: space-between; gap: 8px; }
+.credit .t { font: 400 22px/1.15 Newsreader, serif; }
+.skins { display: flex; margin-right: -12px; }
+/* 44 px hit area, 20 px dot: the 12 px transparent border is touchable but not painted */
+.skin { width: 44px; height: 44px; border-radius: 50%; border: 12px solid transparent; background-clip: padding-box !important;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); }
+.skin[aria-pressed="true"] { outline: 2px solid var(--ink); outline-offset: -10px; }
+
+/* Wardrobe: a bottom sheet with three snap points (peek, half, full); --y is how far it sits below fully open */
+.wardrobe {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 88%; z-index: 2;
+  background: var(--plinth); border-top: 1px solid var(--line); border-radius: 22px 22px 0 0;
+  display: flex; flex-direction: column; transform: translateY(var(--y, 0px));
+  transition: transform 420ms var(--ease-sheet); will-change: transform;
+}
+.wardrobe.dragging { transition: none; }
+.grab { padding: 0 18px; touch-action: none; cursor: grab; }
+.handle { display: block; width: 100%; height: 22px; position: relative; }
+.handle::before { content: ""; position: absolute; left: 50%; top: 9px; width: 40px; height: 4px; margin-left: -20px; border-radius: 2px; background: var(--line); }
+.wardrobe-head { display: flex; align-items: baseline; justify-content: space-between; }
+.wardrobe h2 { font: 400 22px/1 Newsreader, serif; margin: 0; }
+.wardrobe .grid { padding: 4px 18px 24px; overflow-y: auto; overscroll-behavior: contain; grid-template-columns: repeat(3, 1fr); }
+/* the form steps up and back so it stays visible above an open wardrobe */
+.stage .turntable { transform-origin: 50% 0; transition: transform 420ms var(--ease-sheet); }
+.stage[data-snap="half"] .turntable, .stage[data-snap="full"] .turntable { transform: translateY(-2%) scale(.6); }
+/* while choosing, only the look name stays: the credit lines would sit under the scaled form */
+.credit .mono { transition: opacity 200ms var(--ease-out); }
+.stage:not([data-snap="peek"]) .credit .mono { opacity: 0; }
+.cats { display: flex; gap: 6px; margin: 10px -18px 12px; padding: 0 18px; overflow-x: auto; scrollbar-width: none; }
+.cats .cat { flex: none; }
+.cat { min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); font-size: 13px; }
+.cat[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.grid .zones { grid-column: 1 / -1; display: flex; gap: 6px; }
+.tile {
+  aspect-ratio: 3/4; border-radius: 12px; overflow: hidden; position: relative;
+  background: var(--wall); border: 1px solid var(--line);
+}
+.tile img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; filter: var(--lift); }
+.tile .m { position: absolute; left: 6px; bottom: 6px; font: 400 10px "IBM Plex Mono", monospace; background: var(--paper); padding: 2px 5px; border-radius: 4px; }
+.tile.on { outline: 2px solid var(--ink); outline-offset: 2px; }
+.tile.locked img { filter: grayscale(1) contrast(.2) brightness(1.4); }
+.tile.locked::after { content: "Tap the card in the museum"; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 10px; font: italic 13px/1.2 Newsreader, serif; color: var(--muted); }
+
+/* Piece */
+.hero { position: relative; height: 330px; background: var(--wall); overflow: hidden; }
+.hero img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; filter: var(--lift); transition: opacity 200ms var(--ease-out); }
+model-viewer { width: 100%; height: 100%; background: var(--wall); --poster-color: transparent; }
+.hotspot {
+  padding: 4px 9px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line);
+  font: 500 11px Inter, sans-serif; box-shadow: 0 4px 12px -6px rgba(0,0,0,.4);
+  transition: opacity 200ms var(--ease-out), transform 160ms var(--ease-out);
+}
+.hotspot:active { transform: scale(0.97); }
+.hotspot[data-visible="false"] { opacity: 0; pointer-events: none; }
+.model-missing { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; font: italic 15px Newsreader, serif; color: var(--muted); }
+.hint { position: absolute; left: 0; right: 0; bottom: 12px; text-align: center; pointer-events: none; }
+.back { position: absolute; top: 14px; left: 14px; width: 44px; height: 44px; border-radius: 50%; background: var(--paper); display: grid; place-items: center; }
+.body { padding: 16px 20px 0; flex: 1; overflow: auto; }
+.body h3 { font: 400 24px/1.1 Newsreader, serif; }
+dl { display: grid; grid-template-columns: 84px 1fr; gap: 4px 10px; margin: 12px 0; font-size: 13px; }
+dt { color: var(--muted); }
+.variants { display: flex; gap: 8px; margin: 6px 0 16px; }
+.var { width: 64px; text-align: center; font-size: 11px; color: var(--muted); }
+.var .th { width: 64px; height: 64px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background: var(--wall); margin-bottom: 4px; }
+.var .th img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; }
+/* pattern scans are tall sheets of faint pencil: show the labelled top edge so the thumbnail is not read as empty */
+.var .th img.pat { object-position: 0 0; transform: scale(2.6); transform-origin: 0 0; filter: url(#ink); }
+.hero img.pat { filter: url(#ink); }
+.var .th .badge { position: absolute; right: 4px; bottom: 4px; font: 500 10px Inter; background: var(--paper); padding: 1px 4px; border-radius: 4px; }
+.var .th { position: relative; }
+.var[aria-pressed="true"] .th { outline: 2px solid var(--ink); outline-offset: 2px; }
+.var.locked .th { display: grid; place-items: center; font-size: 18px; }
+.foot { padding: 12px 20px 22px; }
+.foot.two { display: flex; gap: 8px; }
+.bar-actions { display: flex; gap: 6px; }
+.pill.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.back-inline { width: 44px; height: 44px; margin: -10px 0 -10px -14px; font-size: 18px; }
+.app-only { display: none; }
+
+/* Track */
+.track { padding: 0 20px; flex: 1; overflow: auto; }
+.track h2 { font: 400 26px/1.1 Newsreader, serif; margin-top: 4px; }
+.steps { list-style: none; padding: 0; margin: 18px 0; position: relative; }
+.steps::before { content: ""; position: absolute; left: 13px; top: 14px; bottom: 14px; width: 1px; background: var(--line); }
+.step { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 10px 0; position: relative; }
+.dot { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: var(--paper); display: grid; place-items: center; font: 500 11px "IBM Plex Mono", monospace; transition: background-color 200ms ease, color 200ms ease; }
+.step.done .dot { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.step .k { font-weight: 600; }
+.step .d { color: var(--muted); font-size: 13px; }
+.step:not(.done) .k { color: var(--muted); }
+.card-wrap { perspective: 900px; margin: 4px 0 16px; }
+.card { position: relative; height: 150px; transform-style: preserve-3d; transition: transform 450ms var(--ease-in-out); }
+.card.flipped { transform: rotateY(180deg); }
+.face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 14px; border: 1px solid var(--line); background: var(--plinth); padding: 14px 16px; }
+.face.backside { transform: rotateY(180deg); display: grid; grid-template-columns: 90px 1fr; gap: 12px; align-items: center; }
+.face.backside img { width: 90px; height: 120px; object-fit: cover; border-radius: 8px; mix-blend-mode: multiply; background: var(--wall); }
+.story { font: italic 400 15px/1.4 Newsreader, serif; }
+
+@media (hover: hover) and (pointer: fine) {
+  .tile img { transition: transform 200ms var(--ease-out); }
+  .tile:hover img { transform: scale(1.03); }
+}
+/* Phone app: one full-screen screen at a time (body[data-screen]); wider screens keep the side-by-side pitch layout */
+@media (max-width: 600px) {
+  html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
+  body { padding: 0; background: var(--paper); }
+  h1.sheet, p.sheet, .label { display: none; }
+  .screens { display: block; height: 100%; }
+  .screens > section { display: none; height: 100%; }
+  body[data-screen="stage"] [data-screen="stage"], body[data-screen="piece"] [data-screen="piece"],
+  body[data-screen="track"] [data-screen="track"] { display: block; animation: screen-in 260ms var(--ease-out); }
+  .phone { width: 100%; height: 100dvh; border: 0; border-radius: 0; box-shadow: none;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left); }
+  .foot { padding-bottom: calc(22px + env(safe-area-inset-bottom)); }
+  .wardrobe .grid { padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
+  .hero { height: 46dvh; }
+  /* the form fills the space between the look credit and the peeking wardrobe; the camera keeps its 22 degree height */
+  .stage .turntable { left: 0; margin-left: 0; width: 100%; height: auto; top: 128px; bottom: 124px; }
+  /* at half the free space is the top 52% of the stage, so the taller phone turntable steps back further */
+  .stage[data-snap="half"] .turntable, .stage[data-snap="full"] .turntable { transform: translateY(-4%) scale(.5); }
+  .app-only { display: inline-flex; align-items: center; justify-content: center; }
+  .foot.two .btn { flex: 1; }
+}
+@keyframes screen-in { from { opacity: 0; transform: translateY(8px); } }
+@media (prefers-reduced-motion: reduce) {
+  .press:active { transform: none; }
+  .card { transition: none; }
+  .wardrobe, .stage .turntable { transition-duration: 1ms; }
+  .screens > section { animation: none !important; }
+}
+</style>
+</head>
+<body data-screen="stage">
+<!-- pattern scans are under 1% light-grey pencil on white: a gamma of 10 keeps paper at 255 and takes 214 to about 30 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="ink" color-interpolation-filters="sRGB">
+  <feColorMatrix type="saturate" values="0"/>
+  <feComponentTransfer><feFuncR type="gamma" exponent="10"/><feFuncG type="gamma" exponent="10"/><feFuncB type="gamma" exponent="10"/></feComponentTransfer>
+</filter></svg>
+<h1 class="sheet">Second Skin</h1>
+<p class="sheet">Drag the avatar to turn it. The avatar is a 3D dress form wearing models made from the museum photos, sized and placed by slot so any top, bottom and shoes fit at every angle. CLO drapes replace the models later.</p>
+
+<div class="screens">
+
+  <!-- 1. STAGE (the wardrobe is a bottom sheet on the stage, so the form stays in view while you dress it) -->
+  <section data-screen="stage">
+    <div class="label">1 · Stage</div>
+    <div class="phone">
+      <div class="bar"><span class="brand">Second Skin</span><span class="bar-actions"><button class="pill ghost press app-only" data-go="piece">Learn</button><button class="pill press" id="shareBtn">Share look</button></span></div>
+      <div class="stage" id="stage" data-snap="peek">
+        <div class="credit">
+          <div>
+            <div class="t" id="lookName">Antwerp, any century</div>
+            <div class="mono" id="lookCredit"></div>
+            <div class="mono" id="lookSpan"></div>
+          </div>
+          <div class="skins" id="skins" aria-label="Form finish"></div>
+        </div>
+        <div class="turntable" id="stageTT" role="img" aria-label="Your avatar, drag to turn"></div>
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+        <section class="wardrobe" id="wardrobe" aria-label="Wardrobe">
+          <div class="grab" id="wardrobeGrab">
+            <button class="handle" id="wardrobeHandle" aria-label="Open or close the wardrobe" aria-expanded="false"></button>
+            <div class="wardrobe-head"><h2 id="slotTitle">Top</h2><span class="mono">6 of 20 pieces found</span></div>
+            <div class="cats" id="cats"></div>
+          </div>
+          <div class="grid" id="grid"></div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. PIECE -->
+  <section data-screen="piece">
+    <div class="label">2 · Piece</div>
+    <div class="phone">
+      <div class="hero">
+        <img id="heroImg" alt="Furisode kimono ST80881">
+        <model-viewer id="heroModel" hidden src="assets/ST80881.glb" alt="Furisode kimono ST80881 in 3D"
+          camera-controls auto-rotate auto-rotate-delay="1500" rotation-per-second="18deg" touch-action="pan-y"
+          ar ar-modes="webxr scene-viewer quick-look" shadow-intensity="0.8" exposure="1.05"
+          min-camera-orbit="auto auto 40%" interaction-prompt="none">
+          <button slot="hotspot-sleeve" class="hotspot" data-dim="-0.42 0.25 0.1">Sleeve</button>
+          <button slot="hotspot-hem" class="hotspot" data-dim="0.2 -0.42 0.1">Hem</button>
+        </model-viewer>
+        <div class="model-missing" id="modelMissing" hidden>No 3D file yet. Run mockups/tools/img2glb.py.</div>
+        <button class="back press" aria-label="Back to your look" data-go="stage">←</button>
+        <div class="hint mono" id="heroHint" hidden>Drag to turn · pinch to zoom</div>
+      </div>
+      <div class="body">
+        <div class="mono">ST80881 · Study collection</div>
+        <h3>Furisode kimono, painted with gold print</h3>
+        <dl>
+          <dt>Date</dt><dd>1979</dd>
+          <dt>Technique</dt><dd>Painted, gold print</dd>
+          <dt>Pattern by</dt><dd>Stijn Van den Bulck, MoMu</dd>
+        </dl>
+        <div class="mono" style="margin-bottom:6px">Versions from its real life</div>
+        <div class="variants" id="variants"></div>
+      </div>
+      <div class="foot two"><button class="btn ghost press app-only" data-go="track">Levels</button><button class="btn press" id="wearBtn">Wear it</button></div>
+    </div>
+  </section>
+
+  <!-- 3. TRACK -->
+  <section data-screen="track">
+    <div class="label">3 · Knowledge track</div>
+    <div class="phone">
+      <div class="bar"><button class="back-inline press app-only" aria-label="Back to the kimono" data-go="piece">←</button><span class="brand">Second Skin</span><span class="mono">ST80881</span></div>
+      <div class="track">
+        <h2>Learn it to level it up</h2>
+        <ol class="steps" id="steps"></ol>
+        <div class="card-wrap">
+          <div class="card" id="card">
+            <div class="face">
+              <div class="mono">Next unlock</div>
+              <div class="serif" style="font-size:20px;margin-top:6px" id="nextName">The pattern</div>
+              <div class="mono" style="margin-top:8px">Read the story to reveal it</div>
+            </div>
+            <div class="face backside">
+              <img id="unlockImg" alt="">
+              <div><div class="mono">Unlocked</div><div class="story" id="unlockText"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><button class="btn press" id="readBtn">Read the story</button></div>
+    </div>
+  </section>
+
+</div>
+
+<script type="module">
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+
+const IMG = id => `https://heron.libis.be/momu/files/large/${id}.jpg`;
+const FRAMES = 36; // matches CLO export_turntable's default frame count
+
+const SKINS = ["#e9dfcc", "#d2bf9c", "#2a2724", "#8a6a48"];   // dress-form finishes, in FINISH_NAMES order
+const FINISH_NAMES = ["Linen", "Calico", "Black jersey", "Oak"];
+// pieces.json (schema: pieces.schema.json) is the single source of truth; the pipeline reads the same file
+const manifest = await (await fetch("pieces.json")).json();
+const PIECES = Object.fromEntries(manifest.pieces.map(p => [p.id, {
+  ...p.fit, slot: p.slot, name: p.name, year: p.year, locked: p.locked,
+  img: IMG(p.source.imgSha), glb: p.assets.glb?.path ?? null, kind: p.assets.glb?.kind ?? null,
+}]));
+const SLOTS = ["top", "bottom", "feet", "full"];
+const look = { top: "ST503", bottom: "ST80931", feet: "ST2407/1-2", full: null, fabric: { body: null, sleeves: null }, skin: 1 };
+const SAVE_KEY = "secondSkin.save.v1";
+try {   // restore the visitor's look; ids are checked against the manifest, since storage is user-controlled
+  const saved = JSON.parse(localStorage.getItem(SAVE_KEY) || "null");
+  const ok = (id, slots) => id === null || (PIECES[id] && !PIECES[id].locked && slots.includes(PIECES[id].slot));
+  const l = saved?.v === 1 && saved.look;
+  if (l && ok(l.top, ["top"]) && ok(l.bottom, ["bottom"]) && ok(l.feet, ["feet"]) && ok(l.full, ["full"])
+      && ok(l.fabric?.body ?? null, ["top", "bottom", "feet", "full"]) && ok(l.fabric?.sleeves ?? null, ["top", "bottom", "feet", "full"])
+      && Number.isInteger(l.skin) && l.skin >= 0 && l.skin < 4) {
+    Object.assign(look, { top: l.top, bottom: l.bottom, feet: l.feet, full: l.full, skin: l.skin,
+      fabric: { body: l.fabric?.body ?? null, sleeves: l.fabric?.sleeves ?? null } });
+  }
+} catch { /* private mode or a corrupt save: start fresh */ }
+
+/* ---------- Turntable: one three.js scene, a dress form and the worn pieces ---------- */
+// Dress form in metres; every MoMu photo is shot on a form like this, so the scans sit on it in the same pose
+const FORM_PROFILE = [[0, 0.78], [0.15, 0.79], [0.175, 0.86], [0.16, 0.95], [0.13, 1.04], [0.15, 1.16], [0.17, 1.27],
+  [0.165, 1.33], [0.12, 1.37], [0, 1.38]];
+// Width in metres of the model's bounding box x; `top` is where its top edge sits (null: stands on the floor).
+// Trellis GLBs are normalised, so true size is lost. A bottom or full piece is also capped so it cannot hang below y=0.
+const SLOT_FIT = { top: { width: 0.6, top: 1.38 }, bottom: { width: 0.5, top: 1.04, floor: 0.04 }, feet: { width: 0.22, top: null }, full: { width: 0.7, top: 1.38 } };
+
+function makeForm() {
+  const form = new THREE.Group(), metal = new THREE.MeshStandardMaterial({ color: 0x2a2623, roughness: 0.4, metalness: 0.6 });
+  const cloth = new THREE.MeshStandardMaterial({ color: SKINS[look.skin], roughness: 0.9 });
+  const torso = new THREE.Mesh(new THREE.LatheGeometry(FORM_PROFILE.map(([r, y]) => new THREE.Vector2(r, y)), 48), cloth);
+  torso.scale.z = 0.7;   // forms are flatter front to back than side to side
+  const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.78, 12), metal); pole.position.y = 0.39;
+  const base = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.17, 0.025, 32), metal); base.position.y = 0.0125;
+  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.055, 0.1, 24), cloth); neck.position.y = 1.41;
+  form.add(torso, neck, pole, base);
+  form.userData = { cloth, torso };
+  return form;
+}
+
+// render layers in dressing order: each pass draws over the last, so an outer garment always covers the one under it
+// (scans are rigid and never nest cleanly, so plain depth lets trouser ties poke through a jak)
+const LAYER = { feet: 1, bottom: 2, top: 3, full: 3 };
+const fileOf = id => id.replace("/", "_");
+
+/* Garment material: one shader patch per scan, set once on load.
+   uDrop hides near-black texels (the museum stand TRELLIS baked into some scans).
+   uRemixA/B project another piece's fabric in object space (TRELLIS UVs are hundreds of scattered islands, so a
+   swatch on the UVs would come out chopped) and multiply it by the scan's own brightness to keep folds and shading.
+   Zone A is the body, zone B the sleeves: further than uSplit from the centre line uCx and above uSleeveY. */
+const GARMENT_VERT = ["#include <common>\nvarying vec3 vObjPos;\nvarying vec3 vObjN;", "#include <begin_vertex>\n  vObjPos = position; vObjN = normal;"];
+const GARMENT_DECL = `varying vec3 vObjPos;
+varying vec3 vObjN;
+uniform sampler2D uFabricA, uFabricB;
+uniform float uRemixA, uRemixB, uMean, uDrop, uCx, uSplit, uSleeveY;
+vec3 triplanar(sampler2D t) {
+  vec3 w = pow(abs(normalize(vObjN)), vec3(4.0)); w /= w.x + w.y + w.z;
+  vec3 p = vObjPos * 4.0;
+  return texture2D(t, p.zy).rgb * w.x + texture2D(t, p.xz).rgb * w.y + texture2D(t, p.xy).rgb * w.z;
+}`;
+const GARMENT_FRAG = `#include <map_fragment>
+  float lum = dot(diffuseColor.rgb, vec3(0.299, 0.587, 0.114));
+  if (lum < uDrop) discard;
+  float shade = clamp(lum / uMean, 0.35, 1.5);
+  vec3 bodyCol = uRemixA > 0.5 ? triplanar(uFabricA) * shade : diffuseColor.rgb;
+  vec3 sleeveCol = uRemixB > 0.5 ? triplanar(uFabricB) * shade : diffuseColor.rgb;
+  float sleeve = smoothstep(uSplit - 0.015, uSplit + 0.015, abs(vObjPos.x - uCx))   // soft seams, not hard cuts
+    * smoothstep(uSleeveY - 0.015, uSleeveY + 0.015, vObjPos.y);   // below the cuffs, wide is a skirt, not a sleeve
+  diffuseColor.rgb = mix(bodyCol, sleeveCol, sleeve);`;
+function meanLuma(tex) {   // linear brightness of the scan's texture, ignoring the black padding between UV islands
+  const c = document.createElement("canvas"); c.width = c.height = 32;
+  const g = c.getContext("2d"); g.drawImage(tex.image, 0, 0, 32, 32);
+  const d = g.getImageData(0, 0, 32, 32).data, lin = v => (v / 255) ** 2.2;
+  let sum = 0, n = 0;
+  for (let i = 0; i < d.length; i += 4) {
+    if (d[i] + d[i + 1] + d[i + 2] < 6) continue;
+    sum += 0.299 * lin(d[i]) + 0.587 * lin(d[i + 1]) + 0.114 * lin(d[i + 2]); n++;
+  }
+  return Math.max(sum / Math.max(n, 1), 0.02);
+}
+function prepGarment(scene, piece) {
+  scene.traverse(o => {
+    if (!o.isMesh) return;
+    if (!o.geometry.attributes.normal) o.geometry.computeVertexNormals();   // TRELLIS ships none, which renders faceted
+    const m = o.material, g = o.geometry;
+    g.computeBoundingBox();
+    const half = (g.boundingBox.max.x - g.boundingBox.min.x) / 2;
+    const u = m.userData.u = { uFabricA: { value: null }, uFabricB: { value: null }, uRemixA: { value: 0 }, uRemixB: { value: 0 },
+      uMean: { value: m.map ? meanLuma(m.map) : 0.2 },
+      uCx: { value: (g.boundingBox.max.x + g.boundingBox.min.x) / 2 },
+      uSplit: { value: half * 0.5 },   // scans hang sleeves outside about half the full width
+      uSleeveY: { value: g.boundingBox.min.y + (piece.sleeveTo ?? 0.4) * (g.boundingBox.max.y - g.boundingBox.min.y) },
+      uDrop: { value: piece.hideStand ? 0.03 : -1 } };   // 0.03 is linear: the stand's near-black, under any fabric's darkest dye
+    m.onBeforeCompile = sh => {
+      Object.assign(sh.uniforms, u);
+      sh.vertexShader = sh.vertexShader.replace("#include <common>", GARMENT_VERT[0]).replace("#include <begin_vertex>", GARMENT_VERT[1]);
+      sh.fragmentShader = sh.fragmentShader
+        .replace("#include <common>", "#include <common>\n" + GARMENT_DECL)
+        .replace("#include <map_fragment>", GARMENT_FRAG);
+    };
+  });
+  return scene;
+}
+const fabricLoader = new THREE.TextureLoader(), fabrics = {};
+function fabricTex(id) {
+  if (!fabrics[id]) {
+    const t = fabrics[id] = fabricLoader.load(`assets/swatch/${fileOf(id)}.jpg`, () => turntables.forEach(tt => tt.render()));
+    t.wrapS = t.wrapT = THREE.MirroredRepeatWrapping;   // mirrored tiling hides the swatch's edges
+    t.colorSpace = THREE.SRGBColorSpace;
+  }
+  return fabrics[id];
+}
+function setFabric(obj, { body, sleeves } = {}) {
+  obj.traverse(o => {
+    const u = o.material?.userData.u; if (!u) return;
+    u.uRemixA.value = body ? 1 : 0; if (body) u.uFabricA.value = fabricTex(body);
+    u.uRemixB.value = sleeves ? 1 : 0; if (sleeves) u.uFabricB.value = fabricTex(sleeves);
+  });
+}
+
+function contactShadow() {   // soft dark disc under the base so the form stands on the floor, not in the air
+  const c = document.createElement("canvas"); c.width = c.height = 128;
+  const g = c.getContext("2d"), r = g.createRadialGradient(64, 64, 8, 64, 64, 64);
+  r.addColorStop(0, "rgba(40,30,20,0.45)"); r.addColorStop(1, "rgba(40,30,20,0)");
+  g.fillStyle = r; g.fillRect(0, 0, 128, 128);
+  const disc = new THREE.Mesh(new THREE.PlaneGeometry(0.75, 0.75), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(c), transparent: true, depthWrite: false }));
+  disc.rotation.x = -Math.PI / 2; disc.position.y = 0.002;
+  return disc;
+}
+
+const loader = new GLTFLoader(), scenes = {};
+const loadGlb = id => scenes[id] ??= loader.loadAsync(PIECES[id].glb)
+  .then(g => prepGarment(g.scene, PIECES[id]))
+  .catch(e => { delete scenes[id]; throw e; });   // a failed load must not stick in the cache
+
+function place(model, slot, adjust = 1) {   // wrapper keeps the model's own transform; the wrapper carries the fit
+  const box = new THREE.Box3().setFromObject(model), c = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3());
+  const { width, top } = SLOT_FIT[slot];
+  const span = slot === "feet" ? Math.max(size.x, size.z) : size.x;   // a pair of shoes is longer than it is wide
+  // bottoms are sized by length, waist to just above the base (`floor`); width only caps them
+  const s = Math.min(width / span, top ? (top - (SLOT_FIT[slot].floor ?? 0)) / size.y : Infinity) * adjust;
+  const wrap = new THREE.Group(); wrap.add(model);
+  wrap.scale.setScalar(s); wrap.position.set(-c.x * s, top ? top - box.max.y * s : -box.min.y * s, -c.z * s);
+  return wrap;
+}
+
+class Turntable {
+  constructor(el, { interactive, frame = 0, onFrame }) {
+    this.el = el; this.frame = frame; this.onFrame = onFrame; this.worn = {};
+    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    el.appendChild(this.renderer.domElement);
+    this.scene = new THREE.Scene();
+    // TRELLIS materials are partly metallic and turn black without an environment to reflect
+    this.scene.environment = new THREE.PMREMGenerator(this.renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+    const fill = new THREE.HemisphereLight(0xffffff, 0xd8cfc0, 0.6), key = new THREE.DirectionalLight(0xffffff, 1.2);
+    key.position.set(-1.5, 2.5, 3);
+    for (const light of [fill, key]) { light.layers.enableAll(); this.scene.add(light); }   // lights must reach both render passes
+    this.renderer.autoClear = false;
+    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;   // softer highlights on pale silks than the default linear clip
+    this.renderer.toneMappingExposure = 1.1;
+    const rim = new THREE.DirectionalLight(0xfff4e6, 0.7); rim.position.set(1.2, 2, -3);   // back light separates dark cloth from the wall
+    rim.layers.enableAll(); this.scene.add(rim);
+    // fov 19 at 4.8 m frames the floor to 8 cm above the neck (1.46 m), so the form fills the stage
+    this.camera = new THREE.PerspectiveCamera(19, 0.5, 0.1, 20);
+    this.camera.position.set(0, 0.77, 4.8); this.camera.lookAt(0, 0.77, 0);
+    this.rig = new THREE.Group(); this.scene.add(this.rig);
+    this.form = makeForm(); this.rig.add(this.form);
+    this.scene.add(contactShadow());
+    new ResizeObserver(() => this.resize()).observe(el);
+    new IntersectionObserver(([e]) => { this.onScreen = e.isIntersecting; this.render(); }).observe(el);
+    if (interactive) this.bindDrag();
+    this.draw(); this.setFrame(frame);
+  }
+  resize() {
+    const r = this.el.getBoundingClientRect();
+    if (!r.width || !r.height) return;   // hidden element: an aspect of NaN would break the camera
+    this.renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+    this.renderer.setSize(r.width, r.height, false);
+    this.camera.aspect = r.width / r.height; this.camera.updateProjectionMatrix();
+    this.render();
+  }
+  setFrame(f) {   // fractional frames turn smoothly; onFrame still gets whole 10-degree steps
+    this.rig.rotation.y = (f / FRAMES) * 2 * Math.PI;
+    this.render();
+    const n = ((Math.round(f) % FRAMES) + FRAMES) % FRAMES;
+    if (n !== this.shown) { this.shown = n; this.onFrame?.(n); }
+  }
+  swap() { this.draw(); }
+  draw() {   // bring the worn pieces in line with `look`
+    this.form.userData.cloth.color.set(SKINS[look.skin]);
+    const want = look.full ? { full: look.full, feet: look.feet } : { top: look.top, bottom: look.bottom, feet: look.feet };
+    for (const slot of SLOTS) {
+      const id = want[slot], cur = this.worn[slot];
+      if (cur && cur.id === id) { if (cur.obj) setFabric(cur.obj, this.fabricFor(slot, id)); continue; }
+      if (!cur && !id) continue;
+      if (cur?.obj) this.rig.remove(cur.obj);
+      delete this.worn[slot];
+      if (!id || !PIECES[id].glb) continue;
+      const entry = this.worn[slot] = { id };
+      loadGlb(id).then(model => {
+        if (this.worn[slot] !== entry) return;   // swapped again while loading
+        entry.obj = place(model.clone(), slot, PIECES[id].adjust);
+        entry.born = performance.now();
+        entry.obj.traverse(o => o.layers.set(LAYER[slot]));
+        setFabric(entry.obj, this.fabricFor(slot, id));
+        this.rig.add(entry.obj); this.fitForm(); this.settle();
+      }).catch(e => console.warn(`3D model for ${id} failed`, e));
+    }
+    this.fitForm(); this.render();
+  }
+  fabricFor(slot, id) {   // remix fabrics go on the main garment only; a piece's own fabric means "original"
+    if (slot !== "top" && slot !== "full") return {};
+    const own = f => f && f !== id ? f : null;
+    return { body: own(look.fabric.body), sleeves: own(look.fabric.sleeves) };
+  }
+  fitForm() {   // a loaded top hides the torso (scan shoulders rarely match the form's); the neck stays
+    this.form.userData.torso.visible = !(this.worn.top?.obj || this.worn.full?.obj);
+  }
+  settle() {   // a new piece drops 4 cm onto the form and eases in, instead of popping into place
+    const tick = () => { this.render(); if (Object.values(this.worn).some(e => e.born)) requestAnimationFrame(tick); };
+    tick();
+  }
+  render() {   // form first, then each garment layer over a cleared depth buffer (see LAYER)
+    if (this.onScreen === false) return;
+    for (const e of Object.values(this.worn)) {
+      if (!e.born || !e.obj) continue;
+      const k = Math.min((performance.now() - e.born) / 360, 1), ease = 1 - (1 - k) ** 3;
+      e.obj.userData.rest ??= { y: e.obj.position.y, s: e.obj.scale.x };
+      e.obj.position.y = e.obj.userData.rest.y + 0.04 * (1 - ease);
+      e.obj.scale.setScalar(e.obj.userData.rest.s * (0.97 + 0.03 * ease));
+      if (k === 1) delete e.born;
+    }
+    this.renderer.clear();
+    this.camera.layers.set(0); this.renderer.render(this.scene, this.camera);
+    for (const layer of [1, 2, 3]) {
+      this.renderer.clearDepth();
+      this.camera.layers.set(layer); this.renderer.render(this.scene, this.camera);
+    }
+  }
+  bindDrag() {
+    let x0, f0, last, vel = 0, raf, idle;
+    // spin by elapsed time (a 120 Hz screen turns at the same speed), slowly, and ease up to speed after a drag
+    let t0, speed = 0;
+    const spin = t => {
+      speed += (0.0022 - speed) * 0.02;   // 0.0022 frames/ms is 22 degrees a second, one turn in about 16 s
+      this.frame += speed * Math.min(t - (t0 ?? t), 50); t0 = t; this.setFrame(this.frame); raf = requestAnimationFrame(spin);
+    };
+    const coast = () => {   // momentum after release, then hand back to the idle spin
+      vel *= 0.92; this.frame += vel; this.setFrame(this.frame);
+      if (Math.abs(vel) > 0.02) raf = requestAnimationFrame(coast);
+      else idle = setTimeout(() => { if (!reduce) raf = requestAnimationFrame(spin); }, 2500);
+    };
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduce) raf = requestAnimationFrame(spin);
+    this.el.addEventListener("pointerdown", e => {
+      if (x0 != null) return;   // ignore a second finger mid-drag
+      cancelAnimationFrame(raf); clearTimeout(idle); speed = 0; t0 = undefined;
+      this.el.setPointerCapture(e.pointerId);
+      x0 = e.clientX; f0 = this.frame; last = { x: e.clientX, t: performance.now() }; vel = 0;
+    });
+    this.el.addEventListener("pointermove", e => {
+      if (x0 == null) return;
+      this.frame = f0 - (e.clientX - x0) / 6;   // 6 px per frame
+      const now = performance.now();
+      vel = -(e.clientX - last.x) / 6 / Math.max(1, (now - last.t) / 16);
+      last = { x: e.clientX, t: now };
+      this.setFrame(this.frame);
+    });
+    const end = () => { if (x0 == null) return; x0 = null; raf = requestAnimationFrame(coast); };
+    this.el.addEventListener("pointerup", end);
+    this.el.addEventListener("pointercancel", end);
+  }
+}
+
+const stageTT = new Turntable(document.getElementById("stageTT"), {
+  interactive: true,
+});
+const turntables = [stageTT];
+window.secondSkin = { look, turntables };   // handle for driving the mockup from the console
+
+/* ---------- Look state, skins, locker ---------- */
+const yearOf = id => PIECES[id].year.from;
+let widest = 0;
+const noun = id => PIECES[id].name.split(",")[0].split(" ").pop().replace(/^./, c => c.toUpperCase());   // "Green wool coat" -> "Coat"
+const adj = id => PIECES[id].name.split(" ")[0].replace(/,$/, "");   // "Furisode kimono, 1979" -> "Furisode"
+function lookName() {   // a remixed look earns a name; an unremixed one keeps the screen's title
+  const main = look.full || look.top, { body, sleeves } = look.fabric;
+  if (!main || (!body && !sleeves)) return "Antwerp, any century";
+  return `${noun(main)}${body ? ` in ${adj(body)}` : ""}${sleeves ? `${body ? "," : ""} with ${adj(sleeves)} sleeves` : ""}`;
+}
+/* Firsts: each shows once, then stays earned. Milestones reward range and curiosity, never time spent or streaks. */
+const FIRSTS = [
+  { k: "remix", t: "First remix: one piece's cloth on another's cut", test: (span, n) => n >= 1 },
+  { k: "two", t: "Two fabrics, one look", test: (span, n) => n >= 2 },
+  { k: "c1", t: "A century apart", test: span => span >= 100 },
+  { k: "c2", t: "Two centuries on one form", test: span => span >= 200 },
+];
+const earned = new Set();
+let toastTimer;
+function toast(text) {
+  const el = document.getElementById("toast");
+  el.textContent = text; el.classList.add("show");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove("show"), 2600);
+}
+function renderCredit() {   // the evening game: build the look that spans the most years
+  const ids = (look.full ? [look.full, look.feet] : [look.top, look.bottom, look.feet]).filter(Boolean);
+  const fabricIds = [look.fabric.body, look.fabric.sleeves].filter(Boolean);
+  const years = [...ids, ...fabricIds].map(yearOf).filter(Boolean);
+  const span = years.length > 1 ? Math.max(...years) - Math.min(...years) : 0;
+  widest = Math.max(widest, span);
+  document.getElementById("lookCredit").textContent = [...ids,
+    look.fabric.body && `body ${look.fabric.body}`, look.fabric.sleeves && `sleeves ${look.fabric.sleeves}`].filter(Boolean).join(" · ");
+  document.getElementById("lookSpan").textContent = span ? `Spans ${span} years · your widest ${widest}` : "";
+  document.getElementById("lookName").textContent = lookName();
+  try { localStorage.setItem(SAVE_KEY, JSON.stringify({ v: 1, look, widest })); } catch { /* storage full or blocked */ }
+  if (!renderCredit.ready) return;   // the page's opening look earns nothing; the visitor's first change can
+  const fresh = FIRSTS.filter(f => !earned.has(f.k) && f.test(span, fabricIds.length));
+  fresh.forEach(f => earned.add(f.k));
+  if (fresh.length) toast(fresh.at(-1).t);
+}
+const skinsEl = document.getElementById("skins");
+skinsEl.innerHTML = SKINS.map((c, i) => `<button class="skin press" style="background:${c}" aria-label="Form finish: ${FINISH_NAMES[i]}" aria-pressed="${i === look.skin}" data-i="${i}"></button>`).join("");
+skinsEl.addEventListener("click", e => {
+  const b = e.target.closest("[data-i]"); if (!b) return;
+  look.skin = +b.dataset.i;
+  skinsEl.querySelectorAll("[data-i]").forEach(x => x.setAttribute("aria-pressed", x === b));
+  turntables.forEach(t => t.draw());
+});
+
+let activeSlot = "top", activeZone = "body";
+function renderLocker() {
+  const LABEL = { top: "Top", bottom: "Bottom", feet: "Feet", full: "Full look", remix: "Remix" };
+  document.getElementById("slotTitle").textContent = activeSlot === "remix" ? "Remix the fabric" : LABEL[activeSlot];
+  document.getElementById("cats").innerHTML = [...SLOTS, "remix"].map(s =>
+    `<button class="cat press" aria-pressed="${s === activeSlot}" data-slot="${s}">${LABEL[s]}</button>`).join("");
+  if (activeSlot === "remix") {   // any unlocked piece's cloth, on the body or sleeves of your top or full look
+    const zones = ["body", "sleeves"].map(z =>
+      `<button class="cat press" aria-pressed="${z === activeZone}" data-zone="${z}">${z === "body" ? "Body" : "Sleeves"}</button>`).join("");
+    document.getElementById("grid").innerHTML = `<div class="zones">${zones}</div>` +
+      Object.entries(PIECES).filter(([, p]) => p.glb && !p.locked).map(([id, p]) =>
+      `<button class="tile press ${look.fabric[activeZone] === id ? "on" : ""}" data-id="${id}" aria-label="${p.name} fabric on the ${activeZone}">
+        <img src="assets/swatch/${fileOf(id)}.jpg" alt="" style="mix-blend-mode:normal"><span class="m">${id}</span></button>`).join("");
+    return;
+  }
+  document.getElementById("grid").innerHTML = Object.entries(PIECES).filter(([, p]) => p.slot === activeSlot).map(([id, p]) => {
+    const on = activeSlot === "full" ? look.full === id : (activeSlot === "feet" || !look.full) && look[activeSlot] === id;
+    return `<button class="tile press ${on ? "on" : ""} ${p.locked ? "locked" : ""}" data-id="${id}" aria-label="${p.name}">
+      <img src="${p.img}" alt=""><span class="m">${id}</span></button>`;
+  }).join("");
+}
+document.getElementById("cats").addEventListener("click", e => {
+  const b = e.target.closest("[data-slot]"); if (!b) return;
+  activeSlot = b.dataset.slot; renderLocker();
+});
+document.getElementById("grid").addEventListener("click", e => {
+  const z = e.target.closest("[data-zone]");
+  if (z) { activeZone = z.dataset.zone; renderLocker(); return; }
+  const b = e.target.closest("[data-id]"); if (!b || b.classList.contains("locked")) return;
+  const id = b.dataset.id;
+  if (activeSlot === "remix") look.fabric[activeZone] = look.fabric[activeZone] === id ? null : id;
+  else if (activeSlot === "full") look.full = look.full === id ? null : id;
+  else { if (activeSlot !== "feet") look.full = null; look[activeSlot] = id; }
+  const layer = activeSlot === "full" ? "top" : activeSlot;
+  turntables.forEach(t => { t.swap(layer); if (layer === "top") t.swap("bottom"); });
+  renderLocker(); renderCredit();
+});
+
+/* ---------- Wardrobe sheet: drag the grab area, snap to peek / half / full ---------- */
+const stageEl = document.getElementById("stage"), wardrobe = document.getElementById("wardrobe");
+const grabEl = document.getElementById("wardrobeGrab"), handleEl = document.getElementById("wardrobeHandle");
+const SNAPS = ["peek", "half", "full"], PEEK = 124;   // peek shows the handle, the title and the category chips
+let snap = "peek";
+function snapY(name) {   // translateY for a snap point: sheet height minus the part left visible
+  const sheetH = wardrobe.offsetHeight;
+  return sheetH - { peek: PEEK, half: stageEl.clientHeight * 0.48, full: sheetH }[name];
+}
+function setSnap(name) {
+  snap = name; stageEl.dataset.snap = name;
+  wardrobe.style.setProperty("--y", `${snapY(name)}px`);
+  handleEl.setAttribute("aria-expanded", name !== "peek");
+}
+setSnap("peek");
+new ResizeObserver(() => setSnap(snap)).observe(stageEl);
+{
+  let y0 = null, from, y, vel = 0, lastY, lastT, dragged = false;
+  grabEl.addEventListener("pointerdown", e => { y0 = lastY = e.clientY; lastT = e.timeStamp; from = y = snapY(snap); vel = 0; dragged = false; });
+  grabEl.addEventListener("pointermove", e => {
+    if (y0 === null) return;
+    const dy = e.clientY - y0;
+    if (!dragged && Math.abs(dy) < 6) return;   // under 6 px a press on a chip stays a tap
+    if (!dragged) {
+      dragged = true; wardrobe.classList.add("dragging");
+      try { grabEl.setPointerCapture(e.pointerId); } catch { /* pointer already gone: the drag still works without capture */ }
+    }
+    y = from + dy;
+    if (y < 0) y *= 0.3;   // past fully open the sheet resists instead of stopping dead
+    wardrobe.style.setProperty("--y", `${y}px`);
+    vel = (e.clientY - lastY) / Math.max(1, e.timeStamp - lastT); lastY = e.clientY; lastT = e.timeStamp;
+  });
+  const end = () => {
+    if (y0 === null) return;
+    y0 = null;
+    if (!dragged) return;
+    wardrobe.classList.remove("dragging");
+    setTimeout(() => { dragged = false; });   // the click that ends this drag runs first; the next tap is real
+    const i = SNAPS.indexOf(snap);
+    // a flick (over 0.11 px/ms) moves one snap in its direction; a slow drag settles on the nearest
+    const next = Math.abs(vel) > 0.11 ? SNAPS[Math.max(0, Math.min(2, i + (vel < 0 ? 1 : -1)))]
+      : SNAPS.reduce((a, b) => Math.abs(snapY(b) - y) < Math.abs(snapY(a) - y) ? b : a);
+    setSnap(next);
+  };
+  grabEl.addEventListener("pointerup", end);
+  grabEl.addEventListener("pointercancel", end);
+  grabEl.addEventListener("click", e => { if (dragged) e.stopPropagation(); }, true);   // a drag that ends on a chip is not a tap
+  handleEl.addEventListener("click", () => setSnap(snap === "peek" ? "half" : "peek"));
+}
+// choosing a category from the peeking sheet opens it so the pieces are visible
+document.getElementById("cats").addEventListener("click", e => { if (e.target.closest("[data-slot]") && snap === "peek") setSnap("half"); });
+
+/* ---------- Screens: on a phone one screen shows at a time (CSS keys on body[data-screen]) ---------- */
+function go(screen) {
+  document.body.dataset.screen = screen;
+  if (screen === "stage") turntables.forEach(t => t.render());   // it was display:none, so its canvas went stale
+}
+document.addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (b) go(b.dataset.go); });
+document.getElementById("wearBtn").addEventListener("click", () => {   // the Piece page's kimono goes onto the form
+  look.full = "ST80881";
+  turntables.forEach(t => t.draw()); renderLocker(); renderCredit();
+  go("stage");
+});
+
+/* ---------- Piece variants: real versions of ST80881 ---------- */
+const VARIANTS = [
+  { k: "Photo", img: IMG("34b6955bc31aceef7b78ed1a031475ff19cd6b95") },
+  { k: "Pattern", img: IMG("d9346b7588f720e04da602797c00d96dc67170af") },
+  { k: "Pattern 2", img: IMG("de25d0fe1e047e66d58e81f1df37dd8e65132fdc") },
+  { k: "3D", model: true },
+];
+const hero = document.getElementById("heroImg");
+const heroModel = document.getElementById("heroModel");
+const heroHint = document.getElementById("heroHint");
+hero.src = VARIANTS[0].img;
+const vEl = document.getElementById("variants");
+vEl.innerHTML = VARIANTS.map((v, i) =>
+  `<button class="var press" aria-pressed="${i === 0}" data-i="${i}"><div class="th">${v.model
+    ? `<img src="assets/ST80881_cutout.png" alt="" style="object-fit:contain"><span class="badge">3D</span>`
+    : `<img src="${v.img}" alt=""${v.k.startsWith("Pattern") ? ' class="pat"' : ""}>`}</div>${v.k}</button>`).join("");
+vEl.addEventListener("click", e => {
+  const b = e.target.closest("[data-i]"); if (!b) return;
+  vEl.querySelectorAll("[data-i]").forEach(x => x.setAttribute("aria-pressed", x === b));
+  const v = VARIANTS[b.dataset.i];
+  hero.classList.toggle("pat", v.k.startsWith("Pattern"));
+  heroModel.hidden = heroHint.hidden = !v.model;
+  document.getElementById("modelMissing").hidden = !(v.model && heroModel.dataset.failed);
+  hero.hidden = !!v.model;
+  if (v.model) return;
+  hero.style.opacity = 0;
+  setTimeout(() => { hero.src = v.img; hero.style.opacity = 1; }, 150);
+});
+// Hotspots are placed as fractions of the model's size, so they survive swapping in a CLO export of a different scale
+heroModel.addEventListener("error", () => {
+  heroModel.dataset.failed = "1";
+  document.getElementById("modelMissing").hidden = heroModel.hidden;
+});
+heroModel.addEventListener("load", () => {
+  delete heroModel.dataset.failed; document.getElementById("modelMissing").hidden = true;
+  const c = heroModel.getBoundingBoxCenter(), d = heroModel.getDimensions();
+  heroModel.querySelectorAll(".hotspot").forEach(h => {
+    const [fx, fy, fz] = h.dataset.dim.split(" ").map(Number);
+    heroModel.updateHotspot({ name: h.slot, position: `${c.x + fx * d.x}m ${c.y + fy * d.y}m ${c.z + fz * d.z}m` });
+  });
+});
+
+/* ---------- Knowledge track ---------- */
+const STEPS = [
+  { k: "Wear it", d: "Found at the museum card. Credit line added to your looks." },
+  { k: "The pattern", d: "Drafted from the real kimono by MoMu.", img: IMG("d9346b7588f720e04da602797c00d96dc67170af"),
+    story: "Every panel of a kimono is a straight rectangle. The shape comes from the body, not the cut." },
+  { k: "The fabric", d: "Detail view of the painted fabric.", img: IMG("34b6955bc31aceef7b78ed1a031475ff19cd6b95"),
+    story: "Long swinging sleeves mark a furisode, worn by young unmarried women on formal days." },
+  { k: "On your avatar", d: "Rebuilt in CLO 3D, turn it all the way round." },
+];
+let level = 1;
+const card = document.getElementById("card");
+function renderTrack() {
+  document.getElementById("steps").innerHTML = STEPS.map((s, i) =>
+    `<li class="step ${i < level ? "done" : ""}"><span class="dot">${i + 1}</span><div><div class="k">${s.k}</div><div class="d">${s.d}</div></div></li>`).join("");
+  const next = STEPS[level];
+  document.getElementById("nextName").textContent = next ? next.k : "All levels found";
+}
+document.getElementById("readBtn").addEventListener("click", () => {
+  const s = STEPS[level];
+  if (!s) { level = 1; card.classList.remove("flipped"); renderTrack(); return; }
+  if (s.img) {
+    document.getElementById("unlockImg").src = s.img;
+    document.getElementById("unlockText").textContent = s.story;
+    card.classList.add("flipped");
+    setTimeout(() => card.classList.remove("flipped"), 2600);
+  }
+  level++; renderTrack();
+});
+
+renderCredit(); renderCredit.ready = true; renderLocker(); renderTrack();
+
+/* Card scan: each museum card's QR opens ?card=<inventory id>; that piece unlocks and goes straight onto the form */
+const scanned = new URLSearchParams(location.search).get("card");
+if (scanned && PIECES[scanned]?.glb) {
+  const p = PIECES[scanned];
+  p.locked = false;
+  if (p.slot === "full") look.full = scanned;
+  else { if (p.slot !== "feet") look.full = null; look[p.slot] = scanned; }
+  turntables.forEach(t => t.draw()); renderLocker(); renderCredit();
+  toast(`Found in the museum: ${p.name}, ${p.year.from}`);
+}
+</script>
+</body>
+</html>

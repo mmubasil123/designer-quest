@@ -1,0 +1,205 @@
+{
+  "$schema": "pieces.schema.json",
+  "version": 1,
+  "pieces": [
+    {
+      "id": "ST503",
+      "slot": "top",
+      "name": "Jak",
+      "year": {
+        "from": 1750,
+        "to": 1780
+      },
+      "source": {
+        "imgSha": "d854d7decbce09ccfb198297818c8dac50d8c2b9"
+      },
+      "locked": false,
+      "assets": {
+        "glb": {
+          "path": "assets/ST503.glb",
+          "kind": "scan",
+          "units": "norm",
+          "origin": "bbox"
+        }
+      },
+      "fit": {
+        "sleeveTo": 0.6
+      },
+      "pipeline": {
+        "cutout": "segformer"
+      }
+    },
+    {
+      "id": "ST80930",
+      "slot": "top",
+      "name": "Ikat vest",
+      "year": {
+        "from": 1950,
+        "to": 1960
+      },
+      "source": {
+        "imgSha": "571dc06fac9a8d24a6b96b40266dbc16de7604f0"
+      },
+      "locked": false,
+      "assets": {
+        "glb": {
+          "path": "assets/ST80930.glb",
+          "kind": "scan",
+          "units": "norm",
+          "origin": "bbox"
+        }
+      },
+      "fit": {},
+      "pipeline": {
+        "cutout": "segformer"
+      }
+    },
+    {
+      "id": "ST2434",
+      "slot": "top",
+      "name": "Green wool coat",
+      "year": {
+        "from": 1795,
+        "to": 1840
+      },
+      "source": {
+        "imgSha": "b1dbc01697681023ff7d7a0bbe14eb115293b7c5"
+      },
+      "locked": false,
+      "assets": {
+        "glb": {
+          "path": "assets/ST2434.glb",
+          "kind": "scan",
+          "units": "norm",
+          "origin": "bbox"
+        }
+      },
+      "fit": {},
+      "pipeline": {
+        "cutout": "segformer"
+      }
+    },
+    {
+      "id": "ST80931",
+      "slot": "bottom",
+      "name": "Monpe trousers",
+      "year": {
+        "from": 1965,
+        "to": 1965
+      },
+      "source": {
+        "imgSha": "ff2b639af225b065918fd468eeb87ee5bc7992f4"
+      },
+      "locked": false,
+      "assets": {
+        "glb": {
+          "path": "assets/ST80931.glb",
+          "kind": "scan",
+          "units": "norm",
+          "origin": "bbox"
+        }
+      },
+      "fit": {},
+      "pipeline": {
+        "cutout": "segformer"
+      }
+    },
+    {
+      "id": "ST2062",
+      "slot": "bottom",
+      "name": "Knee breeches",
+      "year": {
+        "from": 1850,
+        "to": 1870
+      },
+      "source": {
+        "imgSha": "db9135b2d52d9bdd3493371a59bd1c82a491f185"
+      },
+      "locked": true,
+      "assets": {
+        "glb": null
+      },
+      "fit": {},
+      "pipeline": {
+        "cutout": "segformer"
+      }
+    },
+    {
+      "id": "ST2407/1-2",
+      "slot": "feet",
+      "name": "Football boots, Dirk Bikkembergs",
+      "year": {
+        "from": 2005,
+        "to": 2009
+      },
+      "source": {
+        "imgSha": "e312cb64c61115e85acdf2de3b7e16a3ac43cb68"
+      },
+      "locked": false,
+      "assets": {
+        "glb": {
+          "path": "assets/ST2407_1-2.glb",
+          "kind": "scan",
+          "units": "norm",
+          "origin": "bbox"
+        }
+      },
+      "fit": {},
+      "pipeline": {
+        "cutout": "none"
+      }
+    },
+    {
+      "id": "ST80881",
+      "slot": "full",
+      "name": "Furisode kimono",
+      "year": {
+        "from": 1979,
+        "to": 1979
+      },
+      "source": {
+        "imgSha": "34b6955bc31aceef7b78ed1a031475ff19cd6b95"
+      },
+      "locked": false,
+      "assets": {
+        "glb": {
+          "path": "assets/ST80881.glb",
+          "kind": "scan",
+          "units": "norm",
+          "origin": "bbox"
+        }
+      },
+      "fit": {
+        "hideStand": true
+      },
+      "pipeline": {
+        "cutout": "none"
+      }
+    },
+    {
+      "id": "ST655/1",
+      "slot": "full",
+      "name": "Cocktail dress",
+      "year": {
+        "from": 1947,
+        "to": 1950
+      },
+      "source": {
+        "imgSha": "a5677be4652b639aee899baf38d73fb905a11077"
+      },
+      "locked": false,
+      "assets": {
+        "glb": {
+          "path": "assets/ST655_1.glb",
+          "kind": "scan",
+          "units": "norm",
+          "origin": "bbox"
+        }
+      },
+      "fit": {},
+      "pipeline": {
+        "cutout": "segformer"
+      }
+    }
+  ]
+}

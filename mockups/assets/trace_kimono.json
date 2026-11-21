@@ -1,0 +1,5 @@
+[
+  {"id": "file.new", "params": {"name": "ST80881 trace", "width": 163.92, "height": 245.76, "units": "Points"}},
+  {"id": "file.place", "params": {"path": "assets/src/ST80881_1024.jpg", "link": false}},
+  {"id": "imageTrace.makeAndExpand", "params": {"preset": "16 Colors"}}
+]

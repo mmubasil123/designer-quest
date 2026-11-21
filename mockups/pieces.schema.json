@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Second Skin pieces manifest",
+  "type": "object",
+  "required": [
+    "version",
+    "pieces"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "const": 1
+    },
+    "pieces": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/piece"
+      }
+    }
+  },
+  "$defs": {
+    "piece": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "slot",
+        "name",
+        "year",
+        "source",
+        "locked",
+        "assets",
+        "fit",
+        "pipeline"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^ST[0-9A-Z/\\-]+$"
+        },
+        "slot": {
+          "enum": [
+            "top",
+            "bottom",
+            "feet",
+            "full"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "year": {
+          "type": "object",
+          "required": [
+            "from",
+            "to"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "from": {
+              "type": "integer"
+            },
+            "to": {
+              "type": "integer"
+            }
+          }
+        },
+        "source": {
+          "type": "object",
+          "required": [
+            "imgSha"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "imgSha": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{40}$"
+            }
+          }
+        },
+        "locked": {
+          "type": "boolean"
+        },
+        "assets": {
+          "type": "object",
+          "required": [
+            "glb"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "glb": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "path",
+                    "kind",
+                    "units",
+                    "origin"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "pattern": "^assets/.+\\.glb$"
+                    },
+                    "kind": {
+                      "enum": [
+                        "scan",
+                        "clo"
+                      ]
+                    },
+                    "units": {
+                      "enum": [
+                        "norm",
+                        "m"
+                      ]
+                    },
+                    "origin": {
+                      "enum": [
+                        "bbox",
+                        "avatar"
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "fit": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "adjust": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "sleeveTo": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "hideStand": {
+              "type": "boolean"
+            }
+          }
+        },
+        "pipeline": {
+          "type": "object",
+          "required": [
+            "cutout"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "cutout": {
+              "enum": [
+                "segformer",
+                "none",
+                "vectorcraft"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
