@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/" } }</script>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
+<link rel="preconnect" href="https://heron.libis.be" crossorigin>
 <style>
 :root {
   --paper: #f3efe7;
@@ -60,7 +60,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
 
 /* Turntable: one WebGL canvas per avatar */
-.turntable { position: absolute; left: 50%; margin-left: -110px; width: 220px; height: 440px; touch-action: pan-y; cursor: grab; }
+.turntable { position: absolute; left: 50%; margin-left: -110px; width: 220px; height: 440px; touch-action: none; cursor: grab; }
 .turntable:active { cursor: grabbing; }
 .turntable canvas {
   position: absolute; inset: 0; width: 100%; height: 100%;
@@ -68,6 +68,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .stage { flex: 1; position: relative; background: linear-gradient(var(--wall), var(--paper) 78%); }
 .stage .turntable { bottom: 164px; height: 420px; }   /* 164: the peeking grab area */
+.zoom { position: absolute; right: 12px; top: 150px; display: flex; flex-direction: column; gap: 8px; z-index: 1; transition: opacity 200ms var(--ease-out); }
+.zoom button { width: 44px; height: 44px; border-radius: 50%; background: var(--paper); border: 1px solid var(--line); font: 400 22px/1 Newsreader, serif; }
+.zoom button:disabled { opacity: .35; }
+.stage:not([data-snap="peek"]) .zoom { opacity: 0; pointer-events: none; }
+.nfc .status { min-height: 1.4em; margin: -10px 0 14px; font-size: 12px; }
 .toast { position: absolute; left: 50%; top: 92px; transform: translate(-50%, -6px); opacity: 0; pointer-events: none;
   background: var(--ink); color: var(--paper); font: 500 12px Inter; padding: 7px 12px; border-radius: 999px; white-space: nowrap;
   transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out); }
@@ -278,6 +283,7 @@ dt { color: var(--muted); }
           <div class="skins" id="skins" aria-label="Form finish"></div>
         </div>
         <div class="turntable" id="stageTT" role="img" aria-label="Your avatar, drag to turn"></div>
+        <div class="zoom" aria-label="Zoom the form"><button class="press" id="zoomIn" aria-label="Zoom in">+</button><button class="press" id="zoomOut" aria-label="Zoom out" disabled>&minus;</button></div>
         <div class="toast" id="toast" role="status" aria-live="polite"></div>
         <section class="wardrobe" id="wardrobe" aria-label="Wardrobe">
           <div class="grab" id="wardrobeGrab">
@@ -333,6 +339,7 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 
 const IMG = id => `https://heron.libis.be/momu/files/large/${id}.jpg`;
+const ZOOM_MAX = 3;
 const FRAMES = 36; // matches CLO export_turntable's default frame count
 
 const SKINS = ["#e9dfcc", "#d2bf9c", "#2a2724", "#8a6a48"];   // dress-form finishes, in FINISH_NAMES order
@@ -543,6 +550,7 @@ class Turntable {
     // fov 19 at 4.8 m frames the floor to 8 cm above the neck (1.46 m), so the form fills the stage
     this.camera = new THREE.PerspectiveCamera(19, 0.5, 0.1, 20);
     this.camera.position.set(0, 0.77, 4.8); this.camera.lookAt(0, 0.77, 0);
+    this.zoom = 1; this.focusY = 0.77;
     this.rig = new THREE.Group(); this.scene.add(this.rig);
     this.form = makeForm(); this.rig.add(this.form);
     this.scene.add(contactShadow());
@@ -558,6 +566,25 @@ class Turntable {
     this.renderer.setSize(r.width, r.height, false);
     this.camera.aspect = r.width / r.height; this.camera.updateProjectionMatrix();
     this.render();
+  }
+  /* Zoom: the camera frame is 1.6 m tall at zoom 1 (floor to above the neck). A higher zoom narrows it around focusY, which is
+     clamped so the view never leaves the form's height. anchorNdc (-1 bottom to 1 top) is the screen row that stays put, so a
+     pinch or wheel zooms toward the finger or cursor rather than the middle. */
+  setZoom(z, anchorNdc = 0, focusY = null) {
+    const HALF = 0.80, z0 = this.zoom;
+    z = Math.min(ZOOM_MAX, Math.max(1, z));
+    const anchorY = focusY ?? this.focusY + anchorNdc * HALF / z0;   // the world height under the anchor before the change
+    this.zoom = z;
+    this.focusY = Math.min(1.57 - HALF / z, Math.max(-0.03 + HALF / z, anchorY - anchorNdc * HALF / z));
+    this.camera.zoom = z; this.camera.position.y = this.focusY; this.camera.lookAt(0, this.focusY, 0);
+    this.camera.updateProjectionMatrix();
+    this.onZoom?.(z);
+    this.render();
+  }
+  panY(dyPx) {   // a drag moves the form with the finger; only meaningful when zoomed in
+    if (this.zoom <= 1.01) return;
+    const h = this.el.getBoundingClientRect().height || 1;
+    this.setZoom(this.zoom, 0, this.focusY + dyPx * (1.6 / this.zoom) / h);
   }
   setFrame(f) {   // fractional frames turn smoothly; onFrame still gets whole 10-degree steps
     this.rig.rotation.y = (f / FRAMES) * 2 * Math.PI;
@@ -582,7 +609,7 @@ class Turntable {
         entry.born = performance.now();
         entry.obj.traverse(o => o.layers.set(LAYER[slot]));
         setFabric(entry.obj, this.fabricFor(slot, id));
-        this.rig.add(entry.obj); this.fitForm(); this.settle();
+        this.rig.add(entry.obj); this.fitForm(); this.settle(); maybeWarm();
       }).catch(e => console.warn(`3D model for ${id} failed`, e));
     }
     this.fitForm(); this.render();
@@ -632,36 +659,91 @@ class Turntable {
     };
     // A6: the loop stops for a hidden tab or the Piece screen; this restarts it (not mid-drag or mid-coast)
     this.wake = () => {
-      if (reduce || x0 != null || coasting || document.hidden || this.onScreen === false) return;
+      if (reduce || x0 != null || coasting || pinch || document.hidden || this.onScreen === false) return;
       cancelAnimationFrame(raf); clearTimeout(idle); t0 = undefined; raf = requestAnimationFrame(spin);
     };
     document.addEventListener("visibilitychange", () => { if (!document.hidden) this.wake(); });
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!reduce) raf = requestAnimationFrame(spin);
+    const pts = new Map();   // active pointers, for two-finger pinch
+    let pinch = null, lastY = 0;
+    const ndcOf = clientY => { const r = this.el.getBoundingClientRect(); return 1 - 2 * (clientY - r.top) / (r.height || 1); };
+    const spread = () => { const [a, b] = [...pts.values()]; return Math.hypot(a.x - b.x, a.y - b.y) || 1; };
     this.el.addEventListener("pointerdown", e => {
-      if (x0 != null) return;   // ignore a second finger mid-drag
+      pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      try { this.el.setPointerCapture(e.pointerId); } catch { /* pointer already gone */ }
       cancelAnimationFrame(raf); clearTimeout(idle); coasting = false; speed = 0; t0 = undefined;
-      this.el.setPointerCapture(e.pointerId);
-      x0 = e.clientX; f0 = this.frame; last = { x: e.clientX, t: performance.now() }; vel = 0;
+      if (pts.size === 2) { pinch = { d: spread(), z: this.zoom }; x0 = null; return; }   // the second finger turns the drag into a pinch
+      if (pts.size > 2 || pinch) return;
+      x0 = e.clientX; f0 = this.frame; lastY = e.clientY; last = { x: e.clientX, t: performance.now() }; vel = 0;
     });
     this.el.addEventListener("pointermove", e => {
+      if (!pts.has(e.pointerId)) return;
+      pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pinch && pts.size >= 2) {
+        const [a, b] = [...pts.values()];
+        this.setZoom(pinch.z * spread() / pinch.d, ndcOf((a.y + b.y) / 2));
+        return;
+      }
       if (x0 == null) return;
       this.frame = f0 - (e.clientX - x0) / 6;   // 6 px per frame
       const now = performance.now();
       vel = -(e.clientX - last.x) / 6 / Math.max(1, (now - last.t) / 16);
       last = { x: e.clientX, t: now };
+      this.panY(e.clientY - lastY); lastY = e.clientY;   // zoomed in, a vertical drag also moves the view up and down
       this.setFrame(this.frame);
     });
-    const end = () => { if (x0 == null) return; x0 = null; coasting = true; raf = requestAnimationFrame(coast); };
+    const end = e => {
+      pts.delete(e.pointerId);
+      if (pinch) {   // after a pinch the remaining finger does nothing until all are lifted, then the idle spin returns
+        if (pts.size === 0) { pinch = null; idle = setTimeout(() => this.wake?.(), 2500); }
+        return;
+      }
+      if (x0 == null) return;
+      x0 = null; coasting = true; raf = requestAnimationFrame(coast);
+    };
     this.el.addEventListener("pointerup", end);
     this.el.addEventListener("pointercancel", end);
+    this.el.addEventListener("wheel", e => {   // mouse wheel and trackpad pinch (which arrives as ctrl + wheel)
+      e.preventDefault();
+      this.setZoom(this.zoom * Math.exp(-e.deltaY * (e.ctrlKey ? 0.01 : 0.0015)), ndcOf(e.clientY));
+    }, { passive: false });
   }
 }
 
+/* Background warm-up: once the first look is on the form, fetch the other wearable scans at low priority so a tap in the
+   wardrobe finds them in the HTTP cache. The bytes are streamed and dropped (nothing parsed, nothing kept in memory).
+   Skipped on Save-Data or a slow connection, where those 7 MB would compete with what the visitor is doing. */
+let warmStarted = false;
+const idle = cb => (window.requestIdleCallback ? requestIdleCallback(cb, { timeout: 4000 }) : setTimeout(cb, 1500));
+async function drain(url, init) {
+  const r = await fetch(url, init);
+  if (r.body?.pipeTo) await r.body.pipeTo(new WritableStream()); else await r.arrayBuffer();
+}
+function maybeWarm() {
+  if (warmStarted) return;
+  const worn = Object.values(stageTT.worn);
+  if (!worn.length || !worn.every(e => e.obj)) return;   // the first look is not on the form yet
+  warmStarted = true;
+  const c = navigator.connection;
+  if (c?.saveData || /^(slow-2g|2g|3g)$/.test(c?.effectiveType || "")) return;
+  idle(async () => {
+    for (const [id, p] of Object.entries(PIECES)) {
+      if (!p.glb || p.locked || scenes[id] || document.hidden) continue;   // scenes[id]: already loaded or loading
+      try { await drain(p.glb, { priority: "low" }); } catch { /* offline or aborted: the loader will fetch it when worn */ }
+    }
+  });
+}
 const stageTT = new Turntable(document.getElementById("stageTT"), {
   interactive: true,
 });
 const turntables = [stageTT];
+{   // zoom buttons: the same limits as pinch and wheel; they step by half again
+  const zin = document.getElementById("zoomIn"), zout = document.getElementById("zoomOut");
+  stageTT.onZoom = z => { zin.disabled = z >= ZOOM_MAX - 0.01; zout.disabled = z <= 1.01; };
+  zin.addEventListener("click", () => stageTT.setZoom(stageTT.zoom * 1.5));
+  zout.addEventListener("click", () => stageTT.setZoom(stageTT.zoom / 1.5));
+}
 window.secondSkin = { look, turntables };   // handle for driving the mockup from the console
 
 /* ---------- Look state, skins, locker ---------- */
@@ -724,7 +806,7 @@ function isWorn(id, ctx) {
   return (ctx === "feet" || !look.full) && look[ctx] === id;
 }
 const tile = (id, cls, img, label, aria) => `<div class="tile ${cls}" data-id="${id}">
-  <button class="pick press" aria-label="${esc(aria)}" aria-pressed="${cls.includes("on")}"><img src="${img}" alt=""${img.startsWith("assets/swatch") ? ' style="mix-blend-mode:normal"' : ""}></button>${label}
+  <button class="pick press" aria-label="${esc(aria)}" aria-pressed="${cls.includes("on")}"><img src="${img}" alt="" decoding="async"${img.startsWith("assets/swatch") ? ' style="mix-blend-mode:normal"' : ""}></button>${label}
   <button class="info" data-info="${id}" aria-label="About ${esc(PIECES[id].name)}"><span aria-hidden="true">i</span></button></div>`;
 function renderLocker() {
   const counted = Object.values(PIECES).filter(p => !p.locked || p.seen).length;
@@ -770,6 +852,37 @@ function renderWearing() {
     : `<span class="none">Nothing on yet. Pick a piece below.</span>`;
 }
 function dress() { turntables.forEach(t => t.draw()); renderLocker(); renderCredit(); }
+/* Study preload: tapping a study tile that still needs its card starts fetching that scan (about 17 MB) and the Up close page's
+   scripts right away, so by the time the visitor taps the NFC card the page finds them in the cache. Not now, Escape or a
+   backdrop tap aborts the download and drops the preload hints; nothing is parsed or kept in memory here. */
+const UPCLOSE_MODULES = ["https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/controls/OrbitControls.js",
+  "https://cdn.jsdelivr.net/npm/@sparkjsdev/spark@2.4.0/dist/spark.module.js"];
+let study = null;
+const nfcStatus = document.getElementById("nfcStatus");
+function preloadStudy(id) {
+  cancelStudy();
+  const ctl = new AbortController();
+  const links = UPCLOSE_MODULES.map(href => { const l = document.createElement("link"); l.rel = "modulepreload"; l.href = href; document.head.append(l); return l; });
+  study = { ctl, links };
+  nfcStatus.textContent = "Getting the scan ready…";
+  fetch(PIECES[id].splat, { signal: ctl.signal }).then(async r => {
+    if (!r.ok) throw new Error(r.status);
+    const total = +r.headers.get("content-length") || 0, reader = r.body.getReader();
+    let got = 0;
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      got += value.length;
+      if (total) nfcStatus.textContent = `Getting the scan ready… ${Math.floor(got / total * 100)}%`;
+    }
+    nfcStatus.textContent = "Scan ready";
+  }).catch(e => { if (e.name !== "AbortError") nfcStatus.textContent = ""; });
+}
+function cancelStudy() {
+  if (!study) return;
+  study.ctl.abort(); study.links.forEach(l => l.remove()); study = null;
+  nfcStatus.textContent = "";
+}
 function act(id, ctx) {   // the one action a tile, or its fact card, performs
   if (ctx === "study") {   // shortcut: placeholder until the NFC cards exist; a tap on a card opens ?card=<id>
     if (PIECES[id].seen) location.href = `up-close.html?id=${encodeURIComponent(id)}`;
@@ -777,6 +890,7 @@ function act(id, ctx) {   // the one action a tile, or its fact card, performs
       document.getElementById("nfcText").textContent = `Hold your phone to the NFC card beside the ${PIECES[id].name.toLowerCase()} to study it up close.`;
       document.getElementById("nfcGo").href = `?card=${encodeURIComponent(id)}`;   // the same URL a real card will open
       document.getElementById("nfc").showModal();
+      preloadStudy(id);
     }
     return;
   }
@@ -813,13 +927,15 @@ document.getElementById("grid").addEventListener("click", e => {
 });
 
 /* ---------- Fact card (C1): every field is copied from the MoMu record by tools/records.py; gaps say so (D3) ---------- */
-const RECORDS = await (await fetch("records.json")).json();
+let RECORDS = {};   // not needed until a fact card opens, so it must not hold up the first frame
+const recordsReady = fetch("records.json").then(r => r.json()).then(j => { RECORDS = j; }).catch(() => {});
 const GENERIC = new Set(["metal", "weaving", "sewing (needleworking technique)", "handmade", "machine-made"]);   // shared by too many to link
 const plain = t => t.replace(/ \([^)]*\)$/, "");   // "cotton (fiber)" -> "cotton"
 const NR = '<span class="nr">not recorded</span>';
 const factEl = document.getElementById("fact");
 let factId = null;
-function openFact(id) {
+async function openFact(id) {
+  await recordsReady;
   const p = PIECES[id], r = RECORDS[id] || {}, ctx = ctxOf(id);
   factId = id;
   document.getElementById("factId").textContent = `${id} · MoMu study collection`;
@@ -858,6 +974,7 @@ function snapY(name) {   // translateY for a snap point: sheet height minus the 
 }
 function setSnap(name) {
   snap = name; stageEl.dataset.snap = name;
+  if (name !== "peek" && stageTT.zoom !== 1) stageTT.setZoom(1);   // the form steps back above an open wardrobe, so a zoomed view would be cut off
   wardrobe.style.setProperty("--y", `${snapY(name)}px`);
   handleEl.setAttribute("aria-expanded", name !== "peek");
 }
@@ -925,12 +1042,20 @@ document.getElementById("helpSkip").addEventListener("click", () => helpEl.close
 helpEl.addEventListener("close", () => { try { localStorage.setItem(HELP_KEY, "1"); } catch { /* storage blocked: it will show again next visit */ } });
 helpEl.addEventListener("click", e => { if (e.target === helpEl) helpEl.close(); });   // backdrop tap closes
 /* ---------- Screens: on a phone one screen shows at a time (CSS keys on body[data-screen]) ---------- */
+let pieceReady = false;
+function enterPiece() {   // the Piece screen is off screen at boot, so its photo and the 3D viewer wait for the first visit
+  if (pieceReady) return; pieceReady = true;
+  hero.src = VARIANTS[0].img;
+  import("https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js").catch(() => { heroModel.dataset.failed = "1"; });
+}
 function go(screen) {
   document.body.dataset.screen = screen;
+  if (screen === "piece") enterPiece();
   if (screen === "stage") turntables.forEach(t => t.render());   // it was display:none, so its canvas went stale
 }
 document.addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (b) go(b.dataset.go); });
 document.getElementById("nfc").addEventListener("click", e => { if (e.target.id === "nfc") e.target.close(); });   // backdrop tap closes
+document.getElementById("nfc").addEventListener("close", cancelStudy);   // Not now, Escape or the backdrop: stop downloading
 document.getElementById("shareBtn").addEventListener("click", async () => {   // shortcut: shares text and link, B7 adds the 9:16 image
   const span = document.getElementById("lookSpan").textContent.split(" · ")[0];
   const name = look.fabric.body || look.fabric.sleeves ? lookName() : "My look";   // unremixed looks have no name
@@ -957,12 +1082,11 @@ const VARIANTS = [
 const hero = document.getElementById("heroImg");
 const heroModel = document.getElementById("heroModel");
 const heroHint = document.getElementById("heroHint");
-hero.src = VARIANTS[0].img;
 const vEl = document.getElementById("variants");
 vEl.innerHTML = VARIANTS.map((v, i) =>
   `<button class="var press" aria-pressed="${i === 0}" data-i="${i}"><div class="th">${v.model
-    ? `<img src="assets/ST80881_cutout.png" alt="" style="object-fit:contain"><span class="badge">3D</span>`
-    : `<img src="${v.img}" alt=""${v.k.startsWith("Pattern") ? ' class="pat"' : ""}>`}</div>${v.k}</button>`).join("");
+    ? `<img src="assets/ST80881_cutout.png" alt="" loading="lazy" decoding="async" style="object-fit:contain"><span class="badge">3D</span>`
+    : `<img src="${v.img}" alt="" loading="lazy" decoding="async"${v.k.startsWith("Pattern") ? ' class="pat"' : ""}>`}</div>${v.k}</button>`).join("");
 vEl.addEventListener("click", e => {
   const b = e.target.closest("[data-i]"); if (!b) return;
   vEl.querySelectorAll("[data-i]").forEach(x => x.setAttribute("aria-pressed", x === b));
@@ -1018,6 +1142,7 @@ if (won && PIECES[won]?.splat && !PIECES[won].locked) {
   <div class="ring" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 8.5a5 5 0 0 1 0 7M9.5 6a8.5 8.5 0 0 1 0 12M13 3.5a12 12 0 0 1 0 17"/></svg></div>
   <h3 id="nfcTitle">Find it in the museum</h3>
   <p id="nfcText"></p>
+  <p class="mono status" id="nfcStatus" role="status"></p>
   <a class="btn press" id="nfcGo">Simulate NFC tap</a>
   <form method="dialog"><button class="btn ghost press">Not now</button></form>
 </div></dialog>
