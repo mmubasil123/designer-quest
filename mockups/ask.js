@@ -15,7 +15,7 @@ export function createAsk({ endpoint = "api/ask" } = {}) {
   el.innerHTML = `<div class="ask-in">
     <span class="handle" aria-hidden="true"></span>
     <div class="ask-head">
-      <div><div class="mono" id="askId"></div><h3 id="askName"></h3></div>
+      <div><div class="mono" id="askId"></div><h2 id="askName"></h2></div>
       <button class="ask-x press" data-close aria-label="Close Ask the archive">×</button>
     </div>
     <p class="ask-note">AI answers, written only from MoMu's record of this piece. If the record is silent, so is the answer.</p>

@@ -4,39 +4,37 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Up close · Second Skin</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="theme.css"><!-- B9 MoMu theme: tokens and fonts -->
 <style>
-:root {
-  --paper: #f3efe7; --wall: #e8e2d6; --ink: #1b1a17; --muted: #6f695e; --line: #d9d1c2; --found: #3f5a3c;
-  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-}
+/* colour, type and motion tokens come from theme.css */
 * { box-sizing: border-box; margin: 0; }
 html, body { height: 100%; }
-body { background: var(--paper); color: var(--ink); font: 15px/1.45 Inter, system-ui, sans-serif; display: grid;
+body { background: var(--paper); color: var(--ink); font: var(--t-body); display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto; -webkit-font-smoothing: antialiased; }
 button, a { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; text-decoration: none; }
-.mono { font: 500 11px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.mono { font: var(--t-label); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--muted); font-variant-numeric: tabular-nums; }
 .press { transition: transform 160ms var(--ease-out); }
 .press:active { transform: scale(0.97); }
 
 header { display: flex; align-items: center; gap: 12px; padding: max(12px, env(safe-area-inset-top)) 16px 12px; }
 .back { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-size: 20px; }
-.brand { font: italic 400 20px/1 Newsreader, serif; }
+.brand { font: 500 15px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
 header .mono { margin-left: auto; }
 
-#view { position: relative; background: var(--wall); margin: 0 16px; border-radius: 24px; overflow: hidden; touch-action: none; }
+#view { position: relative; background: var(--wall); margin: 0 16px; border-radius: var(--r-pic); overflow: hidden; touch-action: none; }
 #view canvas { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 400ms var(--ease-out); }
 #view.ready canvas { opacity: 1; }
 #loading { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; }
 #view.ready #loading { display: none; }
 .pin { position: absolute; left: 0; top: 0; width: 28px; height: 28px; margin: -14px 0 0 -14px; border-radius: 50%;
   border: 2px solid var(--paper); background: var(--found); color: var(--paper); display: grid; place-items: center;
-  font: 600 12px/1 Inter, sans-serif; pointer-events: none; transition: opacity 200ms var(--ease-out);
+  font: 600 12px/1 var(--sans); pointer-events: none; transition: opacity 200ms var(--ease-out);
   box-shadow: 0 1px 6px rgb(0 0 0 / .25); }
 .pin[hidden] { display: grid; opacity: 0; }
 .pin.hint { background: var(--ink); animation: pulse 1.2s var(--ease-out) infinite; }
-@keyframes pulse { 50% { box-shadow: 0 0 0 10px rgb(27 26 23 / 0); } 0%, 100% { box-shadow: 0 0 0 0 rgb(27 26 23 / .35); } }
+@keyframes pulse { 50% { box-shadow: 0 0 0 10px rgb(0 0 0 / 0); } 0%, 100% { box-shadow: 0 0 0 0 rgb(0 0 0 / .35); } }
 .miss { position: absolute; width: 36px; height: 36px; margin: -18px 0 0 -18px; border-radius: 50%;
   border: 1.5px solid var(--ink); pointer-events: none; animation: miss 500ms var(--ease-out) forwards; }
 @keyframes miss { from { transform: scale(.6); opacity: .6; } to { transform: scale(1.1); opacity: 0; } }
@@ -46,25 +44,25 @@ header .mono { margin-left: auto; }
 #toast.on { opacity: 1; transform: translate(-50%, 0); }
 
 aside { padding: 20px 16px max(16px, env(safe-area-inset-bottom)); display: grid; gap: 16px; }
-h1 { font: 400 26px/1.1 Newsreader, serif; }
+h1 { font: var(--t-display); letter-spacing: var(--track-title); text-wrap: balance; text-transform: uppercase; color: var(--title-ink); }
 .meta { display: flex; gap: 10px; margin-top: 8px; }
 .progress { display: flex; align-items: center; justify-content: space-between; }
 .dots { display: flex; gap: 6px; }
 .dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); transition: background-color 200ms ease; }
 .dots i.on { background: var(--found); }
-ol { list-style: none; padding: 0; display: grid; border-top: 1px solid var(--line); }
+ol { list-style: none; padding: 0; display: grid; border-top: 1px solid var(--ink); }
 li { border-bottom: 1px solid var(--line); }
 .row { width: 100%; min-height: 52px; display: grid; grid-template-columns: 28px 1fr auto; gap: 12px; align-items: center; text-align: left; padding: 8px 0; }
 .num { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--line); display: grid; place-items: center;
-  font: 600 11px/1 Inter, sans-serif; color: var(--muted); transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease; }
+  font: 600 11px/1 var(--sans); color: var(--muted); transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease; }
 li.found .num { background: var(--found); border-color: var(--found); color: var(--paper); }
 .find { font-weight: 500; }
-.show { font-size: 13px; color: var(--muted); padding: 10px 0 10px 12px; min-height: 44px; }
+.show { font-size: 13px; padding: 10px 0 10px 12px; min-height: 44px; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
 li.found .show { display: none; }
 .fact { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 250ms var(--ease-out); }
 li.found .fact { grid-template-rows: 1fr; }
 .fact > div { overflow: hidden; padding-left: 40px; }
-.fact q { display: block; font: italic 400 17px/1.35 Newsreader, serif; quotes: "“" "”"; }
+.fact q { display: block; font: var(--t-quote); quotes: "“" "”"; }
 .fact p { color: var(--muted); font-size: 13px; margin: 6px 0 14px; }
 .fact .mono { font-size: 10px; margin-right: 6px; }
 .cta { min-height: 52px; border-radius: 999px; font-weight: 500; font-size: 15px; background: transparent; color: var(--ink);

@@ -1,0 +1,152 @@
+/* MoMu theme (H4). One place for the look: tokens, fonts and the component skin for second-skin.html.
+   Two sources. MoMu's hackathon presentation template (the one the museum asked teams to use) decides where they
+   differ: white ground, black text, headings in red capitals set in a plain grotesque (Arial in the file), red #d72f25.
+   momu.be (read 2026-11-21) fills in what a slide template has no opinion on: floating white pills with a soft offset
+   shadow, sharp-cornered pictures, hairline rules, red underlines on links, a serif for editorial reading text.
+   Fonts are OFL and self-hosted in assets/fonts/: Hanken Grotesk for the template's Arial and the site's Roobert
+   (commercial), Source Serif 4 for the site's Reckless (commercial), used only for stories and record quotes.
+   No font is fetched from a third party.
+   Load this file AFTER a page's own <style>: it overrides the older paper-and-mono look selector by selector.
+   Every page and sheet (quiz.css, ask.css, share.css, up-close.html) reads these tokens. */
+
+@font-face { font-family: "Hanken Grotesk"; font-style: normal; font-weight: 400 600; font-display: swap;
+  src: url("assets/fonts/hanken-grotesk.woff2") format("woff2"); }
+@font-face { font-family: "Source Serif 4"; font-style: normal; font-weight: 400 600; font-display: swap;
+  src: url("assets/fonts/source-serif-4.woff2") format("woff2"); }
+@font-face { font-family: "Source Serif 4"; font-style: italic; font-weight: 400 600; font-display: swap;
+  src: url("assets/fonts/source-serif-4-italic.woff2") format("woff2"); }
+
+:root {
+  /* colour: the names are the app's old ones, so every existing rule picks the new values up */
+  --paper: #fff;            /* ground, cards, pills */
+  --plinth: #fff;           /* sheets */
+  --wall: #ededed;          /* gallery grey behind photos and the form (photos multiply onto it) */
+  --page: #e2e2e2;          /* desktop pitch layout only */
+  --ink: #000;
+  --muted: #595959;         /* 7:1 on white, 6:1 on --wall */
+  --line: #cbcbcb;          /* hairlines and control borders */
+  --accent: #d72f25;        /* the template's red: titles, underlines, dots (4.9:1 on white) */
+  --accent-ink: #c00000;    /* the template's darker red, where white text sits on it (6.5:1) */
+  --title-ink: var(--accent);
+  --found: var(--accent-ink);
+
+  /* type */
+  --sans: "Hanken Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --t-label: 500 11px/1.3 var(--sans);     /* uppercase, tracked: ids and counts */
+  --t-small: 400 13px/1.4 var(--sans);
+  --t-body: 400 15px/1.45 var(--sans);
+  --t-quote: italic 400 17px/1.4 var(--serif);
+  --t-title-s: 400 18px/1.2 var(--sans);       /* titles: red capitals, regular weight, as in the template */
+  --t-title: 400 22px/1.15 var(--sans);
+  --t-display: 400 27px/1.1 var(--sans);
+  --track-label: .06em;
+  --track-title: .01em;
+
+  /* shape and depth */
+  --r-card: 6px;            /* dialogs */
+  --r-pic: 2px;             /* pictures stay sharp, like the museum's */
+  --r-sheet: 20px;
+  --shadow-pill: 3px 5px 22px rgb(0 0 0 / .16);     /* momu.be floats its pills on 8px 10px 37px / .2; scaled for a phone */
+  --shadow-card: 0 18px 50px rgb(0 0 0 / .24);
+  --shadow-sheet: 0 -10px 36px rgb(0 0 0 / .12);
+  --scrim: rgb(0 0 0 / .42);
+
+  /* motion (unchanged curves; exits are quicker than entrances) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-sheet: cubic-bezier(0.32, 0.72, 0, 1);
+  --exit: 150ms;
+}
+
+/* ---------- base and browser surfaces ---------- */
+body { font: var(--t-body); font-optical-sizing: auto; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+::selection { background: var(--accent-ink); color: #fff; }
+input, textarea { caret-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.serif { font-family: var(--serif); }
+.brand { font: 500 15px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
+/* the old mono lines: ids, counts, credits */
+.mono { font: var(--t-small); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; letter-spacing: 0; text-transform: none; }
+.label { font: var(--t-label); letter-spacing: var(--track-label); }
+.btn { font: 500 15px/1.2 var(--sans); padding: 14px 18px; }
+.btn.ghost { border-color: var(--ink); }
+.pill { font: 500 14px/1 var(--sans); }
+.pill.ghost { border: 0; background: var(--paper); box-shadow: var(--shadow-pill); }
+.helpbtn { font: 500 16px/1 var(--sans); }
+
+/* every title on every sheet: the template's red capitals */
+h1.sheet, .stage .credit .t, .wardrobe h2, dialog.fact :is(h2, h3), .nfc :is(h2, h3), .help :is(h2, h3), .body :is(h2, h3),
+.quiz #quizName, .ask-head :is(h2, h3), .share :is(h2, h3) { text-transform: uppercase; color: var(--title-ink); }
+
+/* ---------- desktop pitch layout ---------- */
+h1.sheet { font: 400 40px/1.05 var(--sans); letter-spacing: var(--track-title); }
+p.sheet { font-size: 16px; text-wrap: pretty; }
+.phone { box-shadow: 0 30px 70px -30px rgb(0 0 0 / .4); border-color: transparent; }
+
+/* ---------- Stage ---------- */
+.bar { padding: 14px 14px 8px 20px; }
+.stage { background: linear-gradient(var(--paper), var(--wall) 72%); }   /* white under the bar, gallery grey at the floor */
+.stage .credit { top: 10px; }
+/* name beside the finishes, the span line on a full-width row under both */
+.stage .credit { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 8px; align-items: start; }
+.stage .credit > div:first-child { display: contents; }
+.stage .credit .t { grid-area: 1 / 1; }
+.stage .credit .skins { grid-area: 1 / 2; }
+.stage .credit .mono { grid-area: 2 / 1 / 3 / 3; }
+.stage .credit .t { font: var(--t-display); font-size: 22px; letter-spacing: var(--track-title); text-wrap: balance; }
+.stage .credit .mono { margin-top: 4px; font-size: 13px; }
+.skin { box-shadow: inset 0 0 0 1px rgb(0 0 0 / .22); }
+.zoom button { border: 0; background: var(--paper); box-shadow: var(--shadow-pill); font: 300 24px/1 var(--sans); }
+.toast { font: 500 13px/1 var(--sans); padding: 10px 14px; }
+
+/* ---------- Wardrobe sheet ---------- */
+.wardrobe { border-top: 0; border-radius: var(--r-sheet) var(--r-sheet) 0 0; box-shadow: var(--shadow-sheet); }
+.handle::before { width: 36px; margin-left: -18px; }
+.wardrobe h2 { font: var(--t-title); letter-spacing: var(--track-title); }
+#foundCount::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 7px; border-radius: 50%; background: var(--accent); }
+#foundCount:empty::before { content: none; }
+.cat { font: 500 14px/1 var(--sans); padding: 0 16px; }
+.wear { border-color: var(--line); height: 46px; }   /* 44 px inside the border */
+.wear .off { width: 44px; }
+.wear .open { font-size: 14px; }
+.wear .open em { font-size: 12px; }
+.wearing .none, .grid .none { font: var(--t-small); font-size: 14px; }
+.tile { border: 0; border-radius: var(--r-pic); }
+/* names sit flush in the corner like a caption tag, not a floating chip */
+.tile .m { left: 0; bottom: 0; max-width: 100%; padding: 5px 8px; border-radius: 0; font: 500 12px/1.2 var(--sans); }
+.tile .st { left: 0; right: 0; bottom: 0; border-radius: 0; padding: 7px 8px; }
+.tile .st b { font: 500 12px/1.2 var(--sans); }
+.tile .st span { font: 400 11px/1.35 var(--sans); }
+.tile .info span { font: 500 13px/1 var(--sans); box-shadow: 0 2px 8px rgb(0 0 0 / .2); }
+.tile.locked::after { font: var(--t-small); }
+
+/* ---------- dialogs: fact card, NFC, help ---------- */
+dialog.fact, .nfc, .help { border-radius: var(--r-card); box-shadow: var(--shadow-card); }
+dialog.fact::backdrop, .nfc::backdrop, .help::backdrop { background: var(--scrim); }
+dialog.fact:not([open]), .nfc:not([open]), .help:not([open]) { transition-duration: var(--exit); }
+dialog.fact > div { display: flex; flex-direction: column; padding: 24px 22px 20px; }
+/* the name leads, the id follows it (it used to sit above as a label) */
+dialog.fact :is(h2, h3) { order: -1; font: var(--t-title); letter-spacing: var(--track-title); margin: 0 0 6px; text-wrap: balance; }
+dialog.fact #factId { margin-bottom: 16px; }
+dialog.fact dl { font-size: 14px; gap: 6px 12px; margin: 0 0 16px; }
+dialog.fact .nr { font-style: normal; }
+dialog.fact blockquote { border-left: 0; padding-left: 0; margin-bottom: 16px; }
+dialog.fact blockquote q { font: var(--t-quote); }
+dialog.fact .shares button, dialog.fact .row a, .quiz .cite a {
+  text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+dialog.fact .shares button { min-height: 44px; }
+dialog.fact .row { gap: 6px; }
+dialog.fact .row .btn { white-space: nowrap; padding-inline: 12px; }
+dialog.fact .row a { font-size: 14px; padding: 0 8px; white-space: nowrap; }
+.nfc :is(h2, h3), .help :is(h2, h3) { font: var(--t-title); letter-spacing: var(--track-title); margin: 6px 0 10px; text-wrap: balance; }
+.nfc p, .help p { font-size: 15px; }
+.nfc p.status { font-size: 12px; }
+.help .dots i[aria-current="true"] { background: var(--ink); }
+
+/* ---------- Piece page ---------- */
+.body :is(h2, h3) { font: var(--t-title); letter-spacing: var(--track-title); margin-top: 4px; }
+.hero .back { box-shadow: var(--shadow-pill); }
+.hotspot { font: 500 12px/1 var(--sans); border: 0; box-shadow: var(--shadow-pill); }
+.model-missing { font: var(--t-small); font-size: 14px; }
+.var .th { border: 0; border-radius: var(--r-pic); }
+.var .th .badge { font: 500 11px/1 var(--sans); border-radius: 0; padding: 2px 4px; }
