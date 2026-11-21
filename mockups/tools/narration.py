@@ -6,8 +6,7 @@ The story text is not written here; this script only collects it:
     description (English translation of the Dutch record) and its materials and techniques. Marked draft: true for her.
 
 Narration is pre-generated, so playback needs no API at runtime and works on bad venue wifi. Each file is regenerated
-only when its text, voice or model changes (sha256 in narration.json). Provider: Google Gemini TTS (processed outside the
-EU; only the museum text above is sent, no visitor data). Key: GEMINI_API_KEY in the git-ignored .env, never printed.
+only when its text, voice or model changes (sha256 in narration.json). Provider: Google Gemini TTS (only the museum text above is sent). Key: GEMINI_API_KEY in the git-ignored .env, never printed.
 Audio: mono AAC (.m4a, 48 kbps) through macOS afconvert.
 
   python3 -I mockups/tools/narration.py                 # rebuild narration.json text only (no API calls)
