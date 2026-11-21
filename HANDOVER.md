@@ -20,8 +20,9 @@ before calling anything done. Never deploy, push to `main` or publish without yo
   answers as AI. Without `ANTHROPIC_API_KEY` it falls back to field answers for the 3 suggested questions.
 - Run locally: `cd mockups && npm install && npm run dev:ask` (http://127.0.0.1:8768, key from the repo's `.env`).
   Eval: `npm run eval:ask`, results in `mockups/tools/ask_eval/RESULTS.md` for the curator to review.
-- To go live: Mubasil sets `ANTHROPIC_API_KEY` in the Vercel project (Production and Preview) before deploying;
-  MoMu should be told that questions are processed by the Claude API outside the EU.
+- To go live: Mubasil sets the key env in the Vercel project (Production and Preview) before deploying:
+  `ANTHROPIC_API_KEY`, or `ASK_PROVIDER` + `ASK_API_KEY` + `ASK_MODEL` for a free OpenAI-compatible tier.
+  GDPR and non-EU processing were set aside for the hackathon; revisit before real visitors use it.
 - Regenerate records after a harvest: `.venv/bin/python -I mockups/tools/ask_records.py`.
 
 ## Done tonight (from the ledger)
