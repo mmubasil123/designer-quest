@@ -1,4 +1,4 @@
-// E4: renders the dress form wearing each era's piece, straight from the app's own three.js Stage, as transparent PNGs
+// E4: renders each era's piece (H20: on its own, no dress form), straight from the app's own three.js Stage, as transparent PNGs
 // for the landing page's year slider (mockups/index.html). Same scene, lights and fit as the app; nothing redrawn.
 // Serve the mockup first: cd mockups && python3 -m http.server 8765 --bind 127.0.0.1
 // Run (from presentation/reel, after npm install): node scripts/landing-stills.mjs [only-stop-id]
@@ -27,7 +27,6 @@ export const STOPS = [
   { id: "1998", look: { full: "ST81190" } },
   { id: "2005", look: { feet: "ST2407/1-2" } },
   { id: "look", look: { top: "ST503", bottom: "ST80931", feet: "ST2407/1-2" } },   // the 255-year look
-  { id: "bare", look: {} },
 ];
 
 const browser = await chromium.launch({ channel: "chrome", headless: true, args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"] });
@@ -49,7 +48,7 @@ for (const stop of STOPS) {
   if (only && stop.id !== only) continue;
   const data = await page.evaluate(async look => {
     const { look: L, turntables: [tt] } = window.secondSkin;
-    Object.assign(L, { top: null, bottom: null, feet: null, full: null, fabric: { body: null, sleeves: null }, skin: 1 }, look);
+    Object.assign(L, { top: null, bottom: null, feet: null, full: null, fabric: { body: null, sleeves: null } }, look);
     tt.setFrame(0); tt.setZoom?.(1);
     tt.draw();
     // wait until every worn slot has its model, then for the drop-in to settle

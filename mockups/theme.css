@@ -106,17 +106,16 @@ p.sheet { font-size: 16px; text-wrap: pretty; }
 .bar { padding: 14px 14px 8px 20px; }
 .stage { background: linear-gradient(var(--paper), var(--wall) 72%); }   /* white under the bar, gallery grey at the floor */
 .stage .credit { top: 10px; }
-/* name beside the finishes, the span line on a full-width row under both */
+/* name beside the ?demo Avatar toggle, the span line on a full-width row under both */
 .stage .credit { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 8px; align-items: start; }
 .stage .credit > div:first-child { display: contents; }
 .stage .credit .t { grid-area: 1 / 1; }
-.stage .credit .skins { grid-area: 1 / 2; }
+.stage .credit .bodies { grid-area: 1 / 2; }
 .stage .credit .mono { grid-area: 2 / 1 / 3 / 3; }
 .stage .credit .t { font: var(--t-display); font-size: 22px; letter-spacing: var(--track-title); text-wrap: balance; }
 /* the look title sits on the grey --wall, where the template's red is 4.1:1; the darker red is 5.5:1 (AA for 22 px text) */
 .stage .credit .t { color: var(--accent-ink); }
 .stage .credit .mono { margin-top: 4px; font-size: 13px; }
-.skin { box-shadow: inset 0 0 0 1px rgb(0 0 0 / .22); }
 .zoom button { border: 0; background: var(--paper); box-shadow: var(--shadow-pill); font: 300 24px/1 var(--sans); }
 .toast { font: 500 13px/1 var(--sans); padding: 10px 14px; }
 

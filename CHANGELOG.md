@@ -2,6 +2,22 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## Stage without the dress form (2026-11-22, H20, branch hassan/H20-no-form)
+- What: the four form finishes (linen, calico, black jersey, oak) are gone from the Stage header, and the dress form
+  (torso, neck, pole, base) is no longer built: the worn scans stand on their own in the room, with the contact shadow
+  kept on the floor. `look.skin` is dropped from the look; an old save that still has it restores as before. Copy that
+  named the form now says the look ("Dress up", "Two centuries in one look", the zoom and focus labels, the no-JS line).
+  The `?demo` avatar toggle is unchanged.
+- Why: the finishes only recoloured the form, and the form itself added nothing to the pieces (Hassan).
+- Decision: D1 changed to "no body under the pieces". A CLO avatar in its place was not done: the rigid scans clip on a
+  body and would each need the A9 fit. Checked in the browser pane at 390 px
+  (front, side, back, empty Stage, `?demo`), not on a phone.
+- Landing page too: the 13 slider stills (`assets/landing/<year>.webp`, `look.webp`) re-rendered from the new Stage with
+  `presentation/reel/scripts/landing-stills.mjs` (unused `bare` stop dropped), the share-card screen re-captured from the
+  app (Noor, Jak + football boots), and the copy, alt text and slider labels no longer name a dress form. Left as they
+  are: the Jak scan's own baked-in white bust (part of its texture; the `?demo` neck cut only removes the stub), the
+  E2 teaser video and its poster, and MoMu's photo of the Jak on its mannequin (`ST503.webp`).
+
 ## Phone UI: persistent wardrobe tiles, locked silhouettes, reduced-motion pass (2026-11-22, B5 + B6 + B8, branch hassan/B-phone-ui)
 - What (B5): the wardrobe builds each tile and tab chip once (`mockups/wardrobe.js`, `nodeFor`) and a render only reorders
   them and toggles `on`, `new`, `locked` and `aria-pressed`. A tile node now survives tab changes, so the selection
