@@ -365,16 +365,21 @@ const scanned = params.get("card");
 // C2: the curator's story and questions (questions.json) show after a card scan; optional, nothing is locked behind them
 const quiz = null;   // shortcut: the curator's questions (C2) are left out of the tap flow to keep it to story then challenge; bring them back on the Won card if wanted
 let story = scanned ? await createStory({ img: id => PIECES[id].img, name: id => PIECES[id].name }) : null;   // H3: story with narration before the questions (story.js)
-if (PIECES[scanned]?.splat && PIECES[scanned].locked) {   // before the Stage boots, so a study card never downloads the wearable GLBs; Up close is its challenge
-  await showScan({ story, quiz, id: scanned, next: "Study it up close" });
+let scanLater = false;   // H6: Not now on a scan's story: the Stage boots as usual and the piece waits in the Museum
+const parkLater = async () => { scanLater = true; await settled(); history.replaceState(null, "", location.pathname); };   // after the story's history step is gone, or it would keep ?card=
+if (PIECES[scanned]?.splat && PIECES[scanned].locked
+    && !await showScan({ story, quiz, id: scanned, next: "Study it up close", step: { study: true } })) await parkLater();
+else if (PIECES[scanned]?.splat && PIECES[scanned].locked) {   // before the Stage boots, so a study card never downloads the wearable GLBs; Up close is its challenge
   await window.momuPreload?.handoff(scanned);   // H5: a download still running would be cancelled by the jump, so wait for it (preload.js)
   await settled();   // H6: the story's history step must be gone before this entry is rewritten
   history.replaceState(null, "", location.pathname);   // H6: the Stage stays under Up close, so back lands on it, not outside the app
   await go(`up-close.html?id=${encodeURIComponent(scanned)}`);
   await new Promise(() => {});
 }
-if (PIECES[scanned]?.clo && !PIECES[scanned].glb) {   // a CLO garment is worn on the team avatar it was draped on (outfit.html), never on the dress form (D5)
-  await showScan({ story, quiz, id: scanned, next: "See it on the avatar" });
+// a CLO garment is worn on the team avatar it was draped on (outfit.html), never on the dress form (D5)
+if (!scanLater && PIECES[scanned]?.clo && !PIECES[scanned].glb
+    && !await showScan({ story, quiz, id: scanned, next: "See it on the avatar", step: {} })) await parkLater();
+else if (!scanLater && PIECES[scanned]?.clo && !PIECES[scanned].glb) {
   await settled();
   history.replaceState(null, "", location.pathname);   // the Stage stays under the outfit page, so back lands on it
   await go(`outfit.html?card=${encodeURIComponent(scanned)}`);
@@ -1285,11 +1290,13 @@ async function replayStory(id) {   // a piece already won keeps its story and au
   await showScan({ story, quiz, id, next: "Back to my look" });
   welcome(id, PIECES[id].room ? `${shortName(id)} is in your Won tab` : `${shortName(id)} is in your ${LABEL[PIECES[id].slot]} tab`);   // only museum wins live in Won
 }
+const later = id => toast(`The ${shortName(id).toLowerCase()} waits in the Museum. Tap its sticker again any time.`);   // H6: Not now
 async function scan(id) {
   const p = PIECES[id];
   if (!p.locked) { await replayStory(id); return; }
-  await showScan({ story, quiz, id, next: "Win it", years: false });
+  if (!await showScan({ story, quiz, id, next: "Win it", years: false, step: {} })) { later(id); return; }
   const off = await win.guess(id);
+  if (off === null) { later(id); return; }   // Not now on Guess the year
   await recordsSoon(); const pick = await win.won(id, { off });
   p.locked = false;
   try { localStorage.setItem(WON_KEY, JSON.stringify([...new Set([...readWon(), id])])); } catch { /* blocked: the win lasts this visit */ }
@@ -1298,12 +1305,13 @@ async function scan(id) {
   welcome(id, `${shortName(id)} is in your Won tab. Tap it to wear it.`);
   if (pick === "next" && win.next) tapCard(win.next);   // H17: the Won card's next piece, opened like its Museum tile
 }
-if (scanned && !PIECES[scanned]?.glb && !PIECES[scanned]?.splat) toast("This sticker isn't in the app yet");
+if (scanLater) later(scanned);
+else if (scanned && !PIECES[scanned]?.glb && !PIECES[scanned]?.splat) toast("This sticker isn't in the app yet");
 else if (scanned) scan(scanned);
 // up-close.html sends ?fabric=<id> once every detail is found: the same Won card, then the fabric waits in the Remix tab
 const takeClaim = () => { try { const c = sessionStorage.getItem(CLAIM_KEY); sessionStorage.removeItem(CLAIM_KEY); return c; } catch { return null; } };
 const claimed = takeClaim() ?? params.get("fabric");   // read the claim either way, so it is used once
-if (claimed && PIECES[claimed]?.splat && !PIECES[claimed].locked) recordsSoon().then(() => win.won(claimed, { what: "fabric" })).then(pick => {
+if (claimed && PIECES[claimed]?.splat && !PIECES[claimed].locked) recordsSoon().then(() => win.won(claimed, { what: "fabric", study: true })).then(pick => {
   if (pick === "wear") { wearAlone(claimed); toast(`Wearing the ${shortName(claimed).toLowerCase()}'s fabric`); return; }
   fresh.add(claimed); keepFresh();
   welcome(claimed, `${shortName(claimed)} is in your Won tab. Tap it to wear it.`);

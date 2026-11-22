@@ -6,6 +6,7 @@
    for word under "Read the story". Audio is pre-generated and never autoplays; if a file is missing or fails, the
    browser's own voice reads the same captions (its word boundaries drive the highlight). */
 
+import { stepsHtml, handover } from "./steps.js";   // H6: one flow across story and challenge
 const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const clock = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
 const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -29,7 +30,10 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
   el.addEventListener("click", e => {
     const more = e.target.closest("[data-more]");
     if (more) { toggle(more); return; }
-    if (e.target === el || e.target.closest("[data-close]")) el.close();
+    // H6: only the main button goes on. Not now, Escape and back stop here; a backdrop tap does nothing, so a stray
+    // tap never starts the challenge
+    if (e.target.closest("[data-close]")) { if (el.dataset.step) handover(); el.close("next"); }
+    else if (e.target.closest("[data-dismiss]")) el.close("dismiss");
   });
 
   function toggle(btn) {   // "Read the story": the whole caption text, and the curator's own story for her pieces
@@ -158,9 +162,11 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
     stop = () => audio.pause();
   }
 
-  function show(id, { found = false, next = "Continue", years = true } = {}) {   // years: false before Guess the year, so the story does not give it away
+  // years: false before Guess the year, so the story does not give it away. step: { study } shows the scan's step line
+  // (H6). dismiss: the quiet way out (Not now); null hides it. Resolves true to go on, false for Not now/Escape/back.
+  function show(id, { found = false, next = "Continue", years = true, step = null, dismiss = null } = {}) {
     const p = doc.pieces[id];
-    if (!p) return Promise.resolve();
+    if (!p) return Promise.resolve(true);
     const guess = !years;
     const cap = captions(p, guess);
     const curator = p.source === "curator" && p.form === "script" ? p.paragraphs : null;   // her own words, never changed
@@ -168,6 +174,7 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
     let i = 0; const n = () => `style="--i:${i++}"`;   // stagger order for the opening
     el.innerHTML = `<div tabindex="-1" autofocus>
       ${img ? `<figure class="pic"><img src="${img(id)}" alt="" style="--drift:${seconds}s"></figure>` : ""}
+      ${step ? stepsHtml(0, step) : ""}
       <div class="mono rise" ${n()}>${found ? "Found in the museum" : "Story"} · ${esc(id)}</div>
       <h2 id="storyName" class="rise" ${n()}>${esc(name?.(id) ?? p.title)}</h2>
       ${years && p.years ? `<p class="years rise" ${n()}>${esc(p.years)}</p>` : ""}
@@ -183,21 +190,27 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
       ${guess && p.tease ? `<p class="tease rise" ${n()}>${esc(p.tease)}</p>` : ""}
       ${curator ? `<div class="rest" id="storyRest" inert><div><h3 class="more-title">More about this piece</h3>${curator.map(t => `<p>${esc(t)}</p>`).join("")}</div></div>` : ""}
       <button class="more press rise" ${n()} data-more type="button" aria-expanded="false" ${curator ? `aria-controls="storyRest"` : ""}>Read the story</button>
-      <div class="row rise" ${n()}><button class="btn press" data-close type="button">${esc(next)}</button></div>
+      <div class="row rise" ${n()}><button class="btn press" data-close type="button">${esc(next)}</button>${dismiss ? `<button class="btn ghost press" data-dismiss type="button">${esc(dismiss)}</button>` : ""}</div>
     </div>`;
     player(p, cap, guess);
+    el.returnValue = "";
+    if (step) el.dataset.step = "1"; else delete el.dataset.step;
     if (!el.open) el.showModal();
     const box = el.querySelector(".captions");
     if (!curator && box.scrollHeight <= box.clientHeight + 2) { box.classList.remove("clamp"); el.querySelector("[data-more]").remove(); }   // it all fits: nothing to open
-    return new Promise(resolve => el.addEventListener("close", resolve, { once: true }));
+    return new Promise(resolve => el.addEventListener("close", () => resolve(!dismiss || el.returnValue === "next"), { once: true }));
   }
 
   return { has: id => !!doc.pieces[id], show };
 }
 
-/* After a card scan: story first, then the curator's questions (without repeating the story), then `next`. */
-export async function showScan({ story, quiz, id, next, years }) {
+/* After a card scan: story first, then the curator's questions (without repeating the story), then `next`.
+   H6: with `step` the story shows the scan's step line and a Not now; resolves false when the visitor chose Not now
+   (or Escape, or back): the piece then simply stays in the Museum, exactly as before the scan. */
+export async function showScan({ story, quiz, id, next, years, step = null }) {
   const hasQuiz = !!quiz?.has(id), hasStory = !!story?.has(id);
-  if (hasStory) await story.show(id, { found: true, next: hasQuiz ? "Continue to the questions" : next, years });
+  if (hasStory && !await story.show(id, { found: true, next: hasQuiz ? "Continue to the questions" : next, years, step,
+    dismiss: step ? "Not now" : null })) return false;
   if (hasQuiz) await quiz.show(id, { found: !hasStory, next, story: !hasStory });
+  return true;
 }

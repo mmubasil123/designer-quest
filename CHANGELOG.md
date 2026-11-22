@@ -2,6 +2,25 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## H6 Navigation, PR 2: the card scan as one flow with a way out (2026-11-22, H6, branch hassan/H6-nav)
+- What: new `mockups/steps.js`. The story and Win it dialogs share a step line (Story · Guess the year or Up close ·
+  Yours) and hand over in place: the old card goes at once and the next rises in without the scale-in, so the scrim
+  never blinks; Guess the year to You won it swaps content in the same card (fade, 6 px rise, 2 px blur; fade only under
+  reduced motion). Every scan step has **Not now**: on the story and on Guess the year, Not now, Escape and the back
+  gesture stop there and a toast says the piece waits in the Museum; a backdrop tap no longer starts the challenge. A
+  study or CLO card's Not now boots the Stage instead of jumping to Up close or the outfit page. On the Won card, Escape
+  and back now keep the prize (as "Keep it in my wardrobe") instead of being refused. Replaying a won piece's story
+  keeps its old single button.
+- Checked (browser pane, 390 x 844): `?card=ST503` backdrop tap keeps the story, back = Not now (toast, URL clean);
+  Win it, Escape on Guess the year = Not now; three misses win, back on the Won card keeps it (`secondSkin.won.v1`).
+  `?card=ST81190` Not now boots the Stage (one canvas, URL clean); Study it up close, all found, back: Won card with the
+  step line on Yours. Console clean.
+- Why: `docs/UX_AUDIT.md` finding 3 (dismiss meant "continue"; Win it could not be left) and 12 (hard cuts between
+  steps). Findings 4 (narration before the guess) and 5 (Wear it now) were already fixed on main by H13 and J8.
+- Decision: rebuilt on today's main rather than rebasing the old `hassan/nav-ux-scan` commit, because Basil's J8 Won
+  card ("Wear it now" / "Keep it") and H15/H17's next row had replaced that part; both are kept as they are. Nobody can
+  lose (D2): Not now leaves the piece exactly as before the scan.
+
 ## Landing page at `/`, the Stage at `/stage` (2026-11-22, E4, branch hassan/E4-landing)
 - What: `mockups/index.html`, the landing page. The hero is "the year itself": a giant red year fills the screen and the
   dress form stands in front of it; one slider (13 era stops, 1750 to 2005, then "Your look") changes the numeral, the

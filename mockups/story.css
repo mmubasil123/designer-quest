@@ -70,11 +70,22 @@
 .story .row { display: grid; gap: 8px; margin-top: 14px; }
 .story .row .btn { min-height: 44px; }
 
+/* H6: the scan's step line (steps.js), shared by the story and Win it dialogs */
+.steps { display: flex; flex-wrap: wrap; gap: 4px 6px; list-style: none; margin: 0 0 10px; padding: 0; font: var(--t-small); font-size: 12px; color: var(--muted); }
+.steps li + li::before { content: "·"; margin-right: 6px; color: var(--muted); }
+.steps [aria-current="step"] { color: var(--ink); font-weight: 600; }
+.story .steps { order: -2; }
+.story[open] .steps { animation: story-rise 420ms var(--ease-out) both; animation-delay: 160ms; }
+.win .steps { justify-content: center; }
+/* Handing over from one step's dialog to the next: the old card goes at once, the new one rises in without the
+   scale-in, so the scrim never blinks (steps.js handover) */
+:root[data-scan="step"] :is(.story, .win):not([open]) { transition: none; }
+@starting-style { :root[data-scan="step"] :is(.story, .win)[open] { opacity: 0; transform: translateY(6px); } }
 @media (prefers-reduced-motion: reduce) {
   .story { transition: opacity 150ms ease; transform: none; }
-  @starting-style { .story[open] { transform: none; } }
+  @starting-style { .story[open], :root[data-scan="step"] :is(.story, .win)[open] { transform: none; } }
   .story[open] .pic img { animation: story-fade 300ms ease both; }
-  .story[open] .rise { animation: story-fade 200ms ease both; }
+  .story[open] :is(.rise, .steps) { animation: story-fade 200ms ease both; }
   .story .rest { transition: opacity 150ms ease; }
   .story .captions .w { transition: color 100ms ease; }
   .story .tease.show { animation: story-fade 200ms ease both; }
