@@ -2,6 +2,21 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## "Win its fabric" works on every tap: Up close steps back once (2026-11-22, H23, branch hassan/win-fabric-button)
+- What: `backTo()` in `nav.js` leaves once per page view; later calls are ignored until the page is shown again from the
+  back-forward cache. Cause: "Win its fabric" (and Up close's ←) call `backTo()`, which uses `history.back()` when the
+  Stage is the previous entry. Each call queues one more traversal, so a double tap stepped back twice, past the Stage
+  (often to the landing page), and the Won card never showed; the claim sat unused in `sessionStorage`. Three taps could
+  land on an older Stage entry, which is why it looked intermittent.
+- Why: the button felt dead in the demo. One tap always worked; quick or repeated taps (natural while the Stage loads)
+  did not.
+- Decision: fixed at the source in `backTo()`, not with a disabled state or a retry, so every page that steps back
+  (Up close, outfit) is covered. Checked headless (Chromium): all 9 study pieces at 1280 and 390 px with 1, 2, 3 and 5
+  quick taps, plus 1 to 3 taps on ←: 75 of 75 pass. The same run against the old `nav.js`: 72 of 75, the misses a double
+  tap that landed on the landing page, a 5-tap burst that lost the Won card and a triple ← that left the app. Both runs
+  log the same view-transition abort errors (`InvalidStateError`), which come from main, not from this change. Not
+  checked on a phone.
+
 ## Dutch and French for the curator's jacket story and hints (2026-11-22, D-3, branch hassan/curator-translations)
 - What: the 3 story paragraphs and 3 hint lines of ST81190 are in `i18n/content.nl.json` and `content.fr.json` (12 entries,
   `by: machine`, glossary terms kept: klinknagels / rivets, drukknopen / boutons-pression, vilten / feutrage). `i18n_build.py --check`
