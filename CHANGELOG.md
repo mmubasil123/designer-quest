@@ -2,6 +2,14 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## Web address follows the new name (2026-11-22, H-URL, branch basil/H-URL)
+- What: the public address in the reel closing card (`presentation/reel/src/teaser/scenes.tsx`, `style.md`),
+  `presentation/DEMO_VIDEO.md` and `PRODUCT.md` is now `museum-atelier.vercel.app` instead of `second-skin-ten.vercel.app`.
+- Why: the app is called Museum Atelier (H-NAME); Basil wants the address, the deck QR code and the NFC chip to match.
+- Decision: `museum-atelier.vercel.app` is added as a domain on the existing Vercel project `second-skin` (Settings >
+  Domains), so every prod deploy keeps it; the old address keeps working. The app itself builds share links from
+  `location.host`, so no app code changes. The reel MP4 needs a re-render to show the new address.
+
 ## the curator's "more story" version for the jacket (2026-11-22, C2, branch hassan/curator-story-import)
 - What: ST81190's story is now the curator's "more story-format version" (3 paragraphs, verbatim); her plain description variant is
   gone from `questions.json` and `narration.json`. Her page was re-read: blouse ST81114AB and trousers ST81116 (one story
