@@ -13,17 +13,8 @@
 </p>
 
 <p align="center">
-  <a href="https://designer-quest-momu.vercel.app"><b>Open the live app</b></a> ·
-  <a href="https://designer-quest-momu.vercel.app/?card=ST503">Scan the jak (demo card)</a> ·
-  <a href="mockups/assets/landing/momu-teaser.mp4">Watch the 44 s teaser</a> ·
-  <a href="presentation/TEAM%20C%20BLANCO_MoMu%20Hackathon%20presentation.pptx">Pitch deck</a>
-</p>
-
-<p align="center">
-  <a href="mockups/assets/landing/momu-teaser.mp4">
-    <img src="mockups/assets/landing/teaser-poster.webp" alt="Teaser: a jak from 1750 and football boots from 2005, worn as one look" width="820">
-  </a>
-  <br><sub>▶ Click the poster to play the teaser</sub>
+  <img src="mockups/assets/landing/teaser-poster.webp" alt="Teaser: a jak from 1750 and football boots from 2005, worn as one look" width="820">
+  <br><sub>From the 44 s teaser: <code>mockups/assets/landing/momu-teaser.mp4</code></sub>
 </p>
 
 ---
@@ -49,7 +40,7 @@ Young visitors rarely see it, and "fashion history" sounds like an exam.
   <tr>
     <td align="center" width="33%"><img src="mockups/assets/landing/screen-story.webp" alt="Story sheet for the jak ST503 with narration" width="250"><br><b>Story</b><br><sub>Narrated, from the MoMu record</sub></td>
     <td align="center" width="33%"><img src="mockups/assets/landing/screen-upclose.webp" alt="Up close on the riveted wool coat ST81190" width="250"><br><b>Up close</b><br><sub>Find the 3 recorded details on a 3D scan</sub></td>
-    <td align="center" width="33%"><img src="mockups/assets/landing/screen-share-card.webp" alt="Share card: a look across 255 years" width="250"><br><b>Share</b><br><sub>A look no century could have made</sub></td>
+    <td align="center" width="33%"><img src="docs/readme/screen-share-card.webp" alt="Share card: a look across 255 years" width="250"><br><b>Share</b><br><sub>A look no century could have made</sub></td>
   </tr>
 </table>
 
@@ -92,18 +83,13 @@ momu-collection-db/
 └── docs/           # project notes, wearable-scan pipeline
 ```
 
-More detail: [ARCHITECTURE.md](ARCHITECTURE.md) (components, data flow, how-tos), [DESIGN.md](DESIGN.md),
-[PRODUCT.md](PRODUCT.md), [docs/PROJECT_NOTES.md](docs/PROJECT_NOTES.md) (problem, ideation, visitor flow) and
-[presentation/STORYLINE.md](presentation/STORYLINE.md) (persona and demo script).
+More detail: `ARCHITECTURE.md` (components, data flow, how-tos), `DESIGN.md`, `PRODUCT.md`,
+`docs/PROJECT_NOTES.md` (problem, ideation, visitor flow) and `presentation/STORYLINE.md` (persona and demo script).
 
 ## Run it locally
 
-```
-cd mockups && python3 -m http.server 8765 --bind 127.0.0.1
-```
-
-Open <http://127.0.0.1:8765/> for the landing page or `/atelier.html?card=ST503` to simulate scanning a card.
-The app alone needs nothing else; the 3D pipeline and DB need the steps below.
+Serve the `mockups/` folder with any static file server. `index.html` is the landing page;
+`atelier.html?card=ST503` simulates scanning a card. The app alone needs nothing else; the 3D pipeline and DB need the steps below.
 
 <details>
 <summary>3D pipeline, database, narration and Ask</summary>
@@ -121,7 +107,7 @@ createdb momu && pg_restore -d momu --no-owner seed/momu_full.dump    # collecti
 - Narration: `mockups/tools/narration.py` builds `narration.json`; facts are checked with `narration_facts.py`.
 - Languages: UI strings in `mockups/i18n/`, built with `mockups/tools/i18n_build.py`.
 - Ask the archive: `cd mockups && npm install && npm run dev:ask`; eval with `npm run eval:ask`.
-- Wearable scans: [docs/WEARABLE-PIPELINE.md](docs/WEARABLE-PIPELINE.md). Teaser: [presentation/reel/README.md](presentation/reel/README.md).
+- Wearable scans: `docs/WEARABLE-PIPELINE.md`. Teaser: `presentation/reel/README.md`.
 
 </details>
 
