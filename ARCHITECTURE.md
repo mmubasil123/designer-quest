@@ -66,7 +66,7 @@ mockups/pieces.json  (single source of truth for pieces) ───────�
   or quote not in that record (D3).
 - Piece facts on screen trace to a record field; Dutch-only text is marked as a translation.
 
-## How-tos (moved from `HANDOVER.md`, 2026-11-22)
+## How-tos
 
 ### Study piece from a splat (Up close)
 - Raw `.ply` captures sit in the git-ignored `splats/` (about 220 MB each, from MoMu's Splatting_FOLDER on Google Drive or
@@ -81,18 +81,6 @@ mockups/pieces.json  (single source of truth for pieces) ───────�
   dress 1920-25; MOMU-4 ST80998 bridal kaftan 1900-25; MOMU-6 ST2431/1-4 uniform 1870-1900; MOMU-7 ST2432/1-2 uniform
   1800-1940; MOMU-8 ST671 dress 1900-15; MOMU-9 ST2203 dress 1937-48; MOMU-10 ST652/1 dress 1940-45. All are standard
   `.ply`, about 0.9 M splats, SH degree 3.
-
-### Splat Stage (approach A, tickets G2 to G4): what the spike taught
-Spike page `mockups/splat-stage-spike.html` (`window.spike`); parts cut by `mockups/tools/splat_spike_cut.py` (rules for
-ST2431 and ST2432 only; commands in its docstring) into `mockups/assets/splat/spike/`, garments decimated to 30%, all SH 1.
-- One look is 5.5 to 6.8 MB. Both uniforms were shot on the same MoMu form, so parts swap with no scaling and Spark sorts
-  splats across meshes. Fabric remix is a Spark dyno `objectModifier` that keeps luminance and swaps hue (cream above 0.45
-  stays undyed; a uniform change needs `mesh.updateVersion()`).
-- Carry into the build: (1) Spark still draws a SplatMesh with `visible = false`, so add and remove it. (2) The form's arms
-  differ per capture, so hands travel with their top as an undyed part. (3) Cut by splat footprint, not centre, or blurry
-  splats drag coat tails into the trousers. (4) Hidden garment areas are missing, so a look always needs a top.
-- Known flaws: ST2432 keeps its own waistband in the coat opening; its trousers have white knee streaks; the dye is strong
-  on indigo. Not yet checked on a phone; three 0.169 to 0.180 is needed for Spark in the Stage.
 
 ### CLO models on the outfit page (`outfit.html`, `clo/`)
 - MoMu's own CLO projects (ST80881, ST503, ST2062, ST81190, ST80998), each on MoMu's mannequin at `outfit.html?card=<id>`.
@@ -114,5 +102,5 @@ is `npx vercel deploy`, confirm `target`). Only Mubasil deploys. Ask needs `ANTH
 `ASK_API_KEY` + `ASK_MODEL`) set in the Vercel project first.
 
 ## Where to go next
-Open work and its order: `LEDGER.md`. Planned structure change: A3 splits the script into `src/` modules with
-Vite and moves the deploy root to `app/` (D7).
+Planned structure change (D7, not started): split the script into `src/` modules with Vite and move the deploy root
+to `app/`.

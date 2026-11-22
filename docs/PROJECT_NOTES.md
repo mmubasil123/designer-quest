@@ -1,8 +1,7 @@
 # Project notes
 
 The shared reference for the whole team: what problem we picked, how we got to the idea, what the visitor does,
-who owns what, and what is still open. Engineering detail lives in `ARCHITECTURE.md`; tickets and decisions
-D1 to D8 live in `LEDGER.md`; the pitch and demo script live in `presentation/STORYLINE.md`.
+who owns what, and what is still open. Engineering detail lives in `ARCHITECTURE.md`; the pitch and demo script live in `presentation/STORYLINE.md`.
 
 Edit freely. When you change something the team agreed on, say so in the commit message.
 
@@ -80,7 +79,7 @@ flowchart TD
 
 ## Decisions (team level)
 
-The engineering decisions are D1 to D8 in `LEDGER.md`. Team decisions from the ideation:
+Team decisions from the ideation:
 
 | Date | Decision | Why |
 |---|---|---|
@@ -91,7 +90,7 @@ The engineering decisions are D1 to D8 in `LEDGER.md`. Team decisions from the i
 
 ### Open: selfie and sign-up vs the repo's rules
 
-The ideation flow had a sign-up step with an optional selfie try-on. `LEDGER.md` says the avatar stays a dress
+The ideation flow had a sign-up step with an optional selfie try-on. The build keeps the avatar a dress
 form (D1) and there are no accounts or personal data (D2). These conflict; the team decides before anyone builds
 sign-up or selfie try-on. If the selfie stays: explicit opt-in, processing on the phone, nothing stored, and a
 privacy notice that covers visitors under 18 (GDPR).
@@ -121,8 +120,6 @@ Hassan translates, the curator checks the fashion terms.
 | What | Where |
 |---|---|
 | Pitch, demo script, persona | `presentation/STORYLINE.md` |
-| Tickets, decisions, cut, risks | `LEDGER.md` |
-| Where work stopped | `HANDOVER.md` |
 | How the app is built | `ARCHITECTURE.md`, `README.md` |
 | Live demo | Vercel project on Mubasil's account (see Deploy in `ARCHITECTURE.md`) |
 | Task board | Team Notion page "MoMu Hackathon" |

@@ -1,88 +1,137 @@
-# MoMu collection DB and the Designer Quest app
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/momu-logo-white.svg">
+    <img src="docs/readme/momu-logo-black.svg" alt="MoMu" width="140">
+  </picture>
+</p>
 
-Two things live here, for the MoMu Hackathon 2026 (MoMu is the Antwerp fashion museum):
+<h1 align="center">Designer Quest</h1>
 
-1. **The collection database.** MoMu's public collection data, harvested from the Omeka S APIs behind
-   studycenter.momu.be and heron.libis.be/momu into a normalised Postgres schema.
-2. **The MoMu app** (new name not decided yet), a web mockup where visitors unlock real collection pieces and dress a 3D museum dress form in
-   them, remix fabrics across pieces and centuries, and learn the history as they go.
+<p align="center">
+  <b>Tap a real MoMu piece, hear its story, win it, and wear it in a look that spans 255 years.</b><br>
+  Team C Blanco · MoMu Hackathon 2026 · MoMu Fashion Museum Antwerp
+</p>
 
-## Layout
+<p align="center">
+  <a href="https://designer-quest-momu.vercel.app"><b>Open the live app</b></a> ·
+  <a href="https://designer-quest-momu.vercel.app/?card=ST503">Scan the jak (demo card)</a> ·
+  <a href="mockups/assets/landing/momu-teaser.mp4">Watch the 44 s teaser</a> ·
+  <a href="presentation/TEAM%20C%20BLANCO_MoMu%20Hackathon%20presentation.pptx">Pitch deck</a>
+</p>
 
-| Path | What |
+<p align="center">
+  <a href="mockups/assets/landing/momu-teaser.mp4">
+    <img src="mockups/assets/landing/teaser-poster.webp" alt="Teaser: a jak from 1750 and football boots from 2005, worn as one look" width="820">
+  </a>
+  <br><sub>▶ Click the poster to play the teaser</sub>
+</p>
+
+---
+
+## The challenge
+
+> How can we make the MoMu Study Collection more accessible and interesting to a younger audience (15 to 25)?
+
+MoMu's Study Collection is archive and storage, not gallery: inventory numbers, boxes and Dutch-only labels.
+Young visitors rarely see it, and "fashion history" sounds like an exam.
+
+## Our answer
+
+**Designer Quest** is a phone web app for the museum floor. No install, no account.
+
+1. **Scan.** A card or NFC tag beside a real piece opens it on your phone.
+2. **Listen.** Its story, narrated and told from the museum's own record.
+3. **Win it.** Guess the year it was made, or find the three details the curators recorded on a 3D scan.
+4. **Wear it.** Every piece you win joins your wardrobe and goes on stage: a 1750 jak with 2005 football boots.
+5. **Remix and share.** Put one century's fabric on another and share a 9:16 card that credits MoMu.
+
+<table>
+  <tr>
+    <td align="center" width="33%"><img src="mockups/assets/landing/screen-story.webp" alt="Story sheet for the jak ST503 with narration" width="250"><br><b>Story</b><br><sub>Narrated, from the MoMu record</sub></td>
+    <td align="center" width="33%"><img src="mockups/assets/landing/screen-upclose.webp" alt="Up close on the riveted wool coat ST81190" width="250"><br><b>Up close</b><br><sub>Find the 3 recorded details on a 3D scan</sub></td>
+    <td align="center" width="33%"><img src="mockups/assets/landing/screen-share-card.webp" alt="Share card: a look across 255 years" width="250"><br><b>Share</b><br><sub>A look no century could have made</sub></td>
+  </tr>
+</table>
+
+<p align="center">
+  <img src="mockups/assets/landing/1750.webp" alt="1750" width="120">
+  <img src="mockups/assets/landing/1870.webp" alt="1870" width="120">
+  <img src="mockups/assets/landing/1920.webp" alt="1920" width="120">
+  <img src="mockups/assets/landing/1950.webp" alt="1950" width="120">
+  <img src="mockups/assets/landing/1979.webp" alt="1979" width="120">
+  <img src="mockups/assets/landing/2005.webp" alt="2005" width="120">
+  <br><sub>Real Study Collection pieces, 1750 to 2009, rendered from the app's own stage</sub>
+</p>
+
+## What makes it work
+
+- **The museum's own words.** Every date and fact comes from MoMu's collection records; a missing field says
+  "not recorded". *Ask the archive* answers questions from one record and drops anything it can't quote.
+- **Play before reading.** You win a piece by noticing something about it. Nobody can lose: the third miss wins anyway.
+- **Real garments in 3D.** 19 pieces: photo-to-3D scans (TRELLIS), MoMu's CLO models and Gaussian splats of study pieces.
+- **Three languages.** Dutch, English and French, with narration for every piece.
+- **Zero friction.** A static web app, progress kept on the phone, nothing stored on a server.
+
+## Under the hood
+
+| Part | What |
 |---|---|
-| `harvester/momu_harvest.py` | Two-stage harvester: `fetch` (API to `cache/`, polite, robots-aware) and `load` (cache to Postgres) |
-| `schema.sql` | Postgres schema (objects, values, concepts, agents, media, showcases) |
-| `seed/momu_seed.sql.gz`, `seed/momu_full.dump` | Loaded data: 4622 objects, 9323 media |
-| `mockups/atelier.html` | The mockup: Stage with the wardrobe sheet, and the Piece page; one file, three.js from a CDN |
-| `mockups/up-close.html` | Look closer: study a MoMu Gaussian splat, find its recorded details, win its fabric |
-| `mockups/pieces.json` | Piece manifest: slot, year, source photo, GLB kind (`scan` or `clo`), fit and pipeline hints |
-| `mockups/assets/*.glb` | One 3D model per piece, generated once and stored (the page never calls an API) |
-| `mockups/assets/swatch/*.jpg` | Tileable fabric swatches for the Remix tab |
-| `mockups/assets/src/` | Source photos and garment-only cutouts |
-| `mockups/tools/` | The 3D pipeline (below) |
-| `tools/craft/` | VectorCraft and TextureCraft CLIs, registered as MCP servers in `.mcp.json` |
-| `docs/PROJECT_NOTES.md` | The team's shared notes: problem statement, ideation, visitor flow, decisions, who owns what |
-| `presentation/STORYLINE.md` | Pitch story, persona, demo script, jury questions |
-| `AGENTS.md`, `ARCHITECTURE.md` | Rules for every agent and both people; components, data flow, invariants |
-| `LEDGER.md`, `TICKETS.md`, `CHANGELOG.md`, `HANDOVER.md` | Ticket ledger and decisions, earlier tickets, changes with reasons, where work stopped (short, current) |
+| Collection DB | MoMu's public collection harvested from the Omeka S APIs (studycenter.momu.be, heron.libis.be/momu) into Postgres: **4,622 objects, 9,323 media** |
+| App | Static HTML/JS on Vercel, three.js stage, one shared garment shader with triplanar fabric remix |
+| 3D pipeline | Photo → garment cutout (SegFormer) → TRELLIS image-to-3D → GLB → auto-fit by slot; splats via PlayCanvas `splat-transform` |
+| Ask the archive | Serverless `/api/ask`, answers grounded in a single public record |
+| Teaser | Made in code with Remotion from real captures of the app |
 
-## Run the mockup
+```
+momu-collection-db/
+├── harvester/      # fetch (API → cache) and load (cache → Postgres)
+├── schema.sql      # objects, values, concepts, agents, media, showcases
+├── seed/           # loaded data dumps
+├── mockups/        # the app: index.html (landing), atelier.html (Stage), up-close.html, assets, tools
+├── presentation/   # pitch deck, storyline, Remotion teaser (reel/)
+└── docs/           # project notes, wearable-scan pipeline
+```
+
+More detail: [ARCHITECTURE.md](ARCHITECTURE.md) (components, data flow, how-tos), [DESIGN.md](DESIGN.md),
+[PRODUCT.md](PRODUCT.md), [docs/PROJECT_NOTES.md](docs/PROJECT_NOTES.md) (problem, ideation, visitor flow) and
+[presentation/STORYLINE.md](presentation/STORYLINE.md) (persona and demo script).
+
+## Run it locally
 
 ```
 cd mockups && python3 -m http.server 8765 --bind 127.0.0.1
 ```
-Open http://127.0.0.1:8765/atelier.html. Drag the avatar to turn it. Pull up the wardrobe sheet: pick Top,
-Bottom, Feet or Full look; the Remix tab puts any unlocked piece's fabric on the body or sleeves of your top.
-`?card=<inventory id>` simulates scanning a museum card.
 
-## The 3D pipeline
+Open <http://127.0.0.1:8765/> for the landing page or `/atelier.html?card=ST503` to simulate scanning a card.
+The app alone needs nothing else; the 3D pipeline and DB need the steps below.
 
-Photo -> garment-only cutout -> TRELLIS image-to-3D -> GLB -> auto-fit on the dress form.
+<details>
+<summary>3D pipeline, database, narration and Ask</summary>
 
 ```
-.venv/bin/python -I mockups/tools/batch_glb.py      # makes assets/<id>.glb for every unlocked piece that lacks one
-.venv/bin/python -I mockups/tools/make_swatches.py  # rebuilds the Remix swatches
+python3 -m venv .venv && .venv/bin/python -I -m pip install -r requirements.txt
+cp .env.example .env && chmod 600 .env && zsh tools/set_hf_token.sh   # your own HF token
+createdb momu && pg_restore -d momu --no-owner seed/momu_full.dump    # collection DB
+
+.venv/bin/python -I mockups/tools/batch_glb.py       # GLB for every unlocked piece that lacks one
+.venv/bin/python -I mockups/tools/make_swatches.py   # Remix fabric swatches
 ```
-- `garment_mask.py`: local segformer (`mattmdjaga/segformer_b2_clothes`) keeps only the garment. Shoes and the
-  kimono skip it (the model is trained on people and drops them).
-- `img2glb.py`: the public TRELLIS Space on Hugging Face. Needs `HF_TOKEN` in the project `.env`
-  (`zsh tools/set_hf_token.sh` writes it without echoing). Each run spends about 120 s of the account's free
-  ZeroGPU allowance (a few minutes a day, refilling about 24 h after first use).
-- The piece list is `mockups/pieces.json` (schema `mockups/pieces.schema.json`), read by both the page and the pipeline.
 
-Python lives in the project `.venv` only (torch and transformers make it about 1 GB). No global installs.
+- Pieces: `mockups/pieces.json` (schema `pieces.schema.json`) is read by both the app and the pipeline.
+- Narration: `mockups/tools/narration.py` builds `narration.json`; facts are checked with `narration_facts.py`.
+- Languages: UI strings in `mockups/i18n/`, built with `mockups/tools/i18n_build.py`.
+- Ask the archive: `cd mockups && npm install && npm run dev:ask`; eval with `npm run eval:ask`.
+- Wearable scans: [docs/WEARABLE-PIPELINE.md](docs/WEARABLE-PIPELINE.md). Teaser: [presentation/reel/README.md](presentation/reel/README.md).
 
-## Content tools (how to refresh what the app shows)
+</details>
 
-- **Theme:** change a colour or font in the `:root` block of `mockups/theme.css`, never in the pages; it loads after
-  `atelier.html`'s own style block. `share.js` mirrors the fonts and colours as constants: change both together.
-- **the curator's text:** fetch her Notion page "Story and Questions" (read only) as Markdown, then
-  `python3 -I mockups/tools/questions_sync.py page.md`; then rebuild narration and translations (below).
-- **Narration:** `mockups/narration.json` is built by `python3 -I mockups/tools/narration.py` (never hand-edit); scripts in
-  `narration-scripts.json`, check facts with `python3 -I mockups/tools/narration_facts.py <cache/>`. All 19 are voiced in
-  Picsart Adeline (English only). To re-voice: `narration.py --scripts DIR`; Picsart editor > AI Audio Generator, voice
-  Adeline, paste the exact text, Generate, add the voiceover to the canvas, download as `DIR/<id>.en.mp3`; then
-  `.venv/bin/python -I mockups/tools/narration_listen.py DIR` (transcribes back, writes `DIR/cues.json`),
-  `narration.py --import DIR --voice "picsart:Adeline"`, `narration.py --cues DIR/cues.json`, `--check`.
-- **Languages (NL / EN / FR):** wrap new UI text in `t("English text")` (from `./i18n.js`) and add a line to
-  `mockups/i18n/ui.nl.json` and `ui.fr.json`. New fact or story text: add its source to `sources()` in
-  `mockups/tools/i18n_build.py`, run `python3 -I mockups/tools/i18n_build.py --env <a .env with ASK_PROVIDER, ASK_MODEL,
-  ASK_API_KEY>`, then `--check`; show it with `tc(key, source, sourceLang)` and `labelHtml()`. A new screen with state
-  worth keeping across a language switch registers `keepPlace` / `takePlace`.
-- **Ask the archive:** `cd mockups && npm install && npm run dev:ask` (http://127.0.0.1:8768, key from the repo's `.env`);
-  eval `npm run eval:ask` (results in `mockups/tools/ask_eval/RESULTS.md`); regenerate records after a harvest with
-  `.venv/bin/python -I mockups/tools/ask_records.py`. Demo model: Gemini free tier (`ASK_PROVIDER=gemini`,
-  `ASK_MODEL=gemini-3.5-flash-lite`); check its limits in AI Studio before the demo; past a cap Ask answers the
-  suggested questions from fields only.
-- **Landing page stills:** after a GLB or fit change, serve `mockups/`, then from `presentation/reel` run
-  `node scripts/landing-stills.mjs` and the `cwebp` line in its header. The demo teaser: `presentation/reel/README.md`.
-- **Wearable scans:** `docs/WEARABLE-PIPELINE.md`. GPU: free ZeroGPU is about 2 TRELLIS runs a day per account.
+## Team
 
-## Engine in one paragraph
+| | |
+|---|---|
+| **the team** | 3D models and splats |
+| **Mubasil** | UI / UX and deploys |
+| **Hassan** | AI, data and narration |
+| **the curator** | Fashion history, stories and questions |
 
-One three.js scene per turntable: a procedural dress form, plus each worn GLB scaled and placed by slot from its
-bounding box. The form renders first and garments over a cleared depth buffer, so a scan never shows the form
-through it; a worn top hides the torso and keeps the neck. A shared garment shader adds smooth normals, hides the
-stand baked into some scans, and projects remix fabrics in object space (triplanar) multiplied by the scan's own
-shading, with a body and a sleeves zone. CLO-draped GLBs are never rescaled (see "CLO models" in `ARCHITECTURE.md`).
+<sub>Collection data, photos, 3D captures and the MoMu logo belong to MoMu Fashion Museum Antwerp and were used for the hackathon.</sub>
