@@ -2,6 +2,13 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## Detector ignores for three false positives (2026-11-22, branch hassan/detector-ignores)
+- What: `.impeccable/config.json` ignores `low-contrast` in `mockups/index.html` and `cramped-padding` in `mockups/atelier.html`.
+- Why: the findings were the giant red display years on the landing page (large text, 4.1:1 where AA asks 3:1) and the
+  full-bleed 3D viewer dialog (padding 0 on purpose; its controls are placed in from the edges).
+- Decision (Hassan): the detector cannot ignore a single value for these rules, so both ignores are file-wide, with the
+  reason stored. Contrast on the landing page and inner spacing in `atelier.html` now need a manual check when edited.
+
 ## Re-voiced stories load the new recording at once (2026-11-22, H27, branch hassan/H27-audio-cache-bust)
 - What: `story.js` and `preload.js` now ask for a story's audio as `assets/audio/<id>.en.m4a?v=<audioHash>` (the hash
   `tools/narration.py` writes when it voices the text). Both build the same URL, so the preload still warms the file the player uses.
