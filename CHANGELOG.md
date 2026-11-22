@@ -17,6 +17,16 @@ Newest first. Each entry: what changed, why, and the decision behind it.
   log the same view-transition abort errors (`InvalidStateError`), which come from main, not from this change. Not
   checked on a phone.
 
+## Dutch and French for the curator's jacket story and hints (2026-11-22, D-3, branch hassan/curator-translations)
+- What: the 3 story paragraphs and 3 hint lines of ST81190 are in `i18n/content.nl.json` and `content.fr.json` (12 entries,
+  `by: machine`, glossary terms kept: klinknagels / rivets, drukknopen / boutons-pression, vilten / feutrage). `i18n_build.py --check`
+  passes. The story player (`story.js`) now shows a the curator prose story's captions through the same `q:<id>:story:<n>` lookup,
+  labelled as a translation; before, only script-form stories were translated, so the jacket's captions stayed English in NL / FR.
+- Why: Hassan asked for the translation. The narration audio stays English (the sheet says so).
+- Decision: written by Claude in this session rather than by `i18n_build.py`, which needs an API key from outside this repo;
+  same file format and source hashes, so the script treats them as fresh. Her hint line "…nine press-studs are a type of
+  button…" is translated for its meaning, not its grammar. the curator or a native speaker should read them.
+
 ## the curator's hints on the Win its fabric page (2026-11-22, C2, branch hassan/curator-hints)
 - What: her "3 Hints" for the jacket ST81190 are in `questions.json` (`hints`: title and line, copied by `questions_sync.py`).
   On Up close, tapping a clue's Hint now also opens her line under that clue (`up-close.html`), next to the ring on the piece.
