@@ -2,6 +2,27 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## Landing page at `/`, the Stage at `/stage` (2026-11-22, E4, branch hassan/E4-landing)
+- What: `mockups/index.html`, the landing page. The hero is "the year itself": a giant red year fills the screen and the
+  dress form stands in front of it; one slider (13 era stops, 1750 to 2005, then "Your look") changes the numeral, the
+  outfit and the record quote together. A pausable tour plays once on load and rests on the 255-year look (jak, monpe
+  trousers, football boots); it is off under reduced motion. Below: how a visit goes (tap, guess, wear, look closer,
+  remix, share) with the app's real screens and a playable year guess on the jak that uses `win.js`'s own `judge()`;
+  the E2 teaser; "every word from the museum"; Start. The stills are rendered from the app's own Stage by
+  `presentation/reel/scripts/landing-stills.mjs` (transparent PNGs, git-ignored in `assets/landing/raw/`, shipped as
+  WebP, about 0.5 MB for all 14). App screens come from the E2 captures; the video poster is the teaser's first
+  storyboard frame; `assets/landing/momu-teaser.mp4` is the E2 render (4.4 MB, served with `preload="none"`).
+  Routing: `vercel.json` no longer rewrites `/` to the app; `/` serves `index.html` and `/stage` rewrites to
+  `second-skin.html`. The landing page forwards any `?card=` or `?fabric=` URL to the Stage first, so sticker links work.
+  On the Stage the MoMu logo now links to the landing page, and the desktop pitch line is written for visitors.
+  `PRODUCT.md` records the product for design work; `.impeccable/surfaces/` holds the page's direction.
+- Why: the app had no front door that tells the story; Hassan asked for a landing page with the demo video and a
+  mannequin re-dressed by a year slider, at `/`, with the Stage elsewhere.
+- Decision: Hassan chose pre-rendered stills over live 3D (light, fast on venue wifi) and the "year itself" layout
+  over a museum-label and a phone-promo layout. Facts and quotes come from `pieces.json` and `records.json` (D3).
+  The CLO-only pieces (knee breeches, cycling outfit) have no stop: they are worn on the avatar, not the dress form
+  (D5). Deploy setting D7 changes: Mubasil deploys it.
+
 ## MoMu teaser video, made in code (2026-11-22, E2, branch hassan/E2-demo-video)
 - What: `presentation/reel/`, a Remotion project that renders a 44 s, 1920 x 1080 teaser from the app's real screens
   (captured at 390 px with Playwright, `scripts/capture.mjs`) and MoMu's photos: nine scenes, one per caption, with

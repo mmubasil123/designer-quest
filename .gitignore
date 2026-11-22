@@ -12,3 +12,6 @@ splats/
 mockups/assets/splat/*.ply
 node_modules/
 tools/node/
+
+# E4: full-size PNG renders behind mockups/assets/landing/*.webp (presentation/reel/scripts/landing-stills.mjs)
+mockups/assets/landing/raw/

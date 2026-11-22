@@ -4,6 +4,12 @@ Read this, then `LEDGER.md` (tickets, decisions D1 to D8, product-owner cut and 
 change with its reason. Agent rule (both people): work autonomously within your claimed ticket, inspect screenshots critically
 before calling anything done. Never deploy, push to `main` or publish without your person's explicit go.
 
+## E4 landing page (hassan, branch hassan/E4-landing, 2026-11-22)
+`mockups/index.html` is the new `/`; the Stage is `/stage` (and still `second-skin.html`). Sticker links `/?card=<id>`
+and `/?fabric=<id>` are forwarded to the Stage by the landing page. Re-render the hero stills after a GLB or fit change:
+serve `mockups/`, then `node presentation/reel/scripts/landing-stills.mjs` (from `presentation/reel`) and the `cwebp` line in its header.
+Needs Mubasil's deploy; check `/`, `/stage` and `/?card=ST503` on the preview first.
+
 ## E2 demo video (hassan, PR #56 merged, 2026-11-22)
 A 44 s, 1920 x 1080 MoMu teaser rendered in code: `presentation/reel/` (Remotion), script and fact sources in
 `presentation/DEMO_VIDEO.md`, look in `presentation/reel/style.md`, `/reel <line>` skill for the next one. The MP4 is
