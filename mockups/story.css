@@ -73,10 +73,10 @@
 @media (prefers-reduced-motion: reduce) {
   .story { transition: opacity 150ms ease; transform: none; }
   @starting-style { .story[open] { transform: none; } }
-  .story[open] .pic img { animation: story-fade 300ms ease both; }
-  .story[open] .rise { animation: story-fade 200ms ease both; }
+  .story[open] .pic img { animation: story-fade 150ms ease both; }
+  .story[open] .rise { animation: story-fade 150ms ease both; }
   .story .rest { transition: opacity 150ms ease; }
-  .story .captions .w { transition: color 100ms ease; }
-  .story .tease.show { animation: story-fade 200ms ease both; }
+  .story .captions .w { transition: color 150ms ease; }
+  .story .tease.show { animation: story-fade 150ms ease both; }
 }
 @keyframes story-fade { from { opacity: 0; } to { opacity: 1; } }

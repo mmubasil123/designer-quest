@@ -186,7 +186,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .fact .row .btn { flex: 1; }
 .fact .row a { flex: none; min-height: 44px; display: flex; align-items: center; padding: 0 14px; font-size: 13px; color: var(--ink); }
 .tile.on { outline: 2px solid var(--ink); outline-offset: 2px; }
-.tile.locked img { filter: grayscale(1) contrast(.2) brightness(1.4); }
 .tile .st { position: absolute; left: 6px; right: 6px; bottom: 6px; background: var(--paper); border-radius: 8px; padding: 6px 8px; text-align: left; }
 .tile .st b { display: block; font: 400 13px/1.2 var(--serif); }
 .tile .st span { font: 400 10px/1.4 var(--sans); color: var(--muted); }
@@ -194,7 +193,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .museum { width: min(420px, calc(100% - 32px)); text-align: left; }
 .museum .grid { max-height: min(60vh, 520px); overflow-y: auto; margin-bottom: 8px; }
 .tile.study:not(.seen) img { filter: grayscale(1) contrast(.2) brightness(1.4); }
-.tile.locked::after { pointer-events: none; content: "Win it at MoMu"; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 10px; font: italic 13px/1.2 var(--serif); color: var(--muted); }
 
 dl { display: grid; grid-template-columns: 84px 1fr; gap: 4px 10px; margin: 12px 0; font-size: 13px; }
 dt { color: var(--muted); }
@@ -261,6 +259,7 @@ dt { color: var(--muted); }
   .nfc { transition: opacity 150ms ease; transform: none; }
 }
 </style>
+<link rel="stylesheet" href="wardrobe.css"><!-- B5/B6/B8 wardrobe tiles: persistent nodes, silhouettes, reveal -->
 <link rel="stylesheet" href="theme.css"><!-- B9 MoMu theme: tokens, fonts and the skin; must stay after the style block -->
 </head>
 <body data-screen="stage">
@@ -308,6 +307,7 @@ dt { color: var(--muted); }
 </div>
 
 <script type="module">
+import { nodeFor, syncTile, show } from "./wardrobe.js";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
@@ -559,6 +559,7 @@ function place(model, slot, adjust = 1, fit = SLOT_FIT, lift = 0) {   // wrapper
   return wrap;
 }
 
+const REDUCE = matchMedia("(prefers-reduced-motion: reduce)");   // B8: read live, so switching it while the page is open takes effect
 class Turntable {
   constructor(el, { interactive, frame = 0, onFrame }) {
     this.el = el; this.frame = frame; this.onFrame = onFrame; this.worn = {};
@@ -696,7 +697,7 @@ class Turntable {
     if (this.onScreen === false) return;
     for (const e of Object.values(this.worn)) {
       if (!e.born || !e.obj) continue;
-      const k = Math.min((performance.now() - e.born) / 360, 1), ease = 1 - (1 - k) ** 3;
+      const k = REDUCE.matches ? 1 : Math.min((performance.now() - e.born) / 360, 1), ease = 1 - (1 - k) ** 3;
       e.obj.userData.rest ??= { y: e.obj.position.y, s: e.obj.scale.x };
       e.obj.position.y = e.obj.userData.rest.y + 0.04 * (1 - ease);
       e.obj.scale.setScalar(e.obj.userData.rest.s * (0.97 + 0.03 * ease));
@@ -721,16 +722,18 @@ class Turntable {
     const coast = () => {   // momentum after release, then hand back to the idle spin
       vel *= 0.92; this.frame += vel; this.setFrame(this.frame);
       if (Math.abs(vel) > 0.02) raf = requestAnimationFrame(coast);
-      else { coasting = false; idle = setTimeout(() => { if (!reduce) raf = requestAnimationFrame(spin); }, 2500); }
+      else { coasting = false; idle = setTimeout(() => { if (!REDUCE.matches) raf = requestAnimationFrame(spin); }, 2500); }
     };
     // A6: the loop stops for a hidden tab or the Piece screen; this restarts it (not mid-drag or mid-coast)
     this.wake = () => {
-      if (reduce || x0 != null || coasting || pinch || document.hidden || this.onScreen === false) return;
+      if (REDUCE.matches || x0 != null || coasting || pinch || document.hidden || this.onScreen === false) return;
       cancelAnimationFrame(raf); clearTimeout(idle); t0 = undefined; raf = requestAnimationFrame(spin);
     };
     document.addEventListener("visibilitychange", () => { if (!document.hidden) this.wake(); });
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!reduce) raf = requestAnimationFrame(spin);
+    REDUCE.addEventListener("change", () => {   // B8: reduce stops the idle spin at once; leaving it starts it again
+      if (REDUCE.matches) { cancelAnimationFrame(raf); clearTimeout(idle); speed = 0; t0 = undefined; } else this.wake();
+    });
+    if (!REDUCE.matches) raf = requestAnimationFrame(spin);
     const pts = new Map();   // active pointers, for two-finger pinch
     let pinch = null, lastY = 0;
     const ndcOf = clientY => { const r = this.el.getBoundingClientRect(); return 1 - 2 * (clientY - r.top) / (r.height || 1); };
@@ -917,38 +920,48 @@ function isWorn(id, ctx) {
   if (ctx === "full") return look.full === id;
   return (ctx === "feet" || !look.full) && look[ctx] === id;
 }
-const tile = (id, cls, img, label, aria) => `<div class="tile ${cls}" data-id="${id}">
-  <button class="pick press" aria-label="${esc(aria)}" aria-pressed="${cls.includes("on")}"><img src="${img}" alt="" loading="lazy" decoding="async"${img.startsWith("assets/swatch") ? ' style="mix-blend-mode:normal"' : ""}></button>${label}
+const tile = (id, cls, img, label, aria, sil = false) => `<div class="tile ${cls}" data-id="${id}">
+  <button class="pick press" aria-label="${esc(aria)}" aria-pressed="${cls.includes("on")}">${sil ? `<img class="sil" src="${img}" alt="" loading="lazy" decoding="async">` : ""}<img${sil ? ' class="real"' : ""} src="${img}" alt="" loading="lazy" decoding="async"${img.startsWith("assets/swatch") ? ' style="mix-blend-mode:normal"' : ""}></button>${label}
   <button class="info" data-info="${id}" aria-label="About ${esc(PIECES[id].name)}"><span aria-hidden="true">i</span></button></div>`;
 const newFirst = ([a], [b]) => fresh.has(b) - fresh.has(a);   // a piece just won leads its tab
+/* B5: the wardrobe keeps one node per tile (wardrobe.js); a render only reorders them and toggles classes and aria */
+const ROOM_NO = Object.fromEntries(manifest.pieces.filter(p => p.museumRoom).map(p => [p.id, p.museumRoom]));   // optional field; none recorded yet (D3: no room number is guessed)
+const whereIs = id => ROOM_NO[id] ? `Find card in room ${ROOM_NO[id]}` : "Find its card in the museum";
+const slotTile = id => { const p = PIECES[id];
+  const n = nodeFor(`slot:${id}`, () => tile(id, "", p.img, `<span class="m">${esc(shortName(id))}<span class="where"></span></span>`, "", p.locked));
+  n.querySelector(".where").textContent = whereIs(id);
+  return syncTile(n, { on: isWorn(id, activeSlot), locked: p.locked, fresh: fresh.has(id),
+    aria: p.locked ? `${p.name}, still to find. ${whereIs(id)}` : isWorn(id, activeSlot) ? `Take off ${p.name}` : `Wear ${p.name}` }); };
+const plainTile = (kind, id, img, label, aria) => syncTile(nodeFor(`${kind}:${id}`, () => tile(id, "", img, `<span class="m">${label}</span>`, aria)),
+  { on: isWorn(id, kind), locked: false, fresh: fresh.has(id), aria });
 function renderLocker() {
   document.getElementById("foundCount").textContent = `${Object.values(PIECES).filter(p => !p.locked && p.glb).length} in your wardrobe`;
   const won = wonIds();
   if (activeSlot === "won" && !won.length) activeSlot = "top";
   document.getElementById("slotTitle").textContent = LABEL[activeSlot];
-  document.getElementById("cats").innerHTML = [...(won.length ? ["won"] : []), ...SLOTS, "remix"].map(s =>
-    `<button class="cat press" aria-pressed="${s === activeSlot}" data-slot="${s}">${LABEL[s]}</button>`).join("");
-  const cats = document.getElementById("cats"), on = cats.querySelector('[aria-pressed="true"]');   // the chosen tab must be on screen, even the last one
+  const cats = document.getElementById("cats");
+  show(cats, [...(won.length ? ["won"] : []), ...SLOTS, "remix"].map(s => {
+    const b = nodeFor(`cat:${s}`, () => `<button class="cat press" data-slot="${s}">${LABEL[s]}</button>`);
+    b.setAttribute("aria-pressed", String(s === activeSlot)); return b; }));
+  const on = cats.querySelector('[aria-pressed="true"]');   // the chosen tab must be on screen, even the last one
   cats.scrollLeft += on.getBoundingClientRect().right - cats.getBoundingClientRect().right + 48;
   renderWearing();
   const grid = document.getElementById("grid");
   if (activeSlot === "won") {   // everything won in the museum, garments and fabrics alike; a tap puts that one piece on by itself
-    grid.innerHTML = won.map(id => [id, PIECES[id]]).sort(newFirst).map(([id, p]) =>
-      tile(id, `${isWorn(id, "won") ? "on" : ""} ${fresh.has(id) ? "new" : ""}`, p.splat ? swatchOf(id) : p.img,
-        `<span class="m">${esc(shortName(id))}${p.splat ? " fabric" : ""}</span>`, isWorn(id, "won") ? `Take off ${p.name}` : `Wear ${p.name} on its own`)).join("");
+    show(grid, won.map(id => [id, PIECES[id]]).sort(newFirst).map(([id, p]) =>
+      plainTile("won", id, p.splat ? swatchOf(id) : p.img, `${esc(shortName(id))}${p.splat ? " fabric" : ""}`, isWorn(id, "won") ? `Take off ${p.name}` : `Wear ${p.name} on its own`)));
     return;
   }
   if (activeSlot === "remix") {   // any unlocked piece's cloth, on the body or sleeves of your top or full look
-    const zones = ["body", "sleeves"].map(z =>
-      `<button class="cat press" aria-pressed="${z === activeZone}" data-zone="${z}">${z === "body" ? "Body" : "Sleeves"}</button>`).join("");
-    const bare = !look.full && !look.top ? `<p class="zones none">Fabric goes on a top or a full look. Put one on first.</p>` : "";
-    grid.innerHTML = `<div class="zones">${zones}</div>${bare}` + Object.entries(PIECES).filter(([, p]) => (p.glb || p.splat) && !p.locked).sort(newFirst).map(([id, p]) =>
-      tile(id, `${isWorn(id, "remix") ? "on" : ""} ${fresh.has(id) ? "new" : ""}`, swatchOf(id), `<span class="m">${esc(shortName(id))}</span>`, `${p.name} fabric on the ${activeZone}`)).join("");
+    const zones = nodeFor("zones", () => `<div class="zones">${["body", "sleeves"].map(z =>
+      `<button class="cat press" data-zone="${z}">${z === "body" ? "Body" : "Sleeves"}</button>`).join("")}</div>`);
+    zones.querySelectorAll("[data-zone]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.zone === activeZone)));
+    const bare = !look.full && !look.top ? [nodeFor("bare", () => `<p class="zones none">Fabric goes on a top or a full look. Put one on first.</p>`)] : [];
+    show(grid, [zones, ...bare, ...Object.entries(PIECES).filter(([, p]) => (p.glb || p.splat) && !p.locked).sort(newFirst).map(([id, p]) =>
+      plainTile("remix", id, swatchOf(id), esc(shortName(id)), `${p.name} fabric on the ${activeZone}`))]);
     return;
   }
-  grid.innerHTML = Object.entries(PIECES).filter(([, p]) => (p.slot === activeSlot || (p.wear === activeSlot && !p.locked)) && p.glb).sort(newFirst).map(([id, p]) =>
-    tile(id, `${isWorn(id, activeSlot) ? "on" : ""} ${p.locked ? "locked" : ""} ${fresh.has(id) ? "new" : ""}`, p.img, `<span class="m">${esc(shortName(id))}</span>`,
-      isWorn(id, activeSlot) ? `Take off ${p.name}` : `Wear ${p.name}`)).join("");
+  show(grid, Object.entries(PIECES).filter(([, p]) => (p.slot === activeSlot || (p.wear === activeSlot && !p.locked)) && p.glb).sort(newFirst).map(([id]) => slotTile(id)));
 }
 /* Museum: the room pieces (each with a sticker) are won there, not owned yet, so they live outside the wardrobe (D2) */
 const museumEl = document.getElementById("museum");
@@ -1112,7 +1125,7 @@ document.getElementById("grid").addEventListener("click", e => {
   const info = e.target.closest("[data-info]");
   if (info) { openFact(info.dataset.info); return; }
   const t = e.target.closest(".pick") && e.target.closest("[data-id]");
-  if (t) t.classList.contains("locked") ? tapCard(t.dataset.id) : act(t.dataset.id, ctxOf(t.dataset.id));
+  if (t) PIECES[t.dataset.id].locked ? tapCard(t.dataset.id) : act(t.dataset.id, ctxOf(t.dataset.id));
 });
 
 /* ---------- Fact card (C1): every field is copied from the MoMu record by tools/records.py; gaps say so (D3) ---------- */
