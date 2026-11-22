@@ -1,4 +1,4 @@
-# Changelog: Second Skin mockup
+# Changelog: Museum Atelier mockup
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
@@ -10,6 +10,11 @@ Newest first. Each entry: what changed, why, and the decision behind it.
   in a Story section when there is one; her page was only read, never edited.
 - Decision: her wording wins. Dutch and French translations of the jacket story (3 entries each) are stale until
   `i18n_build.py` runs with the Gemini key; they show the old text meanwhile.
+
+## The app is called Museum Atelier (2026-11-22, H-NAME, branch hassan/museum-atelier-rename)
+- What: "Museum Atelier" now shows in the tab titles (also "Up close · Museum Atelier", "<piece> · Museum Atelier", "Cycling outfit · Museum Atelier"), next to the MoMu logo in the Stage, Up close, outfit and landing headers (`.app-name` in `theme.css`), in the share card's top row ("Museum Atelier · <date>"), the share sheet title ("My Museum Atelier look", nl and fr too), the landing page's `og:` tags, and the README, AGENTS, LEDGER title, schema comments and current docs. Dutch and French strings that said Second Skin now say Museum Atelier.
+- Why: the team picked the name; "Second Skin" was a friend's idea name and must not stay in the product.
+- Decision: identifiers stay (`second-skin.html`, the Vercel project `second-skin`, sticker URLs, `secondSkin.*` keys, `window.secondSkin`, the `second_skin` DB schema), as in the H10 entry below: renaming them would break printed stickers and saved looks and needs Mubasil for the deploy. History (past changelog entries, ledger rows, plans) is left as written.
 
 ## Stage UI bugs: every wardrobe tile reachable, zoom never cut by a box (2026-11-22, H21, branch hassan/stage-ui-bugs)
 - What (wardrobe): the tile grid pads its end by the sheet's `--y` (`.wardrobe .grid` in `second-skin.html`), so at half the

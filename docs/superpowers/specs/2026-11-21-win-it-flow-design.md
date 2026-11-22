@@ -1,7 +1,7 @@
 # Win it: one flow from the room to the wardrobe (2026-11-21)
 
 ## Intent
-Show judges, in a 5-minute demo, how Second Skin brings new audiences to MoMu: you play with a starter wardrobe,
+Show judges, in a 5-minute demo, how Museum Atelier brings new audiences to MoMu: you play with a starter wardrobe,
 then the pieces in the room are something you hunt and win, and every win lands in your digital wardrobe.
 Approved by Mubasil in chat on 2026-11-21.
 

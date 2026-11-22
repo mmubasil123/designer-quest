@@ -25,7 +25,7 @@ from MoMu's hackathon page (Splatting_FOLDER on Google Drive) or from Mubasil. T
 just fail to connect.
 
 ## Scope
-- MoMu Hackathon 2026: the harvested collection DB and the MoMu app mockup (the old name "Second Skin" is dropped from the app; files, URLs and the Vercel project keep `second-skin`).
+- MoMu Hackathon 2026: the harvested collection DB and the MoMu app mockup (the app is called "Museum Atelier"; "Second Skin" was an early idea name and is gone from the product; files, URLs and the Vercel project keep `second-skin`).
 - Private repo: github.com/mmubasil123/momu-collection-db. Discards move to `_to_delete/` (git-ignored), never `rm`.
 
 ## Working together (two people, several agents)
