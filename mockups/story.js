@@ -59,7 +59,10 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
      its start time as a share of the whole narration (for an audio file, which has no word timings). */
   function captions(id, p, guess) {
     let tr = false;
-    const beats = p.form === "script" ? p.beats.map((b, n) => { const g = tc(`narr:${id}:${n}`, b.t, "en"); if (g.tr) tr = true; return { ...b, t: g.text }; }) : p.paragraphs.map(x => ({ t: x }));
+    const beats = p.form === "script" ? p.beats.map((b, n) => { const g = tc(`narr:${id}:${n}`, b.t, "en"); if (g.tr) tr = true; return { ...b, t: g.text }; }) : p.paragraphs.map((x, n) => {   // prose: the curator's paragraphs, in NL / FR our labelled translation (q: keys), as for the script beats
+      const g = p.source === "curator" ? tc(`q:${id}:story:${n}`, x, "en") : { text: x, tr: false };
+      if (g.tr) tr = true; return { t: g.text };
+    });
     const words = []; let total = 0, at = 0, cut = null;
     const beatStarts = [];
     const html = beats.map(b => {
