@@ -2,6 +2,15 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## the curator's "more story" version for the jacket (2026-11-22, C2, branch hassan/curator-story-import)
+- What: ST81190's story is now the curator's "more story-format version" (3 paragraphs, verbatim); her plain description variant is
+  gone from `questions.json` and `narration.json`. Her page was re-read: blouse ST81114AB and trousers ST81116 (one story
+  version each) and all 11 questions already matched it. The other 16 pieces are not on her page and keep their text.
+- Why: the team wants the narrative version shown. `tools/questions_sync.py` now uses the text after a "more story" marker
+  in a Story section when there is one; her page was only read, never edited.
+- Decision: her wording wins. Dutch and French translations of the jacket story (3 entries each) are stale until
+  `i18n_build.py` runs with the Gemini key; they show the old text meanwhile.
+
 ## The app is called Museum Atelier (2026-11-22, H-NAME, branch hassan/museum-atelier-rename)
 - What: "Museum Atelier" now shows in the tab titles (also "Up close · Museum Atelier", "<piece> · Museum Atelier", "Cycling outfit · Museum Atelier"), next to the MoMu logo in the Stage, Up close, outfit and landing headers (`.app-name` in `theme.css`), in the share card's top row ("Museum Atelier · <date>"), the share sheet title ("My Museum Atelier look", nl and fr too), the landing page's `og:` tags, and the README, AGENTS, LEDGER title, schema comments and current docs. Dutch and French strings that said Second Skin now say Museum Atelier.
 - Why: the team picked the name; "Second Skin" was a friend's idea name and must not stay in the product.
