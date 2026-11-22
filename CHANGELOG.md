@@ -2,6 +2,12 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## Old Stage address still opens (2026-11-22, H-URL, branch basil/H-URL2)
+- What: `vercel.json` sends `/second-skin.html` (with its `?card=` / `?fabric=`) to `/stage`, which serves `atelier.html`.
+- Why: the Stage file is now `atelier.html` (H-NAME), so NFC chips, QR codes and shares written with the old file name
+  would 404 after the next deploy.
+- Decision: a temporary (307) redirect, query kept; the link to print on NFC and QR is `museum-atelier.vercel.app/?card=<id>`.
+
 ## Dutch and French for the curator's jacket story and hints (2026-11-22, D-3, branch hassan/curator-translations)
 - What: the 3 story paragraphs and 3 hint lines of ST81190 are in `i18n/content.nl.json` and `content.fr.json` (12 entries,
   `by: machine`, glossary terms kept: klinknagels / rivets, drukknopen / boutons-pression, vilten / feutrage). `i18n_build.py --check`
