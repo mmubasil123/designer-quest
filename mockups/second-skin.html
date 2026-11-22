@@ -96,15 +96,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .stage .toast { white-space: normal; width: max-content; max-width: calc(100% - 40px); text-align: center; line-height: 1.35; border-radius: 16px; }   /* long piece names wrap instead of running off the phone */
 .credit { position: absolute; left: 20px; top: 8px; right: 20px; display: flex; justify-content: space-between; gap: 8px; }
 .credit .t { font: 400 22px/1.15 var(--serif); }
-.skins { display: flex; margin-right: -12px; }
 .bodies { display: flex; align-items: flex-start; gap: 4px; }
 #bodyBtn { min-height: 36px; margin-top: 4px; padding: 0 14px; }
 #bodyBtn[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 #bodyBtn[aria-busy="true"] { opacity: 0.6; }
-/* 44 px hit area, 20 px dot: the 12 px transparent border is touchable but not painted */
-.skin { width: 44px; height: 44px; border-radius: 50%; border: 12px solid transparent; background-clip: padding-box !important;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); }
-.skin[aria-pressed="true"] { outline: 2px solid var(--ink); outline-offset: -10px; }
 
 /* Wardrobe: a bottom sheet with three snap points (peek, half, full); --y is how far it sits below fully open */
 .wardrobe {
@@ -269,7 +264,7 @@ dt { color: var(--muted); }
   <feComponentTransfer><feFuncR type="gamma" exponent="10"/><feFuncG type="gamma" exponent="10"/><feFuncB type="gamma" exponent="10"/></feComponentTransfer>
 </filter></svg>
 <h1 class="sheet">MoMu</h1>
-<p class="sheet">Win real MoMu pieces and wear them on a museum dress form, across 255 years. <a href="./">How it works</a></p>
+<p class="sheet">Win real MoMu pieces and dress up in them, across 255 years. <a href="./">How it works</a></p>
 
 <div class="screens">
 
@@ -284,17 +279,17 @@ dt { color: var(--muted); }
             <div class="t" id="lookName">Antwerp, any century</div>
             <div class="mono" id="lookSpan"></div>
           </div>
-          <div class="bodies"><button class="pill ghost press" id="bodyBtn" hidden aria-pressed="false">Avatar</button><div class="skins" id="skins" aria-label="Form finish"></div></div>
+          <div class="bodies"><button class="pill ghost press" id="bodyBtn" hidden aria-pressed="false">Avatar</button></div>
         </div>
         <div class="turntable" id="stageTT" role="img" aria-label="Your avatar, drag to turn"></div>
-        <div class="zoom" aria-label="Zoom the form"><button class="press" id="zoomIn" aria-label="Zoom in">+</button><button class="press" id="zoomOut" aria-label="Zoom out" disabled>&minus;</button><button class="press" id="focusBtn" aria-pressed="false" aria-label="Show only the form"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div>
+        <div class="zoom" aria-label="Zoom the look"><button class="press" id="zoomIn" aria-label="Zoom in">+</button><button class="press" id="zoomOut" aria-label="Zoom out" disabled>&minus;</button><button class="press" id="focusBtn" aria-pressed="false" aria-label="Show only the look"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div>
         <div class="toast" id="toast" role="status" aria-live="polite"></div>
         <section class="wardrobe" id="wardrobe" aria-label="Wardrobe">
           <div class="grab" id="wardrobeGrab">
             <button class="handle" id="wardrobeHandle" aria-label="Open or close the wardrobe" aria-expanded="false"></button>
             <div class="wardrobe-head"><h2 id="slotTitle">Top</h2><span class="mono" id="foundCount"></span></div>
             <div class="cats" id="cats"></div>
-            <div class="wearing" id="wearing" aria-label="What the form is wearing"></div>
+            <div class="wearing" id="wearing" aria-label="What you are wearing"></div>
           </div>
           <div class="grid" id="grid"></div>
         </section>
@@ -323,8 +318,6 @@ const IMG = id => `https://heron.libis.be/momu/files/large/${id}.jpg`;
 const ZOOM_MAX = 3;
 const FRAMES = 36; // matches CLO export_turntable's default frame count
 
-const SKINS = ["#e9dfcc", "#d2bf9c", "#2a2724", "#8a6a48"];   // dress-form finishes, in FINISH_NAMES order
-const FINISH_NAMES = ["Linen", "Calico", "Black jersey", "Oak"];
 /* Back from Up close can show this page from the back-forward cache, frozen as it was. A ?card= study scan parks this page
    before the wardrobe is drawn and hands over to Up close, so a frozen copy is a blank sheet with only "Top", and a win
    left there would wait for some later page load. So: any restore before boot finished, or with a win waiting or details
@@ -381,7 +374,7 @@ if (PIECES[scanned]?.clo && !PIECES[scanned].glb) {   // a CLO garment is worn o
   await new Promise(() => {});
 }
 const SLOTS = ["top", "bottom", "feet", "full"];
-const look = { top: null, bottom: null, feet: null, full: "ST80881", fabric: { body: null, sleeves: null }, skin: 1 };   // first look: the furisode, the cleanest scan and the most recognisable piece
+const look = { top: null, bottom: null, feet: null, full: "ST80881", fabric: { body: null, sleeves: null } };   // first look: the furisode, the cleanest scan and the most recognisable piece
 const SAVE_KEY = "secondSkin.save.v1";
 let widest = 0;   // the widest span this visitor has built; saved with the look, so a reload keeps the record
 try {   // restore the visitor's look; ids are checked against the manifest, since storage is user-controlled
@@ -390,33 +383,16 @@ try {   // restore the visitor's look; ids are checked against the manifest, sin
   const l = saved?.v === 1 && saved.look;
   if (Number.isFinite(saved?.widest) && saved.widest > 0) widest = Math.min(Math.round(saved.widest), 1000);
   if (l && ok(l.top, ["top"]) && ok(l.bottom, ["bottom"]) && ok(l.feet, ["feet"]) && ok(l.full, ["full"])
-      && ok(l.fabric?.body ?? null, ["top", "bottom", "feet", "full", "study"]) && ok(l.fabric?.sleeves ?? null, ["top", "bottom", "feet", "full", "study"])
-      && Number.isInteger(l.skin) && l.skin >= 0 && l.skin < 4) {
-    Object.assign(look, { top: l.top, bottom: l.bottom, feet: l.feet, full: l.full, skin: l.skin,
+      && ok(l.fabric?.body ?? null, ["top", "bottom", "feet", "full", "study"]) && ok(l.fabric?.sleeves ?? null, ["top", "bottom", "feet", "full", "study"])) {
+    Object.assign(look, { top: l.top, bottom: l.bottom, feet: l.feet, full: l.full,
       fabric: { body: l.fabric?.body ?? null, sleeves: l.fabric?.sleeves ?? null } });
   }
 } catch { /* private mode or a corrupt save: start fresh */ }
 
-/* ---------- Turntable: one three.js scene, a dress form and the worn pieces ---------- */
-// Dress form in metres; every MoMu photo is shot on a form like this, so the scans sit on it in the same pose
-const FORM_PROFILE = [[0, 0.78], [0.15, 0.79], [0.175, 0.86], [0.16, 0.95], [0.13, 1.04], [0.15, 1.16], [0.17, 1.27],
-  [0.165, 1.33], [0.12, 1.37], [0, 1.38]];
+/* ---------- Turntable: one three.js scene and the worn pieces, shown on their own (H20: no dress form) ---------- */
 // Width in metres of the model's bounding box x; `top` is where its top edge sits (null: stands on the floor).
 // Trellis GLBs are normalised, so true size is lost. A bottom or full piece is also capped so it cannot hang below y=0.
 const SLOT_FIT = { top: { width: 0.6, top: 1.38 }, bottom: { width: 0.5, top: 1.04, floor: 0.04 }, feet: { width: 0.22, top: null }, full: { width: 0.7, top: 1.38 } };
-
-function makeForm() {
-  const form = new THREE.Group(), metal = new THREE.MeshStandardMaterial({ color: 0x2a2623, roughness: 0.4, metalness: 0.6 });
-  const cloth = new THREE.MeshStandardMaterial({ color: SKINS[look.skin], roughness: 0.9 });
-  const torso = new THREE.Mesh(new THREE.LatheGeometry(FORM_PROFILE.map(([r, y]) => new THREE.Vector2(r, y)), 48), cloth);
-  torso.scale.z = 0.7;   // forms are flatter front to back than side to side
-  const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.78, 12), metal); pole.position.y = 0.39;
-  const base = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.17, 0.025, 32), metal); base.position.y = 0.0125;
-  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.055, 0.1, 24), cloth); neck.position.y = 1.41;
-  form.add(torso, neck, pole, base);
-  form.userData = { cloth, torso };
-  return form;
-}
 
 // render layers in dressing order: each pass draws over the last, so an outer garment always covers the one under it
 // (scans are rigid and never nest cleanly, so plain depth lets trouser ties poke through a jak)
@@ -510,7 +486,7 @@ function setFabric(obj, { body, sleeves } = {}) {
   });
 }
 
-function contactShadow() {   // soft dark disc under the base so the form stands on the floor, not in the air
+function contactShadow() {   // soft dark disc on the floor under the look, so the pieces sit in the room, not in the air
   const c = document.createElement("canvas"); c.width = c.height = 128;
   const g = c.getContext("2d"), r = g.createRadialGradient(64, 64, 8, 64, 64, 64);
   r.addColorStop(0, "rgba(40,30,20,0.45)"); r.addColorStop(1, "rgba(40,30,20,0)");
@@ -581,7 +557,6 @@ class Turntable {
     this.camera.position.set(0, 0.77, 4.8); this.camera.lookAt(0, 0.77, 0);
     this.zoom = 1; this.focusY = 0.77;
     this.rig = new THREE.Group(); this.scene.add(this.rig);
-    this.form = makeForm(); this.rig.add(this.form);
     this.scene.add(contactShadow());
     new ResizeObserver(() => this.resize()).observe(el);
     new IntersectionObserver(([e]) => { this.onScreen = e.isIntersecting; this.render(); if (this.onScreen) this.wake?.(); }).observe(el);
@@ -622,7 +597,6 @@ class Turntable {
     if (n !== this.shown) { this.shown = n; this.onFrame?.(n); }
   }
   draw() {   // bring the worn pieces in line with `look`
-    this.form.userData.cloth.color.set(SKINS[look.skin]);
     const want = look.full ? { full: look.full, feet: look.feet } : { top: look.top, bottom: look.bottom, feet: look.feet };
     for (const slot of SLOTS) {
       const id = want[slot], cur = this.worn[slot];
@@ -638,31 +612,27 @@ class Turntable {
         entry.born = performance.now();
         entry.obj.traverse(o => o.layers.set(LAYER[slot]));
         setFabric(entry.obj, this.fabricFor(slot, id));
-        this.rig.add(entry.obj); this.fitForm(); this.fitBody(); this.settle(); maybeWarm();
+        this.rig.add(entry.obj); this.fitBody(); this.settle(); maybeWarm();
       }).catch(e => console.warn(`3D model for ${id} failed`, e));
     }
-    this.fitForm(); this.fitBody(); this.render();
+    this.fitBody(); this.render();
   }
   fabricFor(slot, id) {   // remix fabrics go on the main garment only; a piece's own fabric means "original"
     if (slot !== "top" && slot !== "full") return {};
     const own = f => f && f !== id ? f : null;
     return { body: own(look.fabric.body), sleeves: own(look.fabric.sleeves) };
   }
-  fitForm() {   // a loaded top hides the torso (scan shoulders rarely match the form's); the neck stays
-    this.form.userData.torso.visible = !(this.worn.top?.obj || this.worn.full?.obj);
-  }
-  placeOn(model, slot, id) {   // on the dress form, or (?demo) on the demo avatar's measured body
+  placeOn(model, slot, id) {   // in the empty slot boxes, or (?demo) on the demo avatar's measured body
     const av = this.avatar;
     if (!av) return place(model, slot, PIECES[id].adjust);
     const f = AVATAR_FIT[id] || {};
     return slot === "feet" ? placeFeet(av, model, f) : place(model, slot, f.size ?? 1, av.fit, f.lift ?? 0);
   }
-  setBody(av) {   // null: the dress form. Every worn piece is placed again for the new body.
+  setBody(av) {   // null: no body, the pieces alone. Every worn piece is placed again for the new body.
     if (av === this.avatar) return;
     if (this.avatar) this.rig.remove(this.avatar.root);
     this.avatar = av;
-    this.form.visible = !av;
-    // the avatar is taller than the form (the frame tops out at 1.57 m): the whole rig steps back so the head fits
+    // the avatar is taller than the slot boxes (the frame tops out at 1.57 m): the whole rig steps back so the head fits
     this.bodyScale = av ? Math.min(1, 1.55 / av.height) : 1;
     this.rig.scale.setScalar(this.bodyScale);
     if (av) this.rig.add(av.root);
@@ -815,13 +785,13 @@ const turntables = [stageTT];
   const focusBtn = document.getElementById("focusBtn"), phone = focusBtn.closest(".phone");
   const setFocus = on => {
     phone.classList.toggle("focus", on);
-    focusBtn.setAttribute("aria-pressed", on); focusBtn.setAttribute("aria-label", on ? "Show the menus again" : "Show only the form");
+    focusBtn.setAttribute("aria-pressed", on); focusBtn.setAttribute("aria-label", on ? "Show the menus again" : "Show only the look");
     focusBtn.querySelector("path").setAttribute("d", on ? "M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" : "M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5");
   };
   focusBtn.addEventListener("click", () => setFocus(!phone.classList.contains("focus")));
   addEventListener("keydown", e => { if (e.key === "Escape" && phone.classList.contains("focus") && !document.querySelector("dialog[open]")) setFocus(false); });
 }
-/* A9 demo avatar, presenter only: `?demo` shows an "Avatar" toggle beside the form finishes. Ordinary visitors never
+/* A9 demo avatar, presenter only: `?demo` shows an "Avatar" toggle in the Stage header. Ordinary visitors never
    load the file. The avatar is fetched when the page is idle, so the switch during a talk is instant. */
 const avatarState = { promise: null, av: null };
 function loadAvatar() {
@@ -845,14 +815,13 @@ if (params.has("demo")) {
       stageTT.setBody(body);
       dress();
       btn.setAttribute("aria-pressed", on);
-      skinsEl.hidden = on;   // finishes colour the dress form only
     } catch (e) { console.warn("demo avatar failed", e); toast("The demo avatar did not load"); }
     btn.removeAttribute("aria-busy");
   });
 }
 window.secondSkin = { look, turntables, avatar: avatarState };   // handle for driving the mockup from the console
 
-/* ---------- Look state, skins, locker ---------- */
+/* ---------- Look state, locker ---------- */
 const yearOf = id => PIECES[id].year.from;
 const noun = id => PIECES[id].name.split(",")[0].split(" ").pop().replace(/^./, c => c.toUpperCase());   // "Green wool coat" -> "Coat"
 const adj = id => PIECES[id].name.split(" ")[0].replace(/,$/, "");   // "Furisode kimono, 1979" -> "Furisode"
@@ -868,7 +837,7 @@ const FIRSTS = [
   { k: "remix", t: "First remix: one piece's cloth on another's cut", test: (span, n) => n >= 1 },
   { k: "two", t: "Two fabrics, one look", test: (span, n) => n >= 2 },
   { k: "c1", t: "A century apart", test: span => span >= 100 },
-  { k: "c2", t: "Two centuries on one form", test: span => span >= 200 },
+  { k: "c2", t: "Two centuries in one look", test: span => span >= 200 },
 ];
 const earned = new Set();
 let toastTimer;
@@ -895,15 +864,6 @@ function renderCredit() {   // the evening game: build the look that spans the m
   fresh.forEach(f => earned.add(f.k));
   if (fresh.length) toast(fresh.at(-1).t);
 }
-const skinsEl = document.getElementById("skins");
-skinsEl.innerHTML = SKINS.map((c, i) => `<button class="skin press" style="background:${c}" aria-label="Form finish: ${FINISH_NAMES[i]}" aria-pressed="${i === look.skin}" data-i="${i}"></button>`).join("");
-skinsEl.addEventListener("click", e => {
-  const b = e.target.closest("[data-i]"); if (!b) return;
-  look.skin = +b.dataset.i;
-  skinsEl.querySelectorAll("[data-i]").forEach(x => x.setAttribute("aria-pressed", x === b));
-  turntables.forEach(t => t.draw());
-  saveLook();   // the finish is part of the saved look: a reload must not reset it
-});
 
 let activeSlot = look.full ? "full" : "top", activeZone = "body";
 const LABEL = { won: "Won", top: "Top", bottom: "Bottom", feet: "Feet", full: "Full", study: "Study", remix: "Fabrics" };
@@ -1257,7 +1217,7 @@ document.getElementById("cats").addEventListener("click", e => { if (e.target.cl
 
 /* ---------- Help: three steps, shown once on a first visit, always reopenable with the ? button ---------- */
 const HELP = [
-  { t: "Dress the form", d: "Pull up the wardrobe from the bottom. Tap a piece to wear it, tap it again to take it off. Drag the form to turn it." },
+  { t: "Dress up", d: "Pull up the wardrobe from the bottom. Tap a piece to wear it, tap it again to take it off. Drag the look to turn it." },
   { t: "Win pieces at MoMu", d: "Tap the sticker beside a piece. Guess its year, or find its details up close, and it joins your wardrobe. Museum shows what is left to find." },
   { t: "Remix a fabric", d: "In the Fabrics tab, put one piece's cloth on another piece's cut. The i on any piece shows what MoMu recorded about it." },
 ];
