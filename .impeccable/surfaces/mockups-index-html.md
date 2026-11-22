@@ -7,7 +7,7 @@ related_targets: []
 
 # Landing page (mockups/index.html)
 
-Mode: Persuade. Audience: 15 to 25 year old MoMu visitors first (a sticker link or a friend's share), the hackathon jury on the same page. Action: Start, which opens the Stage (second-skin.html, /stage). Proof: the app's own dress form renders, record quotes, the E2 teaser. Constraints: MoMu template (white, black, red capitals, Hanken Grotesk, Source Serif 4 for record words), facts only from records (D3), `?card=` and `?fabric=` links forward to the Stage untouched.
+Mode: Persuade. Audience: 15 to 25 year old MoMu visitors first (a sticker link or a friend's share), the hackathon jury on the same page. Action: Start, which opens the Stage (atelier.html, /stage). Proof: the app's own dress form renders, record quotes, the E2 teaser. Constraints: MoMu template (white, black, red capitals, Hanken Grotesk, Source Serif 4 for record words), facts only from records (D3), `?card=` and `?fabric=` links forward to the Stage untouched.
 
 ## Direction contract
 THESIS: The year is the interface. One slider remaps the whole first viewport (a giant red year, the outfit on the dress form, the record line, the span), refusing the category's headline-over-phone-mockup hero.

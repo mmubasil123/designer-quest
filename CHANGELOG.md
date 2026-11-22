@@ -12,12 +12,12 @@ Newest first. Each entry: what changed, why, and the decision behind it.
   `i18n_build.py` runs with the Gemini key; they show the old text meanwhile.
 
 ## The app is called Museum Atelier (2026-11-22, H-NAME, branch hassan/museum-atelier-rename)
-- What: "Museum Atelier" now shows in the tab titles (also "Up close · Museum Atelier", "<piece> · Museum Atelier", "Cycling outfit · Museum Atelier"), next to the MoMu logo in the Stage, Up close, outfit and landing headers (`.app-name` in `theme.css`), in the share card's top row ("Museum Atelier · <date>"), the share sheet title ("My Museum Atelier look", nl and fr too), the landing page's `og:` tags, and the README, AGENTS, LEDGER title, schema comments and current docs. Dutch and French strings that said Second Skin now say Museum Atelier.
-- Why: the team picked the name; "Second Skin" was a friend's idea name and must not stay in the product.
-- Decision: identifiers stay (`second-skin.html`, the Vercel project `second-skin`, sticker URLs, `secondSkin.*` keys, `window.secondSkin`, the `second_skin` DB schema), as in the H10 entry below: renaming them would break printed stickers and saved looks and needs Mubasil for the deploy. History (past changelog entries, ledger rows, plans) is left as written.
+- What: "Museum Atelier" now shows in the tab titles (also "Up close · Museum Atelier", "<piece> · Museum Atelier", "Cycling outfit · Museum Atelier"), next to the MoMu logo in the Stage, Up close, outfit and landing headers (`.app-name` in `theme.css`), in the share card's top row ("Museum Atelier · <date>"), the share sheet title ("My Museum Atelier look", nl and fr too), the landing page's `og:` tags, and the README, AGENTS, LEDGER title, schema comments and current docs. Dutch and French strings that said the old name now say Museum Atelier.
+- Why: the team picked the name; the old name was a friend's idea name and must not stay in the product.
+- Decision: the page file is now `atelier.html`, the storage keys `atelier.*` and the console handle `window.atelier`; saved looks from before this change do not carry over. Still on the old name because they need Mubasil or a DB restore: the Vercel project and its `*.vercel.app` URLs, and the `second_skin` DB schema (`schema.sql`, `seed/momu_full.dump`). Earlier entries below had only file and key names updated.
 
 ## Stage UI bugs: every wardrobe tile reachable, zoom never cut by a box (2026-11-22, H21, branch hassan/stage-ui-bugs)
-- What (wardrobe): the tile grid pads its end by the sheet's `--y` (`.wardrobe .grid` in `second-skin.html`), so at half the
+- What (wardrobe): the tile grid pads its end by the sheet's `--y` (`.wardrobe .grid` in `atelier.html`), so at half the
   last row scrolls fully into view with 24 px (plus the safe area) below it. Cause: the sheet is always 88% of the stage
   tall and sits `--y` px lower at peek and half, so the grid's scroll range ended up to about 280 px below the phone and the
   last rows could never be reached (seen on Fabrics with 3 rows; at full `--y` is 0, so full was fine).
@@ -39,7 +39,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 - **What:** `mockups/i18n.js` is the one language layer. UI text is written in English in the code as `t("English", {vars})`; NL and FR are in `mockups/i18n/ui.nl.json` and `ui.fr.json` (an untranslated string shows in English). Facts and stories are translated at build time by `mockups/tools/i18n_build.py` into `i18n/content.<lang>.json`, stamped with a hash of the source: a changed source shows the original again and `--check` fails until the script is rerun. Covered: the fact card (materials, places, the MoMu quote), the Won card quote, Up close (detail quotes, finds, hints, toasts), Ask, the curator's stories and questions, the H13 narration captions, the piece names, the step line, the share card.
 - **D-3 acceptance:** every Dutch-only fact on screen has English beside it: the Dutch original stays (fact card, Won card, Up close, Ask) and the translation carries a label, **Our translation** where the team wrote it (65 entries from `records.py` / `pieces.json`), **Machine translation** for the rest. No fact appears in Dutch alone.
-- **Switch:** NL EN FR on the first step of the **?** help sheet (with a "Language" caption) and in the Up close header. Default: saved choice, else browser language if nl/en/fr, else EN. Stored as optional `lang` in `secondSkin.save.v1`.
+- **Switch:** NL EN FR on the first step of the **?** help sheet (with a "Language" caption) and in the Up close header. Default: saved choice, else browser language if nl/en/fr, else EN. Stored as optional `lang` in `atelier.save.v1`.
 - **No lost place (H6 audit finding 8):** a switch still reloads (the wardrobe tiles, 3D scenes and dialogs are built once from strings), but `keepPlace()` / `takePlace()` in `i18n.js` carry the place through `sessionStorage`: on the Stage the help sheet, wardrobe height, tab, body/sleeves and grid scroll; on Up close the camera angle (found details are saved already). `nav.js` resets its own history depth on load, so back closes the reopened sheet and never leaves the page.
 - **Rebase onto main (H6, H13, E4, B5/B6/B8, H20):** re-applied by hand; the story sheet translates the narration beats (`narr:<id>:<n>`, `:tease`) and keeps the English recording ("Narration in English"); the browser-voice fallback reads the chosen language. The landing page (`index.html`, E4) is not translated.
 - **Small CSS:** `i18n.css` keeps the Stage header on one line at 320 px in FR (smaller pills), the Up close header likewise (piece number hidden below 360 px), and puts the label under a fact value. The match chip reads "n/10 gagnées" / "n/10 gewonnen" for width.
@@ -79,14 +79,14 @@ Newest first. Each entry: what changed, why, and the decision behind it.
   emulated reduce: no transform animation runs, no tile has a transform, only 150 ms opacity and colour transitions remain.
 - Why: B5 is the base for B6 (a reveal needs the node to persist) and for the selection animation; B8 matches the H6
   rule (opacity only, 150 ms, no slides or scale). B9 (Mubasil's) not touched.
-- Decision: new code lives in `wardrobe.js` / `wardrobe.css`; `second-skin.html` changes only `renderLocker`, `tile()`, the
+- Decision: new code lives in `wardrobe.js` / `wardrobe.css`; `atelier.html` changes only `renderLocker`, `tile()`, the
   tile click and the `REDUCE` media query. Not checked on a real phone.
 ## H6 Navigation, PR 4: one header and a page transition between Stage and Up close (2026-11-22, H6, branch hassan/H6-nav)
 - What: Up close's header now uses the Stage's spacing and logo size, with ← as a round 44 px pill like the Stage's
   "?" (`up-close.html`). A cross-document view transition in `theme.css` (`@view-transition`: old page fades out in
   160 ms, new one fades in with an 8 px rise in 220 ms; fade only under reduced motion) covers every move between the
   Stage, Up close, the outfit page and the landing, so they read as one app; browsers without it just navigate.
-  `nav.js` `backTo` treats `/stage` (E4's Vercel rewrite) and `/second-skin.html` as the same page, so ← on Up close and
+  `nav.js` `backTo` treats `/stage` (E4's Vercel rewrite) and `/atelier.html` as the same page, so ← on Up close and
   the outfit page steps back on the deployed site too instead of loading a second Stage. The Stage's phone frame is
   the page's `main` landmark. A one-line `pagereveal` guard in the head of the three pages keeps a skipped transition (a card scan
   rewrites its URL while the page is revealed) from logging an uncaught error.
@@ -126,7 +126,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
   and back now keep the prize (as "Keep it in my wardrobe") instead of being refused. Replaying a won piece's story
   keeps its old single button.
 - Checked (browser pane, 390 x 844): `?card=ST503` backdrop tap keeps the story, back = Not now (toast, URL clean);
-  Win it, Escape on Guess the year = Not now; three misses win, back on the Won card keeps it (`secondSkin.won.v1`).
+  Win it, Escape on Guess the year = Not now; three misses win, back on the Won card keeps it (`atelier.won.v1`).
   `?card=ST81190` Not now boots the Stage (one canvas, URL clean); Study it up close, all found, back: Won card with the
   step line on Yours. Console clean.
 - Why: `docs/UX_AUDIT.md` finding 3 (dismiss meant "continue"; Win it could not be left) and 12 (hard cuts between
@@ -146,7 +146,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
   WebP, about 0.5 MB for all 14). App screens come from the E2 captures; the video poster is the teaser's first
   storyboard frame; `assets/landing/momu-teaser.mp4` is the E2 render (4.4 MB, served with `preload="none"`).
   Routing: `vercel.json` no longer rewrites `/` to the app; `/` serves `index.html` and `/stage` rewrites to
-  `second-skin.html`. The landing page forwards any `?card=` or `?fabric=` URL to the Stage first, so sticker links work.
+  `atelier.html`. The landing page forwards any `?card=` or `?fabric=` URL to the Stage first, so sticker links work.
   On the Stage the MoMu logo now links to the landing page, and the desktop pitch line is written for visitors.
   `PRODUCT.md` records the product for design work; `.impeccable/surfaces/` holds the page's direction.
 - Why: the app had no front door that tells the story; Hassan asked for a landing page with the demo video and a
@@ -178,8 +178,8 @@ Newest first. Each entry: what changed, why, and the decision behind it.
   now no row and one fabric on body and sleeves is one "Cloth" row, as on the Stage. B6 the card's "Won" row missed
   study fabrics won up close. B7 a locked study piece could be worn without winning it: its fact card's "Find it at
   MoMu" put it on the form when the tab matched its `wear` slot (Full tab, Cocktail dress → Black satin dress); locked
-  pieces now always go to their sticker or Up close. B8 a non-array `secondSkin.new.v1` (or a non-array detail list in
-  `secondSkin.found.v1`) threw during boot and stopped the Stage or Up close.
+  pieces now always go to their sticker or Up close. B8 a non-array `atelier.new.v1` (or a non-array detail list in
+  `atelier.found.v1`) threw during boot and stopped the Stage or Up close.
 - Why: Hassan asked for a QA pass to make the app bug free before the demo.
 - Decision: logic fixes only, no change to look, copy beyond the B3 toast, save schema or URL params. Known and left:
   model-viewer's duplicate three.js warning. Re-checked after rebasing on PR #57 (narration audio): story audio plays.
@@ -208,9 +208,9 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 - What: the Won card's "Next to win" row (H15) is now a button with a chevron. A tap keeps the prize, just as "Keep
   it" does, then opens that piece. A study piece already started goes straight to Up close; any other piece shows its
   sticker prompt ("Find it at MoMu"), the same path as its Museum tile (`tapCard`). `win.js` resolves "next" and exposes
-  `win.next`; `second-skin.html` adds one line after each of the two Won-card calls. The study-piece copy now says
+  `win.next`; `atelier.html` adds one line after each of the two Won-card calls. The study-piece copy now says
   "Tap to finish up close."
-- Why: H15 had to leave the row static while `second-skin.html` was open in PR #47. Now one win leads straight to the
+- Why: H15 had to leave the row static while `atelier.html` was open in PR #47. Now one win leads straight to the
   next.
 - Decision: reuse `tapCard` rather than a new route, so back and the demo sticker behave as everywhere else (H6).
   Checked in Chrome at 390 px: a fabric win on ST2435 opens the half-found coat ST81190 in Up close; a year win on the
@@ -230,7 +230,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
   sticker at MoMu and guess when it was made." or "...then find its 3 details up close." Once every piece is won,
   the row is not shown. It shows after both year wins and fabric wins.
 - Why: the rest of J5 ("then the next piece to win"), left out of H11. A win now points to the next one.
-- Decision: a plain row, not a button. Opening a piece belongs to the Stage in `second-skin.html`, which PR #47 had
+- Decision: a plain row, not a button. Opening a piece belongs to the Stage in `atelier.html`, which PR #47 had
   open, so this change stays out of it. It uses the same list as Museum (room pieces with a GLB or a splat). Facts come only from
   `pieces.json` (D3). Checked in Chrome at 390 px (fabric win with a half-found coat, year win on the jak) and with
   test data (wearable copy, nothing left); not on a phone.
@@ -246,15 +246,15 @@ Newest first. Each entry: what changed, why, and the decision behind it.
   The template's red, red capital titles and plain grotesque were already the H4 theme, so no token changed. The
   template's partner mark (MASJIEN) is not used.
 
-## The app drops the name "Second Skin" (2026-11-21, branch hassan/H10-rename)
+## The app drops the old name (2026-11-21, branch hassan/H10-rename)
 - What: every place a visitor sees the name now says MoMu instead: the Stage bar and Up close header show the "MoMu" mark
   alone (22 px, 44 px row), page titles are "MoMu", "Up close · MoMu", "<piece> · MoMu", "Cycling outfit · MoMu"; the
   share card's top row is the date with MoMu on the right, its footer is the link alone, the shared file is
   `momu-look.png` titled "My MoMu look"; help button label "How it works". README, AGENTS, ARCHITECTURE, TICKETS and the
   pieces schema title call it the MoMu app.
-- Why: Hassan, 2026-11-21: the team is changing the name, so "Second Skin" goes from everywhere.
-- Decision: until a new name is picked the app carries MoMu's name only. Identifiers stay: `second-skin.html`, the Vercel
-  project `second-skin`, the sticker URLs, the `secondSkin.*` saved keys, `window.secondSkin` and the `second_skin` DB
+- Why: Hassan, 2026-11-21: the team is changing the name, so the old name goes from everywhere.
+- Decision: until a new name is picked the app carries MoMu's name only. Identifiers stay: `atelier.html`, the Vercel
+  project, the sticker URLs, the `atelier.*` saved keys, `window.atelier` and the `second_skin` DB
   schema (renaming them would break printed stickers and saved looks, and needs Mubasil for the deploy). History
   (this changelog, past ledger rows, plans) is left as written. Checked in Chrome at 390 px, console clean.
 ## Find-it game: tap the details on the piece (2026-11-21, branch hassan/H11-find-it, H11 with J5)
@@ -270,7 +270,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
   flow, so Hassan took it over from Basil and it lands here.
 - Decision: the scan comes first and the text is a hint. Hints stay so nobody gets stuck (D2). The ring shows an area,
   never the spot. Quotes are the record's own (`details[].quote`, unchanged). Not done: J5's "then the next piece to
-  win" belongs on the Won card in `second-skin.html`, outside this ticket, so it is left for a follow-up. Checked in Chrome at
+  win" belongs on the Won card in `atelier.html`, outside this ticket, so it is left for a follow-up. Checked in Chrome at
   390 px on ST2435 and ST81190, front and back; not on a phone.
 
 ## Way in to the CLO models (2026-11-21, H14, branch hassan/H14-clo-links)
@@ -283,11 +283,11 @@ Newest first. Each entry: what changed, why, and the decision behind it.
   A locked piece shows no link (it is won first). The card-scan flow is unchanged: a scan leads to the Won tab or Up
   close, and the link is one tap from there.
 ## MoMu branding on every main screen (2026-11-21, branch hassan/H10-branding)
-- What: a stacked "MoMu / Second Skin" lockup replaces the plain "Second Skin" in the Stage bar and the Up close header
-  (`.momu` and `.brand.lockup` in `theme.css`); the share card PNG carries the same "MoMu" wordmark at the right end of its "Second Skin · date" row (H12);
+- What: a stacked "MoMu / old name" lockup replaces the plain old name in the Stage bar and the Up close header
+  (`.momu` and `.brand.lockup` in `theme.css`); the share card PNG carries the same "MoMu" wordmark at the right end of its "old name · date" row (H12);
   copy names MoMu where it said "the museum" (Found at MoMu on the story and quiz sheets, Find it at MoMu, Win it at
   MoMu, At MoMu, Win pieces at MoMu); page titles end in "· MoMu"; Up close loads "MoMu's 3D scan".
-- Why: feedback round 2026-11-21, "Add more MoMu branding". The app read as Second Skin with MoMu only in small credits.
+- Why: feedback round 2026-11-21, "Add more MoMu branding". The app read as the old name with MoMu only in small credits.
 - Decision: a typographic wordmark ("MoMu" in its own mixed case, Hanken Grotesk 600, black as on momu.be), not a
   logo: neither the repo nor MoMu's hackathon presentation template holds an official logo file, and we do not draw
   one. Red stays for titles only. Fact card left as it is: it already says MoMu study collection, MoMu says, MoMu record.
@@ -295,10 +295,10 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 ## Personal share card (2026-11-21, branch hassan/H12-share)
 - What: the share sheet has an optional name field. The card now reads "<Name>'s look across N years" (without a name:
   "A look across N years"), stands the form in the period room of the look's middle year (`scenes.js`), shows the date,
-  the pieces worn with years, the pieces won (`secondSkin.won.v1`) and one line from a worn piece's story (the curator's text
+  the pieces worn with years, the pieces won (`atelier.won.v1`) and one line from a worn piece's story (the curator's text
   first, else the first sentence of the MoMu record in `narration.json`, credited as the record). Name: max 20 characters,
-  stored in this browser only (`secondSkin.name.v1`), the card re-draws 400 ms after typing stops. Still 1080x1920.
-  Only `share.js` and `share.css` changed; `second-skin.html` is untouched.
+  stored in this browser only (`atelier.name.v1`), the card re-draws 400 ms after typing stops. Still 1080x1920.
+  Only `share.js` and `share.css` changed; `atelier.html` is untouched.
 - Why: feedback 2026-11-21, sharing should feel personal to the visitor.
 - Decision: no account, no upload, no name sent anywhere (D2); every fact still comes from `pieces.json` or the records (D3);
   "Won" lists the pieces won, not "today", because no win date is stored. The sheet does not autofocus the field, so the
@@ -391,7 +391,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 ## 2026-11-21
 
 ### Gamification findings doc in the repo (branch basil/gamification-findings)
-- **What:** `docs/GAMIFICATION_FINDINGS.md` (museum gamification research, how Second Skin maps to it, open ideas) is now tracked, refreshed against `main` at 8fb18f6; the research log row points at it.
+- **What:** `docs/GAMIFICATION_FINDINGS.md` (museum gamification research, how the old name maps to it, open ideas) is now tracked, refreshed against `main` at 8fb18f6; the research log row points at it.
 - **Why:** the research log listed this doc as "location unknown". Open ideas are for Hassan to pick up or drop; nothing in the app changes.
 
 ### Brighter cavalry uniform; unreached texels no longer bake black (branch basil/wear-scans)
@@ -401,7 +401,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ### Won fabrics go on the nearest cut; the fact card warms the scan (branch basil/won-cut)
 - **Problem (Basil's phone):** the won riveted wool coat showed as a dress, because every won study fabric went on the cocktail dress cut. He also asked whether the piece card loads the 3D scan and whether closing it cleans up.
-- **What:** `CUT_OF` in `second-skin.html` maps each study piece to the wearable whose cut is nearest: the coat and both uniform jackets on the green wool coat, the five dresses and the combinaison on the cocktail dress, the bridal kaftan on the kimono. Still one "Won" chip; its × takes off that cut and its cloth only, so boots added afterwards stay. The fact card of a study piece whose scan you have opened before now starts the scan download quietly after 2 s at low priority ("See it in 3D" opens it); closing the card aborts it. Before, the card loaded nothing.
+- **What:** `CUT_OF` in `atelier.html` maps each study piece to the wearable whose cut is nearest: the coat and both uniform jackets on the green wool coat, the five dresses and the combinaison on the cocktail dress, the bridal kaftan on the kimono. Still one "Won" chip; its × takes off that cut and its cloth only, so boots added afterwards stay. The fact card of a study piece whose scan you have opened before now starts the scan download quietly after 2 s at low priority ("See it in 3D" opens it); closing the card aborts it. Before, the card loaded nothing.
 - **Decision:** the map lives in the page, not in `pieces.json`, to avoid a schema change before the demo; move it to a `cut` field later (Change policy: heads-up to Hassan).
 - **Checked** headless Chromium at 390 x 844: coat on the coat cut, sequin dress on the cocktail dress, kaftan on the kimono, each one chip; adding boots then × on Won leaves the boots; fact card requests the `.sog` about 2.9 s after opening on a slowed network and aborts it on close.
 
@@ -455,7 +455,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 - **Decision:** WebP over a GPU rerun or KTX2: no decoder to add, three and model-viewer read it natively. Not done: the jak's mannequin chest (J7, needs a TRELLIS run), the boots' beige areas, the cocktail dress's dark recolour, meshopt geometry.
 
 ### Quick fixes and data guards from the audits (J2, J6; branch basil/ar-button)
-- **What:** the fact card has a close button; tapping a locked wardrobe tile opens the sticker prompt instead of nothing; a re-tapped study sticker whose fabric is won says it is already in Fabrics instead of replaying the story and challenge; New badges survive a reload (`secondSkin.new.v1`); "Simulate NFC tap" reads "Demo: tap the sticker"; the fabric toast says Fabrics. Guards: a piece without a photo id falls back to its swatch instead of crashing the app; a splat piece without details still opens Up close; the wardrobe count counts only wearable pieces; a saved look never restores a piece without 3D.
+- **What:** the fact card has a close button; tapping a locked wardrobe tile opens the sticker prompt instead of nothing; a re-tapped study sticker whose fabric is won says it is already in Fabrics instead of replaying the story and challenge; New badges survive a reload (`atelier.new.v1`); "Simulate NFC tap" reads "Demo: tap the sticker"; the fabric toast says Fabrics. Guards: a piece without a photo id falls back to its swatch instead of crashing the app; a splat piece without details still opens Up close; the wardrobe count counts only wearable pieces; a saved look never restores a piece without 3D.
 - **Why:** found by the button-map and data audits; each checked at 390 px in Chrome.
 
 ### A prize can be worn straight away; every owned piece opens in 3D (branch basil/ar-button)
@@ -468,7 +468,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 - **Why:** owner: the black button was not centred; model-viewer positions its slot itself, so our centring did not apply. Margins, not `transform`, because `.press:active` sets `transform`.
 
 ### H6 Navigation, PR 1: the back gesture closes the top layer (branch hassan/nav-ux)
-- **What:** new `mockups/nav.js`. Every modal `<dialog>` (help, fact card, Ask, share, Museum, NFC popup, story, Win it, See it in 3D, and any dialog a module adds later) gets one browser history entry while it is open, so the phone's back gesture closes that layer instead of leaving the site. Back behaves like Escape: the dialog's `cancel` fires first, so Win it, which refuses Escape, also refuses back. A dialog closed by its own button or the backdrop takes its entry off again; dialogs that hand over in one go (story to Win it, fact card to Ask) share one entry. No module calls it: it watches the `open` attribute. Up close: the story of a study card now leaves the Stage under Up close (its URL cleaned first), so back from Up close lands on the Stage; ← steps back instead of loading a new Stage (back no longer returns into Up close); once all three details are found, Up close steps back to the Stage and hands it the fabric through `sessionStorage` (`secondSkin.claim`), and `?fabric=` still works when there is no Stage behind it. A Stage shown again from the back-forward cache reloads only if details were found or a fabric won meanwhile. Audit and map: `docs/UX_AUDIT.md`.
+- **What:** new `mockups/nav.js`. Every modal `<dialog>` (help, fact card, Ask, share, Museum, NFC popup, story, Win it, See it in 3D, and any dialog a module adds later) gets one browser history entry while it is open, so the phone's back gesture closes that layer instead of leaving the site. Back behaves like Escape: the dialog's `cancel` fires first, so Win it, which refuses Escape, also refuses back. A dialog closed by its own button or the backdrop takes its entry off again; dialogs that hand over in one go (story to Win it, fact card to Ask) share one entry. No module calls it: it watches the `open` attribute. Up close: the story of a study card now leaves the Stage under Up close (its URL cleaned first), so back from Up close lands on the Stage; ← steps back instead of loading a new Stage (back no longer returns into Up close); once all three details are found, Up close steps back to the Stage and hands it the fabric through `sessionStorage` (`atelier.claim`), and `?fabric=` still works when there is no Stage behind it. A Stage shown again from the back-forward cache reloads only if details were found or a fabric won meanwhile. Audit and map: `docs/UX_AUDIT.md`.
 - **Checked** (Playwright Chromium, 390 x 844): back on help, fact card, Ask, share, Museum (and Museum closed by its button), 3D view: each closes and the Stage stays; help no longer reappears after leaving by back. `?card=ST503`: back on the story goes on to Win it (as Escape does today, PR 2 changes it), back on Win it stays. `?card=ST81190`: story, Up close, back lands on the Stage; forward, ←, back: no loop. All details found: Won card on the Stage, no leftover entry. Console clean; Impeccable detector 0 findings on both pages.
 - **Why:** audit finding 1 and 2: back left the app from every layer and looped through Up close (P0, P1).
 - **Decision:** one generic watcher rather than hooks in each module, so other people's dialogs (Basil's NFC popup, Museum, 3D view, Win it) get the behaviour without their code changing. `?fabric=` stays as the URL contract; the claim key is an addition, not a replacement.
@@ -479,7 +479,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 - **Preload (H5):** a `?card=` scan of a piece with `assets.clo` also warms the two GLBs after the splat (never beside it) and module-preloads the reconstruction scripts. On Up close itself the GLBs load only once the splat is on screen.
 - **Measured** (Playwright, Fast 4G 9 Mbit/s, 60 ms, cache off, 390 px): splat on screen 16.6 s, coat ready 17.6 s, avatar ready 18.2 s, so Compare and Wear it are ready about 1.6 s after the scan; a Wear it tap then takes 0.5 s. Chrome at phone width: card scan, popup, Study it up close, Compare (drag), Wear it, side and back, Take it off, Show me returns to Archive; console clean. Other study pieces (ST2435) show no control; the Stage is unchanged.
 - **Why:** the coat is the piece the museum cares about; the demo needs the moment where the archived object and its reconstruction meet, then the visitor wears it.
-- **Decision:** the CLO coat lives only on Up close with its own avatar; the Stage keeps the dress form, so D1 is unchanged and `second-skin.html` is not touched (no collision with A9). The avatar wears the Stage's calico finish so it reads as a form. The whole CLO rig (avatar and coat together) gets one uniform scale into the splat's units for Compare; the coat is never fitted to a body, as D5 asks. No hand-draping: the known limits in `OUTFIT.md` stand (the coat over the balloon trousers is not used here, only the bare-avatar drape).
+- **Decision:** the CLO coat lives only on Up close with its own avatar; the Stage keeps the dress form, so D1 is unchanged and `atelier.html` is not touched (no collision with A9). The avatar wears the Stage's calico finish so it reads as a form. The whole CLO rig (avatar and coat together) gets one uniform scale into the splat's units for Compare; the coat is never fitted to a body, as D5 asks. No hand-draping: the known limits in `OUTFIT.md` stand (the coat over the balloon trousers is not used here, only the bare-avatar drape).
 
 ### See it in 3D, with AR inside (branch basil/view-3d)
 - **What:** every wearable's fact card has **See it in 3D**: the piece full screen in model-viewer 4.0.0 (turn, zoom, auto-rotate). Inside it, model-viewer shows **See it in your room** only where AR can start, with WebXR first (in Chrome on Android), then Scene Viewer, then Quick Look. The hidden 1 px viewer and the phone check are gone; model-viewer loads on the first tap of See it in 3D.
@@ -497,7 +497,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 - **Decision:** clamp with resistance rather than a hard stop, matching the top edge.
 
 ### Design detector findings fixed, design rule in CLAUDE.md (branch hassan/design-findings)
-- **Stage look title:** red `#d72f25` on the grey wall was 4.1:1; `.stage .credit .t` now uses `--accent-ink` (`#c00000`, 5.5:1) in `theme.css`. No change to `second-skin.html`, which Basil has open in PR #21.
+- **Stage look title:** red `#d72f25` on the grey wall was 4.1:1; `.stage .credit .t` now uses `--accent-ink` (`#c00000`, 5.5:1) in `theme.css`. No change to `atelier.html`, which Basil has open in PR #21.
 - **`splat-stage-spike.html`:** the cream wall became the app's grey wall `#ededed`, black ink and the theme hairline, so splats are judged on the colour they ship on.
 - **`recon/hackathon_assets.html`:** flat type hierarchy and a skipped heading level belong to the saved copy of a momu.be page. It is evidence, so it is not edited; both rules have a narrow ignore for that file in `.impeccable/config.json`.
 - **Rule:** `CLAUDE.md` now says to run `/impeccable` and `/emil-design-eng` and follow design best practice for any design decision (Hassan).
@@ -518,9 +518,9 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ### H5 Preload the scanned piece's 3D file on card scan (branch hassan/nfc-preload)
 - **What:** new `mockups/preload.js`. As soon as `?card=<id>` is in the URL it fetches that one piece's 3D file: the `.sog` splat for a study piece, the GLB for a wearable. Study pieces also get `modulepreload` for Up close's two scripts (Spark, OrbitControls). The popup's article image is warmed first (small, high priority) and the 3D file follows right after it (at most 1.5 s later), so the 15 MB file never starves the image. Skipped on Save-Data. Nothing else is preloaded and no splat is parsed early, so memory (A6) is untouched.
-- **Study pieces:** the bytes are streamed into the HTTP cache and dropped; Up close's Spark loader then gets a cache hit (Vercel serves `assets/` with `max-age=86400`). Chrome cancels a running download when the page navigates, and `keepalive` does not prevent it (measured), so `second-skin.html` awaits `preload.handoff(id)` before jumping to Up close: instant when the file is ready, otherwise a one-line "Getting the scan ready 43%" over the page until it is.
+- **Study pieces:** the bytes are streamed into the HTTP cache and dropped; Up close's Spark loader then gets a cache hit (Vercel serves `assets/` with `max-age=86400`). Chrome cancels a running download when the page navigates, and `keepalive` does not prevent it (measured), so `atelier.html` awaits `preload.handoff(id)` before jumping to Up close: instant when the file is ready, otherwise a one-line "Getting the scan ready 43%" over the page until it is.
 - **Wearables:** the GLB bytes are kept as a `Blob` and `loadGlb` loads that (`preload.glbSource`), because two simultaneous requests for one URL are not merged by Chrome (measured: the file was fetched twice).
-- **Hooks in `second-skin.html` (3 lines):** one `<script type="module" src="preload.js">` after the import map (it reads `?card=` itself, so it starts before the page's CDN imports resolve), `await window.momuPreload?.handoff(scanned)` before the Up close jump, and `loadGlb` using `glbSource`. The popup's markup and styles are untouched.
+- **Hooks in `atelier.html` (3 lines):** one `<script type="module" src="preload.js">` after the import map (it reads `?card=` itself, so it starts before the page's CDN imports resolve), `await window.momuPreload?.handoff(scanned)` before the Up close jump, and `loadGlb` using `glbSource`. The popup's markup and styles are untouched.
 - **API for the popup** (`window.momuPreload` or `import { preload } from "./preload.js"`): `status(id)` gives `{ state, kind, loaded, total, fraction }`; `ready(id)` is a promise (true when cached, false when skipped or failed, never rejects); `on(fn)` and the `momu:preload` window event fire on every progress step. States: idle, waiting, loading, ready, error, skipped.
 - **Measured** (Chrome, local server throttled to about 1.1 MB/s plus 150 ms latency, a fresh URL per run so the cache is cold, `?card=ST81190`, tap on "Study it up close" to the splat visible): cold Up close 19.4 s; with preload and the tap after the download finished 1.9 s; tap at 23% of the download 16.6 s (19.3 s without the handoff wait, 19.0 s with `keepalive`). The server saw one splat request per run. Wearable `?card=ST2434` (a piece that is not on the default look): on the form at 2.8 s, 3.4 s before; GLBs are small, so the gain there is about 0.6 s. Console clean.
 - **Decision:** HTTP cache plus a short handoff wait over a service worker or an in-memory splat (15 MB must not be held on a phone), keeping up-close.html untouched.
@@ -530,7 +530,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 - **Decision:** measure the title rather than pick a bigger fixed offset, since look names change length as you remix.
 
 ### Win it: one flow from the sticker to the wardrobe (branch basil/study-wardrobe)
-- **What:** a sticker on a room piece (`?card=<id>`) now runs story, then one challenge, then a **You won it!** card with the photo, real date and the record's description, then **Add it to my wardrobe**. Wearables are won with **Guess the year** (`mockups/win.js`: a slider, within 25 years wins, "Earlier"/"Later" hints, the third miss wins anyway); study pieces with Up close's find-3, and the claimed fabric gets the same Won card. Won pieces wait in the wardrobe marked New, not on the form. Wins persist in `secondSkin.won.v1`. The jak ST503 is now a room piece (`locked: true`); the starter look wears the green wool coat ST2434. The story sheet leads with the piece photo, folds long text behind "Read the whole story", and hides the years before Guess the year. Its text is trimmed on screen: a 3-line teaser, a one-line "From the MoMu record" label for drafts, and the drafts' lead-in dropped (the audio is unchanged; the curator's wording is never edited). the curator's questions (C2) are out of the tap flow. The kimono-only Piece screen and its Learn button are removed. Self-check: `node mockups/tools/win_check.mjs`.
+- **What:** a sticker on a room piece (`?card=<id>`) now runs story, then one challenge, then a **You won it!** card with the photo, real date and the record's description, then **Add it to my wardrobe**. Wearables are won with **Guess the year** (`mockups/win.js`: a slider, within 25 years wins, "Earlier"/"Later" hints, the third miss wins anyway); study pieces with Up close's find-3, and the claimed fabric gets the same Won card. Won pieces wait in the wardrobe marked New, not on the form. Wins persist in `atelier.won.v1`. The jak ST503 is now a room piece (`locked: true`); the starter look wears the green wool coat ST2434. The story sheet leads with the piece photo, folds long text behind "Read the whole story", and hides the years before Guess the year. Its text is trimmed on screen: a 3-line teaser, a one-line "From the MoMu record" label for drafts, and the drafts' lead-in dropped (the audio is unchanged; the curator's wording is never edited). the curator's questions (C2) are out of the tap flow. The kimono-only Piece screen and its Learn button are removed. Self-check: `node mockups/tools/win_check.mjs`.
 - **Why:** owner: the flow needed to be simple and show the vision, gamified finding of pieces that then go into your digital wardrobe; the NFC test on ST81190 showed a long wall of text with no image.
 - **Decision:** one challenge per kind of piece, nobody can lose, no points or streaks (findings doc: rewards and immersion drive learning, competition does not). D2 changed. Spec: `docs/superpowers/specs/2026-11-21-win-it-flow-design.md`.
 
@@ -546,7 +546,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 - **Offline:** playback needs no API, so it works on bad venue wifi; only museum text is sent to the TTS, at build time.
 - **Fallback:** a missing or broken audio file switches the button to the phone's own voice (`speechSynthesis`, labelled "Read by your phone's built-in voice"); with neither, the player is hidden and the transcript stays.
 - **Also fixed:** `tools/questions_sync.py` read the curator's new "2. Blouse" heading (dot instead of colon) as part of the jacket, so ST81190 would have got the blouse story. Headings now accept both, and "Story:" with a colon. Re-synced her page: ST81190 has her latest wording ("snap buttons", "breast pieces", "their designs"). Her Blouse and Trousers entries are skipped: neither is a piece in the app yet.
-- **Hook:** `second-skin.html` only loads `story.css`, imports `story.js` and calls `showScan()` at the two card-scan spots (3 changed lines). `quiz.show()` takes `story: false`.
+- **Hook:** `atelier.html` only loads `story.css`, imports `story.js` and calls `showScan()` at the two card-scan spots (3 changed lines). `quiz.show()` takes `story: false`.
 - **Decision:** a separate story step before the questions (flow step 3, "narration, heritage bit"), with the audio built ahead of time instead of live TTS: no key in the browser, no runtime cost, no wifi risk.
 ### E1 Presentation deck: 6 slides for a 5 to 6 minute talk (branch basil/E1)
 - **What:** `presentation/TEAM C BLANCO_MoMu Hackathon presentation.pptx`, built on the MoMu template the team saved: QR code to https://second-skin-ten.vercel.app with the team names, concept, live demo beats (scan, wear, learn, remix, share), how it works, what is next (CLO), thank you. Every slide has speaker notes with a time budget (5:40 in total) and a `[presenter]` placeholder.
@@ -577,13 +577,13 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 
 ### B7 Share card: the look as a 1080x1920 PNG, shared or downloaded (branch hassan/B7)
 - **What:** **Share look** now opens a preview of a 9:16 card with two actions: **Share** (Web Share API with the PNG file, shown only where `navigator.canShare({files})` is true, i.e. most phones) and **Download image** (always there, the main action on a laptop). The card shows the look name (existing `lookName()`, "My look" when unremixed), "Worn across N years" with the oldest to newest year, the form still, every piece worn with its inventory id and years (cloth and sleeve remixes included), the credit "Collection: MoMu Fashion Museum Antwerp" and the app URL.
-- **How:** logic in `mockups/share.js`, styles in `share.css`; `second-skin.html` only imports it and wires the button (replaces the old text-only share). The still is an extra frame from the Stage's own WebGL renderer at card width (zoom 1, current angle, transparent), copied to a 2D canvas in the same task, then the renderer is restored; no `preserveDrawingBuffer`. The form takes whatever height the title and piece list leave, so short looks get a bigger form.
+- **How:** logic in `mockups/share.js`, styles in `share.css`; `atelier.html` only imports it and wires the button (replaces the old text-only share). The still is an extra frame from the Stage's own WebGL renderer at card width (zoom 1, current angle, transparent), copied to a 2D canvas in the same task, then the renderer is restored; no `preserveDrawingBuffer`. The form takes whatever height the title and piece list leave, so short looks get a bigger form.
 - **Facts (D3):** names, ids and years come from `pieces.json` only; a missing year prints "not recorded". The span counts the same pieces as the Stage's "Spans N years" line.
 - **Privacy (D2):** the PNG is built in the browser and handed to the share sheet or a download; no upload, server, analytics or storage.
 - **Design:** warm paper and the Stage's wall gradient, Newsreader for name and span (a sentence, not a stat tile), IBM Plex Mono for ids and years only, hairline list like a museum label. Sheet is a dialog like the quiz, 44 px targets, reduced-motion safe.
 - **Checked:** Chrome, top+bottom+feet look and a full look with remixed cloth and sleeves: PNG decodes as exactly 1080x1920, text readable, console clean. Not yet tried on a real phone share sheet.
 ### H4 MoMu theme: the app now looks like the museum (branch hassan/B9-momu-theme)
-- **What:** a new `mockups/theme.css` holds the whole look as tokens (colour, type, radius, shadow, motion) plus the component skin. `second-skin.html` links it after its own style block; `quiz.css`, `ask.css` and `up-close.html` read the same tokens. No flow, layout or engine change.
+- **What:** a new `mockups/theme.css` holds the whole look as tokens (colour, type, radius, shadow, motion) plus the component skin. `atelier.html` links it after its own style block; `quiz.css`, `ask.css` and `up-close.html` read the same tokens. No flow, layout or engine change.
 - **Reference:** two sources. MoMu's hackathon presentation template (the Google Slides file the museum asked teams to use; read only) decides where they differ: white slides, black text, headings in red capitals in a plain grotesque (Arial), red `#d72f25`. momu.be, read on 2026-11-21, fills in what a slide template leaves open: white pill buttons floating on a soft offset shadow, sharp-cornered pictures, hairline rules, dot-and-capitals section labels, red underlines on links, and a serif (Reckless) for editorial text. The template's "MM" mark is MoMu's logo and is not used; the credit stays text.
 - **Palette:** paper and sheets `#fff`, gallery grey `#ededed` behind photos and the form (photos still multiply onto it), ink `#000`, muted `#595959` (7:1 on white), hairline `#cbcbcb`, accent `#d72f25` (the template's red, 4.9:1 on white) for titles, underlines and the found-count dot; `#c00000` where the red carries white text (6.5:1). The cream and beige are gone.
 - **Type:** every title is red capitals in the sans, regular weight, as in the template. Hanken Grotesk stands in for the template's Arial and the site's Roobert; Source Serif 4 stands in for the site's Reckless and is used only for stories, record quotes and Ask answers. Roobert and Reckless are commercial, so neither is copied; both stand-ins are SIL OFL and self-hosted in `mockups/assets/fonts/` (latin subset, 284 KB, licences beside them). Inter, Newsreader and IBM Plex Mono are dropped, and with them the Google Fonts request (no visitor IP goes to Google). Scale: 11 label, 13 small, 15 body, 17 quote, 18, 22 and 27 px titles. Ids and counts are plain small sans, not mono.
@@ -595,8 +595,8 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 - **Not done:** B9 itself (span as a large number, short tile names) stays open and Mubasil's; this ticket is H4. No dark theme (photos need the light wall).
 - **Story screen (H3):** `story.css` reads the tokens too (red capital title first, years in the sans, transcript in the serif); its title is an `h2`.
 - **Share card:** `share.js` draws on a canvas, so it cannot read the CSS tokens; its font and colour constants now mirror `theme.css` (change both together). `share.css` reads the tokens.
-- **Merge order:** rebased on B7. If A9 (PR #11) merges first, rebase this again: in `second-skin.html` it only touches the head, the font names in the style block and four heading tags.
-- **Decision:** a separate stylesheet over rewriting the inline CSS, so open branches on `second-skin.html` merge cleanly and a brand guide can later be applied by editing one `:root` block.
+- **Merge order:** rebased on B7. If A9 (PR #11) merges first, rebase this again: in `atelier.html` it only touches the head, the font names in the style block and four heading tags.
+- **Decision:** a separate stylesheet over rewriting the inline CSS, so open branches on `atelier.html` merge cleanly and a brand guide can later be applied by editing one `:root` block.
 
 ### H2 Ask the archive: questions answered only from the piece's MoMu record (branch hassan/H2-ask-archive)
 - **What:** an **Ask** button on every fact card opens a bottom sheet (wardrobe style, 44 px targets, reduced-motion safe). It offers 3 suggested questions built from the record's filled fields plus free text. Each answer shows "From the MoMu record: <field>", a verbatim quote from that field, and an "AI · AI answer, written only from the MoMu record" badge (EU AI Act transparency for chatbots). Questions the record does not cover get "That is not recorded for this piece."
@@ -606,7 +606,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 - **Fallback:** with no key the function answers `{offline: true}` and the sheet answers the suggested questions straight from the fields, labelled "Straight from the record, no AI"; free text says Ask can't reach the archive. Same when the network or function is missing (python `http.server` returns 501), so the demo never breaks on venue wifi.
 - **Privacy (D2):** no accounts or cookies; question text and IP are never logged or stored (errors log status and class only); questions capped at 280 characters; a per-instance cap of 30 calls a minute (no IP tracking). The sheet asks visitors to leave out personal details. The provider processes the question outside the EU (GDPR Art. 44), and free tiers may train on prompts; the team chose to accept that for the hackathon and revisit it (EU provider, paid tier, telling MoMu) before real visitors use it.
 - **Eval:** `tools/ask_eval/` has 24 cases on ST81190 and ST503 (13 answerable, including two in Dutch, and 11 that must say not recorded, including outside-knowledge traps and a prompt injection). `npm run eval:ask` runs offline checks always and the model cases when a key is set, and writes `RESULTS.md` for the curator. Result on Nemotron: **25 of 25 pass**, every answered question with a verbatim quote. One case was wrong at first, not the model: it expected "not recorded" for when the label closed, but the record says "In 2020 besluiten ze hun label stop te zetten"; the case now expects that answer and a new unrecorded trap replaced it. Two other free models (Gemma 4 31B, Ling 3.2 Flash) were rate-limited and not scored. Gemini 3.5 Flash-Lite, run on a 7-case subset to spare its free quota (Dutch, translation of a detail, a fact only the record has, outside-knowledge and injection traps, a missing maker): **7 of 7 pass** (`RESULTS-gemini-3.5-flash-lite-subset.md`); `--only=` picks the subset.
-- **Deploy (Mubasil):** `mockups/` now has a `package.json` (one dependency, `@anthropic-ai/sdk` 1.12.0, pinned), so Vercel installs it and builds `api/ask.js` as a function. Before deploying, set the same env as `.env` in the Vercel project `second-skin` (Settings, Environment Variables, Production and Preview): `ANTHROPIC_API_KEY`, or `ASK_PROVIDER` + `ASK_API_KEY` + `ASK_MODEL`. Without it the site still works in fallback mode. Optional: `ASK_MODEL`, `ASK_MAX_PER_MINUTE`.
+- **Deploy (Mubasil):** `mockups/` now has a `package.json` (one dependency, `@anthropic-ai/sdk` 1.12.0, pinned), so Vercel installs it and builds `api/ask.js` as a function. Before deploying, set the same env as `.env` in the Vercel project (Settings, Environment Variables, Production and Preview): `ANTHROPIC_API_KEY`, or `ASK_PROVIDER` + `ASK_API_KEY` + `ASK_MODEL`. Without it the site still works in fallback mode. Optional: `ASK_MODEL`, `ASK_MAX_PER_MINUTE`.
 - **Fixed while testing:** a double tap could send two questions at once (busy flag set after an await); the function retries once after a free-tier 429.
 - **Local:** `cd mockups && npm install && npm run dev:ask` serves the page and the function on http://127.0.0.1:8768 (reads the key from the repo's `.env`); no Vercel login needed.
 - **Decision:** a function in the static site's own Vercel project over a separate backend (one deploy, one domain, key server-side). Grounding is enforced twice, in the prompt and in code, because the visitor cannot check the archive themselves.
@@ -631,7 +631,7 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 - **What:** our 3 drafted multiple-choice questions (ST503, ST80931, ST2407/1-2), the fabric lock and the `quiz` save field are gone. `questions.json` now holds the curator's text from her Notion page "Story and Questions", copied as written by `mockups/tools/questions_sync.py` (her Heron link maps to the inventory number through a new `heron` field in `records.json`, added by `records.py`). Her page has one piece so far: the A.F. Vandevorst jacket ST81190.
 - **Flow:** a card scan of a piece with a story shows a sheet: her facts, her story, a "Source: MoMu Study Collection" link to the Heron page, and every question on her page in her order (all 4 for the jacket; Hassan chose all over her "pick 3"), each with "Show answer". For a study piece the sheet comes first and "Study it up close" then opens Up close as before; find-3-details is unchanged. A plain visit does not load `questions.json`.
 - **Decisions (Hassan, 2026-11-21):** the quiz is optional and on top; interacting with a piece collects it and nothing is locked behind a question (D2 edited). the curator's text is the source for stories and questions and is shown as written, with a citation where her page gives a reference (D3 exception added). Her Notion page is read only for us. Our Notion review page was moved to Notion's Trash.
-- **Removed:** `tools/questions_check.py` and `tools/questions_apply.py` (moved to `_to_delete/`), the Remix locked-fabric tiles and `secondSkinQuiz`. The save schema is back to what is on `main`.
+- **Removed:** `tools/questions_check.py` and `tools/questions_apply.py` (moved to `_to_delete/`), the Remix locked-fabric tiles and `atelierQuiz`. The save schema is back to what is on `main`.
 - **Checked** at 390 x 844: jacket card shows her story and all 4 questions, answers reveal, "Study it up close" opens Up close; Jak card shows no sheet; Remix grid fix kept.
 
 ### Remix grid overlap fixed; quiz questions reviewed in Notion (branch hassan/C2)
@@ -639,10 +639,10 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 - **Review loop for the curator:** the 3 questions are rows in a Notion table "Quiz questions" under the team hub page "Quiz questions: review (the curator)", with the MoMu value and the allowed wrong options beside each row. `mockups/tools/questions_apply.py rows.json` writes her rows back into `questions.json` (Status "Approved" sets `draft: false`) and runs `questions_check.py`; if any row breaks a rule (answer not a MoMu value, made-up wrong option), the file is left unchanged. Decision: rows are fetched with the Notion connector rather than a Notion API token, so no new secret lives in the repo.
 
 ### C2 quiz: one question per piece wins its fabric (branch hassan/C2)
-- **What:** `mockups/questions.json` holds one multiple-choice question for each of 3 demo pieces: ST503 jak (place), ST80931 monpe trousers (date), ST2407/1-2 Bikkembergs boots (material). `mockups/quiz.js` + `quiz.css` show it as a sheet; `second-skin.html` only imports it and has five small hooks (save, restore, Remix tiles, `act`, card scan).
+- **What:** `mockups/questions.json` holds one multiple-choice question for each of 3 demo pieces: ST503 jak (place), ST80931 monpe trousers (date), ST2407/1-2 Bikkembergs boots (material). `mockups/quiz.js` + `quiz.css` show it as a sheet; `atelier.html` only imports it and has five small hooks (save, restore, Remix tiles, `act`, card scan).
 - **Flow:** a card scan (`?card=<id>`) wears the piece and opens its question. Right: "MoMu records its place as Netherlands", the record's description quote with our translation, and the fabric unlocks ("Try the fabric" puts it on the body). Wrong: the right answer shows gently, the piece stays in the wardrobe, the fabric stays locked; scanning the card again gives another go. In Remix, a locked fabric is a grey tile ("Answer its question" or "Scan its card again"); tapping it asks the question (or says to scan again). A right answer is never asked again. No score, timer or streak (D2); study pieces keep their find-3-details question.
 - **Facts (D3):** every answer and option is a verbatim value of the field in `records.json`; distractors are the same field from other records. `python3 -I mockups/tools/questions_check.py --cache <harvest cache>` checks this, traces each answer to the raw record in `cache/`, and fails if a prompt gives the answer away. The reveal adds no prose of its own: field value plus the record's description. Question text is marked `draft: true` until the curator rewrites and approves it.
-- **Save:** optional `quiz` field in `secondSkin.save.v1`, `{ "<id>": "right" | "wrong" }`, validated on load. Old saves without it load as before (heads-up to Mubasil in the PR, per the change policy). A restored remix fabric must also be unlocked.
+- **Save:** optional `quiz` field in `atelier.save.v1`, `{ "<id>": "right" | "wrong" }`, validated on load. Old saves without it load as before (heads-up to Mubasil in the PR, per the change policy). A restored remix fabric must also be unlocked.
 - **Checked:** in Chrome (window 570 px, the narrowest it goes here) and at 390 x 844 in the app browser: right and wrong for all 3 pieces, retry by re-scan, no re-ask after right, reload keeps state, console clean.
 - **Seen, not fixed (pre-existing):** with the sheet at half height the Remix grid squeezes its rows to about 110 px while tiles stay 230 px tall, so tiles overlap; it happens with or without the quiz classes.
 
@@ -673,7 +673,7 @@ Raised by Basil after a phone test: 3D scans take about 10 s, and the main avata
 
 ### Onboarding help pop-up and help button (branch basil/onboarding; Notion task "Onboarding help pop-up (with skip) + help button", no ledger ticket)
 - A three-step card (dress the form, remix a fabric, read the record) opens once on a first visit with Next and Skip; the last step's button is "Start dressing". A "?" button in the top bar (44 px) reopens it any time. The backdrop and Escape close it.
-- It does not open for a visitor who arrived by a museum card (`?card=`) or back from Up close (`?fabric=`), so it never covers their toast. Seen state is `secondSkin.help.v1` in localStorage; if storage is blocked it shows each visit.
+- It does not open for a visitor who arrived by a museum card (`?card=`) or back from Up close (`?fabric=`), so it never covers their toast. Seen state is `atelier.help.v1` in localStorage; if storage is blocked it shows each visit.
 - Why: the Ideation page lists "first-time help pop-up with a skip button" and a help button as UX must-haves. The copy only describes what the app does today and makes no claim about MoMu facts (D3).
 - Checked in headless Chromium at 390 px: opens on first visit, steps through, closes on Start, stays closed on reload, "?" reopens at step 1, Skip closes, no popup on a `?card=ST503` arrival, no horizontal overflow, console clean. Not checked on a real phone or with a screen reader.
 
@@ -741,7 +741,7 @@ Raised by Basil after a phone test: 3D scans take about 10 s, and the main avata
 ### Up close: Look closer on MoMu splats (branch basil/splats)
 - `mockups/up-close.html`: a MoMu Gaussian splat (three 0.180.0 + Spark 2.4.0) with a detail hunt. Each detail quotes the record's `dcterms:description` (verbatim, checked by script; an ellipsis marks a cut) with our English marked as translation. Tap it on the scan, or "Show me" turns the camera to it. All found unlocks the piece's fabric for Remix.
 - Two splat pieces in `pieces.json`: ST2435 (1920-1925) and ST652/1 (1940-1945), new slot `study`, `assets.splat`, `details[].at` as fractions of the scan's bounding box (placed by hand in Chrome).
-- `second-skin.html`: `?card=<splat id>` opens Up close; Remix lists splat fabrics (locked, "Look closer", or won); `?fabric=<id>` wears a won fabric on the body. Progress lives in localStorage `secondSkin.found.v1`.
+- `atelier.html`: `?card=<splat id>` opens Up close; Remix lists splat fabrics (locked, "Look closer", or won); `?fabric=<id>` wears a won fabric on the body. Progress lives in localStorage `atelier.found.v1`.
 - Swatches for both (`make_swatches.py` POINT); `batch_glb.py` skips pieces without a GLB so no GPU run is spent on a splat piece.
 - Decision: a separate page on three 0.180 instead of upgrading the main page from 0.169, so the 7 GLB scans are not put at risk before the demo. Splat pieces are studied, not worn (their scans include MoMu's own form), and win their fabric instead (D2: learning unlocks).
 - `.sog` for both pieces via `splat-transform` 3.10.3 in `tools/node/` (220 MB `.ply` to 17 MB, same bounds and detail in Chrome); committed, since each is under GitHub's 50 MB warning.
@@ -753,7 +753,7 @@ Raised by Basil after a phone test: 3D scans take about 10 s, and the main avata
 - Decision: keep splats out of git (about 220 MB each, over GitHub's 100 MB file limit).
 
 ### Two-person setup: AGENTS.md, ARCHITECTURE.md
-- `AGENTS.md` is now the entry file for every agent and both people (setup, ticket claims, branch per ticket, PR review, one branch on `second-skin.html` at a time, handover at session end); `CLAUDE.md` imports it and keeps Claude-only notes.
+- `AGENTS.md` is now the entry file for every agent and both people (setup, ticket claims, branch per ticket, PR review, one branch on `atelier.html` at a time, handover at session end); `CLAUDE.md` imports it and keeps Claude-only notes.
 - `ARCHITECTURE.md` maps the DB, the 3D pipeline and the mockup, and lists the invariants that break silently.
 - `requirements.txt` (pip freeze of `.venv`), `.env.example`, and relative paths in `.mcp.json` so a second machine can set up without this laptop's paths.
 - `AGENTS.md` points to the ledger's Change policy and no longer claims a demo flow in `HANDOVER.md` (none is written yet); the handover's single-owner rule now covers both people.
@@ -779,7 +779,7 @@ Raised by Basil after a phone test: 3D scans take about 10 s, and the main avata
   (https://second-skin-ten.vercel.app) still serves the earlier build.
 
 ### Vercel deploy (E3)
-- Deployed `mockups/` as a static site to the Vercel project `second-skin` (team mmubasilbokhari-6857s-projects),
+- Deployed `mockups/` as a static site to the Vercel project (team mmubasilbokhari-6857s-projects),
   on the owner's request for a preview. **It went out as production**: on a project with no git connection the CLI
   made the first `vercel deploy` a production deploy. Live and public at https://second-skin-ten.vercel.app
   (deployment `dpl_62q4AA6PLHaTF1zpVhH1WHKarbGm`). Next deploys: `npx vercel deploy` from `mockups/` now creates
@@ -817,7 +817,7 @@ Raised by Basil after a phone test: 3D scans take about 10 s, and the main avata
   Why: CLO pieces need typed fields, and teammates should edit data, not code.
 - **C3 card scan:** `?card=<inventory id>` unlocks the piece, puts it on the form and toasts "Found in the museum".
   Unknown or malformed ids are ignored.
-- **C6 save:** the look and widest span persist in localStorage (`secondSkin.save.v1`); restored ids are checked
+- **C6 save:** the look and widest span persist in localStorage (`atelier.save.v1`); restored ids are checked
   against the manifest because storage is user-controlled.
 - **UI quick wins:** removed the two unlabeled "+" buttons and the live degree readout; skin tones became dress-form
   finishes (linen, calico, black jersey, oak); 44 px hit areas for finishes, chips and the back button.

@@ -87,7 +87,7 @@ export async function go(href, { replace = false } = {}) {
 
 /* A page link that should behave like a back step when the previous entry is the page it points at (Up close's ←):
    go back instead of piling a new entry on top, which made back return into Up close. */
-const SAME = { "/stage": "/second-skin.html" };   // E4: Vercel serves the Stage at /stage too (vercel.json rewrite)
+const SAME = { "/stage": "/atelier.html" };   // E4: Vercel serves the Stage at /stage too (vercel.json rewrite)
 const page = path => SAME[path] ?? path;
 export function backTo(href, { from } = {}) {
   const ref = document.referrer && new URL(document.referrer);

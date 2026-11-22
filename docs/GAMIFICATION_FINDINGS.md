@@ -53,16 +53,16 @@ testing and curator sign-off, which only come after the hackathon.
 ## Still open (for Hassan to pick up or drop)
 
 1. **Firsts toasts that name a fact** (MuseumNext's "what was the point" pitfall): e.g. "First 18th-century piece:
-   silk taffeta, 1750 to 1780". `FIRSTS` in `second-skin.html` names no fact today. Build only from `records.json`
+   silk taffeta, 1750 to 1780". `FIRSTS` in `atelier.html` names no fact today. Build only from `records.json`
    fields (`date`, `place`, `medium`), D3.
 2. **Empathy line when a piece goes on**, built only from fields: "Sewn by hand in the Netherlands, 1750 to 1780".
    It must not invent a person (D3). Ties in with the season name "Fibres and Hands".
 3. **Toast when every answer of a piece is revealed** ("Looked closer: 4 questions on the jacket"): a reward with
-   nothing locked, so D2 holds. `quiz.js` emits an event; `second-skin.html` reuses the `FIRSTS` toast.
+   nothing locked, so D2 holds. `quiz.js` emits an event; `atelier.html` reuses the `FIRSTS` toast.
 4. **Hallway test:** hand the phone to 3 to 5 people at the hackathon and note where they stall. A real line for the
    pitch and a list of fixes.
 5. **Pitch framing:** structure the 5 minutes on the paper's chain: empathy leads to enjoyment and memorability;
    rewards plus immersion lead to learning, and learning to intention to donate. Close with "Play isn't a panacea"
    and the next step: visitor testing and curator sign-off.
 
-1 and 2 are small and need no new data; both touch `second-skin.html`, so only one open branch at a time.
+1 and 2 are small and need no new data; both touch `atelier.html`, so only one open branch at a time.

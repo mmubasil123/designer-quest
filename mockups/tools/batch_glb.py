@@ -1,4 +1,4 @@
-"""Make a GLB for every unlocked piece in second-skin.html that lacks one.
+"""Make a GLB for every unlocked piece in atelier.html that lacks one.
 
 Usage: .venv/bin/python -I mockups/tools/batch_glb.py
 Reads mockups/pieces.json, the manifest the page also loads, so the piece list lives in one place.

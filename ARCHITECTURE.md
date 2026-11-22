@@ -8,7 +8,7 @@ MoMu Omeka S APIs ──fetch──> cache/ (JSON pages) ──load──> Postg
                                                                   v
 heron.libis.be photo ──> garment_mask.py ──> img2glb.py (TRELLIS, HF) ──> mockups/assets/<id>.glb
                                                                   │
-mockups/pieces.json  (single source of truth for pieces) ─────────┼──> second-skin.html (three.js, browser)
+mockups/pieces.json  (single source of truth for pieces) ─────────┼──> atelier.html (three.js, browser)
                                                                   └──> batch_glb.py, make_swatches.py
 ```
 
@@ -32,9 +32,9 @@ mockups/pieces.json  (single source of truth for pieces) ───────�
 - Output is committed: GLBs are expensive to make (scarce free GPU), cheap to store.
 
 ## 3. MoMu app mockup (`mockups/`)
-- `second-skin.html`: one file, one `<script type="module">`. three.js 0.169.0 from jsDelivr via import map;
+- `atelier.html`: one file, one `<script type="module">`. three.js 0.169.0 from jsDelivr via import map;
   model-viewer only on the Piece page (to be replaced, A4).
-- Boot: `fetch("pieces.json")`, restore save from `localStorage` key `secondSkin.save.v1` (ids validated).
+- Boot: `fetch("pieces.json")`, restore save from `localStorage` key `atelier.save.v1` (ids validated).
 - Story and questions (C2): on a card scan only, `quiz.js` loads `questions.json` (the curator's Notion page, copied by `tools/questions_sync.py`) and shows that piece's story and questions before the Stage or Up close; nothing is saved or locked.
 - Engine: `Turntable` class owns one renderer and scene: `makeForm()` procedural dress form, each worn GLB via
   `prepGarment()` + `place()` (auto-fit by slot from the bounding box), `setFabric()` remix (triplanar, body and
@@ -43,10 +43,10 @@ mockups/pieces.json  (single source of truth for pieces) ───────�
   (time-span game); `?card=<id>` unlocks and wears a piece. Learning happens on Up close (the Levels track was removed).
 - Study tab in the wardrobe sheet lists every `study` piece with its state (card not scanned, n of 3 found, fabric won); a scanned one opens Up close. Won fabrics appear in Remix.
 - `up-close.html`: separate page for splat pieces (three 0.180.0 + Spark 2.4.0, while the main page stays on
-  0.169.0). Detail hunt; progress in localStorage `secondSkin.found.v1` (`{id: [detail index]}`), which the main
+  0.169.0). Detail hunt; progress in localStorage `atelier.found.v1` (`{id: [detail index]}`), which the main
   page reads to unlock a splat piece's fabric. `splat-viewer.html` is a local-only viewer for `splats/`.
-- Deploy: Vercel project `second-skin`, root `mockups/`, `.vercelignore` drops tools and sources;
-  `/` serves the landing page `index.html` (E4), `vercel.json` rewrites `/stage` to the Stage (`second-skin.html`);
+- Deploy: Vercel project (still on its early name, Mubasil renames it), root `mockups/`, `.vercelignore` drops tools and sources;
+  `/` serves the landing page `index.html` (E4), `vercel.json` rewrites `/stage` to the Stage (`atelier.html`);
   the landing page forwards `?card=` and `?fabric=` links to the Stage before anything renders, so sticker URLs keep working.
 - Ask the archive (H2): fact card **Ask** opens `ask.js`'s sheet, which POSTs `{pieceId, question}` to
   `api/ask.js` (Vercel function, key in env `ANTHROPIC_API_KEY`) or, offline, answers suggested questions from

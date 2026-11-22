@@ -1,4 +1,4 @@
-# QA test cases: MoMu app (second-skin.html, up-close.html, outfit.html)
+# QA test cases: MoMu app (atelier.html, up-close.html, outfit.html)
 
 Bug bash 2026-11-22 (hassan, H19, branch `hassan/H19-qa-bugbash`). Run at 390 x 844 and 320 x 568 in headless Chromium
 (Playwright), served by `python3 -m http.server 8765` from `mockups/`. Every case starts from a known
@@ -46,7 +46,7 @@ Result key: **Pass**, **Fixed** (failed, fixed on this branch, re-run and passed
 | TC30 | `?card=ST503` (room wearable) | Story without the year, "Win it", then Guess the year | Pass |
 | TC31 | Back on Guess the year | Stays on the guess (Win it refuses back and Escape) | Pass |
 | TC32 | Three wrong guesses | Hints "Later than…", third try wins, card says how far off | Pass |
-| TC33 | Right guess, "Keep it" | Won tab appears and is selected, tile marked New, saved in `secondSkin.won.v1` | Pass |
+| TC33 | Right guess, "Keep it" | Won tab appears and is selected, tile marked New, saved in `atelier.won.v1` | Pass |
 | TC34 | Reload after a win | No replay of the card, Won tab still there | Pass |
 | TC35 | Re-scan a won piece | Story with its years, "Back to my look", toast "… is in your Won tab" | Pass |
 | TC36 | `?card=ST80930` (owned piece, not a museum piece) | Story, then toast names the **Top** tab, not the Won tab (there is none) | **Fixed** (B3) |
@@ -72,10 +72,10 @@ Result key: **Pass**, **Fixed** (failed, fixed on this branch, re-run and passed
 
 | # | Scenario | Expected | Result |
 |---|---|---|---|
-| TC60 | `secondSkin.save.v1` is `{bad`, `[]`, or names a locked piece / finish 9 | Page boots with the default look | Pass |
-| TC61 | `secondSkin.new.v1` is `{}` or `5` | Page boots (was a page error that stopped the Stage) | **Fixed** (B8) |
-| TC62 | `secondSkin.found.v1` is `"str"`, `{"ST2435":"ab"}` or `{"ST2435":[7,8,9]}` | Stage boots with the piece still locked; Up close opens at 0 of 3 | **Fixed** (B8) |
-| TC63 | `secondSkin.won.v1` is not an array | Ignored | Pass |
+| TC60 | `atelier.save.v1` is `{bad`, `[]`, or names a locked piece / finish 9 | Page boots with the default look | Pass |
+| TC61 | `atelier.new.v1` is `{}` or `5` | Page boots (was a page error that stopped the Stage) | **Fixed** (B8) |
+| TC62 | `atelier.found.v1` is `"str"`, `{"ST2435":"ab"}` or `{"ST2435":[7,8,9]}` | Stage boots with the piece still locked; Up close opens at 0 of 3 | **Fixed** (B8) |
+| TC63 | `atelier.won.v1` is not an array | Ignored | Pass |
 
 ## Layout
 

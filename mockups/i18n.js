@@ -12,13 +12,13 @@
      source shows the original until the script is rerun. Nothing is translated at runtime and nothing is sent anywhere.
    Every item returned by tc() says whether it is a translation, so the screen can show the "Translation" label.
 
-   Language: the saved choice (field `lang` in the shared save, localStorage "secondSkin.save.v1"), else the browser's
+   Language: the saved choice (field `lang` in the shared save, localStorage "atelier.save.v1"), else the browser's
    language if it is nl, en or fr, else English. Switching reloads the page (the look is already saved), so every screen
    renders once, in one language. Narration audio is English only for now. */
 
 export const LANGS = ["nl", "en", "fr"];
 export const NAMES = { nl: "Nederlands", en: "English", fr: "Français" };
-const SAVE_KEY = "secondSkin.save.v1";   // shared with second-skin.html; `lang` is an optional extra field
+const SAVE_KEY = "atelier.save.v1";   // shared with atelier.html; `lang` is an optional extra field
 
 const readSaved = () => { try { return JSON.parse(localStorage.getItem(SAVE_KEY) || "null")?.lang; } catch { return undefined; } };
 function pick() {
@@ -100,7 +100,7 @@ export function localize(root = document.body) {
    the 3D scenes and the dialogs are built once from strings). So the page says what to keep: keepPlace(() => state) is
    called just before the reload and its result goes to sessionStorage; after the reload the page calls takePlace() once
    and puts the sheet, tab and scroll back. The state is dropped if it is old, from another page, or already taken. */
-const PLACE_KEY = "secondSkin.place.v1";
+const PLACE_KEY = "atelier.place.v1";
 let placeSaver = null;
 export const keepPlace = fn => { placeSaver = fn; };
 export function takePlace() {

@@ -19,7 +19,7 @@ for D-3 to merge, since `i18n.js` is not on main.
 | Card scan of a study piece `?card=ST81190`: story, Up close, back, all 3 found, fabric won | `17` to `23` |
 | Language toggle (D-3) | read from `hassan/D-3-i18n`; not on `main` yet |
 
-Detector baseline (`impeccable detect --viewport 390x844`): `second-skin.html` 0 findings, `up-close.html?id=ST81190`
+Detector baseline (`impeccable detect --viewport 390x844`): `atelier.html` 0 findings, `up-close.html?id=ST81190`
 0 findings and 1 advisory (one-word last line). Console: no errors except one 404 on the very first cold load, not reproduced on reload (likely the browser's
 favicon request). The problems below are flow problems
 the detector cannot see.
@@ -39,7 +39,7 @@ P0 blocks the story; P1 makes it feel broken; P2 friction; P3 polish. "Owner" is
 | 8 | P2 | **The language switch reloads the page** (D-3 branch): open sheet, tab, scroll and an unanswered Ask are lost; on Up close the splat downloads again. | `i18n.js` line 104 on `hassan/D-3-i18n` | Hassan (D-3) |
 | 9 | P2 | **False and thin affordances.** Ask's handle is a decorative `<span>` that cannot be dragged. The wardrobe handle button is 22 px tall (its drag area is larger, but the button alone fails 44 px). The "wearing" chips row is cut off at 390 px with no cue that it scrolls. A locked Jak sits in the Top grid ("Win it in the museum") though the Museum says room pieces live outside the wardrobe. | `04`, `06` | Basil (sheet B3), Hassan (Ask) |
 | 10 | P2 | **Two different headers.** Stage: wordmark + Museum / Share / ?. Up close: ← + wordmark + id, different type and spacing. Moving between them feels like changing apps. | `03` vs `18` | Hassan |
-| 11 | P3 | **Screen-reader structure.** No visible `h1` or `main` landmark at phone width; page title "Second Skin mockups"; every dialog focuses a bare `div` (`autofocus` wrapper) so the dialog's name is read but not its first action. Focus does return correctly after Ask closes. | DOM check | Hassan |
+| 11 | P3 | **Screen-reader structure.** No visible `h1` or `main` landmark at phone width; page title the old name plus "mockups"; every dialog focuses a bare `div` (`autofocus` wrapper) so the dialog's name is read but not its first action. Focus does return correctly after Ask closes. | DOM check | Hassan |
 | 12 | P3 | **Motion is uneven.** Dialogs use `@starting-style` scale-in (good), but there is no transition between pages and the scan flow swaps dialog content with no change of state shown (story → guess → won reuse one box with a hard cut). | `11` → `12` → `13` | Hassan |
 
 What already works and stays: the wardrobe sheet's peek/half/full with flick snapping (B3/B4), 44 px chips and
@@ -108,15 +108,15 @@ lands on). The wardrobe peek always shows what is worn.
 ## What touches other people's work
 | Change | Files | Whose | Needs |
 |---|---|---|---|
-| History entries for every layer, one back behaviour | `second-skin.html`, `story.js`, `win.js`, `ask.js`, `share.js` | Hassan; `win.js` Basil | Basil heads-up |
+| History entries for every layer, one back behaviour | `atelier.html`, `story.js`, `win.js`, `ask.js`, `share.js` | Hassan; `win.js` Basil | Basil heads-up |
 | Scan flow as one modal with Not now; Wear it now on Won | `story.js`, `win.js`, `win.css` | Basil (Win flow, D2) | **Basil's OK** (D2 flow) |
-| NFC popup and Help as the "modal" kind, Museum as a sheet, progress chip in the header | `second-skin.html` top bar, `#nfc`, `#museum`, `#help` | **Basil** (NFC popup redesign, onboarding) | **Basil's OK via Hassan**; wait for his popup redesign if it is in flight |
-| Piece sheet (fact ⇄ Ask) | `second-skin.html` fact card, `ask.js`, `ask.css` | Hassan (C1 was Basil's) | Basil heads-up |
+| NFC popup and Help as the "modal" kind, Museum as a sheet, progress chip in the header | `atelier.html` top bar, `#nfc`, `#museum`, `#help` | **Basil** (NFC popup redesign, onboarding) | **Basil's OK via Hassan**; wait for his popup redesign if it is in flight |
+| Piece sheet (fact ⇄ Ask) | `atelier.html` fact card, `ask.js`, `ask.css` | Hassan (C1 was Basil's) | Basil heads-up |
 | Up close header, back, View Transition | `up-close.html`, `theme.css` | Hassan; **A7** edits `up-close.html` | Sequence with A7 |
 | Language switch without losing place | `i18n.js` | Hassan (D-3, not merged) | Land D-3 first, then this on top |
-| Wardrobe handle size, chips scroll cue | `second-skin.html` sheet CSS | Basil (B3/B4) | Basil heads-up |
+| Wardrobe handle size, chips scroll cue | `atelier.html` sheet CSS | Basil (B3/B4) | Basil heads-up |
 
-**Sequencing.** `second-skin.html` may only be changed by one open branch at a time (AGENTS.md). Today
+**Sequencing.** `atelier.html` may only be changed by one open branch at a time (AGENTS.md). Today
 `hassan/D-3-i18n` changes it (117 lines) and is unmerged; `hassan/A7` changes `up-close.html`. Proposal: merge
 D-3 first, then H6 in small PRs in this order: (1) back/history layer manager, (2) scan flow, (3) sheets,
 (4) Up close header and transition. Each is verified at 390 px before the next.

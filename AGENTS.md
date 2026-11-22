@@ -6,8 +6,8 @@ it. `CLAUDE.md` loads this file and adds only Claude-specific notes.
 ## Start here
 1. `git pull`, then read `HANDOVER.md` (where work stopped) and `LEDGER.md` (tickets, decisions D1 to D8, owners).
 2. `ARCHITECTURE.md`: components, data flow, invariants. `README.md`: layout and commands.
-3. Serve the mockup: `cd mockups && python3 -m http.server 8765 --bind 127.0.0.1`, open `/second-skin.html`.
-   `window.secondSkin = { look, turntables }` drives it from the console for checks.
+3. Serve the mockup: `cd mockups && python3 -m http.server 8765 --bind 127.0.0.1`, open `/atelier.html`.
+   `window.atelier = { look, turntables }` drives it from the console for checks.
 
 ## First-time setup (each person, own machine)
 ```
@@ -25,7 +25,7 @@ from MoMu's hackathon page (Splatting_FOLDER on Google Drive) or from Mubasil. T
 just fail to connect.
 
 ## Scope
-- MoMu Hackathon 2026: the harvested collection DB and the MoMu app mockup (the app is called "Museum Atelier"; "Second Skin" was an early idea name and is gone from the product; files, URLs and the Vercel project keep `second-skin`).
+- MoMu Hackathon 2026: the harvested collection DB and the MoMu app mockup (the app is called "Museum Atelier"; the Vercel project and its URL still carry the early idea name until Mubasil renames them).
 - Private repo: github.com/mmubasil123/momu-collection-db. Discards move to `_to_delete/` (git-ignored), never `rm`.
 
 ## Working together (two people, several agents)
@@ -33,7 +33,7 @@ just fail to connect.
   alone, then start. Someone else's name there means hands off; ask the person, not their agent.
 - **One branch per ticket**, named `<name>/<ticket>` (e.g. `basil/A2`). Open a PR to `main`; no review is
   needed, but a PR is merged only when its developer says so, never automatically (an agent asks first). Nobody pushes straight to `main` except a claim or a `HANDOVER.md` update.
-- **`mockups/second-skin.html` is one file:** only one open branch may change it at a time. Check
+- **`mockups/atelier.html` is one file:** only one open branch may change it at a time. Check
   `gh pr list` and the ledger before touching it; keep those PRs small and merge them quickly.
 - **Pull and rebase before you push** (`git pull --rebase origin main`). On a conflict in someone else's code,
   stop and ask; never resolve it by dropping their side.
@@ -58,7 +58,7 @@ just fail to connect.
 - Study pieces (splats): commit only the `.sog` (under 50 MB), never a `.ply`. Each detail's `quote` is cut
   verbatim from the record's `dcterms:description` (check it with a script); place `details[].at` with
   `upClose.fracAt(x, y, fz)` in the console on `up-close.html`, checking front and back. Steps are in `HANDOVER.md`.
-- Deploys: the Vercel project `second-skin` is on Mubasil's account. Only Mubasil deploys, and only on purpose.
+- Deploys: the Vercel project (its name and URL are the early idea name) is on Mubasil's account. Only Mubasil deploys, and only on purpose.
 
 ## Delivery
 - Hackathon presentation: story, persona and demo script in `presentation/STORYLINE.md` (slides still ticket E1,

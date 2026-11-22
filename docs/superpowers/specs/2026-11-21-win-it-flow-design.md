@@ -22,7 +22,7 @@ Museum button: every room piece, won or still to find
   try again; the third miss wins anyway. You always win; the game is the guess, not a gate you can fail.
 - Won card (shared by both kinds): photo, the real date, how far off you were (wearables), the record's description in
   our English (`records.json` `quoteEn`, else the Dutch `quote`), Add to wardrobe. Facts only from records (D3).
-- Wins are saved in `secondSkin.won.v1` (array of ids); study fabrics keep `secondSkin.found.v1`.
+- Wins are saved in `atelier.won.v1` (array of ids); study fabrics keep `atelier.found.v1`.
 - The kimono-only Piece screen and its Learn button are removed; the ⓘ fact card is the one place to read a piece.
 - D2 changes: winning a room piece is now one challenge after its story. Hassan gets a heads-up (Change policy).
 

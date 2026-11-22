@@ -24,7 +24,7 @@ createServer(async (req, res) => {
     res.json = obj => { res.setHeader("Content-Type", "application/json"); res.end(JSON.stringify(obj)); };
     return handler(req, res);
   }
-  const rel = url.pathname === "/" ? "second-skin.html" : decodeURIComponent(url.pathname.slice(1));
+  const rel = url.pathname === "/" ? "atelier.html" : decodeURIComponent(url.pathname.slice(1));
   const path = normalize(join(ROOT, rel));
   if (!path.startsWith(ROOT) || rel.split("/").some(s => s.startsWith(".")) || path.includes(`${sep}node_modules${sep}`)) {
     res.writeHead(404).end(); return;

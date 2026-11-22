@@ -1,5 +1,5 @@
 {
-  "name": "second-skin",
+  "name": "museum-atelier",
   "private": true,
   "type": "module",
   "description": "Static mockup plus one Vercel function (api/ask.js, ticket H2). The page itself needs no build.",
