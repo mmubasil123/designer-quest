@@ -661,53 +661,16 @@
       "years": "1998 to 1999",
       "source": "curator",
       "draft": false,
-      "form": "script",
-      "beats": [
-        {
-          "t": "Autumn-winter, 1998. A Belgian fashion house, A.F. Vandevorst, presents its very first collection."
-        },
-        {
-          "t": "This grey wool coat is part of it. The museum's record gives it a single word: Blessed."
-        },
-        {
-          "t": "Now look closer. The sleeves, the front, the shoulders: none of them are sewn together."
-        },
-        {
-          "t": "Brass-coloured rivets hold every piece in place, even the darts and the side seams."
-        },
-        {
-          "t": "Horses and their tack, uniforms, rivets: they inspired the house from the start, and you can see it here."
-        },
-        {
-          "t": "Nine snap buttons close the front."
-        },
-        {
-          "t": "And at the back of the neck, stitched in red, a cross: the mark of A.F. Vandevorst."
-        }
-      ],
-      "tease": null,
+      "form": "prose",
       "paragraphs": [
         "Take a look at this grey jacket in front of you. What do you think the fabric would feel like? Would the felted wool be itchy or soft? Now look closely at the little round metal pieces you see all over the jacket. Rather than sewing the pieces together, the designers used rivets-bolt-like fasteners-to attach the separate parts. Even the darts, the little folds to shape the piece are attached with them. Do you also see a column of metal snap buttons along the centre front of the piece? They look almost identical to the rivets.",
         "Rivets were something that inspired the designers of A.F. Vandevorst and appears in multiple of their designs. Where else might you have seen rivets used before, for decoration or practical uses? They were also inspired by uniforms and by horses and horse riding equipment, something you can maybe picture when looking at this piece.",
         "Now look at the back of the jacket, at the top there is red stitching, what shape is this in? This is the logo of A.F. Vandevorst."
       ],
       "lang": "en",
-      "text": "Autumn-winter, 1998. A Belgian fashion house, A.F. Vandevorst, presents its very first collection.\n\nThis grey wool coat is part of it. The museum's record gives it a single word: Blessed.\n\nNow look closer. The sleeves, the front, the shoulders: none of them are sewn together.\n\nBrass-coloured rivets hold every piece in place, even the darts and the side seams.\n\nHorses and their tack, uniforms, rivets: they inspired the house from the start, and you can see it here.\n\nNine snap buttons close the front.\n\nAnd at the back of the neck, stitched in red, a cross: the mark of A.F. Vandevorst.",
-      "hash": "a38b37505ae106e1",
-      "audio": "assets/audio/ST81190.en.m4a",
-      "audioHash": "a38b37505ae106e1",
-      "seconds": 46.1,
-      "bytes": 290119,
-      "voice": "picsart:Adeline",
-      "cues": [
-        0.58,
-        8.5,
-        15.2,
-        22.36,
-        27.88,
-        36.2,
-        38.9
-      ]
+      "text": "A.F. Vandevorst Jacket, 1998 to 1999.\n\nTake a look at this grey jacket in front of you. What do you think the fabric would feel like? Would the felted wool be itchy or soft? Now look closely at the little round metal pieces you see all over the jacket. Rather than sewing the pieces together, the designers used rivets-bolt-like fasteners-to attach the separate parts. Even the darts, the little folds to shape the piece are attached with them. Do you also see a column of metal snap buttons along the centre front of the piece? They look almost identical to the rivets.\n\nRivets were something that inspired the designers of A.F. Vandevorst and appears in multiple of their designs. Where else might you have seen rivets used before, for decoration or practical uses? They were also inspired by uniforms and by horses and horse riding equipment, something you can maybe picture when looking at this piece.\n\nNow look at the back of the jacket, at the top there is red stitching, what shape is this in? This is the logo of A.F. Vandevorst.",
+      "hash": "28a4aa22a98de418",
+      "audio": null
     },
     "ST80998": {
       "title": "Striped velvet bridal kaftan",

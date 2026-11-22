@@ -2,31 +2,6 @@
   "version": 1,
   "about": "H13: the spoken story per piece, written as an audio-guide scene (a hook, the history, a detail to look at). Facts come only from the piece's MoMu record or from the curator's own story (D3); each `trace` pair is [our words, the source's words], where the source is the record's Dutch description (no prefix), a record field (`date:`, `place:`, `creator:`, `title:`, `medium:`) or the curator's text (`curator:`), checked by tools/narration_facts.py. `reveal` beats carry the date: they are left out before a Guess the year, and `tease` (shown, not spoken) ends the narration there instead. the curator's own text is never changed: it stays in questions.json and shows in full under the narration.",
   "pieces": {
-    "ST81190": {
-      "beats": [
-        {"t": "Autumn-winter, 1998. A Belgian fashion house, A.F. Vandevorst, presents its very first collection."},
-        {"t": "This grey wool coat is part of it. The museum's record gives it a single word: Blessed."},
-        {"t": "Now look closer. The sleeves, the front, the shoulders: none of them are sewn together."},
-        {"t": "Brass-coloured rivets hold every piece in place, even the darts and the side seams."},
-        {"t": "Horses and their tack, uniforms, rivets: they inspired the house from the start, and you can see it here."},
-        {"t": "Nine snap buttons close the front."},
-        {"t": "And at the back of the neck, stitched in red, a cross: the mark of A.F. Vandevorst."}
-      ],
-      "trace": [
-        ["autumn-winter 1998", "date: herfst-winter 1998-1999"],
-        ["a Belgian fashion house, A.F. Vandevorst", "curator: Belgian fashion house A.F. Vandevorst"],
-        ["its very first collection", "curator: This jacket is part of their first collection"],
-        ["grey wool coat", "Getailleerde jas in grijs wolweefsel"],
-        ["the record's single word: Blessed", "title: BLESSED"],
-        ["sleeves, front and shoulders not sewn together", "curator: the sleeve, front, shoulder, and breast pieces are not sewn together"],
-        ["brass-coloured rivets, even the darts and side seams", "Ook de nepen en zijnaden zijn niet gestikt, maar met rivetten vastgemaakt"],
-        ["brass-coloured rivets", "aan elkaar vastgehecht met messingkleurige rivetten"],
-        ["inspired by horses and their tack, uniforms, rivets, from the early collections", "curator: Since their early collections, their designs have been inspired by German artist Joseph Beuys, religion, horses and their tack, uniforms, rivets"],
-        ["nine snap buttons", "De jas sluit middenvoor met negen messingkleurige drukknopen"],
-        ["a red cross at the back of the neck", "Op de achterzijde ter hoogte van de hals is een rood kruis gestikt"],
-        ["the mark of A.F. Vandevorst", "curator: The red cross stitched at the nape of the neck is the iconic logo of A.F. Vandevorst"]
-      ]
-    },
     "ST81114AB": {
       "beats": [
         {"t": "Picture a woman setting off on a bicycle."},

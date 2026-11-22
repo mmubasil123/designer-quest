@@ -2,6 +2,13 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## Jacket audio follows the curator's more-story text (2026-11-22, C2, branch hassan/curator-story-audio)
+- What: ST81190 no longer has an audio-guide script in `narration-scripts.json`, so it is spoken like her blouse and
+  trousers: its title and years, then her 3 more-story paragraphs word for word. Captions are those paragraphs.
+- Why: Hassan asked for the audio to match her text. The old 46 s H13 script (voice picsart:Adeline) is replaced.
+- Status: the new audio is not voiced yet (`audio` is null in `narration.json`, so the sheet shows the text without a
+  player). Voice `ST81190.en.txt` with Picsart Adeline, then `narration.py --import DIR --voice "picsart:Adeline"`.
+
 ## the curator's "more story" version for the jacket (2026-11-22, C2, branch hassan/curator-story-import)
 - What: ST81190's story is now the curator's "more story-format version" (3 paragraphs, verbatim); her plain description variant is
   gone from `questions.json` and `narration.json`. Her page was re-read: blouse ST81114AB and trousers ST81116 (one story
