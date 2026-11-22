@@ -31,11 +31,11 @@ export const STOPS = [
 
 const browser = await chromium.launch({ channel: "chrome", headless: true, args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"] });
 const ctx = await browser.newContext({ viewport: { width: 1200, height: 1400 }, deviceScaleFactor: 2, reducedMotion: "reduce" });
-await ctx.addInitScript(() => { try { localStorage.setItem("secondSkin.help.v1", "1"); } catch {} });
+await ctx.addInitScript(() => { try { localStorage.setItem("atelier.help.v1", "1"); } catch {} });
 const page = await ctx.newPage();
 page.on("pageerror", e => console.log("  pageerror:", e.message));
-await page.goto(`${BASE}/second-skin.html`);
-await page.waitForFunction(() => window.secondSkin?.turntables?.[0]);
+await page.goto(`${BASE}/atelier.html`);
+await page.waitForFunction(() => window.atelier?.turntables?.[0]);
 // a tall, high-resolution stage of its own, outside the phone frame
 await page.evaluate(() => {
   const el = document.getElementById("stageTT");
@@ -47,7 +47,7 @@ await page.waitForTimeout(500);
 for (const stop of STOPS) {
   if (only && stop.id !== only) continue;
   const data = await page.evaluate(async look => {
-    const { look: L, turntables: [tt] } = window.secondSkin;
+    const { look: L, turntables: [tt] } = window.atelier;
     Object.assign(L, { top: null, bottom: null, feet: null, full: null, fabric: { body: null, sleeves: null } }, look);
     tt.setFrame(0); tt.setZoom?.(1);
     tt.draw();

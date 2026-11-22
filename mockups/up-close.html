@@ -132,7 +132,7 @@ li.found .fact { grid-template-rows: 1fr; }
 </head>
 <body>
 <header>
-  <a class="back press" href="second-skin.html" aria-label="Back to your look">←</a>
+  <a class="back press" href="atelier.html" aria-label="Back to your look">←</a>
   <span class="brand lockup"><!-- H10: MoMu's official logo, as assets/brand/momu-logo.svg (inline so it takes currentColor) --><svg class="momu-logo" viewBox="0 0 534 299" role="img" aria-label="MoMu"><title>MoMu</title><g transform="scale(1 2.491667)" fill="currentColor" fill-rule="evenodd"><polygon points="247.449335 0 132.331383 115.359336 12.7377802 0 0 0 0 120 68.4655685 120 68.4655685 56.4509346 133.794221 120 196.889009 120 260.934378 56.4509346 260.934378 120 264 120 264 0"/><polygon points="517.451645 0 402.326108 115.359336 282.738035 0 270 0 270 120 338.464298 120 338.464298 56.4509346 403.794257 120 466.890307 120 530.939597 56.4509346 530.939597 120 534 120 534 0"/></g></svg><span class="app-name">Museum Atelier</span></span>
   <span class="mono" id="pid"></span>
 </header>
@@ -171,14 +171,14 @@ import { backTo } from "./nav.js";
 import { lang, t, tc, pieceName, labelHtml, mountSwitch, keepPlace, takePlace } from "./i18n.js";   // D-3: NL / EN / FR
 import { mountScene } from "./scenes.js";   // H6: back gesture closes layers; ← steps back to the Stage instead of stacking a new page
 
-const FOUND_KEY = "secondSkin.found.v1";   // { [pieceId]: [detail index, ...] }; second-skin.html reads it
+const FOUND_KEY = "atelier.found.v1";   // { [pieceId]: [detail index, ...] }; atelier.html reads it
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const id = new URLSearchParams(location.search).get("id");
 const manifest = await (await fetch("pieces.json")).json();
 const piece = manifest.pieces.find(p => p.id === id && p.assets.splat);
 if (piece) piece.details ??= [];   // a splat entry without details must still open
 if (piece?.assets.clo) { const a = document.getElementById("clo"); a.href = `outfit.html?card=${encodeURIComponent(id)}`; a.hidden = false; }   // H14: MoMu's draped CLO model (outfit.html)
-if (!piece) { location.replace("second-skin.html"); throw new Error("no splat piece " + id); }
+if (!piece) { location.replace("atelier.html"); throw new Error("no splat piece " + id); }
 
 const readFound = () => { try { return JSON.parse(localStorage.getItem(FOUND_KEY) || "{}") || {}; } catch { return {}; } };
 const found = new Set([].concat(readFound()[id] || []).filter(i => Number.isInteger(i) && i >= 0 && i < piece.details.length));
@@ -215,10 +215,10 @@ function renderPanel() {
   $("#how").hidden = n === total;
 }
 renderPanel();
-$("header .back").addEventListener("click", e => { e.preventDefault(); backTo("second-skin.html"); });   // H6: a link would stack a new Stage
+$("header .back").addEventListener("click", e => { e.preventDefault(); backTo("atelier.html"); });   // H6: a link would stack a new Stage
 const claim = () => {   // H6: back to the Stage underneath (it shows the Won card), never a new entry that back would return through
-  try { sessionStorage.setItem("secondSkin.claim", id); } catch { /* blocked: ?fabric= below still carries it */ }
-  backTo(`second-skin.html?fabric=${encodeURIComponent(id)}`);
+  try { sessionStorage.setItem("atelier.claim", id); } catch { /* blocked: ?fabric= below still carries it */ }
+  backTo(`atelier.html?fabric=${encodeURIComponent(id)}`);
 };
 $("#wear").addEventListener("click", () => {   // never a dead button; H11: before all are found it points at the piece, not at the answer
   const next = piece.details.findIndex((_, i) => !found.has(i));

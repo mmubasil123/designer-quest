@@ -208,7 +208,7 @@ def call(url, model, key, lang, batch):
 def ui_missing():
     """UI strings wrapped in t("...") in the pages and modules that NL or FR files do not have yet (literal calls only)."""
     keys = set()
-    for f in [*MOCKUPS.glob("*.js"), MOCKUPS / "second-skin.html", MOCKUPS / "up-close.html"]:
+    for f in [*MOCKUPS.glob("*.js"), MOCKUPS / "atelier.html", MOCKUPS / "up-close.html"]:
         if f.name == "i18n.js":
             continue
         src = f.read_text()

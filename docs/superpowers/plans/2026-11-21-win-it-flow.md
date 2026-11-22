@@ -5,8 +5,8 @@
 **Goal:** A room piece is won with one challenge after its NFC tap, then added to the wardrobe; one simple flow for the demo.
 
 **Architecture:** New `mockups/win.js` + `win.css` (a dialog, same pattern as `quiz.js`/`story.js`) exports `judge()` and
-`createWin()`. `second-skin.html` calls it after `showScan()` for wearables and on `?fabric=` for study pieces, keeps
-wins in `secondSkin.won.v1`, and loses the kimono-only Piece screen.
+`createWin()`. `atelier.html` calls it after `showScan()` for wearables and on `?fabric=` for study pieces, keeps
+wins in `atelier.won.v1`, and loses the kimono-only Piece screen.
 
 **Tech Stack:** static ES modules, three.js page as is; Node 22 for the self-check.
 
@@ -40,9 +40,9 @@ wins in `secondSkin.won.v1`, and loses the kimono-only Piece screen.
 `guess` shows the slider (1700 to 2025, step 5, starts 1900), Guess button, "Earlier"/"Later" hints, third miss wins.
 `won` shows photo, date, "You were N years off" (only when off given), `quoteEn` else `quote`, Add to wardrobe (resolves true).
 
-### Task 3: Wire the flow into `second-skin.html`
+### Task 3: Wire the flow into `atelier.html`
 - `pieces.json`: `ST503.locked = true`; starter `look.top = "ST2434"`.
-- `secondSkin.won.v1` unlocks won ids at boot, before the save restore.
+- `atelier.won.v1` unlocks won ids at boot, before the save restore.
 - `?card=<wearable>`: locked -> showScan(next "Win it") -> guess -> won -> unlock, save, open its slot, New. Unlocked -> open its slot.
 - `?card=<study>`: back to the original redirect to Up close (story first). `?fabric=` -> won() then Remix tab, New.
 - Museum lists every `locked` room piece; tap -> NFC dialog (wearable) or Up close (seen study).

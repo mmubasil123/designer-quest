@@ -18,7 +18,7 @@ const browser = await chromium.launch({
 async function phone(storage = {}) {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
   await ctx.addInitScript(s => { if (location.pathname.endsWith(".html") && !sessionStorage.getItem("seeded")) {
-    for (const [k, v] of Object.entries(s)) localStorage.setItem(k, v); sessionStorage.setItem("seeded", "1"); } }, { "secondSkin.help.v1": "1", ...storage });
+    for (const [k, v] of Object.entries(s)) localStorage.setItem(k, v); sessionStorage.setItem("seeded", "1"); } }, { "atelier.help.v1": "1", ...storage });
   const page = await ctx.newPage();
   page.on("pageerror", e => console.log("  pageerror:", e.message));
   return { ctx, page };
@@ -31,7 +31,7 @@ const shots = {
   // sticker scan of the jak: story, the year guess with a miss, the win
   async win() {
     const { ctx, page } = await phone();
-    await page.goto(`${BASE}/second-skin.html?card=ST503`);
+    await page.goto(`${BASE}/atelier.html?card=ST503`);
     await page.waitForSelector("dialog.story[open]"); await settle(page, 2500);
     await shot(page, "story");
     await page.click("dialog.story [data-close]");
@@ -49,14 +49,14 @@ const shots = {
   },
   // the 255-year look: jak and football boots on the form
   async look() {
-    const { ctx, page } = await phone({ "secondSkin.won.v1": '["ST503"]', "secondSkin.save.v1": save({ top: "ST503", feet: "ST2407/1-2" }) });
-    await page.goto(`${BASE}/second-skin.html`); await settle(page, 9000);
+    const { ctx, page } = await phone({ "atelier.won.v1": '["ST503"]', "atelier.save.v1": save({ top: "ST503", feet: "ST2407/1-2" }) });
+    await page.goto(`${BASE}/atelier.html`); await settle(page, 9000);
     await shot(page, "look-jak-boots");
     await ctx.close();
   },
   async kimono() {
-    const { ctx, page } = await phone({ "secondSkin.save.v1": save({ full: "ST80881", feet: "ST2407/1-2" }) });
-    await page.goto(`${BASE}/second-skin.html`); await settle(page, 9000);
+    const { ctx, page } = await phone({ "atelier.save.v1": save({ full: "ST80881", feet: "ST2407/1-2" }) });
+    await page.goto(`${BASE}/atelier.html`); await settle(page, 9000);
     await shot(page, "look-kimono");
     await ctx.close();
   },
@@ -67,8 +67,8 @@ const shots = {
     await ctx.close();
   },
   async share() {
-    const { ctx, page } = await phone({ "secondSkin.won.v1": '["ST503"]', "secondSkin.save.v1": save({ top: "ST503", feet: "ST2407/1-2" }) });
-    await page.goto(`${BASE}/second-skin.html`); await settle(page, 9000);
+    const { ctx, page } = await phone({ "atelier.won.v1": '["ST503"]', "atelier.save.v1": save({ top: "ST503", feet: "ST2407/1-2" }) });
+    await page.goto(`${BASE}/atelier.html`); await settle(page, 9000);
     await page.$eval("#shareBtn", b => b.click()); await settle(page, 5000);
     await shot(page, "share-sheet");
     await page.fill("#shareName", "Noor"); await page.keyboard.press("Enter"); await settle(page, 4000);

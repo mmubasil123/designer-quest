@@ -8,7 +8,7 @@ import { t, lang } from "./i18n.js";   // D-3
 /* H12 personal card: the visitor may type a name (kept in this browser only, never sent anywhere, D2). The card shows their
    look in the period room of its middle year (scenes.js), the pieces they wear, the pieces they won, and one line from a worn
    piece's story (narration.json: the curator's text, else a sentence of the MoMu record, D3). */
-const NAME_KEY = "secondSkin.name.v1", WON_KEY = "secondSkin.won.v1";
+const NAME_KEY = "atelier.name.v1", WON_KEY = "atelier.won.v1";
 const cleanName = x => String(x || "").replace(/[\u0000-\u001f<>]/g, "").replace(/\s+/g, " ").trim().slice(0, 20);
 const readName = () => { try { return cleanName(localStorage.getItem(NAME_KEY)); } catch { return ""; } };
 const writeName = n => { try { n ? localStorage.setItem(NAME_KEY, n) : localStorage.removeItem(NAME_KEY); } catch { /* blocked: the name lasts this visit */ } };
@@ -221,7 +221,7 @@ export function createShare({ tt, look, PIECES, getName, toast }) {
     const shown = won.length > 2 ? [...won.slice(0, 2), `+${won.length - 2} more`] : won;
     const title = cardTitle(name, facts, getName());
     const kicker = "Museum Atelier · " + new Date().toLocaleDateString({ nl: "nl-BE", fr: "fr-BE" }[lang] || "en-GB", { day: "numeric", month: "long", year: "numeric" });
-    const url = location.host + location.pathname.replace(/\/(index|second-skin)\.html$/, "/");
+    const url = location.host + location.pathname.replace(/\/(index|atelier)\.html$/, "/");
     const canvas = drawCard({ grab: h => grabStill(tt, h), name: title, facts, url, scene, quote: pickQuote(facts, stories), won: shown, kicker });
     const blob = await new Promise(res => canvas.toBlob(res, "image/png"));
     if (mine !== run) return;

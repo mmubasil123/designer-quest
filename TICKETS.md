@@ -3,7 +3,7 @@
 Goal: clothes on the avatar look smooth and consistent at every angle. One three.js scene, a dress-form avatar
 (the form every MoMu photo is shot on), garment-only scans, automatic fit by slot.
 
-Files: `mockups/second-skin.html` (one file, so HTML tickets run one at a time), `mockups/tools/*.py`.
+Files: `mockups/atelier.html` (one file, so HTML tickets run one at a time), `mockups/tools/*.py`.
 Serve: `cd mockups && python3 -m http.server 8765 --bind 127.0.0.1`.
 
 | # | Ticket | Owner | Depends on | Status |

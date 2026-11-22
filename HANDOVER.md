@@ -5,15 +5,15 @@ change with its reason. Agent rule (both people): work autonomously within your 
 before calling anything done. Never deploy, push to `main` or publish without your person's explicit go.
 
 ## Phone UI B5, B6, B8 (hassan, branch hassan/B-phone-ui, 2026-11-22, PR waits for H6)
-Wardrobe tiles are persistent nodes (`mockups/wardrobe.js`, `wardrobe.css`; `renderLocker` in `second-skin.html`). Locked pieces
+Wardrobe tiles are persistent nodes (`mockups/wardrobe.js`, `wardrobe.css`; `renderLocker` in `atelier.html`). Locked pieces
 are silhouettes with name and "Find its card in the museum"; the real photo wipes in over 600 ms once, when the tile is
 first seen after the win. Reduced motion: no idle spin (live), no drop-in, opacity-only 150 ms. Open: room numbers are not in
 `pieces.json` (add optional `museumRoom` per piece after a heads-up; the label then says "Find card in room N"). B9 not
-done (Mubasil's). The PR must wait until H6's PR (`second-skin.html`, `story.css`) merges, then rebase. Checked in Chrome at
+done (Mubasil's). The PR must wait until H6's PR (`atelier.html`, `story.css`) merges, then rebase. Checked in Chrome at
 390 px with the reduce emulation, not on a phone. Screenshots: `docs/b-phone-ui/`.
 
 ## E4 landing page (hassan, branch hassan/E4-landing, 2026-11-22)
-`mockups/index.html` is the new `/`; the Stage is `/stage` (and still `second-skin.html`). Sticker links `/?card=<id>`
+`mockups/index.html` is the new `/`; the Stage is `/stage` (and still `atelier.html`). Sticker links `/?card=<id>`
 and `/?fabric=<id>` are forwarded to the Stage by the landing page. Re-render the hero stills after a GLB or fit change:
 serve `mockups/`, then `node presentation/reel/scripts/landing-stills.mjs` (from `presentation/reel`) and the `cwebp` line in its header.
 Needs Mubasil's deploy; check `/`, `/stage` and `/?card=ST503` on the preview first.
@@ -32,7 +32,7 @@ The full-demo backup recording (old E2 acceptance) is not made.
   front of you."
 - **H15 (PR #50), `win.js` and `win.css`:** the Won card ends on a "Next to win" row. A study piece already started
   comes first, otherwise the next locked room piece in `pieces.json` order. The row is gone once everything is won.
-- **H17 (PR #52):** the row is a button. It keeps the prize, then calls `tapCard` (`second-skin.html`): a started study
+- **H17 (PR #52):** the row is a button. It keeps the prize, then calls `tapCard` (`atelier.html`): a started study
   piece opens in Up close, any other shows its sticker prompt.
 - Checked in Chrome at 390 px (ST2435 and ST81190 front and back; fabric win and year win; back closes the prompt),
   console clean. **Not on a phone yet:** on a real phone, check the 44 px tap reach and the hint ring size.
@@ -54,9 +54,9 @@ The full-demo backup recording (old E2 acceptance) is not made.
 
 ## MoMu branding (H10, PR #44 and PR #47 merged, 2026-11-21)
 MoMu's official two-M logo (`mockups/assets/brand/momu-logo.svg`, copied from momu.be) in the Stage bar, the Up close
-header, the share card, the tab icon and the Up close loading screen; "at MoMu" in the copy; the name "Second Skin" is
-gone from everything a visitor sees (the team is renaming the app; until then it says MoMu). Kept: `second-skin.html`,
-the Vercel project, sticker URLs, `secondSkin.*` keys, `second_skin` DB schema. Checked in Chrome at 390 px, not on a
+header, the share card, the tab icon and the Up close loading screen; "at MoMu" in the copy; the old name is
+gone from everything a visitor sees (the team is renaming the app; until then it says MoMu). Kept: `atelier.html`,
+the Vercel project, sticker URLs, `atelier.*` keys, `second_skin` DB schema. Checked in Chrome at 390 px, not on a
 phone. Next: once the new name is picked, decide whether to rename those identifiers (sticker URLs, Mubasil deploys).
 
 ## Personal share card (H12, PR #45, merged 2026-11-21)
@@ -74,16 +74,16 @@ scan pieces and 3 photo-only pieces are next. Checked headless at 390 px; not on
 (raise `matchk`/`satk`), uniform hands may leave stubs at the cuffs.
 
 ## State
-- **Win it flow (branch basil/study-wardrobe, 2026-11-21):** sticker -> story -> one challenge (Guess the year, or Up close for study pieces) -> You won it -> wardrobe (New). Jak ST503 is the wearable room piece (knee breeches ST2062 has no GLB yet, so it is hidden); stickers point at `https://second-skin-ten.vercel.app/second-skin.html?card=<id>`. Piece screen removed. Details in CHANGELOG.
-- `mockups/second-skin.html` + `mockups/pieces.json` (schema `pieces.schema.json`): one three.js scene per
+- **Win it flow (branch basil/study-wardrobe, 2026-11-21):** sticker -> story -> one challenge (Guess the year, or Up close for study pieces) -> You won it -> wardrobe (New). Jak ST503 is the wearable room piece (knee breeches ST2062 has no GLB yet, so it is hidden); stickers point at `https://second-skin-ten.vercel.app/atelier.html?card=<id>`. Piece screen removed. Details in CHANGELOG.
+- `mockups/atelier.html` + `mockups/pieces.json` (schema `pieces.schema.json`): one three.js scene per
   turntable, a procedural dress form, 7 GLB scans auto-fitted by slot and drawn in dressing order, fabric remix on
   body and sleeves, look names, time span, Firsts toasts, card scan (`?card=<id>`), save in localStorage.
 - All 7 wearable scans are garment-only except the kimono (stand hidden by the `hideStand` shortcut).
-- Live at https://second-skin-ten.vercel.app (Vercel project `second-skin`, deployed from `mockups/`; the first
+- Live at https://second-skin-ten.vercel.app (Vercel project, deployed from `mockups/`; the first
   deploy went out as production). Redeploy: `cd mockups && npx vercel deploy` (preview) and confirm `target`.
 - Production tracks `main`: Mubasil's sessions redeploy (`cd mockups && npx vercel deploy --prod`) after each push
   to `main` (owner's rule, 2026-11-21). Last deploy: `ed1d4c1`, spike page included.
-- Serve: `cd mockups && python3 -m http.server 8765 --bind 127.0.0.1`; console handle `window.secondSkin`.
+- Serve: `cd mockups && python3 -m http.server 8765 --bind 127.0.0.1`; console handle `window.atelier`.
 
 ## A7 Archive vs Reconstruction: cut (2026-11-21)
 - MoMu's own CLO models (branch `hassan/momu-clo-pieces`): ST80881, ST503, ST2062, ST81190, ST80998 on MoMu's mannequins at `outfit.html?card=<id>`. To add one: open its `.zprj` in CLO, File > Export > OBJ with patterns, avatars and trims selected, Multiple Objects, Thin, mm; `clo/obj2glb.mjs <scene.obj> <outDir> <id>`; `clo/optimise_glb.mjs` on both files (garment ratio 0.5, body 0.4); add `assets.clo` with `avatar` = its `_body.glb`. Linked from the fact card and Up close (H14, "See it on a mannequin"). Open: 11 pieces have no CLO project; cavalry ST2431 project is part 1 of 4 and undraped.
@@ -114,7 +114,7 @@ scan pieces and 3 photo-only pieces are next. Checked headless at 390 px; not on
 
 ## H4 MoMu theme (hassan, merged in PR #15)
 - The look lives in `mockups/theme.css`: change a colour or font in its `:root` block, not in the pages. It must load
-  after `second-skin.html`'s own style block. Fonts are self-hosted in `mockups/assets/fonts/` (OFL).
+  after `atelier.html`'s own style block. Fonts are self-hosted in `mockups/assets/fonts/` (OFL).
 - New CSS should use the tokens (`--serif`, `--sans`, `--t-title`, `--accent`, `--r-card`, `--shadow-pill`).
 - `share.js` draws on a canvas and mirrors the theme's fonts and colours as constants: change both together.
 - Source of the look: MoMu's hackathon presentation template first (red capital titles, `#d72f25`), momu.be second.
@@ -216,7 +216,7 @@ by `mockups/tools/splat_spike_cut.py` (height, depth, colour and splat-footprint
 - **Open:** whether more exists on the MoMu Drive (pattern files, an empty form, fabric scans); MOMU-5 missing.
 
 ## Up close (branch basil/splats; live on production https://second-skin-ten.vercel.app since 2026-11-21)
-9 study pieces (every MoMu splat but MOMU-5, which was not in the download), each with 3 details placed in Chrome. Entry: a card scan `second-skin.html?card=<id>` (redirects before the Stage boots), or the wardrobe's Study tab once scanned. Review of placement and flow (2026-11-21): Study chip in the sheet; open items are a 'tap to scan' demo button (C3), a hotspot for venue wifi (scans are 14 to 17 MB), and model-viewer on the Piece page (A4).
+9 study pieces (every MoMu splat but MOMU-5, which was not in the download), each with 3 details placed in Chrome. Entry: a card scan `atelier.html?card=<id>` (redirects before the Stage boots), or the wardrobe's Study tab once scanned. Review of placement and flow (2026-11-21): Study chip in the sheet; open items are a 'tap to scan' demo button (C3), a hotspot for venue wifi (scans are 14 to 17 MB), and model-viewer on the Piece page (A4).
 `.sog` files (17 MB each, committed) are made from the raw `.ply` with PlayCanvas `splat-transform` 3.10.3,
 installed in the git-ignored `tools/node/`:
 `tools/node/node_modules/.bin/splat-transform -q splats/MOMU-3_st2435.ply mockups/assets/splat/ST2435.sog`.
