@@ -10,9 +10,14 @@ Newest first. Each entry: what changed, why, and the decision behind it.
   The `?demo` avatar toggle is unchanged.
 - Why: the finishes only recoloured the form, and the form itself added nothing to the pieces (Hassan).
 - Decision: D1 changed to "no body under the pieces". A CLO avatar in its place was not done: the rigid scans clip on a
-  body and would each need the A9 fit. The landing page still shows the form in its stills and copy. Branch is stacked on
+  body and would each need the A9 fit. Branch is stacked on
   hassan/B-phone-ui (both change `second-skin.html`), so merge B-phone-ui first. Checked in the browser pane at 390 px
   (front, side, back, empty Stage, `?demo`), not on a phone.
+- Landing page too: the 13 slider stills (`assets/landing/<year>.webp`, `look.webp`) re-rendered from the new Stage with
+  `presentation/reel/scripts/landing-stills.mjs` (unused `bare` stop dropped), the share-card screen re-captured from the
+  app (Noor, Jak + football boots), and the copy, alt text and slider labels no longer name a dress form. Left as they
+  are: the Jak scan's own baked-in white bust (part of its texture; the `?demo` neck cut only removes the stub), the
+  E2 teaser video and its poster, and MoMu's photo of the Jak on its mannequin (`ST503.webp`).
 
 ## Phone UI: persistent wardrobe tiles, locked silhouettes, reduced-motion pass (2026-11-22, B5 + B6 + B8, branch hassan/B-phone-ui)
 - What (B5): the wardrobe builds each tile and tab chip once (`mockups/wardrobe.js`, `nodeFor`) and a render only reorders

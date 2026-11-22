@@ -8,7 +8,7 @@
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>MoMu · Wear 255 years</title>
-<meta name="description" content="Win real pieces from MoMu, the fashion museum in Antwerp, by guessing when they were made. Then wear them on a museum dress form, from a 1750 jak to 2005 football boots.">
+<meta name="description" content="Win real pieces from MoMu, the fashion museum in Antwerp, by guessing when they were made. Then wear them together, from a 1750 jak to 2005 football boots.">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/hanken-grotesk.woff2" crossorigin>
@@ -49,7 +49,7 @@ h1, h2, h3, p, ol, figure, blockquote { margin: 0; }
 .form img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; filter: blur(10px); transform: translateY(-18px) scale(.985);
   transition: opacity 200ms ease, filter 200ms ease, transform 200ms ease; }   /* the outgoing outfit leaves quickly */
 .form img.on { opacity: 1; filter: none; transform: none;
-  transition: opacity 420ms var(--ease-out), filter 480ms var(--ease-out), transform 640ms var(--ease-out); }   /* the new one drops onto the form, as in the app */
+  transition: opacity 420ms var(--ease-out), filter 480ms var(--ease-out), transform 640ms var(--ease-out); }   /* the new one drops into place, as in the app */
 .caption { position: absolute; left: var(--gutter); bottom: calc(var(--track-h) + 28px); width: min(330px, 27vw); }
 .caption .name { font: var(--t-title); font-size: 26px; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 4px; text-wrap: balance; }
 .caption .tag { margin-top: 4px; }
@@ -233,13 +233,13 @@ section { scroll-margin-top: 24px; }
 <main>
 <section class="hero" aria-labelledby="pitchTitle">
   <div class="numeral" aria-hidden="true"><span id="num">1750</span></div>
-  <div class="form" id="form" role="img" aria-label="MoMu's dress form wearing the Jak, 1750 to 1780"></div>
+  <div class="form" id="form" role="img" aria-label="The Jak, 1750 to 1780"></div>
 
   <div class="caption" id="caption" aria-live="off"></div>
 
   <div class="pitch">
     <h1 id="pitchTitle" class="caps">Wear 255 years of MoMu</h1>
-    <p>Win real pieces from Antwerp's fashion museum by guessing when they were made. Then wear them, all at once, on a museum dress form.</p>
+    <p>Win real pieces from Antwerp's fashion museum by guessing when they were made. Then wear them, all at once.</p>
     <a class="btn-go" href="second-skin.html">Start dressing <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
   </div>
 
@@ -284,7 +284,7 @@ section { scroll-margin-top: 24px; }
       <li class="beat">
         <div class="beat-media">
           <figure class="span-look">
-            <img src="assets/landing/look.webp" width="720" height="1320" loading="lazy" alt="The dress form wearing the Jak, the monpe trousers and the football boots at once.">
+            <img src="assets/landing/look.webp" width="720" height="1320" loading="lazy" alt="The Jak, the monpe trousers and the football boots, worn together.">
             <figcaption>
               <span class="pin" style="left:4%;top:28%"><b>1750</b> Jak</span>
               <span class="pin" style="right:2%;top:56%"><b>1965</b> Monpe trousers</span>
@@ -295,8 +295,8 @@ section { scroll-margin-top: 24px; }
         <div>
           <h3 class="caps">Wear it: one look, 255 years</h3>
           <p class="label-line">ST503 · ST80931 · ST2407/1-2 · 1750 to 2005</p>
-          <p>Every piece you win goes into your wardrobe. Put it on the dress form with anything else you won: an eighteenth-century jak over 1965 monpe trousers, with Dirk Bikkembergs football boots from 2005.</p>
-          <p>Turn the form with your finger. The look tells you how many years it spans.</p>
+          <p>Every piece you win goes into your wardrobe. Wear it with anything else you won: an eighteenth-century jak over 1965 monpe trousers, with Dirk Bikkembergs football boots from 2005.</p>
+          <p>Turn the look with your finger. The look tells you how many years it spans.</p>
         </div>
       </li>
 
@@ -328,7 +328,7 @@ section { scroll-margin-top: 24px; }
         <div>
           <h3 class="caps">Remix the fabrics</h3>
           <p class="label-line">ST80930 on ST503 · 1950s ikat on a 1750 cut</p>
-          <p>Put the ikat of a 1950s vest on the body of a 1750 jak, or the furisode's painted silk on its sleeves. Centuries apart, on one form.</p>
+          <p>Put the ikat of a 1950s vest on the body of a 1750 jak, or the furisode's painted silk on its sleeves. Centuries apart, in one look.</p>
         </div>
       </li>
 
@@ -374,7 +374,7 @@ section { scroll-margin-top: 24px; }
 <section class="close" aria-labelledby="closeTitle">
   <div class="wrap">
     <h2 id="closeTitle" class="caps">The collection is waiting</h2>
-    <p>Start with a starter wardrobe on the dress form, or find a MoMu sticker at the Study Center and tap it.</p>
+    <p>Start with a starter wardrobe, or find a MoMu sticker at the Study Center and tap it.</p>
     <a class="btn-go" href="second-skin.html">Start dressing <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
   </div>
   <p class="bigyears" aria-hidden="true">1750–2005</p>
@@ -439,7 +439,7 @@ STOPS.forEach((s, i) => {
 });
 const tickEls = [...ticks.children];
 
-const stopAt = v => STOPS[Math.max(0, Math.min(LAST, Math.round(v / UNIT)))];   // the nearest stop dresses the form
+const stopAt = v => STOPS[Math.max(0, Math.min(LAST, Math.round(v / UNIT)))];   // the nearest stop picks the look
 let shown = null;
 function show(s, announce) {
   if (s === shown) return;
@@ -447,7 +447,7 @@ function show(s, announce) {
   const i = STOPS.indexOf(s);
   imgs.forEach((im, k) => im.classList.toggle("on", k === i));
   tickEls.forEach((t, k) => t.setAttribute("aria-current", k === i));
-  form.setAttribute("aria-label", s.finale ? "MoMu's dress form wearing the Jak, the monpe trousers and the football boots at once" : `MoMu's dress form wearing the ${s.name}, ${span(s.from, s.to)}`);
+  form.setAttribute("aria-label", s.finale ? "The Jak, the monpe trousers and the football boots, worn together" : `The ${s.name}, ${span(s.from, s.to)}`);
   caption.setAttribute("aria-live", announce ? "polite" : "off");
   caption.innerHTML = s.finale
     ? `<p class="name">${esc(s.name)}</p><p class="years">From 1750 to 2005</p><p class="tag">Your look · 3 pieces</p>
@@ -460,7 +460,7 @@ function setYear(v, announce) {
   const s = stopAt(v);
   const y = Math.round(yearAt(v));
   num.textContent = s.finale ? "255" : y;
-  slider.setAttribute("aria-valuetext", s.finale ? "Your look: 255 years on one form" : `${s.y}: ${s.name}, made ${span(s.from, s.to)}`);
+  slider.setAttribute("aria-valuetext", s.finale ? "Your look: 255 years at once" : `${s.y}: ${s.name}, made ${span(s.from, s.to)}`);
   show(s, announce);
 }
 
