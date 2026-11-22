@@ -94,6 +94,11 @@ li.found .mark { background: var(--found); border-color: var(--found); }
   transition: opacity 200ms var(--ease-out), visibility 0s 200ms, transform 160ms var(--ease-out); }
 aside.hints .show { opacity: 1; visibility: visible; transition: opacity 200ms var(--ease-out), visibility 0s, transform 160ms var(--ease-out); }
 li.found .show { display: none; }
+/* C2: the curator's hint line opens under the clue once its Hint is tapped, and goes when the detail is found */
+.clue { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 250ms var(--ease-out); }
+li.hinted:not(.found) .clue { grid-template-rows: 1fr; }
+.clue > div { overflow: hidden; padding-left: 24px; }
+.clue p { padding-bottom: 12px; color: var(--muted); font-size: 15px; line-height: 1.45; text-wrap: pretty; }
 .fact { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 250ms var(--ease-out); }
 li.found .fact { grid-template-rows: 1fr; }
 .fact > div { overflow: hidden; padding-left: 24px; }
@@ -119,7 +124,7 @@ li.found .fact { grid-template-rows: 1fr; }
   #view { height: 58svh; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ring > i { animation: none; opacity: 0; } .miss { animation: fade 300ms ease forwards; } .fact { transition: none; }
+  .ring > i { animation: none; opacity: 0; } .miss { animation: fade 300ms ease forwards; } .fact, .clue { transition: none; }
   #moment, #view.moment-on #moment { transform: none; }
   @keyframes fade { from { opacity: .6; } to { opacity: 0; } }
 }
@@ -198,11 +203,19 @@ $(".credit").textContent = t("Quotes from the MoMu record (dcterms:description).
 $("#date").textContent = piece.year.from === piece.year.to ? piece.year.from : `${piece.year.from}–${piece.year.to}`;
 // quotes are cut from longer record sentences: an ellipsis marks each cut so the quote never reads as complete
 const excerpt = q => `${/^[a-z]/.test(q) ? "…" : ""}${q}${/[.!?]$/.test(q) ? "" : "…"}`;
+// C2: the curator's hint for each detail (her "3 Hints" in questions.json), shown under the clue when its Hint is tapped; only when
+// her list lines up one to one with the piece's details, so a hint never lands on the wrong clue
+let hintText = [];
+try {
+  const mh = ((await (await fetch("questions.json")).json()).pieces.find(q => q.id === id) || {}).hints || [];
+  if (mh.length === piece.details.length) hintText = mh.map((x, i) => { const g = tc(`q:${id}:hint:${i}`, x.text, "en").text; return g[0].toUpperCase() + g.slice(1); });
+} catch { /* no questions file: the Hint button only rings the area, as before */ }
 $("#dots").innerHTML = piece.details.map(() => "<i></i>").join("");
 $("#details").innerHTML = piece.details.map((d, i) => `
   <li data-i="${i}">
     <div class="row"><span class="mark" aria-hidden="true"></span><span class="find">${esc(tc(`det:${id}:${i}:find`, d.find, "en").text)}</span>
       <button class="show press" data-show="${i}" tabindex="-1">${t("Hint")}</button></div>
+    ${hintText[i] ? `<div class="clue"><div><p>${esc(hintText[i])}</p></div></div>` : ""}
     <div class="fact"><div><q lang="nl">${excerpt(d.quote)}</q>${(x => x.tr ? `<p><span class="mono">${lang.toUpperCase()}</span>${esc(x.text)}${labelHtml(x.by)}</p>` : "")(tc(`det:${id}:${i}:quote`, d.quote, "nl"))}</div></div>
   </li>`).join("");
 function renderPanel() {
@@ -414,6 +427,7 @@ $("#details").addEventListener("click", e => {
 function showMe(i) {
   closeMoment();
   hint = i;
+  document.querySelector(`#details li[data-i="${i}"]`)?.classList.add("hinted");
   const a = Math.random() * Math.PI * 2, k = RING * (0.25 + Math.random() * 0.3);   // off-centre, so the ring is not a bullseye
   ringOff = { x: Math.cos(a) * k, y: Math.sin(a) * k };
   toast(t("Somewhere in the ring. Tap it on the piece."));
