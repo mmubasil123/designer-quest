@@ -2,6 +2,16 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## Share card: smaller heading, bigger garment (2026-11-22, H26, branch hassan/H26-sharecard-size)
+- What: in `share.js` the MoMu logo went from 160 to 104 px high, the red title from 84 px (two lines) to 64 px on one line (it shrinks
+  to 44 px to stay on one line; only a name too long for that wraps, at most two lines at 48 px), the "From 1950 to 1965" subline from
+  52 to 36 px, and the gaps between masthead, title, subline and form were tightened. The paper fade behind the heading is 520 px
+  instead of 820. The form takes all the height this frees (about 100 px more than before in a full-look card, the garment roughly 1.5x to 2x as tall).
+- Why: Hassan's screenshot: the heading pushed the garment down and left it small; the garment is the point of the card.
+- Decision: heading stays red capitals and the subline stays serif italic (hierarchy unchanged, contrast unchanged: AA on paper); PNG
+  stays exactly 1080 x 1920, facts only from `pieces.json` (D3), nothing uploaded (D2). Checked at 390 px in the Share dialog for the
+  Furisode kimono and for Ikat vest + Monpe trousers, in EN, FR and NL (a 20-letter name in NL wraps to two lines); console clean.
+
 ## HANDOVER.md cut to a current-state page (2026-11-22, H24, branch hassan/H24-handover-trim)
 - What: `HANDOVER.md` went from 233 to 39 lines: state, open PRs, half-done work, next step. Its per-ticket history (H2 to H22, B5 to B8,
   E2, E4, D-3, wearable scans, State, Do next, Left, Growth story) is dropped because `LEDGER.md` and this file already hold it; the
