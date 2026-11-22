@@ -59,6 +59,7 @@ Result key: **Pass**, **Fixed** (failed, fixed on this branch, re-run and passed
 | TC43 | `?card=ST81114AB` / `?card=ST2062` (CLO only) | Story, "See it on the avatar", `outfit.html`, back returns to the Stage | Pass |
 | TC44 | `up-close.html?id=ST81190` (CLO-backed study piece) | MoMu's CLO model loads on its mannequin | Pass |
 | TC45 | `up-close.html?id=NOPE` | Redirects to the Stage | Pass |
+| TC46 | All details found, double, triple or 5 quick taps on "Win its fabric" (and a double tap on ←), every study piece, 1280 and 390 px | Lands on the Stage once and shows "You won its fabric!"; never steps back past the Stage | **Fixed** (H23) |
 
 ## Share card
 
