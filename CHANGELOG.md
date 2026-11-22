@@ -2,6 +2,21 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## QA round 2: share card framing and the NL / FR gaps (2026-11-22, H22, branch hassan/H22-qa-round2)
+- What: the round 1 suite re-run on main after E4, H6, H20, H21, B5/B6/B8 and D-3, plus their new paths (landing page,
+  `/stage`, scan flow, NL / FR at 320 px); cases in `docs/QA-TEST-CASES.md` (Round 2). Fixed: the share card kept H21's
+  stage-wide camera view offset, so the look came out squashed (`grabStill` clears it; `resize()` restores it). In NL / FR
+  the card's Dress, Shoes, Cloth and "+n more" were English and its story line was the English narration (now the
+  translated beats, marked as a translation, or no line). Dutch look names took the adjective ("Groene in …"); Dutch now
+  takes the garment word before any "met …" / "in …". The landing page turned partly Dutch with a Dutch browser
+  (`data-lang-fixed="en"` pins it). Switching language in the help card left a dead back step (`setLang` now steps back
+  over the dialog's history entries first). A Stage restored from the back-forward cache after a language change reloads.
+  The focus button label, the "Two centuries in one look" toast and the New badge are translated; Up close escapes the
+  translated detail text.
+- Why: Hassan asked for a second QA pass after the latest merges.
+- Decision: no change to layout, flow or save schema; seven UI strings added to `ui.nl.json` / `ui.fr.json` (team
+  wording, as the other UI strings). The landing page stays English only, as written.
+
 ## Web address follows the new name (2026-11-22, H-URL, branch basil/H-URL)
 - What: the public address in the reel closing card (`presentation/reel/src/teaser/scenes.tsx`, `style.md`),
   `presentation/DEMO_VIDEO.md` and `PRODUCT.md` is now `museum-atelier.vercel.app` instead of `second-skin-ten.vercel.app`.

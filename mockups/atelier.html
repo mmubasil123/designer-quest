@@ -192,7 +192,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .tile .st { position: absolute; left: 6px; right: 6px; bottom: 6px; background: var(--paper); border-radius: 8px; padding: 6px 8px; text-align: left; }
 .tile .st b { display: block; font: 400 13px/1.2 var(--serif); }
 .tile .st span { font: 400 10px/1.4 var(--sans); color: var(--muted); }
-.tile.new::before { content: "New"; position: absolute; top: 8px; left: 8px; z-index: 1; padding: 2px 8px; border-radius: 999px; background: var(--ink); color: var(--paper); font: 500 11px/1.6 var(--sans); pointer-events: none; }
+.tile.new::before { content: var(--new-label, "New");   /* D-3: the script sets --new-label to t("New") */ position: absolute; top: 8px; left: 8px; z-index: 1; padding: 2px 8px; border-radius: 999px; background: var(--ink); color: var(--paper); font: 500 11px/1.6 var(--sans); pointer-events: none; }
 .museum { width: min(420px, calc(100% - 24px)); text-align: left; }
 /* H6: the Museum is a sheet like the fact card (it acts on the visit, the Stage stays behind), not a centred modal */
 .nfc.museum { margin: auto auto 12px; transform: translateY(16px); }
@@ -344,7 +344,10 @@ let booted = false;
 addEventListener("pageshow", e => {
   if (!e.persisted) return;
   let waiting = false; try { waiting = !!sessionStorage.getItem(CLAIM_KEY); } catch { /* storage blocked */ }
-  if (!booted || waiting || readFound() !== foundAtBoot) location.reload();
+  // a language picked on another page (Up close) while this one sat in the cache also needs a fresh load: the strings are
+  // built once, and the next save here would otherwise write the old language back
+  let langNow; try { langNow = JSON.parse(localStorage.getItem("atelier.save.v1") || "null")?.lang; } catch { /* blocked */ }
+  if (!booted || waiting || readFound() !== foundAtBoot || (langNow && langNow !== document.documentElement.lang)) location.reload();
 });
 // pieces.json (schema: pieces.schema.json) is the single source of truth; the pipeline reads the same file
 const manifest = await (await fetch("pieces.json")).json();
@@ -830,7 +833,7 @@ const turntables = [stageTT];
   const focusBtn = document.getElementById("focusBtn"), phone = focusBtn.closest(".phone");
   const setFocus = on => {
     phone.classList.toggle("focus", on);
-    focusBtn.setAttribute("aria-pressed", on); focusBtn.setAttribute("aria-label", on ? "Show the menus again" : "Show only the look");
+    focusBtn.setAttribute("aria-pressed", on); focusBtn.setAttribute("aria-label", on ? t("Show the menus again") : t("Show only the look"));
     focusBtn.querySelector("path").setAttribute("d", on ? "M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" : "M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5");
   };
   focusBtn.addEventListener("click", () => setFocus(!phone.classList.contains("focus")));
@@ -865,10 +868,13 @@ if (params.has("demo")) {
   });
 }
 window.atelier = { look, turntables, avatar: avatarState };   // handle for driving the mockup from the console
+document.documentElement.style.setProperty("--new-label", JSON.stringify(t("New")));   // the New badge is CSS content, so its word comes in here
 
 /* ---------- Look state, locker ---------- */
 const yearOf = id => PIECES[id].year.from;
-const noun = id => PIECES[id].name.split(",")[0].split(" ")[lang === "en" ? "pop" : "shift"]().replace(/^./, c => c.toUpperCase());   // EN: "Green wool coat" -> "Coat"; NL and FR put the garment first: "Veste en laine" -> "Veste"   // "Green wool coat" -> "Coat"
+// the garment word: EN and NL end on it ("Green wool coat" -> "Coat", "Groene wollen jas" -> "Jas"; NL cuts a trailing
+// "met …"/"in …" first: "Zijden jurk met pailletten" -> "Jurk"); FR starts with it ("Manteau en laine vert" -> "Manteau")
+const noun = id => { const n = PIECES[id].name.split(",")[0]; return (lang === "fr" ? n.split(" ")[0] : n.split(/ (?:met|in) /)[0].split(" ").pop()).replace(/^./, c => c.toUpperCase()); };
 const adj = id => lang === "en" ? PIECES[id].name.split(" ")[0].replace(/,$/, "") : PIECES[id].name.split(",")[0].toLowerCase();   // NL and FR name the whole piece: "de stof van gilet ikat"   // "Furisode kimono, 1979" -> "Furisode"
 function lookName() {   // a remixed look earns a name; an unremixed one keeps the screen's title
   const main = look.full || look.top, { body, sleeves } = look.fabric;

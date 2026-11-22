@@ -91,3 +91,35 @@ Result key: **Pass**, **Fixed** (failed, fixed on this branch, re-run and passed
 - `up-close.html?id=<unknown>` logs the deliberate `no splat piece` error after redirecting.
 - The share card says "All from 1920" for a single piece dated 1920 to 1925 (it uses the start year). Wording only.
 - Not covered headless: tapping details on a real splat, NFC on a phone, AR, the narration voice itself.
+
+# Round 2: after E4, H6, H20, H21, B5/B6/B8 and D-3 (2026-11-22, hassan, H22, branch `hassan/H22-qa-round2`)
+
+Main at `43a6012`. The round 1 suite was re-run (finish cases dropped: H20 removed the form finishes), plus the new
+landing page, the Stage served at `/stage` (Vercel rewrite emulated in Playwright), the H6 scan flow and back
+behaviour, and NL / FR at 320 x 568. A separate code read of the diff since round 1 suggested 8 candidates; each was
+reproduced in the browser before it was fixed.
+
+| # | Scenario | Expected | Result |
+|---|---|---|---|
+| R2-01 | Landing page `/` at 390 px | Every image loads, no horizontal scroll, Start links open the Stage | Pass |
+| R2-02 | Round 1 Stage, wardrobe, fact card, 3D view, B7 cases | As in round 1 | Pass |
+| R2-03 | `/stage?card=ST503`: story, Guess the year, back | Back closes Guess the year without a win ("Not now", H6) | Pass |
+| R2-04 | Win, then back on "You won it!" | Prize kept, Won tab shown | Pass |
+| R2-05 | `/stage?card=ST2435` → Up close → ← → back | Stage, then off the Stage; no loop into Up close | Pass |
+| R2-06 | Up close "Win its fabric" with all details found | Won card on the Stage | Pass |
+| R2-07 | `/stage?card=ST81114AB` → outfit → ← | Outfit page, then the Stage | Pass |
+| R2-08 | NL and FR at 320 px: Stage, Won tab, fact card, Museum, story, toast, share sheet | Translated, nothing past the edge | Pass |
+| R2-09 | Share card, any look | The look framed as on the Stage | **Fixed**: H21's stage-wide camera view offset was still applied, so the look came out squashed and shifted |
+| R2-10 | Share card in NL / FR | Row labels and the story line in that language, the line marked as a translation | **Fixed**: SHOES, DRESS, CLOTH and "+n more" were English; the quote was the English story |
+| R2-11 | NL look name with a remix (green coat + ikat) | "Jas in de stof van ikat vest" | **Fixed**: was "Groene in de stof van …" (took the first word; Dutch ends on the garment) |
+| R2-12 | Landing page with a Dutch or French browser or saved language | All one language, `lang` matches | **Fixed**: a few strings and `<html lang>` turned Dutch on an English page; it is now pinned to English |
+| R2-13 | Switch language on the first help step, then back twice | Back closes help, then leaves the Stage | **Fixed**: the reload kept the dialog's history entry, so one back press did nothing |
+| R2-14 | Switch language on Up close, ← to the Stage restored from the back-forward cache | Stage in the new language, which stays saved | **Fixed** (guard added; the stale-cache case was not reproduced headless, the path was checked after the fix) |
+| R2-15 | NL / FR: focus button label after a toggle, "Two centuries" toast, New badge | Translated | **Fixed**: "Show the menus again", "Two centuries in one look" and the CSS "New" had no translation |
+| R2-16 | Up close detail texts | Inserted as text | **Fixed** (hardening): translated find and quote text is escaped before `innerHTML` |
+| R2-17 | Corrupt storage (round 1 TC60 to TC63, plus `{"lang":"xx"}`) | Page boots | Pass |
+| R2-18 | `mockups/tools/i18n_build.py --check` | 0 missing or stale | Pass |
+
+Known, not app bugs: headless Chromium logs "Transition was aborted … ViewTransition opt-in disabled" on every
+cross-page navigation; the app's built-in browser pane (regular Chromium) logs nothing for the same steps. A kimono
+worn with shoes floats above them on the Stage and the card alike: that is H20 (no form), not a framing error.
