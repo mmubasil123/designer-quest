@@ -5,7 +5,9 @@ with touch emulation). Screenshots: `docs/ux-audit/before/`. Skills applied: `/i
 `/emil-design-eng`. The story beats and their order stay as they are; this is only about how the visitor moves
 between them.
 
-**Status: proposal. Nothing is implemented until Hassan approves.**
+**Status: approved and built (H6, 2026-11-22).** PR 1 (#28) back gesture; PR 2 to 4 on `hassan/H6-nav`: findings 1, 2,
+3, 6, 7, 9 to 12 fixed; 4 and 5 were fixed on main by H13 and J8. Left open: 8 (the language switch reloads the page) waits
+for D-3 to merge, since `i18n.js` is not on main.
 
 ## What was walked
 | Flow | Screens (`docs/ux-audit/before/`) |

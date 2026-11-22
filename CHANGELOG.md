@@ -2,6 +2,23 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## H6 Navigation, PR 4: one header and a page transition between Stage and Up close (2026-11-22, H6, branch hassan/H6-nav)
+- What: Up close's header now uses the Stage's spacing and logo size, with ← as a round 44 px pill like the Stage's
+  "?" (`up-close.html`). A cross-document view transition in `theme.css` (`@view-transition`: old page fades out in
+  160 ms, new one fades in with an 8 px rise in 220 ms; fade only under reduced motion) covers every move between the
+  Stage, Up close, the outfit page and the landing, so they read as one app; browsers without it just navigate.
+  `nav.js` `backTo` treats `/stage` (E4's Vercel rewrite) and `/second-skin.html` as the same page, so ← on Up close and
+  the outfit page steps back on the deployed site too instead of loading a second Stage. The Stage's phone frame is
+  the page's `main` landmark.
+- Checked (browser pane, 390 x 844): Stage > Up close (ST2435) > ←: back on the existing Stage entry (history grows by
+  the forward entry only); headers compared by screenshot; console clean. Impeccable detector: Up close 0 findings
+  (1 advisory, as before), outfit page 0, Stage 2 findings that are on `main` already (repeated "Full" label in the
+  wardrobe, title contrast over the scene gradient), not from H6.
+- Why: `docs/UX_AUDIT.md` findings 2 (moves to and from Up close felt like reloads), 10 (two different headers) and 11
+  (landmarks; the page title and `h1` were already fixed by H10).
+- Decision: a root cross-fade rather than shared-element morphs: the two headers differ (← only on Up close), and a
+  morph of the logo would draw the eye to chrome instead of the piece.
+
 ## H6 Navigation, PR 3: layers keep their context; progress in the header (2026-11-22, H6, branch hassan/H6-nav)
 - What: one way back for the Stage's layers. A fact card opened from the Museum returns to the Museum when it is
   closed (×, Escape, back, backdrop); Ask and the 3D view return to the fact card they came from; a choice that leaves
