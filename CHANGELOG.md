@@ -2,6 +2,22 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## Demo video re-rendered against the current app (2026-11-22, E2, branch hassan/E2-rerender)
+- What: the teaser MP4 was rendered again from the reel source, which already had `museum-atelier.vercel.app` (H-URL), and
+  all app screens were re-captured from `main` (Museum Atelier header, Stage without the dress form, new share card).
+  Scene 6 caption "Dress the form across the centuries" is now "Dress up across the centuries" (H20 removed the form).
+  Scene 7 quoted a jacket sentence that left `narration.json` when the curator's story replaced it (C2); it now quotes her
+  text, with an ellipsis for the dashed aside. Rings moved to the new screens: the span line (scene 1, 24 pt higher), the
+  rivet and zoom point on Up close (scene 7, 42 pt right) and the smaller MoMu logo on the share card (scene 8, H26).
+  `capture.mjs` no longer writes the dropped `skin` field.
+- Why: the address on the end card and the screens in the last render (00:39) predated the rename, H20, H26 and C2.
+- Decision: the reel still calls ST81190 a "coat" (its `pieces.json` name, "Riveted wool coat"), although the curator's story
+  calls it a jacket; left for the team to settle. Length is now 44.0 s; checks in `presentation/DEMO_VIDEO.md`.
+- On the app: the landing page's film (`mockups/assets/landing/momu-teaser.mp4`) and its poster (the first scene, from the
+  storyboard) are replaced, and `index.html` asks for them with `?v=<sha1 prefix>`, because `/assets/` is cached a day (as H27);
+  the 0:44 label still holds. Checked locally: the landing page loads the new file (44.0 s, 1920 wide), console clean.
+  Live after Mubasil's next deploy.
+
 ## Detector ignores for three false positives (2026-11-22, branch hassan/detector-ignores)
 - What: `.impeccable/config.json` ignores `low-contrast` in `mockups/index.html` and `cramped-padding` in `mockups/atelier.html`.
 - Why: the findings were the giant red display years on the landing page (large text, 4.1:1 where AA asks 3:1) and the

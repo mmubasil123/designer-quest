@@ -25,7 +25,7 @@ async function phone(storage = {}) {
 }
 const shot = (page, name) => page.screenshot({ path: `${OUT}${name}.png`, timeout: 180000 }).then(() => console.log("  ->", name));
 const settle = (page, ms = 1500) => page.waitForTimeout(ms);
-const save = look => JSON.stringify({ v: 1, look: { top: null, bottom: null, feet: null, full: null, skin: 1, fabric: { body: null, sleeves: null }, ...look } });
+const save = look => JSON.stringify({ v: 1, look: { top: null, bottom: null, feet: null, full: null, fabric: { body: null, sleeves: null }, ...look } });
 
 const shots = {
   // sticker scan of the jak: story, the year guess with a miss, the win
