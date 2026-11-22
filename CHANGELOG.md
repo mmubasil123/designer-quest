@@ -6,8 +6,9 @@ Newest first. Each entry: what changed, why, and the decision behind it.
 - What: ST81190 no longer has an audio-guide script in `narration-scripts.json`, so it is spoken like her blouse and
   trousers: its title and years, then her 3 more-story paragraphs word for word. Captions are those paragraphs.
 - Why: Hassan asked for the audio to match her text. The old 46 s H13 script (voice picsart:Adeline) is replaced.
-- Status: the new audio is not voiced yet (`audio` is null in `narration.json`, so the sheet shows the text without a
-  player). Voice `ST81190.en.txt` with Picsart Adeline, then `narration.py --import DIR --voice "picsart:Adeline"`.
+- Voiced (2026-11-22): Picsart AI Audio Generator, voice Adeline (12 credits), MP3 from Picsart's CDN, imported as mono AAC
+  (77 s, 472 KB). Transcribed back locally: 96% of the script heard; the differences are spellings ("gray", "center") and
+  how the brand name is read. English only; the Dutch and French files for this piece do not exist.
 
 ## the curator's "more story" version for the jacket (2026-11-22, C2, branch hassan/curator-story-import)
 - What: ST81190's story is now the curator's "more story-format version" (3 paragraphs, verbatim); her plain description variant is
