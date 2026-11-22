@@ -77,7 +77,7 @@ ST655/1, ST81299, ST2202, ST2434, ST81234/1-2, ST2435.
 ## Track G: Splat Stage (approach A, picked 2026-11-21)
 | # | Ticket | Size | Acceptance | Status |
 |---|---|---|---|---|
-| G1 | Spike: splat form, ST2431 and ST2432 tops and trousers cut and mixed, one fabric tint, on its own page | S | Every top and bottom pairing reads as one outfit front, side and back; a look loads under 8 MB | done 2026-11-21 (basil, on main): `mockups/splat-stage-spike.html`, 5.5 to 6.8 MB a look; findings in `HANDOVER.md` |
+| G1 | Spike: splat form, ST2431 and ST2432 tops and trousers cut and mixed, one fabric tint, on its own page | S | Every top and bottom pairing reads as one outfit front, side and back; a look loads under 8 MB | done 2026-11-21 (basil, on main): `mockups/splat-stage-spike.html`, 5.5 to 6.8 MB a look; findings in `ARCHITECTURE.md` (Splat Stage) |
 | G2 | Phone check of the spike: load time on 4G and frame rate while turning | S | Look on screen under 10 s over 4G; turning stays smooth on a mid-range phone | open |
 | G3 | Cut rules as `pieces.json` hints; parts for ST81190 and the full looks | M | Each splat piece has parts that pass the G1 acceptance | open |
 | G4 | Splat engine in the Stage (three 0.180, Spark) replacing the GLB form | L | Stage wears splat parts from the wardrobe sheet; remix works on splats | open |
@@ -108,6 +108,7 @@ ST655/1, ST81299, ST2202, ST2434, ST81234/1-2, ST2435.
 | H22 | QA round 2: the H19 suite re-run after E4, H6, H20, H21, B5/B6/B8 and D-3, plus their new paths (landing, `/stage`, scan flow, NL / FR at 320 px); every bug found fixed | M | Round 2 in `docs/QA-TEST-CASES.md` lists each case with its result; failing cases fixed and re-run; console clean; `i18n_build.py --check` passes | done 2026-11-22 (hassan, PR #64): 8 fixes (share card framing from H21, NL / FR share card and Stage strings, Dutch look names, landing pinned to English, language switch back step, bfcache language reload, Up close escaping); rebased onto the Museum Atelier rename; not checked on a phone |
 | H-NAME | Rename the app to Museum Atelier: the old idea name must not stay in the repo; titles, headers, share card and title, meta/OG tags, docs, the page file (`atelier.html`), storage keys and console handle all use the new name. Left for Mubasil: the Vercel project and its `*.vercel.app` URLs, and the DB schema name in `schema.sql` and the seed dump | S | `git grep -i "second.\?skin"` finds only the Vercel URLs and the DB schema; header shows the name; share title is "My Museum Atelier look" | done 2026-11-22 (hassan, PRs #65 and #67): app is Museum Atelier; Vercel project and URLs and the DB schema name left for Mubasil |
 | H23 | "Win its fabric" unreliable: some taps on Up close's button did nothing (demo blocker) | S | Root cause found; at 1280 and 390 px every study piece shows the Won card after 1, 2, 3 or 5 quick taps; console clean | done 2026-11-22 (hassan, PR #73): `backTo()` ran `history.back()` once per tap, so a double tap stepped back past the Stage; it now leaves once per page view (`nav.js`); headless 75/75 on all 9 study pieces at 1280 and 390 px, QA TC46; not checked on a phone |
+| H24 | HANDOVER.md as a current-state page: cut to about 40 lines (state, open PRs, half-done work, next step); how-tos moved to `ARCHITECTURE.md` and `README.md`; pointers fixed | S | `wc -l HANDOVER.md` under 45; every claim in it matches this ledger; `git grep HANDOVER` finds no pointer to a section that is gone | done 2026-11-22 (hassan, PR #74): file kept (`AGENTS.md` rules use it), old text in `_to_delete/` and git history; heads-up to Mubasil before merge |
 
 ## Track J: Polish from the 2026-11-21 audits (basil)
 Found by four audits (fabrics and data, 3D quality, speed, buttons and flows). Anything in H6's scope (back behaviour,
@@ -158,7 +159,7 @@ Cut for the day: A2, A3, A7, A8, B4 to B6, B8, B9, C4 to C6, D-1 to D-4, all of 
 - GPU quota: demo set is the 8 existing GLBs; D-4 is out of the cut.
 - QR permission from MoMu: C3 uses a URL and a "tap to scan" button; QR is printed only if MoMu agrees.
 - Curator sign-off: show only fields quoted from MoMu records (D3); if unsigned, label facts "from MoMu metadata".
-- Kimono stand (HANDOVER item 2): keep `hideStand` or leave kimono off the demo path.
+- Kimono stand (see Known art issues in `HANDOVER.md`): keep `hideStand` or leave kimono off the demo path.
 
 **Change policy**
 Safe without asking: Track E files, fact and question text (still quoting a field), copy, CSS, colours, finish names, the order of pieces in the demo.
