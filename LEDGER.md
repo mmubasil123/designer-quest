@@ -38,10 +38,10 @@ write your name in it. Size: S (under 2 h), M (half a day), L (a day or more).
 | B2 | 44 px touch targets (finishes, chips, back button) | S | Tap-target audit passes at 390 px | done for Stage chips, finishes, back |
 | B3 | Bottom-sheet wardrobe (peek 96 px, half 48%, full 88%) replacing the Locker screen; form slides up 18% and scales 0.82 at half; 420 ms `cubic-bezier(0.32,0.72,0,1)` | M | On a 390 px phone: open sheet, equip a piece, remix a fabric, close; the URL never changes and the form stays visible | done 2026-11-21: sheet on the Stage, peek 124 px / half 48% / full 88%, Locker screen removed |
 | B4 | Sheet velocity snap and friction past the top | S | A flick reaches the next snap | done 2026-11-21 with B3: flick over 0.11 px/ms moves one snap; 0.3x resistance past full |
-| B5 | Persistent tiles: toggle classes, no `innerHTML` rerender, so selection animates | S | Tile nodes survive tab changes | open |
-| B6 | Locked pieces as silhouettes with name and room; unlock clip-path reveal 600 ms, once | M | Locked tile shows "Find card in room N" | open |
+| B5 | Persistent tiles: toggle classes, no `innerHTML` rerender, so selection animates | S | Tile nodes survive tab changes | hassan, in progress 2026-11-22 |
+| B6 | Locked pieces as silhouettes with name and room; unlock clip-path reveal 600 ms, once | M | Locked tile shows "Find card in room N" | hassan, in progress 2026-11-22 |
 | B7 | Share card 9:16: still of the form, look name, span, MoMu credit | M | Exported PNG is 1080x1920 and shows the form still, look name, span in years and MoMu credit line | done 2026-11-21 (hassan, PR #12): Share image (file share where supported) and Download image; PNG 1080x1920 checked in Chrome; real-phone share sheet not yet tried |
-| B8 | Reduced-motion pass: no idle spin, 150 ms crossfades | S | Emulated reduce shows no transforms | open |
+| B8 | Reduced-motion pass: no idle spin, 150 ms crossfades | S | Emulated reduce shows no transforms | hassan, in progress 2026-11-22 |
 | B9 | Hierarchy: span as a large serif number; tiles show short names, ids move to the fact card; drop IBM Plex Mono | S | Stage reads name, then span, then credit | open |
 
 ## Track C: Game and facts
