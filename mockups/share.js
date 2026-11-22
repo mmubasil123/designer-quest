@@ -104,35 +104,47 @@ export function drawCard({ grab, name, facts, url, scene, quote, won, kicker }) 
   ctx.fillStyle = wall; ctx.fillRect(0, 0, CARD_W, CARD_H);
   if (scene) {   // the period room of the look, as behind the Stage (H7); paper under the title keeps the red capitals at AA
     ctx.drawImage(scene, 0, 0, CARD_W, CARD_H);
-    const clear = ctx.createLinearGradient(0, 0, 0, 820);   // reaches below the masthead, title and span line
+    const clear = ctx.createLinearGradient(0, 0, 0, 520);   // reaches below the masthead, title and span line
     clear.addColorStop(0, PAPER); clear.addColorStop(.62, PAPER); clear.addColorStop(1, "rgb(255 255 255 / 0)");
-    ctx.fillStyle = clear; ctx.fillRect(0, 0, CARD_W, 820);
+    ctx.fillStyle = clear; ctx.fillRect(0, 0, CARD_W, 520);
   }
   // H10 masthead: MoMu's official logo (assets/brand/momu-logo.svg) top left on the text's own edge, at momu.be's 1.786:1
   // shape and large enough (160 px) that its hairlines hold. The date sits right, on the logo's foot.
-  const logoH = 160, logoW = logoH * MOMU_RATIO, logoTop = 96, foot = logoTop + logoH;
+  const logoH = 104, logoW = logoH * MOMU_RATIO, logoTop = 72, foot = logoTop + logoH;
   ctx.save(); ctx.translate(pad, logoTop); ctx.scale(logoW / 534, logoH / 120); ctx.fillStyle = INK;
   for (const pts of MOMU_LOGO) { ctx.beginPath(); for (let i = 0; i < pts.length; i += 2) ctx[i ? "lineTo" : "moveTo"](pts[i], pts[i + 1]); ctx.closePath(); ctx.fill(); }
   ctx.restore();
   ctx.textBaseline = "alphabetic"; ctx.fillStyle = MUTED; ctx.font = `500 24px ${MONO}`; ctx.textAlign = "right";
   ctx.fillText(fit(ctx, kicker.toUpperCase(), CARD_W - 2 * pad - logoW - 40), CARD_W - pad, foot); ctx.textAlign = "left";
 
-  ctx.fillStyle = RED; ctx.font = `400 84px ${MONO}`;   // titles are red capitals, as in MoMu's template
-  // a long unbreakable word (a long name) would run off the card: shrink the title just enough, down to 56 px
-  const widest = Math.max(...name.toUpperCase().split(" ").map(w => ctx.measureText(w).width));
-  if (widest > CARD_W - 2 * pad) ctx.font = `400 ${Math.max(56, Math.floor(84 * (CARD_W - 2 * pad) / widest))}px ${MONO}`;
-  const lines = wrap(ctx, name.toUpperCase(), CARD_W - 2 * pad, 3);
-  let y = foot + 124;   // about 64 px from the logo's foot to the title's cap height
-  lines.forEach(l => { ctx.fillText(l, pad, y); y += 100; });
+  // H26: the garment is the point of the card, so the heading is small: one line of red capitals, shrunk to fit down to
+  // 44 px; a name too long even for that (or a long word) wraps to at most two lines at 48 px
+  ctx.fillStyle = RED;
+  const up = name.toUpperCase(), inner = CARD_W - 2 * pad;
+  let size = 64;
+  const setT = px => { size = px; ctx.font = `400 ${px}px ${MONO}`; };
+  setT(64);
+  while (size > 44 && ctx.measureText(up).width > inner) setT(size - 2);
+  let lines;
+  if (ctx.measureText(up).width <= inner) lines = [up];
+  else {
+    setT(48);
+    const widest = Math.max(...up.split(" ").map(w => ctx.measureText(w).width));
+    if (widest > inner) setT(Math.max(36, Math.floor(48 * inner / widest)));
+    lines = wrap(ctx, up, inner, 2);
+  }
+  const lead = Math.round(size * 1.16);
+  let y = foot + 48 + Math.round(size * .74);   // about 48 px from the logo's foot to the title's top
+  lines.forEach(l => { ctx.fillText(l, pad, y); y += lead; });
 
   const { oldest, newest, span } = facts;   // the span is a sentence, not a stat tile
-  ctx.font = `italic 400 52px ${SERIF}`; ctx.fillStyle = INK;
+  ctx.font = `italic 400 36px ${SERIF}`; ctx.fillStyle = INK;
   const spanText = span ? t("From {a} to {b}", { a: oldest, b: newest }) : oldest ? t("All from {year}", { year: oldest }) : t("Years not recorded");
-  ctx.fillText(spanText, pad, y + 20);
+  ctx.fillText(spanText, pad, y + 2);
 
   const rows = [...facts.rows];
   if (won.length) rows.push({ role: t("Won"), name: won.join(", "), id: "", year: null, to: null, right: "" });
-  const rowH = rows.length > 3 ? 68 : 84, formY = y + 60;
+  const rowH = rows.length > 3 ? 68 : 84, formY = y + 20;
   const quoteLines = quote ? (ctx.font = `italic 400 34px ${SERIF}`, wrap(ctx, `“${quote.text}”`, CARD_W - 2 * pad - 34, 3)) : [];
   const blockH = quote ? quoteLines.length * 46 + 74 : 0;
   const formH = Math.max(420, FOOT_Y - 24 - (rows.length * rowH + 8) - blockH - formY);

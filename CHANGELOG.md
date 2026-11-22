@@ -2,6 +2,16 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## Share card: smaller heading, bigger garment (2026-11-22, H26, branch hassan/H26-sharecard-size)
+- What: in `share.js` the MoMu logo went from 160 to 104 px high, the red title from 84 px (two lines) to 64 px on one line (it shrinks
+  to 44 px to stay on one line; only a name too long for that wraps, at most two lines at 48 px), the "From 1950 to 1965" subline from
+  52 to 36 px, and the gaps between masthead, title, subline and form were tightened. The paper fade behind the heading is 520 px
+  instead of 820. The form takes all the height this frees (about 100 px more than before in a full-look card, the garment roughly 1.5x to 2x as tall).
+- Why: Hassan's screenshot: the heading pushed the garment down and left it small; the garment is the point of the card.
+- Decision: heading stays red capitals and the subline stays serif italic (hierarchy unchanged, contrast unchanged: AA on paper); PNG
+  stays exactly 1080 x 1920, facts only from `pieces.json` (D3), nothing uploaded (D2). Checked at 390 px in the Share dialog for the
+  Furisode kimono and for Ikat vest + Monpe trousers, in EN, FR and NL (a 20-letter name in NL wraps to two lines); console clean.
+
 ## Stage header fits the phone (2026-11-22, H25, branch hassan/H25-topbar-fit)
 - What: on the Stage the header overflowed: logo plus "Museum Atelier" plus the three pills needed 439 px (EN) to 468 px (FR) of a
   390 px screen, so Share and ? were cut off. `.bar` is now a size container (`theme.css`); when it is under 480 px wide the written
