@@ -2,6 +2,16 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## Stage header fits the phone (2026-11-22, H25, branch hassan/H25-topbar-fit)
+- What: on the Stage the header overflowed: logo plus "Museum Atelier" plus the three pills needed 439 px (EN) to 468 px (FR) of a
+  390 px screen, so Share and ? were cut off. `.bar` is now a size container (`theme.css`); when it is under 480 px wide the written
+  name is visually hidden (it stays in the DOM and in the link's `aria-label`, so screen readers still hear it) and the MoMu logo
+  carries the brand. The actions no longer shrink (`flex: none`) and stay 44 px high.
+- Result (built-in browser, `?` pills measured): at 390 px the pills end at x=376 (FR, the longest), at 320 px at x=310 in EN, NL and
+  FR; no horizontal scroll; console clean.
+- Decision: a container query, not a viewport one, because the desktop pitch frame is 340 px wide inside a wide window. The name
+  returns on any bar 480 px or wider. CSS only; no copy changed.
+
 ## HANDOVER.md cut to a current-state page (2026-11-22, H24, branch hassan/H24-handover-trim)
 - What: `HANDOVER.md` went from 233 to 39 lines: state, open PRs, half-done work, next step. Its per-ticket history (H2 to H22, B5 to B8,
   E2, E4, D-3, wearable scans, State, Do next, Left, Growth story) is dropped because `LEDGER.md` and this file already hold it; the

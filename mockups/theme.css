@@ -84,7 +84,13 @@ input, textarea { caret-color: var(--accent); }
 .momu-logo { display: block; width: 64px; height: 36px; color: var(--ink); }
 .app-name { text-decoration: none; margin-left: 10px; font: 500 13px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
 .brand.lockup { display: inline-flex; align-items: center; flex: none; min-height: 44px; letter-spacing: 0; text-transform: none; }
-.bar { gap: 12px; }
+.bar { gap: 12px; container-type: inline-size; }
+/* H25: the bar is as wide as the phone (340 px framed, the screen width on a phone). The logo is the brand there; the
+   written name stays for the link's accessible name (aria-label) and shows only where the bar has room for it. */
+@container (max-width: 479px) {
+  .app-name { position: absolute; width: 1px; height: 1px; margin: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+.bar-actions { flex: none; }
 /* the old mono lines: ids, counts, credits */
 .mono { font: var(--t-small); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; letter-spacing: 0; text-transform: none; }
 .label { font: var(--t-label); letter-spacing: var(--track-label); }
