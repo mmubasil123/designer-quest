@@ -89,7 +89,14 @@ export async function go(href, { replace = false } = {}) {
    go back instead of piling a new entry on top, which made back return into Up close. */
 const SAME = { "/stage": "/atelier.html" };   // E4: Vercel serves the Stage at /stage too (vercel.json rewrite)
 const page = path => SAME[path] ?? path;
+/* Once per page view: every history.back() is queued and runs, so a double tap on "Win its fabric" (or ←) stepped back
+   twice, past the Stage, and the won fabric's Won card never showed. A page shown again from the back-forward cache
+   may leave again. */
+let leaving = false;
+addEventListener("pageshow", e => { if (e.persisted) leaving = false; });
 export function backTo(href, { from } = {}) {
+  if (leaving) return;
+  leaving = true;
   const ref = document.referrer && new URL(document.referrer);
   const target = new URL(href, location.href);
   if (ref && ref.origin === location.origin && page(ref.pathname) === page(target.pathname) && history.length > 1
