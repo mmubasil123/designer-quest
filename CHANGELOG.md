@@ -11,7 +11,8 @@ Newest first. Each entry: what changed, why, and the decision behind it.
   `museum-atelier.vercel.app` stays on the project as a 308 redirect (query kept), so printed NFC cards and deck QR codes
   still open the right piece. Internal ids keep `atelier` (`atelier.html`, `atelier.*` storage keys, `window.atelier`):
   renaming them would drop players' saves and break links for no visible gain. Older entries below keep the old name.
-  Teaser MP4 not re-rendered yet (its end card still shows the old address).
+  Teaser re-rendered (end card `designer-quest-momu.vercel.app`, share card kicker "Designer Quest"); `index.html` asks for it
+  with a new `?v=`. The poster (scene 1) shows neither name nor address, so it is unchanged.
 
 ## Demo video re-rendered against the current app (2026-11-22, E2, branch hassan/E2-rerender)
 - What: the teaser MP4 was rendered again from the reel source, which already had `museum-atelier.vercel.app` (H-URL), and

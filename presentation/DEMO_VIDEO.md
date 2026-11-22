@@ -29,7 +29,7 @@ coat, so it says "on MoMu's 3D model" (Hassan, 2026-11-22). After H20 removed th
 words); after C2 replaced the jacket's story with the curator's text, scene 7 quotes "Rather than sewing the pieces together,
 the designers used rivets … to attach the separate parts." (2026-11-22, re-render).
 
-## Checks on the last render (2026-11-22, re-render after H-URL, H-NAME, H20, H25, H26, C2)
+## Checks on the last render (2026-11-22, re-render after H-DQ; before that H-URL, H-NAME, H20, H25, H26, C2)
 - Length 44.0 s (one word shorter in scene 6).
 - Dead spots (nothing changes for over 1 s, frames every 0.5 s): the end card's 1.8 s hold, kept on purpose so the
   address can be read, and about 1 s at the end of scene 6 (after the red span draws), left as is.
@@ -39,7 +39,8 @@ the designers used rivets … to attach the separate parts." (2026-11-22, re-ren
 - Not yet checked on the venue projector or with the presenter's laptop speakers.
 
 ## Re-record after merges
-The screens were re-captured from `main` on 2026-11-22 (second time, after H-NAME, H20, H25, H26, C2 and H27; the
+The screens were re-captured on 2026-11-22 a third time, after H-DQ (Designer Quest, end card address; rings unmoved),
+and before that (second time) after H-NAME, H20, H25, H26, C2 and H27; the
 rings in scenes 1, 7 and 8 were moved to match) and before that after H10 (logo and masthead), H11, H12, H13 (poetic
 narration and its audio, PR #46 and #57, on the story sheet and share card), H15 and H18 (Up close shows MoMu's CLO model for the coat). Re-run
 `node scripts/capture.mjs`, then render, after any change to the story sheet, the Won card, the wardrobe, Up close or
