@@ -1,6 +1,6 @@
 # Storyline
 
-The story we tell the jury, the persona behind it, and the demo script. Anyone can edit (Track E in `LEDGER.md`).
+The story we tell the jury, the persona behind it, and the demo script.
 The problem, the ideation and the team are in `docs/PROJECT_NOTES.md`.
 
 **Fact rule (D3):** every date, technique or history line said on stage comes from the MoMu record, not from
