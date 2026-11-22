@@ -1,0 +1,39 @@
+/* D-3 language switch and "Translation" label. Tokens come from theme.css; restyle freely, the markup is in i18n.js. */
+.langsw { display: inline-flex; gap: 2px; padding: 2px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); }
+.langsw button { min-width: 44px; min-height: 44px; padding: 0 10px; border-radius: 999px; background: transparent; color: var(--ink);
+  font: 500 13px/1 var(--sans); letter-spacing: var(--track-label); }
+.langsw button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.langsw button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.langsw.small button { min-width: 36px; min-height: 36px; padding: 0 6px; font-size: 12px; }
+
+.tr-label { display: inline-block; margin-left: .5em; padding: 1px 6px; border: 1px solid var(--line); border-radius: 999px; vertical-align: .1em;
+  font: var(--t-label); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.tr-orig { display: block; margin-top: 6px; padding: 0; border: 0; background: none; color: var(--muted); font: var(--t-small);
+  text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; text-align: left; min-height: 44px; }
+.tr-orig-text { margin-top: 4px; color: var(--muted); }
+.tr-row { margin-top: 8px; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 0; }
+.tr-row .tr-label { margin-left: 0; }
+.tr-row .tr-orig { margin: 0 0 0 12px; min-height: 36px; }
+.ask-quote-tr { margin-top: 4px; font: var(--t-small); color: var(--muted); }
+.win blockquote .orig { display: block; margin-top: 8px; font: var(--t-small); font-style: italic; color: var(--muted); quotes: none; }
+.langbox { display: grid; justify-items: center; gap: 6px; margin: 12px 0 4px; }
+.langbox .mono { color: var(--muted); }
+.langbox .langsw { margin: 0; }
+header .langsw { margin-left: 8px; }
+
+/* Longer words in NL and FR ("Partager", "1/10 gagnées") must still fit the Stage header at 320 px */
+@media (max-width: 359px) {
+  .bar { padding-left: 16px; padding-right: 10px; }
+  .bar-actions { gap: 4px; }
+  .bar-actions .pill { padding: 0 9px; font-size: 13px; }
+  .bar .momu-logo { max-width: 64px; }
+}
+
+/* in a fact list the label goes under the value, so a long one ("Traduction automatique") never widens the card */
+.fact dd { min-width: 0; overflow-wrap: anywhere; }
+.fact dd .tr-label { display: table; margin: 4px 0 0; white-space: normal; }
+@media (max-width: 359px) {   /* Up close header: back, logo, piece number and the switch share one line */
+  header .langsw { margin-left: 2px; }
+  header .langsw.small button { min-width: 32px; padding: 0 4px; }
+  header #pid { display: none; }
+}

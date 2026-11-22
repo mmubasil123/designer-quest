@@ -320,6 +320,7 @@ import { AVATAR_URL, AVATAR_FIT, FORM_CUT, prepAvatar, placeFeet, fitWorn, resto
 import { createStory, showScan } from "./story.js";
 import { createWin } from "./win.js";
 import { mountScene } from "./scenes.js";   // H7: the piece stands in a room from its own time
+import { lang, t, tc, pieceName, labelHtml, mountSwitch, keepPlace, takePlace } from "./i18n.js";   // D-3: NL / EN / FR; every visible string goes through t() or tc()
 import { go, settled } from "./nav.js";   // H6: the back gesture closes the top layer; page changes wait for it (nav.js)
 
 const IMG = id => `https://heron.libis.be/momu/files/large/${id}.jpg`;
@@ -342,7 +343,7 @@ addEventListener("pageshow", e => {
 // pieces.json (schema: pieces.schema.json) is the single source of truth; the pipeline reads the same file
 const manifest = await (await fetch("pieces.json")).json();
 const PIECES = Object.fromEntries(manifest.pieces.map(p => [p.id, {
-  ...p.fit, slot: p.slot, wear: p.wear ?? null, name: p.name, year: p.year, locked: p.locked, room: p.locked,   // room: has a sticker in the museum, won there
+  ...p.fit, slot: p.slot, wear: p.wear ?? null, name: pieceName(p.id, p.name), year: p.year, locked: p.locked, room: p.locked,   // room: has a sticker in the museum, won there
   // a piece without a photo must not take the app down
   img: p.source?.imgSha ? IMG(p.source.imgSha) : `assets/swatch/${p.id.replace("/", "_")}.jpg`, glb: p.assets.glb?.path ?? null, kind: p.assets.glb?.kind ?? null,
   splat: p.assets.splat?.path ?? null, details: p.details?.length ?? 0, clo: p.assets.clo?.path ?? null,
@@ -828,7 +829,7 @@ if (params.has("demo")) {
       stageTT.setBody(body);
       dress();
       btn.setAttribute("aria-pressed", on);
-    } catch (e) { console.warn("demo avatar failed", e); toast("The demo avatar did not load"); }
+    } catch (e) { console.warn("demo avatar failed", e); toast(t("The demo avatar did not load")); }
     btn.removeAttribute("aria-busy");
   });
 }
@@ -836,14 +837,15 @@ window.secondSkin = { look, turntables, avatar: avatarState };   // handle for d
 
 /* ---------- Look state, locker ---------- */
 const yearOf = id => PIECES[id].year.from;
-const noun = id => PIECES[id].name.split(",")[0].split(" ").pop().replace(/^./, c => c.toUpperCase());   // "Green wool coat" -> "Coat"
-const adj = id => PIECES[id].name.split(" ")[0].replace(/,$/, "");   // "Furisode kimono, 1979" -> "Furisode"
+const noun = id => PIECES[id].name.split(",")[0].split(" ")[lang === "en" ? "pop" : "shift"]().replace(/^./, c => c.toUpperCase());   // EN: "Green wool coat" -> "Coat"; NL and FR put the garment first: "Veste en laine" -> "Veste"   // "Green wool coat" -> "Coat"
+const adj = id => lang === "en" ? PIECES[id].name.split(" ")[0].replace(/,$/, "") : PIECES[id].name.split(",")[0].toLowerCase();   // NL and FR name the whole piece: "de stof van gilet ikat"   // "Furisode kimono, 1979" -> "Furisode"
 function lookName() {   // a remixed look earns a name; an unremixed one keeps the screen's title
   const main = look.full || look.top, { body, sleeves } = look.fabric;
-  if (!main || (!body && !sleeves)) return "Antwerp, any century";
-  if (body && body === sleeves && PIECES[body].splat) return main === body ? shortName(body) : `${shortName(body)}, its fabric`;   // a won study piece on its own mesh is just its name; on another cut, its fabric
-  if (body && body === sleeves) return `${noun(main)} in ${adj(body)}`;
-  return `${noun(main)}${body ? ` in ${adj(body)}` : ""}${sleeves ? `${body ? "," : ""} with ${adj(sleeves)} sleeves` : ""}`;
+  if (!main || (!body && !sleeves)) return t("Antwerp, any century");
+  if (body && body === sleeves && PIECES[body].splat) return main === body ? shortName(body) : t("{name}, its fabric", { name: shortName(body) });   // a won study piece on its own mesh is just its name; on another cut, its fabric
+  if (body && body === sleeves) return t("{main} in {body}", { main: noun(main), body: adj(body) });
+  const v = { main: noun(main), body: body && adj(body), sleeves: sleeves && adj(sleeves) };
+  return t(body && sleeves ? "{main} in {body}, with {sleeves} sleeves" : body ? "{main} in {body}" : "{main} with {sleeves} sleeves", v);
 }
 /* Firsts: each shows once, then stays earned. Milestones reward range and curiosity, never time spent or streaks. */
 const FIRSTS = [
@@ -859,7 +861,7 @@ function toast(text) {
   el.textContent = text; el.classList.add("show");
   clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove("show"), 2600);
 }
-const saveLook = () => { try { localStorage.setItem(SAVE_KEY, JSON.stringify({ v: 1, look, widest })); } catch { /* storage full or blocked */ } };
+const saveLook = () => { try { localStorage.setItem(SAVE_KEY, JSON.stringify({ v: 1, look, widest, lang })); } catch { /* storage full or blocked */ } };
 const stageScene = mountScene(document.getElementById("stage"));
 function renderCredit() {   // the evening game: build the look that spans the most years
   const lead = look.full || look.top || look.bottom || look.feet;   // the room follows the look's main piece
@@ -869,17 +871,17 @@ function renderCredit() {   // the evening game: build the look that spans the m
   const years = [...ids, ...fabricIds].map(yearOf).filter(Boolean);
   const span = years.length > 1 ? Math.max(...years) - Math.min(...years) : 0;
   widest = Math.max(widest, span);
-  document.getElementById("lookSpan").textContent = span ? `Spans ${span} years · your widest ${widest}` : "";
+  document.getElementById("lookSpan").textContent = span ? t("Spans {span} years · your widest {widest}", { span, widest }) : "";
   document.getElementById("lookName").textContent = lookName();
   saveLook();
   if (!renderCredit.ready) return;   // the page's opening look earns nothing; the visitor's first change can
   const fresh = FIRSTS.filter(f => !earned.has(f.k) && f.test(span, fabricIds.length));
   fresh.forEach(f => earned.add(f.k));
-  if (fresh.length) toast(fresh.at(-1).t);
+  if (fresh.length) toast(t(fresh.at(-1).t));
 }
 
 let activeSlot = look.full ? "full" : "top", activeZone = "body";
-const LABEL = { won: "Won", top: "Top", bottom: "Bottom", feet: "Feet", full: "Full", study: "Study", remix: "Fabrics" };
+const LABEL = { won: t("Won"), top: t("Top"), bottom: t("Bottom"), feet: t("Feet"), full: t("Full"), study: t("Study"), remix: t("Fabrics") };
 const wonIds = () => Object.keys(PIECES).filter(id => PIECES[id].room && !PIECES[id].locked && (PIECES[id].glb || PIECES[id].splat));
 const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const shortName = id => PIECES[id].name.split(",")[0];
@@ -895,21 +897,21 @@ function isWorn(id, ctx) {
 }
 const tile = (id, cls, img, label, aria, sil = false) => `<div class="tile ${cls}" data-id="${id}">
   <button class="pick press" aria-label="${esc(aria)}" aria-pressed="${cls.includes("on")}">${sil ? `<img class="sil" src="${img}" alt="" loading="lazy" decoding="async">` : ""}<img${sil ? ' class="real"' : ""} src="${img}" alt="" loading="lazy" decoding="async"${img.startsWith("assets/swatch") ? ' style="mix-blend-mode:normal"' : ""}></button>${label}
-  <button class="info" data-info="${id}" aria-label="About ${esc(PIECES[id].name)}"><span aria-hidden="true">i</span></button></div>`;
+  <button class="info" data-info="${id}" aria-label="${t("About {name}", { name: esc(PIECES[id].name) })}"><span aria-hidden="true">i</span></button></div>`;
 const newFirst = ([a], [b]) => fresh.has(b) - fresh.has(a);   // a piece just won leads its tab
 /* B5: the wardrobe keeps one node per tile (wardrobe.js); a render only reorders them and toggles classes and aria */
 const ROOM_NO = Object.fromEntries(manifest.pieces.filter(p => p.museumRoom).map(p => [p.id, p.museumRoom]));   // optional field; none recorded yet (D3: no room number is guessed)
-const whereIs = id => ROOM_NO[id] ? `Find card in room ${ROOM_NO[id]}` : "Find its card in the museum";
+const whereIs = id => ROOM_NO[id] ? t("Find card in room {n}", { n: ROOM_NO[id] }) : t("Find its card in the museum");
 const slotTile = id => { const p = PIECES[id];
   const n = nodeFor(`slot:${id}`, () => tile(id, "", p.img, `<span class="m">${esc(shortName(id))}<span class="where"></span></span>`, "", p.locked));
   n.querySelector(".where").textContent = whereIs(id);
   return syncTile(n, { on: isWorn(id, activeSlot), locked: p.locked, fresh: fresh.has(id),
-    aria: p.locked ? `${p.name}, still to find. ${whereIs(id)}` : isWorn(id, activeSlot) ? `Take off ${p.name}` : `Wear ${p.name}` }); };
+    aria: p.locked ? t("{name}, still to find. {where}", { name: p.name, where: whereIs(id) }) : isWorn(id, activeSlot) ? t("Take off {name}", { name: p.name }) : t("Wear {name}", { name: p.name }) }); };
 const plainTile = (kind, id, img, label, aria) => syncTile(nodeFor(`${kind}:${id}`, () => tile(id, "", img, `<span class="m">${label}</span>`, aria)),
   { on: isWorn(id, kind), locked: false, fresh: fresh.has(id), aria });
 function renderLocker() {
   renderProgress();   // H6: every win redraws the wardrobe, so the header chip follows
-  document.getElementById("foundCount").textContent = `${Object.values(PIECES).filter(p => !p.locked && p.glb).length} in your wardrobe`;
+  document.getElementById("foundCount").textContent = t("{n} in your wardrobe", { n: Object.values(PIECES).filter(p => !p.locked && p.glb).length });
   const won = wonIds();
   if (activeSlot === "won" && !won.length) activeSlot = "top";
   document.getElementById("slotTitle").textContent = LABEL[activeSlot];
@@ -923,16 +925,16 @@ function renderLocker() {
   const grid = document.getElementById("grid");
   if (activeSlot === "won") {   // everything won in the museum, garments and fabrics alike; a tap puts that one piece on by itself
     show(grid, won.map(id => [id, PIECES[id]]).sort(newFirst).map(([id, p]) =>
-      plainTile("won", id, p.splat ? swatchOf(id) : p.img, `${esc(shortName(id))}${p.splat ? " fabric" : ""}`, isWorn(id, "won") ? `Take off ${p.name}` : `Wear ${p.name} on its own`)));
+      plainTile("won", id, p.splat ? swatchOf(id) : p.img, `${esc(shortName(id))}${p.splat ? ` ${t("fabric")}` : ""}`, isWorn(id, "won") ? t("Take off {name}", { name: p.name }) : t("Wear {name} on its own", { name: p.name }))));
     return;
   }
   if (activeSlot === "remix") {   // any unlocked piece's cloth, on the body or sleeves of your top or full look
     const zones = nodeFor("zones", () => `<div class="zones">${["body", "sleeves"].map(z =>
-      `<button class="cat press" data-zone="${z}">${z === "body" ? "Body" : "Sleeves"}</button>`).join("")}</div>`);
+      `<button class="cat press" data-zone="${z}">${z === "body" ? t("Body") : t("Sleeves")}</button>`).join("")}</div>`);
     zones.querySelectorAll("[data-zone]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.zone === activeZone)));
-    const bare = !look.full && !look.top ? [nodeFor("bare", () => `<p class="zones none">Fabric goes on a top or a full look. Put one on first.</p>`)] : [];
+    const bare = !look.full && !look.top ? [nodeFor("bare", () => `<p class="zones none">${t("Fabric goes on a top or a full look. Put one on first.")}</p>`)] : [];
     show(grid, [zones, ...bare, ...Object.entries(PIECES).filter(([, p]) => (p.glb || p.splat) && !p.locked).sort(newFirst).map(([id, p]) =>
-      plainTile("remix", id, swatchOf(id), esc(shortName(id)), `${p.name} fabric on the ${activeZone}`))]);
+      plainTile("remix", id, swatchOf(id), esc(shortName(id)), t(activeZone === "body" ? "{name} fabric on the body" : "{name} fabric on the sleeves", { name: p.name })))]);
     return;
   }
   show(grid, Object.entries(PIECES).filter(([, p]) => (p.slot === activeSlot || (p.wear === activeSlot && !p.locked)) && p.glb).sort(newFirst).map(([id]) => slotTile(id)));
@@ -943,16 +945,16 @@ const roomPieces = () => Object.entries(PIECES).filter(([, p]) => p.room && (p.g
 function renderProgress() {   // H6: where am I. The header chip says how far the visit is and opens the Museum
   const room = roomPieces(), won = room.filter(([, p]) => !p.locked).length;
   const b = document.getElementById("museumBtn");
-  b.textContent = `${won} of ${room.length} won`;
-  b.setAttribute("aria-label", `Museum: ${won} of ${room.length} pieces won`);
+  b.textContent = t("{n} of {total} won", { n: won, total: room.length });
+  b.setAttribute("aria-label", t("Museum: {n} of {total} pieces won", { n: won, total: room.length }));
 }
 function renderMuseum() {
   const room = roomPieces();
   renderProgress();
-  document.getElementById("museumCount").textContent = `${room.filter(([, p]) => !p.locked).length} of ${room.length} won`;
+  document.getElementById("museumCount").textContent = t("{n} of {total} won", { n: room.filter(([, p]) => !p.locked).length, total: room.length });
   document.getElementById("museumGrid").innerHTML = room.map(([id, p]) => {
-    const state = !p.locked ? (p.splat && !p.wear ? "Fabric won" : "Won") : p.seen ? `${p.found} of ${p.details} details found` : "Still to find";
-    const date = p.year.from === p.year.to ? p.year.from : `${p.year.from} to ${p.year.to}`;
+    const state = !p.locked ? (p.splat && !p.wear ? t("Fabric won") : t("Won")) : p.seen ? t("{n} of {total} details found", { n: p.found, total: p.details }) : t("Still to find");
+    const date = p.year.from === p.year.to ? p.year.from : t("{a} to {b}", { a: p.year.from, b: p.year.to });
     const when = p.locked && !p.splat ? "" : `${date} · `;   // a wearable's year is the answer to its Win it guess
     return tile(id, `study ${p.seen || !p.locked ? "seen" : ""}`, p.img, `<span class="st"><b>${esc(p.name)}</b><span>${when}${state}</span></span>`,
       `${p.name}, ${date}: ${state}`);
@@ -981,22 +983,22 @@ function renderWearing() {
   const { body, sleeves } = look.fabric;
   if ((look.full || look.top) && body && body === sleeves && PIECES[body].splat) {   // a won study fabric on its cut reads as one piece: one chip, one ×
     const at = parts.findIndex(w => w.slot === "full" || w.slot === "top");
-    parts[at] = { slot: "won", zone: "", id: body, kind: "Won", img: swatchOf(body), cut: parts[at].slot };
-  } else if ((look.full || look.top) && body && body === sleeves) parts.push({ slot: "remix", zone: "both", id: body, kind: "Fabric", img: swatchOf(body) });
+    parts[at] = { slot: "won", zone: "", id: body, kind: t("Won"), img: swatchOf(body), cut: parts[at].slot };
+  } else if ((look.full || look.top) && body && body === sleeves) parts.push({ slot: "remix", zone: "both", id: body, kind: t("Fabric"), img: swatchOf(body) });
   else if (look.full || look.top) for (const zone of ["body", "sleeves"]) {
     const id = look.fabric[zone];
-    if (id) parts.push({ slot: "remix", zone, id, kind: zone === "body" ? "Body" : "Sleeves", img: swatchOf(id) });
+    if (id) parts.push({ slot: "remix", zone, id, kind: zone === "body" ? t("Body") : t("Sleeves"), img: swatchOf(id) });
   }
   document.getElementById("wearing").innerHTML = parts.length ? parts.map(w => `<span class="wear">
-    <button class="open press" data-open="${w.slot}" data-zone="${w.zone}" aria-label="Change the ${w.kind.toLowerCase()}: ${esc(PIECES[w.id].name)}">
+    <button class="open press" data-open="${w.slot}" data-zone="${w.zone}" aria-label="${t("Change the {kind}: {name}", { kind: w.kind.toLowerCase(), name: esc(PIECES[w.id].name) })}">
       <img src="${w.img}" alt="" loading="lazy" decoding="async"><span><em>${w.kind}</em> ${esc(shortName(w.id))}</span></button>
-    <button class="off press" data-off="${w.slot}" data-zone="${w.zone}" data-cut="${w.cut ?? ""}" aria-label="Take off ${esc(PIECES[w.id].name)}">×</button></span>`).join("")
-    : `<span class="none">Nothing on yet. Pick a piece below.</span>`;
+    <button class="off press" data-off="${w.slot}" data-zone="${w.zone}" data-cut="${w.cut ?? ""}" aria-label="${t("Take off {name}", { name: esc(PIECES[w.id].name) })}">×</button></span>`).join("")
+    : `<span class="none">${t("Nothing on yet. Pick a piece below.")}</span>`;
 }
 function dress() {
   if (!look.full && !look.top && (look.fabric.body || look.fabric.sleeves)) {   // fabric sits on a top: without one it would come back unseen on the next
     look.fabric = { body: null, sleeves: null };
-    toast("Its fabric went back to your Fabrics");
+    toast(t("Its fabric went back to your Fabrics"));
   }
   [look.top, look.bottom, look.feet, look.full, look.fabric.body, look.fabric.sleeves].forEach(id => fresh.delete(id)); keepFresh();
   turntables.forEach(t => t.draw()); renderLocker(); renderCredit();
@@ -1016,7 +1018,7 @@ function preloadStudy(id) {
   // the 15 MB scan waits 2 s (a visitor who taps Not now at once downloads nothing) and then goes at low priority,
   // so the popup and the page stay smooth; Not now, Escape or a backdrop tap clears the timer and aborts it
   const wait = new Promise(r => { study.timer = setTimeout(r, 2000); });
-  wait.then(() => { if (!ctl.signal.aborted) nfcStatus.textContent = "Getting the scan ready…"; });
+  wait.then(() => { if (!ctl.signal.aborted) nfcStatus.textContent = t("Getting the scan ready…"); });
   wait.then(() => fetch(PIECES[id].clo ?? PIECES[id].splat, { signal: ctl.signal, priority: "low" })).then(async r => {
     if (!r.ok) throw new Error(r.status);
     const total = +r.headers.get("content-length") || 0, reader = r.body.getReader();
@@ -1025,9 +1027,9 @@ function preloadStudy(id) {
       const { done, value } = await reader.read();
       if (done) break;
       got += value.length;
-      if (total) nfcStatus.textContent = `Getting the scan ready… ${Math.floor(got / total * 100)}%`;
+      if (total) nfcStatus.textContent = `${t("Getting the scan ready…")} ${Math.floor(got / total * 100)}%`;
     }
-    nfcStatus.textContent = "Scan ready";
+    nfcStatus.textContent = t("Scan ready");
   }).catch(e => { if (e.name !== "AbortError") nfcStatus.textContent = ""; });
 }
 function cancelStudy() {
@@ -1038,7 +1040,7 @@ function cancelStudy() {
 function tapCard(id) {   // shortcut: stands in for walking to the sticker; a real tap opens the same ?card=<id>
   const p = PIECES[id];
   if (p.splat && p.seen) { go(`up-close.html?id=${encodeURIComponent(id)}`); return; }
-  document.getElementById("nfcText").textContent = `Hold your phone to the sticker beside the ${p.name.split(",")[0].toLowerCase()} to ${p.splat ? "study it up close" : "win it"}.`;
+  document.getElementById("nfcText").textContent = t(p.splat ? "Hold your phone to the sticker beside the {name} to study it up close." : "Hold your phone to the sticker beside the {name} to win it.", { name: p.name.split(",")[0].toLowerCase() });
   document.getElementById("nfcGo").href = `?card=${encodeURIComponent(id)}`;
   document.getElementById("nfc").showModal();
   if (p.splat) preloadStudy(id);
@@ -1047,7 +1049,7 @@ function tapCard(id) {   // shortcut: stands in for walking to the sticker; a re
 function wearFabric(id) {
   const owned = slot => Object.keys(PIECES).find(k => PIECES[k].slot === slot && PIECES[k].glb && !PIECES[k].locked && k !== id);
   let cut = look.full || look.top;
-  if (!cut) { cut = owned("full") ?? owned("top"); if (!cut) return; look[PIECES[cut].slot] = cut; toast(`Shown on the ${shortName(cut).toLowerCase()} cut`); }
+  if (!cut) { cut = owned("full") ?? owned("top"); if (!cut) return; look[PIECES[cut].slot] = cut; toast(t("Shown on the {name} cut", { name: shortName(cut).toLowerCase() })); }
   look.fabric.body = id; activeSlot = "remix"; activeZone = "body";
   dress();
 }
@@ -1115,7 +1117,7 @@ let RECORDS = {};   // not needed until a fact card opens, so it must not hold u
 const recordsReady = fetch("records.json").then(r => r.json()).then(j => { RECORDS = j; }).catch(() => {});
 const GENERIC = new Set(["metal", "weaving", "sewing (needleworking technique)", "handmade", "machine-made"]);   // shared by too many to link
 const plain = t => t.replace(/ \([^)]*\)$/, "");   // "cotton (fiber)" -> "cotton"
-const NR = '<span class="nr">not recorded</span>';
+const NR = () => `<span class="nr">${t("not recorded")}</span>`;
 const factEl = document.getElementById("fact");
 let factId = null;
 /* H6: one way back. A fact card opened from the Museum goes back to the Museum when it is closed (×, Escape, back,
@@ -1127,24 +1129,30 @@ async function openFact(id, { from } = {}) {
   await recordsReady;
   const p = PIECES[id], r = RECORDS[id] || {}, ctx = ctxOf(id);
   factId = id;
-  document.getElementById("factId").textContent = `${id} · MoMu study collection`;
+  document.getElementById("factId").textContent = `${id} · ${t("MoMu study collection")}`;
   document.getElementById("factName").textContent = p.name;
-  const made = (r.medium || []).map(plain).join(", ");
-  document.getElementById("factFields").innerHTML = `<dt>Made with</dt><dd>${made ? esc(made[0].toUpperCase() + made.slice(1)) : NR}</dd>
-    <dt>Date</dt><dd>${p.room && p.locked && !p.splat ? '<span class="nr">Win it to find out</span>' : r.date?.length ? esc(r.date.join(", ")) : NR}</dd><dt>Place</dt><dd>${r.place?.length ? esc(r.place.join(", ")) : NR}</dd>`;
+  // D-3: Dutch is the record's own language. MoMu's English terms show in EN, our translation of them in FR (labelled).
+  const term = x => tc(`term:${x}`, x, "en");
+  const terms = (r.medium || []).map(x => { const g = term(x); return { ...g, text: plain(g.text) }; });
+  const places = (r.place || []).map(x => term(x));
+  const made = terms.map(x => x.text).join(", ");
+  const lab = [...terms, ...places].some(x => x.tr) ? labelHtml("machine") : "";
+  document.getElementById("factFields").innerHTML = `<dt>${t("Made with")}</dt><dd>${made ? esc(made[0].toUpperCase() + made.slice(1)) + lab : NR()}</dd>
+    <dt>${t("Date")}</dt><dd>${p.room && p.locked && !p.splat ? `<span class="nr">${t("Win it to find out")}</span>` : r.date?.length ? esc(r.date.join(", ")) : NR()}</dd><dt>${t("Place")}</dt><dd>${places.length ? esc(places.map(x => x.text).join(", ")) : NR()}</dd>`;
+  const q = r.quote ? tc(`rec:${id}:quote`, r.quote, "nl") : null;   // the first sentence of the Dutch description, in this language
   document.getElementById("factQuote").innerHTML = r.quote
-    ? `<div class="mono">MoMu says</div><q>${esc(r.quoteEn || r.quote)}</q>${r.quoteEn ? `<p lang="nl">${esc(r.quote)} <span class="mono">Dutch original</span></p>` : ""}`
-    : `<span class="nr">No description recorded</span>`;
+    ? `<div class="mono">${t("MoMu says")}</div>${q.tr ? `<q>${esc(q.text)}</q><p lang="nl">${esc(r.quote)} <span class="mono">${t("Dutch original")}</span></p>${labelHtml(q.by)}` : `<q lang="nl">${esc(r.quote)}</q>`}`
+    : `<span class="nr">${t("No description recorded")}</span>`;
   const links = (r.medium || []).filter(t => !GENERIC.has(t)).map(t => [t, Object.keys(RECORDS).filter(o => o !== id && (PIECES[o]?.glb || PIECES[o]?.splat) && RECORDS[o].medium?.includes(t))])
     .filter(([, o]) => o.length).slice(0, 2);
-  document.getElementById("factShares").innerHTML = links.map(([t, o]) =>
-    `<div><span>${esc(plain(t)[0].toUpperCase() + plain(t).slice(1))} also in:</span>${o.slice(0, 3).map(x => `<button data-fact="${x}">${esc(shortName(x))}</button>`).join("")}</div>`).join("");
+  document.getElementById("factShares").innerHTML = links.map(([t0, o]) =>
+    `<div><span>${t("{term} also in:", { term: esc((x => x[0].toUpperCase() + x.slice(1))(plain(tc(`term:${t0}`, t0, "en").text))) })}</span>${o.slice(0, 3).map(x => `<button data-fact="${x}">${esc(shortName(x))}</button>`).join("")}</div>`).join("");
   const link = document.getElementById("factLink");
   link.hidden = !r.uri; if (r.uri) link.href = r.uri;
   const actBtn = document.getElementById("factAct");
-  const label = ctx === "study" ? (p.seen ? "Study it up close" : "Find it at MoMu")
-    : p.locked ? "Find it at MoMu" : ctx === "remix" ? (isWorn(id, ctx) ? `Take it off the ${activeZone}` : `Use on the ${activeZone}`)
-    : isWorn(id, ctx) ? "Take it off" : "Wear it";
+  const label = ctx === "study" ? (p.seen ? t("Study it up close") : t("Find it at MoMu"))
+    : p.locked ? t("Find it at MoMu") : ctx === "remix" ? (isWorn(id, ctx) ? t(activeZone === "body" ? "Take it off the body" : "Take it off the sleeves") : t(activeZone === "body" ? "Use on the body" : "Use on the sleeves"))
+    : isWorn(id, ctx) ? t("Take it off") : t("Wear it");
   actBtn.hidden = !label; actBtn.textContent = label ?? "";
   const unwon = p.room && p.locked && !p.splat;   // its date is the answer to Guess the year, so nothing may reveal it yet
   document.getElementById("factAsk").hidden = unwon;
@@ -1253,19 +1261,22 @@ document.getElementById("cats").addEventListener("click", e => { if (e.target.cl
 
 /* ---------- Help: three steps, shown once on a first visit, always reopenable with the ? button ---------- */
 const HELP = [
-  { t: "Dress up", d: "Pull up the wardrobe from the bottom. Tap a piece to wear it, tap it again to take it off. Drag the look to turn it." },
-  { t: "Win pieces at MoMu", d: "Tap the sticker beside a piece. Guess its year, or find its details up close, and it joins your wardrobe. Museum shows what is left to find." },
-  { t: "Remix a fabric", d: "In the Fabrics tab, put one piece's cloth on another piece's cut. The i on any piece shows what MoMu recorded about it." },
+  { t: t("Dress up"), d: t("Pull up the wardrobe from the bottom. Tap a piece to wear it, tap it again to take it off. Drag the look to turn it.") },
+  { t: t("Win pieces at MoMu"), d: t("Tap the sticker beside a piece. Guess its year, or find its details up close, and it joins your wardrobe. Museum shows what is left to find.") },
+  { t: t("Remix a fabric"), d: t("In the Fabrics tab, put one piece's cloth on another piece's cut. The i on any piece shows what MoMu recorded about it.") },
 ];
 const HELP_KEY = "secondSkin.help.v1", helpEl = document.getElementById("help");
 let helpStep = 0;
+const helpLang = mountSwitch(document.body, { className: "in-help", caption: true });
+helpEl.querySelector(".dots").before(helpLang);   // D-3: where the visitor changes language
 function renderHelp() {
   const last = helpStep === HELP.length - 1;
-  document.getElementById("helpCount").textContent = `${helpStep + 1} of ${HELP.length}`;
+  document.getElementById("helpCount").textContent = t("{n} of {total}", { n: helpStep + 1, total: HELP.length });
   document.getElementById("helpTitle").textContent = HELP[helpStep].t;
   document.getElementById("helpText").textContent = HELP[helpStep].d;
   document.getElementById("helpDots").innerHTML = HELP.map((_, i) => `<i${i === helpStep ? ' aria-current="true"' : ""}></i>`).join("");
-  document.getElementById("helpNext").textContent = last ? "Start dressing" : "Next";
+  document.getElementById("helpNext").textContent = last ? t("Start dressing") : t("Next");
+  helpLang.hidden = helpStep !== 0;   // the language switch lives on the first help step, which the ? button always reopens
   document.getElementById("helpSkip").hidden = last;
 }
 function openHelp() { helpStep = 0; renderHelp(); if (!helpEl.open) helpEl.showModal(); }
@@ -1292,9 +1303,9 @@ const recordsSoon = () => Promise.race([recordsReady, new Promise(r => setTimeou
 async function replayStory(id) {   // a piece already won keeps its story and audio tour: the sticker or its Museum tile plays it again
   story ??= await createStory({ img: i => PIECES[i].img, name: i => PIECES[i].name });
   await showScan({ story, quiz, id, next: "Back to my look" });
-  welcome(id, PIECES[id].room ? `${shortName(id)} is in your Won tab` : `${shortName(id)} is in your ${LABEL[PIECES[id].slot]} tab`);   // only museum wins live in Won
+  welcome(id, PIECES[id].room ? t("{name} is in your Won tab", { name: shortName(id) }) : t("{name} is in your {tab} tab", { name: shortName(id), tab: LABEL[PIECES[id].slot] }));   // only museum wins live in Won
 }
-const later = id => toast(`The ${shortName(id).toLowerCase()} waits in the Museum. Tap its sticker again any time.`);   // H6: Not now
+const later = id => toast(t("The {name} waits in the Museum. Tap its sticker again any time.", { name: shortName(id).toLowerCase() }));   // H6: Not now
 async function scan(id) {
   const p = PIECES[id];
   if (!p.locked) { await replayStory(id); return; }
@@ -1304,27 +1315,39 @@ async function scan(id) {
   await recordsSoon(); const pick = await win.won(id, { off });
   p.locked = false;
   try { localStorage.setItem(WON_KEY, JSON.stringify([...new Set([...readWon(), id])])); } catch { /* blocked: the win lasts this visit */ }
-  if (pick === "wear") { wearAlone(id); toast(`Wearing the ${shortName(id).toLowerCase()}`); return; }
+  if (pick === "wear") { wearAlone(id); toast(t("Wearing the {name}", { name: shortName(id).toLowerCase() })); return; }
   fresh.add(id); keepFresh();
-  welcome(id, `${shortName(id)} is in your Won tab. Tap it to wear it.`);
+  welcome(id, t("{name} is in your Won tab. Tap it to wear it.", { name: shortName(id) }));
   if (pick === "next" && win.next) tapCard(win.next);   // H17: the Won card's next piece, opened like its Museum tile
 }
 if (scanLater) later(scanned);
-else if (scanned && !PIECES[scanned]?.glb && !PIECES[scanned]?.splat) toast("This sticker isn't in the app yet");
+else if (scanned && !PIECES[scanned]?.glb && !PIECES[scanned]?.splat) toast(t("This sticker isn't in the app yet"));
 else if (scanned) scan(scanned);
 // up-close.html sends ?fabric=<id> once every detail is found: the same Won card, then the fabric waits in the Remix tab
 const takeClaim = () => { try { const c = sessionStorage.getItem(CLAIM_KEY); sessionStorage.removeItem(CLAIM_KEY); return c; } catch { return null; } };
 const claimed = takeClaim() ?? params.get("fabric");   // read the claim either way, so it is used once
 if (claimed && PIECES[claimed]?.splat && !PIECES[claimed].locked) recordsSoon().then(() => win.won(claimed, { what: "fabric", study: true })).then(pick => {
-  if (pick === "wear") { wearAlone(claimed); toast(`Wearing the ${shortName(claimed).toLowerCase()}'s fabric`); return; }
+  if (pick === "wear") { wearAlone(claimed); toast(t("Wearing the {name}'s fabric", { name: shortName(claimed).toLowerCase() })); return; }
   fresh.add(claimed); keepFresh();
-  welcome(claimed, `${shortName(claimed)} is in your Won tab. Tap it to wear it.`);
+  welcome(claimed, t("{name} is in your Won tab. Tap it to wear it.", { name: shortName(claimed) }));
   if (pick === "next" && win.next) tapCard(win.next);   // H17
 });
 if (scanned || claimed) history.replaceState(null, "", location.pathname);   // a reload must not replay the card
 booted = true;
 // first visit only, and not for a visitor who arrived by a sticker or from Up close: they already know what they want
 try { if (!scanned && !claimed && !localStorage.getItem(HELP_KEY)) openHelp(); } catch { openHelp(); }
+/* D-3: switching language reloads the page; put the visitor back where they were (the look itself is saved already) */
+keepPlace(() => ({ help: helpEl.open, snap, slot: activeSlot, zone: activeZone, scroll: document.getElementById("grid").scrollTop }));
+{
+  const back = takePlace();
+  if (back) {
+    if (back.slot && (back.slot === "won" || back.slot === "remix" || SLOTS.includes(back.slot))) { activeSlot = back.slot; activeZone = back.zone === "sleeves" ? "sleeves" : "body"; }
+    renderLocker();
+    if (back.snap && back.snap !== "peek") setSnap(back.snap);
+    document.getElementById("grid").scrollTop = back.scroll || 0;
+    if (back.help && !helpEl.open) { openHelp(); }
+  }
+}
 </script>
 <dialog class="nfc" id="nfc" aria-labelledby="nfcTitle"><div tabindex="-1" autofocus>
   <div class="ring" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 8.5a5 5 0 0 1 0 7M9.5 6a8.5 8.5 0 0 1 0 12M13 3.5a12 12 0 0 1 0 17"/></svg></div>

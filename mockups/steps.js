@@ -1,13 +1,15 @@
 /* H6: the card scan is one short flow (story, then its challenge, then the piece is yours), shown in two dialogs
    (story.js, win.js). This keeps them reading as one: the same step line on each, and a handover that swaps the
    content in place instead of closing one card and opening another. Styles: `.steps` in story.css. */
-const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+import { t } from "./i18n.js";   // D-3
+
+const esc = x => String(x).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const reduce = matchMedia("(prefers-reduced-motion: reduce)");
 
 // i: 0 story, 1 challenge, 2 won. study: the challenge is Up close (its own page), not Guess the year.
 export function stepsHtml(i, { study = false } = {}) {
-  const names = ["Story", study ? "Up close" : "Guess the year", "Yours"];
-  return `<ol class="steps" aria-label="Step ${i + 1} of 3">${names.map((n, k) =>
+  const names = [t("Story"), study ? t("Up close") : t("Guess the year"), t("Yours")];
+  return `<ol class="steps" aria-label="${t("Step {n} of 3", { n: i + 1 })}">${names.map((n, k) =>
     `<li${k === i ? ' aria-current="step"' : ""}${k < i ? ' class="done"' : ""}>${esc(n)}</li>`).join("")}</ol>`;
 }
 

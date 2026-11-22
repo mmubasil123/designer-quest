@@ -1,0 +1,2637 @@
+{
+ "_about": "D-3: fr text for facts and stories, built by mockups/tools/i18n_build.py. Do not hand-edit; change the glossary or the source and rerun. h = hash of the source text; by = team or machine.",
+ "det:ST2203:0:find": {
+  "h": "a986ff64",
+  "t": "De larges épaulettes rembourrées",
+  "by": "machine",
+  "s": "Big padded shoulders"
+ },
+ "det:ST2203:0:quote": {
+  "h": "bdce5244",
+  "t": "Grandes épaulettes en coton blanc rembourré.",
+  "by": "machine",
+  "s": "Grote schoudervullingen van witte, opgevulde katoen."
+ },
+ "det:ST2203:1:find": {
+  "h": "216c2862",
+  "t": "Une fermeture éclair du V jusqu'à la taille",
+  "by": "machine",
+  "s": "A zip from the V to the waist"
+ },
+ "det:ST2203:1:quote": {
+  "h": "6496c02d",
+  "t": "Fermeture au milieu du devant par une fermeture à glissière en métal noir (20 cm) de la pointe du col en V jusqu'à la taille.",
+  "by": "machine",
+  "s": "Sluitend middenvoor door middel van een zwarte metalen rits (20cm) vanaf punt V-hals tot op taillehoogte."
+ },
+ "det:ST2203:2:find": {
+  "h": "d3ff98c0",
+  "t": "Des poches drapées sur les hanches",
+  "by": "machine",
+  "s": "Draped pockets at the hips"
+ },
+ "det:ST2203:2:quote": {
+  "h": "11aa8b85",
+  "t": "Deux poches drapées au niveau des hanches, bordées d'un ruban de velours noir",
+  "by": "machine",
+  "s": "Twee gedrapeerde zakken op heuphoogte die afgezet zijn met een band zwart fluweel"
+ },
+ "det:ST2431/1-4:0:find": {
+  "h": "3dd9bcea",
+  "t": "Des soutaches qui servent aussi de fermeture",
+  "by": "machine",
+  "s": "Frogging that is also the fastening"
+ },
+ "det:ST2431/1-4:0:quote": {
+  "h": "4007ec0a",
+  "t": "grand motif en passementerie noire des deux côtés du devant (brandebourgs, qui forment également la fermeture)",
+  "by": "machine",
+  "s": "groot motief in zwarte passementerie op beide kanten van het voorpand (brandebourgs, die ook de sluiting vormen)"
+ },
+ "det:ST2431/1-4:1:find": {
+  "h": "7e161cf2",
+  "t": "Le col montant rouge",
+  "by": "machine",
+  "s": "The red standing collar"
+ },
+ "det:ST2431/1-4:1:quote": {
+  "h": "9e203e77",
+  "t": "Col montant en drap rouge agrémenté de décorations en cannetille.",
+  "by": "machine",
+  "s": "Opstaande kraag in rood laken voorzien van decoratie in cannetille."
+ },
+ "det:ST2431/1-4:2:find": {
+  "h": "0302fc21",
+  "t": "Galon en métal sur les parements",
+  "by": "machine",
+  "s": "Metal braid on the cuffs"
+ },
+ "det:ST2431/1-4:2:quote": {
+  "h": "94e9eb0b",
+  "t": "Le bas des manches est doté d'un grand motif en passementerie métallique",
+  "by": "machine",
+  "s": "Onder op de mouwen voorzien van een groot motief in passementerie in metaal"
+ },
+ "det:ST2432/1-2:0:find": {
+  "h": "a6ec4de8",
+  "t": "Le haut col rouge",
+  "by": "machine",
+  "s": "The high red collar"
+ },
+ "det:ST2432/1-2:0:quote": {
+  "h": "7088d0cd",
+  "t": "col montant haut en drap rouge",
+  "by": "machine",
+  "s": "hoge opstaande kraag in rood laken"
+ },
+ "det:ST2432/1-2:1:find": {
+  "h": "8bf227d0",
+  "t": "Épaulettes en fil d'or",
+  "by": "machine",
+  "s": "Epaulettes of gold thread"
+ },
+ "det:ST2432/1-2:1:quote": {
+  "h": "4cacf03f",
+  "t": "épaulettes en cannetille et tissu métallique doré",
+  "by": "machine",
+  "s": "epauletten met cannetille en goudkleurig metaalweefsel"
+ },
+ "det:ST2432/1-2:2:find": {
+  "h": "40c05fb8",
+  "t": "Écussons rouges au bout des basques",
+  "by": "machine",
+  "s": "Red flashes at the tail tips"
+ },
+ "det:ST2432/1-2:2:quote": {
+  "h": "c35aab6d",
+  "t": "Les pointes de chacune des basques ont été retournées de l'intérieur vers l'extérieur et reliées entre elles, révélant un détail rouge au bas des basques bleues.",
+  "by": "machine",
+  "s": "De punten van elk van de slippen werden van binnen naar buiten gekeerd en aan elkaar verbonden, waardoor er een rood detail zichtbaar is onderaan de blauwe slippen."
+ },
+ "det:ST2435:0:find": {
+  "h": "58e11ae2",
+  "t": "La large encolure bateau",
+  "by": "machine",
+  "s": "The wide boat neck"
+ },
+ "det:ST2435:0:quote": {
+  "h": "80363077",
+  "t": "Large encolure bateau",
+  "by": "machine",
+  "s": "Brede boothals"
+ },
+ "det:ST2435:1:find": {
+  "h": "61a70f85",
+  "t": "La bande qui sculpte les hanches",
+  "by": "machine",
+  "s": "The band that shapes the hips"
+ },
+ "det:ST2435:1:quote": {
+  "h": "3ca1510d",
+  "t": "courtes bandes appliquées dans le même tissu brodé sur les hanches à l'avant et à l'arrière, qui cintrent la coupe droite",
+  "by": "machine",
+  "s": "korte opgezette stroken van dezelfde geborduurde stof op de heupen aan voor en achterzijde, die het rechte model tailleren"
+ },
+ "det:ST2435:2:find": {
+  "h": "54c59ae4",
+  "t": "Des boucles et des œillets dans les surpiqûres",
+  "by": "machine",
+  "s": "Curls and eyes in the stitching"
+ },
+ "det:ST2435:2:quote": {
+  "h": "66be7dd4",
+  "t": "surpiqûres à la machine (à l'intérieur : fil métallique) formant un motif organique et d'inspiration orientale de volutes et d'œillets",
+  "by": "machine",
+  "s": "machinale stiksels (binnenzijde: metaaldraad) in een organisch, oosters geïnspireerd motief van krullen en ogen"
+ },
+ "det:ST652/1:0:find": {
+  "h": "9ae410ed",
+  "t": "Le raccommodage à carreaux",
+  "by": "machine",
+  "s": "The checked mending"
+ },
+ "det:ST652/1:0:quote": {
+  "h": "28242c80",
+  "t": "Réparé systématiquement avec du tissu à carreaux.",
+  "by": "machine",
+  "s": "Stelselmatig gerepareerd met geruite stof."
+ },
+ "det:ST652/1:1:find": {
+  "h": "940e0237",
+  "t": "Un mouchoir rouge qui n'y est pas",
+  "by": "machine",
+  "s": "A red handkerchief that isn't there"
+ },
+ "det:ST652/1:1:quote": {
+  "h": "071cd058",
+  "t": "Une pochette rouge dépasse en trompe-l'œil d'une poche au niveau de la poitrine.",
+  "by": "machine",
+  "s": "In een zak op borsthoogte steekt optisch een rood pochet."
+ },
+ "det:ST652/1:2:find": {
+  "h": "7b04c754",
+  "t": "La petite ceinture au dos",
+  "by": "machine",
+  "s": "The little belt at the back"
+ },
+ "det:ST652/1:2:quote": {
+  "h": "77478f12",
+  "t": "Une petite ceinture en tissu est fixée au milieu dans le dos",
+  "by": "machine",
+  "s": "Aan de achterkant is in het midden een ceintuurtje van stof bevestigd"
+ },
+ "det:ST671:0:find": {
+  "h": "b7f49b0f",
+  "t": "Un col en dentelle imitant la dentelle de Lille",
+  "by": "machine",
+  "s": "A lace collar pretending to be Lille lace"
+ },
+ "det:ST671:0:quote": {
+  "h": "13bb9cce",
+  "t": "Une collerette en dentelle mécanique beige, imitation de dentelle aux fuseaux de Lille, a été insérée dans l'encolure.",
+  "by": "machine",
+  "s": "In de halsuitsnijding is een kraag gezet in beige machinale kant, een imitatie van Rijselse kloskant."
+ },
+ "det:ST671:1:find": {
+  "h": "201e8575",
+  "t": "Une bande de dentelle le long du devant gauche",
+  "by": "machine",
+  "s": "A lace band down the left front"
+ },
+ "det:ST671:1:quote": {
+  "h": "8a84b298",
+  "t": "Une bande de la même dentelle et de la même broderie descend à l'avant gauche de l'encolure jusqu'au bas de la robe",
+  "by": "machine",
+  "s": "Een strook in dezelfde kant en borduurwerk loopt links vooraan van bij de hals tot onderaan de japon"
+ },
+ "det:ST671:2:find": {
+  "h": "117311b1",
+  "t": "Agrafes dans le dos",
+  "by": "machine",
+  "s": "Hooks down the back"
+ },
+ "det:ST671:2:quote": {
+  "h": "1fd6ca37",
+  "t": "La robe et la jupe de dessous se ferment toutes deux au milieu du dos par une rangée d'agrafes et de boutons au-delà des fesses.",
+  "by": "machine",
+  "s": "De japon en de onderjurk sluiten beide middenachter met een rij haken en knopen tot voorbij het zitvlak."
+ },
+ "det:ST673/1-2:0:find": {
+  "h": "6ccc81f4",
+  "t": "Des boutons en nacre",
+  "by": "machine",
+  "s": "Mother-of-pearl buttons"
+ },
+ "det:ST673/1-2:0:quote": {
+  "h": "86edcca6",
+  "t": "Ferme au milieu devant par des boutons en nacre.",
+  "by": "machine",
+  "s": "Sluit middenvoor met parelmoeren knopen."
+ },
+ "det:ST673/1-2:1:find": {
+  "h": "1a510de5",
+  "t": "Un empiècement en U en broderie anglaise",
+  "by": "machine",
+  "s": "A U-shaped yoke of eyelet lace"
+ },
+ "det:ST673/1-2:1:quote": {
+  "h": "b56a5026",
+  "t": "empiècement d'épaule descendant jusqu'à la poitrine, en broderie anglaise, en forme de U",
+  "by": "machine",
+  "s": "schouderpas die tot de borst reikt, in broderie anglaise, in de vorm van een U"
+ },
+ "det:ST673/1-2:2:find": {
+  "h": "ba8b07b5",
+  "t": "De l'espace pour bouger dans le dos",
+  "by": "machine",
+  "s": "Room to move at the back"
+ },
+ "det:ST673/1-2:2:quote": {
+  "h": "36c8bd46",
+  "t": "À l'arrière, de l'espace a été créé en fronçant le tissu à l'horizontale.",
+  "by": "machine",
+  "s": "Aan de achterkant is er ruimte gecreëerd door de stof horizontaal te rimpelen."
+ },
+ "det:ST80998:0:find": {
+  "h": "c9217a36",
+  "t": "Une encolure qui se termine en pointe",
+  "by": "machine",
+  "s": "A neckline that ends in a point"
+ },
+ "det:ST80998:0:quote": {
+  "h": "e6eb9ca5",
+  "t": "encolure ronde, se terminant en pointe",
+  "by": "machine",
+  "s": "ronde halsuitsnijding, uitlopend in een punt"
+ },
+ "det:ST80998:1:find": {
+  "h": "ea3392ff",
+  "t": "Broderie de cordonnet posé sur la poitrine",
+  "by": "machine",
+  "s": "Couched cord embroidery on the chest"
+ },
+ "det:ST80998:1:quote": {
+  "h": "a45570de",
+  "t": "le plastron du caftan est décoré de broderies multicolores de cordonnets cousus et de fil métallique",
+  "by": "machine",
+  "s": "het borstvlak van de kaftan zijn versierd met veelkleurig borduurwerk van opgenaaide koorden en metaaldraad"
+ },
+ "det:ST80998:2:find": {
+  "h": "13dda94d",
+  "t": "De longues manches pointues",
+  "by": "machine",
+  "s": "Long pointed sleeves"
+ },
+ "det:ST80998:2:quote": {
+  "h": "48130b08",
+  "t": "à longues manches pointues",
+  "by": "machine",
+  "s": "met lange puntmouwen"
+ },
+ "det:ST81190:0:find": {
+  "h": "eadf650c",
+  "t": "Des rivets à la place des coutures",
+  "by": "machine",
+  "s": "Rivets instead of seams"
+ },
+ "det:ST81190:0:quote": {
+  "h": "66fce6b6",
+  "t": "fixés ensemble par des rivets couleur laiton",
+  "by": "machine",
+  "s": "aan elkaar vastgehecht met messingkleurige rivetten"
+ },
+ "det:ST81190:1:find": {
+  "h": "49b2e8bd",
+  "t": "Neuf boutons-pression",
+  "by": "machine",
+  "s": "Nine press studs"
+ },
+ "det:ST81190:1:quote": {
+  "h": "02d4e5be",
+  "t": "La veste se ferme au milieu du torse par neuf boutons-pression couleur laiton.",
+  "by": "machine",
+  "s": "De jas sluit middenvoor met negen messingkleurige drukknopen."
+ },
+ "det:ST81190:2:find": {
+  "h": "6a746423",
+  "t": "Une croix rouge dans le haut du dos",
+  "by": "machine",
+  "s": "A red cross at the back of the neck"
+ },
+ "det:ST81190:2:quote": {
+  "h": "fb54ec62",
+  "t": "Une croix rouge est cousue au dos au niveau du cou.",
+  "by": "machine",
+  "s": "Op de achterzijde ter hoogte van de hals is een rood kruis gestikt."
+ },
+ "name:ST2062": {
+  "h": "42dd19a3",
+  "t": "culotte",
+  "by": "machine",
+  "s": "Knee breeches"
+ },
+ "name:ST2203": {
+  "h": "baaeedb8",
+  "t": "robe en satin noir",
+  "by": "machine",
+  "s": "Black satin dress"
+ },
+ "name:ST2407/1-2": {
+  "h": "9b625a7d",
+  "t": "chaussures de football, Dirk Bikkembergs",
+  "by": "machine",
+  "s": "Football boots, Dirk Bikkembergs"
+ },
+ "name:ST2431/1-4": {
+  "h": "53dddec4",
+  "t": "uniforme de cavalerie bleu clair",
+  "by": "machine",
+  "s": "Light-blue cavalry uniform"
+ },
+ "name:ST2432/1-2": {
+  "h": "1d21ef41",
+  "t": "uniforme à habit à queue bleu foncé",
+  "by": "machine",
+  "s": "Dark-blue tailcoat uniform"
+ },
+ "name:ST2434": {
+  "h": "c3ec4690",
+  "t": "manteau en laine vert",
+  "by": "machine",
+  "s": "Green wool coat"
+ },
+ "name:ST2435": {
+  "h": "3dfd2a82",
+  "t": "robe en soie à broderie de paillettes",
+  "by": "machine",
+  "s": "Sequin silk dress"
+ },
+ "name:ST503": {
+  "h": "4bf2d68d",
+  "t": "jaquette",
+  "by": "machine",
+  "s": "Jak"
+ },
+ "name:ST652/1": {
+  "h": "61932e7c",
+  "t": "robe reprisée à pois",
+  "by": "machine",
+  "s": "Polka-dot mended dress"
+ },
+ "name:ST655/1": {
+  "h": "640f054c",
+  "t": "robe de cocktail",
+  "by": "machine",
+  "s": "Cocktail dress"
+ },
+ "name:ST671": {
+  "h": "a4a9d40c",
+  "t": "robe de promenade en soie",
+  "by": "machine",
+  "s": "Silk walking dress"
+ },
+ "name:ST673/1-2": {
+  "h": "1446b91e",
+  "t": "combinaison en coton",
+  "by": "machine",
+  "s": "Cotton combinaison"
+ },
+ "name:ST80881": {
+  "h": "94268b67",
+  "t": "kimono furisode",
+  "by": "machine",
+  "s": "Furisode kimono"
+ },
+ "name:ST80930": {
+  "h": "bb679682",
+  "t": "gilet ikat",
+  "by": "machine",
+  "s": "Ikat vest"
+ },
+ "name:ST80931": {
+  "h": "0a1c6c5f",
+  "t": "pantalon monpe",
+  "by": "machine",
+  "s": "Monpe trousers"
+ },
+ "name:ST80998": {
+  "h": "d1a8aadb",
+  "t": "caftan de mariée en velours rayé",
+  "by": "machine",
+  "s": "Striped velvet bridal kaftan"
+ },
+ "name:ST81114AB": {
+  "h": "59cbe79c",
+  "t": "blouse de cycliste",
+  "by": "machine",
+  "s": "Cycling blouse"
+ },
+ "name:ST81116": {
+  "h": "acb4234f",
+  "t": "pantalon de cycliste",
+  "by": "machine",
+  "s": "Cycling trousers"
+ },
+ "name:ST81190": {
+  "h": "7ed60806",
+  "t": "manteau en laine à rivets",
+  "by": "machine",
+  "s": "Riveted wool coat"
+ },
+ "narr:ST2062:0": {
+  "h": "3c49a6d2",
+  "t": "Chaque point de cette culotte a été cousu à la main.",
+  "by": "machine",
+  "s": "Every stitch in these breeches was sewn by hand."
+ },
+ "narr:ST2062:1": {
+  "h": "d1b52971",
+  "t": "Drap de laine crème, fait pour un homme, et autrefois partie d'un costume militaire russe.",
+  "by": "machine",
+  "s": "Cream woollen broadcloth, made for a man, and once part of a Russian military costume."
+ },
+ "narr:ST2062:2": {
+  "h": "349d814e",
+  "t": "Six boutons ferment la longue braguette. Une petite poche se cache dans la ceinture, à la hanche droite. Dans le dos, une boucle en laiton la serre.",
+  "by": "machine",
+  "s": "Six buttons close the long fly. A small pocket hides in the waistband at the right hip. At the back, a brass buckle pulls them tight."
+ },
+ "narr:ST2062:3": {
+  "h": "7ce52f6c",
+  "t": "Au bas de chaque genou : une fente et trois boutons. Et à l'intérieur, un aperçu d'un sergé crème brillant, probablement de la soie.",
+  "by": "machine",
+  "s": "Down at each knee: a slit and three buttons. And inside, a glimpse of glossy cream twill, probably silk."
+ },
+ "narr:ST2062:4": {
+  "h": "b9445ecc",
+  "t": "Elle date de la période 1850-1870.",
+  "by": "machine",
+  "s": "They date from between 1850 and 1870."
+ },
+ "narr:ST2062:tease": {
+  "h": "d02f8844",
+  "t": "Quand a-t-elle été cousue ? Faites votre pronostic.",
+  "by": "machine",
+  "s": "When were they sewn? Make your guess."
+ },
+ "narr:ST2203:0": {
+  "h": "70756984",
+  "t": "Du satin de soie noir, coupé près du corps, quelque part entre 1937 et 1948.",
+  "by": "machine",
+  "s": "Black silk satin, cut close to the body, somewhere between 1937 and 1948."
+ },
+ "narr:ST2203:1": {
+  "h": "abd67652",
+  "t": "Un profond décolleté en V, bordé de velours noir. De grandes épaules, rembourrées de coton blanc.",
+  "by": "machine",
+  "s": "A deep V, edged in black velvet. Big shoulders, padded with white cotton."
+ },
+ "narr:ST2203:2": {
+  "h": "684a5800",
+  "t": "Le satin se fronce et se drape, sur le devant et dans le dos.",
+  "by": "machine",
+  "s": "The satin gathers and drapes, down the front and down the back."
+ },
+ "narr:ST2203:3": {
+  "h": "56bb0ecf",
+  "t": "Deux poches drapées sont placées aux hanches. Cinq boutons en tissu ferment chaque poignet.",
+  "by": "machine",
+  "s": "Two draped pockets sit at the hips. Five fabric buttons close each cuff."
+ },
+ "narr:ST2203:4": {
+  "h": "36c1c4cd",
+  "t": "Et de la pointe du V, une fermeture éclair en métal noir descend de vingt centimètres, jusqu'à la taille.",
+  "by": "machine",
+  "s": "And from the point of the V, a black metal zip runs twenty centimetres down, to the waist."
+ },
+ "narr:ST2407/1-2:0": {
+  "h": "b911fba1",
+  "t": "Dirk Bikkembergs a fait ces chaussures de football pour un vrai club : le FC Bikkembergs Fossombrone, dans les Marches, en Italie.",
+  "by": "machine",
+  "s": "Dirk Bikkembergs made these football boots for a real club: FC Bikkembergs Fossombrone, in the Marche, in Italy."
+ },
+ "narr:ST2407/1-2:1": {
+  "h": "812af7d3",
+  "t": "Du cuir blanc, entouré de cercles bleus.",
+  "by": "machine",
+  "s": "White leather, wound with blue circles."
+ },
+ "narr:ST2407/1-2:2": {
+  "h": "7c80a8e5",
+  "t": "Retournez-les. À travers la semelle transparente à crampons, on voit un dessin rouge et bleu.",
+  "by": "machine",
+  "s": "Turn them over. Through the clear, studded sole, you can see a drawing in red and blue."
+ },
+ "narr:ST2407/1-2:3": {
+  "h": "d40fb6f6",
+  "t": "Un cercle de cuir recouvre les lacets, tenu par un élastique, et porte le logo de Bikkembergs Sport.",
+  "by": "machine",
+  "s": "A leather circle covers the laces, held on with elastic, and carries the logo of Bikkembergs Sport."
+ },
+ "narr:ST2407/1-2:4": {
+  "h": "4a31e157",
+  "t": "Un talon est bleu, l'autre rouge. L'écusson du club à gauche, celui de la marque à droite.",
+  "by": "machine",
+  "s": "One heel is blue, the other red. The club's badge on the left, the label's on the right."
+ },
+ "narr:ST2407/1-2:5": {
+  "h": "ee4ee282",
+  "t": "Elles ont été faites entre 2005 et 2009.",
+  "by": "machine",
+  "s": "They were made between 2005 and 2009."
+ },
+ "narr:ST2407/1-2:tease": {
+  "h": "ee12d6c4",
+  "t": "Sont-elles récentes ? Faites votre pronostic.",
+  "by": "machine",
+  "s": "How new are they? Make your guess."
+ },
+ "narr:ST2431/1-4:0": {
+  "h": "f3951641",
+  "t": "Imaginez-le à cheval : un lieutenant de la Garde nationale, dans les Chasseurs à cheval de France, le neuvième régiment, ou le dix-huitième.",
+  "by": "machine",
+  "s": "Imagine him on horseback: a lieutenant of the National Guard, with the mounted chasseurs of France, the ninth regiment, or the eighteenth."
+ },
+ "narr:ST2431/1-4:1": {
+  "h": "2c785c62",
+  "t": "Son uniforme est en laine bleu clair et rouge, fait entre 1870 et 1900.",
+  "by": "machine",
+  "s": "His uniform is light blue and red wool, made between 1870 and 1900."
+ },
+ "narr:ST2431/1-4:2": {
+  "h": "f8ab35ee",
+  "t": "Une tresse noire croise sa poitrine, et sert aussi de fermeture. Son col rouge est montant, travaillé en fil métallique enroulé.",
+  "by": "machine",
+  "s": "Black braid crosses his chest, and it is the fastening too. His red collar stands up, worked with coiled metal thread."
+ },
+ "narr:ST2431/1-4:3": {
+  "h": "5f05867d",
+  "t": "Un pantalon rouge à bande bleue. Des boutons dorés sur la ceinture indiquent : dix-huitième chasseurs.",
+  "by": "machine",
+  "s": "Red trousers with a blue stripe. Gold buttons on the waistband read: eighteenth chasseurs."
+ },
+ "narr:ST2431/1-4:4": {
+  "h": "f7ee9c29",
+  "t": "Sur la tête, un képi de quinze centimètres de haut, à visière en cuir noir.",
+  "by": "machine",
+  "s": "On his head, a kepi, fifteen centimetres tall, with a black leather peak."
+ },
+ "narr:ST2431/1-4:5": {
+  "h": "1fe09b9e",
+  "t": "Un dernier détail : de petites fentes dans les coutures latérales, juste assez grandes pour une petite main.",
+  "by": "machine",
+  "s": "One last detail: small slits in the side seams, just big enough for a small hand."
+ },
+ "narr:ST2432/1-2:0": {
+  "h": "fa38cf23",
+  "t": "Cet uniforme a vécu plus d'une vie.",
+  "by": "machine",
+  "s": "This uniform has lived more than one life."
+ },
+ "narr:ST2432/1-2:1": {
+  "h": "55f83bb4",
+  "t": "L'habit est l'original, fait pour un membre de la Garde nationale : du drap bleu foncé, un haut col rouge, des poignets rouges, et des basques doublées de rouge.",
+  "by": "machine",
+  "s": "The coat is the original, made for a member of the National Guard: dark blue broadcloth, a high red collar, red cuffs, and tails lined in red."
+ },
+ "narr:ST2432/1-2:2": {
+  "h": "ec594407",
+  "t": "Regardez les basques. Leurs pointes sont retournées, de sorte qu'un éclat de rouge apparaît sous le bleu.",
+  "by": "machine",
+  "s": "Look at the tails. Their points are turned out, so a flash of red shows below the blue."
+ },
+ "narr:ST2432/1-2:3": {
+  "h": "f33f3f9c",
+  "t": "Trois boutons en métal blanc disent encore : Garde Nationale.",
+  "by": "machine",
+  "s": "Three white-metal buttons still say: Garde Nationale."
+ },
+ "narr:ST2432/1-2:4": {
+  "h": "cbf041a6",
+  "t": "Le pantalon est venu plus tard, des années 1910 à 1940. Plus tard encore, un lacet rouge a été posé dans son dos.",
+  "by": "machine",
+  "s": "The trousers came later, from between 1910 and 1940. Later still, a red lace was set into their back."
+ },
+ "narr:ST2432/1-2:5": {
+  "h": "8a65966d",
+  "t": "Même les boutons dorés du devant sont plus récents, peut-être de 1980 à 2000. L'habit et le pantalon : tous deux modifiés au fil des ans.",
+  "by": "machine",
+  "s": "Even the gold buttons on the front are newer, possibly from 1980 to 2000. Coat and trousers: both altered over the years."
+ },
+ "narr:ST2434:0": {
+  "h": "6e83302d",
+  "t": "Ce manteau en drap vert, aux longues basques, a une énigme pour vous.",
+  "by": "machine",
+  "s": "This green broadcloth coat, with its long tails, has a puzzle for you."
+ },
+ "narr:ST2434:1": {
+  "h": "d47c9a24",
+  "t": "Comptez les boutonnières sur le devant : deux rangées de quatre. Comptez maintenant les boutons. Aucun.",
+  "by": "machine",
+  "s": "Count the buttonholes on the front: two rows of four. Now count the buttons. None."
+ },
+ "narr:ST2434:2": {
+  "h": "9a74800c",
+  "t": "Huit boutons ronds en laiton ont été conservés à part. Ils étaient très probablement cousus dans le dos.",
+  "by": "machine",
+  "s": "Eight round brass buttons were kept loose. Most likely, they once sat on the back."
+ },
+ "narr:ST2434:3": {
+  "h": "3d3e15f4",
+  "t": "Deux grands boutons plats en laiton sont encore là, bas sur les basques, signés : M et Cie, Paris.",
+  "by": "machine",
+  "s": "Two large flat brass buttons are still there, low on the tails, signed: M and Cie, Paris."
+ },
+ "narr:ST2434:4": {
+  "h": "f80770b0",
+  "t": "Plus tard, quelqu'un a ajouté une large bande rouge sur le devant. Et à l'intérieur, il y a une doublure d'un violet brillant.",
+  "by": "machine",
+  "s": "Later, someone added a broad red band to the front. And inside, there is a lining of glossy purple."
+ },
+ "narr:ST2434:5": {
+  "h": "44cb4c0d",
+  "t": "Il a été fait quelque part entre 1795 et 1840.",
+  "by": "machine",
+  "s": "It was made somewhere between 1795 and 1840."
+ },
+ "narr:ST2434:tease": {
+  "h": "926585b6",
+  "t": "Quel âge a ce manteau ? Faites votre pronostic.",
+  "by": "machine",
+  "s": "How old is this coat? Make your guess."
+ },
+ "narr:ST2435:0": {
+  "h": "5711860b",
+  "t": "Quelque part entre 1920 et 1925, cette robe a été faite pour scintiller.",
+  "by": "machine",
+  "s": "Somewhere between 1920 and 1925, this dress was made to shimmer."
+ },
+ "narr:ST2435:1": {
+  "h": "34776883",
+  "t": "De la soie écrue, mi-mollet, entièrement couverte de paillettes qui brillent comme des perles.",
+  "by": "machine",
+  "s": "Ecru silk, calf-length, and covered all over in sequins that glow like pearls."
+ },
+ "narr:ST2435:2": {
+  "h": "ef7f496d",
+  "t": "Elle tombe presque droit, depuis un large col bateau.",
+  "by": "machine",
+  "s": "It falls almost straight, from a wide boat neck."
+ },
+ "narr:ST2435:3": {
+  "h": "286f3e05",
+  "t": "Les côtés restent ouverts. Seules trois agrafes à gauche et de courtes pattes aux hanches la resserrent.",
+  "by": "machine",
+  "s": "The sides are left open. Only three hooks and eyes on the left, and short strips at the hips, draw it in."
+ },
+ "narr:ST2435:4": {
+  "h": "a6435417",
+  "t": "Regardez bien la surface : des piqûres à la machine en fil métallique dessinent des boucles, et des yeux.",
+  "by": "machine",
+  "s": "Look closely at the surface: machine stitching in metal thread draws curls, and eyes."
+ },
+ "narr:ST503:0": {
+  "h": "9d41f4da",
+  "t": "Aux Pays-Bas, quelqu'un a fait cette jaquette dans un taffetas de soie bleu : fin, lisse, au léger éclat.",
+  "by": "machine",
+  "s": "In the Netherlands, someone made this jacket from blue silk taffeta: fine, smooth, with a soft shine."
+ },
+ "narr:ST503:1": {
+  "h": "aeec4ecd",
+  "t": "Suivez les fils. Des flottés blancs et jaunes courent avec la chaîne, et un zigzag s'ouvre en fleurs.",
+  "by": "machine",
+  "s": "Follow the threads. White and yellow floats run with the warp, and a zigzag breaks into flowers."
+ },
+ "narr:ST503:2": {
+  "h": "18e98df7",
+  "t": "Elle s'arrête à la taille, puis retombe en longues basques. L'encolure est carrée. Les manches épousent le bras et finissent au coude.",
+  "by": "machine",
+  "s": "It stops at the waist, then falls into long skirts. The neckline is square. The sleeves hug the arm and end at the elbow."
+ },
+ "narr:ST503:3": {
+  "h": "03b1827c",
+  "t": "Le devant reste ouvert, maintenu par de petites agrafes en métal.",
+  "by": "machine",
+  "s": "The front stays open, held by small metal hooks and eyes."
+ },
+ "narr:ST503:4": {
+  "h": "09d0f56b",
+  "t": "Même la doublure est soignée : du lin bleu, rayé de blanc et de jaune.",
+  "by": "machine",
+  "s": "Even the lining is dressed up: blue linen, striped white and yellow."
+ },
+ "narr:ST503:5": {
+  "h": "6017d2ec",
+  "t": "Elle a été faite entre 1750 et 1780.",
+  "by": "machine",
+  "s": "It was made between 1750 and 1780."
+ },
+ "narr:ST503:tease": {
+  "h": "6aeba1dc",
+  "t": "Quel âge lui donnez-vous ? Faites votre pronostic.",
+  "by": "machine",
+  "s": "How old do you think it is? Make your guess."
+ },
+ "narr:ST652/1:0": {
+  "h": "fa2c422e",
+  "t": "Entre 1940 et 1945, cette robe a été reprisée, et reprisée encore.",
+  "by": "machine",
+  "s": "Between 1940 and 1945, this dress was mended, and mended again."
+ },
+ "narr:ST652/1:1": {
+  "h": "f8a02724",
+  "t": "Du coton bleu, à petits pois blancs et rouges, boutonné jusqu'en bas.",
+  "by": "machine",
+  "s": "Blue cotton, with small white and red dots, buttoned all the way down."
+ },
+ "narr:ST652/1:2": {
+  "h": "cd58b776",
+  "t": "Cherchez les pièces : du tissu à carreaux, posé encore et encore.",
+  "by": "machine",
+  "s": "Look for the patches: checked cloth, set in time after time."
+ },
+ "narr:ST652/1:3": {
+  "h": "a204b7f8",
+  "t": "Du rouge borde les poches et les manches. Trois lignes rouges ornent le revers droit.",
+  "by": "machine",
+  "s": "Red edges the pockets and the sleeves. Three red lines trim the right lapel."
+ },
+ "narr:ST652/1:4": {
+  "h": "1f4f29b5",
+  "t": "Et ce mouchoir rouge dans la poche de poitrine ? Regardez encore. Il n'a que l'air d'être là.",
+  "by": "machine",
+  "s": "And that red handkerchief in the chest pocket? Look again. It only seems to be there."
+ },
+ "narr:ST652/1:5": {
+  "h": "7b1c41bc",
+  "t": "Une ceinture en tissu se noue devant, pour marquer la taille.",
+  "by": "machine",
+  "s": "A cloth belt ties at the front, to mark the waist."
+ },
+ "narr:ST655/1:0": {
+  "h": "1f1b1790",
+  "t": "De Belgique, une robe de cocktail à rayures vertes et noires, avec un secret dans sa coupe.",
+  "by": "machine",
+  "s": "From Belgium, a cocktail dress in green and black stripes, with a secret in its cut."
+ },
+ "narr:ST655/1:1": {
+  "h": "ef504f35",
+  "t": "Onze boutons recouverts descendent le long du devant. Le col châle est en velours noir, tout comme les bandes des manches courtes.",
+  "by": "machine",
+  "s": "Eleven covered buttons run down the front. The shawl collar is black velvet, and so are the bands on the short sleeves."
+ },
+ "narr:ST655/1:2": {
+  "h": "7f6b30e1",
+  "t": "Maintenant, le secret. La jupe est faite de demi-cercles, sans coutures latérales. Ainsi les rayures sont horizontales devant, et deviennent verticales derrière.",
+  "by": "machine",
+  "s": "Now, the secret. The skirt is made of half circles, with no side seams. So the stripes run across at the front, and turn upright at the back."
+ },
+ "narr:ST655/1:3": {
+  "h": "e0ea96e9",
+  "t": "Pas de poches. Pas de doublure. Juste un ruban noir à l'intérieur de l'ourlet, fixé à la main de petits points fins.",
+  "by": "machine",
+  "s": "No pockets. No lining. Just a black ribbon inside the hem, fixed by hand with fine stitches."
+ },
+ "narr:ST655/1:4": {
+  "h": "e756d793",
+  "t": "Elle a été faite entre 1947 et 1950.",
+  "by": "machine",
+  "s": "It was made between 1947 and 1950."
+ },
+ "narr:ST655/1:tease": {
+  "h": "76df8c6b",
+  "t": "Quand a-t-elle été faite ? Faites votre pronostic.",
+  "by": "machine",
+  "s": "When was it made? Make your guess."
+ },
+ "narr:ST671:0": {
+  "h": "744fe2d8",
+  "t": "Paris, 83 boulevard Magenta. Cette adresse est imprimée sur la ceinture de cette robe, avec le nom de Madame Guédon Deschamps.",
+  "by": "machine",
+  "s": "Paris, 83 Boulevard Magenta. That address is printed on this dress's waistband, with the name Madame Guédon Deschamps."
+ },
+ "narr:ST671:1": {
+  "h": "34d4f4e0",
+  "t": "C'est une robe de promenade : longue, en reps de soie beige, faite entre 1900 et 1915.",
+  "by": "machine",
+  "s": "It is a walking gown: long, in beige silk rep, made between 1900 and 1915."
+ },
+ "narr:ST671:2": {
+  "h": "fc790c7c",
+  "t": "À la gorge, de la dentelle à la machine imitant la dentelle aux fuseaux de Lille, et un col montant tenu par des baleines.",
+  "by": "machine",
+  "s": "At the throat, machine lace made to imitate Lille bobbin lace, and a standing collar held up by bones."
+ },
+ "narr:ST671:3": {
+  "h": "afae04cd",
+  "t": "Dessous se trouve une seconde robe, en soie. Ses plis dépassent sous l'ourlet.",
+  "by": "machine",
+  "s": "Underneath is a second dress, of silk. Its pleats peek out below the hem."
+ },
+ "narr:ST671:4": {
+  "h": "9bd7fbba",
+  "t": "Regardez cet ourlet : des deux côtés, il pend un peu plus bas que devant et derrière.",
+  "by": "machine",
+  "s": "Look at that hem: at both sides, it hangs a little lower than at the front and back."
+ },
+ "narr:ST671:5": {
+  "h": "71364852",
+  "t": "Et les deux robes se ferment dans le dos, par une longue rangée d'agrafes et de boutons.",
+  "by": "machine",
+  "s": "And both dresses close at the back, with one long row of hooks and buttons."
+ },
+ "narr:ST673/1-2:0": {
+  "h": "d0dcafa0",
+  "t": "Tennis. Croquet. Badminton. Tir à l'arc. Entre 1880 et 1900, ceci a été fait pour le sport.",
+  "by": "machine",
+  "s": "Tennis. Croquet. Badminton. Archery. Between 1880 and 1900, this was made for sport."
+ },
+ "narr:ST673/1-2:1": {
+  "h": "4329ecbe",
+  "t": "Du coton blanc : un corsage et un long pantalon de dessous, boutonnés ensemble en une seule pièce, sans aucune baleine.",
+  "by": "machine",
+  "s": "White cotton: a bodice and long drawers, buttoned into one, with no boning at all."
+ },
+ "narr:ST673/1-2:2": {
+  "h": "fd371bf5",
+  "t": "De la broderie anglaise encadre le V de l'encolure, et des volants entourent les bras.",
+  "by": "machine",
+  "s": "Broderie anglaise frames the V of the neck, and ruffles circle the arms."
+ },
+ "narr:ST673/1-2:3": {
+  "h": "f39f87d3",
+  "t": "Des boutons en nacre ferment le devant. Des boutons en os ceignent la taille, pour tenir ce qui se portait par-dessus.",
+  "by": "machine",
+  "s": "Mother-of-pearl buttons close the front. Bone buttons ring the waist, to hold whatever was worn on top."
+ },
+ "narr:ST673/1-2:4": {
+  "h": "c8accc6a",
+  "t": "Et le pantalon ? Ouvert devant, ouvert derrière, et fermé par un seul bouton.",
+  "by": "machine",
+  "s": "And the drawers? Open at the front, open at the back, and closed over a single button."
+ },
+ "narr:ST80881:0": {
+  "h": "9d4660ac",
+  "t": "Ouvrez ce kimono furisode du Japon, et tout un paysage se déploie.",
+  "by": "machine",
+  "s": "Open this furisode kimono from Japan, and a whole landscape unfolds."
+ },
+ "narr:ST80881:1": {
+  "h": "d3e995e3",
+  "t": "De la soie écrue, peinte et imprimée d'or.",
+  "by": "machine",
+  "s": "Ecru silk, painted, and printed with gold."
+ },
+ "narr:ST80881:2": {
+  "h": "58e145fd",
+  "t": "De larges rubans ondulent dessus en de nombreuses couleurs. Derrière eux : des maisons, des nuages, des pivoines, des chrysanthèmes, des fleurs de prunier, de l'érable du Japon et du bambou.",
+  "by": "machine",
+  "s": "Broad ribbons billow across it in many colours. Behind them: houses, clouds, peonies, chrysanthemums, plum blossom, Japanese maple, and bamboo."
+ },
+ "narr:ST80881:3": {
+  "h": "f246936d",
+  "t": "Approchez-vous des fleurs. Leurs détails sont brodés en fil de soie et de métal.",
+  "by": "machine",
+  "s": "Come closer to the flowers. Their details are embroidered in silk and metal thread."
+ },
+ "narr:ST80881:4": {
+  "h": "c815d9ef",
+  "t": "À l'intérieur, la doublure change à mi-hauteur : blanche en haut, imprimée en dessous.",
+  "by": "machine",
+  "s": "Inside, the lining changes halfway: white at the top, printed below."
+ },
+ "narr:ST80881:5": {
+  "h": "37e290b3",
+  "t": "Il date de 1979.",
+  "by": "machine",
+  "s": "It dates from 1979."
+ },
+ "narr:ST80881:tease": {
+  "h": "76df8c6b",
+  "t": "Quand a-t-il été fait ? Faites votre pronostic.",
+  "by": "machine",
+  "s": "When was it made? Make your guess."
+ },
+ "narr:ST80930:0": {
+  "h": "ac549146",
+  "t": "Du Japon vient cette petite veste en coton bleu foncé.",
+  "by": "machine",
+  "s": "From Japan comes this little jacket in dark blue cotton."
+ },
+ "narr:ST80930:1": {
+  "h": "30ccae69",
+  "t": "Son motif est un double ikat : des points bleu clair et de petits carrés rouges, éparpillés comme des confettis.",
+  "by": "machine",
+  "s": "Its pattern is double ikat: light blue spots, and small red squares, scattered like confetti."
+ },
+ "narr:ST80930:2": {
+  "h": "81b187a4",
+  "t": "Les manches sont longues et bouffantes. Les pans du devant se croisent et se ferment à la taille avec des rubans.",
+  "by": "machine",
+  "s": "The sleeves are long and puffed. The front panels cross over each other, and close at the waist with ribbons."
+ },
+ "narr:ST80930:3": {
+  "h": "8774d1f2",
+  "t": "Gilet ou veste ? Même la fiche du musée n'arrive pas à trancher : elle dit l'un ou l'autre.",
+  "by": "machine",
+  "s": "Waistcoat, or jacket? Even the museum's record cannot decide: it says one or the other."
+ },
+ "narr:ST80930:4": {
+  "h": "d15d49c2",
+  "t": "Elle date des années 1950.",
+  "by": "machine",
+  "s": "It dates from the 1950s."
+ },
+ "narr:ST80930:tease": {
+  "h": "76df8c6b",
+  "t": "Quand a-t-elle été faite ? Faites votre pronostic.",
+  "by": "machine",
+  "s": "When was it made? Make your guess."
+ },
+ "narr:ST80931:0": {
+  "h": "3bd755b2",
+  "t": "Voici des monpe : des pantalons bouffants du Japon.",
+  "by": "machine",
+  "s": "These are monpe: puffed trousers from Japan."
+ },
+ "narr:ST80931:1": {
+  "h": "8784b78c",
+  "t": "Du coton bleu foncé en ikat, avec des points bleu clair et de petits carrés rouges.",
+  "by": "machine",
+  "s": "Dark blue cotton in ikat, with light blue spots and small red squares."
+ },
+ "narr:ST80931:2": {
+  "h": "ed880e7d",
+  "t": "Une large ceinture se ferme avec de longs rubans. Et aux chevilles ? D'autres rubans, pour serrer les jambes.",
+  "by": "machine",
+  "s": "A broad waistband closes with long ribbons. And at the ankles? More ribbons, so you can tie the legs in close."
+ },
+ "narr:ST80931:3": {
+  "h": "0e920553",
+  "t": "Ils ont été faits en 1965.",
+  "by": "machine",
+  "s": "They were made in 1965."
+ },
+ "narr:ST80931:tease": {
+  "h": "c06f7e24",
+  "t": "Quand ont-ils été faits ? Faites votre pronostic.",
+  "by": "machine",
+  "s": "When were they made? Make your guess."
+ },
+ "narr:ST80998:0": {
+  "h": "c69a3c88",
+  "t": "Ce caftan a été fait pour une mariée en Palestine, entre 1900 et 1925.",
+  "by": "machine",
+  "s": "This kaftan was made for a bride in Palestine, between 1900 and 1925."
+ },
+ "narr:ST80998:1": {
+  "h": "265f1f37",
+  "t": "Du velours, à rayures bordeaux, rouges, vertes et noires.",
+  "by": "machine",
+  "s": "Velvet, in stripes of burgundy, red, green and black."
+ },
+ "narr:ST80998:2": {
+  "h": "43ad8e57",
+  "t": "L'encolure est ronde, puis descend en pointe. Les longues manches se terminent elles aussi en pointes.",
+  "by": "machine",
+  "s": "The neckline is round, then drops to a point. The long sleeves end in points too."
+ },
+ "narr:ST80998:3": {
+  "h": "af54eb82",
+  "t": "Suivez maintenant la broderie : sur la poitrine, le long des côtés, sur les manches. Des cordons et du fil métallique, cousus en de nombreuses couleurs, sur des fonds orange, brun clair et vert.",
+  "by": "machine",
+  "s": "Now follow the embroidery: across the chest, along the sides, over the sleeves. Cords and metal thread, sewn on in many colours, on grounds of orange, light brown and green."
+ },
+ "narr:ST80998:4": {
+  "h": "6ede4210",
+  "t": "Et sous les manches brodées, une doublure cachée en coton rose.",
+  "by": "machine",
+  "s": "And under the embroidered sleeves, a hidden lining of pink cotton."
+ },
+ "narr:ST81114AB:0": {
+  "h": "e9413986",
+  "t": "Imaginez une femme qui part à vélo.",
+  "by": "machine",
+  "s": "Picture a woman setting off on a bicycle."
+ },
+ "narr:ST81114AB:1": {
+  "h": "43b5b3b0",
+  "t": "Voici ce qu'elle portait sur le haut : une blouse blanche en batiste de coton, légère et respirante, faite pour la balade.",
+  "by": "machine",
+  "s": "This is what she wore on top: a white blouse of cotton batiste, light and breathable, made for the ride."
+ },
+ "narr:ST81114AB:2": {
+  "h": "2636db2b",
+  "t": "De la dentelle faite à la machine court le long du col, des poignets et du devant.",
+  "by": "machine",
+  "s": "Machine-made lace runs along the collar, the cuffs, and down the front."
+ },
+ "narr:ST81114AB:3": {
+  "h": "be7f0855",
+  "t": "Regardez le centre. Un panneau de fins plis est boutonné dessus, avec des boutons en nacre, la couche intérieure lisse d'un coquillage marin.",
+  "by": "machine",
+  "s": "Look at the centre. A panel of fine pleats is buttoned on, with buttons of mother of pearl, the smooth inner layer of a sea shell."
+ },
+ "narr:ST81114AB:4": {
+  "h": "244233b5",
+  "t": "Et chaque boutonnière ? Cousue à la main.",
+  "by": "machine",
+  "s": "And every buttonhole? Sewn by hand."
+ },
+ "narr:ST81114AB:5": {
+  "h": "b778ff01",
+  "t": "Des tenues comme celle-ci étaient portées par les femmes pour faire du vélo, vers 1900.",
+  "by": "machine",
+  "s": "Outfits like this one were worn by women for cycling, around 1900."
+ },
+ "narr:ST81114AB:tease": {
+  "h": "17095b71",
+  "t": "Alors, quand roulait-elle ? Faites votre pronostic.",
+  "by": "machine",
+  "s": "So when did she ride? Make your guess."
+ },
+ "narr:ST81116:0": {
+  "h": "e83e73cc",
+  "t": "Reculez de quelques pas. Pantalon ou jupe ? Difficile à dire.",
+  "by": "machine",
+  "s": "Take a few steps back. Trousers, or a skirt? It is hard to tell."
+ },
+ "narr:ST81116:1": {
+  "h": "66c96f61",
+  "t": "De la laine noire, large, resserrée au genou par un élastique en une sorte de ballon.",
+  "by": "machine",
+  "s": "Black wool, wide, gathered at the knee with elastic into a kind of balloon."
+ },
+ "narr:ST81116:2": {
+  "h": "9c443477",
+  "t": "Six plis profonds, devant et derrière, cachent l'endroit où les jambes se rejoignent.",
+  "by": "machine",
+  "s": "Six deep pleats, at the front and at the back, hide where the legs meet."
+ },
+ "narr:ST81116:3": {
+  "h": "fdd4a23c",
+  "t": "Pourquoi autant de tissu ? Parce qu'une longue jupe pouvait se coincer dans les roues d'un vélo.",
+  "by": "machine",
+  "s": "Why so much fabric? Because a long skirt could get caught in the wheels of a bicycle."
+ },
+ "narr:ST81116:4": {
+  "h": "9bd64af2",
+  "t": "Celui-ci donnait aux femmes de la liberté de mouvement.",
+  "by": "machine",
+  "s": "These gave women room to move."
+ },
+ "narr:ST81116:5": {
+  "h": "5234d0fb",
+  "t": "Vers 1900, de nombreuses femmes ont commencé à porter des pantalons comme celui-ci pour pédaler.",
+  "by": "machine",
+  "s": "Around 1900, many women started wearing trousers like these to cycle."
+ },
+ "narr:ST81116:tease": {
+  "h": "cf806963",
+  "t": "Quand les femmes ont-elles roulé ainsi pour la première fois ? Faites votre pronostic.",
+  "by": "machine",
+  "s": "When did women first ride in these? Make your guess."
+ },
+ "narr:ST81190:0": {
+  "h": "21fc23a2",
+  "t": "Automne-hiver 1998. Une maison de mode belge, A.F. Vandevorst, présente sa toute première collection.",
+  "by": "machine",
+  "s": "Autumn-winter, 1998. A Belgian fashion house, A.F. Vandevorst, presents its very first collection."
+ },
+ "narr:ST81190:1": {
+  "h": "c0c18c9b",
+  "t": "Ce manteau en laine grise en fait partie. La fiche du musée lui donne un seul mot : Blessed.",
+  "by": "machine",
+  "s": "This grey wool coat is part of it. The museum's record gives it a single word: Blessed."
+ },
+ "narr:ST81190:2": {
+  "h": "5cbf8c1e",
+  "t": "Regardez maintenant de plus près. Les manches, le devant, les épaules : aucun de ces éléments n'est cousu.",
+  "by": "machine",
+  "s": "Now look closer. The sleeves, the front, the shoulders: none of them are sewn together."
+ },
+ "narr:ST81190:3": {
+  "h": "c38bec48",
+  "t": "Des rivets couleur laiton maintiennent chaque pièce en place, même les pinces et les coutures latérales.",
+  "by": "machine",
+  "s": "Brass-coloured rivets hold every piece in place, even the darts and the side seams."
+ },
+ "narr:ST81190:4": {
+  "h": "d5f1a7b7",
+  "t": "Les chevaux et leur harnachement, les uniformes, les rivets : ils ont inspiré la maison dès le début, et on le voit ici.",
+  "by": "machine",
+  "s": "Horses and their tack, uniforms, rivets: they inspired the house from the start, and you can see it here."
+ },
+ "narr:ST81190:5": {
+  "h": "2314ad5c",
+  "t": "Neuf boutons-pression ferment le devant.",
+  "by": "machine",
+  "s": "Nine snap buttons close the front."
+ },
+ "narr:ST81190:6": {
+  "h": "80717c0b",
+  "t": "Et à l'arrière du col, cousue en rouge, une croix : la marque d'A.F. Vandevorst.",
+  "by": "machine",
+  "s": "And at the back of the neck, stitched in red, a cross: the mark of A.F. Vandevorst."
+ },
+ "q:ST81114AB:a:0": {
+  "h": "360caa42",
+  "t": "3",
+  "by": "machine",
+  "s": "3"
+ },
+ "q:ST81114AB:a:1": {
+  "h": "91dda213",
+  "t": "Oui, l'un des motifs floraux",
+  "by": "machine",
+  "s": "Yes, one of the flower motifs"
+ },
+ "q:ST81114AB:a:2": {
+  "h": "2b1dfc92",
+  "t": "les boutonnières ou les coutures",
+  "by": "machine",
+  "s": "buttonholes or seams"
+ },
+ "q:ST81114AB:a:3": {
+  "h": "2816f956",
+  "t": "Batiste de coton",
+  "by": "machine",
+  "s": "Cotton batiste"
+ },
+ "q:ST81114AB:fact:0": {
+  "h": "678c75e7",
+  "t": "Blouse",
+  "by": "machine",
+  "s": "Blouse"
+ },
+ "q:ST81114AB:fact:1": {
+  "h": "a12e3fde",
+  "t": "Coton, nacre",
+  "by": "machine",
+  "s": "Cotton, Mother of pearl"
+ },
+ "q:ST81114AB:fact:2": {
+  "h": "34b4850d",
+  "t": "tissage, broderie blanche, broderie anglaise, couture",
+  "by": "machine",
+  "s": "weaving, whitework, broderie anglaise, stitching"
+ },
+ "q:ST81114AB:fact:3": {
+  "h": "8786b0ec",
+  "t": "1890-1920",
+  "by": "machine",
+  "s": "1890-1920"
+ },
+ "q:ST81114AB:fact:4": {
+  "h": "5e64d484",
+  "t": "Belgique, Europe",
+  "by": "machine",
+  "s": "Belgium, Europe"
+ },
+ "q:ST81114AB:q:0": {
+  "h": "347eb03b",
+  "t": "Combien de coutures verticales (la ligne où deux ou plusieurs morceaux de tissu sont cousus ensemble) voyez-vous dans le dos de la blouse ?",
+  "by": "machine",
+  "s": "How many vertical seams (the line where two or more pieces of fabric are stitched together) can you see at the back of the blouse?"
+ },
+ "q:ST81114AB:q:1": {
+  "h": "462440ea",
+  "t": "Les bandes de dentelle aux extrémités des manches et au col ont-elles des motifs en commun ?",
+  "by": "machine",
+  "s": "Do the lace pieces on the ends of the sleeves and on the collar have any of the same patterns?"
+ },
+ "q:ST81114AB:q:2": {
+  "h": "4da5d58f",
+  "t": "Citez un élément précis de la blouse qui est cousu à la main",
+  "by": "machine",
+  "s": "Name one specific element of the blouse that is hand sewn"
+ },
+ "q:ST81114AB:q:3": {
+  "h": "013afd25",
+  "t": "En quel tissu la blouse est-elle faite, ce qui la rend légère et adaptée au sport ?",
+  "by": "machine",
+  "s": "What type of fabric is the blouse made of that makes it light and good for exercise?"
+ },
+ "q:ST81114AB:story:0": {
+  "h": "f7a184bd",
+  "t": "Cette blouse blanche en coton a de la dentelle faite à la machine sur le devant, au col et aux extrémités des manches (appelées poignets). Regardez le centre du devant de la blouse : les bandes de dentelle encadrent un panneau de plis (les bandes de tissu pliées en deux et cousues). En regardant bien, vous verrez que ce panneau plissé est fixé au reste de la blouse par des boutons. Ces boutons blancs brillants sont en nacre, la couche intérieure solide et lisse de certains coquillages marins, comme les huîtres. Les boutonnières sont cousues à la main",
+  "by": "machine",
+  "s": "This white cotton blouse has machine-made lace on the front, the collar, and the ends of the sleeves (named the cuffs). Take a look at the centre front of the blouse, the lace pieces frame a panel of pleats (the columns of fabric folded double and sewed). If you look closely you can see this pleated panel is attached to the rest of the blouse with buttons. These shiny white buttons are made of mother of pearl, the strong and smooth inner layer of certain sea shells, such as oysters. The buttonholes are hand sewn"
+ },
+ "q:ST81114AB:story:1": {
+  "h": "b02ac26d",
+  "t": "La blouse fait partie d'une tenue que les femmes portaient pour faire du vélo vers 1900. Le type de tissu utilisé pour la blouse, appelé « batiste de coton », est très léger et respirant, ce qui le rendait idéal pour le cyclisme et le sport.",
+  "by": "machine",
+  "s": "The blouse is part of an outfit that would have been worn by women for cycling around 1900. The type of fabric used for the blouse, called ‘cotton batiste’ is very light and breathable, making it a good fit for cycling and exercising."
+ },
+ "q:ST81114AB:title": {
+  "h": "678c75e7",
+  "t": "Blouse",
+  "by": "machine",
+  "s": "Blouse"
+ },
+ "q:ST81116:a:0": {
+  "h": "e6221cde",
+  "t": "une poche",
+  "by": "machine",
+  "s": "a pocket"
+ },
+ "q:ST81116:a:1": {
+  "h": "c7bee68c",
+  "t": "le tissu pouvait se coincer dans les roues",
+  "by": "machine",
+  "s": "the fabric could get caught in the wheels"
+ },
+ "q:ST81116:a:2": {
+  "h": "bf6456c8",
+  "t": "oui, elles ont un élastique",
+  "by": "machine",
+  "s": "yes, they have an elastic"
+ },
+ "q:ST81116:fact:0": {
+  "h": "4bfcebbc",
+  "t": "Pantalon",
+  "by": "machine",
+  "s": "Trousers"
+ },
+ "q:ST81116:fact:1": {
+  "h": "5d26942e",
+  "t": "Laine, coton, fibre synthétique",
+  "by": "machine",
+  "s": "Wool, cotton, synthetic fibre"
+ },
+ "q:ST81116:fact:2": {
+  "h": "69e7f6ad",
+  "t": "tissage, couture",
+  "by": "machine",
+  "s": "weaving, stitching"
+ },
+ "q:ST81116:fact:3": {
+  "h": "8786b0ec",
+  "t": "1890-1920",
+  "by": "machine",
+  "s": "1890-1920"
+ },
+ "q:ST81116:fact:4": {
+  "h": "5e64d484",
+  "t": "Belgique, Europe",
+  "by": "machine",
+  "s": "Belgium, Europe"
+ },
+ "q:ST81116:q:0": {
+  "h": "28eb379b",
+  "t": "Que voyez-vous caché entre les plis en haut à droite du pantalon ?",
+  "by": "machine",
+  "s": "What do you see hidden between the folded pleats at the top right of the trousers?"
+ },
+ "q:ST81116:q:1": {
+  "h": "8607416a",
+  "t": "Pourquoi était-il dangereux de porter de longues jupes à vélo ?",
+  "by": "machine",
+  "s": "Why was it dangerous to wear long skirts whilst cycling?"
+ },
+ "q:ST81116:q:2": {
+  "h": "5d9228f9",
+  "t": "Le bas des jambes du pantalon serait-il élastique ?",
+  "by": "machine",
+  "s": "Would the ends of the pant legs be stretchy?"
+ },
+ "q:ST81116:story:0": {
+  "h": "52f4b169",
+  "t": "Regardez ce pantalon noir en laine. Il est large et se resserre aux genoux par un élastique, ce qui lui donne une sorte de forme de ballon. Devant comme derrière, six plis profonds cachent l'endroit où les jambes gauche et droite sont assemblées.",
+  "by": "machine",
+  "s": "Take a look at these black woollen trousers. They are wide and gather at the knees with an elastic, forming a kind of balloon shape. Both in the front and the back are six deep pleats or folds which hide the part where the left and right pant legs are attached."
+ },
+ "q:ST81116:story:1": {
+  "h": "cdd052ba",
+  "t": "Si vous reculez de quelques pas, vous aurez peut-être du mal à voir s'il s'agit d'un pantalon ou d'une jupe. Ce pantalon ample fait partie d'une tenue que les femmes portaient vers 1900 pour faire du vélo. À cette époque, de nombreuses femmes ont commencé à porter le pantalon pour pédaler, car les longues jupes pouvaient se coincer dans les roues. Contrairement à leurs vêtements de tous les jours, les vêtements de sport nouvellement conçus offraient aux femmes plus de confort et de liberté de mouvement pendant l'effort.",
+  "by": "machine",
+  "s": "If you take a few steps back, you may find it is hard to see whether these are trousers or a skirt. The voluminous trousers are part of an outfit worn by women around 1900 for cycling. Around this time, many women started wearing trousers to cycle as long skirts could get caught in the wheels. In contrast to their daily clothing, newly designed sports clothes gave women more comfort and room to move when exercising."
+ },
+ "q:ST81116:title": {
+  "h": "4bfcebbc",
+  "t": "Pantalon",
+  "by": "machine",
+  "s": "Trousers"
+ },
+ "q:ST81190:a:0": {
+  "h": "95dde6f9",
+  "t": "la croix sur la nuque",
+  "by": "machine",
+  "s": "the cross at the nape of the neck"
+ },
+ "q:ST81190:a:1": {
+  "h": "3477990c",
+  "t": "rivets",
+  "by": "machine",
+  "s": "rivets"
+ },
+ "q:ST81190:a:2": {
+  "h": "3c0cb3b4",
+  "t": "9",
+  "by": "machine",
+  "s": "9"
+ },
+ "q:ST81190:a:3": {
+  "h": "e3010dcb",
+  "t": "Automne et hiver",
+  "by": "machine",
+  "s": "Autumn and winter"
+ },
+ "q:ST81190:fact:0": {
+  "h": "fd6ae67b",
+  "t": "Jaquette",
+  "by": "machine",
+  "s": "Jacket"
+ },
+ "q:ST81190:fact:1": {
+  "h": "bf217580",
+  "t": "Laine, fibre synthétique, coton, métal, feutre",
+  "by": "machine",
+  "s": "Wool, synthetic fiber, cotton, metal, felt"
+ },
+ "q:ST81190:fact:2": {
+  "h": "9dd2f044",
+  "t": "feutrage",
+  "by": "machine",
+  "s": "Felting"
+ },
+ "q:ST81190:fact:3": {
+  "h": "8e0fdb35",
+  "t": "1998-1999",
+  "by": "machine",
+  "s": "1998-1999"
+ },
+ "q:ST81190:fact:4": {
+  "h": "cabe18f6",
+  "t": "Belgique",
+  "by": "machine",
+  "s": "Belgium"
+ },
+ "q:ST81190:q:0": {
+  "h": "d1d9933e",
+  "t": "Quelle partie de la jaquette est cousue avec du fil rouge ?",
+  "by": "machine",
+  "s": "What part of the jacket is stitched with red thread?"
+ },
+ "q:ST81190:q:1": {
+  "h": "78134353",
+  "t": "Quel élément de la jaquette montre clairement le langage visuel du créateur ?",
+  "by": "machine",
+  "s": "Which element of the jacket clearly shows the designer’s visual language?"
+ },
+ "q:ST81190:q:2": {
+  "h": "e90cba1a",
+  "t": "Combien de boutons-pression la jaquette a-t-elle ?",
+  "by": "machine",
+  "s": "How many snap buttons does the jacket have?"
+ },
+ "q:ST81190:q:3": {
+  "h": "9fe5070a",
+  "t": "Compte tenu de la matière et du style, pour quelles saisons cette jaquette a-t-elle été conçue ?",
+  "by": "machine",
+  "s": "Considering the material and style, what seasons was this jacket made for?"
+ },
+ "q:ST81190:story:0": {
+  "h": "f9a7ef51",
+  "t": "Cette jaquette grisonnante en laine de 1998-1999 de la maison de couture belge A.F. Vandevorst présente des détails remarquables. Elle est composée de parties séparées ; la manche, le devant, l'épaule et les pièces de poitrine ne sont pas cousus ensemble. Si tu regardes de près, comment sont-ils maintenus ensemble ? Les pièces, ainsi que les pinces et les coutures latérales, sont fixées à l'aide de rivets en métal, des attaches ressemblant à des boulons qui unissent deux tissus. La jaquette se ferme au milieu du devant par une rangée de boutons-pression, un type de bouton que l'on ferme facilement en pressant les deux extrémités l'une contre l'autre.",
+  "by": "machine",
+  "s": "This grey woolen jacket from 1998-1999 by Belgian fashion house A.F. Vandevorst has some remarkable details. It is made up of separate parts; the sleeve, front, shoulder, and breast pieces are not sewn together. If you look closely, how are they held together? The pieces, as well as the darts and side seams are fastened with metal rivets, bolt-like fasteners that attach two fabrics. The jacket is closed in the centre front by a column of snap buttons, a type of button you can easily close by pressing the two ends together."
+ },
+ "q:ST81190:story:1": {
+  "h": "bafaf3c9",
+  "t": "Regarde maintenant l'arrière de la pièce. Qu'est-ce qui saute aux yeux ? La croix rouge brodée sur la nuque est le logo emblématique d'A.F. Vandevorst. Dès leurs premières collections, leurs créations ont été inspirées par l'artiste allemand Joseph Beuys, la religion, les chevaux et leur harnachement, les uniformes, les rivets, la lingerie et les chaussures fétiches. Cette jaquette fait partie de leur première collection.",
+  "by": "machine",
+  "s": "Now look at the back of the piece. What stands out? The red cross stitched at the nape of the neck is the iconic logo of A.F. Vandevorst. Since their early collections, their designs have been inspired by German artist Joseph Beuys, religion, horses and their tack, uniforms, rivets, lingerie, and fetish shoes. This jacket is part of their first collection."
+ },
+ "q:ST81190:title": {
+  "h": "304fa7d6",
+  "t": "A.F. Vandevorst jaquette",
+  "by": "machine",
+  "s": "A.F. Vandevorst Jacket"
+ },
+ "rec:ST2062:desc:0": {
+  "h": "a29e7f9e",
+  "t": "Pantalon, culotte pour homme, en drap de laine couleur crème.",
+  "by": "machine",
+  "s": "Broek, kniebroek voor een man, in crèmekleurig wollen laken."
+ },
+ "rec:ST2062:desc:1": {
+  "h": "f3e84ca6",
+  "t": "Longue braguette au milieu du devant, fermée par six boutons (matériau inconnu).",
+  "by": "machine",
+  "s": "Lange gulp middenvoor, gesloten met zes knopen (materiaal onbekend)."
+ },
+ "rec:ST2062:desc:2": {
+  "h": "7b9f3ae1",
+  "t": "Petite poche sur la hanche droite : poche en biais dans la ceinture.",
+  "by": "machine",
+  "s": "Zakje rechts op de heup: steekzak in de tailleband."
+ },
+ "rec:ST2062:desc:3": {
+  "h": "09bbb7a8",
+  "t": "Au milieu du dos, une petite patte avec une boucle en laiton ; de même, une petite fente dans la ceinture.",
+  "by": "machine",
+  "s": "Middenachter een riempje met een messing gesp; eveneens kleine split in de tailleband."
+ },
+ "rec:ST2062:desc:4": {
+  "h": "ad9106d5",
+  "t": "La culotte est finie au bas des jambes par une fente et trois boutons ; la bande se termine par une courte patte et une boutonnière de l'autre côté (les deux boutons sont absents).",
+  "by": "machine",
+  "s": "Kniebroek is onderaan de pijpen afgewerkt met een split en drie knopen; de bies eindigt in een kort riempje en een knoopsgat aan de andere zijde (knopen beide afwezig)."
+ },
+ "rec:ST2062:desc:5": {
+  "h": "5ad55f36",
+  "t": "Le pantalon est en partie doublé sur le dessus d'un sergé blanc crème brillant probablement en soie.",
+  "by": "machine",
+  "s": "Broek is aan de bovenzijde deels gevoerd met glanzend crèmewit keperweefsel in waarschijnlijk zijde."
+ },
+ "rec:ST2062:desc:6": {
+  "h": "0e9a8621",
+  "t": "Élément d'un costume militaire russe.",
+  "by": "machine",
+  "s": "Deel van een Russisch militair kostuum."
+ },
+ "rec:ST2062:desc:7": {
+  "h": "a4ed7422",
+  "t": "Entièrement cousu à la main.",
+  "by": "machine",
+  "s": "Volledig met de hand genaaid."
+ },
+ "rec:ST2062:quote": {
+  "h": "a29e7f9e",
+  "t": "Pantalon, culotte pour homme, en drap de laine couleur crème.",
+  "by": "machine",
+  "s": "Broek, kniebroek voor een man, in crèmekleurig wollen laken."
+ },
+ "rec:ST2203:desc:0": {
+  "h": "5bcb6441",
+  "t": "Robe en satin de soie noir.",
+  "by": "machine",
+  "s": "Jurk van zwart zijden satijn."
+ },
+ "rec:ST2203:desc:1": {
+  "h": "a11ca03f",
+  "t": "Modèle ajusté avec un décolleté en V profond bordé d'une bande de velours de soie noir.",
+  "by": "machine",
+  "s": "Nauwsluitend model met diepe V-hals die afgezet is met een band van zwart zijden fluweel."
+ },
+ "rec:ST2203:desc:2": {
+  "h": "bdce5244",
+  "t": "Grandes épaulettes en coton blanc rembourré.",
+  "by": "machine",
+  "s": "Grote schoudervullingen van witte, opgevulde katoen."
+ },
+ "rec:ST2203:desc:3": {
+  "h": "93d95bef",
+  "t": "Manches longues droites coupées d'une seule pièce avec le devant, avec un poignet fermé par cinq boutons recouverts de tissu et des brides.",
+  "by": "machine",
+  "s": "Aan de voorkant aangeknipte, rechte lange mouwen met een manchet sluitend met vijf stofknopen en lusjes."
+ },
+ "rec:ST2203:desc:4": {
+  "h": "af7c917a",
+  "t": "Les mouches sont froncées à hauteur de la poitrine.",
+  "by": "machine",
+  "s": "De mouwen zijn aangerimpeld op borsthoogte."
+ },
+ "rec:ST2203:desc:5": {
+  "h": "d29bebfd",
+  "t": "Gousset dans le bas de l'emmanchure.",
+  "by": "machine",
+  "s": "Spie aan onderzijde armstgat."
+ },
+ "rec:ST2203:desc:6": {
+  "h": "83dffe08",
+  "t": "La robe est fortement froncée et drapée le long des lignes du milieu devant et du milieu dos.",
+  "by": "machine",
+  "s": "De jurk is langs middenvoor- en middenachterlijn sterk ingerimpeld en gedrapeerd."
+ },
+ "rec:ST2203:desc:7": {
+  "h": "2f556183",
+  "t": "Deux poches drapées au niveau des hanches, bordées d'un ruban de velours noir et qui se prolongent jusqu'aux côtés.",
+  "by": "machine",
+  "s": "Twee gedrapeerde zakken op heuphoogte die afgezet zijn met een band zwart fluweel en doorlopen tot aan de zij."
+ },
+ "rec:ST2203:desc:8": {
+  "h": "3268248b",
+  "t": "Plis creux au milieu devant, de la fermeture à glissière jusqu'à l'ourlet.",
+  "by": "machine",
+  "s": "Stolpplooi middenvoor vanaf ritssluiting naar zoom."
+ },
+ "rec:ST2203:desc:9": {
+  "h": "6496c02d",
+  "t": "Fermeture au milieu devant par une glissière en métal noir (20cm) de la pointe de l'encolure en V jusqu'à la taille.",
+  "by": "machine",
+  "s": "Sluitend middenvoor door middel van een zwarte metalen rits (20cm) vanaf punt V-hals tot op taillehoogte."
+ },
+ "rec:ST2203:quote": {
+  "h": "5bcb6441",
+  "t": "Robe en satin de soie noir.",
+  "by": "machine",
+  "s": "Jurk van zwart zijden satijn."
+ },
+ "rec:ST2407/1-2:desc:0": {
+  "h": "3ecff78a",
+  "t": "Paire de chaussures de football en cuir blanc à rayures circulaires bleues.",
+  "by": "machine",
+  "s": "Paar voetbalschoenen in wit met circulair blauw gestreept leder."
+ },
+ "rec:ST2407/1-2:desc:1": {
+  "h": "efc5b37d",
+  "t": "Créé pour le club FC Bikkembergs Fossombrone dans les Marches, en Italie.",
+  "by": "machine",
+  "s": "Gemaakt voor de club FC Bikkembergs Fossombrone in De Marken, Italië."
+ },
+ "rec:ST2407/1-2:desc:2": {
+  "h": "87525356",
+  "t": "Semelle à crampons en plastique transparent, à travers laquelle un motif graphique en rouge et bleu est visible.",
+  "by": "machine",
+  "s": "Zool met noppen in transparante kunststof, waardoorheen een grafisch ontwerp in rood en blauw zichtbaar is."
+ },
+ "rec:ST2407/1-2:desc:3": {
+  "h": "24d89470",
+  "t": "Sur l'avant-pied, au-dessus d'un laçage, se trouve un cercle en cuir portant le logo de la marque Bikkembergs Sport.",
+  "by": "machine",
+  "s": "Op de voorvoet bovenop een vetersluiting bevindt zich een cirkel in leder die het logo van het label Bikkembergs Sport bevat."
+ },
+ "rec:ST2407/1-2:desc:4": {
+  "h": "ff796c40",
+  "t": "Ce rabat est fixé autour de la chaussure par un élastique.",
+  "by": "machine",
+  "s": "Deze flap zit met elastiek bevestigd rondom de schoen."
+ },
+ "rec:ST2407/1-2:desc:5": {
+  "h": "eca665f5",
+  "t": "Le talon gauche est en cuir bleu ; le talon droit en rouge.",
+  "by": "machine",
+  "s": "De hiel links is in blauw leder uitgevoerd; de hiel rechts in rood."
+ },
+ "rec:ST2407/1-2:desc:6": {
+  "h": "bc2a954d",
+  "t": "À gauche sur le talon, le logo de l'équipe de football du FC Fossombrone est brodé ; à droite, le logo de la marque Bikkembergs Sport.",
+  "by": "machine",
+  "s": "Links op de hiel is het logo van de voetbalploeg FC Fossombrone opgestikte; rechts het logo van het label Bikkembergs Sport."
+ },
+ "rec:ST2407/1-2:quote": {
+  "h": "3ecff78a",
+  "t": "Paire de chaussures de football en cuir blanc à rayures circulaires bleues.",
+  "by": "machine",
+  "s": "Paar voetbalschoenen in wit met circulair blauw gestreept leder."
+ },
+ "rec:ST2431/1-4:desc:0": {
+  "h": "4d18646e",
+  "t": "Uniforme militaire pour homme, en laine bleu clair et rouge, d'un lieutenant de la Garde nationale, membre du 9e ou 18e régiment des Chasseurs à cheval (France). 1.",
+  "by": "machine",
+  "s": "Militair uniform voor een man, in lichtblauwe en rode wol, van een luitenant van de Nationale Garde, lid van het 9e of 18e regiment van de jagers te paard (Chasseurs à cheval, Frankrijk). 1."
+ },
+ "rec:ST2431/1-4:desc:1": {
+  "h": "5ea972db",
+  "t": "Veste, longue jusqu'aux hanches, en drap (laine) bleu, évasée, avec une fermeture à boutons métalliques bombés gris foncé au milieu du devant (marqué CP Perfectionné Paris).",
+  "by": "machine",
+  "s": "Jas, heuplang, in blauw laken (wol), wijd uitlopend, met een sluiting van donkergrijze, bolle, metallic knopen middenvoor (gemerkt CP Perfectionné Paris)."
+ },
+ "rec:ST2431/1-4:desc:10": {
+  "h": "4eb8f4fd",
+  "t": "À l'intérieur des jambes en bas, de chaque côté, un bouton en métal sur un petit morceau de cuir.",
+  "by": "machine",
+  "s": "Binnenin de pijpen onderaan aan weerszijden een metalen knoop op een stukje leder."
+ },
+ "rec:ST2431/1-4:desc:11": {
+  "h": "a4e3ebef",
+  "t": "Longue fermeture à patte de boutons dorés sur du coton lustré violet clair.",
+  "by": "machine",
+  "s": "Lange gulpsluiting van goudkleurige knopen op lichtpaars geglansd katoen."
+ },
+ "rec:ST2431/1-4:desc:12": {
+  "h": "2863f814",
+  "t": "Boutons dorés sur la ceinture portant le texte 18e CHASSEURS TOUJAS, du 18e régiment.",
+  "by": "machine",
+  "s": "Gouden knopen op de tailleband waarin de tekst 18e CHASSEURS TOUJAS, van het 18e regiment."
+ },
+ "rec:ST2431/1-4:desc:13": {
+  "h": "9775e2be",
+  "t": "Petite patte horizontale à l'arrière au-dessus des fesses, avec boucle.",
+  "by": "machine",
+  "s": "Horizontaal riempje achter boven het zitvlak, met gesp."
+ },
+ "rec:ST2431/1-4:desc:14": {
+  "h": "e62f24a9",
+  "t": "Fait main et fait à la machine. 3.",
+  "by": "machine",
+  "s": "Handwerk en machinaal naaiwerk. 3."
+ },
+ "rec:ST2431/1-4:desc:15": {
+  "h": "c71596e4",
+  "t": "Casquette, képi, en laine rouge et bleu clair, d'une hauteur de 15 centimètres, décoré de passementerie métallique et de cannetille et pourvu d'une visière noire en cuir.",
+  "by": "machine",
+  "s": "Pet, kepie, in rode en lichtblauwe wol, met een hoogte van 15 centimeter, gedecoreerd met metalen passement en cannetille en voorzien van een zwarte klep in leder."
+ },
+ "rec:ST2431/1-4:desc:2": {
+  "h": "a8c75886",
+  "t": "Le bas des manches est doté d'un grand motif en passementerie métallique, d'un grand motif en passementerie noire sur les deux côtés du pan avant (brandebourgs, qui forment aussi la fermeture), et d'épaulettes en passementerie noire.",
+  "by": "machine",
+  "s": "Onder op de mouwen voorzien van een groot motief in passementerie in metaal, groot motief in zwarte passementerie op beide kanten van het voorpand (brandebourgs, die ook de sluiting vormen), epauletten in zwarte passementerie."
+ },
+ "rec:ST2431/1-4:desc:3": {
+  "h": "9e203e77",
+  "t": "Col montant en drap rouge doté d'une décoration en cannetille.",
+  "by": "machine",
+  "s": "Opstaande kraag in rood laken voorzien van decoratie in cannetille."
+ },
+ "rec:ST2431/1-4:desc:4": {
+  "h": "2cab9a6a",
+  "t": "Passementerie noire appliquée sur les coutures de cintrage à l'arrière.",
+  "by": "machine",
+  "s": "Aan de achterzijde op de coupenaden aangebrachte zwarte passementerie."
+ },
+ "rec:ST2431/1-4:desc:5": {
+  "h": "5c4192f3",
+  "t": "Petites fentes dans les coutures latérales permettant de glisser une petite main.",
+  "by": "machine",
+  "s": "Kleine splitten in de zijnaden waardoorheen een kleine hand zou passen."
+ },
+ "rec:ST2431/1-4:desc:6": {
+  "h": "e7ae8c53",
+  "t": "Doublé d'un tissu de coton noir robuste ; presque tout le pan avant a été surpiqué de fil orange pour plus de solidité.",
+  "by": "machine",
+  "s": "Gevoerd met stevig zwart katoenweefsel; bijna het volledige voorpand werd ter versteviging doorstikt met oranje garen."
+ },
+ "rec:ST2431/1-4:desc:7": {
+  "h": "2b38cb54",
+  "t": "Couture à la main et à la machine.",
+  "by": "machine",
+  "s": "Hand- en machinaal naaiwerk."
+ },
+ "rec:ST2431/1-4:desc:8": {
+  "h": "a6aa64a6",
+  "t": "À l'intérieur du col est fixé un col montant blanc amovible du 20e siècle (marqué DURAND, ST2431/4). 2.",
+  "by": "machine",
+  "s": "Binnenin de kraag is een 20e-eeuwse witte losse opstaande kraag bevestigd (gemerkt DURAND, ST2431/4). 2."
+ },
+ "rec:ST2431/1-4:desc:9": {
+  "h": "316cd0a1",
+  "t": "Pantalon en laine rouge, à longues jambes droites, fini avec une bande en laine bleue sur le côté extérieur.",
+  "by": "machine",
+  "s": "Broek in rode wol, met lange rechte pijpen, afgewerkt met een streep in blauwe wol aan de buitenkant."
+ },
+ "rec:ST2431/1-4:quote": {
+  "h": "23845a3f",
+  "t": "Uniforme militaire pour homme, en laine bleu clair et rouge, d'un lieutenant de la Garde nationale, membre du 9e ou 18e régiment des Chasseurs à cheval (France).",
+  "by": "machine",
+  "s": "Militair uniform voor een man, in lichtblauwe en rode wol, van een luitenant van de Nationale Garde, lid van het 9e of 18e regiment van de jagers te paard (Chasseurs à cheval, Frankrijk)."
+ },
+ "rec:ST2432/1-2:desc:0": {
+  "h": "a24d8bfb",
+  "t": "Costume en forme d'uniforme militaire pour homme, membre de la Garde nationale, composé d'une veste d'origine et d'un pantalon fabriqué plus tard ; les deux ont été adaptés. 1.",
+  "by": "machine",
+  "s": "Kostuum in de vorm van een militair uniform voor een man, lid van de Nationale Garde, bestaande uit een originele jas en een broek die later werd gemaakt; beide werden aangepast. 1."
+ },
+ "rec:ST2432/1-2:desc:1": {
+  "h": "a02904de",
+  "t": "Habit à queue en drap (laine) bleu foncé, col montant haut en drap rouge, épaulettes en cannetille et tissu métallique de couleur dorée, parements rapportés en drap rouge et basques doublées en drap rouge.",
+  "by": "machine",
+  "s": "Jas met slippen in donkerblauw laken (wol), hoge opstaande kraag in rood laken, epauletten met cannetille en goudkleurig metaalweefsel, aangestikte manchetten in rood laken en slippen gevoerd in rood laken."
+ },
+ "rec:ST2432/1-2:desc:2": {
+  "h": "c35aab6d",
+  "t": "Les pointes de chacune des basques ont été retournées de l'intérieur vers l'extérieur et attachées ensemble, rendant visible un détail rouge au bas des basques bleues.",
+  "by": "machine",
+  "s": "De punten van elk van de slippen werden van binnen naar buiten gekeerd en aan elkaar verbonden, waardoor er een rood detail zichtbaar is onderaan de blauwe slippen."
+ },
+ "rec:ST2432/1-2:desc:3": {
+  "h": "26d50eab",
+  "t": "Sur les basques se trouve un écusson surpiqué en forme de grande poche passepoilée verticale qui se termine à l'intérieur par trois pointes sur lesquelles se trouvent trois boutons en métal blanc, portant le texte 'Garde Nationale'.",
+  "by": "machine",
+  "s": "Op de slippen bevindt zicht een opgestikte patch in de vorm van een grote verticale steekzak die aan de binnenkant uitloopt in drie punten waarop zich drie witmetalen knopen bevinden, voorzien van de tekst 'Garde Nationale'."
+ },
+ "rec:ST2432/1-2:desc:4": {
+  "h": "4accdfd5",
+  "t": "Exécuté en fait main et fait à la machine.",
+  "by": "machine",
+  "s": "Uitgevoerd in handwerk en machinaal naaiwerk."
+ },
+ "rec:ST2432/1-2:desc:5": {
+  "h": "39468deb",
+  "t": "Fermeture boutonnée sur le devant avec agrafes dont les crochets ont en grande partie disparu ; remplacés à l'extérieur par de nouveaux boutons dorés du même style (boutons avec l'emblème de la Garde impériale, datation possible 1980-2000). 2.",
+  "by": "machine",
+  "s": "Knoopsluiting vooraan met haak- en oogsluiting waarvan de haakjes grotendeels zijn verdwenen; aan de buitenkant vervangen door goudkleurige, nieuwe knopen in dezelfde stijl (knopen met embleem van de Keizerlijke Garde, datering mogelijk 1980-2000). 2."
+ },
+ "rec:ST2432/1-2:desc:6": {
+  "h": "161c8da7",
+  "t": "Pantalon à pinces des années 1910-1940 en drap bleu foncé, deux poches passepoilées sur les fesses munies d'un bouton en plastique, braguette avec des boutons en plastique dont les boutonnières sont finies à la main, ceinture avec passants de pantalon, gousset, intérieur en tissu de coton gris, longues jambes comportant sur l'extérieur deux bandes en laine rouge, munies à l'intérieur en bas des deux côtés de deux boutons sur un petit morceau de cuir.",
+  "by": "machine",
+  "s": "Bandplooibroek uit de jaren 1910-1940 in donkerblauw laken, twee gepaspelde zakken op het zitvlak voorzien van een kunststof knoop, gulpsluiting met kunststof knopen waarvan de knoopsgaten met de hand zijn afgewerkt, tailleband met broeklussen, horlogezakje, binnenwerk in grijs katoenweefsel, lange pijpen waaraan aan de buitenzijde twee banen in rode wol, aan de binnenzijde onderaan aan weerszijden voorzien van twee knopen op een stukje leder."
+ },
+ "rec:ST2432/1-2:desc:7": {
+  "h": "6de62ea4",
+  "t": "À l'arrière du pantalon, une encoche a été faite dans la ceinture et la partie supérieure du dos.",
+  "by": "machine",
+  "s": "Aan de achterkant van de broek werd een inkeping gemaakt in de tailleband en de bovenzijde van de achterkant."
+ },
+ "rec:ST2432/1-2:desc:8": {
+  "h": "eb9f5e2a",
+  "t": "Une fermeture à lacets y a été insérée avec un lacet rouge des années 1970-1990.",
+  "by": "machine",
+  "s": "Hier werd een rijgsluiting ingezet met een rode veter uit de jaren 1970-1990."
+ },
+ "rec:ST2432/1-2:desc:9": {
+  "h": "d5a74ef9",
+  "t": "Confectionné tant à la machine qu'à la main.",
+  "by": "machine",
+  "s": "Zowel machinaal als met de hand vervaardigd."
+ },
+ "rec:ST2432/1-2:quote": {
+  "h": "41bbb6d4",
+  "t": "Costume en forme d'uniforme militaire pour homme, membre de la Garde nationale, composé d'une veste originale et d'un pantalon fabriqué plus tard ; les deux ont été adaptés.",
+  "by": "machine",
+  "s": "Kostuum in de vorm van een militair uniform voor een man, lid van de Nationale Garde, bestaande uit een originele jas en een broek die later werd gemaakt; beide werden aangepast."
+ },
+ "rec:ST2434:desc:0": {
+  "h": "381b826d",
+  "t": "Veste en drap vert, avec des basques.",
+  "by": "machine",
+  "s": "Jas in groen laken, met slippen."
+ },
+ "rec:ST2434:desc:1": {
+  "h": "e7ba912d",
+  "t": "Longues manches montées et col couché avec de petits revers.",
+  "by": "machine",
+  "s": "Lange aangezette mouwen en liggende kraag met korte revers."
+ },
+ "rec:ST2434:desc:2": {
+  "h": "23f57dc2",
+  "t": "Fermeture boutonnée avec deux fois quatre boutonnières, croisée, sans boutons.",
+  "by": "machine",
+  "s": "Knoopsluiting met twee keer vier knoopsgaten, double breasted, zonder knopen."
+ },
+ "rec:ST2434:desc:3": {
+  "h": "25d6a223",
+  "t": "Huit boutons bombés, fournis séparément en laiton, étaient à l'origine probablement fixés à l'arrière.",
+  "by": "machine",
+  "s": "Acht bolle, los aanwezige knopen in messing waren oorspronkelijk waarschijnlijk bevestigd op de achterzijde."
+ },
+ "rec:ST2434:desc:4": {
+  "h": "0a0ffa04",
+  "t": "Sur les deux basques se trouve un patch cousu en forme de grande poche verticale qui se termine à l'intérieur en trois pointes, avec des traces de boutons.",
+  "by": "machine",
+  "s": "Op beide slippen bevindt zicht een opgestikte patch in de vorm van een grote verticale steekzak die aan de binnenkant uitloopt in drie punten, met sporen van de knopen."
+ },
+ "rec:ST2434:desc:5": {
+  "h": "16bec0f2",
+  "t": "À l'arrière, au bas des basques, se trouvent deux grands boutons plats en laiton, signés M & Cie PARIS.",
+  "by": "machine",
+  "s": "Op de achterzijde bevinden zich onderaan de slippen twee grote, platte messing knopen, gesigneerd M & Cie PARIS."
+ },
+ "rec:ST2434:desc:6": {
+  "h": "9c3ecbc7",
+  "t": "Au bas des devants, un large passepoil horizontal en drap rouge a été ajouté par la suite de chaque côté.",
+  "by": "machine",
+  "s": "Onderaan de voorpanden werd later aan weerszijden een horizontale brede bies toegevoegd in rood laken."
+ },
+ "rec:ST2434:desc:7": {
+  "h": "20747633",
+  "t": "Doublé en coton sergé violet lustré.",
+  "by": "machine",
+  "s": "Gevoerd in paars geglansd keperkatoen."
+ },
+ "rec:ST2434:quote": {
+  "h": "381b826d",
+  "t": "Veste en drap vert, avec des basques.",
+  "by": "machine",
+  "s": "Jas in groen laken, met slippen."
+ },
+ "rec:ST2435:desc:0": {
+  "h": "7e3f977b",
+  "t": "Robe en tissu de soie écru, longueur mollet, entièrement recouverte d'un broderie de paillettes à l'effet irisé de perles.",
+  "by": "machine",
+  "s": "Jurk in ecru zijdeweefsel, kuitlang, volledig voorzien van paillettenborduurwerk met het iridiserende effect van parels."
+ },
+ "rec:ST2435:desc:1": {
+  "h": "6ad5cd08",
+  "t": "Large encolure bateau ; ouverte le long des coutures latérales, maintenue uniquement à gauche par trois agrafes et de courtes bandes rapportées du même tissu brodé sur les hanches à l'avant et à l'arrière, qui cintrent la coupe droite.",
+  "by": "machine",
+  "s": "Brede boothals; niet gesloten langs de zijnaden, behalve door links drie haken en ogen en korte opgezette stroken van dezelfde geborduurde stof op de heupen aan voor en achterzijde, die het rechte model tailleren."
+ },
+ "rec:ST2435:desc:2": {
+  "h": "ed3b8bfe",
+  "t": "Les pans en grande partie droits sont entièrement recouverts de surpiqûres à la machine (envers : fil métallique) dans un motif organique d'inspiration orientale de boucles et d'œillets.",
+  "by": "machine",
+  "s": "De grotendeels rechtvallende panden zijn volledig bedekt met machinale stiksels (binnenzijde: metaaldraad) in een organisch, oosters geïnspireerd motief van krullen en ogen."
+ },
+ "rec:ST2435:quote": {
+  "h": "7e3f977b",
+  "t": "Robe en tissu de soie écru, mi-longue, entièrement recouverte de broderie de paillettes à l'effet irisé de perles.",
+  "by": "machine",
+  "s": "Jurk in ecru zijdeweefsel, kuitlang, volledig voorzien van paillettenborduurwerk met het iridiserende effect van parels."
+ },
+ "rec:ST503:desc:0": {
+  "h": "d8f60b19",
+  "t": "La jaquette arrive jusqu'à la taille et possède de longs basques, une encolure carrée et des manches ajustées jusqu'au coude.",
+  "by": "machine",
+  "s": "Het jak reikt tot aan de taille en heeft lange schootpanden, een vierkante halslijn en nauw aansluitende mouwen tot aan de elleboog."
+ },
+ "rec:ST503:desc:1": {
+  "h": "6dc44502",
+  "t": "Elle est ouverte à l'avant et se ferme au milieu par des agrafes en métal.",
+  "by": "machine",
+  "s": "Aan de voorkant is het open en het wordt in het midden gesloten met metalen haken en ogen."
+ },
+ "rec:ST503:desc:2": {
+  "h": "ca4b2e27",
+  "t": "Le tissu extérieur est en taffetas bleu avec une décoration jaune-blanc de motifs flottants locaux dans le sens des fils de chaîne.",
+  "by": "machine",
+  "s": "De buitenstof is gemaakt van blauwe tafzijde met een witgele versiering van plaatselijke vlottermotieven in de richting van de kettingdraden."
+ },
+ "rec:ST503:desc:3": {
+  "h": "5966f339",
+  "t": "Cette décoration combine un motif abstrait en zigzag avec un motif floral.",
+  "by": "machine",
+  "s": "Deze decoratie combineert een abstract zigzagpatroon met een bloemmotief."
+ },
+ "rec:ST503:desc:4": {
+  "h": "631c10f4",
+  "t": "Le taffetas est un tissu en soie fin, lisse et légèrement brillant.",
+  "by": "machine",
+  "s": "Tafzijde is een fijne, gladde en licht glanzende zijden stof."
+ },
+ "rec:ST503:desc:5": {
+  "h": "ef17f425",
+  "t": "La doublure est en tissu de lin bleu, également décoré de rayures blanches et jaunes, formées par des fils de chaîne colorés.",
+  "by": "machine",
+  "s": "De voering bestaat uit een blauwe linnen stof die eveneens versierd is met witte en gele strepen, gevormd door gekleurde kettingdraden."
+ },
+ "rec:ST503:quote": {
+  "h": "d8f60b19",
+  "t": "La jaquette arrive jusqu'à la taille et possède de longs basques, une encolure carrée et des manches ajustées jusqu'au coude.",
+  "by": "machine",
+  "s": "Het jak reikt tot aan de taille en heeft lange schootpanden, een vierkante halslijn en nauw aansluitende mouwen tot aan de elleboog."
+ },
+ "rec:ST652/1:desc:0": {
+  "h": "935503c2",
+  "t": "Robe chemisier en coton imprimé, bleu à petits pois blancs et rouges.",
+  "by": "machine",
+  "s": "Doorknoopjurk van bedrukte katoen, blauw met witte en rode stipjes."
+ },
+ "rec:ST652/1:desc:1": {
+  "h": "28242c80",
+  "t": "Réparé systématiquement avec du tissu à carreaux.",
+  "by": "machine",
+  "s": "Stelselmatig gerepareerd met geruite stof."
+ },
+ "rec:ST652/1:desc:2": {
+  "h": "9b12bc39",
+  "t": "Deux poches plaquées sous la taille sont bordées d'un tissu rouge, tout comme les manches.",
+  "by": "machine",
+  "s": "Twee opgestikte zakken onder taillehoogte zijn afgebiesd met een rood weefsel, net als de mouwen."
+ },
+ "rec:ST652/1:desc:3": {
+  "h": "071cd058",
+  "t": "Une pochette rouge dépasse visuellement d'une poche au niveau de la poitrine.",
+  "by": "machine",
+  "s": "In een zak op borsthoogte steekt optisch een rood pochet."
+ },
+ "rec:ST652/1:desc:4": {
+  "h": "bf9a0164",
+  "t": "Revers droit décoré le long du bord de trois passepoils rouges.",
+  "by": "machine",
+  "s": "Rechter revers langs de rand gedecoreerd met drie rode biezen."
+ },
+ "rec:ST652/1:desc:5": {
+  "h": "aab894ff",
+  "t": "À l'arrière, une petite ceinture en tissu est fixée au milieu, et peut se nouer à l'avant pour marquer la taille.",
+  "by": "machine",
+  "s": "Aan de achterkant is in het midden een ceintuurtje van stof bevestigd, die aan de voorkant vastgestrikt kan worden voor de markering van de taille."
+ },
+ "rec:ST652/1:quote": {
+  "h": "935503c2",
+  "t": "Robe boutonnée en coton imprimé, bleu à petits pois blancs et rouges.",
+  "by": "machine",
+  "s": "Doorknoopjurk van bedrukte katoen, blauw met witte en rode stipjes."
+ },
+ "rec:ST655/1:desc:0": {
+  "h": "d771c0dc",
+  "t": "Robe longueur mollet à cheville boutonnée sur le devant, de type robe cocktail, en matière synthétique à rayures horizontales vert et noir.",
+  "by": "machine",
+  "s": "Kuit- tot enkellange japon in doorknoopmodel, type cocktailjurk, van groen-zwart horizontaal gestreept synthetisch materiaal."
+ },
+ "rec:ST655/1:desc:1": {
+  "h": "dddb7e29",
+  "t": "Fermeture à l'avant avec 11 boutons, recouverts du même tissu rayé et de velours, boutonnières cousues à la machine.",
+  "by": "machine",
+  "s": "Sluiting vooraan met 11 knopen, met dezelfde strepenstof en fluweel bekleed, machinaal genaaide knoopsgaten."
+ },
+ "rec:ST655/1:desc:2": {
+  "h": "c8e17dc0",
+  "t": "Col châle avec revers en velours noir.",
+  "by": "machine",
+  "s": "Sjaalkraag met revers van zwart fluweel."
+ },
+ "rec:ST655/1:desc:3": {
+  "h": "71de5260",
+  "t": "Manches courtes rapportées avec bord rapporté en velours noir.",
+  "by": "machine",
+  "s": "Aangezette korte mouwen met aangezette boord van zwart fluweel."
+ },
+ "rec:ST655/1:desc:4": {
+  "h": "e0987025",
+  "t": "Passant de ceinture au crochet noir au niveau de la hanche droite, il manque à gauche.",
+  "by": "machine",
+  "s": "Zwart gehaakte riemlus ter hoogte van de rechterheup, deze ontbreekt links."
+ },
+ "rec:ST655/1:desc:5": {
+  "h": "250d0d3b",
+  "t": "Il n'y a pas de poches et il n'y a pas de doublure.",
+  "by": "machine",
+  "s": "Er zijn geen zakken en er is geen voering."
+ },
+ "rec:ST655/1:desc:6": {
+  "h": "a6ba9c6a",
+  "t": "Épaulettes intégrées faites dans le même tissu que la robe.",
+  "by": "machine",
+  "s": "Ingenaaide schoudervullingen gemaakt van dezelfde stof als de jurk."
+ },
+ "rec:ST655/1:desc:7": {
+  "h": "24520ee4",
+  "t": "L'ourlet est renforcé à l'intérieur par un ruban noir et fixé à la main avec de petits points.",
+  "by": "machine",
+  "s": "De zoom is aan de binnenzijde verstevigd met een zwart lint en is met fijne steekjes met de hand vastgezet."
+ },
+ "rec:ST655/1:desc:8": {
+  "h": "b3d39fb9",
+  "t": "Détail intéressant : la lisière des pans inférieurs a été utilisée pour la fermeture au milieu du devant et les pans inférieurs de la jupe n'ont pas de coutures latérales, car ce sont des demi-cercles.",
+  "by": "machine",
+  "s": "Interessant detail: de zelfkant van de onderpade nden is gebruikt aan de sluiting middenvoor en de onderste panden van de rok hebben geen zijnaden, omdat het halve cirkels zijn."
+ },
+ "rec:ST655/1:desc:9": {
+  "h": "ef58c0f7",
+  "t": "Par conséquent, les rayures sont horizontales à l'avant, mais verticales à l'arrière au niveau du raccord avec le corsage.",
+  "by": "machine",
+  "s": "Daardoor zijn de strepen vooraan horizontaal, maar lopen ze aan de achterzijde verticaal bij de aansluiting met het bovenstuk."
+ },
+ "rec:ST655/1:quote": {
+  "h": "d771c0dc",
+  "t": "Robe mi-longue à longs boutons, de type robe de cocktail, en matière synthétique à rayures horizontales vert et noir.",
+  "by": "machine",
+  "s": "Kuit- tot enkellange japon in doorknoopmodel, type cocktailjurk, van groen-zwart horizontaal gestreept synthetisch materiaal."
+ },
+ "rec:ST671:desc:0": {
+  "h": "b71d040a",
+  "t": "Longue robe, robe de promenade, en reps de soie beige.",
+  "by": "machine",
+  "s": "Lange japon, wandeljapon, in beige zijderips."
+ },
+ "rec:ST671:desc:1": {
+  "h": "b886df8b",
+  "t": "La robe possède un jupon en soie beige avec une encolure ronde et profonde et des manches mi-longues.",
+  "by": "machine",
+  "s": "De japon heeft een beige zijden onderjurk met een diepe, ronde halsuitsnijding en halflange mouwen."
+ },
+ "rec:ST671:desc:10": {
+  "h": "daa9bebb",
+  "t": "La jupe de dessous est cousue à la taille de la robe.",
+  "by": "machine",
+  "s": "De onderjurk is bij de middel aan de japon vastgenaaid."
+ },
+ "rec:ST671:desc:11": {
+  "h": "364c4deb",
+  "t": "Tout comme pour la jupe de dessous, le corsage et la jupe de la robe sont coupés séparément et cousus ensemble à la taille.",
+  "by": "machine",
+  "s": "Net als bij de onderjurk zijn het lijfje en de rok van de japon afzonderlijk gesneden en in de taille aan elkaar genaaid."
+ },
+ "rec:ST671:desc:12": {
+  "h": "9048fd9f",
+  "t": "Le corsage présente une encolure ronde et des manches courtes, bordées de la même dentelle mécanique de Malines et de la même broderie lacée que la jupe de dessous.",
+  "by": "machine",
+  "s": "Het lijfje heeft een ronde halsuitsnijding en korte mouwen, ze zijn afgeboord met dezelfde machinale stropkant en hetzelfde veterborduurwerk als bij de onderjurk."
+ },
+ "rec:ST671:desc:13": {
+  "h": "d38bd955",
+  "t": "Une bande de cette même dentelle et de cette même broderie descend du côté gauche du devant, de l'encolure jusqu'au bas de la robe, où elle borde ensuite tout le tour de la jupe.",
+  "by": "machine",
+  "s": "Een strook in dezelfde kant en borduurwerk loopt links vooraan van bij de hals tot onderaan de japon waar het de rok verder rondom afboordt."
+ },
+ "rec:ST671:desc:14": {
+  "h": "b99b3a36",
+  "t": "Sur les deux côtés, l'ourlet de la jupe pend plus bas qu'au milieu du devant et du dos.",
+  "by": "machine",
+  "s": "Aan beide zijkanten hangt de rokzoom lager dan middenvoor en middenachter."
+ },
+ "rec:ST671:desc:15": {
+  "h": "1fd6ca37",
+  "t": "La robe et la jupe de dessous se ferment toutes deux au milieu du dos par une rangée d'agrafes et de boutons qui descend plus bas que les fesses.",
+  "by": "machine",
+  "s": "De japon en de onderjurk sluiten beide middenachter met een rij haken en knopen tot voorbij het zitvlak."
+ },
+ "rec:ST671:desc:16": {
+  "h": "de1ab8c0",
+  "t": "Les bandes transparentes de dentelle mécanique dans le corsage de la robe et de la jupe de dessous sont doublées de mousseline de soie beige.",
+  "by": "machine",
+  "s": "De transparante stroken machinale kant in het lijfje van japon en onderjurk zijn gedubbeld met beige zijdemousseline."
+ },
+ "rec:ST671:desc:2": {
+  "h": "6ec77363",
+  "t": "Le corsage et la jupe sont coupés séparément et assemblés à la taille.",
+  "by": "machine",
+  "s": "Het lijfje en de rok zijn apart gesneden en in de taille aan elkaar gezet."
+ },
+ "rec:ST671:desc:3": {
+  "h": "f5be7244",
+  "t": "Le corsage est doté d'une ceinture portant l'inscription 'Mme Guédon Descham(?) 83, Boulevard Magenta, Paris'.",
+  "by": "machine",
+  "s": "Het lijfje heeft een tailleband met daarop de bedrukking 'Mme Guédon Descham(?) 83, Boulevard Magenta, Paris'."
+ },
+ "rec:ST671:desc:4": {
+  "h": "3f99130c",
+  "t": "Une baleine est cousue au milieu du the devant du corsage.",
+  "by": "machine",
+  "s": "Middenvoor is in het lijfje een balein genaaid."
+ },
+ "rec:ST671:desc:5": {
+  "h": "13bb9cce",
+  "t": "L'encolure est garnie d'un col en dentelle mécanique beige, imitation de dentelle aux fuseaux de Lille.",
+  "by": "machine",
+  "s": "In de halsuitsnijding is een kraag gezet in beige machinale kant, een imitatie van Rijselse kloskant."
+ },
+ "rec:ST671:desc:6": {
+  "h": "c70093df",
+  "t": "La partie montante du col est dotée de baleines.",
+  "by": "machine",
+  "s": "Het opstaande deel van de kraag heeft baleinen."
+ },
+ "rec:ST671:desc:7": {
+  "h": "bce36871",
+  "t": "Le bas des manches est réalisé dans la même dentelle mécanique.",
+  "by": "machine",
+  "s": "De onderkant van de mouwen is in dezelfde machinale kant."
+ },
+ "rec:ST671:desc:8": {
+  "h": "1e565dd4",
+  "t": "Les poignets sont garnis d'une bande de dentelle mécanique beige, imitation de dentelle de Malines, et bordés en plus d'une broderie lacée.",
+  "by": "machine",
+  "s": "De mouwboorden zijn gegarneerd met een strook beige machinale kant, een imitatie van stropkant, en bijkomend afgeboord met veterborduurwerk."
+ },
+ "rec:ST671:desc:9": {
+  "h": "960db2e3",
+  "t": "La partie inférieure de la jupe est réalisée dans le même reps de soie que la robe, est montée en plis sur la jupe de dessous et dépasse sous la robe.",
+  "by": "machine",
+  "s": "Het onderste deel van de rok is uitgevoerd in dezelfde zijderips als de japon, is in plooien aan de onderjurk gezet en komt onder de japon uit."
+ },
+ "rec:ST671:quote": {
+  "h": "b71d040a",
+  "t": "Longue robe, robe de promenade, en reps de soie beige.",
+  "by": "machine",
+  "s": "Lange japon, wandeljapon, in beige zijderips."
+ },
+ "rec:ST673/1-2:desc:0": {
+  "h": "b0d13187",
+  "t": "Combinaison en coton blanc, composée d'un corsage sans baleines auquel est fixé par des boutons un long pantalon de dessous ouvert.",
+  "by": "machine",
+  "s": "Combinaison in wit katoen, bestaande uit een baleinloos onderlijf waaraan met knopen bevestigd een lange open onderbroek."
+ },
+ "rec:ST673/1-2:desc:1": {
+  "h": "64c29a23",
+  "t": "Corsage : encolure en V bordée de bandes de broderie anglaise ; empiècement d'épaule descendant jusqu'à la poitrine, en broderie anglaise, en forme de U, avec un bord à volants en broderie anglaise.",
+  "by": "machine",
+  "s": "Onderlijf: halslijn in V-vorm voorzien van stroken broderie anglaise; schouderpas die tot de borst reikt, in broderie anglaise, in de vorm van een U, met in ruches aangezette rand van broderie anglaise."
+ },
+ "rec:ST673/1-2:desc:2": {
+  "h": "a51b33c8",
+  "t": "Ce bord est également monté tout autour de l'emmanchure.",
+  "by": "machine",
+  "s": "Deze rand is ook gemonteerd rondom het armsgat."
+ },
+ "rec:ST673/1-2:desc:3": {
+  "h": "a7aebb27",
+  "t": "Cintré ; les pinces à la taille sont ouvertes à l'intérieur et surpiquées pour plus de solidité.",
+  "by": "machine",
+  "s": "Getailleerd; nepen in de taille zijn aan de binnenzijde opengestreken en doorgestikt voor stevigdheid."
+ },
+ "rec:ST673/1-2:desc:4": {
+  "h": "86edcca6",
+  "t": "Fermeture au milieu du devant par des boutons en nacre.",
+  "by": "machine",
+  "s": "Sluit middenvoor met parelmoeren knopen."
+ },
+ "rec:ST673/1-2:desc:5": {
+  "h": "201df36c",
+  "t": "Tout autour de la taille, des boutons en os de couleur écru pour fixer les vêtements portés par-dessus (probablement un jupon).",
+  "by": "machine",
+  "s": "Rondom de taille ecrukleurige benen knopen voor de bevestiging van de hierover gedragen kleding (mogelijk een onderrok)."
+ },
+ "rec:ST673/1-2:desc:6": {
+  "h": "6ec710b2",
+  "t": "Le pantalon de dessous est ouvert à l'avant à partir de la taille, et entièrement ouvert à l'arrière ; les deux côtés se ferment sur le même bouton.",
+  "by": "machine",
+  "s": "De onderbroek is aan de voorzijde open vanaf de taille, en aan de achterkant geheel open; de twee zijden worden gesloten overheen dezelfde knoop."
+ },
+ "rec:ST673/1-2:desc:7": {
+  "h": "36c8bd46",
+  "t": "À l'arrière, de l'espace a été créé en fronçant le tissu horizontalement.",
+  "by": "machine",
+  "s": "Aan de achterkant is er ruimte gecreëerd door de stof horizontaal te rimpelen."
+ },
+ "rec:ST673/1-2:desc:8": {
+  "h": "d1dce521",
+  "t": "Le pantalon de dessous peut être fixé au corps à deux niveaux, avec les mêmes boutons de jambe.",
+  "by": "machine",
+  "s": "De onderbroek kan op twee niveaus aan het lijf vastgemaakt worden, met dezelfde benen knopen."
+ },
+ "rec:ST673/1-2:desc:9": {
+  "h": "e75fc86b",
+  "t": "À utiliser pendant le sport (p. ex. tennis, croquet, badminton ou tir à l'arc).",
+  "by": "machine",
+  "s": "Te gebruiken tijdens het sporten (bv. tennis, croquet, badminton of boogschieten)."
+ },
+ "rec:ST673/1-2:quote": {
+  "h": "b0d13187",
+  "t": "Combinaison en coton blanc, composée d'un corsage sans baleines auquel est fixé par des boutons un long pantalon de dessous ouvert.",
+  "by": "machine",
+  "s": "Combinaison in wit katoen, bestaande uit een baleinloos onderlijf waaraan met knopen bevestigd een lange open onderbroek."
+ },
+ "rec:ST80881:desc:0": {
+  "h": "ed519653",
+  "t": "Furisode kimono écru, peint et à impression dorée.",
+  "by": "machine",
+  "s": "Ecru furisode kimono, beschilderd en met gouden opdruk."
+ },
+ "rec:ST80881:desc:1": {
+  "h": "355b3805",
+  "t": "Motif multicolore de larges rubans virevoltants (probablement un motif noshi ou kichô) sur fond de paysage abstrait avec des maisons, des nuages et de la flore, incluant des pivoines, des chrysanthèmes, des fleurs de prunier ume, de l'érable japonais et du bambou.",
+  "by": "machine",
+  "s": "Veelkleurig motief van brede opwaaiende linten (mogelijk noshi- of kichô-motief) met op de achtergrond een abstract landschap met huizen, wolken en flora, waaronder pioenen, chrysanten, ume pruimenbloesem, Japanse esdoorn en bamboe."
+ },
+ "rec:ST80881:desc:2": {
+  "h": "b1b53afb",
+  "t": "Les détails sur les fleurs sont brodés de soie et de fil métallique.",
+  "by": "machine",
+  "s": "Details op bloemen zijn geborduurd met zijde en metaaldraad."
+ },
+ "rec:ST80881:desc:3": {
+  "h": "6677276e",
+  "t": "Doublure en deux parties, blanche en haut, en tissu imprimé en bas.",
+  "by": "machine",
+  "s": "Tweedelige voering, bovenaan wit, onderaan bedrukte stof."
+ },
+ "rec:ST80881:quote": {
+  "h": "ed519653",
+  "t": "Kimono furisode écru, peint et à impression dorée.",
+  "by": "machine",
+  "s": "Ecru furisode kimono, beschilderd en met gouden opdruk."
+ },
+ "rec:ST80930:desc:0": {
+  "h": "f01fe0c0",
+  "t": "Gilet ou veste bleu foncé en ikat avec des taches bleu clair et des carrés rouges.",
+  "by": "machine",
+  "s": "Donkerblauwe vest of jasje in ikat met lichtblauwe vlekken en rode vierkanten."
+ },
+ "rec:ST80930:desc:1": {
+  "h": "a8be97d5",
+  "t": "La veste a de longues manches bouffantes, des devants croisés et se ferme à la taille par des rubans.",
+  "by": "machine",
+  "s": "De vest heeft lange pofmouwen, overlappende voorpanden en sluit in de taille met linten."
+ },
+ "rec:ST80930:quote": {
+  "h": "f01fe0c0",
+  "t": "Gilet ou veste bleu foncé en ikat avec des taches bleu clair et des carrés rouges.",
+  "by": "machine",
+  "s": "Donkerblauwe vest of jasje in ikat met lichtblauwe vlekken en rode vierkanten."
+ },
+ "rec:ST80931:desc:0": {
+  "h": "4af051a2",
+  "t": "Pantalon bouffant bleu foncé, ou \"monpe\", en ikat avec des taches bleu clair et des carrés rouges.",
+  "by": "machine",
+  "s": "Donkerblauwe pofbroek, ofwel \"monpe\", in ikat met lichtblauwe vlekken en rode vierkanten."
+ },
+ "rec:ST80931:desc:1": {
+  "h": "dd357bb1",
+  "t": "Large ceinture avec de longs rubans comme fermeture, peut aussi se nouer autour des chevilles avec des rubans.",
+  "by": "machine",
+  "s": "Brede tailleband met lange linten als sluiting, kan ook onderaan rond de enkels gebonden worden met linten."
+ },
+ "rec:ST80931:quote": {
+  "h": "4af051a2",
+  "t": "Pantalon bouffant bleu foncé, ou \"monpe\", en ikat avec des taches bleu clair et des carrés rouges.",
+  "by": "machine",
+  "s": "Donkerblauwe pofbroek, ofwel \"monpe\", in ikat met lichtblauwe vlekken en rode vierkanten."
+ },
+ "rec:ST80998:desc:0": {
+  "h": "e701e828",
+  "t": "Caftan de mariée en velours rayé bordeaux, rouge, vert et noir, à encolure ronde se terminant en pointe et à longues manches pointues.",
+  "by": "machine",
+  "s": "Bruidskaftan in bordeaux, rood, groen en zwart gestreepte fluweel met ronde halsuitsnijding, uitlopend in een punt en met lange puntmouwen."
+ },
+ "rec:ST80998:desc:1": {
+  "h": "552d80e9",
+  "t": "Les côtés, le haut des manches et la poitrine du caftan sont ornés d'une broderie multicolore de cordonnets cousus et de fil métallique sur des fonds orange, brun clair et vert.",
+  "by": "machine",
+  "s": "De zijkanten, bovenkanten van de mouwen en het borstvlak van de kaftan zijn versierd met veelkleurig borduurwerk van opgenaaide koorden en metaaldraad op oranje, lichtbruine en groene ondergronden."
+ },
+ "rec:ST80998:desc:2": {
+  "h": "979890b1",
+  "t": "Les zones brodées sur les manches sont doublées d'un coton rose à motifs abstraits.",
+  "by": "machine",
+  "s": "De geborduurde zones op de mouwen zijn gevoerd met een roze katoen met abstracte motieven."
+ },
+ "rec:ST80998:quote": {
+  "h": "e701e828",
+  "t": "Caftan de mariée en velours rayé bordeaux, rouge, vert et noir à encolure ronde se terminant en pointe et à longues manches pointues.",
+  "by": "machine",
+  "s": "Bruidskaftan in bordeaux, rood, groen en zwart gestreepte fluweel met ronde halsuitsnijding, uitlopend in een punt en met lange puntmouwen."
+ },
+ "rec:ST81114AB:desc:0": {
+  "h": "5301a342",
+  "t": "Blouse blanche portée comme tenue de cyclisme, en batiste de coton.",
+  "by": "machine",
+  "s": "Witte blouse gedragen als fietskleding, gemaakt van katoenbatist."
+ },
+ "rec:ST81114AB:desc:1": {
+  "h": "05c37218",
+  "t": "Col montant avec des bandes cousues ensemble de broderie blanche faite à la machine.",
+  "by": "machine",
+  "s": "Opstaande kraag met aan elkaar genaaide stroken machinaal witborduurwerk."
+ },
+ "rec:ST81114AB:desc:2": {
+  "h": "1bd4b16c",
+  "t": "Fermeture devant avec 20 boutons en nacre ; boutonnières cousues à la main (point de gaze).",
+  "by": "machine",
+  "s": "Sluiting vooraan met 20 knopen gemaakt van parelmoer; met de hand genaaide knoopsgaten (gaaskantsteek)."
+ },
+ "rec:ST81114AB:desc:3": {
+  "h": "1a2f777b",
+  "t": "Au centre, deux bandes verticales de broderie blanche faite à la machine sont cousues, cachant les boutonnières du plastron.",
+  "by": "machine",
+  "s": "Centraal zijn twee verticale stroken machinaal witborduurwerk opgenaaid, die de knoopsgaten van het borststuk verbergen."
+ },
+ "rec:ST81114AB:desc:4": {
+  "h": "c665afbc",
+  "t": "Le plastron amovible a de fins plis et se fixe par-dessus la fermeture avec 14 boutons en nacre (dont 4 manquent).",
+  "by": "machine",
+  "s": "Het losse borststuk heeft fijne plooien en wordt met 14 knopen van parelmoer (waarvan 4 ontbreken) over de sluiting bevestigd."
+ },
+ "rec:ST81114AB:desc:5": {
+  "h": "874e684d",
+  "t": "Manches rapportées, froncées à l'emmanchure et au poignet.",
+  "by": "machine",
+  "s": "Aangezette mouwen, gerimpeld op de kop en aan het manchet."
+ },
+ "rec:ST81114AB:desc:6": {
+  "h": "13865d11",
+  "t": "Poignet haut et étroit sans fermeture, fait d'une bande de batiste de coton avec broderie à la machine.",
+  "by": "machine",
+  "s": "Hoge smalle manchet zonder sluiting, gemaakt van een strook katoenbatist met machinaal borduurwerk."
+ },
+ "rec:ST81114AB:desc:7": {
+  "h": "9988e5dd",
+  "t": "Coupe très cintrée à la taille.",
+  "by": "machine",
+  "s": "Sterk getailleerde snit."
+ },
+ "rec:ST81114AB:desc:8": {
+  "h": "d104636f",
+  "t": "Les coutures sont rabattues à l'intérieur sur la valeur de couture et fermées à la main.",
+  "by": "machine",
+  "s": "De naden zijn aan de binnenzijde aan de naadwaarde omgevouwen en met de hand toegenaaid."
+ },
+ "rec:ST81114AB:desc:9": {
+  "h": "b6697956",
+  "t": "Dans le dos, une fente finie avec les mêmes bandes de broderie, qui pendent librement.",
+  "by": "machine",
+  "s": "Aan de achterzijde een split afgewerkt met dezelfde stroken borduurwerk, die los afhangen."
+ },
+ "rec:ST81114AB:quote": {
+  "h": "5301a342",
+  "t": "Blouse blanche portée comme tenue de cyclisme, en batiste de coton.",
+  "by": "machine",
+  "s": "Witte blouse gedragen als fietskleding, gemaakt van katoenbatist."
+ },
+ "rec:ST81116:desc:0": {
+  "h": "8e29efce",
+  "t": "Culotte noire en laine, longueur genou, utilisée pour faire du vélo.",
+  "by": "machine",
+  "s": "Zwarte wollen knielange broek gebruikt om te fietsen."
+ },
+ "rec:ST81116:desc:1": {
+  "h": "52c6b5f5",
+  "t": "Ceinture doublée de coton noir, fermeture dans la couture latérale gauche avec 3 boutons en plastique (1 manque).",
+  "by": "machine",
+  "s": "Tailleband gevoerd met zwart katoen, sluiting in de linker zijnaad met 3 kunststof knopen (1 ontbreekt)."
+ },
+ "rec:ST81116:desc:2": {
+  "h": "f2b9a871",
+  "t": "Une poche dans la couture latérale droite, cachée sous un pli.",
+  "by": "machine",
+  "s": "Eén zak in de rechter zijnaad, weggewerkt onder een plooi."
+ },
+ "rec:ST81116:desc:3": {
+  "h": "48c9eac9",
+  "t": "Devant comme derrière, six plis profonds qui cachent l'entrejambe bas.",
+  "by": "machine",
+  "s": "Zowel vooraan als achteraan zes diepe plooien die het laaghangend kruis verbergen."
+ },
+ "rec:ST81116:desc:4": {
+  "h": "2da9dddf",
+  "t": "En bas, les jambes sont resserrées par un élastique.",
+  "by": "machine",
+  "s": "Onderaan zijn de pijpen samengetrokken met elastiek."
+ },
+ "rec:ST81116:desc:5": {
+  "h": "360e8d98",
+  "t": "Pas de doublure.",
+  "by": "machine",
+  "s": "Geen voering."
+ },
+ "rec:ST81116:quote": {
+  "h": "8e29efce",
+  "t": "Culotte noire en laine, longueur genou, utilisée pour faire du vélo.",
+  "by": "machine",
+  "s": "Zwarte wollen knielange broek gebruikt om te fietsen."
+ },
+ "rec:ST81190:desc:0": {
+  "h": "da49ce56",
+  "t": "Veste cintrée en tissu de laine grise avec un col montant.",
+  "by": "machine",
+  "s": "Getailleerde jas in grijs wolweefsel met opstaande kraag."
+ },
+ "rec:ST81190:desc:1": {
+  "h": "55c9e036",
+  "t": "La veste est composée de pièces séparées : des morceaux de manches, une basque, des pièces d'épaules et des plastrons, chacun doublé de coton brun et assemblé par des rivets couleur laiton.",
+  "by": "machine",
+  "s": "De jas is opgebouwd uit losse onderdelen: mouwstukken, een schoot, schouderstukken en borstlappen, elk gevoerd met bruin katoen en aan elkaar vastgehecht met messingkleurige rivetten."
+ },
+ "rec:ST81190:desc:2": {
+  "h": "2173c74b",
+  "t": "Les pinces et les coutures latérales ne sont pas non plus cousues, mais fixées par des rivets.",
+  "by": "machine",
+  "s": "Ook de nepen en zijnaden zijn niet gestikt, maar met rivetten vastgemaakt."
+ },
+ "rec:ST81190:desc:3": {
+  "h": "5841e703",
+  "t": "Les manches sont doublées en 100 % polyester et sont ouvertes aux aisselles.",
+  "by": "machine",
+  "s": "De mouwen zijn gevoerd met 100% polyester en zijn open aan de oksels."
+ },
+ "rec:ST81190:desc:4": {
+  "h": "02d4e5be",
+  "t": "La veste se ferme au milieu du devant par neuf boutons-pression couleur laiton.",
+  "by": "machine",
+  "s": "De jas sluit middenvoor met negen messingkleurige drukknopen."
+ },
+ "rec:ST81190:desc:5": {
+  "h": "fb54ec62",
+  "t": "Une croix rouge est cousue à l'arrière au niveau du cou.",
+  "by": "machine",
+  "s": "Op de achterzijde ter hoogte van de hals is een rood kruis gestikt."
+ },
+ "rec:ST81190:quote": {
+  "h": "da49ce56",
+  "t": "Veste cintrée en tissu de laine gris à col montant.",
+  "by": "machine",
+  "s": "Getailleerde jas in grijs wolweefsel met opstaande kraag."
+ },
+ "term:Belgium": {
+  "h": "cabe18f6",
+  "t": "Belgique",
+  "by": "machine",
+  "s": "Belgium"
+ },
+ "term:Japan": {
+  "h": "a28f44fb",
+  "t": "Japon",
+  "by": "machine",
+  "s": "Japan"
+ },
+ "term:Netherlands": {
+  "h": "64b61f6b",
+  "t": "Pays-Bas",
+  "by": "machine",
+  "s": "Netherlands"
+ },
+ "term:Palestine": {
+  "h": "fe9dc088",
+  "t": "Palestine",
+  "by": "machine",
+  "s": "Palestine"
+ },
+ "term:appliqué (technique)": {
+  "h": "3dd306f8",
+  "t": "appliqué",
+  "by": "machine",
+  "s": "appliqué (technique)"
+ },
+ "term:artificial silk": {
+  "h": "4559f69a",
+  "t": "soie artificielle",
+  "by": "machine",
+  "s": "artificial silk"
+ },
+ "term:bone (material)": {
+  "h": "6132932d",
+  "t": "os",
+  "by": "machine",
+  "s": "bone (material)"
+ },
+ "term:brass": {
+  "h": "9e19b1ea",
+  "t": "laiton",
+  "by": "machine",
+  "s": "brass"
+ },
+ "term:broadcloth (woollen fabric)": {
+  "h": "c4505507",
+  "t": "drap",
+  "by": "machine",
+  "s": "broadcloth (woollen fabric)"
+ },
+ "term:broderie anglaise (technique)": {
+  "h": "899dfef6",
+  "t": "broderie anglaise (technique)",
+  "by": "machine",
+  "s": "broderie anglaise (technique)"
+ },
+ "term:cotton (fiber)": {
+  "h": "d98486b7",
+  "t": "coton",
+  "by": "machine",
+  "s": "cotton (fiber)"
+ },
+ "term:double ikat": {
+  "h": "6c4aa87d",
+  "t": "double ikat",
+  "by": "machine",
+  "s": "double ikat"
+ },
+ "term:embroidering": {
+  "h": "923a1cda",
+  "t": "broderie",
+  "by": "machine",
+  "s": "embroidering"
+ },
+ "term:felt": {
+  "h": "c546d834",
+  "t": "feutre",
+  "by": "machine",
+  "s": "felt"
+ },
+ "term:flax": {
+  "h": "c2eab0b6",
+  "t": "lin",
+  "by": "machine",
+  "s": "flax"
+ },
+ "term:gauze point stitch": {
+  "h": "5cbd0910",
+  "t": "point de gaze",
+  "by": "machine",
+  "s": "gauze point stitch"
+ },
+ "term:hand-painted": {
+  "h": "d5925f3c",
+  "t": "peint à la main",
+  "by": "machine",
+  "s": "hand-painted"
+ },
+ "term:handmade": {
+  "h": "ad484035",
+  "t": "fait main",
+  "by": "machine",
+  "s": "handmade"
+ },
+ "term:knitting": {
+  "h": "1a2add79",
+  "t": "tricot",
+  "by": "machine",
+  "s": "knitting"
+ },
+ "term:leather": {
+  "h": "92b18d26",
+  "t": "cuir",
+  "by": "machine",
+  "s": "leather"
+ },
+ "term:machine lace": {
+  "h": "d1e78aa1",
+  "t": "dentelle mécanique",
+  "by": "machine",
+  "s": "machine lace"
+ },
+ "term:machine-made": {
+  "h": "bc5fb094",
+  "t": "fait à la machine",
+  "by": "machine",
+  "s": "machine-made"
+ },
+ "term:manmade material": {
+  "h": "19c44adb",
+  "t": "matière synthétique",
+  "by": "machine",
+  "s": "manmade material"
+ },
+ "term:metal": {
+  "h": "d756aedc",
+  "t": "métal",
+  "by": "machine",
+  "s": "metal"
+ },
+ "term:mother of pearl": {
+  "h": "06815f6b",
+  "t": "nacre",
+  "by": "machine",
+  "s": "mother of pearl"
+ },
+ "term:passementerie (material)": {
+  "h": "863db8f2",
+  "t": "passementerie",
+  "by": "machine",
+  "s": "passementerie (material)"
+ },
+ "term:printing (process)": {
+  "h": "4273d534",
+  "t": "impression",
+  "by": "machine",
+  "s": "printing (process)"
+ },
+ "term:satin": {
+  "h": "2323499c",
+  "t": "satin",
+  "by": "machine",
+  "s": "satin"
+ },
+ "term:satin weave": {
+  "h": "0b540b1a",
+  "t": "armure satin",
+  "by": "machine",
+  "s": "satin weave"
+ },
+ "term:sequin": {
+  "h": "0b3fff58",
+  "t": "paillette",
+  "by": "machine",
+  "s": "sequin"
+ },
+ "term:sewing (needleworking technique)": {
+  "h": "2646b6bd",
+  "t": "couture",
+  "by": "machine",
+  "s": "sewing (needleworking technique)"
+ },
+ "term:silk (silkworm material)": {
+  "h": "5f8b2d2a",
+  "t": "soie",
+  "by": "machine",
+  "s": "silk (silkworm material)"
+ },
+ "term:silk taffeta": {
+  "h": "f82f17c9",
+  "t": "taffetas de soie",
+  "by": "machine",
+  "s": "silk taffeta"
+ },
+ "term:stitching (generic process)": {
+  "h": "23229f13",
+  "t": "couture (procédé général)",
+  "by": "machine",
+  "s": "stitching (generic process)"
+ },
+ "term:synthetic fiber": {
+  "h": "c00b96ba",
+  "t": "fibre synthétique",
+  "by": "machine",
+  "s": "synthetic fiber"
+ },
+ "term:textile printing": {
+  "h": "d5e57c07",
+  "t": "impression textile",
+  "by": "machine",
+  "s": "textile printing"
+ },
+ "term:twilled weave": {
+  "h": "ef1ac664",
+  "t": "sergé",
+  "by": "machine",
+  "s": "twilled weave"
+ },
+ "term:velvet": {
+  "h": "fb16326b",
+  "t": "velours",
+  "by": "machine",
+  "s": "velvet"
+ },
+ "term:weaving": {
+  "h": "23089dd6",
+  "t": "tissage",
+  "by": "machine",
+  "s": "weaving"
+ },
+ "term:whitework (technique)": {
+  "h": "d55a658e",
+  "t": "broderie blanche (technique)",
+  "by": "machine",
+  "s": "whitework (technique)"
+ },
+ "term:wool (hair material)": {
+  "h": "76d000d4",
+  "t": "laine",
+  "by": "machine",
+  "s": "wool (hair material)"
+ }
+}

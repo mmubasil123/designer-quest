@@ -4,19 +4,20 @@
    tracking (D2). Phones that can share files get the share sheet, everything else gets a download. */
 
 import { eraOf } from "./scenes.js";
+import { t, lang } from "./i18n.js";   // D-3
 /* H12 personal card: the visitor may type a name (kept in this browser only, never sent anywhere, D2). The card shows their
    look in the period room of its middle year (scenes.js), the pieces they wear, the pieces they won, and one line from a worn
    piece's story (narration.json: the curator's text, else a sentence of the MoMu record, D3). */
 const NAME_KEY = "secondSkin.name.v1", WON_KEY = "secondSkin.won.v1";
-const cleanName = t => String(t || "").replace(/[\u0000-\u001f<>]/g, "").replace(/\s+/g, " ").trim().slice(0, 20);
+const cleanName = x => String(x || "").replace(/[\u0000-\u001f<>]/g, "").replace(/\s+/g, " ").trim().slice(0, 20);
 const readName = () => { try { return cleanName(localStorage.getItem(NAME_KEY)); } catch { return ""; } };
 const writeName = n => { try { n ? localStorage.setItem(NAME_KEY, n) : localStorage.removeItem(NAME_KEY); } catch { /* blocked: the name lasts this visit */ } };
 const readWon = () => { try { const w = JSON.parse(localStorage.getItem(WON_KEY) || "[]"); return Array.isArray(w) ? w : []; } catch { return []; } };
 const loadImg = src => new Promise(res => { const i = new Image(); i.onload = () => res(i); i.onerror = () => res(null); i.src = src; });
 
 export function cardTitle(name, facts, fallback) {
-  if (name) return facts.span ? `${name}'s look across ${facts.span} years` : `${name}'s look`;
-  return facts.span ? `A look across ${facts.span} years` : fallback;
+  if (name) return facts.span ? t("{name}'s look across {n} years", { name, n: facts.span }) : t("{name}'s look", { name });
+  return facts.span ? t("A look across {n} years", { n: facts.span }) : fallback;
 }
 
 /* One line from the story of a worn piece. Prefer the curator's own text; a record draft gives its first sentence of the record;
@@ -25,18 +26,18 @@ export function pickQuote(facts, stories) {
   const worn = facts.rows.filter(r => stories?.[r.id]);
   worn.sort((a, b) => (stories[a.id].source === "curator" ? 0 : 1) - (stories[b.id].source === "curator" ? 0 : 1) || (a.year ?? 9999) - (b.year ?? 9999));
   for (const r of worn) {
-    let t = (stories[r.id].paragraphs?.[0] || "").replace(/^The museum's record describes it like this:\s*/, "").replace(/\s*\n\s*/g, " ").trim();   // line breaks joined
-    const m = t.match(/^(.{40,170}?[.!?])(\s|$)/);
-    t = m ? m[1] : t.length > 170 ? t.slice(0, 170).replace(/\s*\S*$/, "") + "…" : t;
-    if (t.length < 20) continue;
+    let q = (stories[r.id].paragraphs?.[0] || "").replace(/^The museum's record describes it like this:\s*/, "").replace(/\s*\n\s*/g, " ").trim();   // line breaks joined
+    const m = q.match(/^(.{40,170}?[.!?])(\s|$)/);
+    q = m ? m[1] : q.length > 170 ? q.slice(0, 170).replace(/\s*\S*$/, "") + "…" : q;
+    if (q.length < 20) continue;
     const yrs = r.year ? (r.to && r.to !== r.year ? `${r.year}–${r.to}` : `${r.year}`) : "";
-    return { text: t, by: stories[r.id].source === "curator" || stories[r.id].form === "script" ? `${r.name}${yrs ? ", " + yrs : ""}` : `MoMu's record of the ${r.name.toLowerCase()}` };
+    return { text: q, by: stories[r.id].source === "curator" || stories[r.id].form === "script" ? `${r.name}${yrs ? ", " + yrs : ""}` : t("MoMu's record of the {name}", { name: r.name.toLowerCase() }) };
   }
   return null;
 }
 
 export const CARD_W = 1080, CARD_H = 1920;
-const CREDIT = "Collection: MoMu Fashion Museum Antwerp";
+const CREDIT = () => t("Collection: MoMu Fashion Museum Antwerp");
 // MoMu's official logo, the two polygons of momu.be's large logo (x 0..534, y 0..120); drawn stretched to 1.786:1 like
 // assets/brand/momu-logo.svg and momu.be's header
 const MOMU_LOGO = [
@@ -118,11 +119,11 @@ export function drawCard({ grab, name, facts, url, scene, quote, won, kicker }) 
 
   const { oldest, newest, span } = facts;   // the span is a sentence, not a stat tile
   ctx.font = `italic 400 52px ${SERIF}`; ctx.fillStyle = INK;
-  const spanText = span ? `From ${oldest} to ${newest}` : oldest ? `All from ${oldest}` : "Years not recorded";
+  const spanText = span ? t("From {a} to {b}", { a: oldest, b: newest }) : oldest ? t("All from {year}", { year: oldest }) : t("Years not recorded");
   ctx.fillText(spanText, pad, y + 20);
 
   const rows = [...facts.rows];
-  if (won.length) rows.push({ role: "Won", name: won.join(", "), id: "", year: null, to: null, right: "" });
+  if (won.length) rows.push({ role: t("Won"), name: won.join(", "), id: "", year: null, to: null, right: "" });
   const rowH = rows.length > 3 ? 68 : 84, formY = y + 60;
   const quoteLines = quote ? (ctx.font = `italic 400 34px ${SERIF}`, wrap(ctx, `“${quote.text}”`, CARD_W - 2 * pad - 34, 3)) : [];
   const blockH = quote ? quoteLines.length * 46 + 74 : 0;
@@ -136,8 +137,8 @@ export function drawCard({ grab, name, facts, url, scene, quote, won, kicker }) 
   rows.forEach(r => {
     ctx.beginPath(); ctx.moveTo(pad, ry); ctx.lineTo(CARD_W - pad, ry); ctx.stroke();
     ctx.font = `500 24px ${MONO}`; ctx.fillStyle = MUTED; ctx.textAlign = "left";
-    ctx.fillText(r.role.toUpperCase(), pad, ry + rowH / 2 - 4);
-    const right = r.right ?? (r.year ? (r.to && r.to !== r.year ? `${r.year}–${r.to}` : `${r.year}`) : "not recorded");
+    ctx.fillText(t(r.role).toUpperCase(), pad, ry + rowH / 2 - 4);
+    const right = r.right ?? (r.year ? (r.to && r.to !== r.year ? `${r.year}–${r.to}` : `${r.year}`) : t("not recorded"));
     ctx.textAlign = "right"; ctx.fillText(right, CARD_W - pad, ry + rowH / 2 - 4);
     const rightW = ctx.measureText(right).width;
     ctx.textAlign = "left"; ctx.fillStyle = INK; ctx.font = `400 34px ${SERIF}`;
@@ -157,7 +158,7 @@ export function drawCard({ grab, name, facts, url, scene, quote, won, kicker }) 
   }
 
   ctx.textAlign = "left"; ctx.fillStyle = INK; ctx.font = `400 38px ${SERIF}`;
-  ctx.fillText(CREDIT, pad, FOOT_Y + 90);
+  ctx.fillText(CREDIT(), pad, FOOT_Y + 90);
   ctx.font = `400 26px ${MONO}`; ctx.fillStyle = MUTED;
   ctx.fillText(fit(ctx, url, CARD_W - 2 * pad), pad, FOOT_Y + 142);
   return cv;
@@ -184,12 +185,12 @@ export function createShare({ tt, look, PIECES, getName, toast }) {
   const el = document.createElement("dialog");
   el.className = "share"; el.setAttribute("aria-labelledby", "shareTitle");
   el.innerHTML = `<div class="share-in">
-    <h2 id="shareTitle">Your look, as a card</h2>
-    <label class="share-name"><span>Your name <i>(optional)</i></span><input id="shareName" type="text" maxlength="20" autocomplete="off" autocapitalize="words" spellcheck="false" enterkeyhint="done" placeholder="Put your name on it"></label>
+    <h2 id="shareTitle">${t("Your look, as a card")}</h2>
+    <label class="share-name"><span>${t("Your name")} <i>${t("(optional)")}</i></span><input id="shareName" type="text" maxlength="20" autocomplete="off" autocapitalize="words" spellcheck="false" enterkeyhint="done" placeholder="${t("Put your name on it")}"></label>
     <img class="share-img" id="shareImg" alt="" width="270" height="480">
     <p class="share-note" id="shareNote"></p>
-    <div class="row"><button class="btn press" id="shareGo" hidden>Share</button><a class="btn ghost press" id="shareSave" download="momu-look.png">Download image</a></div>
-    <button class="share-x press" data-close aria-label="Close" autofocus>×</button>
+    <div class="row"><button class="btn press" id="shareGo" hidden>${t("Share")}</button><a class="btn ghost press" id="shareSave" download="momu-look.png">${t("Download image")}</a></div>
+    <button class="share-x press" data-close aria-label="${t("Close")}" autofocus>×</button>
   </div>`;
   document.body.append(el);
   const img = el.querySelector("#shareImg"), go = el.querySelector("#shareGo"), save = el.querySelector("#shareSave"), note = el.querySelector("#shareNote"), input = el.querySelector("#shareName");
@@ -198,10 +199,10 @@ export function createShare({ tt, look, PIECES, getName, toast }) {
   el.addEventListener("close", () => { clearTimeout(timer); run++; URL.revokeObjectURL(img.src); img.removeAttribute("src"); save.removeAttribute("href"); file = null; });
   go.addEventListener("click", async () => {
     if (!file) return;
-    try { await navigator.share({ files: [file], title: "My MoMu look" }); }
-    catch (err) { if (err.name !== "AbortError") toast("Couldn't share from this browser, use Download"); }
+    try { await navigator.share({ files: [file], title: t("My MoMu look") }); }
+    catch (err) { if (err.name !== "AbortError") toast(t("Couldn't share from this browser, use Download")); }
   });
-  save.addEventListener("click", () => toast("Saved to your downloads"));   // the link itself downloads the blob
+  save.addEventListener("click", () => toast(t("Saved to your downloads")));   // the link itself downloads the blob
   input.addEventListener("input", () => { clearTimeout(timer); timer = setTimeout(render, 400); });   // the card follows the typing, once the hand pauses
   input.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); clearTimeout(timer); render(); input.blur(); } });
   input.addEventListener("change", () => { clearTimeout(timer); render(); });
@@ -219,20 +220,20 @@ export function createShare({ tt, look, PIECES, getName, toast }) {
     const won = [...new Set([...readWon(), ...Object.keys(PIECES)])].filter(id => PIECES[id]?.room && !PIECES[id].locked && !wornIds.has(id)).map(id => PIECES[id].name);
     const shown = won.length > 2 ? [...won.slice(0, 2), `+${won.length - 2} more`] : won;
     const title = cardTitle(name, facts, getName());
-    const kicker = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+    const kicker = new Date().toLocaleDateString({ nl: "nl-BE", fr: "fr-BE" }[lang] || "en-GB", { day: "numeric", month: "long", year: "numeric" });
     const url = location.host + location.pathname.replace(/\/(index|second-skin)\.html$/, "/");
     const canvas = drawCard({ grab: h => grabStill(tt, h), name: title, facts, url, scene, quote: pickQuote(facts, stories), won: shown, kicker });
     const blob = await new Promise(res => canvas.toBlob(res, "image/png"));
     if (mine !== run) return;
-    if (!blob) { toast("Couldn't make the card in this browser"); return; }
+    if (!blob) { toast(t("Couldn't make the card in this browser")); return; }
     URL.revokeObjectURL(img.src);
     file = new File([blob], "momu-look.png", { type: "image/png" });
     img.src = URL.createObjectURL(file);
-    img.alt = `Share card: ${title}, ${facts.span ? `from ${facts.oldest} to ${facts.newest}` : "years as recorded"}, ${CREDIT}`;
+    img.alt = `${t("Share card:")} ${title}, ${facts.span ? t("from {a} to {b}", { a: facts.oldest, b: facts.newest }) : t("years as recorded")}, ${CREDIT()}`;
     const canShare = !!navigator.canShare?.({ files: [file] });
     go.hidden = !canShare; save.href = img.src;
     save.classList.toggle("ghost", canShare);   // on a laptop, where nothing can share a file, Download is the main action
-    note.textContent = "PNG, 1080 × 1920. Your name stays on this device.";
+    note.textContent = t("PNG, 1080 × 1920. Your name stays on this device.");
     if (!el.open) el.showModal();
   }
   async function open() {

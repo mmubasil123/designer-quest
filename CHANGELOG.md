@@ -2,6 +2,18 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## D-3 Languages NL / EN / FR, English for the Dutch-only records (2026-11-22, branch hassan/D-3-i18n)
+
+- **What:** `mockups/i18n.js` is the one language layer. UI text is written in English in the code as `t("English", {vars})`; NL and FR are in `mockups/i18n/ui.nl.json` and `ui.fr.json` (an untranslated string shows in English). Facts and stories are translated at build time by `mockups/tools/i18n_build.py` into `i18n/content.<lang>.json`, stamped with a hash of the source: a changed source shows the original again and `--check` fails until the script is rerun. Covered: the fact card (materials, places, the MoMu quote), the Won card quote, Up close (detail quotes, finds, hints, toasts), Ask, the curator's stories and questions, the H13 narration captions, the piece names, the step line, the share card.
+- **D-3 acceptance:** every Dutch-only fact on screen has English beside it: the Dutch original stays (fact card, Won card, Up close, Ask) and the translation carries a label, **Our translation** where the team wrote it (65 entries from `records.py` / `pieces.json`), **Machine translation** for the rest. No fact appears in Dutch alone.
+- **Switch:** NL EN FR on the first step of the **?** help sheet (with a "Language" caption) and in the Up close header. Default: saved choice, else browser language if nl/en/fr, else EN. Stored as optional `lang` in `secondSkin.save.v1`.
+- **No lost place (H6 audit finding 8):** a switch still reloads (the wardrobe tiles, 3D scenes and dialogs are built once from strings), but `keepPlace()` / `takePlace()` in `i18n.js` carry the place through `sessionStorage`: on the Stage the help sheet, wardrobe height, tab, body/sleeves and grid scroll; on Up close the camera angle (found details are saved already). `nav.js` resets its own history depth on load, so back closes the reopened sheet and never leaves the page.
+- **Rebase onto main (H6, H13, E4, B5/B6/B8, H20):** re-applied by hand; the story sheet translates the narration beats (`narr:<id>:<n>`, `:tease`) and keeps the English recording ("Narration in English"); the browser-voice fallback reads the chosen language. The landing page (`index.html`, E4) is not translated.
+- **Small CSS:** `i18n.css` keeps the Stage header on one line at 320 px in FR (smaller pills), the Up close header likewise (piece number hidden below 360 px), and puts the label under a fact value. The match chip reads "n/10 gagnées" / "n/10 gewonnen" for width.
+- **Counts:** UI NL and FR each cover every `t()` key; content NL 249, FR 439, EN 190 entries (`--check` clean).
+- **Decision:** machine translation at build time, never at runtime, always labelled. The 336 entries added in this rebase (narration, the cycling blouse and trousers, 14 EN record sentences) were written by an assistant, not the Gemini setup, because no `ASK_*` env was at hand; they are stored as `machine`. NL and FR UI strings and all machine text need a native read (the curator reviews `i18n/glossary.json`). FR narration uses "vous" while the FR UI uses "tu": to settle.
+- **Checked:** Playwright-less, in the browser pane at 390 and 320 px (FR, NL, EN): switch with help open, tab and sheet kept, back closes the sheet and Museum, fact card, story, Won card, Up close header; Impeccable detector: one finding on the wardrobe ("Full" ×3, main's code, not changed). Not on a phone.
+
 ## Stage without the dress form (2026-11-22, H20, branch hassan/H20-no-form)
 - What: the four form finishes (linen, calico, black jersey, oak) are gone from the Stage header, and the dress form
   (torso, neck, pole, base) is no longer built: the worn scans stand on their own in the room, with the contact shadow

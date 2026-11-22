@@ -1,0 +1,1497 @@
+{
+ "_about": "D-3: nl text for facts and stories, built by mockups/tools/i18n_build.py. Do not hand-edit; change the glossary or the source and rerun. h = hash of the source text; by = team or machine.",
+ "det:ST2203:0:find": {
+  "h": "a986ff64",
+  "t": "Grote schoudervullingen",
+  "by": "machine",
+  "s": "Big padded shoulders"
+ },
+ "det:ST2203:1:find": {
+  "h": "216c2862",
+  "t": "Een rits van de V tot de taille",
+  "by": "machine",
+  "s": "A zip from the V to the waist"
+ },
+ "det:ST2203:2:find": {
+  "h": "d3ff98c0",
+  "t": "Gedrapeerde zakken op de heupen",
+  "by": "machine",
+  "s": "Draped pockets at the hips"
+ },
+ "det:ST2431/1-4:0:find": {
+  "h": "3dd9bcea",
+  "t": "Chinese knopen die ook de sluiting zijn",
+  "by": "machine",
+  "s": "Frogging that is also the fastening"
+ },
+ "det:ST2431/1-4:1:find": {
+  "h": "7e161cf2",
+  "t": "De rode opstaande kraag",
+  "by": "machine",
+  "s": "The red standing collar"
+ },
+ "det:ST2431/1-4:2:find": {
+  "h": "0302fc21",
+  "t": "Metalen galon op de boorden",
+  "by": "machine",
+  "s": "Metal braid on the cuffs"
+ },
+ "det:ST2432/1-2:0:find": {
+  "h": "a6ec4de8",
+  "t": "De hoge rode kraag",
+  "by": "machine",
+  "s": "The high red collar"
+ },
+ "det:ST2432/1-2:1:find": {
+  "h": "8bf227d0",
+  "t": "Epauletten van gouddraad",
+  "by": "machine",
+  "s": "Epaulettes of gold thread"
+ },
+ "det:ST2432/1-2:2:find": {
+  "h": "40c05fb8",
+  "t": "Rode flitsen aan de uiteinden van de slippen",
+  "by": "machine",
+  "s": "Red flashes at the tail tips"
+ },
+ "det:ST2435:0:find": {
+  "h": "58e11ae2",
+  "t": "De brede bootnek",
+  "by": "machine",
+  "s": "The wide boat neck"
+ },
+ "det:ST2435:1:find": {
+  "h": "61a70f85",
+  "t": "De band die de heupen vorm geeft",
+  "by": "machine",
+  "s": "The band that shapes the hips"
+ },
+ "det:ST2435:2:find": {
+  "h": "54c59ae4",
+  "t": "Krullen en ogen in het stiksel",
+  "by": "machine",
+  "s": "Curls and eyes in the stitching"
+ },
+ "det:ST652/1:0:find": {
+  "h": "9ae410ed",
+  "t": "De geruite verstelling",
+  "by": "machine",
+  "s": "The checked mending"
+ },
+ "det:ST652/1:1:find": {
+  "h": "940e0237",
+  "t": "Een rode zakdoek die er niet is",
+  "by": "machine",
+  "s": "A red handkerchief that isn't there"
+ },
+ "det:ST652/1:2:find": {
+  "h": "7b04c754",
+  "t": "Het riempje op de rug",
+  "by": "machine",
+  "s": "The little belt at the back"
+ },
+ "det:ST671:0:find": {
+  "h": "b7f49b0f",
+  "t": "Een kantkraag die doorgaat voor Lille-kant",
+  "by": "machine",
+  "s": "A lace collar pretending to be Lille lace"
+ },
+ "det:ST671:1:find": {
+  "h": "201e8575",
+  "t": "Een kantband langs de linkervoorkant",
+  "by": "machine",
+  "s": "A lace band down the left front"
+ },
+ "det:ST671:2:find": {
+  "h": "117311b1",
+  "t": "Haken op de rug",
+  "by": "machine",
+  "s": "Hooks down the back"
+ },
+ "det:ST673/1-2:0:find": {
+  "h": "6ccc81f4",
+  "t": "Parelmoeren knopen",
+  "by": "machine",
+  "s": "Mother-of-pearl buttons"
+ },
+ "det:ST673/1-2:1:find": {
+  "h": "1a510de5",
+  "t": "Een U-vormige pas van broderie anglaise",
+  "by": "machine",
+  "s": "A U-shaped yoke of eyelet lace"
+ },
+ "det:ST673/1-2:2:find": {
+  "h": "ba8b07b5",
+  "t": "Bewegingsruimte op de rug",
+  "by": "machine",
+  "s": "Room to move at the back"
+ },
+ "det:ST80998:0:find": {
+  "h": "c9217a36",
+  "t": "Een halslijn die in een punt eindigt",
+  "by": "machine",
+  "s": "A neckline that ends in a point"
+ },
+ "det:ST80998:1:find": {
+  "h": "ea3392ff",
+  "t": "Lijnborduursel op de borst",
+  "by": "machine",
+  "s": "Couched cord embroidery on the chest"
+ },
+ "det:ST80998:2:find": {
+  "h": "13dda94d",
+  "t": "Lange puntmouwen",
+  "by": "machine",
+  "s": "Long pointed sleeves"
+ },
+ "det:ST81190:0:find": {
+  "h": "eadf650c",
+  "t": "Klinknagels in plaats van naden",
+  "by": "machine",
+  "s": "Rivets instead of seams"
+ },
+ "det:ST81190:1:find": {
+  "h": "49b2e8bd",
+  "t": "Negen drukknopen",
+  "by": "machine",
+  "s": "Nine press studs"
+ },
+ "det:ST81190:2:find": {
+  "h": "6a746423",
+  "t": "Een rood kruis in de nek",
+  "by": "machine",
+  "s": "A red cross at the back of the neck"
+ },
+ "name:ST2062": {
+  "h": "42dd19a3",
+  "t": "Kniebroek",
+  "by": "machine",
+  "s": "Knee breeches"
+ },
+ "name:ST2203": {
+  "h": "baaeedb8",
+  "t": "Zwarte satijnen japon",
+  "by": "machine",
+  "s": "Black satin dress"
+ },
+ "name:ST2407/1-2": {
+  "h": "9b625a7d",
+  "t": "Voetbalschoenen, Dirk Bikkembergs",
+  "by": "machine",
+  "s": "Football boots, Dirk Bikkembergs"
+ },
+ "name:ST2431/1-4": {
+  "h": "53dddec4",
+  "t": "Lichtblauw cavalerie-uniform",
+  "by": "machine",
+  "s": "Light-blue cavalry uniform"
+ },
+ "name:ST2432/1-2": {
+  "h": "1d21ef41",
+  "t": "Donkerblauw uniform met slipjas",
+  "by": "machine",
+  "s": "Dark-blue tailcoat uniform"
+ },
+ "name:ST2434": {
+  "h": "c3ec4690",
+  "t": "Groene wollen jas",
+  "by": "machine",
+  "s": "Green wool coat"
+ },
+ "name:ST2435": {
+  "h": "3dfd2a82",
+  "t": "Zijden jurk met pailletten",
+  "by": "machine",
+  "s": "Sequin silk dress"
+ },
+ "name:ST503": {
+  "h": "4bf2d68d",
+  "t": "Jak",
+  "by": "machine",
+  "s": "Jak"
+ },
+ "name:ST652/1": {
+  "h": "61932e7c",
+  "t": "Herstelde jurk met polkadots",
+  "by": "machine",
+  "s": "Polka-dot mended dress"
+ },
+ "name:ST655/1": {
+  "h": "640f054c",
+  "t": "Cocktailjurk",
+  "by": "machine",
+  "s": "Cocktail dress"
+ },
+ "name:ST671": {
+  "h": "a4a9d40c",
+  "t": "Zijden wandeljapon",
+  "by": "machine",
+  "s": "Silk walking dress"
+ },
+ "name:ST673/1-2": {
+  "h": "1446b91e",
+  "t": "Katoenen combinaison",
+  "by": "machine",
+  "s": "Cotton combinaison"
+ },
+ "name:ST80881": {
+  "h": "94268b67",
+  "t": "Furisode kimono",
+  "by": "machine",
+  "s": "Furisode kimono"
+ },
+ "name:ST80930": {
+  "h": "bb679682",
+  "t": "Ikat vest",
+  "by": "machine",
+  "s": "Ikat vest"
+ },
+ "name:ST80931": {
+  "h": "0a1c6c5f",
+  "t": "Monpe broek",
+  "by": "machine",
+  "s": "Monpe trousers"
+ },
+ "name:ST80998": {
+  "h": "d1a8aadb",
+  "t": "Bruidskaftan in gestreept fluweel",
+  "by": "machine",
+  "s": "Striped velvet bridal kaftan"
+ },
+ "name:ST81114AB": {
+  "h": "59cbe79c",
+  "t": "Fietsblouse",
+  "by": "machine",
+  "s": "Cycling blouse"
+ },
+ "name:ST81116": {
+  "h": "acb4234f",
+  "t": "Fietsbroek",
+  "by": "machine",
+  "s": "Cycling trousers"
+ },
+ "name:ST81190": {
+  "h": "7ed60806",
+  "t": "Wollen jas met klinknagels",
+  "by": "machine",
+  "s": "Riveted wool coat"
+ },
+ "narr:ST2062:0": {
+  "h": "3c49a6d2",
+  "t": "Elke steek in deze kniebroek is met de hand genaaid.",
+  "by": "machine",
+  "s": "Every stitch in these breeches was sewn by hand."
+ },
+ "narr:ST2062:1": {
+  "h": "d1b52971",
+  "t": "Crèmekleurig wollen laken, gemaakt voor een man, en ooit deel van een Russisch militair kostuum.",
+  "by": "machine",
+  "s": "Cream woollen broadcloth, made for a man, and once part of a Russian military costume."
+ },
+ "narr:ST2062:2": {
+  "h": "349d814e",
+  "t": "Zes knopen sluiten de lange gulp. Een klein zakje zit verborgen in de tailleband aan de rechterheup. Achteraan trekt een koperen gesp ze strak.",
+  "by": "machine",
+  "s": "Six buttons close the long fly. A small pocket hides in the waistband at the right hip. At the back, a brass buckle pulls them tight."
+ },
+ "narr:ST2062:3": {
+  "h": "7ce52f6c",
+  "t": "Onderaan bij elke knie: een split en drie knopen. En binnenin een glimp van glanzende crèmekleurige keper, waarschijnlijk zijde.",
+  "by": "machine",
+  "s": "Down at each knee: a slit and three buttons. And inside, a glimpse of glossy cream twill, probably silk."
+ },
+ "narr:ST2062:4": {
+  "h": "b9445ecc",
+  "t": "Ze dateren van tussen 1850 en 1870.",
+  "by": "machine",
+  "s": "They date from between 1850 and 1870."
+ },
+ "narr:ST2062:tease": {
+  "h": "d02f8844",
+  "t": "Wanneer werden ze genaaid? Doe je gok.",
+  "by": "machine",
+  "s": "When were they sewn? Make your guess."
+ },
+ "narr:ST2203:0": {
+  "h": "70756984",
+  "t": "Zwart zijden satijn, strak op het lichaam gesneden, ergens tussen 1937 en 1948.",
+  "by": "machine",
+  "s": "Black silk satin, cut close to the body, somewhere between 1937 and 1948."
+ },
+ "narr:ST2203:1": {
+  "h": "abd67652",
+  "t": "Een diepe V, afgezet met zwart fluweel. Brede schouders, opgevuld met wit katoen.",
+  "by": "machine",
+  "s": "A deep V, edged in black velvet. Big shoulders, padded with white cotton."
+ },
+ "narr:ST2203:2": {
+  "h": "684a5800",
+  "t": "Het satijn plooit en drapeert, over de hele voor- en achterkant.",
+  "by": "machine",
+  "s": "The satin gathers and drapes, down the front and down the back."
+ },
+ "narr:ST2203:3": {
+  "h": "56bb0ecf",
+  "t": "Twee gedrapeerde zakken zitten op de heupen. Vijf stoffen knopen sluiten elke manchet.",
+  "by": "machine",
+  "s": "Two draped pockets sit at the hips. Five fabric buttons close each cuff."
+ },
+ "narr:ST2203:4": {
+  "h": "36c1c4cd",
+  "t": "En vanaf de punt van de V loopt een zwarte metalen rits twintig centimeter naar beneden, tot aan de taille.",
+  "by": "machine",
+  "s": "And from the point of the V, a black metal zip runs twenty centimetres down, to the waist."
+ },
+ "narr:ST2407/1-2:0": {
+  "h": "b911fba1",
+  "t": "Dirk Bikkembergs maakte deze voetbalschoenen voor een echte club: FC Bikkembergs Fossombrone, in de Marche, in Italië.",
+  "by": "machine",
+  "s": "Dirk Bikkembergs made these football boots for a real club: FC Bikkembergs Fossombrone, in the Marche, in Italy."
+ },
+ "narr:ST2407/1-2:1": {
+  "h": "812af7d3",
+  "t": "Wit leer, omwonden met blauwe cirkels.",
+  "by": "machine",
+  "s": "White leather, wound with blue circles."
+ },
+ "narr:ST2407/1-2:2": {
+  "h": "7c80a8e5",
+  "t": "Draai ze om. Door de doorzichtige zool met noppen zie je een tekening in rood en blauw.",
+  "by": "machine",
+  "s": "Turn them over. Through the clear, studded sole, you can see a drawing in red and blue."
+ },
+ "narr:ST2407/1-2:3": {
+  "h": "d40fb6f6",
+  "t": "Een leren cirkel bedekt de veters, vastgehouden met elastiek, en draagt het logo van Bikkembergs Sport.",
+  "by": "machine",
+  "s": "A leather circle covers the laces, held on with elastic, and carries the logo of Bikkembergs Sport."
+ },
+ "narr:ST2407/1-2:4": {
+  "h": "4a31e157",
+  "t": "De ene hiel is blauw, de andere rood. Het embleem van de club links, dat van het label rechts.",
+  "by": "machine",
+  "s": "One heel is blue, the other red. The club's badge on the left, the label's on the right."
+ },
+ "narr:ST2407/1-2:5": {
+  "h": "ee4ee282",
+  "t": "Ze werden gemaakt tussen 2005 en 2009.",
+  "by": "machine",
+  "s": "They were made between 2005 and 2009."
+ },
+ "narr:ST2407/1-2:tease": {
+  "h": "ee12d6c4",
+  "t": "Hoe nieuw zijn ze? Doe je gok.",
+  "by": "machine",
+  "s": "How new are they? Make your guess."
+ },
+ "narr:ST2431/1-4:0": {
+  "h": "f3951641",
+  "t": "Stel je hem te paard voor: een luitenant van de Nationale Garde, bij de Franse Chasseurs à cheval, het negende regiment of het achttiende.",
+  "by": "machine",
+  "s": "Imagine him on horseback: a lieutenant of the National Guard, with the mounted chasseurs of France, the ninth regiment, or the eighteenth."
+ },
+ "narr:ST2431/1-4:1": {
+  "h": "2c785c62",
+  "t": "Zijn uniform is van lichtblauwe en rode wol, gemaakt tussen 1870 en 1900.",
+  "by": "machine",
+  "s": "His uniform is light blue and red wool, made between 1870 and 1900."
+ },
+ "narr:ST2431/1-4:2": {
+  "h": "f8ab35ee",
+  "t": "Zwart galon kruist zijn borst, en is ook de sluiting. Zijn rode kraag staat rechtop, bewerkt met opgerolde metaaldraad.",
+  "by": "machine",
+  "s": "Black braid crosses his chest, and it is the fastening too. His red collar stands up, worked with coiled metal thread."
+ },
+ "narr:ST2431/1-4:3": {
+  "h": "5f05867d",
+  "t": "Rode broek met een blauwe streep. Gouden knopen op de tailleband lezen: achttiende chasseurs.",
+  "by": "machine",
+  "s": "Red trousers with a blue stripe. Gold buttons on the waistband read: eighteenth chasseurs."
+ },
+ "narr:ST2431/1-4:4": {
+  "h": "f7ee9c29",
+  "t": "Op zijn hoofd een kepie, vijftien centimeter hoog, met een zwartleren klep.",
+  "by": "machine",
+  "s": "On his head, a kepi, fifteen centimetres tall, with a black leather peak."
+ },
+ "narr:ST2431/1-4:5": {
+  "h": "1fe09b9e",
+  "t": "Nog een laatste detail: kleine spleten in de zijnaden, net groot genoeg voor een kleine hand.",
+  "by": "machine",
+  "s": "One last detail: small slits in the side seams, just big enough for a small hand."
+ },
+ "narr:ST2432/1-2:0": {
+  "h": "fa38cf23",
+  "t": "Dit uniform heeft meer dan één leven geleid.",
+  "by": "machine",
+  "s": "This uniform has lived more than one life."
+ },
+ "narr:ST2432/1-2:1": {
+  "h": "55f83bb4",
+  "t": "De jas is het origineel, gemaakt voor een lid van de Nationale Garde: donkerblauw laken, een hoge rode kraag, rode manchetten en slippen gevoerd met rood.",
+  "by": "machine",
+  "s": "The coat is the original, made for a member of the National Guard: dark blue broadcloth, a high red collar, red cuffs, and tails lined in red."
+ },
+ "narr:ST2432/1-2:2": {
+  "h": "ec594407",
+  "t": "Kijk naar de slippen. De punten zijn naar buiten omgeslagen, zodat er een flits rood onder het blauw te zien is.",
+  "by": "machine",
+  "s": "Look at the tails. Their points are turned out, so a flash of red shows below the blue."
+ },
+ "narr:ST2432/1-2:3": {
+  "h": "f33f3f9c",
+  "t": "Drie knopen van wit metaal zeggen nog altijd: Garde Nationale.",
+  "by": "machine",
+  "s": "Three white-metal buttons still say: Garde Nationale."
+ },
+ "narr:ST2432/1-2:4": {
+  "h": "cbf041a6",
+  "t": "De broek kwam later, van tussen 1910 en 1940. Nog later werd een rode veter in de rug aangebracht.",
+  "by": "machine",
+  "s": "The trousers came later, from between 1910 and 1940. Later still, a red lace was set into their back."
+ },
+ "narr:ST2432/1-2:5": {
+  "h": "8a65966d",
+  "t": "Zelfs de gouden knopen vooraan zijn nieuwer, mogelijk van 1980 tot 2000. Jas en broek: beide in de loop der jaren aangepast.",
+  "by": "machine",
+  "s": "Even the gold buttons on the front are newer, possibly from 1980 to 2000. Coat and trousers: both altered over the years."
+ },
+ "narr:ST2434:0": {
+  "h": "6e83302d",
+  "t": "Deze groene lakense jas met lange slippen heeft een raadsel voor je.",
+  "by": "machine",
+  "s": "This green broadcloth coat, with its long tails, has a puzzle for you."
+ },
+ "narr:ST2434:1": {
+  "h": "d47c9a24",
+  "t": "Tel de knoopsgaten vooraan: twee rijen van vier. Tel nu de knopen. Geen enkele.",
+  "by": "machine",
+  "s": "Count the buttonholes on the front: two rows of four. Now count the buttons. None."
+ },
+ "narr:ST2434:2": {
+  "h": "9a74800c",
+  "t": "Acht ronde koperen knopen werden los bewaard. Waarschijnlijk zaten ze ooit op de rug.",
+  "by": "machine",
+  "s": "Eight round brass buttons were kept loose. Most likely, they once sat on the back."
+ },
+ "narr:ST2434:3": {
+  "h": "3d3e15f4",
+  "t": "Twee grote platte koperen knopen zitten er nog, laag op de slippen, met een signatuur: M en Cie, Paris.",
+  "by": "machine",
+  "s": "Two large flat brass buttons are still there, low on the tails, signed: M and Cie, Paris."
+ },
+ "narr:ST2434:4": {
+  "h": "f80770b0",
+  "t": "Later voegde iemand een brede rode band toe aan de voorkant. En aan de binnenkant zit een voering in glanzend paars.",
+  "by": "machine",
+  "s": "Later, someone added a broad red band to the front. And inside, there is a lining of glossy purple."
+ },
+ "narr:ST2434:5": {
+  "h": "44cb4c0d",
+  "t": "Het werd ergens tussen 1795 en 1840 gemaakt.",
+  "by": "machine",
+  "s": "It was made somewhere between 1795 and 1840."
+ },
+ "narr:ST2434:tease": {
+  "h": "926585b6",
+  "t": "Hoe oud is deze jas? Doe je gok.",
+  "by": "machine",
+  "s": "How old is this coat? Make your guess."
+ },
+ "narr:ST2435:0": {
+  "h": "5711860b",
+  "t": "Ergens tussen 1920 en 1925 werd deze jurk gemaakt om te schitteren.",
+  "by": "machine",
+  "s": "Somewhere between 1920 and 1925, this dress was made to shimmer."
+ },
+ "narr:ST2435:1": {
+  "h": "34776883",
+  "t": "Ecru zijde, kuitlang, en helemaal bedekt met pailletten die gloeien als parels.",
+  "by": "machine",
+  "s": "Ecru silk, calf-length, and covered all over in sequins that glow like pearls."
+ },
+ "narr:ST2435:2": {
+  "h": "ef7f496d",
+  "t": "Ze valt bijna recht, vanaf een wijde boothals.",
+  "by": "machine",
+  "s": "It falls almost straight, from a wide boat neck."
+ },
+ "narr:ST2435:3": {
+  "h": "286f3e05",
+  "t": "De zijkanten blijven open. Slechts drie haken en ogen links en korte bandjes aan de heupen halen ze in.",
+  "by": "machine",
+  "s": "The sides are left open. Only three hooks and eyes on the left, and short strips at the hips, draw it in."
+ },
+ "narr:ST2435:4": {
+  "h": "a6435417",
+  "t": "Kijk goed naar het oppervlak: machinaal stikwerk in metaaldraad tekent krullen en ogen.",
+  "by": "machine",
+  "s": "Look closely at the surface: machine stitching in metal thread draws curls, and eyes."
+ },
+ "narr:ST503:0": {
+  "h": "9d41f4da",
+  "t": "In Nederland maakte iemand dit jak van blauwe zijden taf: fijn, glad, met een zachte glans.",
+  "by": "machine",
+  "s": "In the Netherlands, someone made this jacket from blue silk taffeta: fine, smooth, with a soft shine."
+ },
+ "narr:ST503:1": {
+  "h": "aeec4ecd",
+  "t": "Volg de draden. Witte en gele flottés lopen mee met de schering, en een zigzag breekt open in bloemen.",
+  "by": "machine",
+  "s": "Follow the threads. White and yellow floats run with the warp, and a zigzag breaks into flowers."
+ },
+ "narr:ST503:2": {
+  "h": "18e98df7",
+  "t": "Het stopt op de taille en valt dan uit in lange panden. De hals is vierkant. De mouwen sluiten strak om de arm en eindigen bij de elleboog.",
+  "by": "machine",
+  "s": "It stops at the waist, then falls into long skirts. The neckline is square. The sleeves hug the arm and end at the elbow."
+ },
+ "narr:ST503:3": {
+  "h": "03b1827c",
+  "t": "De voorkant blijft open, bijeengehouden door kleine metalen haken en ogen.",
+  "by": "machine",
+  "s": "The front stays open, held by small metal hooks and eyes."
+ },
+ "narr:ST503:4": {
+  "h": "09d0f56b",
+  "t": "Zelfs de voering is opgesmukt: blauw linnen, gestreept in wit en geel.",
+  "by": "machine",
+  "s": "Even the lining is dressed up: blue linen, striped white and yellow."
+ },
+ "narr:ST503:5": {
+  "h": "6017d2ec",
+  "t": "Het werd gemaakt tussen 1750 en 1780.",
+  "by": "machine",
+  "s": "It was made between 1750 and 1780."
+ },
+ "narr:ST503:tease": {
+  "h": "6aeba1dc",
+  "t": "Hoe oud denk je dat het is? Doe je gok.",
+  "by": "machine",
+  "s": "How old do you think it is? Make your guess."
+ },
+ "narr:ST652/1:0": {
+  "h": "fa2c422e",
+  "t": "Tussen 1940 en 1945 werd deze jurk versteld, en nog eens versteld.",
+  "by": "machine",
+  "s": "Between 1940 and 1945, this dress was mended, and mended again."
+ },
+ "narr:ST652/1:1": {
+  "h": "f8a02724",
+  "t": "Blauw katoen, met kleine witte en rode stippen, helemaal dicht te knopen.",
+  "by": "machine",
+  "s": "Blue cotton, with small white and red dots, buttoned all the way down."
+ },
+ "narr:ST652/1:2": {
+  "h": "cd58b776",
+  "t": "Zoek de lapjes: geruite stof, keer op keer ingezet.",
+  "by": "machine",
+  "s": "Look for the patches: checked cloth, set in time after time."
+ },
+ "narr:ST652/1:3": {
+  "h": "a204b7f8",
+  "t": "Rood omrandt de zakken en de mouwen. Drie rode lijnen versieren de rechterrevers.",
+  "by": "machine",
+  "s": "Red edges the pockets and the sleeves. Three red lines trim the right lapel."
+ },
+ "narr:ST652/1:4": {
+  "h": "1f4f29b5",
+  "t": "En die rode zakdoek in de borstzak? Kijk nog eens. Hij lijkt er alleen maar te zijn.",
+  "by": "machine",
+  "s": "And that red handkerchief in the chest pocket? Look again. It only seems to be there."
+ },
+ "narr:ST652/1:5": {
+  "h": "7b1c41bc",
+  "t": "Een stoffen riem wordt vooraan gestrikt, om de taille te markeren.",
+  "by": "machine",
+  "s": "A cloth belt ties at the front, to mark the waist."
+ },
+ "narr:ST655/1:0": {
+  "h": "1f1b1790",
+  "t": "Uit België, een cocktailjurk met groene en zwarte strepen, met een geheim in de snit.",
+  "by": "machine",
+  "s": "From Belgium, a cocktail dress in green and black stripes, with a secret in its cut."
+ },
+ "narr:ST655/1:1": {
+  "h": "ef504f35",
+  "t": "Elf beklede knopen lopen langs de voorkant. De sjaalkraag is zwart fluweel, en de banden aan de korte mouwen ook.",
+  "by": "machine",
+  "s": "Eleven covered buttons run down the front. The shawl collar is black velvet, and so are the bands on the short sleeves."
+ },
+ "narr:ST655/1:2": {
+  "h": "7f6b30e1",
+  "t": "Nu het geheim. De rok is gemaakt van halve cirkels, zonder zijnaden. Zo lopen de strepen vooraan dwars en staan ze achteraan rechtop.",
+  "by": "machine",
+  "s": "Now, the secret. The skirt is made of half circles, with no side seams. So the stripes run across at the front, and turn upright at the back."
+ },
+ "narr:ST655/1:3": {
+  "h": "e0ea96e9",
+  "t": "Geen zakken. Geen voering. Alleen een zwart lint aan de binnenkant van de zoom, met de hand vastgezet met fijne steekjes.",
+  "by": "machine",
+  "s": "No pockets. No lining. Just a black ribbon inside the hem, fixed by hand with fine stitches."
+ },
+ "narr:ST655/1:4": {
+  "h": "e756d793",
+  "t": "Het werd gemaakt tussen 1947 en 1950.",
+  "by": "machine",
+  "s": "It was made between 1947 and 1950."
+ },
+ "narr:ST655/1:tease": {
+  "h": "76df8c6b",
+  "t": "Wanneer werd het gemaakt? Doe je gok.",
+  "by": "machine",
+  "s": "When was it made? Make your guess."
+ },
+ "narr:ST671:0": {
+  "h": "744fe2d8",
+  "t": "Parijs, 83 Boulevard Magenta. Dat adres staat gedrukt op de tailleband van deze jurk, samen met de naam Madame Guédon Deschamps.",
+  "by": "machine",
+  "s": "Paris, 83 Boulevard Magenta. That address is printed on this dress's waistband, with the name Madame Guédon Deschamps."
+ },
+ "narr:ST671:1": {
+  "h": "34d4f4e0",
+  "t": "Het is een wandeljapon: lang, in beige zijden rips, gemaakt tussen 1900 en 1915.",
+  "by": "machine",
+  "s": "It is a walking gown: long, in beige silk rep, made between 1900 and 1915."
+ },
+ "narr:ST671:2": {
+  "h": "fc790c7c",
+  "t": "Aan de hals machinaal kant, gemaakt als imitatie van Lilles klosjeskant, en een opstaande kraag, overeind gehouden door baleinen.",
+  "by": "machine",
+  "s": "At the throat, machine lace made to imitate Lille bobbin lace, and a standing collar held up by bones."
+ },
+ "narr:ST671:3": {
+  "h": "afae04cd",
+  "t": "Eronder zit een tweede jurk, van zijde. Haar plooien piepen onder de zoom uit.",
+  "by": "machine",
+  "s": "Underneath is a second dress, of silk. Its pleats peek out below the hem."
+ },
+ "narr:ST671:4": {
+  "h": "9bd7fbba",
+  "t": "Kijk naar die zoom: aan beide zijden hangt hij iets lager dan voor en achter.",
+  "by": "machine",
+  "s": "Look at that hem: at both sides, it hangs a little lower than at the front and back."
+ },
+ "narr:ST671:5": {
+  "h": "71364852",
+  "t": "En beide jurken sluiten achteraan, met één lange rij haken en knopen.",
+  "by": "machine",
+  "s": "And both dresses close at the back, with one long row of hooks and buttons."
+ },
+ "narr:ST673/1-2:0": {
+  "h": "d0dcafa0",
+  "t": "Tennis. Croquet. Badminton. Boogschieten. Tussen 1880 en 1900 werd dit gemaakt om te sporten.",
+  "by": "machine",
+  "s": "Tennis. Croquet. Badminton. Archery. Between 1880 and 1900, this was made for sport."
+ },
+ "narr:ST673/1-2:1": {
+  "h": "4329ecbe",
+  "t": "Wit katoen: een lijfje en een lange onderbroek, tot één geheel aan elkaar geknoopt, zonder baleinen.",
+  "by": "machine",
+  "s": "White cotton: a bodice and long drawers, buttoned into one, with no boning at all."
+ },
+ "narr:ST673/1-2:2": {
+  "h": "fd371bf5",
+  "t": "Broderie anglaise omlijst de V van de hals, en ruches omcirkelen de armen.",
+  "by": "machine",
+  "s": "Broderie anglaise frames the V of the neck, and ruffles circle the arms."
+ },
+ "narr:ST673/1-2:3": {
+  "h": "f39f87d3",
+  "t": "Parelmoeren knopen sluiten de voorkant. Knopen van been omringen de taille, om vast te houden wat erboven gedragen werd.",
+  "by": "machine",
+  "s": "Mother-of-pearl buttons close the front. Bone buttons ring the waist, to hold whatever was worn on top."
+ },
+ "narr:ST673/1-2:4": {
+  "h": "c8accc6a",
+  "t": "En de onderbroek? Open vooraan, open achteraan, en gesloten met één enkele knoop.",
+  "by": "machine",
+  "s": "And the drawers? Open at the front, open at the back, and closed over a single button."
+ },
+ "narr:ST80881:0": {
+  "h": "9d4660ac",
+  "t": "Open deze furisode-kimono uit Japan, en een heel landschap vouwt zich open.",
+  "by": "machine",
+  "s": "Open this furisode kimono from Japan, and a whole landscape unfolds."
+ },
+ "narr:ST80881:1": {
+  "h": "d3e995e3",
+  "t": "Ecru zijde, geschilderd en bedrukt met goud.",
+  "by": "machine",
+  "s": "Ecru silk, painted, and printed with gold."
+ },
+ "narr:ST80881:2": {
+  "h": "58e145fd",
+  "t": "Brede linten waaien erover in vele kleuren. Erachter: huizen, wolken, pioenen, chrysanten, pruimenbloesem, Japanse esdoorn en bamboe.",
+  "by": "machine",
+  "s": "Broad ribbons billow across it in many colours. Behind them: houses, clouds, peonies, chrysanthemums, plum blossom, Japanese maple, and bamboo."
+ },
+ "narr:ST80881:3": {
+  "h": "f246936d",
+  "t": "Kom dichter bij de bloemen. Hun details zijn geborduurd met zijde en metaaldraad.",
+  "by": "machine",
+  "s": "Come closer to the flowers. Their details are embroidered in silk and metal thread."
+ },
+ "narr:ST80881:4": {
+  "h": "c815d9ef",
+  "t": "Aan de binnenkant verandert de voering halverwege: wit bovenaan, bedrukt eronder.",
+  "by": "machine",
+  "s": "Inside, the lining changes halfway: white at the top, printed below."
+ },
+ "narr:ST80881:5": {
+  "h": "37e290b3",
+  "t": "Het dateert uit 1979.",
+  "by": "machine",
+  "s": "It dates from 1979."
+ },
+ "narr:ST80881:tease": {
+  "h": "76df8c6b",
+  "t": "Wanneer werd het gemaakt? Doe je gok.",
+  "by": "machine",
+  "s": "When was it made? Make your guess."
+ },
+ "narr:ST80930:0": {
+  "h": "ac549146",
+  "t": "Uit Japan komt dit jasje van donkerblauw katoen.",
+  "by": "machine",
+  "s": "From Japan comes this little jacket in dark blue cotton."
+ },
+ "narr:ST80930:1": {
+  "h": "30ccae69",
+  "t": "Het patroon is dubbele ikat: lichtblauwe stippen en kleine rode vierkantjes, als confetti verspreid.",
+  "by": "machine",
+  "s": "Its pattern is double ikat: light blue spots, and small red squares, scattered like confetti."
+ },
+ "narr:ST80930:2": {
+  "h": "81b187a4",
+  "t": "De mouwen zijn lang en bol. De voorpanden kruisen over elkaar en sluiten op de taille met linten.",
+  "by": "machine",
+  "s": "The sleeves are long and puffed. The front panels cross over each other, and close at the waist with ribbons."
+ },
+ "narr:ST80930:3": {
+  "h": "8774d1f2",
+  "t": "Vest of jasje? Zelfs het museumregister kan niet kiezen: er staat het ene of het andere.",
+  "by": "machine",
+  "s": "Waistcoat, or jacket? Even the museum's record cannot decide: it says one or the other."
+ },
+ "narr:ST80930:4": {
+  "h": "d15d49c2",
+  "t": "Het dateert uit de jaren 1950.",
+  "by": "machine",
+  "s": "It dates from the 1950s."
+ },
+ "narr:ST80930:tease": {
+  "h": "76df8c6b",
+  "t": "Wanneer werd het gemaakt? Doe je gok.",
+  "by": "machine",
+  "s": "When was it made? Make your guess."
+ },
+ "narr:ST80931:0": {
+  "h": "3bd755b2",
+  "t": "Dit zijn monpe: pofbroeken uit Japan.",
+  "by": "machine",
+  "s": "These are monpe: puffed trousers from Japan."
+ },
+ "narr:ST80931:1": {
+  "h": "8784b78c",
+  "t": "Donkerblauw katoen in ikat, met lichtblauwe stippen en kleine rode vierkantjes.",
+  "by": "machine",
+  "s": "Dark blue cotton in ikat, with light blue spots and small red squares."
+ },
+ "narr:ST80931:2": {
+  "h": "ed880e7d",
+  "t": "Een brede tailleband sluit met lange linten. En aan de enkels? Nog meer linten, zodat je de pijpen strak kunt dichtbinden.",
+  "by": "machine",
+  "s": "A broad waistband closes with long ribbons. And at the ankles? More ribbons, so you can tie the legs in close."
+ },
+ "narr:ST80931:3": {
+  "h": "0e920553",
+  "t": "Ze werden gemaakt in 1965.",
+  "by": "machine",
+  "s": "They were made in 1965."
+ },
+ "narr:ST80931:tease": {
+  "h": "c06f7e24",
+  "t": "Wanneer werden ze gemaakt? Doe je gok.",
+  "by": "machine",
+  "s": "When were they made? Make your guess."
+ },
+ "narr:ST80998:0": {
+  "h": "c69a3c88",
+  "t": "Deze kaftan werd gemaakt voor een bruid in Palestina, tussen 1900 en 1925.",
+  "by": "machine",
+  "s": "This kaftan was made for a bride in Palestine, between 1900 and 1925."
+ },
+ "narr:ST80998:1": {
+  "h": "265f1f37",
+  "t": "Fluweel, in strepen van bordeaux, rood, groen en zwart.",
+  "by": "machine",
+  "s": "Velvet, in stripes of burgundy, red, green and black."
+ },
+ "narr:ST80998:2": {
+  "h": "43ad8e57",
+  "t": "De halslijn is rond en loopt dan uit in een punt. De lange mouwen eindigen ook in punten.",
+  "by": "machine",
+  "s": "The neckline is round, then drops to a point. The long sleeves end in points too."
+ },
+ "narr:ST80998:3": {
+  "h": "af54eb82",
+  "t": "Volg nu het borduurwerk: over de borst, langs de zijkanten, over de mouwen. Koorden en metaaldraad, in vele kleuren opgenaaid, op gronden van oranje, lichtbruin en groen.",
+  "by": "machine",
+  "s": "Now follow the embroidery: across the chest, along the sides, over the sleeves. Cords and metal thread, sewn on in many colours, on grounds of orange, light brown and green."
+ },
+ "narr:ST80998:4": {
+  "h": "6ede4210",
+  "t": "En onder de geborduurde mouwen, een verborgen voering van roze katoen.",
+  "by": "machine",
+  "s": "And under the embroidered sleeves, a hidden lining of pink cotton."
+ },
+ "narr:ST81114AB:0": {
+  "h": "e9413986",
+  "t": "Stel je een vrouw voor die op de fiets vertrekt.",
+  "by": "machine",
+  "s": "Picture a woman setting off on a bicycle."
+ },
+ "narr:ST81114AB:1": {
+  "h": "43b5b3b0",
+  "t": "Dit droeg ze bovenaan: een witte blouse van katoenbatist, licht en ademend, gemaakt voor de rit.",
+  "by": "machine",
+  "s": "This is what she wore on top: a white blouse of cotton batiste, light and breathable, made for the ride."
+ },
+ "narr:ST81114AB:2": {
+  "h": "2636db2b",
+  "t": "Machinaal gemaakt kant loopt langs de kraag, de manchetten en over de hele voorkant.",
+  "by": "machine",
+  "s": "Machine-made lace runs along the collar, the cuffs, and down the front."
+ },
+ "narr:ST81114AB:3": {
+  "h": "be7f0855",
+  "t": "Kijk naar het midden. Een paneel met fijne plooien is erop geknoopt, met knopen van parelmoer, de gladde binnenlaag van een zeeschelp.",
+  "by": "machine",
+  "s": "Look at the centre. A panel of fine pleats is buttoned on, with buttons of mother of pearl, the smooth inner layer of a sea shell."
+ },
+ "narr:ST81114AB:4": {
+  "h": "244233b5",
+  "t": "En elk knoopsgat? Met de hand genaaid.",
+  "by": "machine",
+  "s": "And every buttonhole? Sewn by hand."
+ },
+ "narr:ST81114AB:5": {
+  "h": "b778ff01",
+  "t": "Outfits zoals deze droegen vrouwen om te fietsen, rond 1900.",
+  "by": "machine",
+  "s": "Outfits like this one were worn by women for cycling, around 1900."
+ },
+ "narr:ST81114AB:tease": {
+  "h": "17095b71",
+  "t": "Dus wanneer fietste ze? Doe je gok.",
+  "by": "machine",
+  "s": "So when did she ride? Make your guess."
+ },
+ "narr:ST81116:0": {
+  "h": "e83e73cc",
+  "t": "Zet een paar stappen achteruit. Broek of rok? Moeilijk te zeggen.",
+  "by": "machine",
+  "s": "Take a few steps back. Trousers, or a skirt? It is hard to tell."
+ },
+ "narr:ST81116:1": {
+  "h": "66c96f61",
+  "t": "Zwarte wol, wijd, aan de knie met elastiek samengetrokken tot een soort ballon.",
+  "by": "machine",
+  "s": "Black wool, wide, gathered at the knee with elastic into a kind of balloon."
+ },
+ "narr:ST81116:2": {
+  "h": "9c443477",
+  "t": "Zes diepe plooien, voor en achter, verbergen waar de pijpen samenkomen.",
+  "by": "machine",
+  "s": "Six deep pleats, at the front and at the back, hide where the legs meet."
+ },
+ "narr:ST81116:3": {
+  "h": "fdd4a23c",
+  "t": "Waarom zoveel stof? Omdat een lange rok in de wielen van een fiets kon verstrikt raken.",
+  "by": "machine",
+  "s": "Why so much fabric? Because a long skirt could get caught in the wheels of a bicycle."
+ },
+ "narr:ST81116:4": {
+  "h": "9bd64af2",
+  "t": "Zo kregen vrouwen bewegingsruimte.",
+  "by": "machine",
+  "s": "These gave women room to move."
+ },
+ "narr:ST81116:5": {
+  "h": "5234d0fb",
+  "t": "Rond 1900 begonnen veel vrouwen zulke broeken te dragen om te fietsen.",
+  "by": "machine",
+  "s": "Around 1900, many women started wearing trousers like these to cycle."
+ },
+ "narr:ST81116:tease": {
+  "h": "cf806963",
+  "t": "Wanneer reden vrouwen hier voor het eerst in rond? Doe je gok.",
+  "by": "machine",
+  "s": "When did women first ride in these? Make your guess."
+ },
+ "narr:ST81190:0": {
+  "h": "21fc23a2",
+  "t": "Herfst-winter 1998. Een Belgisch modehuis, A.F. Vandevorst, presenteert zijn allereerste collectie.",
+  "by": "machine",
+  "s": "Autumn-winter, 1998. A Belgian fashion house, A.F. Vandevorst, presents its very first collection."
+ },
+ "narr:ST81190:1": {
+  "h": "c0c18c9b",
+  "t": "Deze grijze wollen jas hoort erbij. Het museumregister geeft haar één enkel woord: Blessed.",
+  "by": "machine",
+  "s": "This grey wool coat is part of it. The museum's record gives it a single word: Blessed."
+ },
+ "narr:ST81190:2": {
+  "h": "5cbf8c1e",
+  "t": "Kijk nu beter. De mouwen, de voorkant, de schouders: geen enkel stuk is aan elkaar genaaid.",
+  "by": "machine",
+  "s": "Now look closer. The sleeves, the front, the shoulders: none of them are sewn together."
+ },
+ "narr:ST81190:3": {
+  "h": "c38bec48",
+  "t": "Klinknagels in koperkleur houden elk stuk op zijn plaats, zelfs de afnaaiers en de zijnaden.",
+  "by": "machine",
+  "s": "Brass-coloured rivets hold every piece in place, even the darts and the side seams."
+ },
+ "narr:ST81190:4": {
+  "h": "d5f1a7b7",
+  "t": "Paarden en hun tuig, uniformen, klinknagels: ze inspireerden het huis van bij het begin, en hier zie je het.",
+  "by": "machine",
+  "s": "Horses and their tack, uniforms, rivets: they inspired the house from the start, and you can see it here."
+ },
+ "narr:ST81190:5": {
+  "h": "2314ad5c",
+  "t": "Negen drukknopen sluiten de voorkant.",
+  "by": "machine",
+  "s": "Nine snap buttons close the front."
+ },
+ "narr:ST81190:6": {
+  "h": "80717c0b",
+  "t": "En achteraan in de nek, in rood gestikt, een kruis: het merkteken van A.F. Vandevorst.",
+  "by": "machine",
+  "s": "And at the back of the neck, stitched in red, a cross: the mark of A.F. Vandevorst."
+ },
+ "q:ST81114AB:a:0": {
+  "h": "360caa42",
+  "t": "3",
+  "by": "machine",
+  "s": "3"
+ },
+ "q:ST81114AB:a:1": {
+  "h": "91dda213",
+  "t": "Ja, een van de bloemmotieven",
+  "by": "machine",
+  "s": "Yes, one of the flower motifs"
+ },
+ "q:ST81114AB:a:2": {
+  "h": "2b1dfc92",
+  "t": "knoopsgaten of naden",
+  "by": "machine",
+  "s": "buttonholes or seams"
+ },
+ "q:ST81114AB:a:3": {
+  "h": "2816f956",
+  "t": "Katoenbatist",
+  "by": "machine",
+  "s": "Cotton batiste"
+ },
+ "q:ST81114AB:fact:0": {
+  "h": "678c75e7",
+  "t": "Blouse",
+  "by": "machine",
+  "s": "Blouse"
+ },
+ "q:ST81114AB:fact:1": {
+  "h": "a12e3fde",
+  "t": "Katoen, parelmoer",
+  "by": "machine",
+  "s": "Cotton, Mother of pearl"
+ },
+ "q:ST81114AB:fact:2": {
+  "h": "34b4850d",
+  "t": "weven, witborduurwerk, broderie anglaise, steken",
+  "by": "machine",
+  "s": "weaving, whitework, broderie anglaise, stitching"
+ },
+ "q:ST81114AB:fact:3": {
+  "h": "8786b0ec",
+  "t": "1890-1920",
+  "by": "machine",
+  "s": "1890-1920"
+ },
+ "q:ST81114AB:fact:4": {
+  "h": "5e64d484",
+  "t": "België, Europa",
+  "by": "machine",
+  "s": "Belgium, Europe"
+ },
+ "q:ST81114AB:q:0": {
+  "h": "347eb03b",
+  "t": "Hoeveel verticale naden (de lijn waar twee of meer stukken stof aan elkaar genaaid zijn) zie je aan de achterkant van de blouse?",
+  "by": "machine",
+  "s": "How many vertical seams (the line where two or more pieces of fabric are stitched together) can you see at the back of the blouse?"
+ },
+ "q:ST81114AB:q:1": {
+  "h": "462440ea",
+  "t": "Hebben de kantstroken aan de uiteinden van de mouwen en aan de kraag een of meer motieven gemeen?",
+  "by": "machine",
+  "s": "Do the lace pieces on the ends of the sleeves and on the collar have any of the same patterns?"
+ },
+ "q:ST81114AB:q:2": {
+  "h": "4da5d58f",
+  "t": "Noem één specifiek onderdeel van de blouse dat met de hand genaaid is",
+  "by": "machine",
+  "s": "Name one specific element of the blouse that is hand sewn"
+ },
+ "q:ST81114AB:q:3": {
+  "h": "013afd25",
+  "t": "Van welke stofsoort is de blouse gemaakt, waardoor ze licht is en goed om te sporten?",
+  "by": "machine",
+  "s": "What type of fabric is the blouse made of that makes it light and good for exercise?"
+ },
+ "q:ST81114AB:story:0": {
+  "h": "f7a184bd",
+  "t": "Deze witte katoenen blouse heeft machinaal gemaakt kant vooraan, aan de kraag en aan de uiteinden van de mouwen (de manchetten genoemd). Kijk eens naar het midden voor van de blouse: de kantstroken omlijsten een paneel met plooien (de banen stof die dubbelgevouwen en vastgenaaid zijn). Als je goed kijkt, zie je dat dit geplooide paneel met knopen aan de rest van de blouse is bevestigd. Deze glanzende witte knopen zijn gemaakt van parelmoer, de sterke en gladde binnenlaag van bepaalde zeeschelpen, zoals oesters. De knoopsgaten zijn met de hand genaaid",
+  "by": "machine",
+  "s": "This white cotton blouse has machine-made lace on the front, the collar, and the ends of the sleeves (named the cuffs). Take a look at the centre front of the blouse, the lace pieces frame a panel of pleats (the columns of fabric folded double and sewed). If you look closely you can see this pleated panel is attached to the rest of the blouse with buttons. These shiny white buttons are made of mother of pearl, the strong and smooth inner layer of certain sea shells, such as oysters. The buttonholes are hand sewn"
+ },
+ "q:ST81114AB:story:1": {
+  "h": "b02ac26d",
+  "t": "De blouse maakt deel uit van een outfit die vrouwen rond 1900 droegen om te fietsen. De stofsoort van de blouse, 'katoenbatist', is heel licht en ademend, en daarom geschikt om te fietsen en te sporten.",
+  "by": "machine",
+  "s": "The blouse is part of an outfit that would have been worn by women for cycling around 1900. The type of fabric used for the blouse, called ‘cotton batiste’ is very light and breathable, making it a good fit for cycling and exercising."
+ },
+ "q:ST81114AB:title": {
+  "h": "678c75e7",
+  "t": "Blouse",
+  "by": "machine",
+  "s": "Blouse"
+ },
+ "q:ST81116:a:0": {
+  "h": "e6221cde",
+  "t": "een zak",
+  "by": "machine",
+  "s": "a pocket"
+ },
+ "q:ST81116:a:1": {
+  "h": "c7bee68c",
+  "t": "de stof kon in de wielen verstrikt raken",
+  "by": "machine",
+  "s": "the fabric could get caught in the wheels"
+ },
+ "q:ST81116:a:2": {
+  "h": "bf6456c8",
+  "t": "ja, ze hebben elastiek",
+  "by": "machine",
+  "s": "yes, they have an elastic"
+ },
+ "q:ST81116:fact:0": {
+  "h": "4bfcebbc",
+  "t": "Broek",
+  "by": "machine",
+  "s": "Trousers"
+ },
+ "q:ST81116:fact:1": {
+  "h": "5d26942e",
+  "t": "Wol, katoen, synthetische vezel",
+  "by": "machine",
+  "s": "Wool, cotton, synthetic fibre"
+ },
+ "q:ST81116:fact:2": {
+  "h": "69e7f6ad",
+  "t": "weven, steken",
+  "by": "machine",
+  "s": "weaving, stitching"
+ },
+ "q:ST81116:fact:3": {
+  "h": "8786b0ec",
+  "t": "1890-1920",
+  "by": "machine",
+  "s": "1890-1920"
+ },
+ "q:ST81116:fact:4": {
+  "h": "5e64d484",
+  "t": "België, Europa",
+  "by": "machine",
+  "s": "Belgium, Europe"
+ },
+ "q:ST81116:q:0": {
+  "h": "28eb379b",
+  "t": "Wat zie je verborgen tussen de plooien rechtsboven op de broek?",
+  "by": "machine",
+  "s": "What do you see hidden between the folded pleats at the top right of the trousers?"
+ },
+ "q:ST81116:q:1": {
+  "h": "8607416a",
+  "t": "Waarom was het gevaarlijk om lange rokken te dragen tijdens het fietsen?",
+  "by": "machine",
+  "s": "Why was it dangerous to wear long skirts whilst cycling?"
+ },
+ "q:ST81116:q:2": {
+  "h": "5d9228f9",
+  "t": "Zouden de uiteinden van de broekspijpen rekbaar zijn?",
+  "by": "machine",
+  "s": "Would the ends of the pant legs be stretchy?"
+ },
+ "q:ST81116:story:0": {
+  "h": "52f4b169",
+  "t": "Kijk eens naar deze zwarte wollen broek. Ze is wijd en wordt aan de knieën met elastiek samengetrokken, waardoor ze een soort ballonvorm krijgt. Zowel voor als achter zitten zes diepe plooien die het deel verbergen waar de linker- en rechterpijp aan elkaar vastzitten.",
+  "by": "machine",
+  "s": "Take a look at these black woollen trousers. They are wide and gather at the knees with an elastic, forming a kind of balloon shape. Both in the front and the back are six deep pleats or folds which hide the part where the left and right pant legs are attached."
+ },
+ "q:ST81116:story:1": {
+  "h": "cdd052ba",
+  "t": "Als je een paar stappen achteruit zet, vind je het misschien moeilijk om te zien of dit een broek of een rok is. De wijde broek maakt deel uit van een outfit die vrouwen rond 1900 droegen om te fietsen. In die tijd begonnen veel vrouwen een broek te dragen om te fietsen, omdat lange rokken in de wielen konden verstrikt raken. In tegenstelling tot hun dagelijkse kleding gaven nieuw ontworpen sportkleren vrouwen meer comfort en bewegingsruimte tijdens het sporten.",
+  "by": "machine",
+  "s": "If you take a few steps back, you may find it is hard to see whether these are trousers or a skirt. The voluminous trousers are part of an outfit worn by women around 1900 for cycling. Around this time, many women started wearing trousers to cycle as long skirts could get caught in the wheels. In contrast to their daily clothing, newly designed sports clothes gave women more comfort and room to move when exercising."
+ },
+ "q:ST81116:title": {
+  "h": "4bfcebbc",
+  "t": "Broek",
+  "by": "machine",
+  "s": "Trousers"
+ },
+ "q:ST81190:a:0": {
+  "h": "95dde6f9",
+  "t": "het kruis in de nek",
+  "by": "machine",
+  "s": "the cross at the nape of the neck"
+ },
+ "q:ST81190:a:1": {
+  "h": "3477990c",
+  "t": "klinknagels",
+  "by": "machine",
+  "s": "rivets"
+ },
+ "q:ST81190:a:2": {
+  "h": "3c0cb3b4",
+  "t": "9",
+  "by": "machine",
+  "s": "9"
+ },
+ "q:ST81190:a:3": {
+  "h": "e3010dcb",
+  "t": "Herfst en winter",
+  "by": "machine",
+  "s": "Autumn and winter"
+ },
+ "q:ST81190:fact:0": {
+  "h": "fd6ae67b",
+  "t": "Jak",
+  "by": "machine",
+  "s": "Jacket"
+ },
+ "q:ST81190:fact:1": {
+  "h": "bf217580",
+  "t": "Wol, synthetische vezel, katoen, metaal, vilt",
+  "by": "machine",
+  "s": "Wool, synthetic fiber, cotton, metal, felt"
+ },
+ "q:ST81190:fact:2": {
+  "h": "9dd2f044",
+  "t": "vilten",
+  "by": "machine",
+  "s": "Felting"
+ },
+ "q:ST81190:fact:3": {
+  "h": "8e0fdb35",
+  "t": "1998-1999",
+  "by": "machine",
+  "s": "1998-1999"
+ },
+ "q:ST81190:fact:4": {
+  "h": "cabe18f6",
+  "t": "België",
+  "by": "machine",
+  "s": "Belgium"
+ },
+ "q:ST81190:q:0": {
+  "h": "d1d9933e",
+  "t": "Welk deel van het jak is gestikt met rode draad?",
+  "by": "machine",
+  "s": "What part of the jacket is stitched with red thread?"
+ },
+ "q:ST81190:q:1": {
+  "h": "78134353",
+  "t": "Welk element van het jak laat de vormentaal van de ontwerper duidelijk zien?",
+  "by": "machine",
+  "s": "Which element of the jacket clearly shows the designer’s visual language?"
+ },
+ "q:ST81190:q:2": {
+  "h": "e90cba1a",
+  "t": "Hoeveel drukknopen heeft het jak?",
+  "by": "machine",
+  "s": "How many snap buttons does the jacket have?"
+ },
+ "q:ST81190:q:3": {
+  "h": "9fe5070a",
+  "t": "Voor welke seizoenen is dit jak gemaakt, als je kijkt naar het materiaal en de stijl?",
+  "by": "machine",
+  "s": "Considering the material and style, what seasons was this jacket made for?"
+ },
+ "q:ST81190:story:0": {
+  "h": "f9a7ef51",
+  "t": "Dit grijze wollen jak uit 1998-1999 van het Belgische modehuis A.F. Vandevorst heeft een paar opvallende details. Het is opgebouwd uit losse delen; de mouw-, voor-, schouder- en borststukken zijn niet aan elkaar genaaid. Als je goed kijkt, hoe zitten ze dan vast? De panden, net als de coupenaden en zijnaden, zijn vastgemaakt met metalen klinknagels, boutachtige bevestigingen die twee stoffen aan elkaar zetten. Het jak sluit middenvoor met een rij drukknopen, een type knop dat je makkelijk dichtmaakt door de twee uiteinden op elkaar te drukken.",
+  "by": "machine",
+  "s": "This grey woolen jacket from 1998-1999 by Belgian fashion house A.F. Vandevorst has some remarkable details. It is made up of separate parts; the sleeve, front, shoulder, and breast pieces are not sewn together. If you look closely, how are they held together? The pieces, as well as the darts and side seams are fastened with metal rivets, bolt-like fasteners that attach two fabrics. The jacket is closed in the centre front by a column of snap buttons, a type of button you can easily close by pressing the two ends together."
+ },
+ "q:ST81190:story:1": {
+  "h": "bafaf3c9",
+  "t": "Kijk nu naar de achterkant van het stuk. Wat valt er op? Het rode kruis dat in de nek is geborduurd, is het iconische logo van A.F. Vandevorst. Al vanaf hun vroege collecties halen ze inspiratie uit het werk van de Duitse kunstenaar Joseph Beuys, religie, paarden en hun tuig, uniformen, klinknagels, lingerie en fetisj schoenen. Dit jak maakt deel uit van hun eerste collectie.",
+  "by": "machine",
+  "s": "Now look at the back of the piece. What stands out? The red cross stitched at the nape of the neck is the iconic logo of A.F. Vandevorst. Since their early collections, their designs have been inspired by German artist Joseph Beuys, religion, horses and their tack, uniforms, rivets, lingerie, and fetish shoes. This jacket is part of their first collection."
+ },
+ "q:ST81190:title": {
+  "h": "304fa7d6",
+  "t": "A.F. Vandevorst jak",
+  "by": "machine",
+  "s": "A.F. Vandevorst Jacket"
+ },
+ "term:Belgium": {
+  "h": "cabe18f6",
+  "t": "België",
+  "by": "machine",
+  "s": "Belgium"
+ },
+ "term:Japan": {
+  "h": "a28f44fb",
+  "t": "Japan",
+  "by": "machine",
+  "s": "Japan"
+ },
+ "term:Netherlands": {
+  "h": "64b61f6b",
+  "t": "Nederland",
+  "by": "machine",
+  "s": "Netherlands"
+ },
+ "term:Palestine": {
+  "h": "fe9dc088",
+  "t": "Palestina",
+  "by": "machine",
+  "s": "Palestine"
+ },
+ "term:appliqué (technique)": {
+  "h": "3dd306f8",
+  "t": "applicatie (techniek)",
+  "by": "machine",
+  "s": "appliqué (technique)"
+ },
+ "term:artificial silk": {
+  "h": "4559f69a",
+  "t": "kunstzijde",
+  "by": "machine",
+  "s": "artificial silk"
+ },
+ "term:bone (material)": {
+  "h": "6132932d",
+  "t": "been (materiaal)",
+  "by": "machine",
+  "s": "bone (material)"
+ },
+ "term:brass": {
+  "h": "9e19b1ea",
+  "t": "messing",
+  "by": "machine",
+  "s": "brass"
+ },
+ "term:broadcloth (woollen fabric)": {
+  "h": "c4505507",
+  "t": "laken",
+  "by": "machine",
+  "s": "broadcloth (woollen fabric)"
+ },
+ "term:broderie anglaise (technique)": {
+  "h": "899dfef6",
+  "t": "broderie anglaise (techniek)",
+  "by": "machine",
+  "s": "broderie anglaise (technique)"
+ },
+ "term:cotton (fiber)": {
+  "h": "d98486b7",
+  "t": "katoen",
+  "by": "machine",
+  "s": "cotton (fiber)"
+ },
+ "term:double ikat": {
+  "h": "6c4aa87d",
+  "t": "double ikat",
+  "by": "machine",
+  "s": "double ikat"
+ },
+ "term:embroidering": {
+  "h": "923a1cda",
+  "t": "borduren",
+  "by": "machine",
+  "s": "embroidering"
+ },
+ "term:felt": {
+  "h": "c546d834",
+  "t": "vilt",
+  "by": "machine",
+  "s": "felt"
+ },
+ "term:flax": {
+  "h": "c2eab0b6",
+  "t": "vlas",
+  "by": "machine",
+  "s": "flax"
+ },
+ "term:gauze point stitch": {
+  "h": "5cbd0910",
+  "t": "gaaskantsteek",
+  "by": "machine",
+  "s": "gauze point stitch"
+ },
+ "term:hand-painted": {
+  "h": "d5925f3c",
+  "t": "handgeschilderd",
+  "by": "machine",
+  "s": "hand-painted"
+ },
+ "term:handmade": {
+  "h": "ad484035",
+  "t": "handgemaakt",
+  "by": "machine",
+  "s": "handmade"
+ },
+ "term:knitting": {
+  "h": "1a2add79",
+  "t": "breien",
+  "by": "machine",
+  "s": "knitting"
+ },
+ "term:leather": {
+  "h": "92b18d26",
+  "t": "leder",
+  "by": "machine",
+  "s": "leather"
+ },
+ "term:machine lace": {
+  "h": "d1e78aa1",
+  "t": "machinale kant",
+  "by": "machine",
+  "s": "machine lace"
+ },
+ "term:machine-made": {
+  "h": "bc5fb094",
+  "t": "machinaal gemaakt",
+  "by": "machine",
+  "s": "machine-made"
+ },
+ "term:manmade material": {
+  "h": "19c44adb",
+  "t": "door mensen gemaakten materie",
+  "by": "machine",
+  "s": "manmade material"
+ },
+ "term:metal": {
+  "h": "d756aedc",
+  "t": "metaal",
+  "by": "machine",
+  "s": "metal"
+ },
+ "term:mother of pearl": {
+  "h": "06815f6b",
+  "t": "moederkoorn",
+  "by": "machine",
+  "s": "mother of pearl"
+ },
+ "term:passementerie (material)": {
+  "h": "863db8f2",
+  "t": "passementerie (materiaal)",
+  "by": "machine",
+  "s": "passementerie (material)"
+ },
+ "term:printing (process)": {
+  "h": "4273d534",
+  "t": "drukken (proces)",
+  "by": "machine",
+  "s": "printing (process)"
+ },
+ "term:satin": {
+  "h": "2323499c",
+  "t": "satijn",
+  "by": "machine",
+  "s": "satin"
+ },
+ "term:satin weave": {
+  "h": "0b540b1a",
+  "t": "satijnbinding",
+  "by": "machine",
+  "s": "satin weave"
+ },
+ "term:sequin": {
+  "h": "0b3fff58",
+  "t": "paillet",
+  "by": "machine",
+  "s": "sequin"
+ },
+ "term:sewing (needleworking technique)": {
+  "h": "2646b6bd",
+  "t": "naaien",
+  "by": "machine",
+  "s": "sewing (needleworking technique)"
+ },
+ "term:silk (silkworm material)": {
+  "h": "5f8b2d2a",
+  "t": "zijde",
+  "by": "machine",
+  "s": "silk (silkworm material)"
+ },
+ "term:silk taffeta": {
+  "h": "f82f17c9",
+  "t": "tafzijde",
+  "by": "machine",
+  "s": "silk taffeta"
+ },
+ "term:stitching (generic process)": {
+  "h": "23229f13",
+  "t": "steken (algemeen procedé)",
+  "by": "machine",
+  "s": "stitching (generic process)"
+ },
+ "term:synthetic fiber": {
+  "h": "c00b96ba",
+  "t": "synthetische vezel",
+  "by": "machine",
+  "s": "synthetic fiber"
+ },
+ "term:textile printing": {
+  "h": "d5e57c07",
+  "t": "textieldruk",
+  "by": "machine",
+  "s": "textile printing"
+ },
+ "term:twilled weave": {
+  "h": "ef1ac664",
+  "t": "keperbinding",
+  "by": "machine",
+  "s": "twilled weave"
+ },
+ "term:velvet": {
+  "h": "fb16326b",
+  "t": "fluweel",
+  "by": "machine",
+  "s": "velvet"
+ },
+ "term:weaving": {
+  "h": "23089dd6",
+  "t": "weven",
+  "by": "machine",
+  "s": "weaving"
+ },
+ "term:whitework (technique)": {
+  "h": "d55a658e",
+  "t": "witborduurwerk (techniek)",
+  "by": "machine",
+  "s": "whitework (technique)"
+ },
+ "term:wool (hair material)": {
+  "h": "76d000d4",
+  "t": "wol",
+  "by": "machine",
+  "s": "wool (hair material)"
+ }
+}

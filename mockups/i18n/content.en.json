@@ -1,0 +1,1143 @@
+{
+ "_about": "D-3: en text for facts and stories, built by mockups/tools/i18n_build.py. Do not hand-edit; change the glossary or the source and rerun. h = hash of the source text; by = team or machine.",
+ "det:ST2203:0:quote": {
+  "h": "bdce5244",
+  "t": "Large shoulder pads of white padded cotton.",
+  "by": "team",
+  "s": "Grote schoudervullingen van witte, opgevulde katoen."
+ },
+ "det:ST2203:1:quote": {
+  "h": "6496c02d",
+  "t": "It closes at the centre front with a black metal zip (20 cm) from the point of the V-neck to the waist.",
+  "by": "team",
+  "s": "Sluitend middenvoor door middel van een zwarte metalen rits (20cm) vanaf punt V-hals tot op taillehoogte."
+ },
+ "det:ST2203:2:quote": {
+  "h": "11aa8b85",
+  "t": "Two draped pockets at hip height, edged with a band of black velvet.",
+  "by": "team",
+  "s": "Twee gedrapeerde zakken op heuphoogte die afgezet zijn met een band zwart fluweel"
+ },
+ "det:ST2431/1-4:0:quote": {
+  "h": "4007ec0a",
+  "t": "A large motif in black passementerie on both sides of the front (frogging, which also forms the fastening).",
+  "by": "team",
+  "s": "groot motief in zwarte passementerie op beide kanten van het voorpand (brandebourgs, die ook de sluiting vormen)"
+ },
+ "det:ST2431/1-4:1:quote": {
+  "h": "9e203e77",
+  "t": "A standing collar in red broadcloth decorated with cannetille.",
+  "by": "team",
+  "s": "Opstaande kraag in rood laken voorzien van decoratie in cannetille."
+ },
+ "det:ST2431/1-4:2:quote": {
+  "h": "94e9eb0b",
+  "t": "Low on the sleeves, a large motif in metal passementerie.",
+  "by": "team",
+  "s": "Onder op de mouwen voorzien van een groot motief in passementerie in metaal"
+ },
+ "det:ST2432/1-2:0:quote": {
+  "h": "7088d0cd",
+  "t": "A high standing collar in red broadcloth.",
+  "by": "team",
+  "s": "hoge opstaande kraag in rood laken"
+ },
+ "det:ST2432/1-2:1:quote": {
+  "h": "4cacf03f",
+  "t": "Epaulettes with cannetille and gold-coloured metal cloth.",
+  "by": "team",
+  "s": "epauletten met cannetille en goudkleurig metaalweefsel"
+ },
+ "det:ST2432/1-2:2:quote": {
+  "h": "c35aab6d",
+  "t": "The points of each tail were turned inside out and joined, so a red detail shows at the bottom of the blue tails.",
+  "by": "team",
+  "s": "De punten van elk van de slippen werden van binnen naar buiten gekeerd en aan elkaar verbonden, waardoor er een rood detail zichtbaar is onderaan de blauwe slippen."
+ },
+ "det:ST2435:0:quote": {
+  "h": "80363077",
+  "t": "A wide boat neck.",
+  "by": "team",
+  "s": "Brede boothals"
+ },
+ "det:ST2435:1:quote": {
+  "h": "3ca1510d",
+  "t": "Short bands of the same embroidered cloth on the hips, front and back, give the straight dress a waist.",
+  "by": "team",
+  "s": "korte opgezette stroken van dezelfde geborduurde stof op de heupen aan voor en achterzijde, die het rechte model tailleren"
+ },
+ "det:ST2435:2:quote": {
+  "h": "66be7dd4",
+  "t": "Machine stitching (metal thread on the inside) in an organic, Eastern-inspired motif of curls and eyes.",
+  "by": "team",
+  "s": "machinale stiksels (binnenzijde: metaaldraad) in een organisch, oosters geïnspireerd motief van krullen en ogen"
+ },
+ "det:ST652/1:0:quote": {
+  "h": "28242c80",
+  "t": "Mended throughout with checked cloth.",
+  "by": "team",
+  "s": "Stelselmatig gerepareerd met geruite stof."
+ },
+ "det:ST652/1:1:quote": {
+  "h": "071cd058",
+  "t": "A red pocket square appears to stick out of the chest pocket: it is an optical trick.",
+  "by": "team",
+  "s": "In een zak op borsthoogte steekt optisch een rood pochet."
+ },
+ "det:ST652/1:2:quote": {
+  "h": "77478f12",
+  "t": "A small cloth belt is fixed to the centre back.",
+  "by": "team",
+  "s": "Aan de achterkant is in het midden een ceintuurtje van stof bevestigd"
+ },
+ "det:ST671:0:quote": {
+  "h": "13bb9cce",
+  "t": "A collar of beige machine lace, an imitation of Lille bobbin lace, is set into the neckline.",
+  "by": "team",
+  "s": "In de halsuitsnijding is een kraag gezet in beige machinale kant, een imitatie van Rijselse kloskant."
+ },
+ "det:ST671:1:quote": {
+  "h": "8a84b298",
+  "t": "A band of the same lace and embroidery runs down the left front from the neck to the bottom of the dress.",
+  "by": "team",
+  "s": "Een strook in dezelfde kant en borduurwerk loopt links vooraan van bij de hals tot onderaan de japon"
+ },
+ "det:ST671:2:quote": {
+  "h": "1fd6ca37",
+  "t": "Dress and underdress both close at the centre back with a row of hooks and buttons to below the seat.",
+  "by": "team",
+  "s": "De japon en de onderjurk sluiten beide middenachter met een rij haken en knopen tot voorbij het zitvlak."
+ },
+ "det:ST673/1-2:0:quote": {
+  "h": "86edcca6",
+  "t": "It closes at the centre front with mother-of-pearl buttons.",
+  "by": "team",
+  "s": "Sluit middenvoor met parelmoeren knopen."
+ },
+ "det:ST673/1-2:1:quote": {
+  "h": "b56a5026",
+  "t": "A shoulder yoke reaching to the chest, in broderie anglaise, shaped like a U.",
+  "by": "team",
+  "s": "schouderpas die tot de borst reikt, in broderie anglaise, in de vorm van een U"
+ },
+ "det:ST673/1-2:2:quote": {
+  "h": "36c8bd46",
+  "t": "At the back, room is made by gathering the fabric horizontally.",
+  "by": "team",
+  "s": "Aan de achterkant is er ruimte gecreëerd door de stof horizontaal te rimpelen."
+ },
+ "det:ST80998:0:quote": {
+  "h": "e6eb9ca5",
+  "t": "A round neckline that runs out into a point.",
+  "by": "team",
+  "s": "ronde halsuitsnijding, uitlopend in een punt"
+ },
+ "det:ST80998:1:quote": {
+  "h": "a45570de",
+  "t": "The chest of the kaftan is decorated with many-coloured embroidery of couched cords and metal thread.",
+  "by": "team",
+  "s": "het borstvlak van de kaftan zijn versierd met veelkleurig borduurwerk van opgenaaide koorden en metaaldraad"
+ },
+ "det:ST80998:2:quote": {
+  "h": "48130b08",
+  "t": "With long pointed sleeves.",
+  "by": "team",
+  "s": "met lange puntmouwen"
+ },
+ "det:ST81190:0:quote": {
+  "h": "66fce6b6",
+  "t": "Joined together with brass-coloured rivets.",
+  "by": "team",
+  "s": "aan elkaar vastgehecht met messingkleurige rivetten"
+ },
+ "det:ST81190:1:quote": {
+  "h": "02d4e5be",
+  "t": "The coat closes at the centre front with nine brass-coloured press studs.",
+  "by": "team",
+  "s": "De jas sluit middenvoor met negen messingkleurige drukknopen."
+ },
+ "det:ST81190:2:quote": {
+  "h": "fb54ec62",
+  "t": "A red cross is stitched on the back at neck height.",
+  "by": "team",
+  "s": "Op de achterzijde ter hoogte van de hals is een rood kruis gestikt."
+ },
+ "rec:ST2062:desc:0": {
+  "h": "a29e7f9e",
+  "t": "Trousers: men's knee breeches in cream woollen broadcloth.",
+  "by": "team",
+  "s": "Broek, kniebroek voor een man, in crèmekleurig wollen laken."
+ },
+ "rec:ST2062:desc:1": {
+  "h": "f3e84ca6",
+  "t": "Long fly at center front, closed with six buttons (material unknown).",
+  "by": "machine",
+  "s": "Lange gulp middenvoor, gesloten met zes knopen (materiaal onbekend)."
+ },
+ "rec:ST2062:desc:2": {
+  "h": "7b9f3ae1",
+  "t": "Pocket on the right hip: slash pocket in the waistband.",
+  "by": "machine",
+  "s": "Zakje rechts op de heup: steekzak in de tailleband."
+ },
+ "rec:ST2062:desc:3": {
+  "h": "09bbb7a8",
+  "t": "At center back a small strap with a brass buckle; also a small slit in the waistband.",
+  "by": "machine",
+  "s": "Middenachter een riempje met een messing gesp; eveneens kleine split in de tailleband."
+ },
+ "rec:ST2062:desc:4": {
+  "h": "ad9106d5",
+  "t": "Knee breeches are finished at the bottom of the legs with a slit and three buttons; the trim ends in a short strap and a buttonhole on the other side (buttons both absent).",
+  "by": "machine",
+  "s": "Kniebroek is onderaan de pijpen afgewerkt met een split en drie knopen; de bies eindigt in een kort riempje en een knoopsgat aan de andere zijde (knopen beide afwezig)."
+ },
+ "rec:ST2062:desc:5": {
+  "h": "5ad55f36",
+  "t": "Trousers are partly lined at the top with glossy off-white twill weave in probably silk.",
+  "by": "machine",
+  "s": "Broek is aan de bovenzijde deels gevoerd met glanzend crèmewit keperweefsel in waarschijnlijk zijde."
+ },
+ "rec:ST2062:desc:6": {
+  "h": "0e9a8621",
+  "t": "Part of a Russian military costume.",
+  "by": "machine",
+  "s": "Deel van een Russisch militair kostuum."
+ },
+ "rec:ST2062:desc:7": {
+  "h": "a4ed7422",
+  "t": "Completely handmade.",
+  "by": "machine",
+  "s": "Volledig met de hand genaaid."
+ },
+ "rec:ST2062:quote": {
+  "h": "a29e7f9e",
+  "t": "Trousers: men's knee breeches in cream woollen broadcloth.",
+  "by": "team",
+  "s": "Broek, kniebroek voor een man, in crèmekleurig wollen laken."
+ },
+ "rec:ST2203:desc:0": {
+  "h": "5bcb6441",
+  "t": "Dress of black silk satin.",
+  "by": "team",
+  "s": "Jurk van zwart zijden satijn."
+ },
+ "rec:ST2203:desc:1": {
+  "h": "a11ca03f",
+  "t": "Close-fitting style with a deep V-neck trimmed with a band of black silk velvet.",
+  "by": "machine",
+  "s": "Nauwsluitend model met diepe V-hals die afgezet is met een band van zwart zijden fluweel."
+ },
+ "rec:ST2203:desc:2": {
+  "h": "bdce5244",
+  "t": "Large shoulder pads made of white, padded cotton.",
+  "by": "machine",
+  "s": "Grote schoudervullingen van witte, opgevulde katoen."
+ },
+ "rec:ST2203:desc:3": {
+  "h": "93d95bef",
+  "t": "Straight long sleeves cut-in-one with the front, featuring a cuff fastening with five fabric buttons and loops.",
+  "by": "machine",
+  "s": "Aan de voorkant aangeknipte, rechte lange mouwen met een manchet sluitend met vijf stofknopen en lusjes."
+ },
+ "rec:ST2203:desc:4": {
+  "h": "af7c917a",
+  "t": "The sleeves are gathered at chest height.",
+  "by": "machine",
+  "s": "De mouwen zijn aangerimpeld op borsthoogte."
+ },
+ "rec:ST2203:desc:5": {
+  "h": "d29bebfd",
+  "t": "Gusset at the underside of the armscye.",
+  "by": "machine",
+  "s": "Spie aan onderzijde armstgat."
+ },
+ "rec:ST2203:desc:6": {
+  "h": "83dffe08",
+  "t": "The dress is heavily gathered and draped along the centre-front and centre-back lines.",
+  "by": "machine",
+  "s": "De jurk is langs middenvoor- en middenachterlijn sterk ingerimpeld en gedrapeerd."
+ },
+ "rec:ST2203:desc:7": {
+  "h": "2f556183",
+  "t": "Two draped pockets at hip height, trimmed with a band of black velvet that extend to the side.",
+  "by": "machine",
+  "s": "Twee gedrapeerde zakken op heuphoogte die afgezet zijn met een band zwart fluweel en doorlopen tot aan de zij."
+ },
+ "rec:ST2203:desc:8": {
+  "h": "3268248b",
+  "t": "Inverted pleat at the centre front from the zipper to the hem.",
+  "by": "machine",
+  "s": "Stolpplooi middenvoor vanaf ritssluiting naar zoom."
+ },
+ "rec:ST2203:desc:9": {
+  "h": "6496c02d",
+  "t": "Fastening at the centre front by means of a black metal zipper (20cm) from the point of the V-neck to waist height.",
+  "by": "machine",
+  "s": "Sluitend middenvoor door middel van een zwarte metalen rits (20cm) vanaf punt V-hals tot op taillehoogte."
+ },
+ "rec:ST2203:quote": {
+  "h": "5bcb6441",
+  "t": "Dress of black silk satin.",
+  "by": "team",
+  "s": "Jurk van zwart zijden satijn."
+ },
+ "rec:ST2407/1-2:desc:0": {
+  "h": "3ecff78a",
+  "t": "Pair of football boots in white, with leather in blue circular stripes.",
+  "by": "team",
+  "s": "Paar voetbalschoenen in wit met circulair blauw gestreept leder."
+ },
+ "rec:ST2407/1-2:desc:1": {
+  "h": "efc5b37d",
+  "t": "Made for the football club FC Bikkembergs Fossombrone in Marche, Italy.",
+  "by": "machine",
+  "s": "Gemaakt voor de club FC Bikkembergs Fossombrone in De Marken, Italië."
+ },
+ "rec:ST2407/1-2:desc:2": {
+  "h": "87525356",
+  "t": "Sole with studs in transparent synthetic material, through which a graphic design in red and blue is visible.",
+  "by": "machine",
+  "s": "Zool met noppen in transparante kunststof, waardoorheen een grafisch ontwerp in rood en blauw zichtbaar is."
+ },
+ "rec:ST2407/1-2:desc:3": {
+  "h": "24d89470",
+  "t": "On top of the forefoot over a lace-up closure is a leather circle featuring the logo of the Bikkembergs Sport label.",
+  "by": "machine",
+  "s": "Op de voorvoet bovenop een vetersluiting bevindt zich een cirkel in leder die het logo van het label Bikkembergs Sport bevat."
+ },
+ "rec:ST2407/1-2:desc:4": {
+  "h": "ff796c40",
+  "t": "This flap is attached with elastic around the shoe.",
+  "by": "machine",
+  "s": "Deze flap zit met elastiek bevestigd rondom de schoen."
+ },
+ "rec:ST2407/1-2:desc:5": {
+  "h": "eca665f5",
+  "t": "The left heel is in blue leather; the right heel in red.",
+  "by": "machine",
+  "s": "De hiel links is in blauw leder uitgevoerd; de hiel rechts in rood."
+ },
+ "rec:ST2407/1-2:desc:6": {
+  "h": "bc2a954d",
+  "t": "On the left heel the logo of the football team FC Fossombrone is stitched; on the right the logo of the label Bikkembergs Sport.",
+  "by": "machine",
+  "s": "Links op de hiel is het logo van de voetbalploeg FC Fossombrone opgestikte; rechts het logo van het label Bikkembergs Sport."
+ },
+ "rec:ST2407/1-2:quote": {
+  "h": "3ecff78a",
+  "t": "Pair of football boots in white, with leather in blue circular stripes.",
+  "by": "team",
+  "s": "Paar voetbalschoenen in wit met circulair blauw gestreept leder."
+ },
+ "rec:ST2431/1-4:desc:0": {
+  "h": "4d18646e",
+  "t": "Military uniform for a man, in light blue and red wool, of a lieutenant of the National Guard, in the 9th or 18th regiment of mounted chasseurs (Chasseurs à cheval, France).",
+  "by": "team",
+  "s": "Militair uniform voor een man, in lichtblauwe en rode wol, van een luitenant van de Nationale Garde, lid van het 9e of 18e regiment van de jagers te paard (Chasseurs à cheval, Frankrijk). 1."
+ },
+ "rec:ST2431/1-4:desc:1": {
+  "h": "5ea972db",
+  "t": "Jacket, hip-length, in blue broadcloth (wool), flared, with a fastening of dark grey, convex, metallic buttons at the centre front (marked CP Perfectionné Paris).",
+  "by": "machine",
+  "s": "Jas, heuplang, in blauw laken (wol), wijd uitlopend, met een sluiting van donkergrijze, bolle, metallic knopen middenvoor (gemerkt CP Perfectionné Paris)."
+ },
+ "rec:ST2431/1-4:desc:10": {
+  "h": "4eb8f4fd",
+  "t": "Inside the trouser legs at the bottom on both sides, a metal button on a piece of leather.",
+  "by": "machine",
+  "s": "Binnenin de pijpen onderaan aan weerszijden een metalen knoop op een stukje leder."
+ },
+ "rec:ST2431/1-4:desc:11": {
+  "h": "a4e3ebef",
+  "t": "Long fly fastening of gold-coloured buttons on light purple lustred cotton.",
+  "by": "machine",
+  "s": "Lange gulpsluiting van goudkleurige knopen op lichtpaars geglansd katoen."
+ },
+ "rec:ST2431/1-4:desc:12": {
+  "h": "2863f814",
+  "t": "Gold buttons on the waistband featuring the text 18e CHASSEURS TOUJAS, of the 18th regiment.",
+  "by": "machine",
+  "s": "Gouden knopen op de tailleband waarin de tekst 18e CHASSEURS TOUJAS, van het 18e regiment."
+ },
+ "rec:ST2431/1-4:desc:13": {
+  "h": "9775e2be",
+  "t": "Horizontal strap at the back above the seat, with buckle.",
+  "by": "machine",
+  "s": "Horizontaal riempje achter boven het zitvlak, met gesp."
+ },
+ "rec:ST2431/1-4:desc:14": {
+  "h": "e62f24a9",
+  "t": "Handwork and machine-made sewing. 3.",
+  "by": "machine",
+  "s": "Handwerk en machinaal naaiwerk. 3."
+ },
+ "rec:ST2431/1-4:desc:15": {
+  "h": "c71596e4",
+  "t": "Cap, kepi, in red and light blue wool, with a height of 15 centimetres, decorated with metal passementerie and cannetille and fitted with a black leather visor.",
+  "by": "machine",
+  "s": "Pet, kepie, in rode en lichtblauwe wol, met een hoogte van 15 centimeter, gedecoreerd met metalen passement en cannetille en voorzien van een zwarte klep in leder."
+ },
+ "rec:ST2431/1-4:desc:2": {
+  "h": "a8c75886",
+  "t": "The bottom of the sleeves features a large motif in metal passementerie, a large motif in black passementerie on both sides of the front panel (brandebourgs, which also form the fastening), epaulettes in black passementerie.",
+  "by": "machine",
+  "s": "Onder op de mouwen voorzien van een groot motief in passementerie in metaal, groot motief in zwarte passementerie op beide kanten van het voorpand (brandebourgs, die ook de sluiting vormen), epauletten in zwarte passementerie."
+ },
+ "rec:ST2431/1-4:desc:3": {
+  "h": "9e203e77",
+  "t": "Stand-up collar in red broadcloth featuring decoration in cannetille.",
+  "by": "machine",
+  "s": "Opstaande kraag in rood laken voorzien van decoratie in cannetille."
+ },
+ "rec:ST2431/1-4:desc:4": {
+  "h": "2cab9a6a",
+  "t": "Black passementerie applied to the seam lines at the back.",
+  "by": "machine",
+  "s": "Aan de achterzijde op de coupenaden aangebrachte zwarte passementerie."
+ },
+ "rec:ST2431/1-4:desc:5": {
+  "h": "5c4192f3",
+  "t": "Small slits in the side seams through which a small hand would fit.",
+  "by": "machine",
+  "s": "Kleine splitten in de zijnaden waardoorheen een kleine hand zou passen."
+ },
+ "rec:ST2431/1-4:desc:6": {
+  "h": "e7ae8c53",
+  "t": "Lined with sturdy black cotton fabric; almost the entire front panel was quilted with orange thread for reinforcement.",
+  "by": "machine",
+  "s": "Gevoerd met stevig zwart katoenweefsel; bijna het volledige voorpand werd ter versteviging doorstikt met oranje garen."
+ },
+ "rec:ST2431/1-4:desc:7": {
+  "h": "2b38cb54",
+  "t": "Hand- and machine-made sewing.",
+  "by": "machine",
+  "s": "Hand- en machinaal naaiwerk."
+ },
+ "rec:ST2431/1-4:desc:8": {
+  "h": "a6aa64a6",
+  "t": "Inside the collar, a 20th-century white loose stand-up collar is attached (marked DURAND, ST2431/4). 2.",
+  "by": "machine",
+  "s": "Binnenin de kraag is een 20e-eeuwse witte losse opstaande kraag bevestigd (gemerkt DURAND, ST2431/4). 2."
+ },
+ "rec:ST2431/1-4:desc:9": {
+  "h": "316cd0a1",
+  "t": "Trousers in red wool, with long straight legs, finished with a stripe in blue wool on the outside.",
+  "by": "machine",
+  "s": "Broek in rode wol, met lange rechte pijpen, afgewerkt met een streep in blauwe wol aan de buitenkant."
+ },
+ "rec:ST2431/1-4:quote": {
+  "h": "23845a3f",
+  "t": "Military uniform for a man, in light blue and red wool, of a lieutenant of the National Guard, in the 9th or 18th regiment of mounted chasseurs (Chasseurs à cheval, France).",
+  "by": "team",
+  "s": "Militair uniform voor een man, in lichtblauwe en rode wol, van een luitenant van de Nationale Garde, lid van het 9e of 18e regiment van de jagers te paard (Chasseurs à cheval, Frankrijk)."
+ },
+ "rec:ST2432/1-2:desc:0": {
+  "h": "a24d8bfb",
+  "t": "Costume in the form of a military uniform for a man, a member of the National Guard: an original coat and trousers made later, both altered.",
+  "by": "team",
+  "s": "Kostuum in de vorm van een militair uniform voor een man, lid van de Nationale Garde, bestaande uit een originele jas en een broek die later werd gemaakt; beide werden aangepast. 1."
+ },
+ "rec:ST2432/1-2:desc:1": {
+  "h": "a02904de",
+  "t": "Tailcoat in dark blue broadcloth (wool), high stand-up collar in red broadcloth, epaulettes with cannetille and gold-coloured metal weave, attached cuffs in red broadcloth and tails lined in red broadcloth.",
+  "by": "machine",
+  "s": "Jas met slippen in donkerblauw laken (wol), hoge opstaande kraag in rood laken, epauletten met cannetille en goudkleurig metaalweefsel, aangestikte manchetten in rood laken en slippen gevoerd in rood laken."
+ },
+ "rec:ST2432/1-2:desc:2": {
+  "h": "c35aab6d",
+  "t": "The tips of each of the tails were turned inside out and connected to each other, making a red detail visible at the bottom of the blue tails.",
+  "by": "machine",
+  "s": "De punten van elk van de slippen werden van binnen naar buiten gekeerd en aan elkaar verbonden, waardoor er een rood detail zichtbaar is onderaan de blauwe slippen."
+ },
+ "rec:ST2432/1-2:desc:3": {
+  "h": "26d50eab",
+  "t": "On the tails is a stitched-on patch in the shape of a large vertical welt pocket that extends on the inside into three points featuring three white metal buttons, bearing the text 'Garde Nationale'.",
+  "by": "machine",
+  "s": "Op de slippen bevindt zicht een opgestikte patch in de vorm van een grote verticale steekzak die aan de binnenkant uitloopt in drie punten waarop zich drie witmetalen knopen bevinden, voorzien van de tekst 'Garde Nationale'."
+ },
+ "rec:ST2432/1-2:desc:4": {
+  "h": "4accdfd5",
+  "t": "Executed in handmade and machine-made sewing.",
+  "by": "machine",
+  "s": "Uitgevoerd in handwerk en machinaal naaiwerk."
+ },
+ "rec:ST2432/1-2:desc:5": {
+  "h": "39468deb",
+  "t": "Button closure at the front with hook and eye closure of which the hooks have largely disappeared; on the outside replaced by gold-colored, new buttons in the same style (buttons with emblem of the Imperial Guard, dating possibly 1980-2000). 2.",
+  "by": "machine",
+  "s": "Knoopsluiting vooraan met haak- en oogsluiting waarvan de haakjes grotendeels zijn verdwenen; aan de buitenkant vervangen door goudkleurige, nieuwe knopen in dezelfde stijl (knopen met embleem van de Keizerlijke Garde, datering mogelijk 1980-2000). 2."
+ },
+ "rec:ST2432/1-2:desc:6": {
+  "h": "161c8da7",
+  "t": "Pleated trousers from the 1910s-1940s in dark blue broadcloth, two welt pockets on the seat provided with a plastic button, fly closure with plastic buttons of which the buttonholes are finished by hand, waistband with belt loops, watch pocket, interior in grey cotton fabric, long legs featuring on the outside two bands in red wool, on the inside at the bottom on both sides provided with two buttons on a piece of leather.",
+  "by": "machine",
+  "s": "Bandplooibroek uit de jaren 1910-1940 in donkerblauw laken, twee gepaspelde zakken op het zitvlak voorzien van een kunststof knoop, gulpsluiting met kunststof knopen waarvan de knoopsgaten met de hand zijn afgewerkt, tailleband met broeklussen, horlogezakje, binnenwerk in grijs katoenweefsel, lange pijpen waaraan aan de buitenzijde twee banen in rode wol, aan de binnenzijde onderaan aan weerszijden voorzien van twee knopen op een stukje leder."
+ },
+ "rec:ST2432/1-2:desc:7": {
+  "h": "6de62ea4",
+  "t": "At the back of the trousers, a slit was made in the waistband and the top of the back.",
+  "by": "machine",
+  "s": "Aan de achterkant van de broek werd een inkeping gemaakt in de tailleband en de bovenzijde van de achterkant."
+ },
+ "rec:ST2432/1-2:desc:8": {
+  "h": "eb9f5e2a",
+  "t": "Here a lacing closure was inserted with a red lace from the 1970s-1990.",
+  "by": "machine",
+  "s": "Hier werd een rijgsluiting ingezet met een rode veter uit de jaren 1970-1990."
+ },
+ "rec:ST2432/1-2:desc:9": {
+  "h": "d5a74ef9",
+  "t": "Both machine-made and handmade.",
+  "by": "machine",
+  "s": "Zowel machinaal als met de hand vervaardigd."
+ },
+ "rec:ST2432/1-2:quote": {
+  "h": "41bbb6d4",
+  "t": "Costume in the form of a military uniform for a man, a member of the National Guard: an original coat and trousers made later, both altered.",
+  "by": "team",
+  "s": "Kostuum in de vorm van een militair uniform voor een man, lid van de Nationale Garde, bestaande uit een originele jas en een broek die later werd gemaakt; beide werden aangepast."
+ },
+ "rec:ST2434:desc:0": {
+  "h": "381b826d",
+  "t": "Coat in green broadcloth, with tails.",
+  "by": "team",
+  "s": "Jas in groen laken, met slippen."
+ },
+ "rec:ST2434:desc:1": {
+  "h": "e7ba912d",
+  "t": "Long attached sleeves and lying collar with short lapels.",
+  "by": "machine",
+  "s": "Lange aangezette mouwen en liggende kraag met korte revers."
+ },
+ "rec:ST2434:desc:2": {
+  "h": "23f57dc2",
+  "t": "Button closure with two times four buttonholes, double breasted, without buttons.",
+  "by": "machine",
+  "s": "Knoopsluiting met twee keer vier knoopsgaten, double breasted, zonder knopen."
+ },
+ "rec:ST2434:desc:3": {
+  "h": "25d6a223",
+  "t": "Eight convex, loose brass buttons were originally probably attached to the back.",
+  "by": "machine",
+  "s": "Acht bolle, los aanwezige knopen in messing waren oorspronkelijk waarschijnlijk bevestigd op de achterzijde."
+ },
+ "rec:ST2434:desc:4": {
+  "h": "0a0ffa04",
+  "t": "On both tails there is a patch pocket in the shape of a large vertical welt pocket that extends into three points on the inside, with traces of the buttons.",
+  "by": "machine",
+  "s": "Op beide slippen bevindt zicht een opgestikte patch in de vorm van een grote verticale steekzak die aan de binnenkant uitloopt in drie punten, met sporen van de knopen."
+ },
+ "rec:ST2434:desc:5": {
+  "h": "16bec0f2",
+  "t": "On the back at the bottom of the tails are two large, flat brass buttons, signed M & Cie PARIS.",
+  "by": "machine",
+  "s": "Op de achterzijde bevinden zich onderaan de slippen twee grote, platte messing knopen, gesigneerd M & Cie PARIS."
+ },
+ "rec:ST2434:desc:6": {
+  "h": "9c3ecbc7",
+  "t": "At the bottom of the front panels, a horizontal wide trim in red broadcloth was later added on both sides.",
+  "by": "machine",
+  "s": "Onderaan de voorpanden werd later aan weerszijden een horizontale brede bies toegevoegd in rood laken."
+ },
+ "rec:ST2434:desc:7": {
+  "h": "20747633",
+  "t": "Lined in purple glossy twill cotton.",
+  "by": "machine",
+  "s": "Gevoerd in paars geglansd keperkatoen."
+ },
+ "rec:ST2434:quote": {
+  "h": "381b826d",
+  "t": "Coat in green broadcloth, with tails.",
+  "by": "team",
+  "s": "Jas in groen laken, met slippen."
+ },
+ "rec:ST2435:desc:0": {
+  "h": "7e3f977b",
+  "t": "Calf-length dress in ecru woven silk, covered all over in sequin embroidery with the iridescent effect of pearls.",
+  "by": "team",
+  "s": "Jurk in ecru zijdeweefsel, kuitlang, volledig voorzien van paillettenborduurwerk met het iridiserende effect van parels."
+ },
+ "rec:ST2435:desc:1": {
+  "h": "6ad5cd08",
+  "t": "Wide boat neckline; not closed along the side seams, except by three hooks and eyes on the left and short applied strips of the same embroidered fabric at the hips on front and back, which shape the straight model at the waist.",
+  "by": "machine",
+  "s": "Brede boothals; niet gesloten langs de zijnaden, behalve door links drie haken en ogen en korte opgezette stroken van dezelfde geborduurde stof op de heupen aan voor en achterzijde, die het rechte model tailleren."
+ },
+ "rec:ST2435:desc:2": {
+  "h": "ed3b8bfe",
+  "t": "The largely straight-falling panels are completely covered with machine-made stitching (inside: metal thread) in an organic, eastern-inspired motif of scrolls and eyes.",
+  "by": "machine",
+  "s": "De grotendeels rechtvallende panden zijn volledig bedekt met machinale stiksels (binnenzijde: metaaldraad) in een organisch, oosters geïnspireerd motief van krullen en ogen."
+ },
+ "rec:ST2435:quote": {
+  "h": "7e3f977b",
+  "t": "Calf-length dress in ecru woven silk, covered all over in sequin embroidery with the iridescent effect of pearls.",
+  "by": "team",
+  "s": "Jurk in ecru zijdeweefsel, kuitlang, volledig voorzien van paillettenborduurwerk met het iridiserende effect van parels."
+ },
+ "rec:ST503:desc:0": {
+  "h": "d8f60b19",
+  "t": "The jacket reaches to the waist and has long skirts, a square neckline and close-fitting sleeves to the elbow.",
+  "by": "team",
+  "s": "Het jak reikt tot aan de taille en heeft lange schootpanden, een vierkante halslijn en nauw aansluitende mouwen tot aan de elleboog."
+ },
+ "rec:ST503:desc:1": {
+  "h": "6dc44502",
+  "t": "It is open at the front and closed in the middle with metal hooks and eyes.",
+  "by": "machine",
+  "s": "Aan de voorkant is het open en het wordt in het midden gesloten met metalen haken en ogen."
+ },
+ "rec:ST503:desc:2": {
+  "h": "ca4b2e27",
+  "t": "The outer fabric is made of blue taffeta with a white-yellow decoration of local float motifs in the direction of the warp threads.",
+  "by": "machine",
+  "s": "De buitenstof is gemaakt van blauwe tafzijde met een witgele versiering van plaatselijke vlottermotieven in de richting van de kettingdraden."
+ },
+ "rec:ST503:desc:3": {
+  "h": "5966f339",
+  "t": "This decoration combines an abstract zigzag pattern with a floral motif.",
+  "by": "machine",
+  "s": "Deze decoratie combineert een abstract zigzagpatroon met een bloemmotief."
+ },
+ "rec:ST503:desc:4": {
+  "h": "631c10f4",
+  "t": "Taffeta is a fine, smooth and slightly shiny silk fabric.",
+  "by": "machine",
+  "s": "Tafzijde is een fijne, gladde en licht glanzende zijden stof."
+ },
+ "rec:ST503:desc:5": {
+  "h": "ef17f425",
+  "t": "The lining consists of a blue linen fabric which is also decorated with white and yellow stripes, formed by colored warp threads.",
+  "by": "machine",
+  "s": "De voering bestaat uit een blauwe linnen stof die eveneens versierd is met witte en gele strepen, gevormd door gekleurde kettingdraden."
+ },
+ "rec:ST503:quote": {
+  "h": "d8f60b19",
+  "t": "The jacket reaches to the waist and has long skirts, a square neckline and close-fitting sleeves to the elbow.",
+  "by": "team",
+  "s": "Het jak reikt tot aan de taille en heeft lange schootpanden, een vierkante halslijn en nauw aansluitende mouwen tot aan de elleboog."
+ },
+ "rec:ST652/1:desc:0": {
+  "h": "935503c2",
+  "t": "Button-through dress of printed cotton, blue with small white and red dots.",
+  "by": "team",
+  "s": "Doorknoopjurk van bedrukte katoen, blauw met witte en rode stipjes."
+ },
+ "rec:ST652/1:desc:1": {
+  "h": "28242c80",
+  "t": "Systematically repaired with checkered fabric.",
+  "by": "machine",
+  "s": "Stelselmatig gerepareerd met geruite stof."
+ },
+ "rec:ST652/1:desc:2": {
+  "h": "9b12bc39",
+  "t": "Two patch pockets below waist height are trimmed with a red fabric, just like the sleeves.",
+  "by": "machine",
+  "s": "Twee opgestikte zakken onder taillehoogte zijn afgebiesd met een rood weefsel, net als de mouwen."
+ },
+ "rec:ST652/1:desc:3": {
+  "h": "071cd058",
+  "t": "A red pocket square optically protrudes from a pocket at chest height.",
+  "by": "machine",
+  "s": "In een zak op borsthoogte steekt optisch een rood pochet."
+ },
+ "rec:ST652/1:desc:4": {
+  "h": "bf9a0164",
+  "t": "Right lapel decorated along the edge with three red pipings.",
+  "by": "machine",
+  "s": "Rechter revers langs de rand gedecoreerd met drie rode biezen."
+ },
+ "rec:ST652/1:desc:5": {
+  "h": "aab894ff",
+  "t": "At the back, a fabric belt is attached in the middle, which can be tied at the front to define the waist.",
+  "by": "machine",
+  "s": "Aan de achterkant is in het midden een ceintuurtje van stof bevestigd, die aan de voorkant vastgestrikt kan worden voor de markering van de taille."
+ },
+ "rec:ST652/1:quote": {
+  "h": "935503c2",
+  "t": "Button-through dress of printed cotton, blue with small white and red dots.",
+  "by": "team",
+  "s": "Doorknoopjurk van bedrukte katoen, blauw met witte en rode stipjes."
+ },
+ "rec:ST655/1:desc:0": {
+  "h": "d771c0dc",
+  "t": "Calf- to ankle-length button-through gown, a cocktail dress, in green and black horizontally striped synthetic material.",
+  "by": "team",
+  "s": "Kuit- tot enkellange japon in doorknoopmodel, type cocktailjurk, van groen-zwart horizontaal gestreept synthetisch materiaal."
+ },
+ "rec:ST655/1:desc:1": {
+  "h": "dddb7e29",
+  "t": "Front closure with 11 buttons, covered with the same striped fabric and velvet, machine-sewn buttonholes.",
+  "by": "machine",
+  "s": "Sluiting vooraan met 11 knopen, met dezelfde strepenstof en fluweel bekleed, machinaal genaaide knoopsgaten."
+ },
+ "rec:ST655/1:desc:2": {
+  "h": "c8e17dc0",
+  "t": "Shawl collar with lapels of black velvet.",
+  "by": "machine",
+  "s": "Sjaalkraag met revers van zwart fluweel."
+ },
+ "rec:ST655/1:desc:3": {
+  "h": "71de5260",
+  "t": "Attached short sleeves with attached cuff of black velvet.",
+  "by": "machine",
+  "s": "Aangezette korte mouwen met aangezette boord van zwart fluweel."
+ },
+ "rec:ST655/1:desc:4": {
+  "h": "e0987025",
+  "t": "Black crocheted belt loop at the right hip, this is missing on the left.",
+  "by": "machine",
+  "s": "Zwart gehaakte riemlus ter hoogte van de rechterheup, deze ontbreekt links."
+ },
+ "rec:ST655/1:desc:5": {
+  "h": "250d0d3b",
+  "t": "There are no pockets and there is no lining.",
+  "by": "machine",
+  "s": "Er zijn geen zakken en er is geen voering."
+ },
+ "rec:ST655/1:desc:6": {
+  "h": "a6ba9c6a",
+  "t": "Sewn-in shoulder pads made of the same fabric as the dress.",
+  "by": "machine",
+  "s": "Ingenaaide schoudervullingen gemaakt van dezelfde stof als de jurk."
+ },
+ "rec:ST655/1:desc:7": {
+  "h": "24520ee4",
+  "t": "The hem is reinforced on the inside with a black ribbon and is secured by hand with fine stitches.",
+  "by": "machine",
+  "s": "De zoom is aan de binnenzijde verstevigd met een zwart lint en is met fijne steekjes met de hand vastgezet."
+ },
+ "rec:ST655/1:desc:8": {
+  "h": "b3d39fb9",
+  "t": "Interesting detail: the selvedge of the lower panels is used at the center front closure and the lower panels of the skirt have no side seams, because they are half circles.",
+  "by": "machine",
+  "s": "Interessant detail: de zelfkant van de onderpade nden is gebruikt aan de sluiting middenvoor en de onderste panden van de rok hebben geen zijnaden, omdat het halve cirkels zijn."
+ },
+ "rec:ST655/1:desc:9": {
+  "h": "ef58c0f7",
+  "t": "As a result, the stripes are horizontal at the front, but run vertically at the back where they join the bodice.",
+  "by": "machine",
+  "s": "Daardoor zijn de strepen vooraan horizontaal, maar lopen ze aan de achterzijde verticaal bij de aansluiting met het bovenstuk."
+ },
+ "rec:ST655/1:quote": {
+  "h": "d771c0dc",
+  "t": "Calf- to ankle-length button-through gown, a cocktail dress, in green and black horizontally striped synthetic material.",
+  "by": "team",
+  "s": "Kuit- tot enkellange japon in doorknoopmodel, type cocktailjurk, van groen-zwart horizontaal gestreept synthetisch materiaal."
+ },
+ "rec:ST671:desc:0": {
+  "h": "b71d040a",
+  "t": "Long gown, a walking gown, in beige silk rep.",
+  "by": "team",
+  "s": "Lange japon, wandeljapon, in beige zijderips."
+ },
+ "rec:ST671:desc:1": {
+  "h": "b886df8b",
+  "t": "The gown / dress has a beige silk underskirt with a deep, round neckline and half-long sleeves.",
+  "by": "machine",
+  "s": "De japon heeft een beige zijden onderjurk met een diepe, ronde halsuitsnijding en halflange mouwen."
+ },
+ "rec:ST671:desc:10": {
+  "h": "daa9bebb",
+  "t": "The underskirt is sewn to the gown / dress at the waist.",
+  "by": "machine",
+  "s": "De onderjurk is bij de middel aan de japon vastgenaaid."
+ },
+ "rec:ST671:desc:11": {
+  "h": "364c4deb",
+  "t": "Just like with the underskirt, the bodice and skirt of the gown / dress are cut separately and sewn together at the waist.",
+  "by": "machine",
+  "s": "Net als bij de onderjurk zijn het lijfje en de rok van de japon afzonderlijk gesneden en in de taille aan elkaar genaaid."
+ },
+ "rec:ST671:desc:12": {
+  "h": "9048fd9f",
+  "t": "The bodice has a round neckline and short sleeves, they are edged with the same machine-made blonde lace and the same braid embroidery as at the underskirt.",
+  "by": "machine",
+  "s": "Het lijfje heeft een ronde halsuitsnijding en korte mouwen, ze zijn afgeboord met dezelfde machinale stropkant en hetzelfde veterborduurwerk als bij de onderjurk."
+ },
+ "rec:ST671:desc:13": {
+  "h": "d38bd955",
+  "t": "A strip in the same lace and embroidery runs on the left front from the neck to the bottom of the gown / dress where it further edges the skirt all around.",
+  "by": "machine",
+  "s": "Een strook in dezelfde kant en borduurwerk loopt links vooraan van bij de hals tot onderaan de japon waar het de rok verder rondom afboordt."
+ },
+ "rec:ST671:desc:14": {
+  "h": "b99b3a36",
+  "t": "On both sides, the skirt hem hangs lower than mid-front and mid-back.",
+  "by": "machine",
+  "s": "Aan beide zijkanten hangt de rokzoom lager dan middenvoor en middenachter."
+ },
+ "rec:ST671:desc:15": {
+  "h": "1fd6ca37",
+  "t": "Both the gown / dress (japon) and the slip fasten down the centre back with a row of hooks and eyes past the seat.",
+  "by": "machine",
+  "s": "De japon en de onderjurk sluiten beide middenachter met een rij haken en knopen tot voorbij het zitvlak."
+ },
+ "rec:ST671:desc:16": {
+  "h": "de1ab8c0",
+  "t": "The transparent strips of machine-made lace in the bodice of the gown / dress (japon) and slip are lined with beige silk muslin.",
+  "by": "machine",
+  "s": "De transparante stroken machinale kant in het lijfje van japon en onderjurk zijn gedubbeld met beige zijdemousseline."
+ },
+ "rec:ST671:desc:2": {
+  "h": "6ec77363",
+  "t": "The bodice and skirt are cut separately and joined together at the waist.",
+  "by": "machine",
+  "s": "Het lijfje en de rok zijn apart gesneden en in de taille aan elkaar gezet."
+ },
+ "rec:ST671:desc:3": {
+  "h": "f5be7244",
+  "t": "The bodice has a waistband with the print 'Mme Guédon Descham(?) 83, Boulevard Magenta, Paris' on it.",
+  "by": "machine",
+  "s": "Het lijfje heeft een tailleband met daarop de bedrukking 'Mme Guédon Descham(?) 83, Boulevard Magenta, Paris'."
+ },
+ "rec:ST671:desc:4": {
+  "h": "3f99130c",
+  "t": "Mid-front, a boning is sewn into the bodice.",
+  "by": "machine",
+  "s": "Middenvoor is in het lijfje een balein genaaid."
+ },
+ "rec:ST671:desc:5": {
+  "h": "13bb9cce",
+  "t": "In the neckline, a collar has been set in beige machine-made lace, an imitation of Lille bobbin lace.",
+  "by": "machine",
+  "s": "In de halsuitsnijding is een kraag gezet in beige machinale kant, een imitatie van Rijselse kloskant."
+ },
+ "rec:ST671:desc:6": {
+  "h": "c70093df",
+  "t": "The stand-up part of the collar has boning.",
+  "by": "machine",
+  "s": "Het opstaande deel van de kraag heeft baleinen."
+ },
+ "rec:ST671:desc:7": {
+  "h": "bce36871",
+  "t": "The bottom of the sleeves is in the same machine-made lace.",
+  "by": "machine",
+  "s": "De onderkant van de mouwen is in dezelfde machinale kant."
+ },
+ "rec:ST671:desc:8": {
+  "h": "1e565dd4",
+  "t": "The cuffs are trimmed with a strip of beige machine-made lace, an imitation of blonde lace, and additionally edged with braid embroidery.",
+  "by": "machine",
+  "s": "De mouwboorden zijn gegarneerd met een strook beige machinale kant, een imitatie van stropkant, en bijkomend afgeboord met veterborduurwerk."
+ },
+ "rec:ST671:desc:9": {
+  "h": "960db2e3",
+  "t": "The lower part of the skirt is made of the same silk rep as the gown / dress, is attached in pleats to the underskirt and extends from underneath the gown / dress.",
+  "by": "machine",
+  "s": "Het onderste deel van de rok is uitgevoerd in dezelfde zijderips als de japon, is in plooien aan de onderjurk gezet en komt onder de japon uit."
+ },
+ "rec:ST671:quote": {
+  "h": "b71d040a",
+  "t": "Long gown, a walking gown, in beige silk rep.",
+  "by": "team",
+  "s": "Lange japon, wandeljapon, in beige zijderips."
+ },
+ "rec:ST673/1-2:desc:0": {
+  "h": "b0d13187",
+  "t": "Combination in white cotton: a bodice without boning, with long open drawers buttoned to it.",
+  "by": "team",
+  "s": "Combinaison in wit katoen, bestaande uit een baleinloos onderlijf waaraan met knopen bevestigd een lange open onderbroek."
+ },
+ "rec:ST673/1-2:desc:1": {
+  "h": "64c29a23",
+  "t": "Bodice: V-shaped neckline featuring strips of broderie anglaise; shoulder yoke reaching to the chest, in broderie anglaise, in the shape of a U, with a ruffed edge of broderie anglaise.",
+  "by": "machine",
+  "s": "Onderlijf: halslijn in V-vorm voorzien van stroken broderie anglaise; schouderpas die tot de borst reikt, in broderie anglaise, in de vorm van een U, met in ruches aangezette rand van broderie anglaise."
+ },
+ "rec:ST673/1-2:desc:2": {
+  "h": "a51b33c8",
+  "t": "This edge is also mounted around the armscye.",
+  "by": "machine",
+  "s": "Deze rand is ook gemonteerd rondom het armsgat."
+ },
+ "rec:ST673/1-2:desc:3": {
+  "h": "a7aebb27",
+  "t": "Fitted; waist darts are pressed open on the inside and topstitched for firmness.",
+  "by": "machine",
+  "s": "Getailleerd; nepen in de taille zijn aan de binnenzijde opengestreken en doorgestikt voor stevigdheid."
+ },
+ "rec:ST673/1-2:desc:4": {
+  "h": "86edcca6",
+  "t": "Closes at the center front with mother-of-pearl buttons.",
+  "by": "machine",
+  "s": "Sluit middenvoor met parelmoeren knopen."
+ },
+ "rec:ST673/1-2:desc:5": {
+  "h": "201df36c",
+  "t": "Around the waist, ecru-coloured bone buttons for attaching the garments worn over this (possibly an under-skirt).",
+  "by": "machine",
+  "s": "Rondom de taille ecrukleurige benen knopen voor de bevestiging van de hierover gedragen kleding (mogelijk een onderrok)."
+ },
+ "rec:ST673/1-2:desc:6": {
+  "h": "6ec710b2",
+  "t": "The drawers are open at the front from the waist, and completely open at the back; the two sides are closed over the same button.",
+  "by": "machine",
+  "s": "De onderbroek is aan de voorzijde open vanaf de taille, en aan de achterkant geheel open; de twee zijden worden gesloten overheen dezelfde knoop."
+ },
+ "rec:ST673/1-2:desc:7": {
+  "h": "36c8bd46",
+  "t": "At the back, space has been created by gathering the fabric horizontally.",
+  "by": "machine",
+  "s": "Aan de achterkant is er ruimte gecreëerd door de stof horizontaal te rimpelen."
+ },
+ "rec:ST673/1-2:desc:8": {
+  "h": "d1dce521",
+  "t": "The drawers can be fastened to the body at two levels, with the same bone buttons.",
+  "by": "machine",
+  "s": "De onderbroek kan op twee niveaus aan het lijf vastgemaakt worden, met dezelfde benen knopen."
+ },
+ "rec:ST673/1-2:desc:9": {
+  "h": "e75fc86b",
+  "t": "To be used during sports (e.g. tennis, croquet, badminton or archery).",
+  "by": "machine",
+  "s": "Te gebruiken tijdens het sporten (bv. tennis, croquet, badminton of boogschieten)."
+ },
+ "rec:ST673/1-2:quote": {
+  "h": "b0d13187",
+  "t": "Combination in white cotton: a bodice without boning, with long open drawers buttoned to it.",
+  "by": "team",
+  "s": "Combinaison in wit katoen, bestaande uit een baleinloos onderlijf waaraan met knopen bevestigd een lange open onderbroek."
+ },
+ "rec:ST80881:desc:0": {
+  "h": "ed519653",
+  "t": "Ecru furisode kimono, painted and with a gold print.",
+  "by": "team",
+  "s": "Ecru furisode kimono, beschilderd en met gouden opdruk."
+ },
+ "rec:ST80881:desc:1": {
+  "h": "355b3805",
+  "t": "Multicoloured motif of wide fluttering ribbons (possibly noshi or kichô motif) with against the background an abstract landscape with houses, clouds and flora, including peonies, chrysanthemums, ume plum blossom, Japanese maple and bamboo.",
+  "by": "machine",
+  "s": "Veelkleurig motief van brede opwaaiende linten (mogelijk noshi- of kichô-motief) met op de achtergrond een abstract landschap met huizen, wolken en flora, waaronder pioenen, chrysanten, ume pruimenbloesem, Japanse esdoorn en bamboe."
+ },
+ "rec:ST80881:desc:2": {
+  "h": "b1b53afb",
+  "t": "Details on flowers are embroidered with silk and metal thread.",
+  "by": "machine",
+  "s": "Details op bloemen zijn geborduurd met zijde en metaaldraad."
+ },
+ "rec:ST80881:desc:3": {
+  "h": "6677276e",
+  "t": "Two-part lining, white at the top, printed fabric at the bottom.",
+  "by": "machine",
+  "s": "Tweedelige voering, bovenaan wit, onderaan bedrukte stof."
+ },
+ "rec:ST80881:quote": {
+  "h": "ed519653",
+  "t": "Ecru furisode kimono, painted and with a gold print.",
+  "by": "team",
+  "s": "Ecru furisode kimono, beschilderd en met gouden opdruk."
+ },
+ "rec:ST80930:desc:0": {
+  "h": "f01fe0c0",
+  "t": "Dark blue waistcoat or jacket in ikat with light blue spots and red squares.",
+  "by": "team",
+  "s": "Donkerblauwe vest of jasje in ikat met lichtblauwe vlekken en rode vierkanten."
+ },
+ "rec:ST80930:desc:1": {
+  "h": "a8be97d5",
+  "t": "The vest has long puffed sleeves, overlapping front panels and fastens at the waist with ribbons.",
+  "by": "machine",
+  "s": "De vest heeft lange pofmouwen, overlappende voorpanden en sluit in de taille met linten."
+ },
+ "rec:ST80930:quote": {
+  "h": "f01fe0c0",
+  "t": "Dark blue waistcoat or jacket in ikat with light blue spots and red squares.",
+  "by": "team",
+  "s": "Donkerblauwe vest of jasje in ikat met lichtblauwe vlekken en rode vierkanten."
+ },
+ "rec:ST80931:desc:0": {
+  "h": "4af051a2",
+  "t": "Dark blue puffed trousers, or \"monpe\", in ikat with light blue spots and red squares.",
+  "by": "team",
+  "s": "Donkerblauwe pofbroek, ofwel \"monpe\", in ikat met lichtblauwe vlekken en rode vierkanten."
+ },
+ "rec:ST80931:desc:1": {
+  "h": "dd357bb1",
+  "t": "Wide waistband with long ribbons as closure, can also be tied around the ankles at the bottom with ribbons.",
+  "by": "machine",
+  "s": "Brede tailleband met lange linten als sluiting, kan ook onderaan rond de enkels gebonden worden met linten."
+ },
+ "rec:ST80931:quote": {
+  "h": "4af051a2",
+  "t": "Dark blue puffed trousers, or \"monpe\", in ikat with light blue spots and red squares.",
+  "by": "team",
+  "s": "Donkerblauwe pofbroek, ofwel \"monpe\", in ikat met lichtblauwe vlekken en rode vierkanten."
+ },
+ "rec:ST80998:desc:0": {
+  "h": "e701e828",
+  "t": "Bridal kaftan in burgundy, red, green and black striped velvet, with a round neckline ending in a point and long pointed sleeves.",
+  "by": "team",
+  "s": "Bruidskaftan in bordeaux, rood, groen en zwart gestreepte fluweel met ronde halsuitsnijding, uitlopend in een punt en met lange puntmouwen."
+ },
+ "rec:ST80998:desc:1": {
+  "h": "552d80e9",
+  "t": "The sides, tops of the sleeves and chest area of the kaftan are decorated with multicoloured embroidery of stitched-on cords and metal thread on orange, light brown and green backgrounds.",
+  "by": "machine",
+  "s": "De zijkanten, bovenkanten van de mouwen en het borstvlak van de kaftan zijn versierd met veelkleurig borduurwerk van opgenaaide koorden en metaaldraad op oranje, lichtbruine en groene ondergronden."
+ },
+ "rec:ST80998:desc:2": {
+  "h": "979890b1",
+  "t": "The embroidered zones on the sleeves are lined with a pink cotton with abstract motifs.",
+  "by": "machine",
+  "s": "De geborduurde zones op de mouwen zijn gevoerd met een roze katoen met abstracte motieven."
+ },
+ "rec:ST80998:quote": {
+  "h": "e701e828",
+  "t": "Bridal kaftan in burgundy, red, green and black striped velvet, with a round neckline ending in a point and long pointed sleeves.",
+  "by": "team",
+  "s": "Bruidskaftan in bordeaux, rood, groen en zwart gestreepte fluweel met ronde halsuitsnijding, uitlopend in een punt en met lange puntmouwen."
+ },
+ "rec:ST81114AB:desc:0": {
+  "h": "5301a342",
+  "t": "White blouse worn as cycling wear, made of cotton batiste.",
+  "by": "team",
+  "s": "Witte blouse gedragen als fietskleding, gemaakt van katoenbatist."
+ },
+ "rec:ST81114AB:desc:1": {
+  "h": "05c37218",
+  "t": "Stand-up collar with sewn-together strips of machine-made whitework embroidery.",
+  "by": "machine",
+  "s": "Opstaande kraag met aan elkaar genaaide stroken machinaal witborduurwerk."
+ },
+ "rec:ST81114AB:desc:2": {
+  "h": "1bd4b16c",
+  "t": "Front closure with 20 mother-of-pearl buttons; hand-sewn buttonholes (gauze point stitch).",
+  "by": "machine",
+  "s": "Sluiting vooraan met 20 knopen gemaakt van parelmoer; met de hand genaaide knoopsgaten (gaaskantsteek)."
+ },
+ "rec:ST81114AB:desc:3": {
+  "h": "1a2f777b",
+  "t": "Two vertical strips of machine-made whitework embroidery are sewn on down the centre, hiding the buttonholes of the bodice front.",
+  "by": "machine",
+  "s": "Centraal zijn twee verticale stroken machinaal witborduurwerk opgenaaid, die de knoopsgaten van het borststuk verbergen."
+ },
+ "rec:ST81114AB:desc:4": {
+  "h": "c665afbc",
+  "t": "The loose bodice front has fine pleats and is fastened over the closure with 14 mother-of-pearl buttons (4 of which are missing).",
+  "by": "machine",
+  "s": "Het losse borststuk heeft fijne plooien en wordt met 14 knopen van parelmoer (waarvan 4 ontbreken) over de sluiting bevestigd."
+ },
+ "rec:ST81114AB:desc:5": {
+  "h": "874e684d",
+  "t": "Set-in sleeves, gathered at the head and at the cuff.",
+  "by": "machine",
+  "s": "Aangezette mouwen, gerimpeld op de kop en aan het manchet."
+ },
+ "rec:ST81114AB:desc:6": {
+  "h": "13865d11",
+  "t": "High, narrow cuff without a closure, made from a strip of cotton batiste with machine embroidery.",
+  "by": "machine",
+  "s": "Hoge smalle manchet zonder sluiting, gemaakt van een strook katoenbatist met machinaal borduurwerk."
+ },
+ "rec:ST81114AB:desc:7": {
+  "h": "9988e5dd",
+  "t": "Strongly waisted cut.",
+  "by": "machine",
+  "s": "Sterk getailleerde snit."
+ },
+ "rec:ST81114AB:desc:8": {
+  "h": "d104636f",
+  "t": "The seams are folded over at the seam allowance on the inside and sewn down by hand.",
+  "by": "machine",
+  "s": "De naden zijn aan de binnenzijde aan de naadwaarde omgevouwen en met de hand toegenaaid."
+ },
+ "rec:ST81114AB:desc:9": {
+  "h": "b6697956",
+  "t": "At the back, a slit finished with the same strips of embroidery, which hang loose.",
+  "by": "machine",
+  "s": "Aan de achterzijde een split afgewerkt met dezelfde stroken borduurwerk, die los afhangen."
+ },
+ "rec:ST81114AB:quote": {
+  "h": "5301a342",
+  "t": "White blouse worn as cycling wear, made of cotton batiste.",
+  "by": "team",
+  "s": "Witte blouse gedragen als fietskleding, gemaakt van katoenbatist."
+ },
+ "rec:ST81116:desc:0": {
+  "h": "8e29efce",
+  "t": "Black woollen knee-length trousers used for cycling.",
+  "by": "team",
+  "s": "Zwarte wollen knielange broek gebruikt om te fietsen."
+ },
+ "rec:ST81116:desc:1": {
+  "h": "52c6b5f5",
+  "t": "Waistband lined with black cotton, closure in the left side seam with 3 plastic buttons (1 missing).",
+  "by": "machine",
+  "s": "Tailleband gevoerd met zwart katoen, sluiting in de linker zijnaad met 3 kunststof knopen (1 ontbreekt)."
+ },
+ "rec:ST81116:desc:2": {
+  "h": "f2b9a871",
+  "t": "One pocket in the right side seam, hidden under a pleat.",
+  "by": "machine",
+  "s": "Eén zak in de rechter zijnaad, weggewerkt onder een plooi."
+ },
+ "rec:ST81116:desc:3": {
+  "h": "48c9eac9",
+  "t": "Both at the front and at the back, six deep pleats that hide the low-hanging crotch.",
+  "by": "machine",
+  "s": "Zowel vooraan als achteraan zes diepe plooien die het laaghangend kruis verbergen."
+ },
+ "rec:ST81116:desc:4": {
+  "h": "2da9dddf",
+  "t": "At the bottom, the legs are gathered with elastic.",
+  "by": "machine",
+  "s": "Onderaan zijn de pijpen samengetrokken met elastiek."
+ },
+ "rec:ST81116:desc:5": {
+  "h": "360e8d98",
+  "t": "No lining.",
+  "by": "machine",
+  "s": "Geen voering."
+ },
+ "rec:ST81116:quote": {
+  "h": "8e29efce",
+  "t": "Black woollen knee-length trousers used for cycling.",
+  "by": "team",
+  "s": "Zwarte wollen knielange broek gebruikt om te fietsen."
+ },
+ "rec:ST81190:desc:0": {
+  "h": "da49ce56",
+  "t": "Fitted coat in grey woven wool with a stand-up collar.",
+  "by": "team",
+  "s": "Getailleerde jas in grijs wolweefsel met opstaande kraag."
+ },
+ "rec:ST81190:desc:1": {
+  "h": "55c9e036",
+  "t": "The jacket is constructed from separate components: sleeve pieces, a skirt, shoulder pieces and chest flaps, each lined with brown cotton and attached to each other with brass-coloured rivets.",
+  "by": "machine",
+  "s": "De jas is opgebouwd uit losse onderdelen: mouwstukken, een schoot, schouderstukken en borstlappen, elk gevoerd met bruin katoen en aan elkaar vastgehecht met messingkleurige rivetten."
+ },
+ "rec:ST81190:desc:2": {
+  "h": "2173c74b",
+  "t": "The darts and side seams are also not stitched, but fastened with rivets.",
+  "by": "machine",
+  "s": "Ook de nepen en zijnaden zijn niet gestikt, maar met rivetten vastgemaakt."
+ },
+ "rec:ST81190:desc:3": {
+  "h": "5841e703",
+  "t": "The sleeves are lined with 100% polyester and are open at the armpits.",
+  "by": "machine",
+  "s": "De mouwen zijn gevoerd met 100% polyester en zijn open aan de oksels."
+ },
+ "rec:ST81190:desc:4": {
+  "h": "02d4e5be",
+  "t": "The jacket closes at the center front with nine brass-coloured snap buttons.",
+  "by": "machine",
+  "s": "De jas sluit middenvoor met negen messingkleurige drukknopen."
+ },
+ "rec:ST81190:desc:5": {
+  "h": "fb54ec62",
+  "t": "On the back at neck height, a red cross is stitched.",
+  "by": "machine",
+  "s": "Op de achterzijde ter hoogte van de hals is een rood kruis gestikt."
+ },
+ "rec:ST81190:quote": {
+  "h": "da49ce56",
+  "t": "Fitted coat in grey woven wool with a stand-up collar.",
+  "by": "team",
+  "s": "Getailleerde jas in grijs wolweefsel met opstaande kraag."
+ }
+}
