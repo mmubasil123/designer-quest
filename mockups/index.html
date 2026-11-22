@@ -7,7 +7,9 @@
   if (/[?&](card|fabric)=/.test(location.search)) location.replace("second-skin.html" + location.search + location.hash);
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>MoMu · Wear 255 years</title>
+<title>Museum Atelier · Wear 255 years</title>
+<meta property="og:site_name" content="Museum Atelier">
+<meta property="og:title" content="Museum Atelier · Wear 255 years">
 <meta name="description" content="Win real pieces from MoMu, the fashion museum in Antwerp, by guessing when they were made. Then wear them together, from a 1750 jak to 2005 football boots.">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
@@ -34,6 +36,7 @@ h1, h2, h3, p, ol, figure, blockquote { margin: 0; }
 
 /* ---------- nav ---------- */
 .nav { position: absolute; z-index: 5; inset: 0 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px var(--gutter); }
+.nav .home .app-name { text-decoration: none; margin-left: 10px; font: 500 13px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
 .nav .home { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); }
 .nav nav { display: flex; align-items: center; gap: 6px; }
 .nav nav a:not(.btn-go) { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; background: var(--paper); box-shadow: var(--shadow-pill); font: 500 15px/1 var(--sans); text-decoration: none; }   /* white pills: the numeral may run under the nav */
@@ -222,7 +225,7 @@ section { scroll-margin-top: 24px; }
 <body>
 
 <header class="nav">
-  <a class="home" href="./" aria-label="MoMu, home"><svg class="momu-logo" viewBox="0 0 534 299" aria-hidden="true"><g transform="scale(1 2.491667)" fill="currentColor" fill-rule="evenodd"><polygon points="247.449335 0 132.331383 115.359336 12.7377802 0 0 0 0 120 68.4655685 120 68.4655685 56.4509346 133.794221 120 196.889009 120 260.934378 56.4509346 260.934378 120 264 120 264 0"/><polygon points="517.451645 0 402.326108 115.359336 282.738035 0 270 0 270 120 338.464298 120 338.464298 56.4509346 403.794257 120 466.890307 120 530.939597 56.4509346 530.939597 120 534 120 534 0"/></g></svg></a>
+  <a class="home" href="./" aria-label="Museum Atelier, home"><svg class="momu-logo" viewBox="0 0 534 299" aria-hidden="true"><g transform="scale(1 2.491667)" fill="currentColor" fill-rule="evenodd"><polygon points="247.449335 0 132.331383 115.359336 12.7377802 0 0 0 0 120 68.4655685 120 68.4655685 56.4509346 133.794221 120 196.889009 120 260.934378 56.4509346 260.934378 120 264 120 264 0"/><polygon points="517.451645 0 402.326108 115.359336 282.738035 0 270 0 270 120 338.464298 120 338.464298 56.4509346 403.794257 120 466.890307 120 530.939597 56.4509346 530.939597 120 534 120 534 0"/></g></svg><span class="app-name">Museum Atelier</span></a>
   <nav aria-label="Page">
     <a href="#visit">How it works</a>
     <a href="#film">Film</a>

@@ -199,7 +199,7 @@ export function createShare({ tt, look, PIECES, getName, toast }) {
   el.addEventListener("close", () => { clearTimeout(timer); run++; URL.revokeObjectURL(img.src); img.removeAttribute("src"); save.removeAttribute("href"); file = null; });
   go.addEventListener("click", async () => {
     if (!file) return;
-    try { await navigator.share({ files: [file], title: t("My MoMu look") }); }
+    try { await navigator.share({ files: [file], title: t("My Museum Atelier look") }); }
     catch (err) { if (err.name !== "AbortError") toast(t("Couldn't share from this browser, use Download")); }
   });
   save.addEventListener("click", () => toast(t("Saved to your downloads")));   // the link itself downloads the blob
@@ -220,7 +220,7 @@ export function createShare({ tt, look, PIECES, getName, toast }) {
     const won = [...new Set([...readWon(), ...Object.keys(PIECES)])].filter(id => PIECES[id]?.room && !PIECES[id].locked && !wornIds.has(id)).map(id => PIECES[id].name);
     const shown = won.length > 2 ? [...won.slice(0, 2), `+${won.length - 2} more`] : won;
     const title = cardTitle(name, facts, getName());
-    const kicker = new Date().toLocaleDateString({ nl: "nl-BE", fr: "fr-BE" }[lang] || "en-GB", { day: "numeric", month: "long", year: "numeric" });
+    const kicker = "Museum Atelier · " + new Date().toLocaleDateString({ nl: "nl-BE", fr: "fr-BE" }[lang] || "en-GB", { day: "numeric", month: "long", year: "numeric" });
     const url = location.host + location.pathname.replace(/\/(index|second-skin)\.html$/, "/");
     const canvas = drawCard({ grab: h => grabStill(tt, h), name: title, facts, url, scene, quote: pickQuote(facts, stories), won: shown, kicker });
     const blob = await new Promise(res => canvas.toBlob(res, "image/png"));
