@@ -1368,6 +1368,24 @@
   "by": "machine",
   "s": "Belgium"
  },
+ "q:ST81190:hint:0": {
+  "h": "9a4a64a9",
+  "t": "Au lieu d'être cousus, les morceaux de la veste sont maintenus ensemble par de petites pièces métalliques en forme de boulon appelées rivets",
+  "by": "machine",
+  "s": "Instead of being sewn, the jacket pieces are held together by little metal bolt-like pieces called rivets"
+ },
+ "q:ST81190:hint:1": {
+  "h": "4088c5c4",
+  "t": "la veste se ferme sur le devant avec une rangée de neuf boutons-pression, un type de bouton qui se ferme en pressant les deux parties l'une contre l'autre",
+  "by": "machine",
+  "s": "the jacket is closed in the front with a line of nine press-studs are a type of button that closes by pressing them together"
+ },
+ "q:ST81190:hint:2": {
+  "h": "0abfa51a",
+  "t": "Une croix cousue au fil rouge qui forme le logo d'A.F. Vandevorst",
+  "by": "machine",
+  "s": "A cross stitched in red thread forming the logo of A.F. Vandevorst"
+ },
  "q:ST81190:q:0": {
   "h": "d1d9933e",
   "t": "Quelle partie de la jaquette est cousue avec du fil rouge ?",
@@ -1393,16 +1411,22 @@
   "s": "Considering the material and style, what seasons was this jacket made for?"
  },
  "q:ST81190:story:0": {
-  "h": "f9a7ef51",
-  "t": "Cette jaquette grisonnante en laine de 1998-1999 de la maison de couture belge A.F. Vandevorst présente des détails remarquables. Elle est composée de parties séparées ; la manche, le devant, l'épaule et les pièces de poitrine ne sont pas cousus ensemble. Si tu regardes de près, comment sont-ils maintenus ensemble ? Les pièces, ainsi que les pinces et les coutures latérales, sont fixées à l'aide de rivets en métal, des attaches ressemblant à des boulons qui unissent deux tissus. La jaquette se ferme au milieu du devant par une rangée de boutons-pression, un type de bouton que l'on ferme facilement en pressant les deux extrémités l'une contre l'autre.",
+  "h": "bccaadd8",
+  "t": "Regarde cette veste grise devant toi. Comment imagines-tu le tissu au toucher ? La laine feutrée gratterait-elle ou serait-elle douce ? Observe maintenant les petites pièces métalliques rondes que tu vois partout sur la veste. Au lieu de coudre les morceaux ensemble, les créateurs ont utilisé des rivets – des fixations en forme de boulon – pour assembler les différentes parties. Même les pinces, ces petits plis qui donnent sa forme au vêtement, sont fixées avec eux. Vois-tu aussi une rangée de boutons-pression en métal sur le devant de la pièce ? Ils ressemblent presque exactement aux rivets.",
   "by": "machine",
-  "s": "This grey woolen jacket from 1998-1999 by Belgian fashion house A.F. Vandevorst has some remarkable details. It is made up of separate parts; the sleeve, front, shoulder, and breast pieces are not sewn together. If you look closely, how are they held together? The pieces, as well as the darts and side seams are fastened with metal rivets, bolt-like fasteners that attach two fabrics. The jacket is closed in the centre front by a column of snap buttons, a type of button you can easily close by pressing the two ends together."
+  "s": "Take a look at this grey jacket in front of you. What do you think the fabric would feel like? Would the felted wool be itchy or soft? Now look closely at the little round metal pieces you see all over the jacket. Rather than sewing the pieces together, the designers used rivets-bolt-like fasteners-to attach the separate parts. Even the darts, the little folds to shape the piece are attached with them. Do you also see a column of metal snap buttons along the centre front of the piece? They look almost identical to the rivets."
  },
  "q:ST81190:story:1": {
-  "h": "bafaf3c9",
-  "t": "Regarde maintenant l'arrière de la pièce. Qu'est-ce qui saute aux yeux ? La croix rouge brodée sur la nuque est le logo emblématique d'A.F. Vandevorst. Dès leurs premières collections, leurs créations ont été inspirées par l'artiste allemand Joseph Beuys, la religion, les chevaux et leur harnachement, les uniformes, les rivets, la lingerie et les chaussures fétiches. Cette jaquette fait partie de leur première collection.",
+  "h": "cfc184c9",
+  "t": "Les rivets ont inspiré les créateurs d'A.F. Vandevorst et reviennent dans plusieurs de leurs modèles. Où as-tu déjà vu des rivets, en décoration ou pour un usage pratique ? Ils se sont aussi inspirés des uniformes, des chevaux et de l'équipement d'équitation, ce que tu peux peut-être imaginer en regardant cette pièce.",
   "by": "machine",
-  "s": "Now look at the back of the piece. What stands out? The red cross stitched at the nape of the neck is the iconic logo of A.F. Vandevorst. Since their early collections, their designs have been inspired by German artist Joseph Beuys, religion, horses and their tack, uniforms, rivets, lingerie, and fetish shoes. This jacket is part of their first collection."
+  "s": "Rivets were something that inspired the designers of A.F. Vandevorst and appears in multiple of their designs. Where else might you have seen rivets used before, for decoration or practical uses? They were also inspired by uniforms and by horses and horse riding equipment, something you can maybe picture when looking at this piece."
+ },
+ "q:ST81190:story:2": {
+  "h": "f1394cc7",
+  "t": "Regarde maintenant le dos de la veste : en haut, il y a une couture rouge. Quelle forme dessine-t-elle ? C'est le logo d'A.F. Vandevorst.",
+  "by": "machine",
+  "s": "Now look at the back of the jacket, at the top there is red stitching, what shape is this in? This is the logo of A.F. Vandevorst."
  },
  "q:ST81190:title": {
   "h": "304fa7d6",

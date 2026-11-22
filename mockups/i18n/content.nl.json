@@ -1206,6 +1206,24 @@
   "by": "machine",
   "s": "Belgium"
  },
+ "q:ST81190:hint:0": {
+  "h": "9a4a64a9",
+  "t": "In plaats van genaaid te zijn, worden de delen van de jas bij elkaar gehouden door kleine, bout-achtige metalen stukjes die klinknagels heten",
+  "by": "machine",
+  "s": "Instead of being sewn, the jacket pieces are held together by little metal bolt-like pieces called rivets"
+ },
+ "q:ST81190:hint:1": {
+  "h": "4088c5c4",
+  "t": "de jas sluit aan de voorkant met een rij van negen drukknopen, een soort knoop die sluit door de twee delen tegen elkaar te drukken",
+  "by": "machine",
+  "s": "the jacket is closed in the front with a line of nine press-studs are a type of button that closes by pressing them together"
+ },
+ "q:ST81190:hint:2": {
+  "h": "0abfa51a",
+  "t": "Een kruis in rode draad gestikt, dat het logo van A.F. Vandevorst vormt",
+  "by": "machine",
+  "s": "A cross stitched in red thread forming the logo of A.F. Vandevorst"
+ },
  "q:ST81190:q:0": {
   "h": "d1d9933e",
   "t": "Welk deel van het jak is gestikt met rode draad?",
@@ -1231,16 +1249,22 @@
   "s": "Considering the material and style, what seasons was this jacket made for?"
  },
  "q:ST81190:story:0": {
-  "h": "f9a7ef51",
-  "t": "Dit grijze wollen jak uit 1998-1999 van het Belgische modehuis A.F. Vandevorst heeft een paar opvallende details. Het is opgebouwd uit losse delen; de mouw-, voor-, schouder- en borststukken zijn niet aan elkaar genaaid. Als je goed kijkt, hoe zitten ze dan vast? De panden, net als de coupenaden en zijnaden, zijn vastgemaakt met metalen klinknagels, boutachtige bevestigingen die twee stoffen aan elkaar zetten. Het jak sluit middenvoor met een rij drukknopen, een type knop dat je makkelijk dichtmaakt door de twee uiteinden op elkaar te drukken.",
+  "h": "bccaadd8",
+  "t": "Kijk eens naar deze grijze jas voor je neus. Hoe zou de stof aanvoelen? Zou de gevilte wol prikken of zacht zijn? Kijk nu goed naar de kleine ronde metalen stukjes die je overal op de jas ziet. In plaats van de delen aan elkaar te naaien, gebruikten de ontwerpers klinknagels – bout-achtige bevestigingen – om de losse delen vast te maken. Zelfs de plooien waarmee het stuk een vorm krijgt, zijn ermee vastgezet. Zie je ook een rij metalen drukknopen langs de voorkant van het stuk? Ze lijken bijna identiek aan de klinknagels.",
   "by": "machine",
-  "s": "This grey woolen jacket from 1998-1999 by Belgian fashion house A.F. Vandevorst has some remarkable details. It is made up of separate parts; the sleeve, front, shoulder, and breast pieces are not sewn together. If you look closely, how are they held together? The pieces, as well as the darts and side seams are fastened with metal rivets, bolt-like fasteners that attach two fabrics. The jacket is closed in the centre front by a column of snap buttons, a type of button you can easily close by pressing the two ends together."
+  "s": "Take a look at this grey jacket in front of you. What do you think the fabric would feel like? Would the felted wool be itchy or soft? Now look closely at the little round metal pieces you see all over the jacket. Rather than sewing the pieces together, the designers used rivets-bolt-like fasteners-to attach the separate parts. Even the darts, the little folds to shape the piece are attached with them. Do you also see a column of metal snap buttons along the centre front of the piece? They look almost identical to the rivets."
  },
  "q:ST81190:story:1": {
-  "h": "bafaf3c9",
-  "t": "Kijk nu naar de achterkant van het stuk. Wat valt er op? Het rode kruis dat in de nek is geborduurd, is het iconische logo van A.F. Vandevorst. Al vanaf hun vroege collecties halen ze inspiratie uit het werk van de Duitse kunstenaar Joseph Beuys, religie, paarden en hun tuig, uniformen, klinknagels, lingerie en fetisj schoenen. Dit jak maakt deel uit van hun eerste collectie.",
+  "h": "cfc184c9",
+  "t": "Klinknagels inspireerden de ontwerpers van A.F. Vandevorst en komen in veel van hun ontwerpen voor. Waar heb je klinknagels nog gezien, als versiering of voor praktisch gebruik? Ze lieten zich ook inspireren door uniformen en door paarden en paardrijuitrusting, iets wat je je misschien kunt voorstellen als je naar dit stuk kijkt.",
   "by": "machine",
-  "s": "Now look at the back of the piece. What stands out? The red cross stitched at the nape of the neck is the iconic logo of A.F. Vandevorst. Since their early collections, their designs have been inspired by German artist Joseph Beuys, religion, horses and their tack, uniforms, rivets, lingerie, and fetish shoes. This jacket is part of their first collection."
+  "s": "Rivets were something that inspired the designers of A.F. Vandevorst and appears in multiple of their designs. Where else might you have seen rivets used before, for decoration or practical uses? They were also inspired by uniforms and by horses and horse riding equipment, something you can maybe picture when looking at this piece."
+ },
+ "q:ST81190:story:2": {
+  "h": "f1394cc7",
+  "t": "Kijk nu naar de achterkant van de jas: bovenaan zit rood stiksel. Welke vorm heeft het? Dat is het logo van A.F. Vandevorst.",
+  "by": "machine",
+  "s": "Now look at the back of the jacket, at the top there is red stitching, what shape is this in? This is the logo of A.F. Vandevorst."
  },
  "q:ST81190:title": {
   "h": "304fa7d6",
