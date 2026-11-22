@@ -9,7 +9,8 @@ Newest first. Each entry: what changed, why, and the decision behind it.
   Stage, Up close, the outfit page and the landing, so they read as one app; browsers without it just navigate.
   `nav.js` `backTo` treats `/stage` (E4's Vercel rewrite) and `/second-skin.html` as the same page, so ← on Up close and
   the outfit page steps back on the deployed site too instead of loading a second Stage. The Stage's phone frame is
-  the page's `main` landmark.
+  the page's `main` landmark. A one-line `pagereveal` guard in the head of the three pages keeps a skipped transition (a card scan
+  rewrites its URL while the page is revealed) from logging an uncaught error.
 - Checked (browser pane, 390 x 844): Stage > Up close (ST2435) > ←: back on the existing Stage entry (history grows by
   the forward entry only); headers compared by screenshot; console clean. Impeccable detector: Up close 0 findings
   (1 advisory, as before), outfit page 0, Stage 2 findings that are on `main` already (repeated "Full" label in the

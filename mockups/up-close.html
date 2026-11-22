@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>/* H6: theme.css asks for a cross-document view transition; a page that changes its URL or opens a dialog while being revealed makes the browser skip it, which is expected and must not show as an uncaught error */
+addEventListener("pagereveal", e => { const vt = e.viewTransition; if (vt) for (const p of [vt.ready, vt.finished, vt.updateCallbackDone]) p?.catch(() => {}); });</script>
 <title>Up close · MoMu</title>
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
