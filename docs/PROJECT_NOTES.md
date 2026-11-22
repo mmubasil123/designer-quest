@@ -124,5 +124,5 @@ Hassan translates, the curator checks the fashion terms.
 | Tickets, decisions, cut, risks | `LEDGER.md` |
 | Where work stopped | `HANDOVER.md` |
 | How the app is built | `ARCHITECTURE.md`, `README.md` |
-| Live demo | Vercel project on Mubasil's account (see `HANDOVER.md`) |
+| Live demo | Vercel project on Mubasil's account (see Deploy in `ARCHITECTURE.md`) |
 | Task board | Team Notion page "MoMu Hackathon" |

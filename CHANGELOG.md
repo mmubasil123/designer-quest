@@ -2,6 +2,20 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## HANDOVER.md cut to a current-state page (2026-11-22, H24, branch hassan/H24-handover-trim)
+- What: `HANDOVER.md` went from 233 to 39 lines: state, open PRs, half-done work, next step. Its per-ticket history (H2 to H22, B5 to B8,
+  E2, E4, D-3, wearable scans, State, Do next, Left, Growth story) is dropped because `LEDGER.md` and this file already hold it; the
+  full old text is in `_to_delete/HANDOVER-2026-11-22-full.md` (git-ignored) and in git history. The how-tos moved: splat study
+  pieces (`.sog` conversion, `fracAt`, quote check), the splat captures table, the Splat Stage spike lessons, CLO model export and
+  the team's pieces, and deploy notes to `ARCHITECTURE.md`; theme, the curator sync, narration re-voicing, languages, Ask, landing stills to
+  `README.md` ("Content tools"). Pointers fixed in `AGENTS.md`, `README.md`, `LEDGER.md` (G1, kimono risk), `docs/PROJECT_NOTES.md`
+  and `docs/RESEARCH-LOG.md`.
+- Why: most of the file was stale since 2026-11-21 (it still called B5, B6 and B8 unmerged and listed done tickets under "Do next"),
+  so a fresh agent had to read 233 lines to find 20 that were true.
+- Decision: keep the file, because `AGENTS.md` (Start here, End of session) and Mubasil's agents depend on it; from now on an end
+  of session replaces its contents instead of appending. Shared contract per the LEDGER change policy: Mubasil gets a heads-up before merge.
+  Dropped for being out of date, not moved: the "Housekeeping" loose-files note.
+
 ## "Win its fabric" works on every tap: Up close steps back once (2026-11-22, H23, branch hassan/win-fabric-button)
 - What: `backTo()` in `nav.js` leaves once per page view; later calls are ignored until the page is shown again from the
   back-forward cache. Cause: "Win its fabric" (and Up close's ←) call `backTo()`, which uses `history.back()` when the

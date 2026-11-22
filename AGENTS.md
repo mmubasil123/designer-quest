@@ -4,7 +4,7 @@ Entry file for every agent on this repo (Claude Code, Cursor, Codex, app threads
 it. `CLAUDE.md` loads this file and adds only Claude-specific notes.
 
 ## Start here
-1. `git pull`, then read `HANDOVER.md` (where work stopped) and `LEDGER.md` (tickets, decisions D1 to D8, owners).
+1. `git pull`, then read `HANDOVER.md` (short: where work stopped) and `LEDGER.md` (tickets, decisions D1 to D8, owners).
 2. `ARCHITECTURE.md`: components, data flow, invariants. `README.md`: layout and commands.
 3. Serve the mockup: `cd mockups && python3 -m http.server 8765 --bind 127.0.0.1`, open `/atelier.html`.
    `window.atelier = { look, turntables }` drives it from the console for checks.
@@ -57,7 +57,7 @@ just fail to connect.
 - Change a decision in `LEDGER.md` only by editing its row and saying why.
 - Study pieces (splats): commit only the `.sog` (under 50 MB), never a `.ply`. Each detail's `quote` is cut
   verbatim from the record's `dcterms:description` (check it with a script); place `details[].at` with
-  `upClose.fracAt(x, y, fz)` in the console on `up-close.html`, checking front and back. Steps are in `HANDOVER.md`.
+  `upClose.fracAt(x, y, fz)` in the console on `up-close.html`, checking front and back. Steps are in `ARCHITECTURE.md` ("Study piece from a splat").
 - Deploys: the Vercel project (its name and URL are the early idea name) is on Mubasil's account. Only Mubasil deploys, and only on purpose.
 
 ## Delivery
@@ -65,4 +65,4 @@ just fail to connect.
   recording E2 in `LEDGER.md`); the cut and its risks are at the end of `LEDGER.md`. Problem statement, ideation
   and team roles: `docs/PROJECT_NOTES.md`.
 - CLO path: CLO on a personal machine, pattern files from MoMu, the `Lilbonner/clo3d-mcp` listener. Engine
-  changes needed are in `HANDOVER.md` and ticket A7.
+  how to add a model is in `ARCHITECTURE.md` ("CLO models"); ticket A7 is cut.

@@ -25,7 +25,7 @@ Two things live here, for the MoMu Hackathon 2026 (MoMu is the Antwerp fashion m
 | `docs/PROJECT_NOTES.md` | The team's shared notes: problem statement, ideation, visitor flow, decisions, who owns what |
 | `presentation/STORYLINE.md` | Pitch story, persona, demo script, jury questions |
 | `AGENTS.md`, `ARCHITECTURE.md` | Rules for every agent and both people; components, data flow, invariants |
-| `LEDGER.md`, `TICKETS.md`, `CHANGELOG.md`, `HANDOVER.md` | Ticket ledger and decisions, earlier tickets, changes with reasons, next-session notes |
+| `LEDGER.md`, `TICKETS.md`, `CHANGELOG.md`, `HANDOVER.md` | Ticket ledger and decisions, earlier tickets, changes with reasons, where work stopped (short, current) |
 
 ## Run the mockup
 
@@ -53,10 +53,36 @@ Photo -> garment-only cutout -> TRELLIS image-to-3D -> GLB -> auto-fit on the dr
 
 Python lives in the project `.venv` only (torch and transformers make it about 1 GB). No global installs.
 
+## Content tools (how to refresh what the app shows)
+
+- **Theme:** change a colour or font in the `:root` block of `mockups/theme.css`, never in the pages; it loads after
+  `atelier.html`'s own style block. `share.js` mirrors the fonts and colours as constants: change both together.
+- **the curator's text:** fetch her Notion page "Story and Questions" (read only) as Markdown, then
+  `python3 -I mockups/tools/questions_sync.py page.md`; then rebuild narration and translations (below).
+- **Narration:** `mockups/narration.json` is built by `python3 -I mockups/tools/narration.py` (never hand-edit); scripts in
+  `narration-scripts.json`, check facts with `python3 -I mockups/tools/narration_facts.py <cache/>`. All 19 are voiced in
+  Picsart Adeline (English only). To re-voice: `narration.py --scripts DIR`; Picsart editor > AI Audio Generator, voice
+  Adeline, paste the exact text, Generate, add the voiceover to the canvas, download as `DIR/<id>.en.mp3`; then
+  `.venv/bin/python -I mockups/tools/narration_listen.py DIR` (transcribes back, writes `DIR/cues.json`),
+  `narration.py --import DIR --voice "picsart:Adeline"`, `narration.py --cues DIR/cues.json`, `--check`.
+- **Languages (NL / EN / FR):** wrap new UI text in `t("English text")` (from `./i18n.js`) and add a line to
+  `mockups/i18n/ui.nl.json` and `ui.fr.json`. New fact or story text: add its source to `sources()` in
+  `mockups/tools/i18n_build.py`, run `python3 -I mockups/tools/i18n_build.py --env <a .env with ASK_PROVIDER, ASK_MODEL,
+  ASK_API_KEY>`, then `--check`; show it with `tc(key, source, sourceLang)` and `labelHtml()`. A new screen with state
+  worth keeping across a language switch registers `keepPlace` / `takePlace`.
+- **Ask the archive:** `cd mockups && npm install && npm run dev:ask` (http://127.0.0.1:8768, key from the repo's `.env`);
+  eval `npm run eval:ask` (results in `mockups/tools/ask_eval/RESULTS.md`); regenerate records after a harvest with
+  `.venv/bin/python -I mockups/tools/ask_records.py`. Demo model: Gemini free tier (`ASK_PROVIDER=gemini`,
+  `ASK_MODEL=gemini-3.5-flash-lite`); check its limits in AI Studio before the demo; past a cap Ask answers the
+  suggested questions from fields only.
+- **Landing page stills:** after a GLB or fit change, serve `mockups/`, then from `presentation/reel` run
+  `node scripts/landing-stills.mjs` and the `cwebp` line in its header. The demo teaser: `presentation/reel/README.md`.
+- **Wearable scans:** `docs/WEARABLE-PIPELINE.md`. GPU: free ZeroGPU is about 2 TRELLIS runs a day per account.
+
 ## Engine in one paragraph
 
 One three.js scene per turntable: a procedural dress form, plus each worn GLB scaled and placed by slot from its
 bounding box. The form renders first and garments over a cleared depth buffer, so a scan never shows the form
 through it; a worn top hides the torso and keeps the neck. A shared garment shader adds smooth normals, hides the
 stand baked into some scans, and projects remix fabrics in object space (triplanar) multiplied by the scan's own
-shading, with a body and a sleeves zone. CLO-draped GLBs can replace scans file by file (see `HANDOVER.md`).
+shading, with a body and a sleeves zone. CLO-draped GLBs are never rescaled (see "CLO models" in `ARCHITECTURE.md`).
