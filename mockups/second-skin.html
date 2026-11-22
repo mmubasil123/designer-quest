@@ -7,6 +7,8 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<script>/* H6: theme.css asks for a cross-document view transition; a page that changes its URL or opens a dialog while being revealed makes the browser skip it, which is expected and must not show as an uncaught error */
+addEventListener("pagereveal", e => { const vt = e.viewTransition; if (vt) for (const p of [vt.ready, vt.finished, vt.updateCallbackDone]) p?.catch(() => {}); });</script>
 <title>MoMu</title>
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
@@ -115,8 +117,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .wardrobe.dragging { transition: none; }
 .grab { padding: 0 18px; touch-action: none; cursor: grab; }
-.handle { display: block; width: 100%; height: 22px; position: relative; }
-.handle::before { content: ""; position: absolute; left: 50%; top: 9px; width: 40px; height: 4px; margin-left: -20px; border-radius: 2px; background: var(--line); }
+.handle { display: block; width: 100%; height: 44px; margin: -11px 0; position: relative; }   /* H6: 44 px target, same layout */
+.handle::before { content: ""; position: absolute; left: 50%; top: 20px; width: 40px; height: 4px; margin-left: -20px; border-radius: 2px; background: var(--line); }
 .wardrobe-head { display: flex; align-items: baseline; justify-content: space-between; }
 .wardrobe h2 { font: 400 22px/1 var(--serif); margin: 0; }
 /* max-content rows: the grid is a shrinking flex item and tiles clip (min-height 0), so auto rows were squeezed below the tiles' 3:4 height */
@@ -191,7 +193,12 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .tile .st b { display: block; font: 400 13px/1.2 var(--serif); }
 .tile .st span { font: 400 10px/1.4 var(--sans); color: var(--muted); }
 .tile.new::before { content: "New"; position: absolute; top: 8px; left: 8px; z-index: 1; padding: 2px 8px; border-radius: 999px; background: var(--ink); color: var(--paper); font: 500 11px/1.6 var(--sans); pointer-events: none; }
-.museum { width: min(420px, calc(100% - 32px)); text-align: left; }
+.museum { width: min(420px, calc(100% - 24px)); text-align: left; }
+/* H6: the Museum is a sheet like the fact card (it acts on the visit, the Stage stays behind), not a centred modal */
+.nfc.museum { margin: auto auto 12px; transform: translateY(16px); }
+.nfc.museum[open] { transform: none; }
+@starting-style { .nfc.museum[open] { opacity: 0; transform: translateY(16px); } }
+.bar-actions .progress { font-variant-numeric: tabular-nums; }
 .museum .grid { max-height: min(60vh, 520px); overflow-y: auto; margin-bottom: 8px; }
 .tile.study:not(.seen) img { filter: grayscale(1) contrast(.2) brightness(1.4); }
 .tile.locked::after { pointer-events: none; content: "Win it at MoMu"; position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 10px; font: italic 13px/1.2 var(--serif); color: var(--muted); }
@@ -258,7 +265,8 @@ dt { color: var(--muted); }
   .press:active { transform: none; }
   .wardrobe, .stage .turntable { transition-duration: 1ms; }
   .screens > section { animation: none !important; }
-  .nfc { transition: opacity 150ms ease; transform: none; }
+  .nfc, .nfc.museum { transition: opacity 150ms ease; transform: none; }
+  @starting-style { .nfc.museum[open] { transform: none; } }
 }
 </style>
 <link rel="stylesheet" href="theme.css"><!-- B9 MoMu theme: tokens, fonts and the skin; must stay after the style block -->
@@ -277,8 +285,8 @@ dt { color: var(--muted); }
   <!-- 1. STAGE (the wardrobe is a bottom sheet on the stage, so the form stays in view while you dress it) -->
   <section data-screen="stage">
     <div class="label">1 · Stage</div>
-    <div class="phone">
-      <div class="bar"><a class="brand lockup" href="./" aria-label="MoMu, about the app"><!-- E4: the logo opens the landing page. H10: MoMu's official logo, as assets/brand/momu-logo.svg (inline so it takes currentColor) --><svg class="momu-logo" viewBox="0 0 534 299" role="img" aria-label="MoMu"><title>MoMu</title><g transform="scale(1 2.491667)" fill="currentColor" fill-rule="evenodd"><polygon points="247.449335 0 132.331383 115.359336 12.7377802 0 0 0 0 120 68.4655685 120 68.4655685 56.4509346 133.794221 120 196.889009 120 260.934378 56.4509346 260.934378 120 264 120 264 0"/><polygon points="517.451645 0 402.326108 115.359336 282.738035 0 270 0 270 120 338.464298 120 338.464298 56.4509346 403.794257 120 466.890307 120 530.939597 56.4509346 530.939597 120 534 120 534 0"/></g></svg></a><span class="bar-actions"><button class="pill ghost press" id="museumBtn">Museum</button><button class="pill press" id="shareBtn">Share look</button><button class="pill ghost press helpbtn" id="helpBtn" aria-label="How it works">?</button></span></div>
+    <div class="phone" role="main">
+      <div class="bar"><a class="brand lockup" href="./" aria-label="MoMu, about the app"><!-- E4: the logo opens the landing page. H10: MoMu's official logo, as assets/brand/momu-logo.svg (inline so it takes currentColor) --><svg class="momu-logo" viewBox="0 0 534 299" role="img" aria-label="MoMu"><title>MoMu</title><g transform="scale(1 2.491667)" fill="currentColor" fill-rule="evenodd"><polygon points="247.449335 0 132.331383 115.359336 12.7377802 0 0 0 0 120 68.4655685 120 68.4655685 56.4509346 133.794221 120 196.889009 120 260.934378 56.4509346 260.934378 120 264 120 264 0"/><polygon points="517.451645 0 402.326108 115.359336 282.738035 0 270 0 270 120 338.464298 120 338.464298 56.4509346 403.794257 120 466.890307 120 530.939597 56.4509346 530.939597 120 534 120 534 0"/></g></svg></a><span class="bar-actions"><button class="pill ghost press progress" id="museumBtn" aria-label="Museum">Museum</button><button class="pill ghost press" id="shareBtn">Share</button><button class="pill ghost press helpbtn" id="helpBtn" aria-label="How it works">?</button></span></div>
       <div class="stage" id="stage" data-snap="peek">
         <div class="credit">
           <div>
@@ -365,16 +373,21 @@ const scanned = params.get("card");
 // C2: the curator's story and questions (questions.json) show after a card scan; optional, nothing is locked behind them
 const quiz = null;   // shortcut: the curator's questions (C2) are left out of the tap flow to keep it to story then challenge; bring them back on the Won card if wanted
 let story = scanned ? await createStory({ img: id => PIECES[id].img, name: id => PIECES[id].name }) : null;   // H3: story with narration before the questions (story.js)
-if (PIECES[scanned]?.splat && PIECES[scanned].locked) {   // before the Stage boots, so a study card never downloads the wearable GLBs; Up close is its challenge
-  await showScan({ story, quiz, id: scanned, next: "Study it up close" });
+let scanLater = false;   // H6: Not now on a scan's story: the Stage boots as usual and the piece waits in the Museum
+const parkLater = async () => { scanLater = true; await settled(); history.replaceState(null, "", location.pathname); };   // after the story's history step is gone, or it would keep ?card=
+if (PIECES[scanned]?.splat && PIECES[scanned].locked
+    && !await showScan({ story, quiz, id: scanned, next: "Study it up close", step: { study: true } })) await parkLater();
+else if (PIECES[scanned]?.splat && PIECES[scanned].locked) {   // before the Stage boots, so a study card never downloads the wearable GLBs; Up close is its challenge
   await window.momuPreload?.handoff(scanned);   // H5: a download still running would be cancelled by the jump, so wait for it (preload.js)
   await settled();   // H6: the story's history step must be gone before this entry is rewritten
   history.replaceState(null, "", location.pathname);   // H6: the Stage stays under Up close, so back lands on it, not outside the app
   await go(`up-close.html?id=${encodeURIComponent(scanned)}`);
   await new Promise(() => {});
 }
-if (PIECES[scanned]?.clo && !PIECES[scanned].glb) {   // a CLO garment is worn on the team avatar it was draped on (outfit.html), never on the dress form (D5)
-  await showScan({ story, quiz, id: scanned, next: "See it on the avatar" });
+// a CLO garment is worn on the team avatar it was draped on (outfit.html), never on the dress form (D5)
+if (!scanLater && PIECES[scanned]?.clo && !PIECES[scanned].glb
+    && !await showScan({ story, quiz, id: scanned, next: "See it on the avatar", step: {} })) await parkLater();
+else if (!scanLater && PIECES[scanned]?.clo && !PIECES[scanned].glb) {
   await settled();
   history.replaceState(null, "", location.pathname);   // the Stage stays under the outfit page, so back lands on it
   await go(`outfit.html?card=${encodeURIComponent(scanned)}`);
@@ -922,6 +935,7 @@ const tile = (id, cls, img, label, aria) => `<div class="tile ${cls}" data-id="$
   <button class="info" data-info="${id}" aria-label="About ${esc(PIECES[id].name)}"><span aria-hidden="true">i</span></button></div>`;
 const newFirst = ([a], [b]) => fresh.has(b) - fresh.has(a);   // a piece just won leads its tab
 function renderLocker() {
+  renderProgress();   // H6: every win redraws the wardrobe, so the header chip follows
   document.getElementById("foundCount").textContent = `${Object.values(PIECES).filter(p => !p.locked && p.glb).length} in your wardrobe`;
   const won = wonIds();
   if (activeSlot === "won" && !won.length) activeSlot = "top";
@@ -952,8 +966,16 @@ function renderLocker() {
 }
 /* Museum: the room pieces (each with a sticker) are won there, not owned yet, so they live outside the wardrobe (D2) */
 const museumEl = document.getElementById("museum");
+const roomPieces = () => Object.entries(PIECES).filter(([, p]) => p.room && (p.glb || p.splat));   // a piece with no 3D yet has nothing to win
+function renderProgress() {   // H6: where am I. The header chip says how far the visit is and opens the Museum
+  const room = roomPieces(), won = room.filter(([, p]) => !p.locked).length;
+  const b = document.getElementById("museumBtn");
+  b.textContent = `${won} of ${room.length} won`;
+  b.setAttribute("aria-label", `Museum: ${won} of ${room.length} pieces won`);
+}
 function renderMuseum() {
-  const room = Object.entries(PIECES).filter(([, p]) => p.room && (p.glb || p.splat));   // a piece with no 3D yet has nothing to win
+  const room = roomPieces();
+  renderProgress();
   document.getElementById("museumCount").textContent = `${room.filter(([, p]) => !p.locked).length} of ${room.length} won`;
   document.getElementById("museumGrid").innerHTML = room.map(([id, p]) => {
     const state = !p.locked ? (p.splat && !p.wear ? "Fabric won" : "Won") : p.seen ? `${p.found} of ${p.details} details found` : "Still to find";
@@ -967,7 +989,7 @@ document.getElementById("museumBtn").addEventListener("click", () => { renderMus
 museumEl.addEventListener("click", e => {
   if (e.target === museumEl) { museumEl.close(); return; }   // backdrop tap closes
   const info = e.target.closest("[data-info]");
-  if (info) { museumEl.close(); openFact(info.dataset.info); return; }
+  if (info) { museumEl.close(); openFact(info.dataset.info, { from: "museum" }); return; }
   const t = e.target.closest(".pick") && e.target.closest("[data-id]");
   if (!t) return;
   museumEl.close();
@@ -1123,7 +1145,12 @@ const plain = t => t.replace(/ \([^)]*\)$/, "");   // "cotton (fiber)" -> "cotto
 const NR = '<span class="nr">not recorded</span>';
 const factEl = document.getElementById("fact");
 let factId = null;
-async function openFact(id) {
+/* H6: one way back. A fact card opened from the Museum goes back to the Museum when it is closed (×, Escape, back,
+   backdrop); Ask and the 3D view go back to the fact card they came from. A choice that leaves (wear, Up close, the
+   outfit page, a sticker) does not come back. Reopening inside nav.js's handover window reuses the same history entry. */
+let factFrom = null, factLeaving = false;
+async function openFact(id, { from } = {}) {
+  if (from !== undefined) factFrom = from; else if (!factEl.open) factFrom = null;
   await recordsReady;
   const p = PIECES[id], r = RECORDS[id] || {}, ctx = ctxOf(id);
   factId = id;
@@ -1160,7 +1187,7 @@ const viewScene = mountScene(viewEl.firstElementChild);
 let mvReady = null;
 // src is set as a property, which model-viewer does not reflect to the attribute, so removeAttribute alone left the model loaded
 const clearView = () => { viewMV.removeAttribute("src"); if (viewMV.src) viewMV.src = null; };
-document.getElementById("factClo").addEventListener("click", () => { const id = factId; factEl.close(); go(`outfit.html?card=${encodeURIComponent(id)}`); });
+document.getElementById("factClo").addEventListener("click", () => { const id = factId; factLeave(); go(`outfit.html?card=${encodeURIComponent(id)}`); });
 view3dBtn.addEventListener("click", async () => {
   const id = factId;
   if (!PIECES[id].glb) { location.href = `up-close.html?id=${encodeURIComponent(id)}`; return; }
@@ -1168,7 +1195,7 @@ view3dBtn.addEventListener("click", async () => {
   document.getElementById("viewName").textContent = PIECES[id].name;
   viewScene.set(PIECES[id].year);
   clearView();   // the last piece must not show under this one's name while it loads
-  factEl.close(); viewEl.showModal();
+  factLeave("view"); viewEl.showModal();
   const token = viewEl.dataset.id = id;
   if (await mvReady && viewEl.open && viewEl.dataset.id === token) viewMV.src = PIECES[id].glb;   // closed or switched while the viewer loaded: leave it empty
 });
@@ -1177,11 +1204,20 @@ viewMV.addEventListener("load", () => { viewAR.hidden = !viewMV.canActivateAR; }
 viewAR.addEventListener("click", () => viewMV.activateAR());
 viewEl.addEventListener("close", () => { clearView(); viewAR.hidden = true; });   // frees the model and its GPU memory
 document.getElementById("factShares").addEventListener("click", e => { const b = e.target.closest("[data-fact]"); if (b) openFact(b.dataset.fact); });
-document.getElementById("factAct").addEventListener("click", () => { factEl.close(); PIECES[factId].locked ? tapCard(factId) : act(factId, ctxOf(factId)); });   // anything locked goes to its sticker (or Up close once seen), never onto the form
+document.getElementById("factAct").addEventListener("click", () => { factLeave(); PIECES[factId].locked ? tapCard(factId) : act(factId, ctxOf(factId)); });   // anything locked goes to its sticker (or Up close once seen), never onto the form
 factEl.addEventListener("click", e => { if (e.target === factEl) factEl.close(); });   // backdrop tap closes
 factEl.addEventListener("close", () => { if (!document.getElementById("nfc").open) cancelStudy(); });   // closed without going on: stop the download
 const ask = createAsk();   // H2: questions answered only from this piece's MoMu record (ask.js)
-document.getElementById("factAsk").addEventListener("click", () => { factEl.close(); ask.open(factId, PIECES[factId].name); });
+document.getElementById("factAsk").addEventListener("click", () => { factLeave("ask"); ask.open(factId, PIECES[factId].name); });
+let factChild = null;   // "ask" or "view": the layer opened over this fact card, which comes back to it
+function factLeave(child = null) { factChild = child; factLeaving = true; factEl.close(); }
+factEl.addEventListener("close", () => {   // fires after close() returns, so the flag is read and cleared here
+  if (factLeaving) { factLeaving = false; if (!factChild) factFrom = null; return; }
+  if (factFrom === "museum") { factFrom = null; renderMuseum(); museumEl.showModal(); }
+});
+const backToFact = () => { if (factChild && factId) { factChild = null; openFact(factId, { from: factFrom }); } };
+document.querySelector("dialog.ask").addEventListener("close", backToFact);
+viewEl.addEventListener("close", backToFact);
 
 /* ---------- Wardrobe sheet: drag the grab area, snap to peek / half / full ---------- */
 const stageEl = document.getElementById("stage"), wardrobe = document.getElementById("wardrobe");
@@ -1285,11 +1321,13 @@ async function replayStory(id) {   // a piece already won keeps its story and au
   await showScan({ story, quiz, id, next: "Back to my look" });
   welcome(id, PIECES[id].room ? `${shortName(id)} is in your Won tab` : `${shortName(id)} is in your ${LABEL[PIECES[id].slot]} tab`);   // only museum wins live in Won
 }
+const later = id => toast(`The ${shortName(id).toLowerCase()} waits in the Museum. Tap its sticker again any time.`);   // H6: Not now
 async function scan(id) {
   const p = PIECES[id];
   if (!p.locked) { await replayStory(id); return; }
-  await showScan({ story, quiz, id, next: "Win it", years: false });
+  if (!await showScan({ story, quiz, id, next: "Win it", years: false, step: {} })) { later(id); return; }
   const off = await win.guess(id);
+  if (off === null) { later(id); return; }   // Not now on Guess the year
   await recordsSoon(); const pick = await win.won(id, { off });
   p.locked = false;
   try { localStorage.setItem(WON_KEY, JSON.stringify([...new Set([...readWon(), id])])); } catch { /* blocked: the win lasts this visit */ }
@@ -1298,12 +1336,13 @@ async function scan(id) {
   welcome(id, `${shortName(id)} is in your Won tab. Tap it to wear it.`);
   if (pick === "next" && win.next) tapCard(win.next);   // H17: the Won card's next piece, opened like its Museum tile
 }
-if (scanned && !PIECES[scanned]?.glb && !PIECES[scanned]?.splat) toast("This sticker isn't in the app yet");
+if (scanLater) later(scanned);
+else if (scanned && !PIECES[scanned]?.glb && !PIECES[scanned]?.splat) toast("This sticker isn't in the app yet");
 else if (scanned) scan(scanned);
 // up-close.html sends ?fabric=<id> once every detail is found: the same Won card, then the fabric waits in the Remix tab
 const takeClaim = () => { try { const c = sessionStorage.getItem(CLAIM_KEY); sessionStorage.removeItem(CLAIM_KEY); return c; } catch { return null; } };
 const claimed = takeClaim() ?? params.get("fabric");   // read the claim either way, so it is used once
-if (claimed && PIECES[claimed]?.splat && !PIECES[claimed].locked) recordsSoon().then(() => win.won(claimed, { what: "fabric" })).then(pick => {
+if (claimed && PIECES[claimed]?.splat && !PIECES[claimed].locked) recordsSoon().then(() => win.won(claimed, { what: "fabric", study: true })).then(pick => {
   if (pick === "wear") { wearAlone(claimed); toast(`Wearing the ${shortName(claimed).toLowerCase()}'s fabric`); return; }
   fresh.add(claimed); keepFresh();
   welcome(claimed, `${shortName(claimed)} is in your Won tab. Tap it to wear it.`);

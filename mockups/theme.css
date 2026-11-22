@@ -68,6 +68,19 @@ input, textarea { caret-color: var(--accent); }
 /* H10 MoMu logo: MoMu's official two-M logo (assets/brand/momu-logo.svg), inlined in the headers so it takes currentColor,
    at the 1.786:1 shape momu.be shows in its own header. Black on white as on momu.be and the hackathon template; never
    squashed back to the wide proportion or recoloured red. The app carries MoMu's name only (no app name decided yet). */
+/* H6: Stage, Up close, the outfit page and the landing are separate documents; a short cross-document view transition
+   (fade with an 8 px rise, 220 ms ease-out; fade only under reduced motion) makes moving between them read as one app.
+   Browsers without it simply navigate as before. */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vt-out 160ms cubic-bezier(0.23, 1, 0.32, 1) both; }
+::view-transition-new(root) { animation: vt-in 220ms cubic-bezier(0.23, 1, 0.32, 1) both; }
+@keyframes vt-out { to { opacity: 0; } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(8px); } }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(root) { animation: vt-fade 150ms ease both; }
+  ::view-transition-old(root) { animation: vt-out 150ms ease both; }
+}
+@keyframes vt-fade { from { opacity: 0; } }
 .momu-logo { display: block; width: 64px; height: 36px; color: var(--ink); }
 .brand.lockup { display: inline-flex; align-items: center; flex: none; min-height: 44px; letter-spacing: 0; text-transform: none; }
 .bar { gap: 12px; }

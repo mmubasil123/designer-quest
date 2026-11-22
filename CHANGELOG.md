@@ -2,6 +2,60 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## H6 Navigation, PR 4: one header and a page transition between Stage and Up close (2026-11-22, H6, branch hassan/H6-nav)
+- What: Up close's header now uses the Stage's spacing and logo size, with ← as a round 44 px pill like the Stage's
+  "?" (`up-close.html`). A cross-document view transition in `theme.css` (`@view-transition`: old page fades out in
+  160 ms, new one fades in with an 8 px rise in 220 ms; fade only under reduced motion) covers every move between the
+  Stage, Up close, the outfit page and the landing, so they read as one app; browsers without it just navigate.
+  `nav.js` `backTo` treats `/stage` (E4's Vercel rewrite) and `/second-skin.html` as the same page, so ← on Up close and
+  the outfit page steps back on the deployed site too instead of loading a second Stage. The Stage's phone frame is
+  the page's `main` landmark. A one-line `pagereveal` guard in the head of the three pages keeps a skipped transition (a card scan
+  rewrites its URL while the page is revealed) from logging an uncaught error.
+- Checked (browser pane, 390 x 844): Stage > Up close (ST2435) > ←: back on the existing Stage entry (history grows by
+  the forward entry only); headers compared by screenshot; console clean. Impeccable detector: Up close 0 findings
+  (1 advisory, as before), outfit page 0, Stage 2 findings that are on `main` already (repeated "Full" label in the
+  wardrobe, title contrast over the scene gradient), not from H6.
+- Why: `docs/UX_AUDIT.md` findings 2 (moves to and from Up close felt like reloads), 10 (two different headers) and 11
+  (landmarks; the page title and `h1` were already fixed by H10).
+- Decision: a root cross-fade rather than shared-element morphs: the two headers differ (← only on Up close), and a
+  morph of the logo would draw the eye to chrome instead of the piece.
+
+## H6 Navigation, PR 3: layers keep their context; progress in the header (2026-11-22, H6, branch hassan/H6-nav)
+- What: one way back for the Stage's layers. A fact card opened from the Museum returns to the Museum when it is
+  closed (×, Escape, back, backdrop); Ask and the 3D view return to the fact card they came from; a choice that leaves
+  (Wear it, Find it at MoMu, Up close, the outfit page) does not come back. The header's "Museum" pill is now a progress
+  chip ("2 of 10 won", opens the Museum; read as "Museum: 2 of 10 pieces won") and "Share look" became a quiet "Share"
+  pill, so the last beat is no longer the loudest button. The Museum opens as a bottom sheet like the fact card (opacity
+  only under reduced motion). Ask lost its handle, which looked draggable but was not (× closes it); the wardrobe
+  handle button is 44 px tall without moving the layout.
+- Checked (browser pane, 390 x 844 and 320 x 700): Museum > fact > Ask, then back three times: fact, Museum, Stage;
+  the same with ×, × and "Back to my look"; wardrobe ⓘ > fact > See it in 3D > back: fact, then Stage; Museum > fact >
+  Find it at MoMu opens only the sticker prompt; history never grows. Header fits at 320 px. Console clean.
+- Why: `docs/UX_AUDIT.md` findings 6 (lost context: closing Ask dropped you on the Stage), 7 (Share loudest, progress
+  hidden) and 9 (false and thin affordances; the chips' scroll cue was already on main).
+- Decision: the dialogs keep their own markup and owners; only the way back changes, through the history entries of
+  `nav.js` (a reopened parent reuses its child's entry). The header chip and the Museum as a sheet touch Basil's top
+  bar and Museum: heads-up in the PR, easy to revert in CSS.
+
+## H6 Navigation, PR 2: the card scan as one flow with a way out (2026-11-22, H6, branch hassan/H6-nav)
+- What: new `mockups/steps.js`. The story and Win it dialogs share a step line (Story · Guess the year or Up close ·
+  Yours) and hand over in place: the old card goes at once and the next rises in without the scale-in, so the scrim
+  never blinks; Guess the year to You won it swaps content in the same card (fade, 6 px rise, 2 px blur; fade only under
+  reduced motion). Every scan step has **Not now**: on the story and on Guess the year, Not now, Escape and the back
+  gesture stop there and a toast says the piece waits in the Museum; a backdrop tap no longer starts the challenge. A
+  study or CLO card's Not now boots the Stage instead of jumping to Up close or the outfit page. On the Won card, Escape
+  and back now keep the prize (as "Keep it in my wardrobe") instead of being refused. Replaying a won piece's story
+  keeps its old single button.
+- Checked (browser pane, 390 x 844): `?card=ST503` backdrop tap keeps the story, back = Not now (toast, URL clean);
+  Win it, Escape on Guess the year = Not now; three misses win, back on the Won card keeps it (`secondSkin.won.v1`).
+  `?card=ST81190` Not now boots the Stage (one canvas, URL clean); Study it up close, all found, back: Won card with the
+  step line on Yours. Console clean.
+- Why: `docs/UX_AUDIT.md` finding 3 (dismiss meant "continue"; Win it could not be left) and 12 (hard cuts between
+  steps). Findings 4 (narration before the guess) and 5 (Wear it now) were already fixed on main by H13 and J8.
+- Decision: rebuilt on today's main rather than rebasing the old `hassan/nav-ux-scan` commit, because Basil's J8 Won
+  card ("Wear it now" / "Keep it") and H15/H17's next row had replaced that part; both are kept as they are. Nobody can
+  lose (D2): Not now leaves the piece exactly as before the scan.
+
 ## Landing page at `/`, the Stage at `/stage` (2026-11-22, E4, branch hassan/E4-landing)
 - What: `mockups/index.html`, the landing page. The hero is "the year itself": a giant red year fills the screen and the
   dress form stands in front of it; one slider (13 era stops, 1750 to 2005, then "Your look") changes the numeral, the

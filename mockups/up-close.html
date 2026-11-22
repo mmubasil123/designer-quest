@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>/* H6: theme.css asks for a cross-document view transition; a page that changes its URL or opens a dialog while being revealed makes the browser skip it, which is expected and must not show as an uncaught error */
+addEventListener("pagereveal", e => { const vt = e.viewTransition; if (vt) for (const p of [vt.ready, vt.finished, vt.updateCallbackDone]) p?.catch(() => {}); });</script>
 <title>Up close · MoMu</title>
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
@@ -20,8 +22,10 @@ button, a { font: inherit; color: inherit; background: none; border: 0; cursor: 
 .press { transition: transform 160ms var(--ease-out); }
 .press:active { transform: scale(0.97); }
 
-header { display: flex; align-items: center; gap: 12px; padding: max(12px, env(safe-area-inset-top)) 16px 12px; }
-.back { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-size: 20px; }
+/* H6: the same header as the Stage (spacing, logo, a round 44 px pill for the one action), so the two pages read as one app */
+header { display: flex; align-items: center; gap: 10px; padding: max(18px, env(safe-area-inset-top)) 16px 6px; }
+.back { width: 44px; height: 44px; flex: none; border-radius: 50%; display: grid; place-items: center; font-size: 20px;
+  background: var(--paper); box-shadow: var(--shadow-pill); color: var(--ink); text-decoration: none; }
 .brand { font: 500 15px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
 header .mono { margin-left: auto; }
 
