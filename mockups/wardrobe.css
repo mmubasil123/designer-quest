@@ -1,0 +1,28 @@
+/* B5/B6/B8: wardrobe tiles. Loaded after the inline styles in second-skin.html, so these win on equal specificity. */
+:root { --ease-wipe: cubic-bezier(0.77, 0, 0.175, 1); }   /* on-screen reveal: ease-in-out, 600 ms */
+
+/* B5: selection animates because the tile node persists */
+.tile { outline: 2px solid transparent; outline-offset: 0;
+  transition: outline-color 160ms var(--ease-out), outline-offset 160ms var(--ease-out); }
+.tile.on { outline-color: var(--ink); outline-offset: 2px; }
+.cat { transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease; }
+
+/* B6: a locked piece is a silhouette with its name and where its card is */
+.tile .pick { overflow: hidden; }
+.tile .sil, .tile .real { position: absolute; inset: 0; }
+.tile .sil { filter: grayscale(1) brightness(.55) contrast(100); opacity: .2; mix-blend-mode: multiply; }   /* everything but the paper-white backdrop goes to ink */
+.tile .real { clip-path: inset(0); transition: clip-path 600ms var(--ease-wipe); }
+.tile.veiled .real { clip-path: inset(100% 0 0 0); transition: none; }   /* hidden at once; the reveal is the only animated direction */
+.tile:not(.veiled) .sil { visibility: hidden; }
+.tile .where { display: none; font: 400 11px/1.4 var(--sans); color: var(--muted); white-space: normal; }
+.tile.locked .where { display: block; }
+.tile.locked .m { background: var(--paper); }
+
+@media (prefers-reduced-motion: reduce) {   /* opacity only, 150 ms: no wipe, no outline offset, no zoom */
+  .tile { transition: outline-color 150ms ease; }
+  .tile.on { outline-offset: 2px; }
+  .tile .real { clip-path: none; opacity: 1; transition: opacity 150ms ease; }
+  .tile.veiled .real { clip-path: none; opacity: 0; }
+  .tile:hover img { transform: none; }
+  .zoom, .credit .mono { transition-duration: 150ms; }
+}

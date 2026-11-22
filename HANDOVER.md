@@ -4,6 +4,14 @@ Read this, then `LEDGER.md` (tickets, decisions D1 to D8, product-owner cut and 
 change with its reason. Agent rule (both people): work autonomously within your claimed ticket, inspect screenshots critically
 before calling anything done. Never deploy, push to `main` or publish without your person's explicit go.
 
+## Phone UI B5, B6, B8 (hassan, branch hassan/B-phone-ui, 2026-11-22, PR waits for H6)
+Wardrobe tiles are persistent nodes (`mockups/wardrobe.js`, `wardrobe.css`; `renderLocker` in `second-skin.html`). Locked pieces
+are silhouettes with name and "Find its card in the museum"; the real photo wipes in over 600 ms once, when the tile is
+first seen after the win. Reduced motion: no idle spin (live), no drop-in, opacity-only 150 ms. Open: room numbers are not in
+`pieces.json` (add optional `museumRoom` per piece after a heads-up; the label then says "Find card in room N"). B9 not
+done (Mubasil's). The PR must wait until H6's PR (`second-skin.html`, `story.css`) merges, then rebase. Checked in Chrome at
+390 px with the reduce emulation, not on a phone. Screenshots: `docs/b-phone-ui/`.
+
 ## E4 landing page (hassan, branch hassan/E4-landing, 2026-11-22)
 `mockups/index.html` is the new `/`; the Stage is `/stage` (and still `second-skin.html`). Sticker links `/?card=<id>`
 and `/?fabric=<id>` are forwarded to the Stage by the landing page. Re-render the hero stills after a GLB or fit change:

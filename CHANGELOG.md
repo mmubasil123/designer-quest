@@ -2,6 +2,24 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## Phone UI: persistent wardrobe tiles, locked silhouettes, reduced-motion pass (2026-11-22, B5 + B6 + B8, branch hassan/B-phone-ui)
+- What (B5): the wardrobe builds each tile and tab chip once (`mockups/wardrobe.js`, `nodeFor`) and a render only reorders
+  them and toggles `on`, `new`, `locked` and `aria-pressed`. A tile node now survives tab changes, so the selection
+  outline animates (colour and offset, 160 ms) instead of snapping. The Won, Fabrics and slot tabs keep their own nodes.
+- What (B6): a locked piece is a silhouette (its photo flattened to ink, the backdrop dropped) with its name and
+  "Find card in room N". No room number is recorded in `pieces.json` yet, so the line reads "Find its card in the museum"
+  until a piece has an optional `museumRoom` (read by `renderLocker`, not in the schema yet: heads-up first). When a
+  piece is won the real photo is revealed with a 600 ms clip-path wipe the first time its tile is on screen
+  (IntersectionObserver), once per tile; a tile built after the win shows the photo at once. A tap on a locked tile still
+  opens the sticker prompt (J6), now decided by `PIECES[id].locked`, not by the CSS class.
+- What (B8): under `prefers-reduced-motion: reduce` the idle turntable spin stops at once when the setting changes (it was
+  read once at load), a new garment no longer drops 4 cm onto the form, the tile reveal is a 150 ms opacity crossfade, the
+  tile outline and tab chips change colour only, and the scene, story and zoom/credit fades are 150 ms. Checked with
+  emulated reduce: no transform animation runs, no tile has a transform, only 150 ms opacity and colour transitions remain.
+- Why: B5 is the base for B6 (a reveal needs the node to persist) and for the selection animation; B8 matches the H6
+  rule (opacity only, 150 ms, no slides or scale). B9 (Mubasil's) not touched.
+- Decision: new code lives in `wardrobe.js` / `wardrobe.css`; `second-skin.html` changes only `renderLocker`, `tile()`, the
+  tile click and the `REDUCE` media query. Not checked on a real phone.
 ## H6 Navigation, PR 4: one header and a page transition between Stage and Up close (2026-11-22, H6, branch hassan/H6-nav)
 - What: Up close's header now uses the Stage's spacing and logo size, with ← as a round 44 px pill like the Stage's
   "?" (`up-close.html`). A cross-document view transition in `theme.css` (`@view-transition`: old page fades out in
