@@ -22,6 +22,10 @@ const SAVE_KEY = "atelier.save.v1";   // shared with atelier.html; `lang` is an 
 
 const readSaved = () => { try { return JSON.parse(localStorage.getItem(SAVE_KEY) || "null")?.lang; } catch { return undefined; } };
 function pick() {
+  // a page written in one language only (the landing page, <html data-lang-fixed="en">) stays in it: it imports this module
+  // through win.js, and translating a few of its strings and its lang attribute left it half Dutch, half English
+  const fixed = document.documentElement.dataset.langFixed;
+  if (LANGS.includes(fixed)) return fixed;
   const saved = readSaved();
   if (LANGS.includes(saved)) return saved;
   for (const l of navigator.languages || [navigator.language]) {
@@ -118,7 +122,11 @@ export function setLang(next) {
     localStorage.setItem(SAVE_KEY, JSON.stringify({ ...(old && typeof old === "object" ? old : {}), lang: next }));
   } catch { /* storage blocked: the choice lasts only until the page is left; the browser language applies again */ }
   try { if (placeSaver) sessionStorage.setItem(PLACE_KEY, JSON.stringify({ path: location.pathname + location.search, at: Date.now(), state: placeSaver() })); } catch { /* the page then opens fresh */ }
-  location.reload();
+  // the switch sits in a dialog, and nav.js gave each open dialog a history entry (state.h6). Reloading on that entry left it
+  // behind as a dead step (back once more stayed on the page), so step back to the page's own entry first, then reload
+  const layers = history.state?.h6 ?? 0;
+  if (layers > 0) { addEventListener("popstate", () => location.reload(), { once: true }); history.go(-layers); }
+  else location.reload();
 }
 
 /* The switch: three small buttons (NL EN FR). Self-contained, so it can sit in any bar or sheet; style it in i18n.css. */

@@ -4,7 +4,7 @@
    tracking (D2). Phones that can share files get the share sheet, everything else gets a download. */
 
 import { eraOf } from "./scenes.js";
-import { t, lang } from "./i18n.js";   // D-3
+import { t, tc, lang, labelText } from "./i18n.js";   // D-3
 /* H12 personal card: the visitor may type a name (kept in this browser only, never sent anywhere, D2). The card shows their
    look in the period room of its middle year (scenes.js), the pieces they wear, the pieces they won, and one line from a worn
    piece's story (narration.json: the curator's text, else a sentence of the MoMu record, D3). */
@@ -26,12 +26,20 @@ export function pickQuote(facts, stories) {
   const worn = facts.rows.filter(r => stories?.[r.id]);
   worn.sort((a, b) => (stories[a.id].source === "curator" ? 0 : 1) - (stories[b.id].source === "curator" ? 0 : 1) || (a.year ?? 9999) - (b.year ?? 9999));
   for (const r of worn) {
-    let q = (stories[r.id].paragraphs?.[0] || "").replace(/^The museum's record describes it like this:\s*/, "").replace(/\s*\n\s*/g, " ").trim();   // line breaks joined
+    const s = stories[r.id];
+    let src = s.paragraphs?.[0] || "", by = null;
+    if (lang !== "en") {   // D-3: the story in the card's language, as story.js shows it, and marked as a translation; never English on a NL/FR card
+      const parts = s.form === "script" && s.beats?.length ? s.beats.map((b, n) => tc(`narr:${r.id}:${n}`, b.t, "en")) : [tc(`q:${r.id}:story:0`, src, "en")];
+      if (!parts.every(x => x.tr)) continue;
+      src = parts.map(x => x.text).join(" "); by = parts[0].by;
+    }
+    let q = src.replace(/^The museum's record describes it like this:\s*/, "").replace(/\s*\n\s*/g, " ").trim();   // line breaks joined
     const m = q.match(/^(.{40,170}?[.!?])(\s|$)/);
     q = m ? m[1] : q.length > 170 ? q.slice(0, 170).replace(/\s*\S*$/, "") + "…" : q;
     if (q.length < 20) continue;
     const yrs = r.year ? (r.to && r.to !== r.year ? `${r.year}–${r.to}` : `${r.year}`) : "";
-    return { text: q, by: stories[r.id].source === "curator" || stories[r.id].form === "script" ? `${r.name}${yrs ? ", " + yrs : ""}` : t("MoMu's record of the {name}", { name: r.name.toLowerCase() }) };
+    const credit = s.source === "curator" || s.form === "script" ? `${r.name}${yrs ? ", " + yrs : ""}` : t("MoMu's record of the {name}", { name: r.name.toLowerCase() });
+    return { text: q, by: lang !== "en" ? `${credit} · ${labelText(by)}` : credit };
   }
   return null;
 }
@@ -172,6 +180,7 @@ export function grabStill(tt, h) {
     tt.onScreen = true;
     tt.setZoom(1);
     r.setPixelRatio(1); r.setSize(CARD_W, h, false);
+    cam.clearViewOffset();   // H21's stage-wide view offset would squash and shift the look on the card; resize() below puts it back
     cam.aspect = CARD_W / h; cam.updateProjectionMatrix();
     tt.render();
     const out = document.createElement("canvas"); out.width = CARD_W; out.height = h;
@@ -218,7 +227,7 @@ export function createShare({ tt, look, PIECES, getName, toast }) {
     const wornIds = new Set(facts.rows.map(r => r.id));
     // every museum win: wearables (Win it) and study fabrics (Up close); PIECES already holds both as unlocked room pieces
     const won = [...new Set([...readWon(), ...Object.keys(PIECES)])].filter(id => PIECES[id]?.room && !PIECES[id].locked && !wornIds.has(id)).map(id => PIECES[id].name);
-    const shown = won.length > 2 ? [...won.slice(0, 2), `+${won.length - 2} more`] : won;
+    const shown = won.length > 2 ? [...won.slice(0, 2), t("+{n} more", { n: won.length - 2 })] : won;
     const title = cardTitle(name, facts, getName());
     const kicker = "Museum Atelier · " + new Date().toLocaleDateString({ nl: "nl-BE", fr: "fr-BE" }[lang] || "en-GB", { day: "numeric", month: "long", year: "numeric" });
     const url = location.host + location.pathname.replace(/\/(index|atelier)\.html$/, "/");

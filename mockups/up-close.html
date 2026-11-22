@@ -201,9 +201,9 @@ const excerpt = q => `${/^[a-z]/.test(q) ? "…" : ""}${q}${/[.!?]$/.test(q) ? "
 $("#dots").innerHTML = piece.details.map(() => "<i></i>").join("");
 $("#details").innerHTML = piece.details.map((d, i) => `
   <li data-i="${i}">
-    <div class="row"><span class="mark" aria-hidden="true"></span><span class="find">${tc(`det:${id}:${i}:find`, d.find, "en").text}</span>
+    <div class="row"><span class="mark" aria-hidden="true"></span><span class="find">${esc(tc(`det:${id}:${i}:find`, d.find, "en").text)}</span>
       <button class="show press" data-show="${i}" tabindex="-1">${t("Hint")}</button></div>
-    <div class="fact"><div><q lang="nl">${excerpt(d.quote)}</q>${(x => x.tr ? `<p><span class="mono">${lang.toUpperCase()}</span>${x.text}${labelHtml(x.by)}</p>` : "")(tc(`det:${id}:${i}:quote`, d.quote, "nl"))}</div></div>
+    <div class="fact"><div><q lang="nl">${excerpt(d.quote)}</q>${(x => x.tr ? `<p><span class="mono">${lang.toUpperCase()}</span>${esc(x.text)}${labelHtml(x.by)}</p>` : "")(tc(`det:${id}:${i}:quote`, d.quote, "nl"))}</div></div>
   </li>`).join("");
 function renderPanel() {
   const n = found.size, total = piece.details.length;
