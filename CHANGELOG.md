@@ -2,6 +2,15 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## the curator's "more story" version for the jacket (2026-11-22, C2, branch hassan/curator-story-import)
+- What: ST81190's story is now the curator's "more story-format version" (3 paragraphs, verbatim); her plain description variant is
+  gone from `questions.json` and `narration.json`. Her page was re-read: blouse ST81114AB and trousers ST81116 (one story
+  version each) and all 11 questions already matched it. The other 16 pieces are not on her page and keep their text.
+- Why: the team wants the narrative version shown. `tools/questions_sync.py` now uses the text after a "more story" marker
+  in a Story section when there is one; her page was only read, never edited.
+- Decision: her wording wins. Dutch and French translations of the jacket story (3 entries each) are stale until
+  `i18n_build.py` runs with the Gemini key; they show the old text meanwhile.
+
 ## Stage UI bugs: every wardrobe tile reachable, zoom never cut by a box (2026-11-22, H21, branch hassan/stage-ui-bugs)
 - What (wardrobe): the tile grid pads its end by the sheet's `--y` (`.wardrobe .grid` in `second-skin.html`), so at half the
   last row scrolls fully into view with 24 px (plus the safe area) below it. Cause: the sheet is always 88% of the stage
