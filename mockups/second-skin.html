@@ -72,9 +72,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 /* Turntable: one WebGL canvas per avatar */
 .turntable { position: absolute; left: 50%; margin-left: -110px; width: 220px; height: 440px; touch-action: none; cursor: grab; }
 .turntable:active { cursor: grabbing; }
+/* H21: the canvas covers the whole stage, not just the turntable box, so a zoomed look runs to the stage edges instead of
+   being cut by the box; resize() places it, and the turntable box stays the frame the look fits in at zoom 1 and the drag area */
 .turntable canvas {
-  position: absolute; inset: 0; width: 100%; height: 100%;
+  position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
 }
+/* zoomed in, the look fills the room, so the look name steps aside like it does in focus, and comes back at zoom 1 */
+.stage.zoomed .credit { opacity: 0; pointer-events: none; }
 
 .stage { flex: 1; position: relative; isolation: isolate; background: var(--paper); --scene-clear: var(--credit-h, 128px); }   /* H7: the scene paints behind every child */
 .phone.focus .stage { --scene-clear: 0px; }   /* the title is hidden, so the whole room shows */
@@ -117,7 +121,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .wardrobe-head { display: flex; align-items: baseline; justify-content: space-between; }
 .wardrobe h2 { font: 400 22px/1 var(--serif); margin: 0; }
 /* max-content rows: the grid is a shrinking flex item and tiles clip (min-height 0), so auto rows were squeezed below the tiles' 3:4 height */
-.wardrobe .grid { padding: 4px 18px 24px; overflow-y: auto; overscroll-behavior: contain; grid-template-columns: repeat(3, 1fr); grid-auto-rows: max-content; }
+/* H21: below its snap the sheet hangs --y px past the stage bottom, so the grid pads its end by --y: the last row scrolls up
+   into view at peek and half, not only at full */
+.wardrobe .grid { padding: 4px 18px calc(24px + var(--y, 0px)); overflow-y: auto; overscroll-behavior: contain; grid-template-columns: repeat(3, 1fr); grid-auto-rows: max-content; }
 /* the form steps up and back so it stays visible above an open wardrobe */
 .stage .turntable { transform-origin: 50% 0; transition: transform 420ms var(--ease-sheet); }
 .stage[data-snap="half"] .turntable, .stage[data-snap="full"] .turntable { transform: translateY(-2%) scale(.6); }
@@ -217,7 +223,7 @@ dt { color: var(--muted); }
   body[data-screen="stage"] [data-screen="stage"] { display: block; animation: screen-in 260ms var(--ease-out); }
   .phone { width: 100%; height: 100dvh; border: 0; border-radius: 0; box-shadow: none;
     padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left); }
-  .wardrobe .grid { padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
+  .wardrobe .grid { padding-bottom: calc(24px + env(safe-area-inset-bottom) + var(--y, 0px)); }
   /* the form fills the space between the look credit and the peeking wardrobe; the camera keeps its 22 degree height */
   .stage .turntable { left: 0; margin-left: 0; width: 100%; }
   /* at half the free space is the top 52% of the stage, so the taller phone turntable steps back further */
@@ -572,19 +578,42 @@ class Turntable {
     this.zoom = 1; this.focusY = 0.77;
     this.rig = new THREE.Group(); this.scene.add(this.rig);
     this.scene.add(contactShadow());
-    new ResizeObserver(() => this.resize()).observe(el);
+    const ro = new ResizeObserver(() => this.resize()); ro.observe(el); if (el.parentElement) ro.observe(el.parentElement);
     new IntersectionObserver(([e]) => { this.onScreen = e.isIntersecting; this.render(); if (this.onScreen) this.wake?.(); }).observe(el);
     if (interactive) this.bindDrag();
     this.draw(); this.setFrame(frame);
   }
+  /* H21: the turntable box is the frame the camera fits the look in (fov 19 over its height), but the canvas covers the whole
+     parent (the stage), and setViewOffset widens the view to that area. A zoomed look then runs on to the stage edges instead of
+     being cut by the box. Layout sizes (offset*), not getBoundingClientRect: the box is scaled while the wardrobe is open. */
   resize() {
-    const r = this.el.getBoundingClientRect();
-    if (!r.width || !r.height) return;   // hidden element: an aspect of NaN would break the camera
+    const el = this.el, host = el.parentElement, fw = el.offsetWidth, fh = el.offsetHeight;
+    if (!fw || !fh || !host) return;   // hidden element: an aspect of NaN would break the camera
+    const x = el.offsetLeft, y = el.offsetTop, w = host.clientWidth, h = host.clientHeight;
+    Object.assign(this.renderer.domElement.style, { left: `${-x}px`, top: `${-y}px`, width: `${w}px`, height: `${h}px` });
     this.renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.5));   // A6: 2x costs 78% more pixels for little gain on a scan
-    this.renderer.setSize(r.width, r.height, false);
-    this.camera.aspect = r.width / r.height; this.camera.updateProjectionMatrix();
+    this.renderer.setSize(w, h, false);
+    this.camera.aspect = fw / fh;
+    this.camera.setViewOffset(fw, fh, -x, -y, w, h);   // the box sits at (x, y) inside the canvas; the camera still frames the box
     this.render();
   }
+  /* Zoom buttons ease to the next step (240 ms, strong ease-out) instead of jumping. A new press retargets from where the zoom is
+     now, and a pinch, wheel or drag takes over at once (stopZoom). Reduced motion jumps straight there (B8: no transforms). */
+  zoomTo(z, anchorNdc = 0) {
+    this.stopZoom();
+    const target = Math.min(ZOOM_MAX, Math.max(1, z)), from = this.zoom;
+    this.zoomTarget = target;
+    if (REDUCE.matches || Math.abs(target - from) < 0.001) { this.setZoom(target, anchorNdc); return; }
+    const t0 = performance.now(), D = 240, ease = t => 1 - (1 - t) ** 4;
+    const step = now => {
+      const k = Math.min((now - t0) / D, 1);
+      this.setZoom(from + (target - from) * ease(k), anchorNdc);
+      this.zoomRaf = k < 1 ? requestAnimationFrame(step) : 0;
+      if (k === 1) this.zoomTarget = null;
+    };
+    this.zoomRaf = requestAnimationFrame(step);
+  }
+  stopZoom() { cancelAnimationFrame(this.zoomRaf); this.zoomRaf = 0; this.zoomTarget = null; }
   /* Zoom: the camera frame is 1.6 m tall at zoom 1 (floor to above the neck). A higher zoom narrows it around focusY, which is
      clamped so the view never leaves the form's height. anchorNdc (-1 bottom to 1 top) is the screen row that stays put, so a
      pinch or wheel zooms toward the finger or cursor rather than the middle. */
@@ -725,7 +754,7 @@ class Turntable {
     this.el.addEventListener("pointerdown", e => {
       pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
       try { this.el.setPointerCapture(e.pointerId); } catch { /* pointer already gone */ }
-      cancelAnimationFrame(raf); clearTimeout(idle); coasting = false; speed = 0; t0 = undefined;
+      cancelAnimationFrame(raf); clearTimeout(idle); coasting = false; speed = 0; t0 = undefined; this.stopZoom();
       if (pts.size === 2) { pinch = { d: spread(), z: this.zoom }; x0 = null; return; }   // the second finger turns the drag into a pinch
       if (pts.size > 2 || pinch) return;
       x0 = e.clientX; f0 = this.frame; lastY = e.clientY; last = { x: e.clientX, t: performance.now() }; vel = 0;
@@ -758,7 +787,7 @@ class Turntable {
     this.el.addEventListener("pointerup", end);
     this.el.addEventListener("pointercancel", end);
     this.el.addEventListener("wheel", e => {   // mouse wheel and trackpad pinch (which arrives as ctrl + wheel)
-      e.preventDefault();
+      e.preventDefault(); this.stopZoom();
       this.setZoom(this.zoom * Math.exp(-e.deltaY * (e.ctrlKey ? 0.01 : 0.0015)), ndcOf(e.clientY));
     }, { passive: false });
   }
@@ -793,9 +822,11 @@ const stageTT = new Turntable(document.getElementById("stageTT"), {
 const turntables = [stageTT];
 {   // zoom buttons: the same limits as pinch and wheel; they step by half again
   const zin = document.getElementById("zoomIn"), zout = document.getElementById("zoomOut");
-  stageTT.onZoom = z => { zin.disabled = z >= ZOOM_MAX - 0.01; zout.disabled = z <= 1.01; };
-  zin.addEventListener("click", () => stageTT.setZoom(stageTT.zoom * 1.5));
-  zout.addEventListener("click", () => stageTT.setZoom(stageTT.zoom / 1.5));
+  // stepping from the zoom being eased to (not the frame on screen), so quick presses add up: two fast + presses reach 2.25x
+  const zoomStep = k => stageTT.zoomTo((stageTT.zoomTarget ?? stageTT.zoom) * k);
+  stageTT.onZoom = z => { zin.disabled = z >= ZOOM_MAX - 0.01; zout.disabled = z <= 1.01; stageTT.el.parentElement.classList.toggle("zoomed", z > 1.01); };
+  zin.addEventListener("click", () => zoomStep(1.5));
+  zout.addEventListener("click", () => zoomStep(1 / 1.5));
   const focusBtn = document.getElementById("focusBtn"), phone = focusBtn.closest(".phone");
   const setFocus = on => {
     phone.classList.toggle("focus", on);
@@ -1211,7 +1242,7 @@ function snapY(name) {   // translateY for a snap point: sheet height minus the 
 }
 function setSnap(name) {
   snap = name; stageEl.dataset.snap = name;
-  if (name !== "peek" && stageTT.zoom !== 1) stageTT.setZoom(1);   // the form steps back above an open wardrobe, so a zoomed view would be cut off
+  if (name !== "peek" && (stageTT.zoom !== 1 || stageTT.zoomTarget)) stageTT.zoomTo(1);   // the form steps back above an open wardrobe, so a zoomed view would be cut off
   wardrobe.style.setProperty("--y", `${snapY(name)}px`);
   handleEl.setAttribute("aria-expanded", name !== "peek");
 }

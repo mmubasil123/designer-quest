@@ -2,6 +2,25 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## Stage UI bugs: every wardrobe tile reachable, zoom never cut by a box (2026-11-22, H21, branch hassan/stage-ui-bugs)
+- What (wardrobe): the tile grid pads its end by the sheet's `--y` (`.wardrobe .grid` in `second-skin.html`), so at half the
+  last row scrolls fully into view with 24 px (plus the safe area) below it. Cause: the sheet is always 88% of the stage
+  tall and sits `--y` px lower at peek and half, so the grid's scroll range ended up to about 280 px below the phone and the
+  last rows could never be reached (seen on Fabrics with 3 rows; at full `--y` is 0, so full was fine).
+- What (zoom): the Stage canvas now covers the whole stage. Cause: the canvas was the size of the turntable box (220 px wide
+  in the pitch layout; between the look title and the peeking sheet on a phone) and zoom magnified inside it, so a zoomed
+  look was cut by that box on every side. The box stays the frame the camera fits the look in at zoom 1
+  (`camera.setViewOffset`), so zoom 1 looks the same, and stays the drag area; the canvas ignores pointers. The + and -
+  buttons now ease to the next step (240 ms, ease-out quart), a new press retargets from the zoom being eased to, and a
+  pinch, wheel or drag takes over at once; reduced motion jumps. Opening the wardrobe eases the zoom back to 1. Zoomed in,
+  the look name fades out (as in focus) since the look now runs over it, and returns at zoom 1.
+- Why: Hassan found both on the Stage (wardrobe Fabrics tab half hidden; the zoomed jacket and trousers in a hard rectangle).
+- Decision: fixed at the cause, not the symptom: no change to snap heights or zoom limits. At 2.25x and 3x the look is
+  taller than the stage, so it runs off the stage edges and a vertical drag pans it (as before). Checked in the browser
+  pane at 390 x 844, 320 x 700 and the pitch layout: every tab at half and full, last tile fully in view; zoom in, out,
+  wheel interrupt, front, side and back; console clean; Impeccable detector: only the existing `view3d` finding (also on
+  main). Not on a phone; reduced motion not emulated (the code path jumps). Screenshots in `docs/stage-ui-bugs/`.
+
 ## D-3 Languages NL / EN / FR, English for the Dutch-only records (2026-11-22, branch hassan/D-3-i18n)
 
 - **What:** `mockups/i18n.js` is the one language layer. UI text is written in English in the code as `t("English", {vars})`; NL and FR are in `mockups/i18n/ui.nl.json` and `ui.fr.json` (an untranslated string shows in English). Facts and stories are translated at build time by `mockups/tools/i18n_build.py` into `i18n/content.<lang>.json`, stamped with a hash of the source: a changed source shows the original again and `--check` fails until the script is rerun. Covered: the fact card (materials, places, the MoMu quote), the Won card quote, Up close (detail quotes, finds, hints, toasts), Ask, the curator's stories and questions, the H13 narration captions, the piece names, the step line, the share card.
