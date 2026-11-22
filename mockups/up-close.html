@@ -168,7 +168,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { backTo } from "./nav.js";
-import { lang, t, tc, pieceName, labelHtml, mountSwitch } from "./i18n.js";   // D-3: NL / EN / FR
+import { lang, t, tc, pieceName, labelHtml, mountSwitch, keepPlace, takePlace } from "./i18n.js";   // D-3: NL / EN / FR
 import { mountScene } from "./scenes.js";   // H6: back gesture closes layers; ← steps back to the Stage instead of stacking a new page
 
 const FOUND_KEY = "secondSkin.found.v1";   // { [pieceId]: [detail index, ...] }; second-skin.html reads it
@@ -299,6 +299,11 @@ const dist = size.y * 1.55;
 controls.target.copy(centre);
 controls.minDistance = size.y * 0.55; controls.maxDistance = size.y * 2.6;
 camera.position.set(centre.x, centre.y, centre.z - dist);   // the captures face -z
+{   // D-3: after a language switch the scan opens from the angle it was left at
+  const back = takePlace();
+  if (back?.cam) { camera.position.fromArray(back.cam); controls.target.fromArray(back.target); }
+}
+keepPlace(() => ({ cam: camera.position.toArray(), target: controls.target.toArray() }));
 view.classList.add("ready");
 waitForHints();
 

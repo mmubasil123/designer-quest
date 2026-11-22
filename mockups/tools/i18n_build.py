@@ -6,6 +6,7 @@ What is translated (source language in brackets), and where it comes from:
   det:<id>:<i>:quote    Up close detail quote [nl]; :find the prompt [en]     pieces.json
   q:<id>:story:<n> / :q:<n> / :a:<n> / :fact:<n>   the curator's story, questions, answers, fact values [en]   questions.json
   name:<id>             the piece's name on pieces.json [en]
+  narr:<id>:<n> / :tease   the spoken story's beats and its tease [en]            narration.json (H13; the audio stays English)
   term:<english>        material, technique and place words [en]              records.json
 Our existing English for the Dutch first sentence and detail quotes (records.py EN, pieces.json `en`) is kept as is
 (by "team"); everything else is machine-translated (by "machine") with the project's Gemini setup, using
@@ -84,6 +85,13 @@ def sources():
             out.append((f"q:{q['id']}:a:{n}", x["a"], "en", {}))
         for n, (k, v) in enumerate(q.get("facts") or []):
             out.append((f"q:{q['id']}:fact:{n}", v, "en", {}))
+    for pid, n in json.loads((MOCKUPS / "narration.json").read_text())["pieces"].items():
+        if n.get("form") != "script":
+            continue
+        for i, b in enumerate(n.get("beats") or []):
+            out.append((f"narr:{pid}:{i}", b["t"], "en", {}))
+        if n.get("tease"):
+            out.append((f"narr:{pid}:tease", n["tease"], "en", {}))
     for t in terms:
         out.append((f"term:{t}", t, "en", {}))
     return out

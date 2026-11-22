@@ -320,7 +320,7 @@ import { AVATAR_URL, AVATAR_FIT, FORM_CUT, prepAvatar, placeFeet, fitWorn, resto
 import { createStory, showScan } from "./story.js";
 import { createWin } from "./win.js";
 import { mountScene } from "./scenes.js";   // H7: the piece stands in a room from its own time
-import { lang, t, tc, pieceName, labelHtml, mountSwitch } from "./i18n.js";   // D-3: NL / EN / FR; every visible string goes through t() or tc()
+import { lang, t, tc, pieceName, labelHtml, mountSwitch, keepPlace, takePlace } from "./i18n.js";   // D-3: NL / EN / FR; every visible string goes through t() or tc()
 import { go, settled } from "./nav.js";   // H6: the back gesture closes the top layer; page changes wait for it (nav.js)
 
 const IMG = id => `https://heron.libis.be/momu/files/large/${id}.jpg`;
@@ -1267,7 +1267,7 @@ const HELP = [
 ];
 const HELP_KEY = "secondSkin.help.v1", helpEl = document.getElementById("help");
 let helpStep = 0;
-const helpLang = mountSwitch(document.body, { className: "in-help" });
+const helpLang = mountSwitch(document.body, { className: "in-help", caption: true });
 helpEl.querySelector(".dots").before(helpLang);   // D-3: where the visitor changes language
 function renderHelp() {
   const last = helpStep === HELP.length - 1;
@@ -1336,6 +1336,18 @@ if (scanned || claimed) history.replaceState(null, "", location.pathname);   // 
 booted = true;
 // first visit only, and not for a visitor who arrived by a sticker or from Up close: they already know what they want
 try { if (!scanned && !claimed && !localStorage.getItem(HELP_KEY)) openHelp(); } catch { openHelp(); }
+/* D-3: switching language reloads the page; put the visitor back where they were (the look itself is saved already) */
+keepPlace(() => ({ help: helpEl.open, snap, slot: activeSlot, zone: activeZone, scroll: document.getElementById("grid").scrollTop }));
+{
+  const back = takePlace();
+  if (back) {
+    if (back.slot && (back.slot === "won" || back.slot === "remix" || SLOTS.includes(back.slot))) { activeSlot = back.slot; activeZone = back.zone === "sleeves" ? "sleeves" : "body"; }
+    renderLocker();
+    if (back.snap && back.snap !== "peek") setSnap(back.snap);
+    document.getElementById("grid").scrollTop = back.scroll || 0;
+    if (back.help && !helpEl.open) { openHelp(); }
+  }
+}
 </script>
 <dialog class="nfc" id="nfc" aria-labelledby="nfcTitle"><div tabindex="-1" autofocus>
   <div class="ring" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 8.5a5 5 0 0 1 0 7M9.5 6a8.5 8.5 0 0 1 0 12M13 3.5a12 12 0 0 1 0 17"/></svg></div>

@@ -990,6 +990,114 @@
   "by": "team",
   "s": "Bruidskaftan in bordeaux, rood, groen en zwart gestreepte fluweel met ronde halsuitsnijding, uitlopend in een punt en met lange puntmouwen."
  },
+ "rec:ST81114AB:desc:0": {
+  "h": "5301a342",
+  "t": "White blouse worn as cycling wear, made of cotton batiste.",
+  "by": "team",
+  "s": "Witte blouse gedragen als fietskleding, gemaakt van katoenbatist."
+ },
+ "rec:ST81114AB:desc:1": {
+  "h": "05c37218",
+  "t": "Stand-up collar with sewn-together strips of machine-made whitework embroidery.",
+  "by": "machine",
+  "s": "Opstaande kraag met aan elkaar genaaide stroken machinaal witborduurwerk."
+ },
+ "rec:ST81114AB:desc:2": {
+  "h": "1bd4b16c",
+  "t": "Front closure with 20 mother-of-pearl buttons; hand-sewn buttonholes (gauze point stitch).",
+  "by": "machine",
+  "s": "Sluiting vooraan met 20 knopen gemaakt van parelmoer; met de hand genaaide knoopsgaten (gaaskantsteek)."
+ },
+ "rec:ST81114AB:desc:3": {
+  "h": "1a2f777b",
+  "t": "Two vertical strips of machine-made whitework embroidery are sewn on down the centre, hiding the buttonholes of the bodice front.",
+  "by": "machine",
+  "s": "Centraal zijn twee verticale stroken machinaal witborduurwerk opgenaaid, die de knoopsgaten van het borststuk verbergen."
+ },
+ "rec:ST81114AB:desc:4": {
+  "h": "c665afbc",
+  "t": "The loose bodice front has fine pleats and is fastened over the closure with 14 mother-of-pearl buttons (4 of which are missing).",
+  "by": "machine",
+  "s": "Het losse borststuk heeft fijne plooien en wordt met 14 knopen van parelmoer (waarvan 4 ontbreken) over de sluiting bevestigd."
+ },
+ "rec:ST81114AB:desc:5": {
+  "h": "874e684d",
+  "t": "Set-in sleeves, gathered at the head and at the cuff.",
+  "by": "machine",
+  "s": "Aangezette mouwen, gerimpeld op de kop en aan het manchet."
+ },
+ "rec:ST81114AB:desc:6": {
+  "h": "13865d11",
+  "t": "High, narrow cuff without a closure, made from a strip of cotton batiste with machine embroidery.",
+  "by": "machine",
+  "s": "Hoge smalle manchet zonder sluiting, gemaakt van een strook katoenbatist met machinaal borduurwerk."
+ },
+ "rec:ST81114AB:desc:7": {
+  "h": "9988e5dd",
+  "t": "Strongly waisted cut.",
+  "by": "machine",
+  "s": "Sterk getailleerde snit."
+ },
+ "rec:ST81114AB:desc:8": {
+  "h": "d104636f",
+  "t": "The seams are folded over at the seam allowance on the inside and sewn down by hand.",
+  "by": "machine",
+  "s": "De naden zijn aan de binnenzijde aan de naadwaarde omgevouwen en met de hand toegenaaid."
+ },
+ "rec:ST81114AB:desc:9": {
+  "h": "b6697956",
+  "t": "At the back, a slit finished with the same strips of embroidery, which hang loose.",
+  "by": "machine",
+  "s": "Aan de achterzijde een split afgewerkt met dezelfde stroken borduurwerk, die los afhangen."
+ },
+ "rec:ST81114AB:quote": {
+  "h": "5301a342",
+  "t": "White blouse worn as cycling wear, made of cotton batiste.",
+  "by": "team",
+  "s": "Witte blouse gedragen als fietskleding, gemaakt van katoenbatist."
+ },
+ "rec:ST81116:desc:0": {
+  "h": "8e29efce",
+  "t": "Black woollen knee-length trousers used for cycling.",
+  "by": "team",
+  "s": "Zwarte wollen knielange broek gebruikt om te fietsen."
+ },
+ "rec:ST81116:desc:1": {
+  "h": "52c6b5f5",
+  "t": "Waistband lined with black cotton, closure in the left side seam with 3 plastic buttons (1 missing).",
+  "by": "machine",
+  "s": "Tailleband gevoerd met zwart katoen, sluiting in de linker zijnaad met 3 kunststof knopen (1 ontbreekt)."
+ },
+ "rec:ST81116:desc:2": {
+  "h": "f2b9a871",
+  "t": "One pocket in the right side seam, hidden under a pleat.",
+  "by": "machine",
+  "s": "Eén zak in de rechter zijnaad, weggewerkt onder een plooi."
+ },
+ "rec:ST81116:desc:3": {
+  "h": "48c9eac9",
+  "t": "Both at the front and at the back, six deep pleats that hide the low-hanging crotch.",
+  "by": "machine",
+  "s": "Zowel vooraan als achteraan zes diepe plooien die het laaghangend kruis verbergen."
+ },
+ "rec:ST81116:desc:4": {
+  "h": "2da9dddf",
+  "t": "At the bottom, the legs are gathered with elastic.",
+  "by": "machine",
+  "s": "Onderaan zijn de pijpen samengetrokken met elastiek."
+ },
+ "rec:ST81116:desc:5": {
+  "h": "360e8d98",
+  "t": "No lining.",
+  "by": "machine",
+  "s": "Geen voering."
+ },
+ "rec:ST81116:quote": {
+  "h": "8e29efce",
+  "t": "Black woollen knee-length trousers used for cycling.",
+  "by": "team",
+  "s": "Zwarte wollen knielange broek gebruikt om te fietsen."
+ },
  "rec:ST81190:desc:0": {
   "h": "da49ce56",
   "t": "Fitted coat in grey woven wool with a stand-up collar.",

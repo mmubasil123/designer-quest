@@ -91,7 +91,8 @@ scan pieces and 3 photo-only pieces are next. Checked headless at 390 px; not on
 - Removed: Up close shows only the splat again for ST81190 and every study piece (our CLO coat changed the fabric, so it misrepresented the piece). `reconstruction.js` and `assets/clo/ST81190.glb` are in `_to_delete/`. Kept for the team's models (`hassan/team-models`): `clo/outfit.js`, `assets/clo/avatar_web.glb`. The team no longer makes its own CLO garments.
 
 
-## D-3 Languages NL / EN / FR (hassan, branch hassan/D-3-i18n)
+## D-3 Languages NL / EN / FR (hassan, branch hassan/D-3-i18n, PR open)
+- Open: NL/FR native read of `ui.*.json` and the machine content; FR narration is "vous", the FR UI "tu"; narration audio stays English; the landing page (`index.html`) is English only. A switch reloads and restores the place (`keepPlace`/`takePlace` in `i18n.js`): a new screen with state worth keeping registers the same way.
 - New UI text: wrap it in `t("English text")` (import from `./i18n.js`), add one line to `mockups/i18n/ui.nl.json` and `ui.fr.json`.
   New fact or story text: add its source to `sources()` in `mockups/tools/i18n_build.py`, run
   `python3 -I mockups/tools/i18n_build.py --env <a .env with ASK_PROVIDER, ASK_MODEL, ASK_API_KEY>`, then `--check`.

@@ -75,9 +75,10 @@ export function tcQuote(id, quote) {
 /* A piece's display name: the team's English name from pieces.json in this language (build-time, i18n/content). */
 export const pieceName = (id, en) => { const x = tc(`name:${id}`, en, "en").text; return x[0].toUpperCase() + x.slice(1); };
 
-export const labelText = () => t("Translation");
-/* The small label beside every translated fact or story (UI strings need none). */
-export const labelHtml = () => `<span class="tr-label" title="${t("Translated by a machine; the original stays one tap away")}">${labelText()}</span>`;
+/* The small label beside every translated fact or story (UI strings need none). `by` is what tc() returned: the team's
+   own translation reads "Our translation", a machine one "Machine translation" (D-3: always marked, never passed off as MoMu's). */
+export const labelText = by => by === "team" ? t("Our translation") : t("Machine translation");
+export const labelHtml = by => `<span class="tr-label" title="${t("Translated by a machine; the original stays one tap away")}">${labelText(by)}</span>`;
 
 /* Swap static English text for this language: text nodes and a few attributes whose whole text is a UI key. */
 const ATTRS = ["aria-label", "title", "placeholder", "alt"];
@@ -95,24 +96,45 @@ export function localize(root = document.body) {
   return root;
 }
 
+/* Keeping your place. A language switch reloads the page (every screen renders once, in one language; the wardrobe tiles,
+   the 3D scenes and the dialogs are built once from strings). So the page says what to keep: keepPlace(() => state) is
+   called just before the reload and its result goes to sessionStorage; after the reload the page calls takePlace() once
+   and puts the sheet, tab and scroll back. The state is dropped if it is old, from another page, or already taken. */
+const PLACE_KEY = "secondSkin.place.v1";
+let placeSaver = null;
+export const keepPlace = fn => { placeSaver = fn; };
+export function takePlace() {
+  try {
+    const raw = sessionStorage.getItem(PLACE_KEY); sessionStorage.removeItem(PLACE_KEY);
+    const v = JSON.parse(raw || "null");
+    return v && v.path === location.pathname + location.search && Date.now() - v.at < 15000 ? v.state : null;
+  } catch { return null; }
+}
+
 export function setLang(next) {
   if (!LANGS.includes(next) || next === lang) return;
   try {
     const old = JSON.parse(localStorage.getItem(SAVE_KEY) || "null");
     localStorage.setItem(SAVE_KEY, JSON.stringify({ ...(old && typeof old === "object" ? old : {}), lang: next }));
   } catch { /* storage blocked: the choice lasts only until the page is left; the browser language applies again */ }
+  try { if (placeSaver) sessionStorage.setItem(PLACE_KEY, JSON.stringify({ path: location.pathname + location.search, at: Date.now(), state: placeSaver() })); } catch { /* the page then opens fresh */ }
   location.reload();
 }
 
 /* The switch: three small buttons (NL EN FR). Self-contained, so it can sit in any bar or sheet; style it in i18n.css. */
-export function mountSwitch(into, { className = "" } = {}) {
+export function mountSwitch(into, { className = "", caption = false } = {}) {
   const el = document.createElement("div");
   el.className = `langsw ${className}`.trim();
   el.setAttribute("role", "group"); el.setAttribute("aria-label", t("Language"));
   el.innerHTML = LANGS.map(l => `<button type="button" class="press" lang="${l}" data-lang="${l}" aria-pressed="${l === lang}" aria-label="${NAMES[l]}">${l.toUpperCase()}</button>`).join("");
   el.addEventListener("click", e => { const b = e.target.closest("[data-lang]"); if (b) setLang(b.dataset.lang); });
-  into.append(el);
-  return el;
+  let out = el;
+  if (caption) {   // a caption in the visitor's language says what the three buttons are
+    out = document.createElement("div"); out.className = "langbox";
+    out.innerHTML = `<span class="mono">${t("Language")}</span>`; out.append(el);
+  }
+  into.append(out);
+  return out;
 }
 
 {   // the label and switch styles load with the module, so a page needs no extra <link>
