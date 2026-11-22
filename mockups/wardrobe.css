@@ -1,4 +1,4 @@
-/* B5/B6/B8: wardrobe tiles. Loaded after the inline styles in second-skin.html, so these win on equal specificity. */
+/* B5/B6/B8: wardrobe tiles. Loaded after the inline styles in atelier.html, so these win on equal specificity. */
 :root { --ease-wipe: cubic-bezier(0.77, 0, 0.175, 1); }   /* on-screen reveal: ease-in-out, 600 ms */
 
 /* B5: selection animates because the tile node persists */

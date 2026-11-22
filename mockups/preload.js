@@ -9,7 +9,7 @@
    1.5 s at the latest, so a 15 MB download never starves the image on a slow link.
    Skipped on Save-Data. Never throws; a failed or skipped preload only means the real loader fetches the file itself.
 
-   Loaded by one `<script type="module" src="preload.js">` in the head of second-skin.html. It reads `?card=<id>` itself, so
+   Loaded by one `<script type="module" src="preload.js">` in the head of atelier.html. It reads `?card=<id>` itself, so
    it starts before the big module has resolved its CDN imports. Any other page can call `preload.start(id)`.
 
    API (also on `window.momuPreload`):
@@ -18,7 +18,7 @@
                                    "idle" | "waiting" | "loading" | "ready" | "error" | "skipped"; total/fraction are 0
                                    when the server sent no Content-Length
      preload.ready(id)             promise: true once the file is in cache, false if skipped or failed; never rejects
-     preload.handoff(id, maxMs)    for the moment before leaving the page (second-skin.html -> up-close.html): Chrome cancels a
+     preload.handoff(id, maxMs)    for the moment before leaving the page (atelier.html -> up-close.html): Chrome cancels a
                                    running download on navigation (keepalive does not help; measured), so a visitor who taps
                                    "Study up close" early would lose the part already fetched. handoff resolves at once if
                                    the file is ready, skipped or failed; otherwise it shows a one-line progress text over
@@ -35,7 +35,7 @@ const HERE = import.meta.url;
 const UPCLOSE_MODULES = ["https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/controls/OrbitControls.js",
   "https://cdn.jsdelivr.net/npm/@sparkjsdev/spark@2.4.0/dist/spark.module.js"];   // same pins as up-close.html's import map
 const IMAGE_FIRST_MAX_MS = 1500;
-const IMG = sha => `https://heron.libis.be/momu/files/large/${sha}.jpg`;   // the size second-skin.html uses for a piece
+const IMG = sha => `https://heron.libis.be/momu/files/large/${sha}.jpg`;   // the size atelier.html uses for a piece
 
 const jobs = new Map();   // id -> { s: status, done: Promise<boolean> }
 const listeners = new Set();

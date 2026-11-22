@@ -192,7 +192,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .tile .st { position: absolute; left: 6px; right: 6px; bottom: 6px; background: var(--paper); border-radius: 8px; padding: 6px 8px; text-align: left; }
 .tile .st b { display: block; font: 400 13px/1.2 var(--serif); }
 .tile .st span { font: 400 10px/1.4 var(--sans); color: var(--muted); }
-.tile.new::before { content: "New"; position: absolute; top: 8px; left: 8px; z-index: 1; padding: 2px 8px; border-radius: 999px; background: var(--ink); color: var(--paper); font: 500 11px/1.6 var(--sans); pointer-events: none; }
+.tile.new::before { content: var(--new-label, "New");   /* D-3: the script sets --new-label to t("New") */ position: absolute; top: 8px; left: 8px; z-index: 1; padding: 2px 8px; border-radius: 999px; background: var(--ink); color: var(--paper); font: 500 11px/1.6 var(--sans); pointer-events: none; }
 .museum { width: min(420px, calc(100% - 24px)); text-align: left; }
 /* H6: the Museum is a sheet like the fact card (it acts on the visit, the Stage stays behind), not a centred modal */
 .nfc.museum { margin: auto auto 12px; transform: translateY(16px); }
@@ -337,14 +337,17 @@ const FRAMES = 36; // matches CLO export_turntable's default frame count
    before the wardrobe is drawn and hands over to Up close, so a frozen copy is a blank sheet with only "Top", and a win
    left there would wait for some later page load. So: any restore before boot finished, or with a win waiting or details
    found since, starts the page again (the look is saved). Registered before the first await, so a parked page has it too. */
-const CLAIM_KEY = "secondSkin.claim";   // H6: Up close steps back to this page and leaves the won fabric here, instead of ?fabric= on a new entry
-const readFound = () => { try { return localStorage.getItem("secondSkin.found.v1"); } catch { return null; } };
+const CLAIM_KEY = "atelier.claim";   // H6: Up close steps back to this page and leaves the won fabric here, instead of ?fabric= on a new entry
+const readFound = () => { try { return localStorage.getItem("atelier.found.v1"); } catch { return null; } };
 const foundAtBoot = readFound();
 let booted = false;
 addEventListener("pageshow", e => {
   if (!e.persisted) return;
   let waiting = false; try { waiting = !!sessionStorage.getItem(CLAIM_KEY); } catch { /* storage blocked */ }
-  if (!booted || waiting || readFound() !== foundAtBoot) location.reload();
+  // a language picked on another page (Up close) while this one sat in the cache also needs a fresh load: the strings are
+  // built once, and the next save here would otherwise write the old language back
+  let langNow; try { langNow = JSON.parse(localStorage.getItem("atelier.save.v1") || "null")?.lang; } catch { /* blocked */ }
+  if (!booted || waiting || readFound() !== foundAtBoot || (langNow && langNow !== document.documentElement.lang)) location.reload();
 });
 // pieces.json (schema: pieces.schema.json) is the single source of truth; the pipeline reads the same file
 const manifest = await (await fetch("pieces.json")).json();
@@ -358,14 +361,14 @@ const PIECES = Object.fromEntries(manifest.pieces.map(p => [p.id, {
 // `wear` and a GLB (a mesh made from its own scan) is then worn in that slot as well
 const slotOf = id => PIECES[id].wear ?? PIECES[id].slot;   // where a piece goes on the form
 try {
-  const found = JSON.parse(localStorage.getItem("secondSkin.found.v1") || "{}") || {};
+  const found = JSON.parse(localStorage.getItem("atelier.found.v1") || "{}") || {};
   Object.entries(PIECES).filter(([, p]) => p.splat).forEach(([id, p]) => {
     p.seen = Array.isArray(found[id]);
     p.found = p.seen ? new Set(found[id].filter(i => Number.isInteger(i) && i >= 0 && i < p.details)).size : 0;   // the same check as Up close, so only real details count
     if (p.seen && p.found >= p.details) p.locked = false;
   });
 } catch { /* storage blocked: splat fabrics stay locked */ }
-const WON_KEY = "secondSkin.won.v1";   // wearable room pieces won with Win it; read before the save restore, which refuses locked ids
+const WON_KEY = "atelier.won.v1";   // wearable room pieces won with Win it; read before the save restore, which refuses locked ids
 const readWon = () => { try { const w = JSON.parse(localStorage.getItem(WON_KEY) || "[]"); return Array.isArray(w) ? w : []; } catch { return []; } };
 readWon().forEach(id => { if (PIECES[id] && !PIECES[id].splat) PIECES[id].locked = false; });
 const params = new URLSearchParams(location.search);
@@ -395,7 +398,7 @@ else if (!scanLater && PIECES[scanned]?.clo && !PIECES[scanned].glb) {
 }
 const SLOTS = ["top", "bottom", "feet", "full"];
 const look = { top: null, bottom: null, feet: null, full: "ST80881", fabric: { body: null, sleeves: null } };   // first look: the furisode, the cleanest scan and the most recognisable piece
-const SAVE_KEY = "secondSkin.save.v1";
+const SAVE_KEY = "atelier.save.v1";
 let widest = 0;   // the widest span this visitor has built; saved with the look, so a reload keeps the record
 try {   // restore the visitor's look; ids are checked against the manifest, since storage is user-controlled
   const saved = JSON.parse(localStorage.getItem(SAVE_KEY) || "null");
@@ -830,7 +833,7 @@ const turntables = [stageTT];
   const focusBtn = document.getElementById("focusBtn"), phone = focusBtn.closest(".phone");
   const setFocus = on => {
     phone.classList.toggle("focus", on);
-    focusBtn.setAttribute("aria-pressed", on); focusBtn.setAttribute("aria-label", on ? "Show the menus again" : "Show only the look");
+    focusBtn.setAttribute("aria-pressed", on); focusBtn.setAttribute("aria-label", on ? t("Show the menus again") : t("Show only the look"));
     focusBtn.querySelector("path").setAttribute("d", on ? "M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" : "M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5");
   };
   focusBtn.addEventListener("click", () => setFocus(!phone.classList.contains("focus")));
@@ -864,11 +867,14 @@ if (params.has("demo")) {
     btn.removeAttribute("aria-busy");
   });
 }
-window.secondSkin = { look, turntables, avatar: avatarState };   // handle for driving the mockup from the console
+window.atelier = { look, turntables, avatar: avatarState };   // handle for driving the mockup from the console
+document.documentElement.style.setProperty("--new-label", JSON.stringify(t("New")));   // the New badge is CSS content, so its word comes in here
 
 /* ---------- Look state, locker ---------- */
 const yearOf = id => PIECES[id].year.from;
-const noun = id => PIECES[id].name.split(",")[0].split(" ")[lang === "en" ? "pop" : "shift"]().replace(/^./, c => c.toUpperCase());   // EN: "Green wool coat" -> "Coat"; NL and FR put the garment first: "Veste en laine" -> "Veste"   // "Green wool coat" -> "Coat"
+// the garment word: EN and NL end on it ("Green wool coat" -> "Coat", "Groene wollen jas" -> "Jas"; NL cuts a trailing
+// "met …"/"in …" first: "Zijden jurk met pailletten" -> "Jurk"); FR starts with it ("Manteau en laine vert" -> "Manteau")
+const noun = id => { const n = PIECES[id].name.split(",")[0]; return (lang === "fr" ? n.split(" ")[0] : n.split(/ (?:met|in) /)[0].split(" ").pop()).replace(/^./, c => c.toUpperCase()); };
 const adj = id => lang === "en" ? PIECES[id].name.split(" ")[0].replace(/,$/, "") : PIECES[id].name.split(",")[0].toLowerCase();   // NL and FR name the whole piece: "de stof van gilet ikat"   // "Furisode kimono, 1979" -> "Furisode"
 function lookName() {   // a remixed look earns a name; an unremixed one keeps the screen's title
   const main = look.full || look.top, { body, sleeves } = look.fabric;
@@ -1004,7 +1010,7 @@ museumEl.addEventListener("click", e => {
   else if (PIECES[id].splat || PIECES[id].locked) tapCard(id);
   else { activeSlot = PIECES[id].slot; renderLocker(); setSnap("half"); }
 });
-const FRESH_KEY = "secondSkin.new.v1";   // pieces and fabrics won but not yet worn, marked New
+const FRESH_KEY = "atelier.new.v1";   // pieces and fabrics won but not yet worn, marked New
 const fresh = new Set((() => { try { const f = JSON.parse(localStorage.getItem(FRESH_KEY) || "[]"); return Array.isArray(f) ? f : []; } catch { return []; } })().filter(id => PIECES[id]));   // storage is user-controlled: a non-array must not stop the page
 const keepFresh = () => { try { localStorage.setItem(FRESH_KEY, JSON.stringify([...fresh])); } catch { /* blocked: New lasts this visit */ } };
 /* What the form wears, always in the sheet's peek: tap a chip to change that part, × to take it off */
@@ -1296,7 +1302,7 @@ const HELP = [
   { t: t("Win pieces at MoMu"), d: t("Tap the sticker beside a piece. Guess its year, or find its details up close, and it joins your wardrobe. Museum shows what is left to find.") },
   { t: t("Remix a fabric"), d: t("In the Fabrics tab, put one piece's cloth on another piece's cut. The i on any piece shows what MoMu recorded about it.") },
 ];
-const HELP_KEY = "secondSkin.help.v1", helpEl = document.getElementById("help");
+const HELP_KEY = "atelier.help.v1", helpEl = document.getElementById("help");
 let helpStep = 0;
 const helpLang = mountSwitch(document.body, { className: "in-help", caption: true });
 helpEl.querySelector(".dots").before(helpLang);   // D-3: where the visitor changes language

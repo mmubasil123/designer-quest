@@ -1,5 +1,5 @@
 {
-  "rewrites": [{ "source": "/stage", "destination": "/second-skin.html" }],
+  "rewrites": [{ "source": "/stage", "destination": "/atelier.html" }],
   "headers": [
     { "source": "/assets/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }] }
   ]
