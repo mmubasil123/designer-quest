@@ -6,7 +6,7 @@
 --   collection   reusable, app-neutral model of MoMu's public collection
 --                data (harvested from the Omeka S APIs of
 --                studycenter.momu.be and heron.libis.be/momu)
---   second_skin  thin app layer for the "Museum Atelier" hackathon demo
+--   second_skin  thin app layer for the "Designer Quest" hackathon demo
 --                (QR unlocks, avatar slots, history layers). Other apps
 --                can add their own schema next to it the same way.
 --
@@ -318,7 +318,7 @@ FROM object o
 JOIN source s ON s.id = o.source_id
 LEFT JOIN resource_class rc ON rc.id = o.resource_class_id;
 
--- Objects that are good Museum Atelier demo candidates: they have an image
+-- Objects that are good Designer Quest demo candidates: they have an image
 -- and a pattern (linked pattern record or pattern file) or a 3D model.
 CREATE OR REPLACE VIEW v_demo_candidate AS
 SELECT v.*
@@ -342,7 +342,7 @@ WHERE rt.omeka_id IN (18, 22) OR EXISTS (SELECT 1 FROM object_item_set ois JOIN 
 
 SET search_path = second_skin, collection, public;
 
--- A collection object that is playable in Museum Atelier.
+-- A collection object that is playable in Designer Quest.
 CREATE TABLE IF NOT EXISTS showcase_object (
     id             serial PRIMARY KEY,
     object_id      bigint NOT NULL UNIQUE REFERENCES collection.object(id),

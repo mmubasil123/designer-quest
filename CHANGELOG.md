@@ -1,6 +1,17 @@
-# Changelog: Museum Atelier mockup
+# Changelog: Designer Quest mockup
 
 Newest first. Each entry: what changed, why, and the decision behind it.
+
+## The app is called Designer Quest (2026-11-22, H-DQ, branch basil/designer-quest)
+- What: "Designer Quest" replaces "Museum Atelier" in tab titles, the Stage header, meta/OG tags, the share card and
+  share title, the NL and FR strings, docs, `package.json`, `schema.sql` comments and the teaser end card source. The
+  address is now `designer-quest-momu.vercel.app`; the Vercel project is renamed `designer-quest`.
+- Why: the team renamed the app.
+- Decision: `designer-quest.vercel.app` belongs to another Vercel project, so the address carries `-momu`.
+  `museum-atelier.vercel.app` stays on the project as a 308 redirect (query kept), so printed NFC cards and deck QR codes
+  still open the right piece. Internal ids keep `atelier` (`atelier.html`, `atelier.*` storage keys, `window.atelier`):
+  renaming them would drop players' saves and break links for no visible gain. Older entries below keep the old name.
+  Teaser MP4 not re-rendered yet (its end card still shows the old address).
 
 ## Demo video re-rendered against the current app (2026-11-22, E2, branch hassan/E2-rerender)
 - What: the teaser MP4 was rendered again from the reel source, which already had `museum-atelier.vercel.app` (H-URL), and

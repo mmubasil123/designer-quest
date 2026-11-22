@@ -24,7 +24,7 @@ follows it. Decided by Hassan on 2026-11-21 (E2 grill); the look itself is MoMu'
 ## Brand
 - MoMu's official two-M logo (`public/brand/momu-logo.svg`) on the first and last frame. No product name: the app
   is presented as MoMu's (H10).
-- Closing card as the deck's: `museum-atelier.vercel.app`, `@momuantwerp / #momuantwerp`.
+- Closing card as the deck's: `designer-quest-momu.vercel.app`, `@momuantwerp / #momuantwerp`.
 
 ## Facts (D3)
 - Every name, date and quote comes from `mockups/pieces.json`, `mockups/narration.json` or `mockups/records.json`.

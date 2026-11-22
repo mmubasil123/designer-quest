@@ -1,6 +1,6 @@
-# Gamification findings for Museum Atelier (2026-11-21)
+# Gamification findings for Designer Quest (2026-11-21)
 
-Handover for another agent. Research on museum gamification, how Museum Atelier scores against it, and what can
+Handover for another agent. Research on museum gamification, how Designer Quest scores against it, and what can
 change before the 5-minute hackathon pitch (1.5 days left). Claims about our code cite `origin/main` as of
 commit `8fb18f6`; re-check them if `main` has moved.
 
@@ -26,7 +26,7 @@ commit `8fb18f6`; re-check them if `main` has moved.
    judge play by watching people use it (where they pause, when they ask for help), not by dwell time; "Play isn't
    a panacea."
 
-## How Museum Atelier maps to the four affordances
+## How Designer Quest maps to the four affordances
 
 | Affordance | What we have | Rating |
 |---|---|---|
