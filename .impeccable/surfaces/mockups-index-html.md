@@ -14,5 +14,5 @@ THESIS: The year is the interface. One slider remaps the whole first viewport (a
 OWN-WORLD: White ground and gallery-grey floor, MoMu red #d72f25 for the numeral and titles in capitals, black ink, hairline rules, inventory ids in tracked small caps, record quotes in Source Serif italic; sharp pictures, floating white pills.
 STORY: The visitor sees 255 years of real MoMu pieces on one form, learns the visit (tap a sticker, guess the year, win it, wear it, look closer, remix, share), watches the teaser, and taps Start.
 FIRST VIEWPORT: Numeral edge to edge in red behind the form (form centred, overlapping the numeral); caption bottom left (id, name, years, record quote); pitch line and Start bottom right; year track with era ticks full width at the bottom; logo top left, Start pill top right.
-FORM: "The year itself", position 7 on the ordered list; seed: 31bd0d736fdfe4d7 (surface roll, raised by the variable-font specimen: one control remaps everything in view).
+FORM: "The year itself", position 7 on the ordered list; seed:a8ee1123af45b2b3 (surface roll, raised by the variable-font specimen: one control remaps everything in view).
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

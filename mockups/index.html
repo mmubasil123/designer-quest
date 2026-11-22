@@ -36,14 +36,14 @@ h1, h2, h3, p, ol, figure, blockquote { margin: 0; }
 .nav { position: absolute; z-index: 5; inset: 0 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px var(--gutter); }
 .nav .home { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); }
 .nav nav { display: flex; align-items: center; gap: 6px; }
-.nav nav a:not(.btn-go) { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; font: 500 15px/1 var(--sans); text-decoration: none; }
+.nav nav a:not(.btn-go) { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; background: var(--paper); box-shadow: var(--shadow-pill); font: 500 15px/1 var(--sans); text-decoration: none; }   /* white pills: the numeral may run under the nav */
 @media (hover: hover) and (pointer: fine) { .nav nav a:not(.btn-go):hover { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 6px; text-decoration-thickness: 1.5px; } }
 .nav .btn-go { min-height: 44px; padding: 0 18px; font-size: 15px; margin-left: 8px; }
 
 /* ---------- hero: the year is the interface ---------- */
 .hero { position: relative; height: 100svh; min-height: 700px; overflow: hidden; background: linear-gradient(var(--paper) 52%, var(--wall)); }
-.numeral { position: absolute; inset: max(64px, 8svh) 0 auto; text-align: center; pointer-events: none; user-select: none;
-  font: 400 min(37vw, 66svh)/.78 var(--sans); letter-spacing: -.04em; color: var(--accent); font-variant-numeric: tabular-nums; }
+.numeral { position: absolute; left: 0; right: 0; bottom: calc(var(--track-h) + 300px); text-align: center; pointer-events: none; user-select: none;
+  font: 400 calc((100vw - 2 * var(--gutter)) / 2.08)/.74 var(--sans);   /* "1750" runs gutter to gutter; a short window crops its top, never the caption's ground */ letter-spacing: -.04em; color: var(--accent); font-variant-numeric: tabular-nums; }
 .form { position: absolute; left: 50%; bottom: calc(var(--track-h) - 6px); height: min(calc(100svh - var(--track-h) - 40px), 900px);
   aspect-ratio: 720 / 1320; transform: translateX(-50%); }
 .form img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; filter: blur(10px); transform: translateY(-18px) scale(.985);
@@ -51,7 +51,8 @@ h1, h2, h3, p, ol, figure, blockquote { margin: 0; }
 .form img.on { opacity: 1; filter: none; transform: none;
   transition: opacity 420ms var(--ease-out), filter 480ms var(--ease-out), transform 640ms var(--ease-out); }   /* the new one drops onto the form, as in the app */
 .caption { position: absolute; left: var(--gutter); bottom: calc(var(--track-h) + 28px); width: min(330px, 27vw); }
-.caption .name { font: var(--t-title); font-size: 26px; text-transform: uppercase; color: var(--accent-ink); margin: 8px 0 4px; text-wrap: balance; }
+.caption .name { font: var(--t-title); font-size: 26px; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 4px; text-wrap: balance; }
+.caption .tag { margin-top: 4px; }
 .caption .years { font: 500 15px/1.4 var(--sans); font-variant-numeric: tabular-nums; }
 .caption blockquote { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
 .caption q { font: var(--t-quote); quotes: "\201C" "\201D"; text-wrap: pretty; }
@@ -99,7 +100,8 @@ section { scroll-margin-top: 24px; }
 .beats { list-style: none; padding: 0; margin-top: clamp(56px, 7vw, 96px); display: grid; gap: clamp(72px, 9vw, 136px); }
 .beat { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
 .beat:nth-child(even) .beat-media { order: 2; }
-.beat h3 { font: 400 clamp(26px, 2.6vw, 36px)/1.05 var(--sans); margin: 10px 0 14px; }
+.beat h3 { font: 400 clamp(26px, 2.6vw, 36px)/1.05 var(--sans); text-wrap: balance; }
+.beat .label-line { margin: 10px 0 18px; padding-bottom: 14px; border-bottom: 1px solid var(--line); font: var(--t-label); font-size: 12px; letter-spacing: var(--track-label); text-transform: uppercase; color: var(--muted); font-variant-numeric: tabular-nums; max-width: none; }
 .beat p { font: 400 18px/1.5 var(--sans); max-width: 46ch; text-wrap: pretty; }
 .beat p + p { margin-top: 12px; }
 .beat-media { display: flex; justify-content: center; }
@@ -111,7 +113,7 @@ section { scroll-margin-top: 24px; }
 
 /* the guess: the app's own rule, playable here */
 .guess { width: min(440px, 100%); background: var(--paper); border-radius: var(--r-card); box-shadow: var(--shadow-card); padding: 24px 24px 22px; text-align: center; }
-.guess .q { font: 400 22px/1.15 var(--sans); margin: 6px 0 14px; }
+.guess .q { font: 400 22px/1.15 var(--sans); margin: 0 0 14px; }
 .guess .pic { width: 150px; aspect-ratio: 600 / 782; margin: 0 auto; background: var(--wall); border-radius: var(--r-pic); object-fit: cover; }
 .guess output { display: block; margin: 12px 0 4px; font: 400 48px/1 var(--sans); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
 .guess input { width: 100%; accent-color: var(--ink); height: 44px; margin: 0; cursor: pointer; }
@@ -123,14 +125,14 @@ section { scroll-margin-top: 24px; }
 .guess .cheer { font: 400 32px/1.1 var(--serif); margin-top: 2px; }
 .guess .won-name { font: var(--t-title); text-transform: uppercase; color: var(--accent-ink); margin: 8px 0 12px; }
 .guess .made { font: 500 15px/1.4 var(--sans); margin: 12px 0; font-variant-numeric: tabular-nums; }
-.guess blockquote { text-align: left; border-left: 2px solid var(--accent); padding-left: 14px; margin: 0 0 18px; }
+.guess blockquote { text-align: left; border-top: 1px solid var(--line); padding-top: 12px; margin: 0 0 18px; }
 .guess blockquote q { font: var(--t-quote); font-size: 16px; }
 .guess blockquote .tag { display: block; margin-top: 6px; text-transform: none; letter-spacing: 0; font-size: 12px; }
 .again { margin-top: 10px; min-height: 44px; border: 0; background: none; font: 500 15px/1 var(--sans); cursor: pointer; }
 .guess .pop { animation: pop 420ms var(--ease-out); }
 @keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.98); } }
 
-.span-look { position: relative; width: min(460px, 100%); aspect-ratio: 720 / 1320; max-height: 640px; background: linear-gradient(var(--paper) 40%, var(--wall)); }
+.span-look { position: relative; width: min(460px, 100%); aspect-ratio: 720 / 1320; max-height: 640px; background: linear-gradient(var(--paper) 40%, var(--wall)); }   /* the Stage floor, as in the hero */
 .span-look img { width: 100%; height: 100%; object-fit: contain; }
 .span-look .pin { position: absolute; display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--paper); border-radius: 999px; box-shadow: var(--shadow-pill);
   font: 500 13px/1 var(--sans); white-space: nowrap; font-variant-numeric: tabular-nums; }
@@ -147,6 +149,16 @@ section { scroll-margin-top: 24px; }
 .film h2 { font: 400 clamp(34px, 4.4vw, 60px)/1.02 var(--sans); text-transform: uppercase; color: #ff5a4f; max-width: 16ch; }   /* the red, lifted for black: 5.6:1 */
 .film .head p { max-width: 40ch; font: 400 17px/1.5 var(--sans); color: #c9c9c9; }
 .film video { width: 100%; aspect-ratio: 16 / 9; background: #111; border-radius: var(--r-pic); }
+.player { position: relative; }
+.player video::-webkit-media-controls-panel { background-image: linear-gradient(transparent, rgb(0 0 0 / .55)); }
+.play-film { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 14px; min-height: 64px; padding: 8px 26px 8px 8px;
+  border: 0; border-radius: 999px; background: var(--paper); color: var(--ink); box-shadow: 0 18px 50px rgb(0 0 0 / .35); font: 500 17px/1 var(--sans); cursor: pointer;
+  transition: transform 160ms var(--ease-out), opacity 200ms ease; }
+.play-film:active { transform: translate(-50%, -50%) scale(.97); }
+.play-film .disc { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: var(--paper); }
+.play-film .dur { color: var(--muted); font-variant-numeric: tabular-nums; }
+.play-film[hidden] { display: none; }
+@media (hover: hover) and (pointer: fine) { .play-film:hover .disc { background: var(--accent-ink); } }
 
 /* ---------- real records ---------- */
 .real { padding: clamp(96px, 11vw, 160px) 0; }
@@ -171,13 +183,19 @@ section { scroll-margin-top: 24px; }
 .foot nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 10px; font: 500 14px/1 var(--sans); text-decoration: none; }
 @media (hover: hover) and (pointer: fine) { .foot nav a:hover { text-decoration: underline; text-underline-offset: 5px; } }
 
+/* short desktop windows (laptops at 768): the quote steps aside so the year keeps most of its height */
+@media (min-width: 900px) and (max-height: 820px) {
+  .numeral { bottom: calc(var(--track-h) + 290px); }
+  .caption blockquote { display: none; }
+}
+
 /* ---------- phones and narrow windows ---------- */
 @media (max-width: 899px) {
   :root { --track-h: 92px; }
   .nav nav a:not(.btn-go) { display: none; }
   .hero { height: auto; min-height: 0; display: flex; flex-direction: column; padding-top: 68px; }
   .numeral { order: 1; } .form { order: 2; } .track { order: 3; } .pitch { order: 4; } .caption { order: 5; }
-  .numeral { position: relative; inset: auto; font-size: min(36vw, 200px); line-height: .8; }
+  .numeral { position: relative; inset: auto; bottom: auto; font-size: min(36vw, 200px); line-height: .8; }
   .form { position: relative; left: auto; bottom: auto; transform: none; align-self: center; height: min(46svh, 440px); margin-top: calc(min(36vw, 200px) * -.5); }
   .track { position: relative; inset: auto; height: auto; padding: 6px var(--gutter) 0; }
   .ticks { height: 34px; }
@@ -245,8 +263,8 @@ section { scroll-margin-top: 24px; }
       <li class="beat">
         <div class="beat-media"><div class="phone"><img src="assets/landing/screen-story.webp" width="540" height="1169" loading="lazy" alt="The app's story sheet for the Jak, ST503, with its photo, a play button for the narration and the story text."></div></div>
         <div>
-          <span class="tag">Tap the sticker</span>
-          <h3 class="caps">The piece tells you its story</h3>
+          <h3 class="caps">Tap the sticker</h3>
+          <p class="label-line">ST503 · Jak · 1750 to 1780</p>
           <p>Tap the MoMu sticker beside a piece and it opens on your phone, with its story read aloud. No app store, no account.</p>
         </div>
       </li>
@@ -256,8 +274,8 @@ section { scroll-margin-top: 24px; }
           <div class="guess" id="guess" aria-live="polite"></div>
         </div>
         <div>
-          <span class="tag">Guess the year</span>
-          <h3 class="caps">Win it by noticing</h3>
+          <h3 class="caps">Guess the year, win the piece</h3>
+          <p class="label-line">ST503 · Jak · Top</p>
           <p>When was it made? Drag the year and guess. Get within 25 years and the piece is yours. Missed? You get a hint, Earlier or Later, and another try.</p>
           <p>Try it on the jak, right here.</p>
         </div>
@@ -275,8 +293,8 @@ section { scroll-margin-top: 24px; }
           </figure>
         </div>
         <div>
-          <span class="tag">Wear it</span>
-          <h3 class="caps">One look, 255 years</h3>
+          <h3 class="caps">Wear it: one look, 255 years</h3>
+          <p class="label-line">ST503 · ST80931 · ST2407/1-2 · 1750 to 2005</p>
           <p>Every piece you win goes into your wardrobe. Put it on the dress form with anything else you won: an eighteenth-century jak over 1965 monpe trousers, with Dirk Bikkembergs football boots from 2005.</p>
           <p>Turn the form with your finger. The look tells you how many years it spans.</p>
         </div>
@@ -285,8 +303,8 @@ section { scroll-margin-top: 24px; }
       <li class="beat">
         <div class="beat-media"><div class="phone"><img src="assets/landing/screen-upclose.webp" width="540" height="1169" loading="lazy" alt="Up close on the riveted wool coat: MoMu's 3D model and a list of details to find."></div></div>
         <div>
-          <span class="tag">Look closer</span>
-          <h3 class="caps">Find what the record describes</h3>
+          <h3 class="caps">Look closer</h3>
+          <p class="label-line">ST81190 · Riveted wool coat · 1998 to 1999</p>
           <p>Study pieces hide details that MoMu's record writes down. Find all three on the 3D model of A.F. Vandevorst's riveted wool coat from 1998, and you win its fabric.</p>
           <ul class="found">
             <li>Rivets instead of seams <q>Joined together with brass-coloured rivets.</q></li>
@@ -308,8 +326,8 @@ section { scroll-margin-top: 24px; }
           </ul>
         </div>
         <div>
-          <span class="tag">Remix</span>
-          <h3 class="caps">One piece's cloth on another's cut</h3>
+          <h3 class="caps">Remix the fabrics</h3>
+          <p class="label-line">ST80930 on ST503 · 1950s ikat on a 1750 cut</p>
           <p>Put the ikat of a 1950s vest on the body of a 1750 jak, or the furisode's painted silk on its sleeves. Centuries apart, on one form.</p>
         </div>
       </li>
@@ -317,8 +335,8 @@ section { scroll-margin-top: 24px; }
       <li class="beat">
         <div class="beat-media"><div class="phone"><img src="assets/landing/screen-share-card.webp" width="540" height="960" loading="lazy" alt="A share card: Noor's look across 255 years, from 1750 to 2005, with the pieces listed and a MoMu credit." style="aspect-ratio:540/928"></div></div>
         <div>
-          <span class="tag">Share</span>
-          <h3 class="caps">Every share credits MoMu</h3>
+          <h3 class="caps">Share the look</h3>
+          <p class="label-line">Your look · 1750 to 2005 · credit: MoMu</p>
           <p>Name your look and share it as a story-sized card: the pieces, the years they span, and a line from the museum's record. Then go and find the next sticker.</p>
         </div>
       </li>
@@ -332,9 +350,12 @@ section { scroll-margin-top: 24px; }
       <h2 id="filmTitle">A visit in 44 seconds</h2>
       <p>Made from the app's real screens and MoMu's own photos. Sound on.</p>
     </div>
-    <video controls playsinline preload="none" poster="assets/landing/teaser-poster.webp" width="1280" height="720">
-      <source src="assets/landing/momu-teaser.mp4" type="video/mp4">
-    </video>
+    <div class="player">
+      <video id="film-video" playsinline preload="none" poster="assets/landing/teaser-poster.webp" width="1280" height="720">
+        <source src="assets/landing/momu-teaser.mp4" type="video/mp4">
+      </video>
+      <button class="play-film" id="playFilm" type="button"><span class="disc"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span>Play the film <span class="dur">0:44</span></button>
+    </div>
   </div>
 </section>
 
@@ -356,7 +377,7 @@ section { scroll-margin-top: 24px; }
     <p>Start with a starter wardrobe on the dress form, or find a MoMu sticker at the Study Center and tap it.</p>
     <a class="btn-go" href="second-skin.html">Start dressing <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
   </div>
-  <p class="bigyears" aria-hidden="true">1750–2009</p>
+  <p class="bigyears" aria-hidden="true">1750–2005</p>
 </section>
 </main>
 
@@ -398,7 +419,7 @@ const STOPS = [
 const LAST = STOPS.length - 1, UNIT = 100, MAJOR = new Set([0, 6, LAST]);   // labels a phone keeps
 STOPS.forEach((s, i) => { s.pos = i * UNIT; });
 const yearAt = v => { v = Math.max(0, Math.min(LAST * UNIT, v)); const i = Math.min(LAST - 1, Math.floor(v / UNIT)), t = v / UNIT - i, a = STOPS[i], b = STOPS[i + 1];
-  return b.finale ? (t < .5 ? a.y + (2009 - a.y) * t * 2 : 2009) : a.y + (b.y - a.y) * t; };
+  return b.finale ? a.y : a.y + (b.y - a.y) * t; };   // toward the finale the year holds at 2005, then shows the span
 
 const slider = $("#year"), num = $("#num"), form = $("#form"), caption = $("#caption"), playBtn = $("#play"), ticks = $("#ticks");
 const imgs = STOPS.map((s, i) => {
@@ -429,9 +450,9 @@ function show(s, announce) {
   form.setAttribute("aria-label", s.finale ? "MoMu's dress form wearing the Jak, the monpe trousers and the football boots at once" : `MoMu's dress form wearing the ${s.name}, ${span(s.from, s.to)}`);
   caption.setAttribute("aria-live", announce ? "polite" : "off");
   caption.innerHTML = s.finale
-    ? `<p class="tag">Your look · 3 pieces</p><p class="name">${esc(s.name)}</p><p class="years">From 1750 to 2005</p>
+    ? `<p class="name">${esc(s.name)}</p><p class="years">From 1750 to 2005</p><p class="tag">Your look · 3 pieces</p>
        <ul class="worn">${s.worn.map(([n, y]) => `<li>${esc(n)}<span>${y}</span></li>`).join("")}</ul>`
-    : `<p class="tag">${esc(s.id)} · ${esc(s.slot)}</p><p class="name">${esc(s.name)}</p><p class="years">Made ${span(s.from, s.to)}</p>
+    : `<p class="name">${esc(s.name)}</p><p class="years">Made ${span(s.from, s.to)}</p><p class="tag">${esc(s.id)} · ${esc(s.slot)}</p>
        <blockquote><q>${esc(s.q)}</q><cite>MoMu's record, our translation</cite></blockquote>`;
   if (!reduce) caption.animate([{ opacity: 0, transform: "translateY(6px)" }, { opacity: 1, transform: "none" }], { duration: 260, easing: "cubic-bezier(0.23, 1, 0.32, 1)" });
 }
@@ -501,8 +522,7 @@ else { touring = false; setPlayUi(); }
 /* ---------- Guess the jak's year: the app's win rule, three tries, nobody loses ---------- */
 const JAK = { from: 1750, to: 1780 }, guessEl = $("#guess");
 function ask() {
-  guessEl.innerHTML = `<p class="tag">Win it · ST503</p>
-    <p class="q">When was it made?</p>
+  guessEl.innerHTML = `<p class="q">When was it made?</p>
     <img class="pic" src="assets/landing/ST503.webp" width="600" height="782" loading="lazy" alt="The Jak, ST503, on a museum mannequin">
     <output id="gYear" for="gSlider">1900</output>
     <input type="range" id="gSlider" min="1700" max="2025" step="5" value="1900" aria-label="Your guess, year">
@@ -531,6 +551,10 @@ function won(off) {
   $("#gAgain").addEventListener("click", ask);
 }
 ask();
+
+/* the film: our play button over the poster, the browser's controls once it plays */
+const film = $("#film-video"), playFilm = $("#playFilm");
+playFilm.addEventListener("click", () => { playFilm.hidden = true; film.controls = true; film.play().catch(() => {}); film.focus(); });
 </script>
 </body>
 </html>
