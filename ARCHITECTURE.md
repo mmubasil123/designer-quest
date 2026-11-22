@@ -46,7 +46,8 @@ mockups/pieces.json  (single source of truth for pieces) ───────�
   0.169.0). Detail hunt; progress in localStorage `secondSkin.found.v1` (`{id: [detail index]}`), which the main
   page reads to unlock a splat piece's fabric. `splat-viewer.html` is a local-only viewer for `splats/`.
 - Deploy: Vercel project `second-skin`, root `mockups/`, `.vercelignore` drops tools and sources;
-  `vercel.json` rewrites `/` to the page.
+  `/` serves the landing page `index.html` (E4), `vercel.json` rewrites `/stage` to the Stage (`second-skin.html`);
+  the landing page forwards `?card=` and `?fabric=` links to the Stage before anything renders, so sticker URLs keep working.
 - Ask the archive (H2): fact card **Ask** opens `ask.js`'s sheet, which POSTs `{pieceId, question}` to
   `api/ask.js` (Vercel function, key in env `ANTHROPIC_API_KEY`) or, offline, answers suggested questions from
   `ask-records.json` fields. Local stand-in for Vercel: `tools/ask_dev_server.mjs`; eval: `tools/ask_eval/`.

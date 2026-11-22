@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>
+  /* E4: a sticker or a won fabric arrives as /?card=<id> or /?fabric=<id>; those links belong to the Stage, untouched */
+  if (/[?&](card|fabric)=/.test(location.search)) location.replace("second-skin.html" + location.search + location.hash);
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MoMu · Wear 255 years</title>
+<meta name="description" content="Win real pieces from MoMu, the fashion museum in Antwerp, by guessing when they were made. Then wear them on a museum dress form, from a 1750 jak to 2005 football boots.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/hanken-grotesk.woff2" crossorigin>
+<link rel="preload" as="image" href="assets/landing/1750.webp" fetchpriority="high">
+<link rel="stylesheet" href="theme.css">
+<style>
+:root { --gutter: clamp(16px, 3.4vw, 48px); --track-h: 104px; }
+* { box-sizing: border-box; }
+html { background: var(--paper); color: var(--ink); -webkit-text-size-adjust: 100%; }
+body { margin: 0; overflow-x: clip; }
+img, video { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+h1, h2, h3, p, ol, figure, blockquote { margin: 0; }
+.caps { text-transform: uppercase; color: var(--accent); font-weight: 400; letter-spacing: var(--track-title); }
+.tag { font: var(--t-label); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--muted); font-variant-numeric: tabular-nums; }
+.btn-go { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 24px; border-radius: 999px;
+  background: var(--ink); color: var(--paper); font: 500 16px/1 var(--sans); text-decoration: none; border: 0; cursor: pointer;
+  transition: transform 160ms var(--ease-out), background-color 200ms ease; }
+.btn-go:active { transform: scale(.97); }
+.btn-go svg { transition: transform 200ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .btn-go:hover { background: var(--accent-ink); } .btn-go:hover svg { transform: translateX(3px); } }
+.link { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+
+/* ---------- nav ---------- */
+.nav { position: absolute; z-index: 5; inset: 0 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px var(--gutter); }
+.nav .home { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); }
+.nav nav { display: flex; align-items: center; gap: 6px; }
+.nav nav a:not(.btn-go) { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; background: var(--paper); box-shadow: var(--shadow-pill); font: 500 15px/1 var(--sans); text-decoration: none; }   /* white pills: the numeral may run under the nav */
+@media (hover: hover) and (pointer: fine) { .nav nav a:not(.btn-go):hover { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 6px; text-decoration-thickness: 1.5px; } }
+.nav .btn-go { min-height: 44px; padding: 0 18px; font-size: 15px; margin-left: 8px; }
+
+/* ---------- hero: the year is the interface ---------- */
+.hero { position: relative; height: 100svh; min-height: 700px; overflow: hidden; background: linear-gradient(var(--paper) 52%, var(--wall)); }
+.numeral { position: absolute; left: 0; right: 0; bottom: calc(var(--track-h) + 300px); text-align: center; pointer-events: none; user-select: none;
+  font: 400 calc((100vw - 2 * var(--gutter)) / 2.08)/.74 var(--sans);   /* "1750" runs gutter to gutter; a short window crops its top, never the caption's ground */ letter-spacing: -.04em; color: var(--accent); font-variant-numeric: tabular-nums; }
+.form { position: absolute; left: 50%; bottom: calc(var(--track-h) - 6px); height: min(calc(100svh - var(--track-h) - 40px), 900px);
+  aspect-ratio: 720 / 1320; transform: translateX(-50%); }
+.form img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; filter: blur(10px); transform: translateY(-18px) scale(.985);
+  transition: opacity 200ms ease, filter 200ms ease, transform 200ms ease; }   /* the outgoing outfit leaves quickly */
+.form img.on { opacity: 1; filter: none; transform: none;
+  transition: opacity 420ms var(--ease-out), filter 480ms var(--ease-out), transform 640ms var(--ease-out); }   /* the new one drops onto the form, as in the app */
+.caption { position: absolute; left: var(--gutter); bottom: calc(var(--track-h) + 28px); width: min(330px, 27vw); }
+.caption .name { font: var(--t-title); font-size: 26px; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 4px; text-wrap: balance; }
+.caption .tag { margin-top: 4px; }
+.caption .years { font: 500 15px/1.4 var(--sans); font-variant-numeric: tabular-nums; }
+.caption blockquote { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+.caption q { font: var(--t-quote); quotes: "\201C" "\201D"; text-wrap: pretty; }
+.caption cite { display: block; margin-top: 8px; font: var(--t-small); font-size: 12px; font-style: normal; color: var(--muted); }
+.caption .worn { list-style: none; padding: 0; margin-top: 14px; border-top: 1px solid var(--line); }
+.caption .worn li { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); font: 400 15px/1.4 var(--sans); font-variant-numeric: tabular-nums; }
+.caption .worn span { color: var(--muted); }
+.pitch { position: absolute; right: var(--gutter); bottom: calc(var(--track-h) + 28px); width: min(340px, 27vw); display: grid; justify-items: end; text-align: right; gap: 14px; }
+.pitch h1 { font: 400 clamp(30px, 2.9vw, 42px)/1.04 var(--sans); color: var(--accent-ink); }   /* sits on the grey floor: the darker red keeps 5.5:1 */
+.pitch p { font: 400 16px/1.45 var(--sans); text-wrap: pretty; }
+
+.track { position: absolute; inset: auto var(--gutter) 0; height: var(--track-h); display: flex; align-items: flex-start; gap: 14px; padding-top: 14px; }
+.play { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--ink); background: var(--paper); color: var(--ink); display: grid; place-items: center; cursor: pointer;
+  transition: transform 160ms var(--ease-out); }
+.play:active { transform: scale(.94); }
+.rail { position: relative; flex: 1; --thumb: 26px; }
+.rail input { -webkit-appearance: none; appearance: none; display: block; width: 100%; height: 44px; margin: 0; background: transparent; cursor: grab; touch-action: pan-y; }
+.rail input:active { cursor: grabbing; }
+.rail input::-webkit-slider-runnable-track { height: 2px; background: var(--ink); }
+.rail input::-moz-range-track { height: 2px; background: var(--ink); }
+.rail input::-webkit-slider-thumb { -webkit-appearance: none; width: var(--thumb); height: var(--thumb); margin-top: -12px; border-radius: 50%; background: var(--accent);
+  border: 3px solid var(--paper); box-shadow: 0 2px 10px rgb(0 0 0 / .28); transition: transform 160ms var(--ease-out); }
+.rail input::-moz-range-thumb { width: var(--thumb); height: var(--thumb); border-radius: 50%; background: var(--accent); border: 3px solid var(--paper); box-shadow: 0 2px 10px rgb(0 0 0 / .28); }
+.rail input:active::-webkit-slider-thumb { transform: scale(1.15); }
+.rail input:focus-visible { outline: none; }
+.rail input:focus-visible::-webkit-slider-thumb { outline: 2px solid var(--ink); outline-offset: 3px; }
+.rail input:focus-visible::-moz-range-thumb { outline: 2px solid var(--ink); outline-offset: 3px; }
+.ticks { position: absolute; inset: 22px 0 auto; height: 40px; pointer-events: none; }
+.tick { position: absolute; top: 0; left: calc(var(--thumb) / 2 + var(--p) * (100% - var(--thumb))); transform: translateX(-50%);
+  display: grid; justify-items: center; gap: 10px; padding: 0 4px; border: 0; background: none; font: var(--t-label); letter-spacing: var(--track-label);
+  color: var(--muted); font-variant-numeric: tabular-nums; text-transform: uppercase; cursor: pointer; pointer-events: auto; white-space: nowrap; transition: color 150ms ease; }
+.tick::before { content: ""; width: 1px; height: 8px; background: var(--ink); }
+.tick[aria-current="true"] { color: var(--ink); }
+.tick.last { transform: translateX(-100%); justify-items: end; }
+.tick.last::before { margin-right: 10px; }
+.tick.first { transform: none; justify-items: start; margin-left: -12px; }
+.tick.first::before { margin-left: 12px; }
+
+/* ---------- the visit ---------- */
+section { scroll-margin-top: 24px; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 var(--gutter); }
+.visit { padding: clamp(96px, 12vw, 168px) 0 clamp(64px, 8vw, 120px); }
+.visit h2, .real h2, .close h2 { font: 400 clamp(34px, 4.4vw, 60px)/1.02 var(--sans); max-width: 14ch; text-wrap: balance; }
+.lede { margin-top: 24px; max-width: 58ch; font: 400 19px/1.5 var(--serif); text-wrap: pretty; }
+.beats { list-style: none; padding: 0; margin-top: clamp(56px, 7vw, 96px); display: grid; gap: clamp(72px, 9vw, 136px); }
+.beat { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+.beat:nth-child(even) .beat-media { order: 2; }
+.beat h3 { font: 400 clamp(26px, 2.6vw, 36px)/1.05 var(--sans); text-wrap: balance; }
+.beat .label-line { margin: 10px 0 18px; padding-bottom: 14px; border-bottom: 1px solid var(--line); font: var(--t-label); font-size: 12px; letter-spacing: var(--track-label); text-transform: uppercase; color: var(--muted); font-variant-numeric: tabular-nums; max-width: none; }
+.beat p { font: 400 18px/1.5 var(--sans); max-width: 46ch; text-wrap: pretty; }
+.beat p + p { margin-top: 12px; }
+.beat-media { display: flex; justify-content: center; }
+.phone { width: min(300px, 100%); border-radius: 38px; padding: 10px; background: var(--ink); box-shadow: 0 30px 70px -30px rgb(0 0 0 / .45); }
+.phone img { border-radius: 29px; width: 100%; aspect-ratio: 540 / 1169; object-fit: cover; object-position: top; background: var(--wall); }
+.found { list-style: none; padding: 0; margin-top: 18px; border-top: 1px solid var(--line); max-width: 46ch; }
+.found li { padding: 12px 0; border-bottom: 1px solid var(--line); font: 500 15px/1.4 var(--sans); }
+.found q { display: block; margin-top: 4px; font: var(--t-quote); font-size: 16px; color: var(--muted); }
+
+/* the guess: the app's own rule, playable here */
+.guess { width: min(440px, 100%); background: var(--paper); border-radius: var(--r-card); box-shadow: var(--shadow-card); padding: 24px 24px 22px; text-align: center; }
+.guess .q { font: 400 22px/1.15 var(--sans); margin: 0 0 14px; }
+.guess .pic { width: 150px; aspect-ratio: 600 / 782; margin: 0 auto; background: var(--wall); border-radius: var(--r-pic); object-fit: cover; }
+.guess output { display: block; margin: 12px 0 4px; font: 400 48px/1 var(--sans); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.guess input { width: 100%; accent-color: var(--ink); height: 44px; margin: 0; cursor: pointer; }
+.guess .ends { display: flex; justify-content: space-between; margin-top: -6px; }
+.guess .hint { min-height: 2.9em; margin: 10px 0 14px; font: 400 15px/1.4 var(--sans); color: var(--muted); text-wrap: balance; }
+.guess .hint.nudge { animation: nudge 360ms var(--ease-out); color: var(--ink); }
+@keyframes nudge { 20% { transform: translateX(-6px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-2px); } }
+.guess .btn-go { width: 100%; }
+.guess .cheer { font: 400 32px/1.1 var(--serif); margin-top: 2px; }
+.guess .won-name { font: var(--t-title); text-transform: uppercase; color: var(--accent-ink); margin: 8px 0 12px; }
+.guess .made { font: 500 15px/1.4 var(--sans); margin: 12px 0; font-variant-numeric: tabular-nums; }
+.guess blockquote { text-align: left; border-top: 1px solid var(--line); padding-top: 12px; margin: 0 0 18px; }
+.guess blockquote q { font: var(--t-quote); font-size: 16px; }
+.guess blockquote .tag { display: block; margin-top: 6px; text-transform: none; letter-spacing: 0; font-size: 12px; }
+.again { margin-top: 10px; min-height: 44px; border: 0; background: none; font: 500 15px/1 var(--sans); cursor: pointer; }
+.guess .pop { animation: pop 420ms var(--ease-out); }
+@keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.98); } }
+
+.span-look { position: relative; width: min(460px, 100%); aspect-ratio: 720 / 1320; max-height: 640px; background: linear-gradient(var(--paper) 40%, var(--wall)); }   /* the Stage floor, as in the hero */
+.span-look img { width: 100%; height: 100%; object-fit: contain; }
+.span-look .pin { position: absolute; display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--paper); border-radius: 999px; box-shadow: var(--shadow-pill);
+  font: 500 13px/1 var(--sans); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.span-look .pin b { color: var(--accent-ink); font-weight: 500; }
+.swatches { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; width: min(460px, 100%); list-style: none; padding: 0; }
+.swatches li { display: grid; gap: 8px; }
+.swatches img { aspect-ratio: 1; width: 100%; object-fit: cover; border-radius: var(--r-pic); }
+.swatches span { font: 400 13px/1.4 var(--sans); }
+.swatches span i { font-style: normal; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* ---------- film ---------- */
+.film { background: var(--ink); color: var(--paper); padding: clamp(80px, 10vw, 140px) 0; }
+.film .head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 36px; }
+.film h2 { font: 400 clamp(34px, 4.4vw, 60px)/1.02 var(--sans); text-transform: uppercase; color: #ff5a4f; max-width: 16ch; }   /* the red, lifted for black: 5.6:1 */
+.film .head p { max-width: 40ch; font: 400 17px/1.5 var(--sans); color: #c9c9c9; }
+.film video { width: 100%; aspect-ratio: 16 / 9; background: #111; border-radius: var(--r-pic); }
+.player { position: relative; }
+.player video::-webkit-media-controls-panel { background-image: linear-gradient(transparent, rgb(0 0 0 / .55)); }
+.play-film { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 14px; min-height: 64px; padding: 8px 26px 8px 8px;
+  border: 0; border-radius: 999px; background: var(--paper); color: var(--ink); box-shadow: 0 18px 50px rgb(0 0 0 / .35); font: 500 17px/1 var(--sans); cursor: pointer;
+  transition: transform 160ms var(--ease-out), opacity 200ms ease; }
+.play-film:active { transform: translate(-50%, -50%) scale(.97); }
+.play-film .disc { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: var(--paper); }
+.play-film .dur { color: var(--muted); font-variant-numeric: tabular-nums; }
+.play-film[hidden] { display: none; }
+@media (hover: hover) and (pointer: fine) { .play-film:hover .disc { background: var(--accent-ink); } }
+
+/* ---------- real records ---------- */
+.real { padding: clamp(96px, 11vw, 160px) 0; }
+.real .cols { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+.facts { list-style: none; padding: 0; border-top: 1px solid var(--ink); }
+.facts li { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.facts b { font: 400 22px/1.15 var(--sans); }
+.facts span { font: 400 16px/1.5 var(--sans); color: var(--muted); text-wrap: pretty; }
+
+/* ---------- close ---------- */
+.close { position: relative; overflow: hidden; padding: clamp(96px, 11vw, 160px) 0 0; background: linear-gradient(var(--paper), var(--wall)); }
+.close .wrap { position: relative; z-index: 1; display: grid; justify-items: start; gap: 22px; }
+.close h2 { max-width: 12ch; color: var(--accent-ink); }
+.close p { font: 400 17px/1.5 var(--sans); max-width: 44ch; }
+.close .btn-go { min-height: 56px; padding: 0 30px; font-size: 17px; }
+.close .bigyears { margin-top: clamp(40px, 6vw, 72px); white-space: nowrap; text-align: center; font: 400 min(21vw, 300px)/.74 var(--sans); letter-spacing: -.04em; color: var(--accent);
+  font-variant-numeric: tabular-nums; user-select: none; }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding: 28px var(--gutter) calc(28px + env(safe-area-inset-bottom)); background: var(--ink); color: var(--paper); }
+.foot .momu-logo { color: var(--paper); width: 54px; height: 30px; }
+.foot p { font: var(--t-small); color: #c9c9c9; }
+.foot nav { display: flex; gap: 4px; }
+.foot nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 10px; font: 500 14px/1 var(--sans); text-decoration: none; }
+@media (hover: hover) and (pointer: fine) { .foot nav a:hover { text-decoration: underline; text-underline-offset: 5px; } }
+
+/* short desktop windows (laptops at 768): the quote steps aside so the year keeps most of its height */
+@media (min-width: 900px) and (max-height: 820px) {
+  .numeral { bottom: calc(var(--track-h) + 290px); }
+  .caption blockquote { display: none; }
+}
+
+/* ---------- phones and narrow windows ---------- */
+@media (max-width: 899px) {
+  :root { --track-h: 92px; }
+  .nav nav a:not(.btn-go) { display: none; }
+  .hero { height: auto; min-height: 0; display: flex; flex-direction: column; padding-top: 68px; }
+  .numeral { order: 1; } .form { order: 2; } .track { order: 3; } .pitch { order: 4; } .caption { order: 5; }
+  .numeral { position: relative; inset: auto; bottom: auto; font-size: min(36vw, 200px); line-height: .8; }
+  .form { position: relative; left: auto; bottom: auto; transform: none; align-self: center; height: min(46svh, 440px); margin-top: calc(min(36vw, 200px) * -.5); }
+  .track { position: relative; inset: auto; height: auto; padding: 6px var(--gutter) 0; }
+  .ticks { height: 34px; }
+  .tick:not(.major) { color: transparent; }
+  .tick:not(.major)::before { height: 6px; }
+  .caption, .pitch { position: relative; inset: auto; width: auto; padding: 0 var(--gutter); }
+  .caption { margin: 8px var(--gutter) 40px; padding: 20px 0 0; border-top: 1px solid var(--line); min-height: 14.5em; }
+  .pitch { justify-items: start; text-align: left; gap: 12px; padding-top: 24px; padding-bottom: 24px; }
+  .pitch h1 { font-size: 30px; }
+  .beat { grid-template-columns: 1fr; gap: 28px; }
+  .beat:nth-child(even) .beat-media { order: 0; }
+  .real .cols { grid-template-columns: 1fr; }
+  .facts li { grid-template-columns: 1fr; gap: 6px; }
+}
+@media (max-width: 380px) { .nav .btn-go { padding: 0 14px; } .caption .name { font-size: 22px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .form img, .form img.on { filter: none; transform: none; transition: opacity 240ms ease; }
+  .guess .hint.nudge, .guess .pop { animation: none; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="home" href="./" aria-label="MoMu, home"><svg class="momu-logo" viewBox="0 0 534 299" aria-hidden="true"><g transform="scale(1 2.491667)" fill="currentColor" fill-rule="evenodd"><polygon points="247.449335 0 132.331383 115.359336 12.7377802 0 0 0 0 120 68.4655685 120 68.4655685 56.4509346 133.794221 120 196.889009 120 260.934378 56.4509346 260.934378 120 264 120 264 0"/><polygon points="517.451645 0 402.326108 115.359336 282.738035 0 270 0 270 120 338.464298 120 338.464298 56.4509346 403.794257 120 466.890307 120 530.939597 56.4509346 530.939597 120 534 120 534 0"/></g></svg></a>
+  <nav aria-label="Page">
+    <a href="#visit">How it works</a>
+    <a href="#film">Film</a>
+    <a class="btn-go" href="second-skin.html">Start</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero" aria-labelledby="pitchTitle">
+  <div class="numeral" aria-hidden="true"><span id="num">1750</span></div>
+  <div class="form" id="form" role="img" aria-label="MoMu's dress form wearing the Jak, 1750 to 1780"></div>
+
+  <div class="caption" id="caption" aria-live="off"></div>
+
+  <div class="pitch">
+    <h1 id="pitchTitle" class="caps">Wear 255 years of MoMu</h1>
+    <p>Win real pieces from Antwerp's fashion museum by guessing when they were made. Then wear them, all at once, on a museum dress form.</p>
+    <a class="btn-go" href="second-skin.html">Start dressing <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+
+  <div class="track">
+    <button class="play" id="play" type="button" aria-label="Pause the tour through the years" aria-pressed="false">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path id="playIcon" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+    </button>
+    <div class="rail">
+      <input type="range" id="year" min="0" max="1200" step="1" value="0" aria-label="Year">
+      <div class="ticks" id="ticks"></div>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit" aria-labelledby="visitTitle">
+  <div class="wrap">
+    <h2 id="visitTitle" class="caps">How a visit goes</h2>
+    <p class="lede">A friend brings you to MoMu's Study Collection: thousands of pieces in archive boxes, inventory numbers, labels in Dutch. Then you notice a small sticker beside a jacket from 1750.</p>
+
+    <ol class="beats">
+      <li class="beat">
+        <div class="beat-media"><div class="phone"><img src="assets/landing/screen-story.webp" width="540" height="1169" loading="lazy" alt="The app's story sheet for the Jak, ST503, with its photo, a play button for the narration and the story text."></div></div>
+        <div>
+          <h3 class="caps">Tap the sticker</h3>
+          <p class="label-line">ST503 · Jak · 1750 to 1780</p>
+          <p>Tap the MoMu sticker beside a piece and it opens on your phone, with its story read aloud. No app store, no account.</p>
+        </div>
+      </li>
+
+      <li class="beat">
+        <div class="beat-media">
+          <div class="guess" id="guess" aria-live="polite"></div>
+        </div>
+        <div>
+          <h3 class="caps">Guess the year, win the piece</h3>
+          <p class="label-line">ST503 · Jak · Top</p>
+          <p>When was it made? Drag the year and guess. Get within 25 years and the piece is yours. Missed? You get a hint, Earlier or Later, and another try.</p>
+          <p>Try it on the jak, right here.</p>
+        </div>
+      </li>
+
+      <li class="beat">
+        <div class="beat-media">
+          <figure class="span-look">
+            <img src="assets/landing/look.webp" width="720" height="1320" loading="lazy" alt="The dress form wearing the Jak, the monpe trousers and the football boots at once.">
+            <figcaption>
+              <span class="pin" style="left:4%;top:28%"><b>1750</b> Jak</span>
+              <span class="pin" style="right:2%;top:56%"><b>1965</b> Monpe trousers</span>
+              <span class="pin" style="left:6%;bottom:9%"><b>2005</b> Football boots</span>
+            </figcaption>
+          </figure>
+        </div>
+        <div>
+          <h3 class="caps">Wear it: one look, 255 years</h3>
+          <p class="label-line">ST503 · ST80931 · ST2407/1-2 · 1750 to 2005</p>
+          <p>Every piece you win goes into your wardrobe. Put it on the dress form with anything else you won: an eighteenth-century jak over 1965 monpe trousers, with Dirk Bikkembergs football boots from 2005.</p>
+          <p>Turn the form with your finger. The look tells you how many years it spans.</p>
+        </div>
+      </li>
+
+      <li class="beat">
+        <div class="beat-media"><div class="phone"><img src="assets/landing/screen-upclose.webp" width="540" height="1169" loading="lazy" alt="Up close on the riveted wool coat: MoMu's 3D model and a list of details to find."></div></div>
+        <div>
+          <h3 class="caps">Look closer</h3>
+          <p class="label-line">ST81190 · Riveted wool coat · 1998 to 1999</p>
+          <p>Study pieces hide details that MoMu's record writes down. Find all three on the 3D model of A.F. Vandevorst's riveted wool coat from 1998, and you win its fabric.</p>
+          <ul class="found">
+            <li>Rivets instead of seams <q>Joined together with brass-coloured rivets.</q></li>
+            <li>Nine press studs <q>The coat closes at the centre front with nine brass-coloured press studs.</q></li>
+            <li>A red cross at the back of the neck <q>A red cross is stitched on the back at neck height.</q></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="beat">
+        <div class="beat-media">
+          <ul class="swatches" aria-label="Fabrics you can win">
+            <li><img src="assets/swatch/ST80930.jpg" width="512" height="512" loading="lazy" alt=""><span>Ikat <i>1950 to 1960</i></span></li>
+            <li><img src="assets/swatch/ST80881.jpg" width="512" height="512" loading="lazy" alt=""><span>Furisode silk <i>1979</i></span></li>
+            <li><img src="assets/swatch/ST2434.jpg" width="512" height="512" loading="lazy" alt=""><span>Green broadcloth <i>1795 to 1840</i></span></li>
+            <li><img src="assets/swatch/ST2435.jpg" width="512" height="512" loading="lazy" alt=""><span>Sequins <i>1920 to 1925</i></span></li>
+            <li><img src="assets/swatch/ST655_1.jpg" width="512" height="512" loading="lazy" alt=""><span>Striped synthetic <i>1947 to 1950</i></span></li>
+            <li><img src="assets/swatch/ST81190.jpg" width="512" height="512" loading="lazy" alt=""><span>Grey wool <i>1998 to 1999</i></span></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="caps">Remix the fabrics</h3>
+          <p class="label-line">ST80930 on ST503 · 1950s ikat on a 1750 cut</p>
+          <p>Put the ikat of a 1950s vest on the body of a 1750 jak, or the furisode's painted silk on its sleeves. Centuries apart, on one form.</p>
+        </div>
+      </li>
+
+      <li class="beat">
+        <div class="beat-media"><div class="phone"><img src="assets/landing/screen-share-card.webp" width="540" height="960" loading="lazy" alt="A share card: Noor's look across 255 years, from 1750 to 2005, with the pieces listed and a MoMu credit." style="aspect-ratio:540/928"></div></div>
+        <div>
+          <h3 class="caps">Share the look</h3>
+          <p class="label-line">Your look · 1750 to 2005 · credit: MoMu</p>
+          <p>Name your look and share it as a story-sized card: the pieces, the years they span, and a line from the museum's record. Then go and find the next sticker.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="film" id="film" aria-labelledby="filmTitle">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="filmTitle">A visit in 44 seconds</h2>
+      <p>Made from the app's real screens and MoMu's own photos. Sound on.</p>
+    </div>
+    <div class="player">
+      <video id="film-video" playsinline preload="none" poster="assets/landing/teaser-poster.webp" width="1280" height="720">
+        <source src="assets/landing/momu-teaser.mp4" type="video/mp4">
+      </video>
+      <button class="play-film" id="playFilm" type="button"><span class="disc"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span>Play the film <span class="dur">0:44</span></button>
+    </div>
+  </div>
+</section>
+
+<section class="real" aria-labelledby="realTitle">
+  <div class="wrap cols">
+    <h2 id="realTitle" class="caps">Every word from the museum</h2>
+    <ul class="facts">
+      <li><b>Real records</b><span>Every date, name and quote comes from MoMu's own collection records. When a field is missing, the app says "not recorded" instead of guessing.</span></li>
+      <li><b>Real pieces</b><span>The pieces you wear are MoMu's: 3D models made from the museum's photos, and MoMu's own CLO models where they exist.</span></li>
+      <li><b>Nothing to install</b><span>It runs in your phone's browser. No account: your wardrobe stays on your phone.</span></li>
+      <li><b>More waiting</b><span>19 pieces to win today, picked from the 4622 objects in MoMu's public collection data.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="close" aria-labelledby="closeTitle">
+  <div class="wrap">
+    <h2 id="closeTitle" class="caps">The collection is waiting</h2>
+    <p>Start with a starter wardrobe on the dress form, or find a MoMu sticker at the Study Center and tap it.</p>
+    <a class="btn-go" href="second-skin.html">Start dressing <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+  <p class="bigyears" aria-hidden="true">1750–2005</p>
+</section>
+</main>
+
+<footer class="foot">
+  <svg class="momu-logo" viewBox="0 0 534 299" role="img" aria-label="MoMu"><g transform="scale(1 2.491667)" fill="currentColor" fill-rule="evenodd"><polygon points="247.449335 0 132.331383 115.359336 12.7377802 0 0 0 0 120 68.4655685 120 68.4655685 56.4509346 133.794221 120 196.889009 120 260.934378 56.4509346 260.934378 120 264 120 264 0"/><polygon points="517.451645 0 402.326108 115.359336 282.738035 0 270 0 270 120 338.464298 120 338.464298 56.4509346 403.794257 120 466.890307 120 530.939597 56.4509346 530.939597 120 534 120 534 0"/></g></svg>
+  <p>Collection: MoMu Fashion Museum Antwerp. Made at the MoMu Hackathon 2026 by Team C Blanco.</p>
+  <nav aria-label="MoMu">
+    <a href="https://www.momu.be/en/" rel="noopener">momu.be</a>
+    <a href="https://www.instagram.com/momuantwerp/" rel="noopener">@momuantwerp</a>
+  </nav>
+</footer>
+
+<script type="module">
+import { judge } from "./win.js";   // the app's own guess rule: within 25 years wins
+
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = s => document.querySelector(s);
+const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+const span = (a, b) => a === b ? `${a}` : `${a} to ${b}`;
+
+/* One stop per era. Names, years and quotes from pieces.json and records.json (D3; English is our translation of the
+   Dutch record). Stills: presentation/reel/scripts/landing-stills.mjs renders the app's own Stage. */
+const STOPS = [
+  { y: 1750, img: "1750", id: "ST503", slot: "Top", name: "Jak", from: 1750, to: 1780, q: "The jacket reaches to the waist and has long skirts, a square neckline and close-fitting sleeves to the elbow." },
+  { y: 1795, img: "1795", id: "ST2434", slot: "Top", name: "Green wool coat", from: 1795, to: 1840, q: "Coat in green broadcloth, with tails." },
+  { y: 1870, img: "1870", id: "ST2431/1-4", slot: "Study piece", name: "Light-blue cavalry uniform", from: 1870, to: 1900, q: "Military uniform for a man, in light blue and red wool, of a lieutenant of the National Guard." },
+  { y: 1900, img: "1900", id: "ST671", slot: "Study piece", name: "Silk walking dress", from: 1900, to: 1915, q: "Long gown, a walking gown, in beige silk rep." },
+  { y: 1920, img: "1920", id: "ST2435", slot: "Study piece", name: "Sequin silk dress", from: 1920, to: 1925, q: "Calf-length dress in ecru woven silk, covered all over in sequin embroidery with the iridescent effect of pearls." },
+  { y: 1937, img: "1937", id: "ST2203", slot: "Study piece", name: "Black satin dress", from: 1937, to: 1948, q: "Dress of black silk satin." },
+  { y: 1947, img: "1947", id: "ST655/1", slot: "Full look", name: "Cocktail dress", from: 1947, to: 1950, q: "Calf- to ankle-length button-through gown, a cocktail dress, in green and black horizontally striped synthetic material." },
+  { y: 1950, img: "1950", id: "ST80930", slot: "Top", name: "Ikat vest", from: 1950, to: 1960, q: "Dark blue waistcoat or jacket in ikat with light blue spots and red squares." },
+  { y: 1965, img: "1965", id: "ST80931", slot: "Bottom", name: "Monpe trousers", from: 1965, to: 1965, q: "Dark blue puffed trousers, or “monpe”, in ikat with light blue spots and red squares." },
+  { y: 1979, img: "1979", id: "ST80881", slot: "Full look", name: "Furisode kimono", from: 1979, to: 1979, q: "Ecru furisode kimono, painted and with a gold print." },
+  { y: 1998, img: "1998", id: "ST81190", slot: "Study piece", name: "Riveted wool coat, A.F. Vandevorst", from: 1998, to: 1999, q: "Fitted coat in grey woven wool with a stand-up collar." },
+  { y: 2005, img: "2005", id: "ST2407/1-2", slot: "Feet", name: "Football boots, Dirk Bikkembergs", from: 2005, to: 2009, q: "Pair of football boots in white, with leather in blue circular stripes." },
+  { y: 2016, img: "look", finale: true, name: "One look, 255 years", worn: [["Jak", "1750"], ["Monpe trousers", "1965"], ["Football boots", "2005"]] },
+];
+/* the stops sit evenly on the track (one detent each); between two stops the numeral counts every year */
+const LAST = STOPS.length - 1, UNIT = 100, MAJOR = new Set([0, 6, LAST]);   // labels a phone keeps
+STOPS.forEach((s, i) => { s.pos = i * UNIT; });
+const yearAt = v => { v = Math.max(0, Math.min(LAST * UNIT, v)); const i = Math.min(LAST - 1, Math.floor(v / UNIT)), t = v / UNIT - i, a = STOPS[i], b = STOPS[i + 1];
+  return b.finale ? a.y : a.y + (b.y - a.y) * t; };   // toward the finale the year holds at 2005, then shows the span
+
+const slider = $("#year"), num = $("#num"), form = $("#form"), caption = $("#caption"), playBtn = $("#play"), ticks = $("#ticks");
+const imgs = STOPS.map((s, i) => {
+  const im = new Image(720, 1320);
+  im.src = `assets/landing/${s.img}.webp`; im.alt = ""; im.decoding = "async";
+  if (i) im.loading = "eager";
+  form.append(im); return im;
+});
+STOPS.forEach((s, i) => {
+  const b = document.createElement("button");
+  b.type = "button"; b.tabIndex = -1; b.setAttribute("aria-hidden", "true");
+  b.className = "tick" + (MAJOR.has(i) ? " major" : "") + (i === 0 ? " first" : "") + (s.finale ? " last" : "");
+  b.style.setProperty("--p", i / LAST);
+  b.textContent = s.finale ? "Your look" : s.y;
+  b.addEventListener("click", () => { stopTour(); go(s.pos, 520); });
+  ticks.append(b);
+});
+const tickEls = [...ticks.children];
+
+const stopAt = v => STOPS[Math.max(0, Math.min(LAST, Math.round(v / UNIT)))];   // the nearest stop dresses the form
+let shown = null;
+function show(s, announce) {
+  if (s === shown) return;
+  shown = s;
+  const i = STOPS.indexOf(s);
+  imgs.forEach((im, k) => im.classList.toggle("on", k === i));
+  tickEls.forEach((t, k) => t.setAttribute("aria-current", k === i));
+  form.setAttribute("aria-label", s.finale ? "MoMu's dress form wearing the Jak, the monpe trousers and the football boots at once" : `MoMu's dress form wearing the ${s.name}, ${span(s.from, s.to)}`);
+  caption.setAttribute("aria-live", announce ? "polite" : "off");
+  caption.innerHTML = s.finale
+    ? `<p class="name">${esc(s.name)}</p><p class="years">From 1750 to 2005</p><p class="tag">Your look · 3 pieces</p>
+       <ul class="worn">${s.worn.map(([n, y]) => `<li>${esc(n)}<span>${y}</span></li>`).join("")}</ul>`
+    : `<p class="name">${esc(s.name)}</p><p class="years">Made ${span(s.from, s.to)}</p><p class="tag">${esc(s.id)} · ${esc(s.slot)}</p>
+       <blockquote><q>${esc(s.q)}</q><cite>MoMu's record, our translation</cite></blockquote>`;
+  if (!reduce) caption.animate([{ opacity: 0, transform: "translateY(6px)" }, { opacity: 1, transform: "none" }], { duration: 260, easing: "cubic-bezier(0.23, 1, 0.32, 1)" });
+}
+function setYear(v, announce) {
+  const s = stopAt(v);
+  const y = Math.round(yearAt(v));
+  num.textContent = s.finale ? "255" : y;
+  slider.setAttribute("aria-valuetext", s.finale ? "Your look: 255 years on one form" : `${s.y}: ${s.name}, made ${span(s.from, s.to)}`);
+  show(s, announce);
+}
+
+/* glide the thumb, the numeral and the outfit together; the user's own drag is never animated */
+let raf = 0;
+function go(target, ms) {
+  cancelAnimationFrame(raf);
+  const from = +slider.value;
+  if (reduce || ms === 0 || from === target) { slider.value = target; setYear(target, true); return Promise.resolve(); }
+  const t0 = performance.now(), ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  return new Promise(done => {
+    const step = now => {
+      const t = Math.max(0, Math.min(1, (now - t0) / ms))   /* a frame stamp can precede t0 */, v = from + (target - from) * ease(t);
+      slider.value = v; setYear(t === 1 ? target : v, false);
+      if (t < 1) raf = requestAnimationFrame(step); else done();
+    };
+    raf = requestAnimationFrame(step);
+  });
+}
+
+/* the tour: plays once through the centuries and rests on the 255-year look; pausable, never under reduced motion */
+let touring = false, tourTimer = 0;
+const PAUSE = "M7 5h3.5v14H7zM13.5 5H17v14h-3.5z", PLAY = "M8 5.5v13l11-6.5z";
+function setPlayUi() {
+  playBtn.setAttribute("aria-pressed", String(!touring));
+  playBtn.setAttribute("aria-label", touring ? "Pause the tour through the years" : "Play the tour through the years");
+  $("#playIcon").setAttribute("d", touring ? PAUSE : PLAY);
+}
+function stopTour() { touring = false; clearTimeout(tourTimer); cancelAnimationFrame(raf); setPlayUi(); }
+async function tour() {
+  touring = true; setPlayUi();
+  let i = STOPS.indexOf(stopAt(+slider.value));
+  if (STOPS[i].finale) { i = -1; }
+  while (touring && i < STOPS.length - 1) {
+    i++;
+    await go(STOPS[i].pos, i === 0 ? 700 : 900);
+    if (!touring) return;
+    await new Promise(r => tourTimer = setTimeout(r, STOPS[i].finale ? 0 : 1250));
+  }
+  stopTour();
+}
+playBtn.addEventListener("click", () => touring ? stopTour() : tour());
+slider.addEventListener("pointerdown", stopTour);
+slider.addEventListener("keydown", e => {   // keys move one era at a time
+  const i = STOPS.indexOf(stopAt(+slider.value)), to = { ArrowRight: i + 1, ArrowUp: i + 1, ArrowLeft: i - 1, ArrowDown: i - 1, PageUp: i + 3, PageDown: i - 3, Home: 0, End: LAST }[e.key];
+  if (to === undefined) return;
+  e.preventDefault(); stopTour(); go(STOPS[Math.max(0, Math.min(LAST, to))].pos, 360);
+});
+slider.addEventListener("input", () => { if (touring) stopTour(); cancelAnimationFrame(raf); setYear(+slider.value, true); });
+slider.addEventListener("change", () => go(stopAt(+slider.value).pos, 260));   // settle on the nearest era   // settle on the era's year
+new IntersectionObserver(([e]) => { if (!e.isIntersecting && touring) stopTour(); }).observe($(".hero"));
+document.addEventListener("visibilitychange", () => { if (document.hidden && touring) stopTour(); });
+
+setYear(0, false);
+setPlayUi();
+if (!reduce) imgs[0].decode().catch(() => {}).then(() => { tourTimer = setTimeout(() => { if (+slider.value === 0 && shown === STOPS[0]) tour(); }, 1400); });
+else { touring = false; setPlayUi(); }
+
+/* ---------- Guess the jak's year: the app's win rule, three tries, nobody loses ---------- */
+const JAK = { from: 1750, to: 1780 }, guessEl = $("#guess");
+function ask() {
+  guessEl.innerHTML = `<p class="q">When was it made?</p>
+    <img class="pic" src="assets/landing/ST503.webp" width="600" height="782" loading="lazy" alt="The Jak, ST503, on a museum mannequin">
+    <output id="gYear" for="gSlider">1900</output>
+    <input type="range" id="gSlider" min="1700" max="2025" step="5" value="1900" aria-label="Your guess, year">
+    <div class="ends tag"><span>1700</span><span>2025</span></div>
+    <p class="hint" id="gHint">Get within 25 years to win the jak.</p>
+    <button class="btn-go" id="gGo" type="button">Guess</button>`;
+  const s = $("#gSlider"), out = $("#gYear"), hint = $("#gHint");
+  s.addEventListener("input", () => { out.textContent = s.value; });
+  let tries = 0;
+  $("#gGo").addEventListener("click", () => {
+    const r = judge(+s.value, JAK); tries++;
+    if (r.won || tries >= 3) return won(r.off);
+    hint.textContent = `${r.hint === "later" ? "Later" : "Earlier"} than ${s.value}. ${tries === 1 ? "Try again." : "One more try."}`;
+    hint.classList.remove("nudge"); void hint.offsetWidth; hint.classList.add("nudge");
+  });
+}
+function won(off) {
+  guessEl.innerHTML = `<div class="pop">
+    <p class="cheer">You won it!</p>
+    <p class="won-name">Jak</p>
+    <img class="pic" src="assets/landing/ST503.webp" width="600" height="782" alt="The Jak, ST503">
+    <p class="made">Made 1750 to 1780 · ${off === 0 ? "spot on" : `you were ${off} years off`}</p>
+    <blockquote><q>${esc(STOPS[0].q)}</q><span class="tag">MoMu says, our translation</span></blockquote>
+    <a class="btn-go" href="second-skin.html?card=ST503">Win it in the app</a>
+    <button class="again" type="button" id="gAgain">Play again</button></div>`;
+  $("#gAgain").addEventListener("click", ask);
+}
+ask();
+
+/* the film: our play button over the poster, the browser's controls once it plays */
+const film = $("#film-video"), playFilm = $("#playFilm");
+playFilm.addEventListener("click", () => { playFilm.hidden = true; film.controls = true; film.play().catch(() => {}); film.focus(); });
+</script>
+</body>
+</html>
