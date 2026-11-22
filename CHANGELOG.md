@@ -2,6 +2,23 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## H6 Navigation, PR 3: layers keep their context; progress in the header (2026-11-22, H6, branch hassan/H6-nav)
+- What: one way back for the Stage's layers. A fact card opened from the Museum returns to the Museum when it is
+  closed (×, Escape, back, backdrop); Ask and the 3D view return to the fact card they came from; a choice that leaves
+  (Wear it, Find it at MoMu, Up close, the outfit page) does not come back. The header's "Museum" pill is now a progress
+  chip ("2 of 10 won", opens the Museum; read as "Museum: 2 of 10 pieces won") and "Share look" became a quiet "Share"
+  pill, so the last beat is no longer the loudest button. The Museum opens as a bottom sheet like the fact card (opacity
+  only under reduced motion). Ask lost its handle, which looked draggable but was not (× closes it); the wardrobe
+  handle button is 44 px tall without moving the layout.
+- Checked (browser pane, 390 x 844 and 320 x 700): Museum > fact > Ask, then back three times: fact, Museum, Stage;
+  the same with ×, × and "Back to my look"; wardrobe ⓘ > fact > See it in 3D > back: fact, then Stage; Museum > fact >
+  Find it at MoMu opens only the sticker prompt; history never grows. Header fits at 320 px. Console clean.
+- Why: `docs/UX_AUDIT.md` findings 6 (lost context: closing Ask dropped you on the Stage), 7 (Share loudest, progress
+  hidden) and 9 (false and thin affordances; the chips' scroll cue was already on main).
+- Decision: the dialogs keep their own markup and owners; only the way back changes, through the history entries of
+  `nav.js` (a reopened parent reuses its child's entry). The header chip and the Museum as a sheet touch Basil's top
+  bar and Museum: heads-up in the PR, easy to revert in CSS.
+
 ## H6 Navigation, PR 2: the card scan as one flow with a way out (2026-11-22, H6, branch hassan/H6-nav)
 - What: new `mockups/steps.js`. The story and Win it dialogs share a step line (Story · Guess the year or Up close ·
   Yours) and hand over in place: the old card goes at once and the next rises in without the scale-in, so the scrim

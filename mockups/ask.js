@@ -13,7 +13,6 @@ export function createAsk({ endpoint = "api/ask" } = {}) {
   const el = document.createElement("dialog");
   el.className = "ask"; el.setAttribute("aria-labelledby", "askName");
   el.innerHTML = `<div class="ask-in">
-    <span class="handle" aria-hidden="true"></span>
     <div class="ask-head">
       <div><div class="mono" id="askId"></div><h2 id="askName"></h2></div>
       <button class="ask-x press" data-close aria-label="Close Ask the archive">×</button>
