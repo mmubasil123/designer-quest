@@ -2,6 +2,16 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## the curator's hints on the Win its fabric page (2026-11-22, C2, branch hassan/curator-hints)
+- What: her "3 Hints" for the jacket ST81190 are in `questions.json` (`hints`: title and line, copied by `questions_sync.py`).
+  On Up close, tapping a clue's Hint now also opens her line under that clue (`up-close.html`), next to the ring on the piece.
+  Hints go to the details by position, and only when her list and the piece's details have the same length (3 and 3), so a hint
+  never lands on the wrong clue. First letter capitalised on screen; her wording otherwise unchanged. Pieces without hints
+  behave as before.
+- Why: Hassan asked for her new hint text. `i18n_build.py` now lists the hint lines (`q:<id>:hint:<n>`) for translation.
+- Decision: our clue titles in `pieces.json` stay (they match hers apart from "press studs" vs "press-studs"). Dutch and
+  French hint lines are untranslated until `i18n_build.py` runs with the Gemini key; they show in English meanwhile.
+
 ## Jacket audio follows the curator's more-story text (2026-11-22, C2, branch hassan/curator-story-audio)
 - What: ST81190 no longer has an audio-guide script in `narration-scripts.json`, so it is spoken like her blouse and
   trousers: its title and years, then her 3 more-story paragraphs word for word. Captions are those paragraphs.

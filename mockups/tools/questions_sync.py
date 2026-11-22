@@ -7,6 +7,7 @@ The Heron link (heron.libis.be/momu/.../item/<id>) maps the piece to its invento
 1. Fetch the page's Notion-flavoured Markdown with the Notion connector (page 41f8b3bb922780c1be22c63ccd5cb7c1) to a file.
 2. python3 -I mockups/tools/questions_sync.py page.md     # writes questions.json, then checks it
    python3 -I mockups/tools/questions_sync.py --check     # checks questions.json only
+A "3 Hints:" list in a Story section becomes `hints` (title, text).
 Where a Story has a "more story-format version", only that version is used.
 A piece whose link maps to no app piece is skipped with a note; nothing is invented to fill a gap.
 """
@@ -44,10 +45,13 @@ def parse(md, heron):
         more = re.split(r"<b>\s*more story[^<]*</b>", story_md, maxsplit=1, flags=re.I)   # her "more story-format version"
         if len(more) == 2:
             story_md = more[1]   # the app shows that version only; her plain description variant is dropped
+        story_md, *hint_md = re.split(r"<b>\s*\d*\s*Hints?\s*:?\s*</b>", story_md, maxsplit=1, flags=re.I)   # her "3 Hints:" list
         story = [text(p) for p in re.split(r"\n\s*\n", story_md) if text(p)]
+        hints = [{"title": h["q"], "text": h["a"]} for h in questions_from(hint_md[0])] if hint_md else []
         qtext = next((v for k, v in sections.items() if k.startswith("Questions")), "")
         out.append({"id": pid, "title": title, "link": link, "source": "curator", "facts": facts, "story": story,
-                    "questions": questions_from(qtext)})
+                    "questions": questions_from(qtext),
+                    **({"hints": hints} if hints else {})})
     return out
 
 

@@ -52,6 +52,20 @@
           "q": "Considering the material and style, what seasons was this jacket made for?",
           "a": "Autumn and winter"
         }
+      ],
+      "hints": [
+        {
+          "title": "Rivets instead of seams",
+          "text": "Instead of being sewn, the jacket pieces are held together by little metal bolt-like pieces called rivets"
+        },
+        {
+          "title": "Nine press-studs",
+          "text": "the jacket is closed in the front with a line of nine press-studs are a type of button that closes by pressing them together"
+        },
+        {
+          "title": "A red cross at the back of the neck",
+          "text": "A cross stitched in red thread forming the logo of A.F. Vandevorst"
+        }
       ]
     },
     {

@@ -4,7 +4,7 @@ What is translated (source language in brackets), and where it comes from:
   rec:<id>:quote        the record's first description sentence [nl]          records.json
   rec:<id>:desc:<n>     every sentence of the full description [nl]           ask-records.json (Ask shows quotes from it)
   det:<id>:<i>:quote    Up close detail quote [nl]; :find the prompt [en]     pieces.json
-  q:<id>:story:<n> / :q:<n> / :a:<n> / :fact:<n>   the curator's story, questions, answers, fact values [en]   questions.json
+  q:<id>:story:<n> / :q:<n> / :a:<n> / :hint:<n> / :fact:<n>   the curator's story, questions, answers, hints, fact values [en]   questions.json
   name:<id>             the piece's name on pieces.json [en]
   narr:<id>:<n> / :tease   the spoken story's beats and its tease [en]            narration.json (H13; the audio stays English)
   term:<english>        material, technique and place words [en]              records.json
@@ -83,6 +83,8 @@ def sources():
         for n, x in enumerate(q.get("questions") or []):
             out.append((f"q:{q['id']}:q:{n}", x["q"], "en", {}))
             out.append((f"q:{q['id']}:a:{n}", x["a"], "en", {}))
+        for n, h in enumerate(q.get("hints") or []):
+            out.append((f"q:{q['id']}:hint:{n}", h["text"], "en", {}))
         for n, (k, v) in enumerate(q.get("facts") or []):
             out.append((f"q:{q['id']}:fact:{n}", v, "en", {}))
     for pid, n in json.loads((MOCKUPS / "narration.json").read_text())["pieces"].items():
