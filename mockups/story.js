@@ -146,7 +146,7 @@ export async function createStory({ img, name } = {}) {   // img(id): the piece'
     if (!p.audio) return browserVoice();
     const audio = new Audio();
     audio.preload = "none";   // nothing downloads until the visitor asks for it
-    audio.src = p.audio;
+    audio.src = p.audioHash ? `${p.audio}?v=${p.audioHash}` : p.audio;   // H27: assets are cached a day; a re-voiced file gets a new URL (preload.js warms the same one)
     if (lang !== "en") label.textContent = t("Narration in English");   // the recordings are English only; the captions are in the chosen language
     const length = () => audio.duration || p.seconds || 0;
     // before a guess the file plays only up to the first beat that names the date (cue from the import, else estimated)

@@ -2,6 +2,15 @@
 
 Newest first. Each entry: what changed, why, and the decision behind it.
 
+## Re-voiced stories load the new recording at once (2026-11-22, H27, branch hassan/H27-audio-cache-bust)
+- What: `story.js` and `preload.js` now ask for a story's audio as `assets/audio/<id>.en.m4a?v=<audioHash>` (the hash
+  `tools/narration.py` writes when it voices the text). Both build the same URL, so the preload still warms the file the player uses.
+- Why: `vercel.json` lets browsers keep everything under `/assets/` for a day, and a re-voiced story keeps its file name. After the
+  jacket was re-voiced from the curator's more-story text (PR #68), a phone that had played it kept the old recording; `narration.json`
+  itself is revalidated on every load, so it already pointed at the new text.
+- Decision: version the URL, not shorten the cache: unchanged recordings stay cached a day (good for venue wifi), a new recording
+  gets a new URL. Checked locally on the jacket: preload and play both request `?v=28a4aa22a98de418`, play gets 206, console clean.
+
 ## Share card: smaller heading, bigger garment (2026-11-22, H26, branch hassan/H26-sharecard-size)
 - What: in `share.js` the MoMu logo went from 160 to 104 px high, the red title from 84 px (two lines) to 64 px on one line (it shrinks
   to 44 px to stay on one line; only a name too long for that wraps, at most two lines at 48 px), the "From 1950 to 1965" subline from
