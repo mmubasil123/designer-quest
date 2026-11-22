@@ -8,7 +8,7 @@ Never deploy, push to `main` or publish without your person's explicit go.
 ## State
 - `main` has the whole phone flow: landing page `/` (E4), Stage `/stage` (`atelier.html`) without a dress form (H20), scan
   -> story -> one challenge -> won -> wardrobe, Up close, NL / EN / FR, narration, share card, QA rounds 1 and 2. App name:
-  Museum Atelier. Production (Vercel, Mubasil's account) should track `main`; Mubasil deploys, so check `/`, `/stage` and
+  Designer Quest. Production (Vercel, Mubasil's account) should track `main`; Mubasil deploys, so check `/`, `/stage` and
   `/?card=ST503` on the live URL after his next deploy (E4 and later were not deployed by Hassan).
 - Nothing has been checked on a real phone yet: 44 px tap reach and hint ring in Up close, share sheet, load over 4G.
 

@@ -24,7 +24,7 @@ years (a 1750 jak with 2005 football boots). Every fact quotes the museum's reco
 
 ## Operating Context
 In the museum on the visitor's own phone (no app store, no account), stickers or NFC tags beside the pieces; at home
-afterwards via a shared link. Static web app on Vercel (`museum-atelier.vercel.app`).
+afterwards via a shared link. Static web app on Vercel (`designer-quest-momu.vercel.app`).
 
 ## Capabilities and Constraints
 - Stage with a turnable dress form and a wardrobe sheet; story sheet with narration; guess-the-year win; Up close

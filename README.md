@@ -1,4 +1,4 @@
-# MoMu collection DB and the Museum Atelier app
+# MoMu collection DB and the Designer Quest app
 
 Two things live here, for the MoMu Hackathon 2026 (MoMu is the Antwerp fashion museum):
 

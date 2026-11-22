@@ -21,7 +21,7 @@ in QuickTime, PowerPoint and any browser). Rebuild it with the commands in `pres
 | 6 | 21.3 | Dress up across the centuries: a 1979 furisode kimono, the fabric of a 1998 Vandevorst coat. | A timeline drawing itself, 1750, 1979, 1998, 2005; the kimono look (no dress form since H20) | ST80881, ST81190, ST2407/1-2 |
 | 7 | 28.0 | Look closer, and find the metal rivets the record describes, on MoMu's 3D model. | Up close on the coat (MoMu's CLO model since H18), zoom to a rivet, "Found 1 of 3: Rivets instead of seams", a sentence of the curator's story, words cut with an ellipsis | `narration.json` ST81190 (verbatim, since C2) |
 | 8 | 33.9 | Your look spans 255 years, and every share credits MoMu. | 255 counting up; Noor's share card, ring on its MoMu masthead | the app's share card (H12) |
-| 9 | 38.2 | The rest of the collection is waiting for you. | MoMu logo, museum-atelier.vercel.app, @momuantwerp / #momuantwerp | the deck's closing slide |
+| 9 | 38.2 | The rest of the collection is waiting for you. | MoMu logo, designer-quest-momu.vercel.app, @momuantwerp / #momuantwerp | the deck's closing slide |
 
 Scene 6 first said "a 1998 Vandevorst coat" as if worn on the form; the coat is a study piece whose fabric you win,
 so the caption says "the fabric of". Scene 7 said "on a 3D scan"; since H18 Up close shows MoMu's CLO model of the

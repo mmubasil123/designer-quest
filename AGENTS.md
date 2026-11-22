@@ -25,7 +25,7 @@ from MoMu's hackathon page (Splatting_FOLDER on Google Drive) or from Mubasil. T
 just fail to connect.
 
 ## Scope
-- MoMu Hackathon 2026: the harvested collection DB and the MoMu app mockup (the app is called "Museum Atelier"; the Vercel project and its URL still carry the early idea name until Mubasil renames them).
+- MoMu Hackathon 2026: the harvested collection DB and the MoMu app mockup (the app is called "Designer Quest"; the Vercel project is `designer-quest`, and the app is at `designer-quest-momu.vercel.app` (`designer-quest.vercel.app` is someone else's); `museum-atelier.vercel.app` 308-redirects there for printed cards).
 - Private repo: github.com/mmubasil123/momu-collection-db. Discards move to `_to_delete/` (git-ignored), never `rm`.
 
 ## Working together (two people, several agents)

@@ -235,7 +235,7 @@ export const End: React.FC<P> = ({ scene }) => {
         {scene.phrases.map(p => <div key={p.text} style={{ opacity: arrive(f, p.at + s(0.4), 9), translate: `0px ${(1 - arrive(f, p.at + s(0.4), 9)) * 24}px` }}>{p.text}</div>)}
       </div>
       <div style={{ position: "absolute", top: 760, width, textAlign: "center", opacity: meta }}>
-        <div style={{ fontFamily: SANS, fontSize: 40, color: C.accent }}>museum-atelier.vercel.app</div>
+        <div style={{ fontFamily: SANS, fontSize: 40, color: C.accent }}>designer-quest-momu.vercel.app</div>
         <div style={{ marginTop: 18, opacity: tag }}><Label>@momuantwerp / #momuantwerp</Label></div>
       </div>
     </AbsoluteFill>
