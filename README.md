@@ -122,4 +122,6 @@ createdb momu && pg_restore -d momu --no-owner seed/momu_full.dump    # collecti
 
 ## License
 
-Code and docs: [MIT](LICENSE). MoMu's collection data, photos, 3D captures, narration audio and logo are not covered; see the note in [LICENSE](LICENSE).
+Code and docs: [MIT](LICENSE).
+
+The MIT license covers the source code and documentation written by the team. It does not cover the MoMu collection data, photographs, 3D captures, CLO garment models, audio narration derived from them, or the MoMu logo (seed/, mockups/assets/ and docs/readme/momu-logo-*.svg). Those belong to MoMu Fashion Museum Antwerp and were provided for the hackathon; ask MoMu before reusing them. The bundled fonts keep their own SIL Open Font License (mockups/assets/fonts/OFL-*.txt).
