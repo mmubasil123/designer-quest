@@ -9,7 +9,7 @@
 
 <p align="center">
   <b>Tap a real MoMu piece, hear its story, win it, and wear it in a look that spans 255 years.</b><br>
-  Team C Blanco · MoMu Hackathon 2026 · MoMu Fashion Museum Antwerp
+  Team Clueless · MoMu Hackathon 2026 · MoMu Fashion Museum Antwerp
 </p>
 
 <p align="center">
@@ -111,7 +111,7 @@ createdb momu && pg_restore -d momu --no-owner seed/momu_full.dump    # collecti
 
 </details>
 
-## Team
+## Team Clueless
 
 | | |
 |---|---|
@@ -121,3 +121,7 @@ createdb momu && pg_restore -d momu --no-owner seed/momu_full.dump    # collecti
 | **the curator** | Fashion history, stories and questions |
 
 <sub>Collection data, photos, 3D captures and the MoMu logo belong to MoMu Fashion Museum Antwerp and were used for the hackathon.</sub>
+
+## License
+
+Code and docs: [MIT](LICENSE). MoMu's collection data, photos, 3D captures, narration audio and logo are not covered; see the note in [LICENSE](LICENSE).

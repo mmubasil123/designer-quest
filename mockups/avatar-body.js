@@ -7,7 +7,7 @@
 // Prototyped and tuned in avatar-lab.html (branch basil/A9-avatar-lab).
 import * as THREE from "three";
 
-export const AVATAR_URL = "assets/avatar/demo.glb";   // the presenter's own likeness, used with consent; deploy-only
+export const AVATAR_URL = "assets/avatar/demo.glb";   // not shipped: drop your own rigged GLB here to try ?demo (the folder is git-ignored)
 // per piece on the demo body: size multiplier, lift in m, arm angle in degrees from vertical (null: measured)
 export const AVATAR_FIT = { ST80881: { arms: 14 }, ST2434: { arms: 8 }, ST80930: { arms: 18 }, "ST655/1": { lift: 0.03 } };
 // colour of the dress form TRELLIS baked into a scan's neck (sRGB 0..255); on a person those texels are cut near the centre line

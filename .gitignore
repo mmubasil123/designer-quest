@@ -15,3 +15,7 @@ tools/node/
 
 # E4: full-size PNG renders behind mockups/assets/landing/*.webp (presentation/reel/scripts/landing-stills.mjs)
 mockups/assets/landing/raw/
+
+# a personal avatar for ?demo stays local: never committed, never deployed
+mockups/assets/avatar/
+*.pptx

@@ -840,7 +840,7 @@ const turntables = [stageTT];
   addEventListener("keydown", e => { if (e.key === "Escape" && phone.classList.contains("focus") && !document.querySelector("dialog[open]")) setFocus(false); });
 }
 /* A9 demo avatar, presenter only: `?demo` shows an "Avatar" toggle in the Stage header. Ordinary visitors never
-   load the file. The avatar is fetched when the page is idle, so the switch during a talk is instant. */
+   load the file. The repo ships no avatar: put your own rigged GLB at assets/avatar/demo.glb to try it. The avatar is fetched when the page is idle, so the switch during a talk is instant. */
 const avatarState = { promise: null, av: null };
 function loadAvatar() {
   return avatarState.promise ??= loader.loadAsync(AVATAR_URL).then(g => avatarState.av = prepAvatar(g.scene, SLOT_FIT))

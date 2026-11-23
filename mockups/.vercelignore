@@ -8,3 +8,6 @@ assets/trace_kimono.json
 pieces.schema.json
 assets/splat/*.ply
 splat-viewer.html
+
+# a personal avatar for ?demo stays on the presenter's machine
+assets/avatar/
