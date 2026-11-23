@@ -2,7 +2,7 @@
    Text and audio come from narration.json (built by tools/narration.py). H13: the narration is a short spoken scene
    (`beats`), shown as captions that light up word by word as the voice reads them; the sheet opens with the piece's
    photo settling in, and the photo drifts slowly while the story plays. Before a Guess the year (`years: false`) the
-   beats that name the date are left out and the narration ends on a `tease` instead. the curator's own text is shown word
+   beats that name the date are left out and the narration ends on a `tease` instead. The curator's own text is shown word
    for word under "Read the story". Audio is pre-generated and never autoplays; if a file is missing or fails, the
    browser's own voice reads the same captions (its word boundaries drive the highlight). */
 

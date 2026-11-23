@@ -115,10 +115,8 @@ createdb momu && pg_restore -d momu --no-owner seed/momu_full.dump    # collecti
 
 | | |
 |---|---|
-| **the team** | 3D models and splats |
 | **Mubasil** | UI / UX and deploys |
 | **Hassan** | AI, data and narration |
-| **the curator** | Fashion history, stories and questions |
 
 <sub>Collection data, photos, 3D captures and the MoMu logo belong to MoMu Fashion Museum Antwerp and were used for the hackathon.</sub>
 

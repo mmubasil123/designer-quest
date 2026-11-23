@@ -1,5 +1,5 @@
 {
- "_about": "D-3 glossary: fashion terms translated the same way everywhere (the build script feeds it to the model). the curator reviews it; edit a row, rerun tools/i18n_build.py, entries with a changed glossary are NOT redone automatically: delete the affected entries in content.<lang>.json to force it. 'keep' = a term MoMu itself uses in every language.",
+ "_about": "D-3 glossary: fashion terms translated the same way everywhere (the build script feeds it to the model). The curator reviews it; edit a row, rerun tools/i18n_build.py, entries with a changed glossary are NOT redone automatically: delete the affected entries in content.<lang>.json to force it. 'keep' = a term MoMu itself uses in every language.",
  "terms": [
   {"keep": "monpe"}, {"keep": "furisode"}, {"keep": "kimono"}, {"keep": "ikat"}, {"keep": "A.F. Vandevorst"}, {"keep": "Chasseurs à cheval"},
   {"en": "jacket (jak, 18th century)", "nl": "jak", "fr": "jaquette", "note": "the piece type 'jak' keeps its Dutch name as a piece name; in running text FR says jaquette"},

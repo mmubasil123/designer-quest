@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "about": "H13: the spoken story per piece, written as an audio-guide scene (a hook, the history, a detail to look at). Facts come only from the piece's MoMu record or from the curator's own story (D3); each `trace` pair is [our words, the source's words], where the source is the record's Dutch description (no prefix), a record field (`date:`, `place:`, `creator:`, `title:`, `medium:`) or the curator's text (`curator:`), checked by tools/narration_facts.py. `reveal` beats carry the date: they are left out before a Guess the year, and `tease` (shown, not spoken) ends the narration there instead. the curator's own text is never changed: it stays in questions.json and shows in full under the narration.",
+  "about": "H13: the spoken story per piece, written as an audio-guide scene (a hook, the history, a detail to look at). Facts come only from the piece's MoMu record or from the curator's own story (D3); each `trace` pair is [our words, the source's words], where the source is the record's Dutch description (no prefix), a record field (`date:`, `place:`, `creator:`, `title:`, `medium:`) or the curator's text (`curator:`), checked by tools/narration_facts.py. `reveal` beats carry the date: they are left out before a Guess the year, and `tease` (shown, not spoken) ends the narration there instead. The curator's own text is never changed: it stays in questions.json and shows in full under the narration.",
   "pieces": {
     "ST81114AB": {
       "beats": [

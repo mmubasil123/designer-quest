@@ -72,7 +72,7 @@ def sources():
             team = {"en": a_en} if n == 0 and (a_en := next((f.get("en", [None])[0] for f in a["fields"] if f["key"] == "description"), None)) else {}
             out.append((f"rec:{pid}:desc:{n}", s, "nl", team))
     for p in pieces:
-        out.append((f"name:{p['id']}", p["name"], "en", {}))   # the team's English piece names
+        out.append((f"name:{p['id']}", p["name"], "en", {}))   # The team's English piece names
         for i, d in enumerate(p.get("details") or []):
             out.append((f"det:{p['id']}:{i}:quote", d["quote"], "nl", {"en": d["en"]} if d.get("en") else {}))
             out.append((f"det:{p['id']}:{i}:find", d["find"], "en", {}))

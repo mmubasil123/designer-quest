@@ -99,13 +99,9 @@ privacy notice that covers visitors under 18 (GDPR).
 
 | Person | Focus | Owns now |
 |---|---|---|
-| the team | 3D models | Smaller GLBs for venue wifi (A5), kimono rescan, splat outfits (G2 to G4), new season models (D-4) |
 | Mubasil | UI / UX, deploys | Phone memory (A6, in review), share card (B7), Piece page on the engine (A4), phone UI polish, backup video (E2) |
 | Hassan | AI and data | Question engine (C2), translation of Dutch-only records (D-3), narration audio, season export (D-1) |
-| the curator | Fashion and content | Question and fact text (C2), review of the fact-card translations (C1 is built), story scripts, fashion review of looks, MoMu contact, pitch |
 
-Pairs: the curator writes questions, Hassan builds the engine; the curator writes story scripts, Hassan voices them;
-Hassan translates, the curator checks the fashion terms.
 
 ## Open questions
 

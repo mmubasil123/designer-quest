@@ -70,7 +70,7 @@ const word = clo[0].name.split(" ")[0];
 $("#title").textContent = clo.length > 1 && clo.every(p => p.name.startsWith(word)) ? `${word} outfit` : clo[0].name;
 $("#pid").textContent = clo.map(p => p.id).join(" · ");
 document.title = `${$("#title").textContent} · Designer Quest`;
-$("#credit").textContent = team ? "Models by the team, sewn in CLO 3D and draped on the team avatar. Worn as exported: nothing is fitted."
+$("#credit").textContent = team ? "Models sewn in CLO 3D and draped on the team avatar. Worn as exported: nothing is fitted."
   : "MoMu's own CLO 3D model, on MoMu's mannequin in the pose it was draped in. Worn as exported: nothing is fitted.";
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });

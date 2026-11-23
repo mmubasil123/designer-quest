@@ -3,7 +3,7 @@
 The story text is not written here; this script only collects it:
   - the curator's story from questions.json (synced from her Notion page by questions_sync.py) wins whenever she wrote one;
   - the spoken story (H13) is a short audio-guide scene from narration-scripts.json, for the curator's pieces too: facts only
-    from the record or the curator's story, each traced and checked by narration_facts.py (D3). the curator's own text stays word
+    from the record or the curator's story, each traced and checked by narration_facts.py (D3). The curator's own text stays word
     for word in `paragraphs` and shows in full under the narration. `beats` are the caption lines; `reveal` beats
     carry the date, left out before a Guess the year, where `tease` (shown, not spoken) ends instead;
   - otherwise a draft built only from the piece's MoMu record (records.json, D3): date, place, the record's own
@@ -102,7 +102,7 @@ def build(lang="en"):
         out[pid] = {
             "title": title, "years": when, "source": source, "draft": source != "curator",
             **extra,
-            "paragraphs": paras,   # the curator's own text, word for word, for her pieces; else what is spoken
+            "paragraphs": paras,   # The curator's own text, word for word, for her pieces; else what is spoken
             "lang": lang, "text": text,
             "hash": hashlib.sha256(text.encode()).hexdigest()[:16],
             "audio": None,
