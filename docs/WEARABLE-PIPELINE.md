@@ -26,7 +26,7 @@ Check with a front/side/back render and on the Stage at 390 px.
 
 ## Setup
 `.venv`: `numpy scipy scikit-image trimesh xatlas fast-simplification pillow`.
-`splat-transform` in `tools/node` (see AGENTS.md), or point `SPLAT_TRANSFORM` at it.
+`splat-transform` in `tools/node` (`npm install @playcanvas/splat-transform@3.10.3` there), or point `SPLAT_TRANSFORM` at it.
 
 ## Status (2026-11-21)
 All 9 scan pieces are meshed, registered and checked on the Stage at 390 px (headless; not on a phone yet):

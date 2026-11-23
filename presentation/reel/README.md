@@ -1,7 +1,7 @@
 # MoMu reel (E2)
 
 The MoMu teaser video, made in code with Remotion. Script, storyboard and checks: `presentation/DEMO_VIDEO.md`.
-Look and rules: `style.md`. Type `/reel <one line>` in Claude Code to make another (`.claude/skills/reel/`).
+Look and rules: `style.md`.
 
 ## Make the teaser (from this folder)
 ```

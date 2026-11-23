@@ -64,8 +64,9 @@ const AUDIO_FIRST_MAX_MS = 1500;
 async function warmNarration(id) {   // fetch the story's audio file into the HTTP cache (100 to 450 KB), 1.5 s at most
   try {
     const doc = await (await fetch(new URL("narration.json", HERE))).json();   // story.js asks for the same file: one cache entry
-    const audio = doc.pieces?.[id]?.audio;
-    if (!audio) return;
+    const p = doc.pieces?.[id];
+    if (!p?.audio) return;
+    const audio = p.audioHash ? `${p.audio}?v=${p.audioHash}` : p.audio;   // H27: the same versioned URL story.js plays
     const ctl = new AbortController(), cap = setTimeout(() => ctl.abort(), AUDIO_FIRST_MAX_MS);
     try { const r = await fetch(new URL(audio, HERE), { priority: "high", signal: ctl.signal }); await r.arrayBuffer(); }
     finally { clearTimeout(cap); }

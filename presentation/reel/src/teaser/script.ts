@@ -14,7 +14,7 @@ export const SCRIPT: { id: SceneId; phrases: string[] }[] = [
   { id: "story", phrases: ["Tap it,", "and the piece tells you its story."] },
   { id: "guess", phrases: ["Guess when it was made,", "and you *win* it."] },
   { id: "wardrobe", phrases: ["Every piece you win", "goes into your wardrobe."] },
-  { id: "centuries", phrases: ["Dress the form across the centuries:", "a *1979* furisode kimono,", "the fabric of a *1998* Vandevorst coat."] },
+  { id: "centuries", phrases: ["Dress up across the centuries:", "a *1979* furisode kimono,", "the fabric of a *1998* Vandevorst coat."] },
   { id: "closer", phrases: ["Look closer, and find the metal rivets", "the record describes,", "on MoMu's 3D model."] },
   { id: "share", phrases: ["Your look spans *255* years,", "and every share credits MoMu."] },
   { id: "end", phrases: ["The rest of the collection", "is waiting for you."] },

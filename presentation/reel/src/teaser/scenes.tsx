@@ -27,7 +27,7 @@ const Ring: React.FC<{ x: number; y: number; w: number; h: number; at: number; r
     borderRadius: round ? "50%" : 10, opacity: p, scale: `${1.25 - 0.25 * p}` }} />;
 };
 
-// 1. The result first: two pieces, 255 years apart, on one form
+// 1. The result first: two pieces, 255 years apart, in one look
 export const Hook: React.FC<P> = ({ scene }) => {
   const f = useCurrentFrame();
   const a = arrive(f, 0, 10), b = arrive(f, scene.phrases[1].at, 10);
@@ -48,7 +48,7 @@ export const Hook: React.FC<P> = ({ scene }) => {
         </div>
       </div>
       <Phone src="look-jak-boots.png" x={PX} y={PY} style={usePhoneIn(scene.phrases[2].at - 6)}>
-        <Ring x={14} y={127} w={240} h={24} at={scene.phrases[2].at + s(0.9)} />
+        <Ring x={14} y={103} w={240} h={24} at={scene.phrases[2].at + s(0.9)} />
       </Phone>
     </AbsoluteFill>
   );
@@ -186,12 +186,12 @@ export const Closer: React.FC<P> = ({ scene }) => {
       </div>
       <div style={{ position: "absolute", left: 120, top: 730, width: 980, fontFamily: SERIF, fontStyle: "italic", fontSize: 36, lineHeight: 1.3, color: C.muted,
         opacity: arrive(f, found + s(1.2), 9), translate: `0px ${(1 - arrive(f, found + s(1.2), 9)) * 20}px` }}>
-        “The pieces, as well as the darts and side seams are fastened with metal rivets, bolt-like fasteners that attach two fabrics.”
+        “Rather than sewing the pieces together, the designers used rivets … to attach the separate parts.”
         <div style={{ marginTop: 14 }}><Label>The piece's story · ST81190</Label></div>
       </div>
       <Phone src="upclose.png" x={PX} y={PY} style={usePhoneIn(0)}
-        screen={{ transformOrigin: `${pt(190)}px ${pt(178)}px`, scale: `${1 + 0.7 * arrive(f, s(1.1), 12)}` }}>
-        <Ring x={168} y={156} w={44} h={44} at={found} round />
+        screen={{ transformOrigin: `${pt(232)}px ${pt(178)}px`, scale: `${1 + 0.7 * arrive(f, s(1.1), 12)}` }}>
+        <Ring x={210} y={156} w={44} h={44} at={found} round />
       </Phone>
     </AbsoluteFill>
   );
@@ -216,7 +216,7 @@ export const Share: React.FC<P> = ({ scene }) => {
       <div style={{ position: "absolute", left: 1920 - 120 - Wc, top: 90, width: Wc, height: H, overflow: "hidden", boxShadow: "0 30px 70px rgb(0 0 0 / .2)",
         opacity: card, translate: `0px ${(1 - card) * 80}px` }}>
         <Img src={staticFile("shots/share-card.png")} style={{ width: Wc, display: "block" }} />
-        <div style={{ position: "absolute", left: 44 * k, top: 60 * k, width: 376 * k, height: 236 * k, border: `5px solid ${C.accent}`, borderRadius: 10,
+        <div style={{ position: "absolute", left: 44 * k, top: 36 * k, width: 274 * k, height: 181 * k, border: `5px solid ${C.accent}`, borderRadius: 10,
           opacity: arrive(f, scene.phrases[1].at + s(0.8), 9), scale: `${1.15 - 0.15 * arrive(f, scene.phrases[1].at + s(0.8), 9)}` }} />
       </div>
     </AbsoluteFill>
@@ -235,7 +235,7 @@ export const End: React.FC<P> = ({ scene }) => {
         {scene.phrases.map(p => <div key={p.text} style={{ opacity: arrive(f, p.at + s(0.4), 9), translate: `0px ${(1 - arrive(f, p.at + s(0.4), 9)) * 24}px` }}>{p.text}</div>)}
       </div>
       <div style={{ position: "absolute", top: 760, width, textAlign: "center", opacity: meta }}>
-        <div style={{ fontFamily: SANS, fontSize: 40, color: C.accent }}>museum-atelier.vercel.app</div>
+        <div style={{ fontFamily: SANS, fontSize: 40, color: C.accent }}>designer-quest-momu.vercel.app</div>
         <div style={{ marginTop: 18, opacity: tag }}><Label>@momuantwerp / #momuantwerp</Label></div>
       </div>
     </AbsoluteFill>
