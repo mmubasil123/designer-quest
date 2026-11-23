@@ -1,6 +1,26 @@
 {
-  "rewrites": [{ "source": "/stage", "destination": "/atelier.html" }],
+  "redirects": [
+    {
+      "source": "/second-skin.html",
+      "destination": "/stage",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/stage",
+      "destination": "/atelier.html"
+    }
+  ],
   "headers": [
-    { "source": "/assets/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }] }
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
+      ]
+    }
   ]
 }
